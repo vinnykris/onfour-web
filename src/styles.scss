@@ -1,0 +1,48 @@
+// Sass main styles
+// mixin reference - Hugo Giraudel https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
+
+$breakpoints: (
+  "x-small": (
+    max-width: 414px,
+  ),
+  "small": (
+    max-width: 600px,
+  ),
+  "medium": (
+    max-width: 800px,
+  ),
+  "large": (
+    max-width: 1024px,
+  ),
+  "x-large": (
+    max-width: 1440px,
+  ),
+  "xx-large": (
+    min-width: 1441px,
+  ),
+) !default;
+
+@mixin respond-to($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Prints a media query based on the value
+    @media #{inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
+    }
+  }
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+img.onfour-logo {
+  height: 40px;
+  @include respond-to("medium") {
+    height: 30px;
+  }
+  @include respond-to("x-small") {
+    height: 25px;
+  }
+}
