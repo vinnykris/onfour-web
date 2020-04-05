@@ -4,7 +4,7 @@ import "../styles.scss";
 
 const NavBar = () => {
   return (
-    <nav className="navbar">
+    <div className="navbar">
       <img className="onfour-logo" src={logo} width="auto" alt="nav-logo"></img>
       <div className="nav-pages">
         <a className="nav-page">Home</a>
@@ -13,7 +13,7 @@ const NavBar = () => {
         <a className="nav-page">Host</a>
         <a className="login-button">Log in</a>
       </div>
-    </nav>
+    </div>
   );
 };
 

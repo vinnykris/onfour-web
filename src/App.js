@@ -1,24 +1,15 @@
 import React from "react";
 import NavBar from "./components/navbar";
+import MainContent from "./components/main_content";
 import "./App.css";
+import "./styles.scss";
+import background from "./images/home_page_background.jpeg";
 
 function App() {
   return (
     <div className="App">
       <NavBar />
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MainContent />
     </div>
   );
 }

@@ -37,7 +37,8 @@ $breakpoints: (
   }
 }
 
-img.onfour-logo {
+// NAVIGATION BAR STYLING
+.onfour-logo {
   height: 40px;
   @include respond-to("medium") {
     height: 30px;
@@ -45,4 +46,29 @@ img.onfour-logo {
   @include respond-to("x-small") {
     height: 25px;
   }
+}
+
+.navbar {
+  width: 100%;
+}
+
+.nav-pages {
+  float: right;
+  text-align: end;
+}
+
+.nav-page {
+  margin: 10px;
+  color: white;
+}
+
+.login-button {
+  margin: 10px;
+  background-color: green($color: #c4b1b1);
+}
+
+// MAIN CONTAINER STYLING
+.background-image {
+  width: 100%;
+  object-fit: cover;
 }
