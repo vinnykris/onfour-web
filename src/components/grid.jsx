@@ -1,3 +1,5 @@
+// Source: https://medium.com/swlh/create-a-responsive-grid-with-react-flexbox-styled-components-f7a55f607480
+
 import styled from "styled-components";
 
 export const Grid = styled.div``;

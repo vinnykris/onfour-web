@@ -72,3 +72,25 @@ $breakpoints: (
   width: 100%;
   object-fit: cover;
 }
+
+.featured-content {
+  width: 100%;
+  display: flex;
+}
+
+.feature-placeholder {
+  width: 75%;
+  object-fit: cover;
+  margin: auto;
+}
+
+.featured-header {
+  margin-top: 50px;
+  height: 50px;
+  vertical-align: middle;
+  display: grid;
+}
+
+.header-text {
+  margin: auto;
+}
