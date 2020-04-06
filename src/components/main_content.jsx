@@ -5,6 +5,7 @@ import artist from "../images/artist_placeholder.jpg";
 import "../styles.scss";
 import { Grid, Row, Col } from "./grid";
 import ContentHeader from "./content_header";
+import FeaturedContent from "./featured_content";
 
 const MainContent = () => {
   return (
@@ -27,44 +28,20 @@ const MainContent = () => {
         <Row>
           <Col size={1}></Col>
           <Col size={1}>
-            <div className="featured-concert">
-              <img
-                className="feature-placeholder"
-                src={concert}
-                alt="concert-img"
-              ></img>
-            </div>
+            <FeaturedContent img={concert} />
           </Col>
           <Col size={1}>
-            <div className="featured-concert">
-              <img
-                className="feature-placeholder"
-                src={concert}
-                alt="concert-img"
-              ></img>
-            </div>
+            <FeaturedContent img={concert} />
           </Col>
           <Col size={1}></Col>
         </Row>
         <Row>
           <Col size={1}></Col>
           <Col size={1}>
-            <div className="featured-concert">
-              <img
-                className="feature-placeholder"
-                src={concert}
-                alt="concert-img"
-              ></img>
-            </div>
+            <FeaturedContent img={concert} />
           </Col>
           <Col size={1}>
-            <div className="featured-content">
-              <img
-                className="feature-placeholder"
-                src={concert}
-                alt="concert-img"
-              ></img>
-            </div>
+            <FeaturedContent img={concert} />
           </Col>
           <Col size={1}></Col>
         </Row>
@@ -76,53 +53,23 @@ const MainContent = () => {
         <Row>
           <Col size={1}></Col>
           <Col size={1}>
-            <div className="featured-content">
-              <img
-                className="feature-placeholder"
-                src={artist}
-                alt="artist-img"
-              ></img>
-            </div>
+            <FeaturedContent img={artist} />
           </Col>
           <Col size={1}>
             <Row>
               <Col size={1}>
-                <div className="featured-content">
-                  <img
-                    className="feature-placeholder"
-                    src={artist}
-                    alt="artist-img"
-                  ></img>
-                </div>
+                <FeaturedContent img={artist} />
               </Col>
               <Col size={1}>
-                <div className="featured-content">
-                  <img
-                    className="feature-placeholder"
-                    src={artist}
-                    alt="artist-img"
-                  ></img>
-                </div>
+                <FeaturedContent img={artist} />
               </Col>
             </Row>
             <Row>
               <Col size={1}>
-                <div className="featured-content">
-                  <img
-                    className="feature-placeholder"
-                    src={artist}
-                    alt="artist-img"
-                  ></img>
-                </div>
+                <FeaturedContent img={artist} />
               </Col>
               <Col size={1}>
-                <div className="featured-content">
-                  <img
-                    className="feature-placeholder"
-                    src={artist}
-                    alt="artist-img"
-                  ></img>
-                </div>
+                <FeaturedContent img={artist} />
               </Col>
             </Row>
           </Col>

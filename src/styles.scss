@@ -79,9 +79,11 @@ $breakpoints: (
 }
 
 .feature-placeholder {
-  width: 75%;
+  width: 100%;
   object-fit: cover;
   margin: auto;
+  margin-bottom: 10px;
+  padding-inline-end: 10px;
 }
 
 .featured-header {
