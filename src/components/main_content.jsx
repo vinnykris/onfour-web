@@ -16,11 +16,6 @@ const MainContent = () => {
             ></img>
           </Col>
         </Row>
-        {/* <Row>
-          <Col size={1}>COLUMN 1</Col>
-          <Col size={2}>COLUMN 2</Col>
-          <Col size={1}>COLUMN 3</Col>
-        </Row> */}
       </Grid>
     </div>
   );
