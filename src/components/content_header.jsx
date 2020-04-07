@@ -4,7 +4,7 @@ import "../styles.scss";
 const ContentHeader = ({ headerTitle }) => {
   return (
     <div className="featured-header">
-      <h6 className="header-text">{headerTitle}</h6>
+      <h5 className="header-text">{headerTitle}</h5>
     </div>
   );
 };

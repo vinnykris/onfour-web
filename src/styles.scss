@@ -57,9 +57,21 @@ $breakpoints: (
   text-align: end;
 }
 
-.nav-page {
+a.nav-page {
   margin: 10px;
-  color: white;
+  color: black;
+  &:hover {
+    cursor: pointer;
+    color: rgb(129, 129, 201);
+  }
+  &:active {
+    color: #b25500;
+  }
+}
+
+.nav-active {
+  font-weight: "bold";
+  color: grey;
 }
 
 .login-button {
