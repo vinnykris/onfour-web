@@ -22,7 +22,7 @@ const NavBar = () => {
           Home
         </NavLink>
         <NavLink
-          to="/about"
+          to="/whatisonfour"
           className="nav-page"
           activeStyle={{
             fontWeight: "bold",
