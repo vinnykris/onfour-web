@@ -19,7 +19,7 @@ const WhatsOnFour = () => {
               </h1>
 
               <img
-                className="main-image"
+                className="bannerbackground"
                 src={whatsonfour}
                 alt="nav-logo"
               ></img>
@@ -40,7 +40,7 @@ const WhatsOnFour = () => {
         <Row>
           <Col size={1}> </Col>
           <Col size={2}>
-            <p className="discribtion-text">
+            <p className="description-text">
               Onfour empowers music fans by providing a new way to interact with
               your favorite musicians, no matter where you are. Musicians gain
               more control over their careers and connect with fans in new,
@@ -132,10 +132,18 @@ const WhatsOnFour = () => {
         <Row>
           <Col size={1}>
             <h3>Explore Onfour shows in your city:</h3>
-            <p>Search bar placeholder!</p>
           </Col>
         </Row>
+      
+        <Row>          
+          <Col size={1}>           
+          <h2 className="header">Explore Onfour shows in your city:</h2>           
+          <div className="search-box">              
+          <input   class="search-txt"  type="text"  name=""  placeholder="Search..."/>              <a class="search-btn" href="#">                 <i class="fas fa-search"></i>               </a>             </div>           </Col>         </Row> 
+
       </Grid>
+
+      
     </div>
   );
 };

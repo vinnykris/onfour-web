@@ -166,8 +166,28 @@ a.nav-page {
   font-weight: bold;
   font-size: $medium-weight;
   position: absolute;
+  text-align: center;
   width: 100%;
   top: 27%;
+}
+
+.banner-container button {
+  position: absolute;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.banner-container button:hover {
+  background-color: black;
+  color: white;
 }
 
 h2 {
@@ -204,3 +224,30 @@ h2 {
 .icon {
   width: 40%;
 }
+
+.search-box {
+  background: white;
+  height: 40px;
+  border-radius: 40px;
+  padding: 10px;
+}
+
+.search-btn {
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: black;
+}
+
+.search-txt {
+  border: none;
+  background: none;
+  padding: 0;
+  color: black;
+  font-size: 14px;
+  line-height: 40px;
+  width: 240px;
+}
+
+// HOSTS PAGE STYLING
