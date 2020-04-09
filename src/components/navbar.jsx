@@ -8,63 +8,71 @@ const NavBar = () => {
   return (
     <div className="navbar">
       <img className="onfour-logo" src={logo} width="auto" alt="nav-logo"></img>
-      <div className="nav-pages">
-        <NavLink
-          exact
-          to="/"
-          className="nav-page"
-          activeStyle={{
-            fontWeight: "bold",
-            color: "grey",
-            textDecoration: "underline",
-          }}
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/whatisonfour"
-          className="nav-page"
-          activeStyle={{
-            fontWeight: "bold",
-            color: "grey",
-            textDecoration: "underline",
-          }}
-        >
-          What is Onfour
-        </NavLink>
-        <NavLink
-          to="/musicians"
-          className="nav-page"
-          activeStyle={{
-            fontWeight: "bold",
-            color: "grey",
-            textDecoration: "underline",
-          }}
-        >
-          Musicians
-        </NavLink>
-        <NavLink
-          to="/hosts"
-          className="nav-page"
-          activeStyle={{
-            fontWeight: "bold",
-            color: "grey",
-            textDecoration: "underline",
-          }}
-        >
-          Hosts
-        </NavLink>
-        <NavLink
+      <div>
+      <NavLink
           to="/login"
           className="nav-page"
           activeStyle={{
-            fontWeight: "bold",
-            color: "grey",
-            textDecoration: "underline",
+          //   fontWeight: "bold",
+          //   color: "black",
+            textDecoration: "none",
           }}
         >
           Log in
         </NavLink>
+      
+    
+
+        <NavLink
+          exact
+          to="/"
+          className="nav-page"
+          // // activeStyle={{
+          // //   fontWeight: "bold",
+          // //   color: "black",
+          // //   // textDecoration: "underline",
+          // }}
+        >
+          Home
+        </NavLink>
+
+        <NavLink
+          to="/hosts"
+          className="nav-page"
+          // activeStyle={{
+          //   fontWeight: "regular",
+          //   color: "black",
+          //   // textDecoration: "underline",
+          // }}
+        >
+          Hosts
+        </NavLink>
+        
+      
+        <NavLink
+          to="/musicians"
+          className="nav-page"
+          // activeStyle={{
+          //   fontWeight: "bold",
+          //   color: "black",
+          //   // textDecoration: "underline",
+          // }}
+        >
+          Musicians
+        </NavLink>
+
+        <NavLink
+          to="/whatisonfour"
+          className="nav-page"
+          // activeStyle={{
+          //   fontWeight: "bold",
+          //   color: "black",
+          //   // textDecoration: "underline",
+          // }}
+        >
+          What is Onfour
+        </NavLink>
+      
         {/* <a className="nav-page">Home</a>
         <a className="nav-page">What is Onfour</a>
         <a className="nav-page">Musician</a>

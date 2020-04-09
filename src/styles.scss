@@ -1,6 +1,42 @@
 // Sass main styles
 // mixin reference - Hugo Giraudel https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
 
+// @import 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=Muli:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap';
+// googlefont  font-family: 'Muli', sans-serif; font-family: 'Lato', sans-serif;
+
+// //color
+// $primary-color:#
+// $secondary-color:#
+// $primary-button-color:#
+// $secondary-button-color:#
+
+//typeface
+$muli : 'Muli', sans-serif;
+$lato: 'Lato', sans-serif;
+//weight
+$regular-weight: 400;
+$medium-weight:   500;
+$semimedium-weight: 600;
+$bold-weight: 700;
+
+
+
+h1,h2,h3{
+  font-family: 'Muli', sans-serif;
+}
+
+// nav{
+
+//   .navpages{
+//     font-family: $lato;
+//     margin : 100px;
+//     float: right;
+//     // text-align: end;
+
+//   }
+
+// }
+
 $breakpoints: (
   "x-small": (
     max-width: 414px,
@@ -46,15 +82,18 @@ $breakpoints: (
   @include respond-to("x-small") {
     height: 25px;
   }
+
 }
 
 .navbar {
   width: 100%;
+  height: 70px;
 }
 
-.nav-pages {
+.nav-page {
   float: right;
   text-align: end;
+  padding: 10px;
 }
 
 a.nav-page {
@@ -62,16 +101,18 @@ a.nav-page {
   color: black;
   &:hover {
     cursor: pointer;
-    color: rgb(129, 129, 201);
+    color: rgb(0, 0, 0);
+    text-decoration: "none",
   }
   &:active {
-    color: #b25500;
+    color: #000000;
+    text-decoration: "underline";
   }
 }
 
 .nav-active {
-  font-weight: "bold";
-  color: grey;
+  // font-weight: $bold-weight;
+  color:black;
 }
 
 .login-button {
@@ -109,26 +150,7 @@ a.nav-page {
   margin: auto;
 }
 
-//MUSICIAN PAGE STYLING
-.musician-background {
-  width: 100%;
-  height: 35%;
-  object-fit: cover;
-}
-
-.spacer {
-  height: 250px;
-}
-
-.icon {
-  width: 40%;
-}
-
-.Col {
-  margin: 50px;
-}
-
-// WHATS ONFOUR STYLING
+//MUSICIAN+ Whats on four PAGE STYLING
 .banner-container {
   width: 100%;
 }
@@ -136,42 +158,49 @@ a.nav-page {
 .banner-container img {
   width: 100%;
   object-fit: cover;
-  max-height: 600px;
+  max-height: 350px;
 }
 
-.banner-container p {
+.banner-container h1 {
   color: white;
   font-weight: bold;
-  font-size: larger;
+  font-size: $medium-weight;
   position: absolute;
   width: 100%;
-  bottom: 400px;
+  top: 27%;
 }
 
-.icon-image {
+h2 {
+  // padding-top: 50px;
+  padding-bottom: 0;
+}
+
+// .paragraph-text {
+//   text-align: center;
+//   padding-left: 20%;
+//   padding-right: 20%;
+//   padding-bottom: 50px;
+// }
+
+.description-text {
+  padding: 20px;
+  line-height: 1.5rem;
+  text-align: center;
+}
+
+.spacer {
   height: 100px;
 }
 
-.header {
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
-.paragraph-text {
-  text-align: center;
-  padding-left: 20%;
-  padding-right: 20%;
-  padding-bottom: 50px;
-}
-
-.description-text {
-  padding-top: 20px;
-  padding-bottom: 50px;
-}
-
 .line-divider {
-  width: 50%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   background-color: black;
+  height: 0.1px;
+  margin-top: 100px;
+}
+
+.icon {
+  width: 40%;
 }
