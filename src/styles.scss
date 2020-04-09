@@ -144,8 +144,9 @@ a.nav-page {
   font-weight: bold;
   font-size: larger;
   position: absolute;
+  text-align: center;
+  top: 40%;
   width: 100%;
-  bottom: 400px;
 }
 
 .icon-image {
@@ -174,4 +175,49 @@ a.nav-page {
   margin-left: auto;
   margin-right: auto;
   background-color: black;
+}
+
+.search-box {
+  background: white;
+  height: 40px;
+  border-radius: 40px;
+  padding: 10px;
+}
+
+.search-btn {
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: black;
+}
+
+.search-txt {
+  border: none;
+  background: none;
+  padding: 0;
+  color: black;
+  font-size: 14px;
+  line-height: 40px;
+  width: 240px;
+}
+
+// HOSTS PAGE STYLING
+.banner-container .btn {
+  position: absolute;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.banner-container .btn:hover {
+  background-color: black;
+  color: white;
 }

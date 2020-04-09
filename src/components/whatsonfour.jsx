@@ -49,6 +49,7 @@ const WhatsOnFour = () => {
           </Col>
         </Row>
         <Row>
+          <Col size={1}></Col>
           <Col size={1}>
             <img className="icon-image" src={schedule}></img>
           </Col>
@@ -58,8 +59,10 @@ const WhatsOnFour = () => {
           <Col size={1}>
             <img className="icon-image" src={tickets}></img>
           </Col>
+          <Col size={1}></Col>
         </Row>
         <Row>
+          <Col size={1}></Col>
           <Col size={1}>
             <p className="description-text">
               Musicians register a date and time to perform.
@@ -75,9 +78,11 @@ const WhatsOnFour = () => {
               Fans purchase tickets to their preferred venue.
             </p>
           </Col>
+          <Col size={1}></Col>
         </Row>
         <hr className="line-divider"></hr>
         <Row>
+          <Col size={1}></Col>
           <Col size={1}>
             <h2 className="header">Search</h2>
             <p className="description-text">
@@ -102,11 +107,22 @@ const WhatsOnFour = () => {
               ready to have an awesome time!
             </p>
           </Col>
+          <Col size={1}></Col>
         </Row>
         <Row>
           <Col size={1}>
             <h2 className="header">Explore Onfour shows in your city:</h2>
-            <p>Search bar placeholder!</p>
+            <div className="search-box">
+              <input
+                class="search-txt"
+                type="text"
+                name=""
+                placeholder="Search..."
+              />
+              <a class="search-btn" href="#">
+                <i class="fas fa-search"></i>
+              </a>
+            </div>
           </Col>
         </Row>
       </Grid>
