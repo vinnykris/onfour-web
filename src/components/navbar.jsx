@@ -9,19 +9,17 @@ const NavBar = () => {
     <div className="navbar">
       <img className="onfour-logo" src={logo} width="auto" alt="nav-logo"></img>
       <div>
-      <NavLink
+        <NavLink
           to="/login"
           className="nav-page"
           activeStyle={{
-          //   fontWeight: "bold",
-          //   color: "black",
+            //   fontWeight: "bold",
+            //   color: "black",
             textDecoration: "none",
           }}
         >
           Log in
         </NavLink>
-      
-    
 
         <NavLink
           exact
@@ -47,8 +45,7 @@ const NavBar = () => {
         >
           Hosts
         </NavLink>
-        
-      
+
         <NavLink
           to="/musicians"
           className="nav-page"
@@ -72,7 +69,7 @@ const NavBar = () => {
         >
           What is Onfour
         </NavLink>
-      
+
         {/* <a className="nav-page">Home</a>
         <a className="nav-page">What is Onfour</a>
         <a className="nav-page">Musician</a>

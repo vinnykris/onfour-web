@@ -1,10 +1,10 @@
 import React from "react";
-import whatsonfour from "../images/whatsonfour_background.jpg";
-import tickets from "../images/tickets-icon.png";
-import schedule from "../images/schedule-icon.png";
-import performance from "../images/performance-icon.png";
-import "../styles.scss";
-import { Grid, Row, Col } from "./grid";
+import whatsonfour from "../../images/whatsonfour_background.jpg";
+import tickets from "../../images/tickets-icon.png";
+import schedule from "../../images/schedule-icon.png";
+import performance from "../../images/performance-icon.png";
+import "../../styles.scss";
+import { Grid, Row, Col } from "../grid";
 
 const WhatsOnFour = () => {
   return (
@@ -131,16 +131,14 @@ const WhatsOnFour = () => {
                 name=""
                 placeholder="Search..."
               />
-              <a class="search-btn" href="#">
+              <a class="search-btn">
                 <i class="fas fa-search"></i>
               </a>
             </div>
           </Col>
         </Row>
-         
       </Grid>
     </div>
   );
 };
-
 export default WhatsOnFour;

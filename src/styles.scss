@@ -11,18 +11,18 @@
 // $secondary-button-color:#
 
 //typeface
-$muli : 'Muli', sans-serif;
-$lato: 'Lato', sans-serif;
+$muli: "Muli", sans-serif;
+$lato: "Lato", sans-serif;
 //weight
 $regular-weight: 400;
-$medium-weight:   500;
+$medium-weight: 500;
 $semimedium-weight: 600;
 $bold-weight: 700;
 
-
-
-h1,h2,h3{
-  font-family: 'Muli', sans-serif;
+h1,
+h2,
+h3 {
+  font-family: "Muli", sans-serif;
 }
 
 // nav{
@@ -82,7 +82,6 @@ $breakpoints: (
   @include respond-to("x-small") {
     height: 25px;
   }
-
 }
 
 .navbar {
@@ -102,7 +101,7 @@ a.nav-page {
   &:hover {
     cursor: pointer;
     color: rgb(0, 0, 0);
-    text-decoration: "none",
+    text-decoration: "none";
   }
   &:active {
     color: #000000;
@@ -112,7 +111,7 @@ a.nav-page {
 
 .nav-active {
   // font-weight: $bold-weight;
-  color:black;
+  color: black;
 }
 
 .login-button {
@@ -251,3 +250,22 @@ h2 {
 }
 
 // HOSTS PAGE STYLING
+
+// STREAM PAGE STYLING
+.player-wrapper {
+  display: inline-block;
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  width: 50%;
+  height: 75vh;
+}
+
+.video-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.video-player > div {
+  position: absolute; // Scaling will occur since parent is relative now
+}
