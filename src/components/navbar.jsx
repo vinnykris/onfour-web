@@ -7,33 +7,36 @@ import "../styles.scss";
 const NavBar = () => {
   return (
     <div className="navbar">
-      <img className="onfour-logo" src={logo} width="auto" alt="nav-logo"></img>
       <div>
-      <NavLink
-          to="/login"
-          className="nav-page"
-          activeStyle={{
-          //   fontWeight: "bold",
-          //   color: "black",
-            textDecoration: "none",
-          }}
-        >
-          Log in
-        </NavLink>
-      
-    
-
         <NavLink
           exact
           to="/"
-          className="nav-page"
+          className="nav-home"
           // // activeStyle={{
           // //   fontWeight: "bold",
           // //   color: "black",
           // //   // textDecoration: "underline",
           // }}
         >
-          Home
+          <img
+            className="onfour-logo"
+            src={logo}
+            width="auto"
+            alt="nav-logo"
+          ></img>
+        </NavLink>
+      </div>
+      <div>
+        <NavLink
+          to="/login"
+          className="nav-page"
+          activeStyle={{
+            //   fontWeight: "bold",
+            //   color: "black",
+            textDecoration: "none",
+          }}
+        >
+          Log in
         </NavLink>
 
         <NavLink
@@ -47,8 +50,7 @@ const NavBar = () => {
         >
           Hosts
         </NavLink>
-        
-      
+
         <NavLink
           to="/musicians"
           className="nav-page"
@@ -72,13 +74,13 @@ const NavBar = () => {
         >
           What is Onfour
         </NavLink>
-      
-        {/* <a className="nav-page">Home</a>
+      </div>
+
+      {/* <a className="nav-page">Home</a>
         <a className="nav-page">What is Onfour</a>
         <a className="nav-page">Musician</a>
         <a className="nav-page">Host</a>
         <a className="login-button">Log in</a> */}
-      </div>
     </div>
   );
 };

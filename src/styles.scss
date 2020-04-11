@@ -11,18 +11,18 @@
 // $secondary-button-color:#
 
 //typeface
-$muli : 'Muli', sans-serif;
-$lato: 'Lato', sans-serif;
+$muli: "Muli", sans-serif;
+$lato: "Lato", sans-serif;
 //weight
 $regular-weight: 400;
-$medium-weight:   500;
+$medium-weight: 500;
 $semimedium-weight: 600;
 $bold-weight: 700;
 
-
-
-h1,h2,h3{
-  font-family: 'Muli', sans-serif;
+h1,
+h2,
+h3 {
+  font-family: "Muli", sans-serif;
 }
 
 // nav{
@@ -82,7 +82,6 @@ $breakpoints: (
   @include respond-to("x-small") {
     height: 25px;
   }
-
 }
 
 .navbar {
@@ -96,13 +95,19 @@ $breakpoints: (
   padding: 10px;
 }
 
+.nav-home {
+  float: left;
+  text-align: end;
+  padding: 10px;
+}
+
 a.nav-page {
   margin: 10px;
   color: black;
   &:hover {
     cursor: pointer;
     color: rgb(0, 0, 0);
-    text-decoration: "none",
+    text-decoration: "none";
   }
   &:active {
     color: #000000;
@@ -112,7 +117,7 @@ a.nav-page {
 
 .nav-active {
   // font-weight: $bold-weight;
-  color:black;
+  color: black;
 }
 
 .login-button {
@@ -250,4 +255,29 @@ h2 {
   width: 240px;
 }
 
-// HOSTS PAGE STYLING
+// FORM STYLING
+
+form {
+  display: inline-block;
+}
+
+input {
+  width: 100%;
+  padding: 10px 20px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border: 2px solid black;
+}
+
+button {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

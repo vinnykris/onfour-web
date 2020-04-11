@@ -8,6 +8,7 @@ import "../styles.scss";
 import { Grid, Row, Col } from "./grid";
 import ContentHeader from "./content_header";
 import FeaturedContent from "./featured_content";
+import history from "./../history";
 
 const Hosts = () => {
   return (
@@ -20,10 +21,14 @@ const Hosts = () => {
               <Row>
                 <Col size={2}></Col>
                 <Col size={1}>
-                  <button >Apply to Host</button>
+                  <button onClick={() => history.push("/apply_to_host")}>
+                    Apply to Host
+                  </button>
                 </Col>
                 <Col size={1}>
-                  <button className="btn">I've hosted before</button>
+                  <button onClick={() => history.push("/host_again")}>
+                    I've hosted before
+                  </button>
                 </Col>
                 <Col size={2}></Col>
               </Row>
