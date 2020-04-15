@@ -95,6 +95,12 @@ $breakpoints: (
   padding: 10px;
 }
 
+.nav-home {
+  float: left;
+  text-align: end;
+  padding: 10px;
+}
+
 a.nav-page {
   margin: 10px;
   color: black;
@@ -268,4 +274,30 @@ h2 {
 
 .video-player > div {
   position: absolute; // Scaling will occur since parent is relative now
+}
+// FORM STYLING
+
+form {
+  display: inline-block;
+}
+
+input {
+  width: 100%;
+  padding: 10px 20px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border: 2px solid black;
+}
+
+button {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
