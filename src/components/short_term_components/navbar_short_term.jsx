@@ -9,28 +9,11 @@ const NavBarShortTerm = () => {
     <div className="navbar">
       <img className="onfour-logo" src={logo} width="auto" alt="nav-logo"></img>
       <div>
-        <NavLink
-          to="/stream"
-          className="nav-page"
-          //   activeStyle={{
-          //     //   fontWeight: "bold",
-          //     //   color: "black",
-          //     textDecoration: "none",
-          //   }}
-        >
+        <NavLink to="/stream" className="nav-page">
           Stream
         </NavLink>
 
-        <NavLink
-          exact
-          to="/"
-          className="nav-page"
-          // // activeStyle={{
-          // //   fontWeight: "bold",
-          // //   color: "black",
-          // //   // textDecoration: "underline",
-          // }}
-        >
+        <NavLink exact to="/" className="nav-page">
           What is Onfour?
         </NavLink>
       </div>
