@@ -123,7 +123,6 @@ const WhatsOnFour = () => {
         </Row>
         <Row>
           <Col size={1}>
-            <h2 className="header">Explore Onfour shows in your city:</h2>
             <div className="search-box">
               <input
                 class="search-txt"

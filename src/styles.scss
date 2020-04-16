@@ -301,3 +301,38 @@ button {
   cursor: pointer;
   border-radius: 5px;
 }
+
+// FOOTER STYLING
+.footer-container {
+  background-color: #26272b;
+}
+
+.footer-container h3 {
+  color: white;
+  text-align: left;
+}
+
+.footer-container p {
+  color: white;
+  text-align: left;
+}
+
+.footer-container hr {
+  border-color: white;
+  width: 66%;
+}
+
+.footer-links {
+  list-style: none;
+  text-align: left;
+  padding-left: 0;
+}
+
+.footer-links li {
+  display: block;
+}
+
+.social {
+  text-align: right;
+  list-style: none;
+}
