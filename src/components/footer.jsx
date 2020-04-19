@@ -5,7 +5,7 @@ import "../styles.scss";
 
 const Footer = () => {
   return (
-    <div class="footer-container">
+    <div className="footer-container">
       <Grid>
         <Row>
           <Col size={1}></Col>
@@ -22,7 +22,7 @@ const Footer = () => {
           <Col size={1}></Col>
           <Col size={1}>
             <h3>Quick Links</h3>
-            <ul class="footer-links">
+            <ul className="footer-links">
               <li>
                 <a href="">About Us</a>
               </li>
@@ -47,19 +47,19 @@ const Footer = () => {
           </Col>
           <Col size={1}></Col>
           <Col size={1}>
-            <ul class="social">
+            <ul className="social">
               <li>
-                <a class="facebook" href="#">
+                <a className="facebook" href="#">
                   Facebook
                 </a>
               </li>
               <li>
-                <a class="instagram" href="#">
+                <a className="instagram" href="#">
                   Instagram
                 </a>
               </li>
               <li>
-                <a class="twitter" href="#">
+                <a className="twitter" href="#">
                   Twitter
                 </a>
               </li>
