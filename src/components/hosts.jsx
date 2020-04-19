@@ -36,19 +36,28 @@ const Hosts = () => {
             </div>
           </Col>
         </Row>
+
         <Row>
-          <Col size={1}>
-            <ContentHeader headerTitle={"Bring People Together, For Music"} />
-          </Col>
+          <div className="spacer"></div>
         </Row>
+
         <Row>
-          <Col size={1}>
-            <p>
-              Onfour enables you to easily host a unique experience at your
+        <Col size={2}></Col>
+          <Col size={3}>
+          <h2>Bring People Together, For Music</h2>
+            <p className="description-text">
+            Onfour enables you to easily host a unique experience at your
               venue, get new faces in your doors, and promote your brand.
             </p>
+
           </Col>
+          <Col size={2}></Col>
         </Row>
+        
+
+        <div className="spacer"></div>
+
+
         <Row>
           <Col size={1}></Col>
           <Col size={1}>
@@ -65,41 +74,50 @@ const Hosts = () => {
         <Row>
           <Col size={1}></Col>
           <Col size={1}>
-            <p>
+            <p className="description-text">
               If you have never hosted an Onfour show, we need to understand a
               little bit about your space.
             </p>
           </Col>
           <Col size={1}>
-            <p>
+            <p className="description-text">
               Simply select the performance from the Onfour calendar that you're
               interested in hosting.
             </p>
           </Col>
           <Col size={1}>
-            <p>
+            <p className="description-text">
               On the day of the show, we will send a crew to help you setup, and
               clean up. All you have to do is open your doors and be yourself.
             </p>
           </Col>
           <Col size={1}></Col>
         </Row>
+
         <Row>
+        <Col size={2}> </Col>
+        <Col size={3}>
           <hr className="line-divider"></hr>
+          <div className="spacer"></div>
+        </Col> 
+        <Col size={2}> </Col>
         </Row>
+
+        
         <Row>
           <Col size={1}>
-            <ContentHeader headerTitle={"Featured Venues"} />
+          <h2>Featured Venues</h2>
           </Col>
         </Row>
         <Row>
           <Col size={1}>
-            <p>
+            <p className="description-text">
               Onfour collaborates with unique spaces around the country to bring
               you a new way to experience concerts.
             </p>
           </Col>
         </Row>
+        
         <Row>
           <Col size={1}></Col>
           <Col size={1}>

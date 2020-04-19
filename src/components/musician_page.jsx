@@ -54,12 +54,17 @@ const MainContent = () => {
         </Row>
 
         <Row>
-          <div className="spacer"></div>
+        <Col size={2}> </Col>
+        <Col size={3}>
+          <hr className="line-divider"></hr>
+        </Col> 
+        <Col size={2}> </Col>
         </Row>
-
+        
+        <div className="spacer"></div>
+      
         <Row>
           <Col size={1}></Col>
-
           <Col size={1}>
             <img className="icon" src={applicationicon}></img>
             <p className="description-text">
@@ -67,7 +72,6 @@ const MainContent = () => {
               never performed an Onfour show.{" "}
             </p>
           </Col>
-
           <Col size={1}>
             <img className="icon" src={calendericon}></img>
             <p className="description-text">

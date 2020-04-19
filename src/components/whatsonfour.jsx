@@ -91,15 +91,20 @@ const WhatsOnFour = () => {
         </Row>
 
         <Row>
-          <div className="spacer"></div>
+         <Col size={1}></Col>
+         <Col size={2}>
+           {/* <div className="spacer"></div> */}
+          <hr className="line-divider"></hr></Col>
+          <Col size={1}></Col>
         </Row>
 
-
+        <div className="spacer"></div>
         <Row>
+        
           <Col size={1}></Col>
           <Col size={1}>
             <h3>Search</h3>
-            <p className="description-text">
+            <p className="description-text-left" >
               Onfour brings your favorite musicians to you by livestream. We
               need your location to help you find the right event for you.
               Search your favorite musicians or a convenient location to find
@@ -110,7 +115,7 @@ const WhatsOnFour = () => {
 
           <Col size={1}>
             <h3>Purchase</h3>
-            <p className="description-text">
+            <p className="description-text-left">
               Lock down the details and purchase your tickets to the show. Make
               sure you are able to present your tickets come the day of the
               show.
@@ -120,7 +125,7 @@ const WhatsOnFour = () => {
 
           <Col size={1}>
             <h3>Enjoy</h3>
-            <p className="description-text">
+            <p className="description-text-left">
               Show up to your event location, bring something to drink, and be
               ready to have an awesome time!
             </p>
@@ -128,18 +133,23 @@ const WhatsOnFour = () => {
           <Col size={1}></Col>
         </Row>
 
-
         <Row>
-          <Col size={1}>
-            <h3>Explore Onfour shows in your city:</h3>
-          </Col>
+          <div className="spacer"></div>
+          
         </Row>
       
+      
         <Row>          
+        <Col size={1}></Col>
           <Col size={1}>           
-          <h2 className="header">Explore Onfour shows in your city:</h2>           
+          <h3 className="header">Explore Onfour shows in your city:</h3>           
           <div className="search-box">              
-          <input   class="search-txt"  type="text"  name=""  placeholder="Search..."/>              <a class="search-btn" href="#">                 <i class="fas fa-search"></i>               </a>             </div>           </Col>         </Row> 
+          <input   class="search-txt"  type="text"  name=""  placeholder="Search..."/>              
+          <a class="search-btn" href="#">   <i class="fas fa-search"></i>   </a>            
+           </div>           
+          </Col>         
+          <Col size={1}></Col>
+          </Row>
 
       </Grid>
 

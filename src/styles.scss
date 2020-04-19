@@ -11,8 +11,10 @@
 // $secondary-button-color:#
 
 //typeface
+
 $muli: "Muli", sans-serif;
 $lato: "Lato", sans-serif;
+$heebo: "Heebo", sans-serif;
 //weight
 $regular-weight: 400;
 $medium-weight: 500;
@@ -22,7 +24,7 @@ $bold-weight: 700;
 h1,
 h2,
 h3 {
-  font-family: "Muli", sans-serif;
+  font-family: "Heebo", sans-serif;
 }
 
 // nav{
@@ -169,25 +171,27 @@ a.nav-page {
 .banner-container h1 {
   color: white;
   font-weight: bold;
-  font-size: $medium-weight;
+  font-size: 1.5rem;
+  line-height: 2.6rem;
   position: absolute;
   text-align: center;
   width: 100%;
-  top: 27%;
+  top: 25%;
 }
 
 .banner-container button {
   position: absolute;
-  top: 30%;
+  top: 37%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color: white;
   color: black;
-  font-size: 16px;
-  padding: 12px 24px;
+  font-size: 15px;
+  padding: 12px 17px;
+  font-weight: $medium-weight;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 0px;
 }
 
 .banner-container button:hover {
@@ -211,10 +215,20 @@ h2 {
   padding: 20px;
   line-height: 1.5rem;
   text-align: center;
+  font-size: 15px;
+  font-weight: $medium-weight;
+}
+
+.description-text-left {
+  padding: 20px;
+  line-height: 1.5rem;
+  text-align: left;
+  font-size: 15px;
+  font-weight: $medium-weight;
 }
 
 .spacer {
-  height: 100px;
+  height: 160px;
 }
 
 .line-divider {
@@ -222,7 +236,7 @@ h2 {
   margin-left: auto;
   margin-right: auto;
   background-color: black;
-  height: 0.1px;
+  height: 0.2px;
   margin-top: 100px;
 }
 
@@ -231,9 +245,10 @@ h2 {
 }
 
 .search-box {
-  background: white;
+  background:white;
+  border-color: black;
   height: 40px;
-  border-radius: 40px;
+  border: 1px;
   padding: 10px;
 }
 
@@ -241,7 +256,6 @@ h2 {
   color: white;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
   background: black;
 }
 
@@ -266,6 +280,7 @@ input {
   padding: 10px 20px;
   outline: none;
   transition: 0.3s;
+  margin: 10px;
 }
 
 input:focus {
@@ -280,4 +295,13 @@ button {
   border: none;
   cursor: pointer;
   border-radius: 5px;
+}
+
+h5{
+  padding: 5px;
+  font-size: 7px;
+}
+
+.form-spacer{
+  height: 16px;
 }
