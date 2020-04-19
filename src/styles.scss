@@ -245,7 +245,7 @@ h2 {
 }
 
 .search-box {
-  background:white;
+  background: white;
   border-color: black;
   height: 40px;
   border: 1px;
@@ -269,6 +269,26 @@ h2 {
   width: 240px;
 }
 
+// HOSTS PAGE STYLING
+
+// STREAM PAGE STYLING
+.player-wrapper {
+  display: inline-block;
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  width: 50%;
+  height: 75vh;
+}
+
+.video-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.video-player > div {
+  position: absolute; // Scaling will occur since parent is relative now
+}
 // FORM STYLING
 
 form {
@@ -297,11 +317,45 @@ button {
   border-radius: 5px;
 }
 
-h5{
+h5 {
   padding: 5px;
   font-size: 7px;
 }
 
-.form-spacer{
+.form-spacer {
   height: 16px;
+}
+// FOOTER STYLING
+.footer-container {
+  background-color: #26272b;
+}
+
+.footer-container h3 {
+  color: white;
+  text-align: left;
+}
+
+.footer-container p {
+  color: white;
+  text-align: left;
+}
+
+.footer-container hr {
+  border-color: white;
+  width: 66%;
+}
+
+.footer-links {
+  list-style: none;
+  text-align: left;
+  padding-left: 0;
+}
+
+.footer-links li {
+  display: block;
+}
+
+.social {
+  text-align: right;
+  list-style: none;
 }

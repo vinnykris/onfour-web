@@ -25,8 +25,8 @@ const NavBar = () => {
             alt="nav-logo"
           ></img>
         </NavLink>
-      </div>
-      <div>
+        {/* </div>
+      <div> */}
         <NavLink
           to="/login"
           className="nav-page"
@@ -74,13 +74,13 @@ const NavBar = () => {
         >
           What is Onfour
         </NavLink>
-      </div>
 
-      {/* <a className="nav-page">Home</a>
+        {/* <a className="nav-page">Home</a>
         <a className="nav-page">What is Onfour</a>
         <a className="nav-page">Musician</a>
         <a className="nav-page">Host</a>
         <a className="login-button">Log in</a> */}
+      </div>
     </div>
   );
 };

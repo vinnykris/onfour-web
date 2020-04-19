@@ -26,17 +26,14 @@ const WhatsOnFour = () => {
             </div>
           </Col>
         </Row>
-
         <Row>
           <div className="spacer"></div>
         </Row>
-
         <Row>
           <Col size={1}>
             <h2> Our Mission </h2>
           </Col>
         </Row>
-
         <Row>
           <Col size={1}> </Col>
           <Col size={2}>
@@ -52,19 +49,16 @@ const WhatsOnFour = () => {
           </Col>
           <Col size={1}> </Col>
         </Row>
-
         <Row>
           <div className="spacer"></div>
         </Row>
-
         <Row>
           <Col size={1}>
             <h2> How We Work </h2>
           </Col>
         </Row>
-
         <Row>
-        <Col size={1}></Col>
+          <Col size={1}></Col>
 
           <Col size={1}>
             <img className="icon" src={schedule}></img>
@@ -89,22 +83,14 @@ const WhatsOnFour = () => {
 
           <Col size={1}></Col>
         </Row>
-
         <Row>
-         <Col size={1}></Col>
-         <Col size={2}>
-           {/* <div className="spacer"></div> */}
-          <hr className="line-divider"></hr></Col>
-          <Col size={1}></Col>
+          <div className="spacer"></div>
         </Row>
-
-        <div className="spacer"></div>
         <Row>
-        
           <Col size={1}></Col>
           <Col size={1}>
             <h3>Search</h3>
-            <p className="description-text-left" >
+            <p className="description-text">
               Onfour brings your favorite musicians to you by livestream. We
               need your location to help you find the right event for you.
               Search your favorite musicians or a convenient location to find
@@ -112,48 +98,46 @@ const WhatsOnFour = () => {
             </p>
           </Col>
 
-
           <Col size={1}>
             <h3>Purchase</h3>
-            <p className="description-text-left">
+            <p className="description-text">
               Lock down the details and purchase your tickets to the show. Make
               sure you are able to present your tickets come the day of the
               show.
             </p>
           </Col>
 
-
           <Col size={1}>
             <h3>Enjoy</h3>
-            <p className="description-text-left">
+            <p className="description-text">
               Show up to your event location, bring something to drink, and be
               ready to have an awesome time!
             </p>
           </Col>
           <Col size={1}></Col>
         </Row>
-
         <Row>
-          <div className="spacer"></div>
-          
+          <Col size={1}>
+            <h3>Explore Onfour shows in your city:</h3>
+          </Col>
         </Row>
-      
-      
-        <Row>          
-        <Col size={1}></Col>
-          <Col size={1}>           
-          <h3 className="header">Explore Onfour shows in your city:</h3>           
-          <div className="search-box">              
-          <input   class="search-txt"  type="text"  name=""  placeholder="Search..."/>              
-          <a class="search-btn" href="#">   <i class="fas fa-search"></i>   </a>            
-           </div>           
-          </Col>         
-          <Col size={1}></Col>
-          </Row>
-
+        <Row>
+          <Col size={1}>
+            <div className="search-box">
+              <input
+                class="search-txt"
+                type="text"
+                name=""
+                placeholder="Search..."
+              />
+              <a class="search-btn" href="#">
+                <i class="fas fa-search"></i>
+              </a>
+            </div>
+          </Col>
+        </Row>
+         
       </Grid>
-
-      
     </div>
   );
 };
