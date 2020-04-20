@@ -359,3 +359,35 @@ h5 {
   text-align: right;
   list-style: none;
 }
+
+// SOCIAL STYLING
+.social-media li {
+  list-style: none;
+  margin: 0px 10px;
+  display: inline-block;
+  font-size: 40px;
+  padding: 10px 20px;
+  color: black;
+  border-radius: 50%;
+}
+
+.social-media li a {
+  text-decoration: none;
+  color: black;
+}
+
+.fa-facebook:hover {
+  color: blue;
+}
+
+.fa-spotify:hover {
+  color: green;
+}
+
+.fa-instagram:hover {
+  color: purple;
+}
+
+.fa-youtube:hover {
+  color: red;
+}
