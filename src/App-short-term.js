@@ -5,12 +5,13 @@ import StreamPage from "./components/stream_page";
 import Footer from "./components/footer";
 import "./App.css";
 import "./styles.scss";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
+import history from "./history";
 
 function AppShortTerm() {
   return (
     <div className="App">
-      <Router>
+      <Router history={history}>
         <NavBar />
         <Switch>
           <Route exact path="/" component={About} />
