@@ -160,6 +160,10 @@ a.nav-page {
   margin: auto;
 }
 
+.short-term-spacer {
+  height: 80px;
+}
+
 //MUSICIAN+ Whats on four PAGE STYLING
 .banner-container {
   width: 100%;
@@ -344,12 +348,24 @@ h5 {
 .form-spacer {
   height: 16px;
 }
+
+.inline-form {
+  display: flex;
+}
+
+.inline-form button {
+  margin: 0px 2px;
+  padding: 0px 10px;
+}
+
 // FOOTER STYLING
 .footer-container {
-  background-color: #26272b;
+  background-color: #000000;
+  width: 100%;
 }
 
 .footer-container h3 {
+  margin-top: 10px;
   color: white;
   text-align: left;
 }
@@ -361,12 +377,16 @@ h5 {
 
 .footer-container hr {
   border-color: white;
-  width: 66%;
+  width: 83.33%;
 }
 
 .footer-links {
+  float: right;
+}
+
+.footer-links ul {
   list-style: none;
-  text-align: left;
+  text-align: right;
   padding-left: 0;
 }
 
@@ -374,9 +394,26 @@ h5 {
   display: block;
 }
 
-.social {
-  text-align: right;
+.footer-links li a {
+  color: white;
+}
+
+.footer-social-media ul {
+  float: right;
+}
+
+.footer-social-media li {
   list-style: none;
+  margin: 0px 10px;
+  display: inline-block;
+  font-size: 30px;
+  padding: 0px 20px;
+  color: black;
+}
+
+.footer-social-media li a {
+  text-decoration: none;
+  color: white;
 }
 
 // SOCIAL STYLING
@@ -409,4 +446,8 @@ h5 {
 
 .fa-youtube:hover {
   color: red;
+}
+
+.fa-twitter:hover {
+  color: lightblue;
 }
