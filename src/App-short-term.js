@@ -6,6 +6,7 @@ import Footer from "./components/footer";
 import "./App.css";
 import "./styles.scss";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Chat from "./components/chat/stream_chat";
 
 function AppShortTerm() {
   return (
