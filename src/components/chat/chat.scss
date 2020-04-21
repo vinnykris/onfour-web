@@ -1,30 +1,35 @@
 @import "../../styles.scss";
 
-* {
-  box-sizing: border-box;
-}
+// * {
+//   box-sizing: border-box;
+// }
 
 // JOIN
 .join-outer-container {
   display: flex;
   justify-content: center;
   text-align: center;
-  height: 100vh;
+  height: 100%;
+  margin: auto;
+  // padding: 25%;
   align-items: center;
   background-color: #1a1a1d;
 }
 
 .join-input {
   border-radius: 0;
-  padding: 15px 20px;
+  padding: 5% 5%;
   width: 100%;
 }
 
 .heading {
   color: white;
-  font-size: 2.5em;
+  font-size: 1.5em;
   padding-bottom: 10px;
   border-bottom: 2px solid white;
+  @include respond-to("large") {
+    font-size: 1em;
+  }
 }
 
 .button {
@@ -32,26 +37,29 @@
   text-transform: uppercase;
   text-decoration: none;
   background: #2979ff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 5px;
   display: inline-block;
   border: none;
   width: 100%;
+  @include respond-to("large") {
+    font-size: 1em;
+  }
 }
 
 .mt-20 {
   margin-top: 20px;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
-  .joinOuterContainer {
-    height: 100%;
-  }
+// @media (min-width: 320px) and (max-width: 480px) {
+//   .join-outer-container {
+//     height: 100%;
+//   }
 
-  .joinInnerContainer {
-    width: 90%;
-  }
-}
+//   .join-inner-container {
+//     width: 90%;
+//   }
+// }
 
 button:focus {
   outline: 0;
@@ -62,7 +70,7 @@ button:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   background-color: #1a1a1d;
 }
 
@@ -72,26 +80,26 @@ button:focus {
   justify-content: space-between;
   background: #ffffff;
   border-radius: 8px;
-  height: 60%;
-  width: 35%;
+  height: 100%;
+  width: 100%;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
-  .chat-outer-container {
-    height: 100%;
-  }
+// @media (min-width: 320px) and (max-width: 480px) {
+//   .chat-outer-container {
+//     height: 100%;
+//   }
 
-  .chat-container {
-    width: 100%;
-    height: 100%;
-  }
-}
+//   .chat-container {
+//     width: 100%;
+//     height: 100%;
+//   }
+// }
 
-@media (min-width: 480px) and (max-width: 1200px) {
-  .chat-container {
-    width: 60%;
-  }
-}
+// @media (min-width: 480px) and (max-width: 1200px) {
+//   .chat-container {
+//     width: 60%;
+//   }
+// }
 
 // INFO BAR
 
@@ -99,7 +107,7 @@ button:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #2979ff;
+  background: #3d3f42;
   border-radius: 4px 4px 0 0;
   height: 60px;
   width: 100%;
@@ -149,7 +157,7 @@ select:focus {
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;
-  background: #2979ff;
+  background: #3d3f42;
   padding: 20px;
   display: inline-block;
   border: none;
@@ -181,6 +189,7 @@ select:focus {
   float: left;
   font-size: 1.1em;
   word-wrap: break-word;
+  margin-bottom: 0;
 }
 
 .message-text img {
@@ -200,6 +209,7 @@ select:focus {
   font-family: Helvetica;
   color: #828282;
   letter-spacing: 0.3px;
+  margin-bottom: 0;
 }
 
 .pl-10 {
@@ -227,7 +237,7 @@ select:focus {
 }
 
 .background-blue {
-  background: #2979ff;
+  background: #3d3f42;
 }
 
 .background-light {

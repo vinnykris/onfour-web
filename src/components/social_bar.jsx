@@ -17,16 +17,32 @@ const SocialBar = () => {
           <div class="social-media">
             <ul>
               <li>
-                <a href="#" class="fa fa-instagram"></a>
+                <a
+                  href="https://www.instagram.com/superduperfriend/"
+                  class="fa fa-instagram"
+                  target="_blank"
+                ></a>
               </li>
               <li>
-                <a href="#" class="fa fa-spotify"></a>
+                <a
+                  href="https://open.spotify.com/artist/58aQLz2Bw72YzALyncUm9T?si=6GjQHHueSvSM79yjCuY6-w"
+                  class="fa fa-spotify"
+                  target="_blank"
+                ></a>
               </li>
               <li>
-                <a href="#" class="fa fa-youtube"></a>
+                <a
+                  href="https://www.youtube.com/channel/UC8Mo_XFsrzJr7bxrwdQ93GQ/featured"
+                  class="fa fa-youtube"
+                  target="_blank"
+                ></a>
               </li>
               <li>
-                <a href="#" class="fa fa-facebook"></a>
+                <a
+                  href="https://www.facebook.com/superduperfriend"
+                  class="fa fa-facebook"
+                  target="_blank"
+                ></a>
               </li>
             </ul>
           </div>

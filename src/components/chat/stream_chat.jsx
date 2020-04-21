@@ -50,6 +50,7 @@ const Chat = ({ chatName }) => {
     }
   };
   console.log(message, messages);
+  // console.log(users, users.length);
   return (
     <div className="chat-outer-container">
       <div className="chat-container">
@@ -61,7 +62,7 @@ const Chat = ({ chatName }) => {
           sendMessage={sendMessage}
         />
       </div>
-      <TextContainer users={users} />
+      {/* <TextContainer users={users} /> */}
     </div>
   );
 };

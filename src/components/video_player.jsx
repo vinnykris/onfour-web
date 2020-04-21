@@ -4,7 +4,7 @@ import "../styles.scss";
 
 class VideoPlayer extends Component {
   render() {
-    const { url, streamError, streamStart, streamReady } = this.props;
+    const { url } = this.props;
     return (
       <div className="player-wrapper">
         <ReactPlayer
@@ -14,9 +14,6 @@ class VideoPlayer extends Component {
           height="100%"
           playing
           controls
-          onError={streamError}
-          onStart={streamStart}
-          onReady={streamReady}
         />
       </div>
     );

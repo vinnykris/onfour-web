@@ -12,7 +12,7 @@ const Join = ({ joinSubmit, mode }) => {
   return (
     <div className="join-outer-container">
       <div className="join-inner-container">
-        <h1 className="heading">Join</h1>
+        <h4 className="heading">Join</h4>
         {/* <form onSubmit={this.submitForm(name)}> */}
         <fieldset>
           <fieldset>
