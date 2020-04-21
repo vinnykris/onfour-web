@@ -8,16 +8,25 @@ const HostApplication = () => {
   return (
     <div>
       <Grid>
+       <Row>
+          <div className="spacer"></div>
+        </Row>
+
         <Row>
           <Col size={1}>
-            <h1>Apply to be an Onfour host</h1>
+            <h4>Apply to be an Onfour host</h4>
           </Col>
         </Row>
+
+        <Row>
+          <div className="form-spacer"></div>
+        </Row>
+
         <Row>
           <Col size={1}>
             <form>
               <Row>
-                <h2>Personal information</h2>
+                <h5>Personal information</h5>
               </Row>
               <Row>
                 <input
@@ -31,6 +40,10 @@ const HostApplication = () => {
                   placeholder="Last Name"
                 ></input>
               </Row>
+                  <Row>
+                    <div className="form-spacer"></div>
+                  </Row>
+
               <Row>
                 <input
                   type="email"
@@ -43,8 +56,14 @@ const HostApplication = () => {
                   placeholder="Phone Number"
                 ></input>
               </Row>
+
               <Row>
-                <h2>Date and Time</h2>
+                    <div className="form-spacer"></div>
+                  </Row>
+
+
+              <Row>
+                <h5>Date and Time</h5>
               </Row>
               <Row>
                 <input type="text" name="date" placeholder=" DD/MM/YY"></input>
@@ -54,6 +73,11 @@ const HostApplication = () => {
                   placeholder="6:00PM-8:00PM EST"
                 ></input>
               </Row>
+
+              <Row>
+                    <div className="form-spacer"></div>
+                  </Row>
+                  
               <Row>
                 <button type="submit" name="submit">
                   Submit
