@@ -6,6 +6,8 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
 import awsmobile from "../../AppSync";
+import whatsonfour from "../../images/whatsonfour_background.jpg";
+import history from "../../history";
 
 Amplify.configure(awsmobile);
 
@@ -33,16 +35,23 @@ const WhatsOnFour = () => {
         <Row>
           <Col size={1}>
             <div className="banner-container">
+              <Row>
+                <Col size={1}>
+                  <button onClick={() => history.push("/stream")}>
+                    Tune into the stream!
+                  </button>
+                </Col>
+              </Row>
               <img
                 className="bannerbackground"
-                src={background}
+                src={whatsonfour}
                 alt="nav-logo"
               ></img>
             </div>
           </Col>
         </Row>
         <Row>
-          <div className="spacer"></div>
+          <div className="short-term-spacer"></div>
         </Row>
         <Row>
           <Col size={1}>
@@ -62,8 +71,14 @@ const WhatsOnFour = () => {
               We will bring fans together in local, non-traditional venues to
               experience live music, together. However, due to the COVID-19
               pandemic, we are hosting live-stream concerts and will donate our
-              proceeds to MusiCares.org to help relieve musicians during this
-              difficult time.
+              proceeds to{" "}
+              <a
+                href="https://www.grammy.com/musicares/donations"
+                target="_blank"
+              >
+                MusiCares
+              </a>{" "}
+              to help relieve musicians during this difficult time.
             </p>
             <hr className="line-divider"></hr>
           </Col>
@@ -82,7 +97,12 @@ const WhatsOnFour = () => {
         <Row>
           <Col size={2}></Col>
           <Col size={1}>
-            <form action="/" id="newsletter" onSubmit={onSubmit}>
+            <form
+              class="inline-form"
+              action="/"
+              id="newsletter"
+              onSubmit={onSubmit}
+            >
               <input
                 type="email"
                 placeholder="Enter your email here..."
@@ -99,7 +119,7 @@ const WhatsOnFour = () => {
           <Col size={2}></Col>
         </Row>
         <Row>
-          <div className="spacer"></div>
+          <div className="short-term-spacer"></div>
         </Row>
         <Row>
           <Col size={1}></Col>
@@ -107,13 +127,15 @@ const WhatsOnFour = () => {
             <p className="description-text">
               Want to perform a livestream concert with Onfour? <br></br>Email
               us at{" "}
-              <a href="mailto:onfour.box@gmail.com">onfour.box@gmail.com</a>
+              <a href="mailto:onfour.box@gmail.com" target="_blank">
+                onfour.box@gmail.com
+              </a>
             </p>
           </Col>
           <Col size={1}></Col>
         </Row>
         <Row>
-          <div className="spacer"></div>
+          <div className="short-term-spacer"></div>
         </Row>
       </Grid>
     </div>
