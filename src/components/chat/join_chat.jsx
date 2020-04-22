@@ -6,14 +6,12 @@ const Join = ({ joinSubmit, mode }) => {
   const [name, setName] = useState("");
   const handleSubmit = () => {
     mode = true;
-    // history.pushState({}, null, `/chat?name=${name}`);
     joinSubmit(name, mode);
   };
   return (
     <div className="join-outer-container">
       <div className="join-inner-container">
         <h4 className="heading">Join</h4>
-        {/* <form onSubmit={this.submitForm(name)}> */}
         <fieldset>
           <fieldset>
             <input
@@ -27,7 +25,6 @@ const Join = ({ joinSubmit, mode }) => {
             Sign In
           </button>
         </fieldset>
-        {/* </form> */}
       </div>
     </div>
   );
