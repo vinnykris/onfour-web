@@ -1,10 +1,34 @@
-import React from "react";
-import whatsonfour from "../../images/whatsonfour_background.jpg";
+import React, { useState } from "react";
+import background from "../../images/home_page_background.jpeg";
 import "../../styles.scss";
 import { Grid, Row, Col } from "../grid";
+import { API, graphqlOperation } from "aws-amplify";
+import * as mutations from "../../graphql/mutations";
+import Amplify from "aws-amplify";
+import awsmobile from "../../AppSync";
+import whatsonfour from "../../images/whatsonfour_background.jpg";
 import history from "../../history";
 
+Amplify.configure(awsmobile);
+
 const WhatsOnFour = () => {
+  const [email, setEmail] = useState("");
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    const payload = {
+      email: email,
+      paid: false,
+    };
+
+    API.graphql(
+      graphqlOperation(mutations.createOnfour_current, { input: payload })
+    );
+
+    setEmail("");
+  };
+
   return (
     <div>
       <Grid>
@@ -73,12 +97,19 @@ const WhatsOnFour = () => {
         <Row>
           <Col size={2}></Col>
           <Col size={1}>
-            <form class="inline-form" action="/" id="newsletter">
+            <form
+              class="inline-form"
+              action="/"
+              id="newsletter"
+              onSubmit={onSubmit}
+            >
               <input
                 type="email"
                 placeholder="Enter your email here..."
                 name="email"
                 required
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
               />
               <button type="submit" form="newsletter" value="Submit">
                 Submit
