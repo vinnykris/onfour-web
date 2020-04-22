@@ -17,7 +17,7 @@ const Chat = ({ chatName, chatStatus }) => {
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const ENDPOINT = "localhost:5000";
+  const ENDPOINT = "https://onfour-chat.herokuapp.com/";
 
   const closeChat = () => {
     chatStatus(false);
@@ -58,7 +58,7 @@ const Chat = ({ chatName, chatStatus }) => {
   return (
     <div className="chat-outer-container">
       <div className="chat-container">
-        <InfoBar room={room} />
+        <InfoBar room={room} users={users} />
         <Messages messages={messages} name={name} />
         <Input
           message={message}
