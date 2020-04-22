@@ -465,6 +465,15 @@ h5 {
 }
 
 // SOCIAL STYLING
+
+.social-bar-container {
+  margin-top: 3%;
+}
+
+.social-list {
+  padding-inline-start: 0px;
+}
+
 .social-media li {
   list-style: none;
   margin: 0px 10px;
@@ -478,6 +487,14 @@ h5 {
 .social-media li a {
   text-decoration: none;
   color: black;
+}
+
+.donation-link {
+  margin-top: 2%;
+}
+
+.venmo-code {
+  max-width: 300px;
 }
 
 .fa-facebook:hover {
