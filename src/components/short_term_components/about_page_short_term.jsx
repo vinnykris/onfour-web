@@ -13,6 +13,7 @@ Amplify.configure(awsmobile);
 
 const WhatsOnFour = () => {
   const [email, setEmail] = useState("");
+  const [clicked, setClicked] = useState(false);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -27,6 +28,7 @@ const WhatsOnFour = () => {
     );
 
     setEmail("");
+    setClicked(true)
   };
 
   return (
@@ -97,24 +99,33 @@ const WhatsOnFour = () => {
         <Row>
           <Col size={2}></Col>
           <Col size={1}>
-            <form
-              class="inline-form"
-              action="/"
-              id="newsletter"
-              onSubmit={onSubmit}
-            >
-              <input
-                type="email"
-                placeholder="Enter your email here..."
-                name="email"
-                required
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-              <button type="submit" form="newsletter" value="Submit">
-                Submit
-              </button>
-            </form>
+            {(() => {
+              if (clicked) {
+                return <div>Thank you and stay tuned! :)</div>;
+              } else {
+                return (
+                  <form
+                    class="inline-form"
+                    action="/"
+                    id="newsletter"
+                    onSubmit={onSubmit}
+                  >
+                    <input
+                      type="email"
+                      placeholder="Enter your email here..."
+                      name="email"
+                      required
+                      value={email}
+                      style={{ width: "350px" }}
+                      onChange={(event) => setEmail(event.target.value)}
+                    />
+                    <button type="submit" form="newsletter" value="Submit" style={{ width: "90px" }} >
+                      Submit
+                    </button>
+                  </form>
+                );
+              }
+            })()}
           </Col>
           <Col size={2}></Col>
         </Row>
