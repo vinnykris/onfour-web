@@ -6,11 +6,12 @@ import "./chat.scss";
 import InfoBar from "./info_bar";
 import Input from "./input";
 import Messages from "./messages";
-import TextContainer from "./text_container";
+import ChatIndicator from "./chat_indicator";
+import { FlexGrid, FlexRow, Col } from "../grid";
 
 let socket;
 
-const Chat = ({ chatName }) => {
+const Chat = ({ chatName, chatStatus }) => {
   const [name, setName] = useState(chatName);
   const [room, setRoom] = useState("Onfour");
   const [users, setUsers] = useState("");
@@ -18,17 +19,21 @@ const Chat = ({ chatName }) => {
   const [messages, setMessages] = useState([]);
   const ENDPOINT = "localhost:5000";
 
+  const closeChat = () => {
+    chatStatus(false);
+    socket.disconnect();
+  };
+
   useEffect(() => {
     socket = io(ENDPOINT);
 
     setName(name);
     setRoom(room);
 
-    console.log(room);
-
     socket.emit("join", { name, room }, (error) => {
       if (error) {
         alert(error);
+        closeChat();
       }
     });
   }, [ENDPOINT, name, room]);
@@ -49,8 +54,7 @@ const Chat = ({ chatName }) => {
       socket.emit("sendMessage", message, () => setMessage(""));
     }
   };
-  console.log(message, messages);
-  // console.log(users, users.length);
+
   return (
     <div className="chat-outer-container">
       <div className="chat-container">
@@ -62,7 +66,6 @@ const Chat = ({ chatName }) => {
           sendMessage={sendMessage}
         />
       </div>
-      {/* <TextContainer users={users} /> */}
     </div>
   );
 };

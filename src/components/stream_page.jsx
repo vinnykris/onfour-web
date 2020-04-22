@@ -10,26 +10,17 @@ import { Grid, Row, Col } from "./grid";
 import SocialBar from "./social_bar";
 
 class StreamPage extends Component {
-  // streamError = (e) => {
-  //   console.log(e, "stream is erroring.");
-  // };
-
-  // streamStart = () => {
-  //   console.log("stream is started.");
-  // };
-
-  // streamReady = () => {
-  //   console.log("stream is ready.");
-  // };
-
   joinSubmit = (name, mode) => {
-    console.log(name);
-    console.log(mode);
     this.setState({
       chatName: name,
       showChat: mode,
     });
-    // setChat(mode);
+  };
+
+  chatStatus = (mode) => {
+    this.setState({
+      showChat: mode,
+    });
   };
 
   constructor(props) {
@@ -39,12 +30,9 @@ class StreamPage extends Component {
       showChat: false,
       chatName: "",
     };
-    console.log("constructed");
   }
 
   render() {
-    console.log("rendered");
-    // console.log(this.state.showChat);
     return (
       <div className="stream-page-content">
         <Grid>
@@ -71,7 +59,10 @@ class StreamPage extends Component {
               <div className="chat-main">
                 <div className="chat-wrapper">
                   {this.state.showChat ? (
-                    <Chat chatName={this.state.chatName} />
+                    <Chat
+                      chatName={this.state.chatName}
+                      chatStatus={this.chatStatus}
+                    />
                   ) : (
                     <Join joinSubmit={this.joinSubmit} />
                   )}
