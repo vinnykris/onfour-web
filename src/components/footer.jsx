@@ -12,8 +12,8 @@ const Footer = () => {
       ></link>
       <Grid>
         <Row>
-          <Col size={1}></Col>
-          <Col size={6}>
+          <Col size={2}></Col>
+          <Col size={5}>
             <h3>About</h3>
             <p>
               Onfour is a platform that empowers music fans by providing them
@@ -45,13 +45,13 @@ const Footer = () => {
               </ul>
             </div>
           </Col>
-          <Col size={1}></Col>
+          <Col size={2}></Col>
         </Row>
         <hr></hr>
         <Row>
-          <Col size={1}></Col>
-          <Col size={6}>
-            <p>Copyright &copy; 2020 All Rights Reserved by Onfour</p>
+          <Col size={2}></Col>
+          <Col size={5}>
+            <h6>Copyright &copy; 2020 All Rights Reserved by Onfour</h6>
           </Col>
           <Col size={1}></Col>
           <Col size={3}>
@@ -81,7 +81,7 @@ const Footer = () => {
               </ul>
             </div>
           </Col>
-          <Col size={1}></Col>
+          <Col size={2}></Col>
         </Row>
       </Grid>
     </div>
