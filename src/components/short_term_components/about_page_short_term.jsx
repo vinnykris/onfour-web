@@ -42,6 +42,8 @@ const WhatsOnFour = () => {
                 src={whatsonfour}
                 alt="nav-logo"
               ></img>
+
+              <h1>Livestream concert to you</h1>
             </div>
           </Col>
         </Row>
@@ -50,7 +52,7 @@ const WhatsOnFour = () => {
         </Row>
         <Row>
           <Col size={1}>
-            <h2> Our Mission </h2>
+            <h3> Our Mission </h3>
           </Col>
         </Row>
         <Row>
