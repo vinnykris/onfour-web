@@ -22,7 +22,7 @@ const Join = ({ joinSubmit, mode }) => {
             />{" "}
           </fieldset>
           <button className="button mt-20" type="submit" onClick={handleSubmit}>
-            Sign In
+            Join
           </button>
         </fieldset>
       </div>
