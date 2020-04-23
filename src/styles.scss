@@ -1,9 +1,6 @@
 // Sass main styles
 // mixin reference - Hugo Giraudel https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
 
-@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap");
-// googlefont  font-family: 'Muli', sans-serif; font-family: 'Lato', sans-serif;
-
 // //color
 // $primary-color:#
 // $secondary-color:#
@@ -11,9 +8,7 @@
 // $secondary-button-color:#
 
 //typeface
-
-$muli: "Muli", sans-serif;
-$lato: "Lato", sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap");
 $heebo: "Heebo", sans-serif;
 //weight
 $regular-weight: 400;
@@ -76,15 +71,78 @@ $breakpoints: (
   }
 }
 
+//shor term page styling
+.whitelogoicon {
+  height: 100px;
+  width: 100px;
+}
+.emailbutton {
+  float: right;
+  background-color: #4d4d4d;
+}
+.emaillink {
+  color: white;
+  margin-bottom: 0px;
+}
+.email-p {
+  margin-bottom: 0px;
+  text-decoration: none;
+}
+
+.subscribebox {
+  background-color: #e2e2e2;
+  height: 380px;
+  padding: 6%;
+}
+.performbox {
+  background-color: #979bbb;
+  height: 380px;
+  padding: 6%;
+}
+
+.performtitle {
+  font-size: 29px;
+  font-weight: $medium-weight;
+  color: white;
+  text-align: right;
+}
+.performdescribtion {
+  font-size: 16px;
+  font-weight: $medium-weight;
+  color: white;
+  text-align: right;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.subscribetitle {
+  font-size: 29px;
+  font-weight: $medium-weight;
+  color: #303096;
+  text-align: left;
+}
+.subscribedescribtion {
+  font-size: 16px;
+  font-weight: $medium-weight;
+  color: #636363;
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.bluebackground {
+  background-color: #303096;
+}
+
 // NAVIGATION BAR STYLING
 .onfour-logo {
-  height: 60px;
+  height: 53px;
   @include respond-to("medium") {
     height: 30px;
   }
   @include respond-to("x-small") {
     height: 25px;
   }
+  margin: 25px;
 }
 
 .navbar {
@@ -95,15 +153,17 @@ $breakpoints: (
 
 .nav-page-black,
 .nav-page-white {
+  font-size: 16px;
   float: right;
   text-align: end;
-  padding: 10px;
+  padding: 20px 30px;
+  font-family: "Heebo", sans-serif;
 }
 
 .nav-home {
   float: left;
   text-align: end;
-  padding: 10px;
+  padding: 20px;
 }
 
 a.nav-page-white {
@@ -114,29 +174,24 @@ a.nav-page-white {
     cursor: pointer;
     color: white;
     text-decoration: "none";
-    font-weight: $bold-weight;
   }
   &:active {
     color: white;
     text-decoration: "underline";
-    font-weight: $bold-weight;
   }
 }
 
 a.nav-page-black {
   margin: 10px;
-  color: black;
+  color: #4d4d4d;
   font-weight: $medium-weight;
   &:hover {
     cursor: pointer;
-    color: black;
+    color: #4d4d4d;
     text-decoration: "none";
-    font-weight: $bold-weight;
   }
   &:active {
-    color: black;
-    text-decoration: "underline";
-    font-weight: $bold-weight;
+    color: #4d4d4d;
   }
 }
 
@@ -230,6 +285,8 @@ a.nav-page-black {
 h2 {
   // padding-top: 50px;
   padding-bottom: 0;
+  color: #4d4d4d;
+  font-size: 36px;
 }
 
 // .paragraph-text {
@@ -241,10 +298,11 @@ h2 {
 
 .description-text {
   padding: 20px;
-  line-height: 1.5rem;
+  line-height: 2rem;
   text-align: center;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: $medium-weight;
+  color: #4d4d4d;
 }
 
 .description-text-left {
@@ -315,7 +373,14 @@ h2 {
 }
 
 .stream-page-content {
-  margin-bottom: 3%;
+  margin-top: 5%;
+  margin-bottom: 6%;
+}
+
+.artistname {
+  font-size: 27px;
+  margin: 2%;
+  color: #303096;
 }
 
 .stream-main {
@@ -409,11 +474,11 @@ input {
 }
 
 input:focus {
-  border: 2px solid black;
+  border: 2px solid #303096;
 }
 
 button {
-  background-color: black;
+  background-color: #303096;
   color: white;
   font-size: 16px;
   padding: 12px 24px;
@@ -424,7 +489,7 @@ button {
 
 h5 {
   padding: 5px;
-  font-size: 7px;
+  font-size: 9px;
 }
 
 .form-spacer {
@@ -442,24 +507,35 @@ h5 {
 
 // FOOTER STYLING
 .footer-container {
-  background-color: #000000;
+  background-color: #e6e6e6;
   width: 100%;
+  padding: 60px 10px 10px 10px;
 }
 
 .footer-container h3 {
   margin-top: 10px;
-  color: white;
+  color: #4d4d4d;
   text-align: left;
+  font-size: 17px;
+  font-weight: $semimedium-weight;
 }
 
 .footer-container p {
-  color: white;
+  color: #4d4d4d;
   text-align: left;
+  font-size: 16px;
+}
+
+.footer-container h6 {
+  color: #4d4d4d;
+  text-align: left;
+  font-size: 13px;
+  font-weight: $regular-weight;
 }
 
 .footer-container hr {
-  border-color: white;
-  width: 83.33%;
+  border-color: #4d4d4d;
+  width: 72%;
 }
 
 .footer-links {
@@ -470,6 +546,7 @@ h5 {
   list-style: none;
   text-align: right;
   padding-left: 0;
+  font-size: 16px;
 }
 
 .footer-links li {
@@ -477,7 +554,7 @@ h5 {
 }
 
 .footer-links li a {
-  color: white;
+  color: #4d4d4d;
 }
 
 .footer-social-media ul {
@@ -488,14 +565,13 @@ h5 {
   list-style: none;
   margin: 0px 10px;
   display: inline-block;
-  font-size: 30px;
-  padding: 0px 20px;
+  font-size: 26px;
   color: black;
 }
 
 .footer-social-media li a {
   text-decoration: none;
-  color: white;
+  color: #4d4d4d;
 }
 
 // SOCIAL STYLING
@@ -510,17 +586,16 @@ h5 {
 
 .social-media li {
   list-style: none;
-  margin: 0px 10px;
+  margin: 0px 10px 0px 10px;
   display: inline-block;
-  font-size: 40px;
-  padding: 10px 20px;
-  color: black;
+  font-size: 30px;
+  color: #4d4d4d;
   border-radius: 50%;
 }
 
 .social-media li a {
   text-decoration: none;
-  color: black;
+  color: #4d4d4d;
 }
 
 .donation-link {

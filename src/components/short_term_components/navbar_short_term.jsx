@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import logo from "../../images/whitelogoicon.png";
-import blacklogo from "../../images/blacklogoicon.png";
+import logo from "../../images/whitelogo.png";
+import blacklogo from "../../images/blacklogo.png";
 import "../../styles.scss";
+import { Col } from "../grid";
 
 const NavBarShortTerm = () => {
   let style = "nav-page-white";
@@ -19,11 +20,10 @@ const NavBarShortTerm = () => {
       <img className="onfour-logo" src={icon} width="auto" alt="nav-logo"></img>
       <div>
         <NavLink to="/stream" className={style}>
-          Stream
+          STREAM
         </NavLink>
-
         <NavLink exact to="/" className={style}>
-          What is Onfour?
+          WHAT'S ONFOUR
         </NavLink>
       </div>
     </div>

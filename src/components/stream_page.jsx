@@ -54,7 +54,7 @@ const StreamPage = () => {
           <Col size={7}>
             <Row>
               <Col size={1}>
-                <h1>SUPERFRIEND</h1>
+                <h2 className="artistname">SUPERFRIEND</h2>
               </Col>
             </Row>
             <div className="stream-main">

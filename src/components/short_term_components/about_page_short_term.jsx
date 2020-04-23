@@ -28,7 +28,7 @@ const WhatsOnFour = () => {
     );
 
     setEmail("");
-    setClicked(true)
+    setClicked(true);
   };
 
   return (
@@ -60,13 +60,10 @@ const WhatsOnFour = () => {
               Onfour empowers music fans by providing a new way to interact with
               your favorite musicians, no matter where you are. Musicians gain
               more control over their careers and connect with fans in new,
-              meaningful ways.
-            </p>
-            <p className="description-text">
-              We will bring fans together in local, non-traditional venues to
-              experience live music, together. However, due to the COVID-19
-              pandemic, we are hosting live-stream concerts and will donate our
-              proceeds to{" "}
+              meaningful ways. We will bring fans together in local,
+              non-traditional venues to experience live music, together.
+              However, due to the COVID-19 pandemic, we are hosting live-stream
+              concerts and will donate our proceeds to{" "}
               <a
                 href="https://www.grammy.com/musicares/donations"
                 target="_blank"
@@ -82,23 +79,38 @@ const WhatsOnFour = () => {
                 </button>
               </Col>
             </Row>
-            <hr className="line-divider"></hr>
           </Col>
           <Col size={1}> </Col>
         </Row>
+
         <Row>
-          <Col size={1}></Col>
-          <Col size={2}>
-            <p className="description-text">
-              To stay informed about upcoming events, subscribe to our mailing
-              list:
-            </p>
-          </Col>
-          <Col size={1}></Col>
+          <div className="short-term-spacer"></div>
         </Row>
+
         <Row>
-          <Col size={2}></Col>
-          <Col size={1}>
+          <Col size={1} className="performbox">
+            <p className="performtitle">Perform</p>
+            <p className="performdescribtion">
+              Want to perform a livestream concert with Onfour? <br></br>Send us
+              an email and we will get back to you soon!
+            </p>
+            <button className="emailbutton">
+              <a
+                href="mailto:onfour.box@gmail.com"
+                target="_blank"
+                className="emaillink"
+              >
+                <p className="email-p">Send us an Email </p>
+              </a>
+            </button>
+          </Col>
+
+          <Col size={1} className="subscribebox">
+            <p className="subscribetitle">Subscribe</p>
+            <p className="subscribedescribtion">
+              To stay informed about upcoming events,<br></br> subscribe to our
+              mailing list:
+            </p>
             {(() => {
               if (clicked) {
                 return <div>Thank you and stay tuned! :)</div>;
@@ -119,7 +131,12 @@ const WhatsOnFour = () => {
                       style={{ width: "350px" }}
                       onChange={(event) => setEmail(event.target.value)}
                     />
-                    <button type="submit" form="newsletter" value="Submit" style={{ width: "90px" }} >
+                    <button
+                      type="submit"
+                      form="newsletter"
+                      value="Submit"
+                      style={{ width: "90px" }}
+                    >
                       Submit
                     </button>
                   </form>
@@ -127,26 +144,6 @@ const WhatsOnFour = () => {
               }
             })()}
           </Col>
-          <Col size={2}></Col>
-        </Row>
-        <Row>
-          <div className="short-term-spacer"></div>
-        </Row>
-        <Row>
-          <Col size={1}></Col>
-          <Col size={2}>
-            <p className="description-text">
-              Want to perform a livestream concert with Onfour? <br></br>Email
-              us at{" "}
-              <a href="mailto:onfour.box@gmail.com" target="_blank">
-                onfour.box@gmail.com
-              </a>
-            </p>
-          </Col>
-          <Col size={1}></Col>
-        </Row>
-        <Row>
-          <div className="short-term-spacer"></div>
         </Row>
       </Grid>
     </div>
