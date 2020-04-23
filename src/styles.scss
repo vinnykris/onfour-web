@@ -360,7 +360,14 @@ h2 {
 // STREAM PAGE STYLING
 
 .stream-page-content {
-  margin-bottom: 3%;
+  margin-top: 5%;
+  margin-bottom: 6%;
+}
+
+.artistname {
+  font-size: 27px;
+  margin: 2%;
+  color: #303096;
 }
 
 .stream-main {
@@ -487,9 +494,9 @@ h5 {
 
 // FOOTER STYLING
 .footer-container {
-  background-color: white;
+  background-color: #e6e6e6;
   width: 100%;
-  padding: 100px 10px 40px 10px;
+  padding: 60px 10px 10px 10px;
 }
 
 .footer-container h3 {
