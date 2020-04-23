@@ -11,7 +11,7 @@ const Join = ({ joinSubmit, mode }) => {
   return (
     <div className="join-outer-container">
       <div className="join-inner-container">
-        <h4 className="heading">Join</h4>
+        <h4 className="heading">Join the Chat!</h4>
         <fieldset>
           <fieldset>
             <input
@@ -22,7 +22,7 @@ const Join = ({ joinSubmit, mode }) => {
             />{" "}
           </fieldset>
           <button className="button mt-20" type="submit" onClick={handleSubmit}>
-            Sign In
+            Join
           </button>
         </fieldset>
       </div>

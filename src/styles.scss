@@ -359,6 +359,19 @@ h2 {
 
 // STREAM PAGE STYLING
 
+.stream-email-col {
+  margin-left: 10%;
+  margin-top: 3%;
+}
+
+.stream-page-email {
+  width: 80%;
+}
+
+.stream-page-email-button {
+  width: 20%;
+}
+
 .stream-page-content {
   margin-top: 5%;
   margin-bottom: 6%;
@@ -562,6 +575,15 @@ h5 {
 }
 
 // SOCIAL STYLING
+
+.social-bar-container {
+  margin-top: 3%;
+}
+
+.social-list {
+  padding-inline-start: 0px;
+}
+
 .social-media li {
   list-style: none;
   margin: 0px 10px 0px 10px;
@@ -574,6 +596,14 @@ h5 {
 .social-media li a {
   text-decoration: none;
   color: #4d4d4d;
+}
+
+.donation-link {
+  margin-top: 2%;
+}
+
+.venmo-code {
+  max-width: 300px;
 }
 
 .fa-facebook:hover {

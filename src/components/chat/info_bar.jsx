@@ -8,8 +8,8 @@ const InfoBar = ({ room, users }) => {
     <div className="info-bar">
       <div className="left-inner-container">
         <img className="online-icon" src={onlineIcon} alt="online" />
-        <h5>{room}</h5>
-        <h5>({users.length})</h5>
+        <h4>{room}</h4>
+        <h4>({users.length})</h4>
       </div>
     </div>
   );
