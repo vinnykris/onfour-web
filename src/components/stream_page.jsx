@@ -148,7 +148,7 @@ const StreamPage = () => {
                     class="inline-form"
                     action="/"
                     id="newsletter"
-                    onSubmit={emailSubmitted}
+                    onSubmit={emailSubmit}
                   >
                     <input
                       type="email"
