@@ -79,7 +79,6 @@ const WhatsOnFour = () => {
                 </button>
               </Col>
             </Row>
-            <hr className="line-divider"></hr>
           </Col>
           <Col size={1}> </Col>
         </Row>
