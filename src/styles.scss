@@ -135,7 +135,7 @@ $breakpoints: (
 
 // NAVIGATION BAR STYLING
 .onfour-logo {
-  height: 40px;
+  height: 60px;
   @include respond-to("medium") {
     height: 30px;
   }
@@ -150,7 +150,8 @@ $breakpoints: (
   background-color: none;
 }
 
-.nav-page {
+.nav-page-black,
+.nav-page-white {
   float: right;
   text-align: end;
   padding: 10px;
@@ -163,24 +164,44 @@ $breakpoints: (
   padding: 10px;
 }
 
-a.nav-page {
+a.nav-page-white {
   margin: 10px;
   color: white;
+  font-weight: $medium-weight;
   &:hover {
     cursor: pointer;
-    color: rgb(0, 0, 0);
+    color: white;
     text-decoration: "none";
+    font-weight: $bold-weight;
   }
   &:active {
     color: white;
     text-decoration: "underline";
+    font-weight: $bold-weight;
   }
 }
 
-.nav-active {
-  // font-weight: $bold-weight;
-  color: white;
+a.nav-page-black {
+  margin: 10px;
+  color: black;
+  font-weight: $medium-weight;
+  &:hover {
+    cursor: pointer;
+    color: black;
+    text-decoration: "none";
+    font-weight: $bold-weight;
+  }
+  &:active {
+    color: black;
+    text-decoration: "underline";
+    font-weight: $bold-weight;
+  }
 }
+
+/* .nav-active {
+  // font-weight: $bold-weight;
+  color: black;
+} */
 
 .login-button {
   margin: 10px;

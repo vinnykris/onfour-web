@@ -6,13 +6,14 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
 import awsmobile from "../../AppSync";
-import whatsonfour from "../../images/whatsonfour_background.jpg";
+import whatsonfour from "../../images/bannerbackground-blur.jpg";
 import history from "../../history";
 
 Amplify.configure(awsmobile);
 
 const WhatsOnFour = () => {
   const [email, setEmail] = useState("");
+  const [clicked, setClicked] = useState(false);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -27,6 +28,7 @@ const WhatsOnFour = () => {
     );
 
     setEmail("");
+    setClicked(true);
   };
 
   return (
@@ -35,13 +37,6 @@ const WhatsOnFour = () => {
         <Row>
           <Col size={1}>
             <div className="banner-container">
-              <Row>
-                <Col size={1}>
-                  <button onClick={() => history.push("/stream")}>
-                    Tune into the stream!
-                  </button>
-                </Col>
-              </Row>
               <img
                 className="bannerbackground"
                 src={whatsonfour}
@@ -77,6 +72,14 @@ const WhatsOnFour = () => {
               </a>{" "}
               to help relieve musicians during this difficult time.
             </p>
+            <Row>
+              <Col size={1}>
+                <button onClick={() => history.push("/stream")}>
+                  Tune into the stream!
+                </button>
+              </Col>
+            </Row>
+            <hr className="line-divider"></hr>
           </Col>
           <Col size={1}> </Col>
         </Row>
@@ -109,29 +112,38 @@ const WhatsOnFour = () => {
               To stay informed about upcoming events,<br></br> subscribe to our
               mailing list:
             </p>
-            <form
-              class="inline-form"
-              action="/"
-              id="newsletter"
-              onSubmit={onSubmit}
-            >
-              <input
-                type="email"
-                placeholder="Enter your email here..."
-                name="email"
-                required
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-              <button
-                type="submit"
-                form="newsletter"
-                value="Submit"
-                className="bluebackground"
-              >
-                Submit
-              </button>
-            </form>
+            {(() => {
+              if (clicked) {
+                return <div>Thank you and stay tuned! :)</div>;
+              } else {
+                return (
+                  <form
+                    class="inline-form"
+                    action="/"
+                    id="newsletter"
+                    onSubmit={onSubmit}
+                  >
+                    <input
+                      type="email"
+                      placeholder="Enter your email here..."
+                      name="email"
+                      required
+                      value={email}
+                      style={{ width: "350px" }}
+                      onChange={(event) => setEmail(event.target.value)}
+                    />
+                    <button
+                      type="submit"
+                      form="newsletter"
+                      value="Submit"
+                      style={{ width: "90px" }}
+                    >
+                      Submit
+                    </button>
+                  </form>
+                );
+              }
+            })()}
           </Col>
         </Row>
       </Grid>
