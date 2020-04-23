@@ -13,39 +13,47 @@
   margin: auto;
   // padding: 25%;
   align-items: center;
-  background-color: #1a1a1d;
+  background-color: #e2e2e2;
 }
 
 .join-input {
   border-radius: 0;
   padding: 5% 5%;
   width: 100%;
+  // color: #4d4d4d;
+  box-shadow: 0px 3px 5px #e2e2e2;
+  border: 0;
+  margin-top: 1%;
 }
 
 .heading {
-  color: white;
-  font-size: 1.5em;
+  color: #303096;
+  font-size: 1.3em;
   padding-bottom: 10px;
-  border-bottom: 2px solid white;
-  @include respond-to("large") {
-    font-size: 1em;
-  }
+  letter-spacing: 0;
 }
 
 .button {
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;
-  background: #2979ff;
-  padding: 10px;
   border-radius: 5px;
   display: inline-block;
   border: none;
   width: 100%;
+  letter-spacing: 2px;
+  background-color: #303096;
+  color: white;
+  font-size: 15px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 0px;
+  box-shadow: 0px 3px 5px grey;
 }
 
 .mt-20 {
-  margin-top: 20px;
+  margin-top: 10%;
 }
 
 // @media (min-width: 320px) and (max-width: 480px) {
@@ -68,14 +76,14 @@ button:focus {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: #1a1a1d;
+  background-color: #757575;
 }
 
 .chat-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #ffffff;
+  background: #e2e2e2;
   border-radius: 8px;
   height: 100%;
   width: 100%;
@@ -104,10 +112,18 @@ button:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #3d3f42;
+  background: #757575;
   border-radius: 4px 4px 0 0;
-  height: 60px;
+  height: 45px;
   width: 100%;
+}
+
+.onfourtitle {
+  color: white;
+  font-size: 1rem;
+  padding: 5px;
+  margin-top: 15px;
+  font-weight: $medium-weight;
 }
 
 .left-inner-container {
@@ -123,6 +139,7 @@ button:focus {
   flex: 0.5;
   justify-content: flex-end;
   margin-right: 5%;
+  color: white;
 }
 
 .online-icon {
@@ -130,7 +147,6 @@ button:focus {
 }
 
 // CHAT
-
 .form {
   display: flex;
   border-top: 2px solid #d3d3d3;
@@ -158,15 +174,16 @@ select:focus {
 
 .send-button {
   color: #fff !important;
-  text-transform: uppercase;
+  text-transform: none;
   text-decoration: none;
-  background: #3d3f42;
-  padding: 20px;
+  background: #757575;
+  padding: 10px;
   display: inline-block;
   border: none;
+  letter-spacing: 1px;
   width: 25%;
   @include respond-to("x-large") {
-    font-size: 0.7em;
+    font-size: 1em;
   }
   @include respond-to("large") {
     font-size: 0.4em;

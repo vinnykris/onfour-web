@@ -18,6 +18,7 @@ $bold-weight: 700;
 
 * {
   font-family: "Heebo", sans-serif;
+  color: #4d4d4d;
 }
 
 // nav{
@@ -72,6 +73,10 @@ $breakpoints: (
 }
 
 //shor term page styling
+.short-term-spacer {
+  height: 100px;
+}
+
 .whitelogoicon {
   height: 100px;
   width: 100px;
@@ -79,7 +84,21 @@ $breakpoints: (
 .emailbutton {
   float: right;
   background-color: #4d4d4d;
+  border-radius: 3px;
+  box-shadow: 0px 3px 5px grey;
 }
+
+.buttonborder {
+  border-radius: 3px;
+  box-shadow: 0px 3px 5px grey;
+  font-weight: $medium-weight;
+  letter-spacing: 0.4px;
+}
+
+.buttonheight {
+  height: 45px;
+}
+
 .emaillink {
   color: white;
   margin-bottom: 0px;
@@ -87,6 +106,9 @@ $breakpoints: (
 .email-p {
   margin-bottom: 0px;
   text-decoration: none;
+  color: white;
+  letter-spacing: 0.3px;
+  font-weight: $medium-weight;
 }
 
 .subscribebox {
@@ -101,13 +123,13 @@ $breakpoints: (
 }
 
 .performtitle {
-  font-size: 29px;
+  font-size: 25px;
   font-weight: $medium-weight;
   color: white;
   text-align: right;
 }
 .performdescribtion {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: $medium-weight;
   color: white;
   text-align: right;
@@ -116,13 +138,13 @@ $breakpoints: (
 }
 
 .subscribetitle {
-  font-size: 29px;
+  font-size: 25px;
   font-weight: $medium-weight;
   color: #303096;
   text-align: left;
 }
 .subscribedescribtion {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: $medium-weight;
   color: #636363;
   text-align: left;
@@ -153,7 +175,7 @@ $breakpoints: (
 
 .nav-page-black,
 .nav-page-white {
-  font-size: 16px;
+  font-size: 0.9rem;
   float: right;
   text-align: end;
   padding: 20px 30px;
@@ -235,10 +257,6 @@ a.nav-page-black {
   margin: auto;
 }
 
-.short-term-spacer {
-  height: 80px;
-}
-
 //MUSICIAN+ Whats on four PAGE STYLING
 .banner-container {
   width: 100%;
@@ -259,7 +277,8 @@ a.nav-page-black {
   position: absolute;
   text-align: center;
   width: 100%;
-  top: 25%;
+  top: 20%;
+  font-size: 2rem;
 }
 
 .banner-container button {
@@ -274,7 +293,8 @@ a.nav-page-black {
   font-weight: $medium-weight;
   border: none;
   cursor: pointer;
-  border-radius: 0px;
+  border-radius: 3px;
+  box-shadow: 0px 3px 5px grey;
 }
 
 .banner-container button:hover {
@@ -283,10 +303,8 @@ a.nav-page-black {
 }
 
 h2 {
-  // padding-top: 50px;
   padding-bottom: 0;
   color: #4d4d4d;
-  font-size: 36px;
 }
 
 // .paragraph-text {
@@ -298,9 +316,9 @@ h2 {
 
 .description-text {
   padding: 20px;
-  line-height: 2rem;
+  line-height: 1.9rem;
   text-align: center;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: $medium-weight;
   color: #4d4d4d;
 }
@@ -356,58 +374,6 @@ h2 {
 }
 
 // HOSTS PAGE STYLING
-
-// STREAM PAGE STYLING
-
-.stream-email-col {
-  margin-left: 10%;
-  margin-top: 3%;
-}
-
-.stream-page-email {
-  width: 80%;
-}
-
-.stream-page-email-button {
-  width: 20%;
-}
-
-.stream-page-content {
-  margin-top: 5%;
-  margin-bottom: 6%;
-}
-
-.artistname {
-  font-size: 27px;
-  margin: 2%;
-  color: #303096;
-}
-
-.stream-main {
-  position: relative;
-}
-
-.stream-wrapper {
-  margin: auto;
-  @include respond-to("small") {
-    width: 100vh;
-    height: auto;
-  }
-}
-
-.player-wrapper {
-  display: inline-block;
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  width: 100%;
-  height: auto;
-}
-
-.video-player {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
 
 // .video-player > div {
 //   position: absolute; // Scaling will occur since parent is relative now
@@ -484,7 +450,8 @@ button {
   padding: 12px 24px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 3px;
+  box-shadow: 0px 3px 5px grey;
 }
 
 h5 {
@@ -586,7 +553,7 @@ h5 {
 
 .social-media li {
   list-style: none;
-  margin: 0px 10px 0px 10px;
+  margin: 0px 15px 0px 15px;
   display: inline-block;
   font-size: 30px;
   color: #4d4d4d;
@@ -603,7 +570,7 @@ h5 {
 }
 
 .venmo-code {
-  max-width: 300px;
+  max-width: 200px;
 }
 
 .fa-facebook:hover {
@@ -624,4 +591,99 @@ h5 {
 
 .fa-twitter:hover {
   color: lightblue;
+}
+
+// STREAM PAGE STYLING
+
+.donatebox {
+  background-color: #979bbb;
+  height: 400px;
+  padding-left: 6%;
+  padding-top: 3.5%;
+}
+
+.streamsubscribebox {
+  background-color: #e2e2e2;
+  height: 400px;
+  padding-left: 6%;
+  padding-top: 3.5%;
+}
+
+.donatetitle {
+  font-size: 25px;
+  font-weight: $medium-weight;
+  color: white;
+  text-align: left;
+  margin-left: 60px;
+}
+.donatedescribtion {
+  font-size: 17px;
+  font-weight: $medium-weight;
+  color: white;
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 60px;
+}
+.venmo-code {
+  float: left;
+  margin-left: 60px;
+}
+
+.socialbarcenter {
+  float: center;
+  margin-top: 0;
+}
+
+.stream-email-col {
+  margin-left: 10%;
+  margin-top: 3%;
+}
+
+.stream-page-email {
+  width: 80%;
+}
+
+.stream-page-email-button {
+  width: 20%;
+}
+
+.stream-page-content {
+  margin-top: 5%;
+  margin-bottom: 6%;
+}
+
+.artistname {
+  font-size: 32px;
+  margin: 4px;
+  color: #303096;
+  letter-spacing: 1px;
+}
+
+.stream-main {
+  position: relative;
+  margin-top: 3%;
+  margin-right: 0.5%;
+}
+
+.stream-wrapper {
+  margin: auto;
+  @include respond-to("small") {
+    width: 100vh;
+    height: auto;
+  }
+}
+
+.player-wrapper {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  width: 100%;
+  height: auto;
+}
+
+.video-player {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

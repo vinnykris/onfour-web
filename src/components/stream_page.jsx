@@ -12,6 +12,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../graphql/mutations";
 import Amplify from "aws-amplify";
 import awsmobile from "../AppSync";
+import VenmoCode from "../images/venmo-codecolor.png";
 
 Amplify.configure(awsmobile);
 
@@ -50,13 +51,50 @@ const StreamPage = () => {
     <div className="stream-page-content">
       <Grid>
         <Row>
+          <Col size={1}>
+            <h2 className="artistname">SUPERFRIEND</h2>
+          </Col>
+        </Row>
+        <Row>
+          <Col size={1} className="socialbarcenter">
+            <div className="social-media">
+              <ul className="social-list">
+                <li>
+                  <a
+                    href="https://www.instagram.com/superduperfriend/"
+                    class="fa fa-instagram"
+                    target="_blank"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="https://open.spotify.com/artist/58aQLz2Bw72YzALyncUm9T?si=6GjQHHueSvSM79yjCuY6-w"
+                    class="fa fa-spotify"
+                    target="_blank"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.youtube.com/channel/UC8Mo_XFsrzJr7bxrwdQ93GQ/featured"
+                    class="fa fa-youtube"
+                    target="_blank"
+                  ></a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.facebook.com/superduperfriend"
+                    class="fa fa-facebook"
+                    target="_blank"
+                  ></a>
+                </li>
+              </ul>
+            </div>
+          </Col>
+        </Row>
+        <Row>
           <Col size={1}></Col>
+
           <Col size={7}>
-            <Row>
-              <Col size={1}>
-                <h2 className="artistname">SUPERFRIEND</h2>
-              </Col>
-            </Row>
             <div className="stream-main">
               <div className="stream-wrapper">
                 <VideoPlayer
@@ -81,60 +119,60 @@ const StreamPage = () => {
           <Col size={1}></Col>
         </Row>
         <Row>
-          <Col size={1}></Col>
-          <Col size={7}>
-            <SocialBar />
+          <div className="short-term-spacer"></div>
+        </Row>
+
+        <Row>
+          <Col size={1} className="donatebox">
+            <p className="donatetitle">Donate</p>
+            <p className="donatedescribtion">
+              Scan the QR code below to donate on Venmo.
+              <br></br>All proceeds will go to MusiCares.
+            </p>
+
+            <img className="venmo-code" src={VenmoCode}></img>
           </Col>
-          <Col size={3}>
-            <div className="stream-email-col">
-              <Row>
-                <Col size={1}>
-                  <p className="description-text">
-                    To stay informed about upcoming events, subscribe to our
-                    mailing list:
-                  </p>
-                </Col>
-              </Row>
-              <Row>
-                <Col size={1}>
-                  {(() => {
-                    if (emailSubmitted) {
-                      return <div>Thank you and stay tuned! :)</div>;
-                    } else {
-                      return (
-                        <form
-                          className="inline-form"
-                          action="/"
-                          id="newsletter"
-                          onSubmit={emailSubmit}
-                        >
-                          <input
-                            className="stream-page-email"
-                            type="email"
-                            placeholder="Enter your email here..."
-                            name="email"
-                            required
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
-                          />
-                          <button
-                            className="stream-page-email-button"
-                            type="submit"
-                            form="newsletter"
-                            value="Submit"
-                            style={{ width: "90px" }}
-                          >
-                            Submit
-                          </button>
-                        </form>
-                      );
-                    }
-                  })()}
-                </Col>
-              </Row>
-            </div>
+
+          <Col size={1} className="streamsubscribebox">
+            <p className="subscribetitle">Subscribe</p>
+            <p className="subscribedescribtion">
+              To stay informed about upcoming events,<br></br> subscribe to our
+              mailing list:
+            </p>
+            {(() => {
+              if (emailSubmitted) {
+                return <div>Thank you and stay tuned! :)</div>;
+              } else {
+                return (
+                  <form
+                    class="inline-form"
+                    action="/"
+                    id="newsletter"
+                    onSubmit={emailSubmitted}
+                  >
+                    <input
+                      type="email"
+                      placeholder="Enter your email here..."
+                      name="email"
+                      required
+                      value={email}
+                      style={{ width: "280px" }}
+                      onChange={(event) => setEmail(event.target.value)}
+                    />
+                    <button
+                      type="submit"
+                      form="newsletter"
+                      value="Submit"
+                      style={{ width: "100px" }}
+                      className="buttonborder buttonheight"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                );
+              }
+            })()}
           </Col>
-          <Col size={1}></Col>
         </Row>
       </Grid>
     </div>
