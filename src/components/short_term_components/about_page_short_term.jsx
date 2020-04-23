@@ -43,7 +43,7 @@ const WhatsOnFour = () => {
                 alt="nav-logo"
               ></img>
 
-              <h1>Livestream concert to you</h1>
+              <h1>Live-streamed concerts, reimagined</h1>
             </div>
           </Col>
         </Row>
@@ -76,7 +76,10 @@ const WhatsOnFour = () => {
             </p>
             <Row>
               <Col size={1}>
-                <button onClick={() => history.push("/stream")}>
+                <button
+                  onClick={() => history.push("/stream")}
+                  className="buttonborder"
+                >
                   Tune into the stream!
                 </button>
               </Col>
@@ -130,14 +133,15 @@ const WhatsOnFour = () => {
                       name="email"
                       required
                       value={email}
-                      style={{ width: "350px" }}
+                      style={{ width: "280px" }}
                       onChange={(event) => setEmail(event.target.value)}
                     />
                     <button
                       type="submit"
                       form="newsletter"
                       value="Submit"
-                      style={{ width: "90px" }}
+                      style={{ width: "100px" }}
+                      className="buttonborder buttonheight"
                     >
                       Submit
                     </button>
