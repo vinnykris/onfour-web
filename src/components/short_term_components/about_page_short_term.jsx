@@ -136,7 +136,6 @@ const WhatsOnFour = () => {
                     <div
                       style={{
                         display: "inline-block",
-                        textAlign: "center",
                         margin: "0 0",
                       }}
                     >
