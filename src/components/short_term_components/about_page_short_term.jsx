@@ -14,6 +14,7 @@ Amplify.configure(awsmobile);
 const WhatsOnFour = () => {
   const [email, setEmail] = useState("");
   const [clicked, setClicked] = useState(false);
+  const [scroll, setScroll] = useState(true);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -30,6 +31,11 @@ const WhatsOnFour = () => {
     setEmail("");
     setClicked(true);
   };
+
+  if (scroll) {
+    window.scrollTo({ top: 0 });
+    setScroll(false);
+  }
 
   return (
     <div>
@@ -122,10 +128,11 @@ const WhatsOnFour = () => {
               } else {
                 return (
                   <form
-                    class="inline-form"
+                    className="inline-form"
                     action="/"
                     id="newsletter"
                     onSubmit={onSubmit}
+                    style={{ display: "flex", align: "center" }}
                   >
                     <input
                       type="email"

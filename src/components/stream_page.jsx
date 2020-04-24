@@ -21,6 +21,7 @@ const StreamPage = () => {
   const [chatName, setChatName] = useState("");
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [scroll, setScroll] = useState(true);
 
   const joinSubmit = (name, mode) => {
     setChatName(name);
@@ -46,6 +47,11 @@ const StreamPage = () => {
     setEmail("");
     setEmailSubmitted(true);
   };
+
+  if (scroll) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setScroll(false);
+  }
 
   return (
     <div className="stream-page-content">
