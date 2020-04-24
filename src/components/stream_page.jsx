@@ -156,44 +156,48 @@ const StreamPage = () => {
           </Col>
 
           <Col size={1} className="streamsubscribebox">
-            <p className="subscribetitle">Subscribe</p>
-            <p className="subscribedescribtion">
-              To stay informed about upcoming events,<br></br> subscribe to our
-              mailing list:
-            </p>
-            {(() => {
-              if (emailSubmitted) {
-                return <div>Thank you and stay tuned! :)</div>;
-              } else {
-                return (
-                  <form
-                    class="inline-form"
-                    action="/"
-                    id="newsletter"
-                    onSubmit={emailSubmit}
-                  >
-                    <input
-                      type="email"
-                      placeholder="Enter your email here..."
-                      name="email"
-                      required
-                      value={email}
-                      style={{ width: "280px" }}
-                      onChange={(event) => setEmail(event.target.value)}
-                    />
-                    <button
-                      type="submit"
-                      form="newsletter"
-                      value="Submit"
-                      style={{ width: "100px" }}
-                      className="buttonborder buttonheight"
+            <div>
+              <p className="subscribetitle">Subscribe</p>
+              <p className="subscribedescribtion">
+                To stay informed about upcoming events,<br></br> subscribe to
+                our mailing list:
+              </p>
+              {(() => {
+                if (emailSubmitted) {
+                  return <div>Thank you and stay tuned! :)</div>;
+                } else {
+                  return (
+                    <form
+                      className="inline-form-2"
+                      action="/"
+                      id="newsletter"
+                      onSubmit={emailSubmit}
                     >
-                      Submit
-                    </button>
-                  </form>
-                );
-              }
-            })()}
+                      <div>
+                        <input
+                          type="email"
+                          placeholder="Enter your email here..."
+                          name="email"
+                          required
+                          value={email}
+                          style={{ width: "280px" }}
+                          onChange={(event) => setEmail(event.target.value)}
+                        />
+                        <button
+                          type="submit"
+                          form="newsletter"
+                          value="Submit"
+                          style={{ width: "100px" }}
+                          //className="buttonborder buttonheight"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </form>
+                  );
+                }
+              })()}
+            </div>
           </Col>
         </Row>
       </Grid>
