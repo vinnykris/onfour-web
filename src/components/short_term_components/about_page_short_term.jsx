@@ -133,12 +133,7 @@ const WhatsOnFour = () => {
                     id="newsletter"
                     onSubmit={onSubmit}
                   >
-                    <div
-                      style={{
-                        display: "inline-block",
-                        margin: "0 0",
-                      }}
-                    >
+                    <div>
                       <input
                         type="email"
                         placeholder="Enter your email here..."
