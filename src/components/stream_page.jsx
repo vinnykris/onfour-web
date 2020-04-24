@@ -73,9 +73,6 @@ const StreamPage = () => {
                 <Row>
                   <h2 className="artistname">Jonathan Dely</h2>
                 </Row>
-                <Row>
-                  <h5 className="showtime">Friday 24th March 8:00PM EST</h5>
-                </Row>
               </Col>
               <Col size={1} className="socialbarcenter">
                 <div className="social-media">
@@ -120,6 +117,12 @@ const StreamPage = () => {
                 </div>
               </Col>
             </Row>
+            <Row>
+              <h5 className="showtime">
+                Friday 24th March 8:00PM EST (refresh the page if stream doesn't
+                show up)
+              </h5>
+            </Row>
           </Col>
           <Col size={3}>
             <div className="chat-main">
@@ -132,7 +135,7 @@ const StreamPage = () => {
               </div>
             </div>
           </Col>
-          <Col size={0.5}></Col>
+          <Col size={1}></Col>
         </Row>
         <Row>
           <div className="short-term-spacer"></div>
