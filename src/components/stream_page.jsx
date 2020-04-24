@@ -133,9 +133,9 @@ const StreamPage = () => {
               <Col size={2}>
                 <p className="donatetitle">Donate</p>
                 <p className="donatedescribtion">
-                  Scan the QR code to the right to donate to Jonathan Dely on
+                  Scan the QR code to the right to donate to @Jonathan-Dely on
                   Venmo.
-                  {/* <br></br>All proceeds will go to MusiCares. */}
+                  {/* <br></br>Jon's Venmo handle is  */}
                 </p>
               </Col>
               <Col size={1}>
