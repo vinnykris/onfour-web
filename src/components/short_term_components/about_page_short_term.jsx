@@ -105,15 +105,13 @@ const WhatsOnFour = () => {
               Want to perform a livestream concert with Onfour? <br></br>Send us
               an email and we will get back to you soon!
             </p>
-            <button className="emailbutton">
-              <a
-                href="mailto:onfour.box@gmail.com"
-                target="_blank"
-                className="emaillink"
-              >
-                <p className="email-p">Send us an Email </p>
-              </a>
-            </button>
+            <a
+              href="mailto:onfour.box@gmail.com"
+              target="_blank"
+              className="emaillink"
+            >
+              <button className="emailbutton">Send us an Email</button>
+            </a>
           </Col>
 
           <Col size={1} className="subscribebox">
