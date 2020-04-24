@@ -142,10 +142,19 @@ const StreamPage = () => {
           <Col size={1} className="donatebox">
             <Row>
               <Col size={2}>
-                <p className="donatetitle">Donate</p>
+                <p className="donatetitle">Donate to the Artist</p>
                 <p className="donatedescribtion">
-                  Scan the QR code to the right to donate to @Jonathan-Dely on
-                  Venmo.
+                  To donate to Jonathan Dely on Paypal,{" "}
+                  <a href="http://paypal.me/jonathandely" target="_blank">
+                    click here.
+                  </a>
+                  {/* <br></br>Or, scan the QR code to the right to donate to
+                  @Jonathan-Dely on Venmo. */}
+                  {/* <br></br>Jon's Venmo handle is  */}
+                </p>
+                <p className="donatedescribtion">
+                  Or, scan the QR code to the right to donate to @Jonathan-Dely
+                  on Venmo.
                   {/* <br></br>Jon's Venmo handle is  */}
                 </p>
               </Col>
