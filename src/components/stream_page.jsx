@@ -12,7 +12,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../graphql/mutations";
 import Amplify from "aws-amplify";
 import awsmobile from "../AppSync";
-import VenmoCode from "../images/venmo-codecolor.png";
+import VenmoCode from "../images/jon_venmo_QR.jpeg";
 
 Amplify.configure(awsmobile);
 
@@ -73,9 +73,6 @@ const StreamPage = () => {
                 <Row>
                   <h2 className="artistname">Jonathan Dely</h2>
                 </Row>
-                <Row>
-                  <h5 className="showtime">Friday 24th March 8:00PM EST</h5>
-                </Row>
               </Col>
               <Col size={1} className="socialbarcenter">
                 <div className="social-media">
@@ -112,6 +109,9 @@ const StreamPage = () => {
                   </ul>
                 </div>
               </Col>
+            </Row>
+            <Row>
+              <h5 className="showtime">Friday 24th March 8:00PM EST (refresh the page if stream doesn't show up)</h5>
             </Row>
           </Col>
           <Col size={3}>
