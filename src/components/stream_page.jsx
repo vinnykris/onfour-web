@@ -69,9 +69,14 @@ const StreamPage = () => {
               </div>
             </div>
             <Row>
-              <Col size={1}>
+              <Col size={2}>
                 <Row>
                   <h2 className="artistname">Jonathan Dely</h2>
+                </Row>
+                <Row>
+                  <h5 className="showtime">
+                    Friday 24th April 8:00PM EST (refresh the page if stream doesn't show up)
+                  </h5>
                 </Row>
               </Col>
               <Col size={1} className="socialbarcenter">
@@ -117,12 +122,7 @@ const StreamPage = () => {
                 </div>
               </Col>
             </Row>
-            <Row>
-              <h5 className="showtime">
-                Friday 24th April 8:00PM EST (refresh the page if stream doesn't
-                show up)
-              </h5>
-            </Row>
+            <Row></Row>
           </Col>
           <Col size={3}>
             <div className="chat-main">
@@ -142,7 +142,7 @@ const StreamPage = () => {
         </Row>
 
         <Row>
-          <Col size={1} className="donatebox">
+          <Col size={3} className="donatebox">
             <Row>
               <Col size={2}>
                 <p className="donatetitle">Donate to the Artist</p>
@@ -151,13 +151,10 @@ const StreamPage = () => {
                   <a href="http://paypal.me/jonathandely" target="_blank">
                     click here.
                   </a>
+                  <br></br> Or, scan the QR code to the right to donate to
+                  <br></br>@Jonathan-Dely on Venmo.
                   {/* <br></br>Or, scan the QR code to the right to donate to
                   @Jonathan-Dely on Venmo. */}
-                  {/* <br></br>Jon's Venmo handle is  */}
-                </p>
-                <p className="donatedescribtion">
-                  Or, scan the QR code to the right to donate to @Jonathan-Dely
-                  on Venmo.
                   {/* <br></br>Jon's Venmo handle is  */}
                 </p>
               </Col>
@@ -167,9 +164,9 @@ const StreamPage = () => {
             </Row>
           </Col>
 
-          <Col size={1} className="streamsubscribebox">
-            <p className="subscribetitle">Subscribe</p>
-            <p className="subscribedescribtion">
+          <Col size={2} className="streamsubscribebox">
+            <p className="streamsubscribetitle">Subscribe</p>
+            <p className="streamsubscribedescribtion">
               To stay informed about upcoming events,<br></br> subscribe to our
               mailing list:
             </p>
