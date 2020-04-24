@@ -388,7 +388,7 @@ h2 {
 }
 
 .chat-main {
-  height: 560px;
+  height: 660px;
   width: 100%;
   position: relative;
   // margin: auto;
@@ -397,19 +397,19 @@ h2 {
   align-items: center;
 
   @include respond-to("xx-large") {
-    height: 460px;
+    height: 560px;
   }
 
   @include respond-to("x-large") {
-    height: 410px;
+    height: 465px;
   }
 
   @include respond-to("large") {
-    height: 360px;
+    height: 380px;
   }
 
   @include respond-to("medium") {
-    height: 260px;
+    height: 310px;
   }
 
   @include respond-to("small") {
