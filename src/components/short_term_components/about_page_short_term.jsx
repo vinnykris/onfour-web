@@ -117,46 +117,48 @@ const WhatsOnFour = () => {
           </Col>
 
           <Col size={1} className="subscribebox">
-            <p className="subscribetitle">Subscribe</p>
-            <p className="subscribedescribtion">
-              To stay informed about upcoming events,<br></br> subscribe to our
-              mailing list:
-            </p>
-            {(() => {
-              if (clicked) {
-                return <div>Thank you and stay tuned! :)</div>;
-              } else {
-                return (
-                  <form
-                    className="inline-form"
-                    action="/"
-                    id="newsletter"
-                    onSubmit={onSubmit}
-                  >
-                    <div>
-                      <input
-                        type="email"
-                        placeholder="Enter your email here..."
-                        name="email"
-                        required
-                        value={email}
-                        style={{ width: "280px" }}
-                        onChange={(event) => setEmail(event.target.value)}
-                      />
-                      <button
-                        type="submit"
-                        form="newsletter"
-                        value="Submit"
-                        style={{ width: "100px" }}
-                        className="buttonborder buttonheight"
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </form>
-                );
-              }
-            })()}
+            <div>
+              <p className="subscribetitle">Subscribe</p>
+              <p className="subscribedescribtion">
+                To stay informed about upcoming events,<br></br> subscribe to
+                our mailing list:
+              </p>
+              {(() => {
+                if (clicked) {
+                  return <div>Thank you and stay tuned! :)</div>;
+                } else {
+                  return (
+                    <form
+                      className="inline-form"
+                      action="/"
+                      id="newsletter"
+                      onSubmit={onSubmit}
+                    >
+                      <div>
+                        <input
+                          type="email"
+                          placeholder="Enter your email here..."
+                          name="email"
+                          required
+                          value={email}
+                          style={{ width: "280px" }}
+                          onChange={(event) => setEmail(event.target.value)}
+                        />
+                        <button
+                          type="submit"
+                          form="newsletter"
+                          value="Submit"
+                          style={{ width: "100px" }}
+                          className="buttonborder buttonheight"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </form>
+                  );
+                }
+              })()}
+            </div>
           </Col>
         </Row>
       </Grid>
