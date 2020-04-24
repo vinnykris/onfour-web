@@ -117,7 +117,7 @@ const WhatsOnFour = () => {
           </Col>
 
           <Col size={1} className="subscribebox">
-            <div>
+            <div style={{ textAlign: "center" }}>
               <p className="subscribetitle">Subscribe</p>
               <p className="subscribedescribtion">
                 To stay informed about upcoming events,<br></br> subscribe to
