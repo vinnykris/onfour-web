@@ -146,7 +146,6 @@ const WhatsOnFour = () => {
                           onChange={(event) => setEmail(event.target.value)}
                         />
                         <button
-                          className="inline-form-subscribe"
                           type="submit"
                           form="newsletter"
                           value="Submit"
