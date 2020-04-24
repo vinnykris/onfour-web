@@ -136,6 +136,7 @@ const WhatsOnFour = () => {
                     >
                       <div>
                         <input
+                          className="inline-form-subscribe"
                           type="email"
                           placeholder="Enter your email here..."
                           name="email"
@@ -145,6 +146,7 @@ const WhatsOnFour = () => {
                           onChange={(event) => setEmail(event.target.value)}
                         />
                         <button
+                          className="inline-form-subscribe"
                           type="submit"
                           form="newsletter"
                           value="Submit"
