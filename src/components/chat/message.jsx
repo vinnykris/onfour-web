@@ -5,6 +5,7 @@ import ReactEmoji from "react-emoji";
 const Message = ({ message: { user, text }, name }) => {
   let isSentByCurrentUser = false;
   let isAdmin = false;
+  let isStaff = false;
   const trimmedName = name.trim().toLowerCase();
 
   if (user === trimmedName) {
@@ -13,6 +14,10 @@ const Message = ({ message: { user, text }, name }) => {
   
   if (user === "admin") {
     isAdmin = true;
+  }
+
+  if (user === "onfour-staff") {
+    isStaff =true;
   }
 
   return isSentByCurrentUser ? (
@@ -27,6 +32,13 @@ const Message = ({ message: { user, text }, name }) => {
       <div className="message-box-admin background-white">
           <p className="sent-text">{ReactEmoji.emojify(text)}</p>
       </div>
+    </div>
+  ) : isStaff ? (
+    <div className="message-container justify-start">
+      <div className="message-box background-staff">
+        <p className="message-text color-white">{ReactEmoji.emojify(text)}</p>
+      </div>
+      <p className="sent-text pl-10">{user} </p>
     </div>
   ) : (
     <div className="message-container justify-start">
