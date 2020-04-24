@@ -129,14 +129,10 @@ const WhatsOnFour = () => {
                 } else {
                   return (
                     <form
-                      className="inline-form"
+                      className="inline-form-subscribe"
                       action="/"
                       id="newsletter"
                       onSubmit={onSubmit}
-                      style={{
-                        width: "100%",
-                        clear: "both",
-                      }}
                     >
                       <div>
                         <input
