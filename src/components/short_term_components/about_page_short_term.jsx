@@ -129,7 +129,7 @@ const WhatsOnFour = () => {
                 } else {
                   return (
                     <form
-                      className="inline-form"
+                      className="inline-form-2"
                       action="/"
                       id="newsletter"
                       onSubmit={onSubmit}
