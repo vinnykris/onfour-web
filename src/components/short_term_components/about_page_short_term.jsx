@@ -129,14 +129,13 @@ const WhatsOnFour = () => {
                 } else {
                   return (
                     <form
-                      className="inline-form-subscribe"
+                      className="inline-form"
                       action="/"
                       id="newsletter"
                       onSubmit={onSubmit}
                     >
                       <div>
                         <input
-                          className="inline-form-subscribe"
                           type="email"
                           placeholder="Enter your email here..."
                           name="email"
