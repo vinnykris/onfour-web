@@ -51,49 +51,7 @@ const StreamPage = () => {
     <div className="stream-page-content">
       <Grid>
         <Row>
-          <Col size={1}>
-            <h2 className="artistname">SUPERFRIEND</h2>
-          </Col>
-        </Row>
-        <Row>
-          <Col size={1} className="socialbarcenter">
-            <div className="social-media">
-              <ul className="social-list">
-                <li>
-                  <a
-                    href="https://www.instagram.com/superduperfriend/"
-                    class="fa fa-instagram"
-                    target="_blank"
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    href="https://open.spotify.com/artist/58aQLz2Bw72YzALyncUm9T?si=6GjQHHueSvSM79yjCuY6-w"
-                    class="fa fa-spotify"
-                    target="_blank"
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.youtube.com/channel/UC8Mo_XFsrzJr7bxrwdQ93GQ/featured"
-                    class="fa fa-youtube"
-                    target="_blank"
-                  ></a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.facebook.com/superduperfriend"
-                    class="fa fa-facebook"
-                    target="_blank"
-                  ></a>
-                </li>
-              </ul>
-            </div>
-          </Col>
-        </Row>
-        <Row>
           <Col size={1}></Col>
-
           <Col size={7}>
             <div className="stream-main">
               <div className="stream-wrapper">
@@ -104,8 +62,48 @@ const StreamPage = () => {
                 />
               </div>
             </div>
+            <Row>
+              <Col size={1}>
+                <h2 className="artistname">Jonathan Dely</h2>
+              </Col>
+              <Col size={1} className="socialbarcenter">
+                <div className="social-media">
+                  <Col size={1}></Col>
+                  <ul className="social-list">
+                    <li>
+                      <a
+                        href="http://instagram.com/jonathan_dely"
+                        class="fa fa-instagram"
+                        target="_blank"
+                      ></a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://open.spotify.com/artist/5wdmp3H2QC7tfMYAabtQN3"
+                        class="fa fa-spotify"
+                        target="_blank"
+                      ></a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.youtube.com/channel/UCdh0zQFUEYKQsbTJI00Q2SA"
+                        class="fa fa-youtube"
+                        target="_blank"
+                      ></a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.facebook.com/jonathandelymusic"
+                        class="fa fa-facebook"
+                        target="_blank"
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+              </Col>
+            </Row>
           </Col>
-          <Col className="flex-col" size={3}>
+          <Col size={3}>
             <div className="chat-main">
               <div className="chat-wrapper">
                 {showChat ? (
