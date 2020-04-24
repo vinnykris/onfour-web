@@ -51,7 +51,7 @@ const StreamPage = () => {
     <div className="stream-page-content">
       <Grid>
         <Row>
-          <Col size={1}></Col>
+          <Col size={0.5}></Col>
           <Col size={7}>
             <div className="stream-main">
               <div className="stream-wrapper">
@@ -64,7 +64,12 @@ const StreamPage = () => {
             </div>
             <Row>
               <Col size={1}>
-                <h2 className="artistname">Jonathan Dely</h2>
+                <Row>
+                  <h2 className="artistname">Jonathan Dely</h2>
+                </Row>
+                <Row>
+                  <h5 className="showtime">Friday 24th March 8:00PM EST</h5>
+                </Row>
               </Col>
               <Col size={1} className="socialbarcenter">
                 <div className="social-media">
@@ -114,7 +119,7 @@ const StreamPage = () => {
               </div>
             </div>
           </Col>
-          <Col size={1}></Col>
+          <Col size={0.5}></Col>
         </Row>
         <Row>
           <div className="short-term-spacer"></div>
