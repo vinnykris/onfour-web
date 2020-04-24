@@ -12,7 +12,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../graphql/mutations";
 import Amplify from "aws-amplify";
 import awsmobile from "../AppSync";
-import VenmoCode from "../images/venmo-codecolor.png";
+import VenmoCode from "../images/jon-dely-venmo.jpeg";
 
 Amplify.configure(awsmobile);
 
@@ -98,6 +98,13 @@ const StreamPage = () => {
                         target="_blank"
                       ></a>
                     </li>
+                    <li>
+                      <a
+                        href="http://paypal.me/jonathandely"
+                        class="fa fa-paypal"
+                        target="_blank"
+                      ></a>
+                    </li>
                   </ul>
                 </div>
               </Col>
@@ -122,13 +129,18 @@ const StreamPage = () => {
 
         <Row>
           <Col size={1} className="donatebox">
-            <p className="donatetitle">Donate</p>
-            <p className="donatedescribtion">
-              Scan the QR code below to donate on Venmo.
-              <br></br>All proceeds will go to MusiCares.
-            </p>
-
-            <img className="venmo-code" src={VenmoCode}></img>
+            <Row>
+              <Col size={2}>
+                <p className="donatetitle">Donate</p>
+                <p className="donatedescribtion">
+                  Scan the QR code to the right to donate on Venmo.
+                  <br></br>All proceeds will go to MusiCares.
+                </p>
+              </Col>
+              <Col size={1}>
+                <img className="venmo-code" src={VenmoCode}></img>
+              </Col>
+            </Row>
           </Col>
 
           <Col size={1} className="streamsubscribebox">
