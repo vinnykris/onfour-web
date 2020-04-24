@@ -36,9 +36,9 @@ const Footer = () => {
                     Contact Us
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="">Donate</a>
-                </li>
+                </li> */}
                 {/* <li>
                 <a href="">Privacy Policy</a>
               </li> */}
