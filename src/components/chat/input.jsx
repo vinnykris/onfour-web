@@ -14,7 +14,7 @@ const Input = ({ message, setMessage, sendMessage }) => (
       }
     />
     <button className="send-button" onClick={(event) => sendMessage(event)}>
-      Send
+      <i class="fa fa-send"></i>
     </button>
   </form>
 );
