@@ -78,7 +78,7 @@ button:focus {
   align-items: center;
   height: 100%;
   background-color: #757575;
-  border: 1px solid #303096;
+  border: 1px solid #d3d3d3;
 }
 
 .chat-container {
@@ -115,7 +115,7 @@ button:focus {
   align-items: center;
   justify-content: space-between;
   // background: #757575;
-  background: #fff;
+  background: #d3d3d3;
   border-radius: 4px 4px 0 0;
   height: 40px;
   width: 100%;
@@ -159,7 +159,7 @@ button:focus {
   border: none;
   border-radius: 0;
   padding: 1% 12px;
-  width: 80%;
+  width: 90%;
   font-size: 1.2em;
   @include respond-to("x-large") {
     font-size: 1em;
@@ -179,12 +179,12 @@ select:focus {
   color: #fff !important;
   text-transform: none;
   text-decoration: none;
-  background: #757575;
-  padding: 5px;
+  background: #ffffff;
+  padding: 1px;
   display: inline-block;
   border: none;
   letter-spacing: 1px;
-  width: 20%;
+  width: 10%;
   @include respond-to("x-large") {
     font-size: 1em;
   }
@@ -217,7 +217,6 @@ select:focus {
   overflow: auto;
   flex: auto;
 }
-
 // MESSAGE
 
 .message-box {
@@ -280,6 +279,13 @@ select:focus {
   @include respond-to("large") {
     font-size: 0.6em;
   }
+}
+
+// .fa {
+// 	color: black;
+// }
+.fa-send {
+	color: #303096;
 }
 
 .pl-10 {

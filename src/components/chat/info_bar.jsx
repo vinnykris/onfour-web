@@ -7,7 +7,7 @@ const InfoBar = ({ room, users }) => {
   return (
     <div className="info-bar">
       <div className="left-inner-container">
-        <img className="online-icon" src={onlineIcon} alt="online" />
+        {/* <img className="online-icon" src={onlineIcon} alt="online" /> */}
         <p className="onfourtitle">{room}</p>
         <p className="onfourtitle">({users.length})</p>
       </div>
