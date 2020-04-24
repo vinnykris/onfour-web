@@ -75,7 +75,7 @@ const StreamPage = () => {
                 </Row>
                 <Row>
                   <h5 className="showtime">
-                    Friday 24th March 8:00PM EST (refresh the page if stream
+                    Friday 24th April 8:00PM EST (refresh the page if stream
                     doesn't show up)
                   </h5>
                 </Row>
@@ -152,11 +152,9 @@ const StreamPage = () => {
                   <a href="http://paypal.me/jonathandely" target="_blank">
                     click here.
                   </a>
-                  <br></br> Or, scan the QR code to the right to donate to
+                  <br></br>
+                  <br></br>Or, scan the QR code to the right to donate to
                   <br></br>@Jonathan-Dely on Venmo.
-                  {/* <br></br>Or, scan the QR code to the right to donate to
-                  @Jonathan-Dely on Venmo. */}
-                  {/* <br></br>Jon's Venmo handle is  */}
                 </p>
               </Col>
               <Col size={1}>
