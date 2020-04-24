@@ -132,26 +132,33 @@ const WhatsOnFour = () => {
                     action="/"
                     id="newsletter"
                     onSubmit={onSubmit}
-                    style={{ display: "flex", align: "center" }}
                   >
-                    <input
-                      type="email"
-                      placeholder="Enter your email here..."
-                      name="email"
-                      required
-                      value={email}
-                      style={{ width: "280px" }}
-                      onChange={(event) => setEmail(event.target.value)}
-                    />
-                    <button
-                      type="submit"
-                      form="newsletter"
-                      value="Submit"
-                      style={{ width: "100px" }}
-                      className="buttonborder buttonheight"
+                    <div
+                      style={{
+                        display: "inline-block",
+                        textAlign: "center",
+                        margin: "0 0",
+                      }}
                     >
-                      Submit
-                    </button>
+                      <input
+                        type="email"
+                        placeholder="Enter your email here..."
+                        name="email"
+                        required
+                        value={email}
+                        style={{ width: "280px" }}
+                        onChange={(event) => setEmail(event.target.value)}
+                      />
+                      <button
+                        type="submit"
+                        form="newsletter"
+                        value="Submit"
+                        style={{ width: "100px" }}
+                        className="buttonborder buttonheight"
+                      >
+                        Submit
+                      </button>
+                    </div>
                   </form>
                 );
               }
