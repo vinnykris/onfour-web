@@ -552,6 +552,18 @@ h5 {
   color: #4d4d4d;
 }
 
+.onfour-logo-footer {
+  height: 53px;
+  float: left;
+  @include respond-to("medium") {
+    height: 40px;
+  }
+  @include respond-to("x-small") {
+    height: 35px;
+  }
+  // margin: 25px;
+}
+
 // SOCIAL STYLING
 
 .social-bar-container {

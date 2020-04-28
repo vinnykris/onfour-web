@@ -68,10 +68,8 @@ const WhatsOnFour = () => {
               Onfour empowers music fans by providing a new way to interact with
               your favorite musicians, no matter where you are. Musicians gain
               more control over their careers and connect with fans in new,
-              meaningful ways. We will bring fans together in local,
-              non-traditional venues to experience live music, together.
-              However, due to the COVID-19 pandemic, we are hosting live-stream
-              concerts and will donate our proceeds to{" "}
+              meaningful ways. Due to the COVID-19 pandemic, we are hosting
+              live-stream concerts and will donate our proceeds to{" "}
               <a
                 href="https://www.grammy.com/musicares/donations"
                 target="_blank"

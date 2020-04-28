@@ -23,7 +23,7 @@ const NavBarShortTerm = () => {
           STREAM
         </NavLink>
         <NavLink exact to="/" className={style}>
-          WHAT'S ONFOUR
+          ABOUT US
         </NavLink>
       </div>
     </div>
