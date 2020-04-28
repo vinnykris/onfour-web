@@ -7,18 +7,21 @@ import "../../styles.scss";
 import { Col } from "../grid";
 
 const NavBarShortTerm = () => {
-  let style = "nav-page-white";
-  let icon = logo;
+  let style = "nav-page-black";
+  let icon = blacklogo;
   let location = useLocation();
-  if (location.pathname === "/stream") {
-    style = "nav-page-black";
-    icon = blacklogo;
+  if (location.pathname === "/") {
+    style = "nav-page-white";
+    icon = logo;
   }
 
   return (
     <div className="navbar">
       <img className="onfour-logo" src={icon} width="auto" alt="nav-logo"></img>
       <div>
+        <NavLink to="/archive" className={style}>
+          PAST SHOWS
+        </NavLink>
         <NavLink to="/stream" className={style}>
           STREAM
         </NavLink>
