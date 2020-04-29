@@ -7,12 +7,12 @@ import "../../styles.scss";
 import { Col } from "../grid";
 
 const NavBarShortTerm = () => {
-  let style = "nav-page-white";
-  let icon = logo;
+  let style = "nav-page-black";
+  let icon = blacklogo;
   let location = useLocation();
-  if (location.pathname === "/stream") {
-    style = "nav-page-black";
-    icon = blacklogo;
+  if (location.pathname === "/") {
+    style = "nav-page-white";
+    icon = logo;
   }
 
   if (location.pathname === "/ticket") {
@@ -27,11 +27,14 @@ const NavBarShortTerm = () => {
         <NavLink to="/ticket" className={style}>
           TICKET
         </NavLink>
+        <NavLink to="/archive" className={style}>
+          PAST SHOWS
+        </NavLink>
         <NavLink to="/stream" className={style}>
           STREAM
         </NavLink>
         <NavLink exact to="/" className={style}>
-          WHAT'S ONFOUR
+          ABOUT US
         </NavLink>
       </div>
     </div>

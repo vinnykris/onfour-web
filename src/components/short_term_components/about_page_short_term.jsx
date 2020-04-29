@@ -68,10 +68,8 @@ const WhatsOnFour = () => {
               Onfour empowers music fans by providing a new way to interact with
               your favorite musicians, no matter where you are. Musicians gain
               more control over their careers and connect with fans in new,
-              meaningful ways. We will bring fans together in local,
-              non-traditional venues to experience live music, together.
-              However, due to the COVID-19 pandemic, we are hosting live-stream
-              concerts and will donate our proceeds to{" "}
+              meaningful ways. Due to the COVID-19 pandemic, we are hosting
+              live-stream concerts and will donate our proceeds to{" "}
               <a
                 href="https://www.grammy.com/musicares/donations"
                 target="_blank"
@@ -115,52 +113,48 @@ const WhatsOnFour = () => {
           </Col>
 
           <Col size={1} className="subscribebox">
-            <p className="subscribetitle">Subscribe</p>
-            <p className="subscribedescribtion">
-              To stay informed about upcoming events,<br></br> subscribe to our
-              mailing list:
-            </p>
-            {(() => {
-              if (clicked) {
-                return <div>Thank you and stay tuned! :)</div>;
-              } else {
-                return (
-                  <form
-                    className="inline-form"
-                    action="/"
-                    id="newsletter"
-                    onSubmit={onSubmit}
-                  >
-                    <div
-                      style={{
-                        display: "inline-block",
-                        textAlign: "center",
-                        margin: "0 0",
-                      }}
+            <div>
+              <p className="subscribetitle">Subscribe</p>
+              <p className="subscribedescribtion">
+                To stay informed about upcoming events,<br></br> subscribe to
+                our mailing list:
+              </p>
+              {(() => {
+                if (clicked) {
+                  return <div>Thank you and stay tuned! :)</div>;
+                } else {
+                  return (
+                    <form
+                      className="inline-form-2"
+                      action="/"
+                      id="newsletter"
+                      onSubmit={onSubmit}
                     >
-                      <input
-                        type="email"
-                        placeholder="Enter your email here..."
-                        name="email"
-                        required
-                        value={email}
-                        style={{ width: "280px" }}
-                        onChange={(event) => setEmail(event.target.value)}
-                      />
-                      <button
-                        type="submit"
-                        form="newsletter"
-                        value="Submit"
-                        style={{ width: "100px" }}
-                        className="buttonborder buttonheight"
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </form>
-                );
-              }
-            })()}
+                      <div>
+                        <input
+                          type="email"
+                          placeholder="Enter your email here..."
+                          name="email"
+                          required
+                          value={email}
+                          style={{ width: "280px" }}
+                          onChange={(event) => setEmail(event.target.value)}
+                        />
+                        <button
+                          type="submit"
+                          form="newsletter"
+                          value="Submit"
+                          style={{ width: "100px" }}
+                          className="buttonborder buttonheight"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </form>
+                  );
+                }
+              })()}
+            </div>
           </Col>
         </Row>
       </Grid>

@@ -196,12 +196,33 @@ const StreamPage = () => {
                       style={{ width: "100px" }}
                       className="buttonborder buttonheight"
                     >
+                      {" "}
                       Submit
+                      {/* <div> */}
+                      {/* <input
+                          type="email"
+                          placeholder="Enter your email here..."
+                          name="email"
+                          required
+                          value={email}
+                          style={{ width: "280px" }}
+                          onChange={(event) => setEmail(event.target.value)}
+                        />
+                        <button
+                          type="submit"
+                          form="newsletter"
+                          value="Submit"
+                          style={{ width: "100px" }}
+                          //className="buttonborder buttonheight"
+                        > */}
+                      {/* Submit
+                          </div> */}
                     </button>
                   </form>
                 );
               }
             })()}
+            {/* </div> */}
           </Col>
         </Row>
       </Grid>

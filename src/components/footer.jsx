@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Grid, Row, Col } from "./grid";
 import "../styles.scss";
+import blacklogo from "../images/blacklogo.png";
 
 const Footer = () => {
   return (
@@ -14,15 +15,22 @@ const Footer = () => {
         <Row>
           <Col size={1}></Col>
           <Col size={5}>
-            <h3>About</h3>
+            {/* <h3>About</h3>
             <p>
               Onfour is a platform that empowers music fans by providing them
               with a more intimate and unique concert-going experience.
               Musicians live-stream studio performances to fans at
               non-traditional venues, engaging and interacting with fans in a
               new way.
-            </p>
+            </p> */}
+            <img
+              className="onfour-logo-footer"
+              src={blacklogo}
+              width="auto"
+              alt="nav-logo"
+            ></img>
           </Col>
+
           <Col size={1}></Col>
           <Col size={3}>
             <div class="footer-links">

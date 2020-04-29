@@ -388,7 +388,7 @@ h2 {
 }
 
 .chat-main {
-  height: 560px;
+  height: 660px;
   width: 100%;
   position: relative;
   // margin: auto;
@@ -397,19 +397,19 @@ h2 {
   align-items: center;
 
   @include respond-to("xx-large") {
-    height: 460px;
+    height: 560px;
   }
 
   @include respond-to("x-large") {
-    height: 410px;
+    height: 465px;
   }
 
   @include respond-to("large") {
-    height: 360px;
+    height: 380px;
   }
 
   @include respond-to("medium") {
-    height: 260px;
+    height: 310px;
   }
 
   @include respond-to("small") {
@@ -464,8 +464,18 @@ h5 {
   height: 16px;
 }
 
+.inline-form-subscribe {
+  float: left;
+}
+
 .inline-form {
   display: flex;
+}
+
+.inline-form-2 {
+  margin: 0px;
+  padding: 0px;
+  float: left;
 }
 
 .inline-form button {
@@ -540,6 +550,18 @@ h5 {
 .footer-social-media li a {
   text-decoration: none;
   color: #4d4d4d;
+}
+
+.onfour-logo-footer {
+  height: 53px;
+  float: left;
+  @include respond-to("medium") {
+    height: 40px;
+  }
+  @include respond-to("x-small") {
+    height: 35px;
+  }
+  // margin: 25px;
 }
 
 // SOCIAL STYLING
@@ -769,4 +791,51 @@ h5 {
 .one_show {
   width: 100%;
   height: 100%;
+}
+// ARCHIVE PAGE STYLING
+.archive-performance-wrapper {
+  width: 60%;
+  margin: auto;
+  @include respond-to("large") {
+    width: 80%;
+  }
+  @include respond-to("medium") {
+    width: 100%;
+  }
+}
+
+.archive-video {
+  margin: auto;
+  margin-bottom: 5%;
+}
+
+.archive-artist {
+  font-size: 20px;
+  margin: auto;
+  color: #4d4d4d;
+  letter-spacing: 0.5px;
+  padding: 5px;
+  text-align: left;
+}
+
+.archive-page-title {
+  font-size: 32px;
+  margin: auto;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  color: #4d4d4d;
+  letter-spacing: 1px;
+}
+
+.archive-header {
+  margin-left: 20%;
+  @include respond-to("xx-large") {
+    margin-left: 15%;
+  }
+  @include respond-to("x-large") {
+    margin-left: 10%;
+  }
+  @include respond-to("large") {
+    margin-left: 5%;
+  }
 }
