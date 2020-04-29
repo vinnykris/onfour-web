@@ -17,6 +17,8 @@ import musicianbackground from "./images/musician_background.jpg";
 import homebackground from "./images/home_page_background.jpeg";
 import history from "./history";
 
+require('dotenv').config();
+
 function App() {
   return (
     <div className="App">

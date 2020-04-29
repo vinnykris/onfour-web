@@ -15,10 +15,18 @@ const NavBarShortTerm = () => {
     icon = blacklogo;
   }
 
+  if (location.pathname === "/ticket") {
+    style = "nav-page-black";
+    icon = blacklogo;
+  }
+
   return (
     <div className="navbar">
       <img className="onfour-logo" src={icon} width="auto" alt="nav-logo"></img>
       <div>
+        <NavLink to="/ticket" className={style}>
+          TICKET
+        </NavLink>
         <NavLink to="/stream" className={style}>
           STREAM
         </NavLink>
