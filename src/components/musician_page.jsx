@@ -3,7 +3,7 @@ import musicianbackground from "../images/musician_background.jpg";
 import "../styles.scss";
 import { Grid, Row, Col } from "./grid";
 import applicationicon from "../images/application_icon.png";
-import calendericon from "../images/calender_icon.png";
+import calendericon from "../images/calendar_icon.png";
 import setupicon from "../images/setup_icon.png";
 import playicon from "../images/play_icon.png";
 import history from "./../history";
@@ -54,15 +54,15 @@ const MainContent = () => {
         </Row>
 
         <Row>
-        <Col size={2}> </Col>
-        <Col size={3}>
-          <hr className="line-divider"></hr>
-        </Col> 
-        <Col size={2}> </Col>
+          <Col size={2}> </Col>
+          <Col size={3}>
+            <hr className="line-divider"></hr>
+          </Col>
+          <Col size={2}> </Col>
         </Row>
-        
+
         <div className="spacer"></div>
-      
+
         <Row>
           <Col size={1}></Col>
           <Col size={1}>

@@ -1,0 +1,76 @@
+// SHORT TERM ABOUT PAGE STYLING
+
+@import "../../styles";
+
+.email-link {
+  color: white;
+  margin-bottom: 0px;
+}
+
+.email-p {
+  margin-bottom: 0px;
+  text-decoration: none;
+  color: white;
+  letter-spacing: 0.3px;
+  font-weight: $medium-weight;
+}
+
+.subscribe-box {
+  background-color: #e2e2e2;
+  height: 380px;
+  padding: 6%;
+}
+
+.perform-box {
+  background-color: #979bbb;
+  height: 380px;
+  padding: 6%;
+}
+
+.perform-title {
+  font-size: 25px;
+  font-weight: $medium-weight;
+  color: white;
+  text-align: right;
+}
+
+.perform-description {
+  font-size: 17px;
+  font-weight: $medium-weight;
+  color: white;
+  text-align: right;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.subscribe-title {
+  font-size: 25px;
+  font-weight: $medium-weight;
+  color: #303096;
+  text-align: left;
+}
+
+.subscribe-description {
+  font-size: 17px;
+  font-weight: $medium-weight;
+  color: #636363;
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.blue-background {
+  background-color: #303096;
+}
+
+.white-logo-icon {
+  height: 100px;
+  width: 100px;
+}
+
+.email-button {
+  float: right;
+  background-color: #4d4d4d;
+  border-radius: 3px;
+  box-shadow: 0px 3px 5px grey;
+}

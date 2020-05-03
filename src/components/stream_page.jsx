@@ -12,7 +12,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../graphql/mutations";
 import Amplify from "aws-amplify";
 import awsmobile from "../AppSync";
-import VenmoCode from "../images/jon-dely-venmo.jpeg";
+import VenmoCode from "../images/jon_dely_venmo.jpeg";
 
 Amplify.configure(awsmobile);
 
@@ -71,16 +71,16 @@ const StreamPage = () => {
             <Row>
               <Col size={2}>
                 <Row>
-                  <h2 className="artistname">Jonathan Dely</h2>
+                  <h2 className="artist-name">Jonathan Dely</h2>
                 </Row>
                 <Row>
-                  <h5 className="showtime">
+                  <h5 className="show-time">
                     Friday 24th April 8:00PM EST (refresh the page if stream
                     doesn't show up)
                   </h5>
                 </Row>
               </Col>
-              <Col size={1} className="socialbarcenter">
+              <Col size={1} className="social-bar-center">
                 <div className="social-media">
                   <Col size={1}></Col>
                   <ul className="social-list">
@@ -143,11 +143,11 @@ const StreamPage = () => {
         </Row>
 
         <Row>
-          <Col size={3} className="donatebox">
+          <Col size={3} className="donate-box">
             <Row>
               <Col size={2}>
-                <p className="donatetitle">Donate to the Artist</p>
-                <p className="donatedescribtion">
+                <p className="donate-title">Donate to the Artist</p>
+                <p className="donate-description">
                   To donate to Jonathan Dely on Paypal,{" "}
                   <a href="http://paypal.me/jonathandely" target="_blank">
                     click here.
@@ -163,9 +163,9 @@ const StreamPage = () => {
             </Row>
           </Col>
 
-          <Col size={2} className="streamsubscribebox">
-            <p className="streamsubscribetitle">Subscribe</p>
-            <p className="streamsubscribedescribtion">
+          <Col size={2} className="stream-subscribe-box">
+            <p className="stream-subscribe-title">Subscribe</p>
+            <p className="stream-subscribe-description">
               To stay informed about upcoming events,<br></br> subscribe to our
               mailing list:
             </p>
@@ -194,7 +194,7 @@ const StreamPage = () => {
                       form="newsletter"
                       value="Submit"
                       style={{ width: "100px" }}
-                      className="buttonborder buttonheight"
+                      className="button-border button-height"
                     >
                       {" "}
                       Submit
@@ -213,7 +213,7 @@ const StreamPage = () => {
                           form="newsletter"
                           value="Submit"
                           style={{ width: "100px" }}
-                          //className="buttonborder buttonheight"
+                          //className="button-border button-height"
                         > */}
                       {/* Submit
                           </div> */}

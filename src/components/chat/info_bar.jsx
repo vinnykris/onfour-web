@@ -1,7 +1,7 @@
 import React from "react";
 import "./chat.scss";
-import closeIcon from "../../images/closeIcon.png";
-import onlineIcon from "../../images/onlineIcon.png";
+import closeIcon from "../../images/close_icon.png";
+import onlineIcon from "../../images/online_icon.png";
 
 const InfoBar = ({ room, users }) => {
   return (

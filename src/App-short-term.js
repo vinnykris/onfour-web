@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "./components/short_term_components/navbar_short_term";
-import About from "./components/short_term_components/about_page_short_term";
+import About from "./components/about_page/about_page_short_term";
 import StreamPage from "./components/stream_page";
 import ArchivePage from "./components/archive_page";
 import Footer from "./components/footer";

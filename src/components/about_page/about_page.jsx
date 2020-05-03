@@ -1,12 +1,12 @@
 import React from "react";
-import whatsonfour from "../images/whatsonfour_background.jpg";
-import tickets from "../images/tickets-icon.png";
-import schedule from "../images/schedule-icon.png";
-import performance from "../images/performance-icon.png";
-import "../styles.scss";
-import { Grid, Row, Col } from "./grid";
+import whatsonfour from "../../images/about_page_background.jpg";
+import tickets from "../../images/tickets_icon.png";
+import schedule from "../../images/schedule_icon.png";
+import performance from "../../images/performance_icon.png";
+import "./about_styles.scss";
+import { Grid, Row, Col } from "../grid";
 
-const WhatsOnFour = () => {
+const AboutPage = () => {
   return (
     <div>
       <Grid>
@@ -142,4 +142,4 @@ const WhatsOnFour = () => {
   );
 };
 
-export default WhatsOnFour;
+export default AboutPage;

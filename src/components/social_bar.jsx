@@ -3,7 +3,7 @@
 import React from "react";
 import "../styles.scss";
 import { Grid, Row, Col } from "./grid";
-import VenmoCode from "../images/jon-dely-venmo.jpeg";
+import VenmoCode from "../images/jon_dely_venmo.jpeg";
 
 const SocialBar = () => {
   return (

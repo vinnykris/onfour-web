@@ -4,7 +4,7 @@ import React from "react";
 import NavBar from "./components/navbar";
 import MusicianPage from "./components/musician_page";
 import MainContent from "./components/main_content";
-import WhatsOnFour from "./components/whatsonfour";
+import AboutPage from "./components/about_page/about_page";
 import Hosts from "./components/hosts";
 import HostApplication from "./components/apply_to_host";
 import MusicianApplication from "./components/apply_to_perform";
@@ -25,7 +25,7 @@ function App() {
         {/* <MainContent /> */}
         <Switch>
           <Route exact path="/" component={MainContent} />
-          <Route path="/whatisonfour" component={WhatsOnFour} />
+          <Route path="/whatisonfour" component={AboutPage} />
           <Route path="/musicians" component={MusicianPage} />
           <Route path="/hosts" component={Hosts} />
           <Route path="/apply_to_host" component={HostApplication} />
