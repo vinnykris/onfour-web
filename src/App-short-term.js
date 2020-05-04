@@ -1,9 +1,9 @@
 import React from "react";
-import NavBar from "./components/short_term_components/navbar_short_term";
+import NavBar from "./components/navbar/navbar_short_term";
 import About from "./components/about_page/about_page_short_term";
-import StreamPage from "./components/stream_page";
-import ArchivePage from "./components/archive_page";
-import Footer from "./components/footer";
+import StreamPage from "./components/stream_page/stream_page";
+import ArchivePage from "./components/archive_page/archive_page";
+import Footer from "./components/footer/footer";
 import "./App.css";
 import "./styles.scss";
 import { Router, Switch, Route } from "react-router-dom";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
-import "../styles.scss";
+import "./stream_styles.scss";
 
 class VideoPlayer extends Component {
   render() {

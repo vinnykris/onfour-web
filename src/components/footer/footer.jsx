@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Grid, Row, Col } from "./grid";
-import "../styles.scss";
-import black_logo from "../images/black_logo.png";
+import { Grid, Row, Col } from "../grid";
+import "./footer_styles.scss";
+import black_logo from "../../images/black_logo.png";
 
 const Footer = () => {
   return (

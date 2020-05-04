@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles.scss";
+import "./old_component_styles.scss";
 
 const FeaturedContent = ({ img }) => {
   return (

@@ -1,12 +1,12 @@
 import React from "react";
-import musicianbackground from "../images/musician_background.jpg";
-import "../styles.scss";
-import { Grid, Row, Col } from "./grid";
-import applicationicon from "../images/application_icon.png";
-import calendericon from "../images/calendar_icon.png";
-import setupicon from "../images/setup_icon.png";
-import playicon from "../images/play_icon.png";
-import history from "./../history";
+import musicianbackground from "../../images/musician_background.jpg";
+import "./old_component_styles.scss";
+import { Grid, Row, Col } from "../grid";
+import applicationicon from "../../images/application_icon.png";
+import calendericon from "../../images/calendar_icon.png";
+import setupicon from "../../images/setup_icon.png";
+import playicon from "../../images/play_icon.png";
+import history from "../../history";
 
 const MainContent = () => {
   return (

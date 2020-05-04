@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Link, NavLink } from "react-router-dom";
-import logo from "../images/onfour_logo.png";
-import "../styles.scss";
+import logo from "../../images/onfour_logo.png";
+import "./navbar_styles.scss";
 
 const NavBar = () => {
   return (

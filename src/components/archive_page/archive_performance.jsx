@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
-import { Grid, Row, Col } from "./grid";
+import { Grid, Row, Col } from "../grid";
+
+import "./archive_styles.scss";
 
 const ArchivePerformance = ({ artistName, date }) => {
   return (

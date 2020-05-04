@@ -1,21 +1,23 @@
 import React from "react";
-import "../styles.scss";
-import { Grid, Row, Col } from "./grid";
+import "./old_component_styles.scss";
+import { Grid, Row, Col } from "../grid";
 import ContentHeader from "./content_header";
 import FeaturedContent from "./featured_content";
 
-const HostApplication = () => {
+const PerformApplication = () => {
   return (
     <div>
-      <Grid>
-       <Row>
-          <div className="spacer"></div>
-        </Row>
+      <Row>
+        <div className="spacer"></div>
+      </Row>
 
+      <Grid>
         <Row>
+          <Col size={1}> </Col>
           <Col size={1}>
-            <h4>Apply to be an Onfour host</h4>
+            <h4>Apply for your first Onfour show</h4>
           </Col>
+          <Col size={1}> </Col>
         </Row>
 
         <Row>
@@ -26,7 +28,7 @@ const HostApplication = () => {
           <Col size={1}>
             <form>
               <Row>
-                <h5>Personal information</h5>
+                <h5>Personal Information</h5>
               </Row>
               <Row>
                 <input
@@ -40,9 +42,9 @@ const HostApplication = () => {
                   placeholder="Last Name"
                 ></input>
               </Row>
-                  <Row>
-                    <div className="form-spacer"></div>
-                  </Row>
+              <Row>
+                <div className="form-spacer"></div>
+              </Row>
 
               <Row>
                 <input
@@ -58,9 +60,8 @@ const HostApplication = () => {
               </Row>
 
               <Row>
-                    <div className="form-spacer"></div>
-                  </Row>
-
+                <div className="form-spacer"></div>
+              </Row>
 
               <Row>
                 <h5>Date and Time</h5>
@@ -75,13 +76,12 @@ const HostApplication = () => {
               </Row>
 
               <Row>
-                    <div className="form-spacer"></div>
-                  </Row>
-                  
+                <div className="form-spacer"></div>
+              </Row>
+
               <Row>
                 <button type="submit" name="submit">
                   Submit
-                  <i class=""></i>
                 </button>
               </Row>
             </form>
@@ -92,4 +92,4 @@ const HostApplication = () => {
   );
 };
 
-export default HostApplication;
+export default PerformApplication;

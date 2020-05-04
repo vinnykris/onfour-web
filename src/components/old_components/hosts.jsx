@@ -1,14 +1,14 @@
 import React from "react";
-import background from "../images/hosts_background.jpg";
-import venue from "../images/venue_placeholder.jpg";
-import application from "../images/application_icon.png";
-import schedule from "../images/schedule_icon.png";
-import music from "../images/host_music_icon.png";
-import "../styles.scss";
-import { Grid, Row, Col } from "./grid";
+import background from "../../images/hosts_background.jpg";
+import venue from "../../images/venue_placeholder.jpg";
+import application from "../../images/application_icon.png";
+import schedule from "../../images/schedule_icon.png";
+import music from "../../images/host_music_icon.png";
+import "./old_component_styles.scss";
+import { Grid, Row, Col } from "../grid";
 import ContentHeader from "./content_header";
 import FeaturedContent from "./featured_content";
-import history from "./../history";
+import history from "../../history";
 
 const Hosts = () => {
   return (

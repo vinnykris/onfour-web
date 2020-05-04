@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import VideoPlayer from "./video_player";
 import axios from "axios";
-import "../styles.scss";
 import { render } from "@testing-library/react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Chat from "./chat/stream_chat";
-import Join from "./chat/join_chat";
-import { Grid, Row, Col } from "./grid";
-import SocialBar from "./social_bar";
+
+// AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
-import * as mutations from "../graphql/mutations";
+import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../AppSync";
-import VenmoCode from "../images/jon_dely_venmo.jpeg";
+import awsmobile from "../../AppSync";
+
+// Component Imports
+import VideoPlayer from "./video_player";
+import Chat from "../chat/stream_chat";
+import Join from "../chat/join_chat";
+import { Grid, Row, Col } from "../grid";
+import SocialBar from "../social_bar/social_bar";
+
+// Styles Imports
+import "./stream_styles.scss";
+
+// Image imports
+import VenmoCode from "../../images/jon_dely_venmo.jpeg";
 
 Amplify.configure(awsmobile);
 

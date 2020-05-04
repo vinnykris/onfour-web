@@ -1,9 +1,9 @@
 // https://www.youtube.com/watch?v=woVuUbDOeMk
 
 import React from "react";
-import "../styles.scss";
-import { Grid, Row, Col } from "./grid";
-import VenmoCode from "../images/jon_dely_venmo.jpeg";
+import "./social_bar_styles.scss";
+import { Grid, Row, Col } from "../grid";
+import VenmoCode from "../../images/jon_dely_venmo.jpeg";
 
 const SocialBar = () => {
   return (
