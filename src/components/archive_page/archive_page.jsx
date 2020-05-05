@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import ReactPlayer from "react-player";
+import React from "react";
 import { Grid, Row, Col } from "../grid";
 import ArchiveVideo from "./archive_video";
 import ArchivePerformance from "./archive_performance";

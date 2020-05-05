@@ -1,5 +1,4 @@
-import React, { Component, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import "./chat.scss";
 
 const Join = ({ joinSubmit, mode }) => {

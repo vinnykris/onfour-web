@@ -61,21 +61,25 @@ const AboutPage = () => {
           <Col size={1}></Col>
 
           <Col size={1}>
-            <img className="icon" src={schedule}></img>
+            <img className="icon" src={schedule} alt="schedule-icon"></img>
             <p className="description-text">
               Musicians register a date and time to perform.
             </p>
           </Col>
 
           <Col size={1}>
-            <img className="icon" src={performance}></img>
+            <img
+              className="icon"
+              src={performance}
+              alt="performance-icon"
+            ></img>
             <p className="description-text">
               Local venues choose to host the concert.
             </p>
           </Col>
 
           <Col size={1}>
-            <img className="icon" src={tickets}></img>
+            <img className="icon" src={tickets} alt="tickets-con"></img>
             <p className="description-text">
               Fans purchase tickets to their preferred venue.
             </p>
@@ -130,9 +134,9 @@ const AboutPage = () => {
                 name=""
                 placeholder="Search..."
               />
-              <a class="search-btn" href="#">
+              {/* <a class="search-btn" href="#">
                 <i class="fas fa-search"></i>
-              </a>
+              </a> */}
             </div>
           </Col>
         </Row>

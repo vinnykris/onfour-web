@@ -10,15 +10,14 @@ import Amplify from "aws-amplify";
 import awsmobile from "../../AppSync";
 
 // Image Imports
-import background from "../../images/home_page_background.jpeg";
-import whatsonfour from "../../images/banner_background_blur.jpg";
+import header_image from "../../images/banner_background_blur.jpg";
 
 // Styling Imports
 import "./about_styles.scss";
 
 Amplify.configure(awsmobile);
 
-const WhatsOnFour = () => {
+const AboutPage = () => {
   const [email, setEmail] = useState("");
   const [clicked, setClicked] = useState(false);
   const [scroll, setScroll] = useState(true);
@@ -52,7 +51,7 @@ const WhatsOnFour = () => {
             <div className="banner-container">
               <img
                 className="bannerbackground"
-                src={whatsonfour}
+                src={header_image}
                 alt="nav-logo"
               ></img>
 
@@ -80,6 +79,7 @@ const WhatsOnFour = () => {
               <a
                 href="https://www.grammy.com/musicares/donations"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 MusiCares
               </a>{" "}
@@ -114,6 +114,7 @@ const WhatsOnFour = () => {
               href="mailto:onfour.box@gmail.com"
               target="_blank"
               className="email-link"
+              rel="noopener noreferrer"
             >
               <button className="email-button">Send us an Email</button>
             </a>
@@ -168,4 +169,4 @@ const WhatsOnFour = () => {
     </div>
   );
 };
-export default WhatsOnFour;
+export default AboutPage;

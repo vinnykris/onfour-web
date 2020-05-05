@@ -6,7 +6,6 @@ import schedule from "../../images/schedule_icon.png";
 import music from "../../images/host_music_icon.png";
 import "./old_component_styles.scss";
 import { Grid, Row, Col } from "../grid";
-import ContentHeader from "./content_header";
 import FeaturedContent from "./featured_content";
 import history from "../../history";
 
@@ -58,13 +57,17 @@ const Hosts = () => {
         <Row>
           <Col size={1}></Col>
           <Col size={1}>
-            <img className="icon" src={application}></img>
+            <img
+              className="icon"
+              src={application}
+              alt="application-icon"
+            ></img>
           </Col>
           <Col size={1}>
-            <img className="icon" src={schedule}></img>
+            <img className="icon" src={schedule} alt="schedule-icon"></img>
           </Col>
           <Col size={1}>
-            <img className="icon" src={music}></img>
+            <img className="icon" src={music} alt="music-icon"></img>
           </Col>
           <Col size={1}></Col>
         </Row>

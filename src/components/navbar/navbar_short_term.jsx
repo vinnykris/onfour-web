@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import React from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import logo from "../../images/white_logo.png";
 import black_logo from "../../images/black_logo.png";
 import "../../styles.scss";
-import { Col } from "../grid";
 
 const NavBarShortTerm = () => {
   let style = "nav-page-black";

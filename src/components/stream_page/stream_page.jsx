@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { render } from "@testing-library/react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -89,46 +86,7 @@ const StreamPage = () => {
                 </Row>
               </Col>
               <Col size={1} className="social-bar-center">
-                <div className="social-media">
-                  <Col size={1}></Col>
-                  <ul className="social-list">
-                    <li>
-                      <a
-                        href="http://instagram.com/jonathan_dely"
-                        class="fa fa-instagram"
-                        target="_blank"
-                      ></a>
-                    </li>
-                    <li>
-                      <a
-                        href="https://open.spotify.com/artist/5wdmp3H2QC7tfMYAabtQN3"
-                        class="fa fa-spotify"
-                        target="_blank"
-                      ></a>
-                    </li>
-                    <li>
-                      <a
-                        href="https://www.youtube.com/channel/UCdh0zQFUEYKQsbTJI00Q2SA"
-                        class="fa fa-youtube"
-                        target="_blank"
-                      ></a>
-                    </li>
-                    <li>
-                      <a
-                        href="https://www.facebook.com/jonathandelymusic"
-                        class="fa fa-facebook"
-                        target="_blank"
-                      ></a>
-                    </li>
-                    <li>
-                      <a
-                        href="http://paypal.me/jonathandely"
-                        class="fa fa-paypal"
-                        target="_blank"
-                      ></a>
-                    </li>
-                  </ul>
-                </div>
+                <SocialBar />
               </Col>
             </Row>
             <Row></Row>
@@ -157,7 +115,11 @@ const StreamPage = () => {
                 <p className="donate-title">Donate to the Artist</p>
                 <p className="donate-description">
                   To donate to Jonathan Dely on Paypal,{" "}
-                  <a href="http://paypal.me/jonathandely" target="_blank">
+                  <a
+                    href="http://paypal.me/jonathandely"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     click here.
                   </a>
                   <br></br>
@@ -166,7 +128,11 @@ const StreamPage = () => {
                 </p>
               </Col>
               <Col size={1}>
-                <img className="venmo-code" src={VenmoCode}></img>
+                <img
+                  className="venmo-code"
+                  src={VenmoCode}
+                  alt="venmo-qr"
+                ></img>
               </Col>
             </Row>
           </Col>

@@ -18,10 +18,6 @@ import PerformAgain from "./components/old_components/perform_again";
 import "./App.css";
 import "./styles.scss";
 
-// Image Imports
-import musicianbackground from "./images/musician_background.jpg";
-import homebackground from "./images/home_page_background.jpeg";
-
 function App() {
   return (
     <div className="App">

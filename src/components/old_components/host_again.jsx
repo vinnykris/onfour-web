@@ -1,8 +1,6 @@
 import React from "react";
 import "./old_component_styles.scss";
 import { Grid, Row, Col } from "../grid";
-import ContentHeader from "./content_header";
-import FeaturedContent from "./featured_content";
 
 const HostAgain = () => {
   return (
