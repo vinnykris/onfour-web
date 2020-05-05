@@ -47,7 +47,11 @@ const Chat = ({ chatName, chatStatus }) => {
   const sendMessage = (event) => {
     event.preventDefault();
     if (message) {
-      socket.emit("sendMessage", message, () => setMessage(""));
+      if (message.length > 140) {
+        alert("Message cannot be longer than 140 characters.");
+      } else {
+        socket.emit("sendMessage", message, () => setMessage(""));
+      }
     }
   };
 

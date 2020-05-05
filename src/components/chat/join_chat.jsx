@@ -4,8 +4,12 @@ import "./chat.scss";
 const Join = ({ joinSubmit, mode }) => {
   const [name, setName] = useState("");
   const handleSubmit = () => {
-    mode = true;
-    joinSubmit(name, mode);
+    if (name.length > 30) {
+      alert("Username cannot exceed 30 characters.");
+    } else {
+      mode = true;
+      joinSubmit(name, mode);
+    }
   };
   return (
     <div className="join-outer-container">
