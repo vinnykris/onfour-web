@@ -1,14 +1,12 @@
 import React from "react";
-import "../styles.scss";
-import { Grid, Row, Col } from "./grid";
-import ContentHeader from "./content_header";
-import FeaturedContent from "./featured_content";
+import "./old_component_styles.scss";
+import { Grid, Row, Col } from "../grid";
 
 const HostApplication = () => {
   return (
     <div>
       <Grid>
-       <Row>
+        <Row>
           <div className="spacer"></div>
         </Row>
 
@@ -40,9 +38,9 @@ const HostApplication = () => {
                   placeholder="Last Name"
                 ></input>
               </Row>
-                  <Row>
-                    <div className="form-spacer"></div>
-                  </Row>
+              <Row>
+                <div className="form-spacer"></div>
+              </Row>
 
               <Row>
                 <input
@@ -58,9 +56,8 @@ const HostApplication = () => {
               </Row>
 
               <Row>
-                    <div className="form-spacer"></div>
-                  </Row>
-
+                <div className="form-spacer"></div>
+              </Row>
 
               <Row>
                 <h5>Date and Time</h5>
@@ -75,9 +72,9 @@ const HostApplication = () => {
               </Row>
 
               <Row>
-                    <div className="form-spacer"></div>
-                  </Row>
-                  
+                <div className="form-spacer"></div>
+              </Row>
+
               <Row>
                 <button type="submit" name="submit">
                   Submit

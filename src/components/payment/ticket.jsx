@@ -1,22 +1,12 @@
 import React, { useState } from "react";
-import "../styles.scss";
-import { render } from "@testing-library/react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Grid, Row, Col } from "./grid";
-import { API, graphqlOperation } from "aws-amplify";
-import * as mutations from "../graphql/mutations";
-import Amplify from "aws-amplify";
-import awsmobile from "../AppSync";
-import { loadStripe} from "@stripe/stripe-js"
+import "./payment_styles.scss";
 import {
     useStripe,
     useElements,
     CardElement,
-    ElementsConsumer,
 } from "@stripe/react-stripe-js";
-import axios from "axios";
-import FormField from "./payment/FormField";
-import stripeTokenHandler from "./payment/stripe";
+import FormField from "./FormField";
+import stripeTokenHandler from "./stripe";
 
 const CheckoutForm = () => {
     const stripe = useStripe();

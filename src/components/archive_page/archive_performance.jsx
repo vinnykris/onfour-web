@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import ReactPlayer from "react-player";
-import { Grid, Row, Col } from "./grid";
+import React from "react";
+import { Grid, Row } from "../grid";
+
+import "./archive_styles.scss";
 
 const ArchivePerformance = ({ artistName, date }) => {
   return (
@@ -9,12 +10,8 @@ const ArchivePerformance = ({ artistName, date }) => {
         <h4 className="archive-header">
           {artistName}: {date}
         </h4>
-        {/* <h3 className="archive-artist">{date}</h3> */}
       </Row>
     </Grid>
-    // <div>
-
-    // </div>
   );
 };
 

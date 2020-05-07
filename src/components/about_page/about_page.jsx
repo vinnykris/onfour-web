@@ -1,12 +1,12 @@
 import React from "react";
-import whatsonfour from "../images/whatsonfour_background.jpg";
-import tickets from "../images/tickets-icon.png";
-import schedule from "../images/schedule-icon.png";
-import performance from "../images/performance-icon.png";
-import "../styles.scss";
-import { Grid, Row, Col } from "./grid";
+import whatsonfour from "../../images/about_page_background.jpg";
+import tickets from "../../images/tickets_icon.png";
+import schedule from "../../images/schedule_icon.png";
+import performance from "../../images/performance_icon.png";
+import "./about_styles.scss";
+import { Grid, Row, Col } from "../grid";
 
-const WhatsOnFour = () => {
+const AboutPage = () => {
   return (
     <div>
       <Grid>
@@ -61,21 +61,25 @@ const WhatsOnFour = () => {
           <Col size={1}></Col>
 
           <Col size={1}>
-            <img className="icon" src={schedule}></img>
+            <img className="icon" src={schedule} alt="schedule-icon"></img>
             <p className="description-text">
               Musicians register a date and time to perform.
             </p>
           </Col>
 
           <Col size={1}>
-            <img className="icon" src={performance}></img>
+            <img
+              className="icon"
+              src={performance}
+              alt="performance-icon"
+            ></img>
             <p className="description-text">
               Local venues choose to host the concert.
             </p>
           </Col>
 
           <Col size={1}>
-            <img className="icon" src={tickets}></img>
+            <img className="icon" src={tickets} alt="tickets-con"></img>
             <p className="description-text">
               Fans purchase tickets to their preferred venue.
             </p>
@@ -130,9 +134,9 @@ const WhatsOnFour = () => {
                 name=""
                 placeholder="Search..."
               />
-              <a class="search-btn" href="#">
+              {/* <a class="search-btn" href="#">
                 <i class="fas fa-search"></i>
-              </a>
+              </a> */}
             </div>
           </Col>
         </Row>
@@ -142,4 +146,4 @@ const WhatsOnFour = () => {
   );
 };
 
-export default WhatsOnFour;
+export default AboutPage;

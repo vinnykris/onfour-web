@@ -1,6 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactPlayer from "react-player";
-import { Grid, Row, Col } from "./grid";
+import { Grid, Row, Col } from "../grid";
+
+import "./archive_styles.scss";
 
 const ArchiveVideo = ({ src, songName }) => {
   return (
@@ -14,9 +16,6 @@ const ArchiveVideo = ({ src, songName }) => {
         </Col>
       </Row>
     </Grid>
-    // <div>
-
-    // </div>
   );
 };
 

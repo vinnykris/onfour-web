@@ -1,6 +1,6 @@
 import React from "react";
 import "./chat.scss";
-import onlineIcon from "../../images/onlineIcon.png";
+import onlineIcon from "../../images/online_icon.png";
 
 const TextContainer = ({ users }) => (
   <div className="text-container">

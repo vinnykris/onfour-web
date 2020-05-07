@@ -1,0 +1,71 @@
+// SOCIAL BAR COMPONENT STYLING
+
+@import "../../styles";
+
+.social-bar-container {
+  margin-top: 3%;
+}
+
+.social-list {
+  padding-inline-start: 0px;
+  float: right;
+}
+
+.social-media li {
+  list-style: none;
+  margin: 0px 15px 0px 15px;
+  display: inline-block;
+  font-size: 30px;
+  color: #4d4d4d;
+  border-radius: 50%;
+}
+
+.social-media li a {
+  text-decoration: none;
+  color: #4d4d4d;
+}
+
+.social-media li a span {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
+}
+
+.donation-link {
+  margin-top: 2%;
+}
+
+// STREAM PAGE
+.venmo-code {
+  max-width: 200px;
+  padding-top: 3%;
+  padding-right: 2%;
+  margin-right: 50%;
+  margin-top: 7%;
+}
+
+.fa-paypal:hover {
+  color: #019cde;
+}
+
+.fa-facebook:hover {
+  color: #3b5998;
+}
+
+.fa-spotify:hover {
+  color: #1db954;
+}
+
+.fa-instagram:hover {
+  color: #833ab4;
+}
+
+.fa-youtube:hover {
+  color: #c4302b;
+}
+
+.fa-twitter:hover {
+  color: lightblue;
+}

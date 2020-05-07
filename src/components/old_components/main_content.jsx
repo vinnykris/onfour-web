@@ -1,9 +1,9 @@
 import React from "react";
-import background from "../images/home_page_background.jpeg";
-import concert from "../images/concert_placeholder.jpeg";
-import artist from "../images/artist_placeholder.jpg";
-import "../styles.scss";
-import { Grid, Row, Col } from "./grid";
+import background from "../../images/home_page_background.jpeg";
+import concert from "../../images/concert_placeholder.jpeg";
+import artist from "../../images/artist_placeholder.jpg";
+import "./old_component_styles.scss";
+import { Grid, Row, Col } from "../grid";
 import ContentHeader from "./content_header";
 import FeaturedContent from "./featured_content";
 

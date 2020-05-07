@@ -1,17 +1,23 @@
+// Main Imports
 import React, { useState } from "react";
-import background from "../../images/home_page_background.jpeg";
-import "../../styles.scss";
 import { Grid, Row, Col } from "../grid";
+import history from "../../history";
+
+// AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
 import awsmobile from "../../AppSync";
-import whatsonfour from "../../images/bannerbackground-blur.jpg";
-import history from "../../history";
+
+// Image Imports
+import header_image from "../../images/banner_background_blur.jpg";
+
+// Styling Imports
+import "./about_styles.scss";
 
 Amplify.configure(awsmobile);
 
-const WhatsOnFour = () => {
+const AboutPage = () => {
   const [email, setEmail] = useState("");
   const [clicked, setClicked] = useState(false);
   const [scroll, setScroll] = useState(true);
@@ -45,7 +51,7 @@ const WhatsOnFour = () => {
             <div className="banner-container">
               <img
                 className="bannerbackground"
-                src={whatsonfour}
+                src={header_image}
                 alt="nav-logo"
               ></img>
 
@@ -73,6 +79,7 @@ const WhatsOnFour = () => {
               <a
                 href="https://www.grammy.com/musicares/donations"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 MusiCares
               </a>{" "}
@@ -82,7 +89,7 @@ const WhatsOnFour = () => {
               <Col size={1}>
                 <button
                   onClick={() => history.push("/stream")}
-                  className="buttonborder"
+                  className="button-border"
                 >
                   Tune into the stream!
                 </button>
@@ -97,25 +104,26 @@ const WhatsOnFour = () => {
         </Row>
 
         <Row>
-          <Col size={1} className="performbox">
-            <p className="performtitle">Perform</p>
-            <p className="performdescribtion">
+          <Col size={1} className="perform-box">
+            <p className="perform-title">Perform</p>
+            <p className="perform-description">
               Want to perform a livestream concert with Onfour? <br></br>Send us
               an email and we will get back to you soon!
             </p>
             <a
               href="mailto:onfour.box@gmail.com"
               target="_blank"
-              className="emaillink"
+              className="email-link"
+              rel="noopener noreferrer"
             >
-              <button className="emailbutton">Send us an Email</button>
+              <button className="email-button">Send us an Email</button>
             </a>
           </Col>
 
-          <Col size={1} className="subscribebox">
+          <Col size={1} className="subscribe-box">
             <div>
-              <p className="subscribetitle">Subscribe</p>
-              <p className="subscribedescribtion">
+              <p className="subscribe-title">Subscribe</p>
+              <p className="subscribe-description">
                 To stay informed about upcoming events,<br></br> subscribe to
                 our mailing list:
               </p>
@@ -145,7 +153,7 @@ const WhatsOnFour = () => {
                           form="newsletter"
                           value="Submit"
                           style={{ width: "100px" }}
-                          className="buttonborder buttonheight"
+                          className="button-border button-height"
                         >
                           Submit
                         </button>
@@ -161,4 +169,4 @@ const WhatsOnFour = () => {
     </div>
   );
 };
-export default WhatsOnFour;
+export default AboutPage;

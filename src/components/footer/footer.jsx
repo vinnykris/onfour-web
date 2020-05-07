@@ -1,8 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { Grid, Row, Col } from "./grid";
-import "../styles.scss";
-import blacklogo from "../images/blacklogo.png";
+import { Grid, Row, Col } from "../grid";
+import "./footer_styles.scss";
+import black_logo from "../../images/black_logo.png";
 
 const Footer = () => {
   return (
@@ -25,7 +24,7 @@ const Footer = () => {
             </p> */}
             <img
               className="onfour-logo-footer"
-              src={blacklogo}
+              src={black_logo}
               width="auto"
               alt="nav-logo"
             ></img>
@@ -40,7 +39,11 @@ const Footer = () => {
                 <a href="">About Us</a>
               </li> */}
                 <li>
-                  <a href="mailto:onfour.box@gmail.com" target="_blank">
+                  <a
+                    href="mailto:onfour.box@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Contact Us
                   </a>
                 </li>
@@ -70,21 +73,30 @@ const Footer = () => {
                     href="https://www.instagram.com/_onfour/"
                     target="_blank"
                     class="fa fa-instagram"
-                  ></a>
+                    rel="noopener noreferrer"
+                  >
+                    <span className="hidden-text">Instagram Link</span>
+                  </a>
                 </li>
                 <li>
                   <a
                     href="https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ/featured"
                     target="_blank"
                     class="fa fa-youtube"
-                  ></a>
+                    rel="noopener noreferrer"
+                  >
+                    <span className="hidden-text">Youtube Link</span>
+                  </a>
                 </li>
                 <li>
                   <a
                     href="https://twitter.com/_Onfour"
                     target="_blank"
                     class="fa fa-twitter"
-                  ></a>
+                    rel="noopener noreferrer"
+                  >
+                    <span className="hidden-text">Twitter Link</span>
+                  </a>
                 </li>
               </ul>
             </div>

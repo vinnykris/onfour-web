@@ -1,0 +1,90 @@
+// FOOTER COMPONENT STYLING
+
+@import "../../styles";
+
+.footer-container {
+  background-color: #e6e6e6;
+  width: 100%;
+  padding: 60px 10px 10px 10px;
+}
+
+.footer-container h3 {
+  margin-top: 10px;
+  color: #4d4d4d;
+  text-align: left;
+  font-size: 17px;
+  font-weight: $semimedium-weight;
+}
+
+.footer-container p {
+  color: #4d4d4d;
+  text-align: left;
+  font-size: 16px;
+}
+
+.footer-container h6 {
+  color: #4d4d4d;
+  text-align: left;
+  font-size: 13px;
+  font-weight: $regular-weight;
+}
+
+.footer-container hr {
+  border-color: #4d4d4d;
+  width: 82%;
+}
+
+.footer-links {
+  float: right;
+}
+
+.footer-links ul {
+  list-style: none;
+  text-align: right;
+  padding-left: 0;
+  font-size: 16px;
+}
+
+.footer-links li {
+  display: block;
+}
+
+.footer-links li a {
+  color: #4d4d4d;
+}
+
+.footer-social-media ul {
+  float: right;
+}
+
+.footer-social-media li {
+  list-style: none;
+  margin: 0px 10px;
+  display: inline-block;
+  font-size: 26px;
+  color: black;
+}
+
+.footer-social-media li a {
+  text-decoration: none;
+  color: #4d4d4d;
+}
+
+.onfour-logo-footer {
+  height: 53px;
+  float: left;
+  @include respond-to("medium") {
+    height: 40px;
+  }
+  @include respond-to("x-small") {
+    height: 35px;
+  }
+}
+
+.hidden-text {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
+}

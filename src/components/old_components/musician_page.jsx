@@ -1,12 +1,12 @@
 import React from "react";
-import musicianbackground from "../images/musician_background.jpg";
-import "../styles.scss";
-import { Grid, Row, Col } from "./grid";
-import applicationicon from "../images/application_icon.png";
-import calendericon from "../images/calender_icon.png";
-import setupicon from "../images/setup_icon.png";
-import playicon from "../images/play_icon.png";
-import history from "./../history";
+import musicianbackground from "../../images/musician_background.jpg";
+import "./old_component_styles.scss";
+import { Grid, Row, Col } from "../grid";
+import applicationicon from "../../images/application_icon.png";
+import calendericon from "../../images/calendar_icon.png";
+import setupicon from "../../images/setup_icon.png";
+import playicon from "../../images/play_icon.png";
+import history from "../../history";
 
 const MainContent = () => {
   return (
@@ -30,7 +30,11 @@ const MainContent = () => {
                 </Col>
                 <Col size={2}></Col>
               </Row>
-              <img className="bannerbackground" src={musicianbackground}></img>
+              <img
+                className="banner-background"
+                src={musicianbackground}
+                alt="musician-background"
+              ></img>
             </div>
           </Col>
         </Row>
@@ -54,26 +58,26 @@ const MainContent = () => {
         </Row>
 
         <Row>
-        <Col size={2}> </Col>
-        <Col size={3}>
-          <hr className="line-divider"></hr>
-        </Col> 
-        <Col size={2}> </Col>
+          <Col size={2}> </Col>
+          <Col size={3}>
+            <hr className="line-divider"></hr>
+          </Col>
+          <Col size={2}> </Col>
         </Row>
-        
+
         <div className="spacer"></div>
-      
+
         <Row>
           <Col size={1}></Col>
           <Col size={1}>
-            <img className="icon" src={applicationicon}></img>
+            <img className="icon" src={applicationicon} alt="apply-icon"></img>
             <p className="description-text">
               Submit an application for us to verify who you are If you have
               never performed an Onfour show.{" "}
             </p>
           </Col>
           <Col size={1}>
-            <img className="icon" src={calendericon}></img>
+            <img className="icon" src={calendericon} alt="calendar-icon"></img>
             <p className="description-text">
               Simply book the date and time that you wish to perform, —(more
               words)—-
@@ -81,7 +85,7 @@ const MainContent = () => {
           </Col>
 
           <Col size={1}>
-            <img className="icon" src={setupicon}></img>
+            <img className="icon" src={setupicon} alt="setup-icon"></img>
             <p className="description-text">
               Set up your stream through our step by step guide. Customize your
               stream by selecting from our interactive features to give your
@@ -90,7 +94,7 @@ const MainContent = () => {
           </Col>
 
           <Col size={1}>
-            <img className="icon" src={playicon}></img>
+            <img className="icon" src={playicon} alt="play-icon"></img>
             <p className="description-text">
               Do a quick sound check 30 minutes before the show and enjoy your
               performance!

@@ -1,18 +1,23 @@
 import React, { useState } from "react";
-import VideoPlayer from "./video_player";
-import axios from "axios";
-import "../styles.scss";
-import { render } from "@testing-library/react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Chat from "./chat/stream_chat";
-import Join from "./chat/join_chat";
-import { Grid, Row, Col } from "./grid";
-import SocialBar from "./social_bar";
+
+// AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
-import * as mutations from "../graphql/mutations";
+import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../AppSync";
-import VenmoCode from "../images/jon-dely-venmo.jpeg";
+import awsmobile from "../../AppSync";
+
+// Component Imports
+import VideoPlayer from "./video_player";
+import Chat from "../chat/stream_chat";
+import Join from "../chat/join_chat";
+import { Grid, Row, Col } from "../grid";
+import SocialBar from "../social_bar/social_bar";
+
+// Styles Imports
+import "./stream_styles.scss";
+
+// Image imports
+import VenmoCode from "../../images/jon_dely_venmo.jpeg";
 
 Amplify.configure(awsmobile);
 
@@ -71,56 +76,17 @@ const StreamPage = () => {
             <Row>
               <Col size={2}>
                 <Row>
-                  <h2 className="artistname">Jonathan Dely</h2>
+                  <h2 className="artist-name">Jonathan Dely</h2>
                 </Row>
                 <Row>
-                  <h5 className="showtime">
+                  <h5 className="show-time">
                     Friday 24th April 8:00PM EST (refresh the page if stream
                     doesn't show up)
                   </h5>
                 </Row>
               </Col>
-              <Col size={1} className="socialbarcenter">
-                <div className="social-media">
-                  <Col size={1}></Col>
-                  <ul className="social-list">
-                    <li>
-                      <a
-                        href="http://instagram.com/jonathan_dely"
-                        class="fa fa-instagram"
-                        target="_blank"
-                      ></a>
-                    </li>
-                    <li>
-                      <a
-                        href="https://open.spotify.com/artist/5wdmp3H2QC7tfMYAabtQN3"
-                        class="fa fa-spotify"
-                        target="_blank"
-                      ></a>
-                    </li>
-                    <li>
-                      <a
-                        href="https://www.youtube.com/channel/UCdh0zQFUEYKQsbTJI00Q2SA"
-                        class="fa fa-youtube"
-                        target="_blank"
-                      ></a>
-                    </li>
-                    <li>
-                      <a
-                        href="https://www.facebook.com/jonathandelymusic"
-                        class="fa fa-facebook"
-                        target="_blank"
-                      ></a>
-                    </li>
-                    <li>
-                      <a
-                        href="http://paypal.me/jonathandely"
-                        class="fa fa-paypal"
-                        target="_blank"
-                      ></a>
-                    </li>
-                  </ul>
-                </div>
+              <Col size={1} className="social-bar-center">
+                <SocialBar />
               </Col>
             </Row>
             <Row></Row>
@@ -143,13 +109,17 @@ const StreamPage = () => {
         </Row>
 
         <Row>
-          <Col size={3} className="donatebox">
+          <Col size={3} className="donate-box">
             <Row>
               <Col size={2}>
-                <p className="donatetitle">Donate to the Artist</p>
-                <p className="donatedescribtion">
+                <p className="donate-title">Donate to the Artist</p>
+                <p className="donate-description">
                   To donate to Jonathan Dely on Paypal,{" "}
-                  <a href="http://paypal.me/jonathandely" target="_blank">
+                  <a
+                    href="http://paypal.me/jonathandely"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     click here.
                   </a>
                   <br></br>
@@ -158,14 +128,18 @@ const StreamPage = () => {
                 </p>
               </Col>
               <Col size={1}>
-                <img className="venmo-code" src={VenmoCode}></img>
+                <img
+                  className="venmo-code"
+                  src={VenmoCode}
+                  alt="venmo-qr"
+                ></img>
               </Col>
             </Row>
           </Col>
 
-          <Col size={2} className="streamsubscribebox">
-            <p className="streamsubscribetitle">Subscribe</p>
-            <p className="streamsubscribedescribtion">
+          <Col size={2} className="stream-subscribe-box">
+            <p className="stream-subscribe-title">Subscribe</p>
+            <p className="stream-subscribe-description">
               To stay informed about upcoming events,<br></br> subscribe to our
               mailing list:
             </p>
@@ -194,7 +168,7 @@ const StreamPage = () => {
                       form="newsletter"
                       value="Submit"
                       style={{ width: "100px" }}
-                      className="buttonborder buttonheight"
+                      className="button-border button-height"
                     >
                       {" "}
                       Submit
@@ -213,7 +187,7 @@ const StreamPage = () => {
                           form="newsletter"
                           value="Submit"
                           style={{ width: "100px" }}
-                          //className="buttonborder buttonheight"
+                          //className="button-border button-height"
                         > */}
                       {/* Submit
                           </div> */}

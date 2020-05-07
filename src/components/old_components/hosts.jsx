@@ -1,14 +1,13 @@
 import React from "react";
-import background from "../images/hosts_background.jpg";
-import venue from "../images/venue_placeholder.jpg";
-import application from "../images/application_icon.png";
-import schedule from "../images/schedule-icon.png";
-import music from "../images/host-music-icon.png";
-import "../styles.scss";
-import { Grid, Row, Col } from "./grid";
-import ContentHeader from "./content_header";
+import background from "../../images/hosts_background.jpg";
+import venue from "../../images/venue_placeholder.jpg";
+import application from "../../images/application_icon.png";
+import schedule from "../../images/schedule_icon.png";
+import music from "../../images/host_music_icon.png";
+import "./old_component_styles.scss";
+import { Grid, Row, Col } from "../grid";
 import FeaturedContent from "./featured_content";
-import history from "./../history";
+import history from "../../history";
 
 const Hosts = () => {
   return (
@@ -42,32 +41,33 @@ const Hosts = () => {
         </Row>
 
         <Row>
-        <Col size={2}></Col>
+          <Col size={2}></Col>
           <Col size={3}>
-          <h2>Bring People Together, For Music</h2>
+            <h2>Bring People Together, For Music</h2>
             <p className="description-text">
-            Onfour enables you to easily host a unique experience at your
+              Onfour enables you to easily host a unique experience at your
               venue, get new faces in your doors, and promote your brand.
             </p>
-
           </Col>
           <Col size={2}></Col>
         </Row>
-        
 
         <div className="spacer"></div>
-
 
         <Row>
           <Col size={1}></Col>
           <Col size={1}>
-            <img className="icon" src={application}></img>
+            <img
+              className="icon"
+              src={application}
+              alt="application-icon"
+            ></img>
           </Col>
           <Col size={1}>
-            <img className="icon" src={schedule}></img>
+            <img className="icon" src={schedule} alt="schedule-icon"></img>
           </Col>
           <Col size={1}>
-            <img className="icon" src={music}></img>
+            <img className="icon" src={music} alt="music-icon"></img>
           </Col>
           <Col size={1}></Col>
         </Row>
@@ -95,18 +95,17 @@ const Hosts = () => {
         </Row>
 
         <Row>
-        <Col size={2}> </Col>
-        <Col size={3}>
-          <hr className="line-divider"></hr>
-          <div className="spacer"></div>
-        </Col> 
-        <Col size={2}> </Col>
+          <Col size={2}> </Col>
+          <Col size={3}>
+            <hr className="line-divider"></hr>
+            <div className="spacer"></div>
+          </Col>
+          <Col size={2}> </Col>
         </Row>
 
-        
         <Row>
           <Col size={1}>
-          <h2>Featured Venues</h2>
+            <h2>Featured Venues</h2>
           </Col>
         </Row>
         <Row>
@@ -117,7 +116,7 @@ const Hosts = () => {
             </p>
           </Col>
         </Row>
-        
+
         <Row>
           <Col size={1}></Col>
           <Col size={1}>

@@ -1,13 +1,9 @@
-import React, { Component, useState, useEffect } from "react";
-import queryString from "query-string";
+import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
-import Join from "./join_chat";
 import "./chat.scss";
 import InfoBar from "./info_bar";
 import Input from "./input";
 import Messages from "./messages";
-import ChatIndicator from "./chat_indicator";
-import { FlexGrid, FlexRow, Col } from "../grid";
 
 let socket;
 
@@ -51,9 +47,15 @@ const Chat = ({ chatName, chatStatus }) => {
   const sendMessage = (event) => {
     event.preventDefault();
     if (message) {
-      socket.emit("sendMessage", message, () => setMessage(""));
+      if (message.length > 140) {
+        alert("Message cannot be longer than 140 characters.");
+      } else {
+        socket.emit("sendMessage", message, () => setMessage(""));
+      }
     }
   };
+
+  useEffect(() => () => closeChat(), []);
 
   return (
     <div className="chat-outer-container">

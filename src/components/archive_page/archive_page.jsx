@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import ReactPlayer from "react-player";
-import { Grid, Row, Col } from "./grid";
+import React from "react";
+import { Grid, Row, Col } from "../grid";
 import ArchiveVideo from "./archive_video";
 import ArchivePerformance from "./archive_performance";
+
+import "./archive_styles.scss";
 
 const ArchivePage = () => {
   return (
