@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import logo from "../../images/white_logo.png";
-import black_logo from "../../images/black_logo.png";
+import logo from "../../images/logos/white_logo.png";
+import black_logo from "../../images/logos/black_logo.png";
 import "../../styles.scss";
 
 const NavBarShortTerm = () => {
