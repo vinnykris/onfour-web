@@ -46,11 +46,11 @@ const Input = styled.input`
   }
 `;
 
-const FormField = ({ label, type, name, placeholder, required }) => {
+const FormField = ({ label, type, name, placeholder, value, onChange, required }) => {
     return (
         <FormFieldContainer>
             <Label htmlFor={name}>{label}</Label>
-            <Input name={name} type={type} placeholder={placeholder} required />
+            <Input name={name} type={type} placeholder={placeholder} value={value} onChange={onChange} required />
         </FormFieldContainer>
     );
 };

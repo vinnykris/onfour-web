@@ -8,8 +8,8 @@ const checkout = axios.create({
     },
 });
 
-const stripeTokenHandler = async (token) => {
-    const paymentData = { token: token.id };
+const stripeTokenHandler = async (token, amount_value) => {
+    const paymentData = { token: token.id, amount: amount_value };
 
     console.log("checking");
 

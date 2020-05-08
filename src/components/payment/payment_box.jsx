@@ -13,7 +13,7 @@ const CheckoutForm = () => {
     const elements = useElements();
     const [payed, setPayed] = useState(false);
     const [needConfirm, setNeedConfirm] = useState(true);
-    // const card;
+    const [amount_value, setAmount] = useState();
 
     const iframeStyles = {
         base: {
@@ -70,7 +70,7 @@ const CheckoutForm = () => {
             console.log("test2");
             // Send the token to your server.
             // This function does not exist yet; we will define it in the next step.
-            stripeTokenHandler(result.token);
+            stripeTokenHandler(result.token, Math.round(amount_value*100));
             setPayed(true);
         }
     }
@@ -89,7 +89,9 @@ const CheckoutForm = () => {
                                     name="amount"
                                     label="Amount"
                                     type="number"
-                                    placeholder="$"
+                                    placeholder="$0.00"
+                                    value={amount_value}
+                                    onChange={(event) => setAmount(event.target.value)}
                                     required
                                 />
                                 <FormField

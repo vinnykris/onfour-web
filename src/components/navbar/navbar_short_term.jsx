@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import logo from "../../images/white_logo.png";
-import black_logo from "../../images/black_logo.png";
+import logo from "../../images/logos/white_logo.png";
+import black_logo from "../../images/logos/black_logo.png";
 import Model from "../sign_in/sign_in_model";
 import "../../styles.scss";
 
@@ -19,13 +19,13 @@ const NavBarShortTerm = () => {
     <div className="navbar">
       <img className="onfour-logo" src={icon} width="auto" alt="nav-logo"></img>
       <div>
-        <NavLink to={location.pathname} className={style} data-toggle="modal" data-target="#sign_in_Modal">
+        {/* <NavLink to={location.pathname} className={style} data-toggle="modal" data-target="#sign_in_Modal">
           LOG IN
         </NavLink>  {" "}
-        <Model></Model>
-        <NavLink to="/upcoming" className={style}>
+        <Model></Model> */}
+        {/* <NavLink to="/upcoming" className={style}>
           UPCOMING
-        </NavLink>
+        </NavLink> */}
         <NavLink to="/archive" className={style}>
           PAST SHOWS
         </NavLink>

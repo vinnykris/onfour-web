@@ -91,7 +91,7 @@ const StreamPage = () => {
                   </Row>
                   <Row>
                     <h5 className="show-time">
-                      Sunday 10th May 8:00PM EST (refresh the page if stream
+                      Sunday May 10th 8:00PM EST (refresh the page if stream
                       doesn't show up)
                     </h5>
                   </Row>
@@ -144,7 +144,7 @@ const StreamPage = () => {
               </Row>
             </Col>
 
-            <Col size={2} className="stream-subscribe-box">
+            <Col size={3} className="stream-subscribe-box">
               <p className="stream-subscribe-title">Subscribe</p>
               <p className="stream-subscribe-description">
                 To stay informed about upcoming events,<br></br> subscribe to our

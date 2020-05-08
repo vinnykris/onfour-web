@@ -55,7 +55,7 @@ const AboutPage = () => {
                 alt="nav-logo"
               ></img>
 
-              <h1>Live-streamed concerts, reimagined</h1>
+              <h1>Reimagining live music.</h1>
             </div>
           </Col>
         </Row>
@@ -69,13 +69,16 @@ const AboutPage = () => {
         </Row>
         <Row>
           <Col size={1}> </Col>
-          <Col size={2}>
+          <Col size={4}>
             <p className="description-text">
-              Onfour empowers music fans by providing a new way to interact with
-              your favorite musicians, no matter where you are. Musicians gain
-              more control over their careers and connect with fans in new,
-              meaningful ways. Due to the COVID-19 pandemic, we are hosting
-              live-stream concerts and will donate our proceeds to{" "}
+              Onfour is the premier live-streaming concert platform, built and
+              designed for musicians. We are dedicated to empowering musicians
+              and enabling them to connect with fans in new, meaningful ways.
+              Experience studio-like quality from the comfort of your own home.
+              <br></br>
+              <br></br>
+              Due to the COVID-19 pandemic, we are hosting live-stream concerts
+              and will donate all of our proceeds to{" "}
               <a
                 href="https://www.grammy.com/musicares/donations"
                 target="_blank"
@@ -145,15 +148,15 @@ const AboutPage = () => {
                           name="email"
                           required
                           value={email}
-                          style={{ width: "280px" }}
+                          className="email-input"
+                          // style={{ width: "280px" }}
                           onChange={(event) => setEmail(event.target.value)}
                         />
                         <button
                           type="submit"
                           form="newsletter"
                           value="Submit"
-                          style={{ width: "100px" }}
-                          className="button-border button-height"
+                          className="submit-button button-border button-height"
                         >
                           Submit
                         </button>
