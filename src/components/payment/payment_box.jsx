@@ -12,7 +12,8 @@ const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const [payed, setPayed] = useState(false);
-
+    const [needConfirm, setNeedConfirm] = useState(true);
+    // const card;
 
     const iframeStyles = {
         base: {
@@ -36,6 +37,16 @@ const CheckoutForm = () => {
         iconStyle: "solid",
         style: iframeStyles,
         hidePostalCode: true
+    };
+
+    const needConfirmation = (event) => {
+        event.preventDefault();
+        if (!stripe || !elements) {
+            // Stripe.js has not yet loaded.
+            // Make sure to disable form submission until Stripe.js has loaded.
+            return;
+        }
+        setNeedConfirm(false);
     };
 
     const submitPayment = async (event) =>{
@@ -95,19 +106,23 @@ const CheckoutForm = () => {
                                     placeholder="jane.doe@example.com"
                                     required
                                 />
-                                {/* <FormField
-                                    name="zip"
-                                    label="ZIP"
-                                    type="text"
-                                    placeholder="94103"
-                                    required
-                                /> */}
                                 <br></br>
                                 <CardElement options={cardElementOpts}/>
                                 <br></br>
-                                <button className="payment-button" type="submit" disabled={!stripe}>
-                                    Pay
-                                </button>
+                                <div>
+                                    {needConfirm ? (
+                                        <button className="payment-button" type="toConfirm" disabled={!stripe} onClick={needConfirmation}>
+                                            Pay
+                                        </button>
+                                    ) : (
+                                        <div>
+                                            <p>Are you sure about this?</p>
+                                            <button className="payment-button" type="submit" disabled={!stripe}>
+                                                Confirm
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         );
                     } else {

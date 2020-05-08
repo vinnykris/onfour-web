@@ -19,6 +19,9 @@ import "./stream_styles.scss";
 
 // Image imports
 import VenmoCode from "../../images/jon_dely_venmo.jpeg";
+import waiting_image from "../../images/StreamWaitingPage.jpg";
+import { useStripe } from "@stripe/react-stripe-js";
+import modal from "../payment/payment_modal";
 
 Amplify.configure(awsmobile);
 
@@ -28,6 +31,13 @@ const StreamPage = () => {
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [scroll, setScroll] = useState(true);
+  const [show, setShow] = useState(true);
+
+
+  const hideModal = () => {
+    setShow(false);
+  };
+
 
   const joinSubmit = (name, mode) => {
     setChatName(name);
@@ -61,148 +71,142 @@ const StreamPage = () => {
 
   return (
     <div className="stream-page-content">
-      <Grid>
-        <Row>
-          <Col size={0.5}></Col>
-          <Col size={7}>
-            <div className="stream-main">
-              <div className="stream-wrapper">
-                <VideoPlayer
-                  url={
-                    "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                  }
-                />
+        <Grid>
+          <Row>
+            <Col size={0.5}></Col>
+            <Col size={7}>
+              <div className="stream-main">
+                <div className="stream-wrapper">
+                  <VideoPlayer
+                    url={
+                      "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                    }
+                  />
+                </div>
               </div>
-            </div>
-            <Row>
-              <Col size={2}>
-                <Row>
-                  <h2 className="artist-name">Jonathan Dely</h2>
-                </Row>
-                <Row>
-                  <h5 className="show-time">
-                    Friday 24th April 8:00PM EST (refresh the page if stream
-                    doesn't show up)
-                  </h5>
-                </Row>
-              </Col>
-              <Col size={1} className="social-bar-center">
-                <SocialBar />
-              </Col>
-            </Row>
-            <Row></Row>
-          </Col>
-          <Col size={3}>
-            <div className="chat-main">
-              <div className="chat-wrapper">
-                {showChat ? (
-                  <Chat chatName={chatName} chatStatus={chatStatus} />
-                ) : (
-                  <Join joinSubmit={joinSubmit} />
-                )}
+              <Row>
+                <Col size={2}>
+                  <Row>
+                    <h2 className="artist-name">Jonathan Dely</h2>
+                  </Row>
+                  <Row>
+                    <h5 className="show-time">
+                      Sunday 10th May 8:00PM EST (refresh the page if stream
+                      doesn't show up)
+                    </h5>
+                  </Row>
+                </Col>
+                <Col size={1} className="social-bar-center">
+                  <SocialBar />
+                </Col>
+              </Row>
+              <Row></Row>
+            </Col>
+            <Col size={3}>
+              <div className="chat-main">
+                <div className="chat-wrapper">
+                  {showChat ? (
+                    <Chat chatName={chatName} chatStatus={chatStatus} />
+                  ) : (
+                    <Join joinSubmit={joinSubmit} />
+                  )}
+                </div>
               </div>
-            </div>
-          </Col>
-          <Col size={1}></Col>
-        </Row>
-        <Row>
-          <div className="short-term-spacer"></div>
-        </Row>
+            </Col>
+            <Col size={1}></Col>
+          </Row>
+          <Row>
+            <div className="short-term-spacer"></div>
+          </Row>
 
-        <Row>
-          <Col size={3} className="donate-box">
-            <Row>
-              <Col size={2}>
-                <p className="donate-title">Donate to the Artist</p>
-                <p className="donate-description">
-                  To donate to Jonathan Dely on Paypal,{" "}
-                  <a
-                    href="http://paypal.me/jonathandely"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    click here.
-                  </a>
-                  <br></br>
-                  <br></br>Or, scan the QR code to the right to donate to
-                  <br></br>@Jonathan-Dely on Venmo.
-                </p>
-                <button className="button-border button-height" data-toggle="modal" data-target="#exampleModal">Donate</button> {" "}
-                <Modal isOpen={false}></Modal>
-              </Col>
-              <Col size={1}>
-                <img
-                  className="venmo-code"
-                  src={VenmoCode}
-                  alt="venmo-qr"
-                ></img>
-              </Col>
-            </Row>
-          </Col>
-
-          <Col size={2} className="stream-subscribe-box">
-            <p className="stream-subscribe-title">Subscribe</p>
-            <p className="stream-subscribe-description">
-              To stay informed about upcoming events,<br></br> subscribe to our
-              mailing list:
-            </p>
-            {(() => {
-              if (emailSubmitted) {
-                return <div>Thank you and stay tuned! :)</div>;
-              } else {
-                return (
-                  <form
-                    class="inline-form"
-                    action="/"
-                    id="newsletter"
-                    onSubmit={emailSubmit}
-                  >
-                    <input
-                      type="email"
-                      placeholder="Enter your email here..."
-                      name="email"
-                      required
-                      value={email}
-                      style={{ width: "280px" }}
-                      onChange={(event) => setEmail(event.target.value)}
-                    />
-                    <button
-                      type="submit"
-                      form="newsletter"
-                      value="Submit"
-                      style={{ width: "100px" }}
-                      className="button-border button-height"
+          <Row>
+            <Col size={3} className="donate-box">
+              <Row>
+                <Col size={2}>
+                  <p className="donate-title">Donate to the Artist</p>
+                  <p className="donate-description">
+                    To donate to Jonathan Dely click here.{" "}
+                    {/* <a
+                      href="http://paypal.me/jonathandely"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      {" "}
-                      Submit
-                      {/* <div> */}
-                      {/* <input
-                          type="email"
-                          placeholder="Enter your email here..."
-                          name="email"
-                          required
-                          value={email}
-                          style={{ width: "280px" }}
-                          onChange={(event) => setEmail(event.target.value)}
-                        />
-                        <button
-                          type="submit"
-                          form="newsletter"
-                          value="Submit"
-                          style={{ width: "100px" }}
-                          //className="button-border button-height"
-                        > */}
-                      {/* Submit
-                          </div> */}
-                    </button>
-                  </form>
-                );
-              }
-            })()}
-            {/* </div> */}
-          </Col>
-        </Row>
-      </Grid>
+                      click here.
+                    </a>
+                    <br></br>
+                    <br></br>Or, scan the QR code to the right to donate to
+                    <br></br>@Jonathan-Dely on Venmo. */}
+                  </p>
+                  <button className="button-border button-height" data-toggle="modal" data-target="#exampleModal">Donate</button> {" "}
+                  <Modal isOpen={false}></Modal>
+                </Col>
+                <Col size={1}></Col>
+              </Row>
+            </Col>
+
+            <Col size={2} className="stream-subscribe-box">
+              <p className="stream-subscribe-title">Subscribe</p>
+              <p className="stream-subscribe-description">
+                To stay informed about upcoming events,<br></br> subscribe to our
+                mailing list:
+              </p>
+              {(() => {
+                if (emailSubmitted) {
+                  return <div>Thank you and stay tuned! :)</div>;
+                } else {
+                  return (
+                    <form
+                      class="inline-form"
+                      action="/"
+                      id="newsletter"
+                      onSubmit={emailSubmit}
+                    >
+                      <input
+                        type="email"
+                        placeholder="Enter your email here..."
+                        name="email"
+                        required
+                        value={email}
+                        style={{ width: "280px" }}
+                        onChange={(event) => setEmail(event.target.value)}
+                      />
+                      <button
+                        type="submit"
+                        form="newsletter"
+                        value="Submit"
+                        style={{ width: "100px" }}
+                        className="button-border button-height"
+                      >
+                        {" "}
+                        Submit
+                        {/* <div> */}
+                        {/* <input
+                            type="email"
+                            placeholder="Enter your email here..."
+                            name="email"
+                            required
+                            value={email}
+                            style={{ width: "280px" }}
+                            onChange={(event) => setEmail(event.target.value)}
+                          />
+                          <button
+                            type="submit"
+                            form="newsletter"
+                            value="Submit"
+                            style={{ width: "100px" }}
+                            //className="button-border button-height"
+                          > */}
+                        {/* Submit
+                            </div> */}
+                      </button>
+                    </form>
+                  );
+                }
+              })()}
+              {/* </div> */}
+            </Col>
+          </Row>
+        </Grid>
     </div>
   );
 };
