@@ -4,7 +4,7 @@ import "./upcoming_show_page_styles.scss";
 const MonthHeader = ({ headerTitle }) => {
   return (
     <div className="featured-header">
-      <h2 className="header-text">{headerTitle}</h2>
+      <h1 className="header-text">{headerTitle}</h1>
     </div>
   );
 };

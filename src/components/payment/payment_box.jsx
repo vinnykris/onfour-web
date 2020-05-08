@@ -13,6 +13,7 @@ const CheckoutForm = () => {
     const elements = useElements();
     const [payed, setPayed] = useState(false);
 
+
     const iframeStyles = {
         base: {
             color: "#303096",
@@ -69,6 +70,17 @@ const CheckoutForm = () => {
                     if (!payed) {
                         return (
                             <div>
+                                <button className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <br></br>
+                                <FormField
+                                    name="amount"
+                                    label="Amount"
+                                    type="number"
+                                    placeholder="$"
+                                    required
+                                />
                                 <FormField
                                     name="name"
                                     label="Name"
@@ -83,13 +95,13 @@ const CheckoutForm = () => {
                                     placeholder="jane.doe@example.com"
                                     required
                                 />
-                                <FormField
+                                {/* <FormField
                                     name="zip"
                                     label="ZIP"
                                     type="text"
                                     placeholder="94103"
                                     required
-                                />
+                                /> */}
                                 <br></br>
                                 <CardElement options={cardElementOpts}/>
                                 <br></br>
@@ -99,7 +111,15 @@ const CheckoutForm = () => {
                             </div>
                         );
                     } else {
-                        return <div className="pay_sucess_msg">Payment Succeeded! :)</div>;
+                        return (
+                            <div>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <br></br>
+                                <div className="pay_sucess_msg">Thank you for your donation! :)</div>
+                            </div>
+                        );
                     }
                 })()}
             </form>
@@ -110,7 +130,7 @@ const CheckoutForm = () => {
 
 // const stripePromise = loadStripe("pk_test_QYP6EIav9kdtsfLIRkarusKO00YsyMSiOK");
 
-const ticket = () => {
+const payment_box = () => {
     return (
         <div>
             <br></br>
@@ -124,4 +144,4 @@ const ticket = () => {
     );
 };
 
-export default ticket;
+export default payment_box;

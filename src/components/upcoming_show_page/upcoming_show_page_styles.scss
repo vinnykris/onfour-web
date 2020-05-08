@@ -1,4 +1,4 @@
-// OLD COMPONENT STYLING
+// UPCOMING SHOW COMPONENT STYLING
 
 @import "../../styles";
 
@@ -10,14 +10,37 @@
 .featured-content {
   width: 100%;
   display: flex;
+  padding: 3%;
+  &:hover {
+    cursor: pointer;
+    // padding: 5%;
+  }
+  &:active {
+    cursor: auto;
+    color: white;
+  }
+}
+
+a.nav-page-white {
+  margin: 10px;
+  color: white;
+  font-weight: $medium-weight;
+  &:hover {
+    cursor: pointer;
+    color: white;
+    text-decoration: "none";
+  }
+  &:active {
+    color: white;
+    text-decoration: "underline";
+  }
 }
 
 .feature-placeholder {
   width: 100%;
   object-fit: cover;
   margin: auto;
-  margin-bottom: 10px;
-  padding-inline-end: 10px;
+  padding-inline-end: 0;
 }
 
 .featured-header {
@@ -25,11 +48,47 @@
   height: 50px;
   vertical-align: middle;
   display: grid;
+  float: left;
+  padding: 2%;
+}
+
+.show-content-bar {
+  width: 100%;
+  background-color: #e2e2e2;
+}
+
+.artist-name {
+  font-size: 2vw;
+  font-weight: $medium-weight;
+  color: #303096;
+  text-align: left;
+  margin-top: 5%;
+  margin-left: 5%;
+  font-family: "Heebo", sans-serif;
+}
+
+.date {
+  font-size: 1.5vw;
+  font-weight: $medium-weight;
+  color: #303096;
+  text-align: right;
+  margin-top: 5%;
+  margin-right: 10%;
+  font-family: "Heebo", sans-serif;
+}
+
+.time {
+  font-size: 1.5vw;
+  font-weight: $medium-weight;
+  color: #303096;
+  text-align: left;
+  margin-top: 5%;
+  margin-left: 10%;
+  font-family: "Heebo", sans-serif;
 }
 
 .header-text {
   margin: auto;
-  text-align: left;
 }
 
 .line-divider {

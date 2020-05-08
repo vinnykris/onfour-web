@@ -12,6 +12,7 @@ import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 
+
 // TIP
 // call loadStripe outside of a component
 // in that way there's no chance it will get

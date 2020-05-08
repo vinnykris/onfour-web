@@ -12,6 +12,7 @@ import Chat from "../chat/stream_chat";
 import Join from "../chat/join_chat";
 import { Grid, Row, Col } from "../grid";
 import SocialBar from "../social_bar/social_bar";
+import Modal from "../payment/payment_modal";
 
 // Styles Imports
 import "./stream_styles.scss";
@@ -126,6 +127,8 @@ const StreamPage = () => {
                   <br></br>Or, scan the QR code to the right to donate to
                   <br></br>@Jonathan-Dely on Venmo.
                 </p>
+                <button className="button-border button-height" data-toggle="modal" data-target="#exampleModal">Donate</button> {" "}
+                <Modal isOpen={false}></Modal>
               </Col>
               <Col size={1}>
                 <img
