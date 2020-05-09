@@ -19,7 +19,7 @@ const AboutPage = () => {
               </h1>
 
               <img
-                className="bannerbackground"
+                className="banner-header"
                 src={whatsonfour}
                 alt="nav-logo"
               ></img>

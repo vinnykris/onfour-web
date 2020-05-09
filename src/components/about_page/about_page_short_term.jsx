@@ -11,6 +11,7 @@ import awsmobile from "../../AppSync";
 
 // Image Imports
 import header_image from "../../images/banner_background_blur.jpg";
+import gradient_header from "../../images/mobile_gradient.png";
 
 // Styling Imports
 import "./about_styles.scss";
@@ -50,12 +51,17 @@ const AboutPage = () => {
           <Col size={1}>
             <div className="banner-container">
               <img
-                className="bannerbackground"
+                className="banner-header-desktop"
                 src={header_image}
                 alt="nav-logo"
               ></img>
+              <img
+                className="banner-header-mobile"
+                src={gradient_header}
+                alt="nav-logo"
+              ></img>
 
-              <h1>Reimagining live music.</h1>
+              <h1 className="header-tag">Reimagining live music.</h1>
             </div>
           </Col>
         </Row>
