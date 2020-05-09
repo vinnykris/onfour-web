@@ -2,6 +2,18 @@
 
 @import "../../styles";
 
+.desktop-grid {
+  width: 100%;
+  display: flex;
+  @include respond-to("small") {
+    display: none;
+  }
+}
+
+.desktop-row {
+  align-items: center;
+  justify-content: center;
+}
 .mobile-grid {
   width: 100%;
   display: none;
@@ -10,6 +22,7 @@
   }
 }
 
+.desktop-row,
 .mobile-row {
   width: 100%;
 }
@@ -17,7 +30,7 @@
 // MOVE
 .navbar-custom {
   width: 100%;
-  height: 150px;
+  height: 176px;
   background-color: none;
   position: relative;
   display: flex;
@@ -29,14 +42,14 @@
 
 // MOVE
 .onfour-logo-desktop {
-  height: 53px;
+  height: 124px;
+  margin: auto;
   @include respond-to("small") {
     display: none;
   }
   // @include respond-to("x-small") {
   //   height: 25px;
   // }
-  margin: 25px;
 }
 
 .onfour-logo-mobile {
@@ -64,14 +77,17 @@
 // MOVE
 .nav-page-black,
 .nav-page-white {
+  // margin: auto;
+  margin: auto;
   font-size: 0.9rem;
-  float: right;
-  text-align: end;
-  padding: 20px 30px;
+  // float: right;
+  // text-align: end;
+  // padding: 20px 30px;
   font-family: "Heebo", sans-serif;
-  @include respond-to("medium") {
-    display: none;
-  }
+  // @include respond-to("medium") {
+  //   display: none;
+  // }
+  font-weight: $medium-weight;
 }
 
 // MOVE
@@ -83,9 +99,9 @@
 
 // MOVE
 a.nav-page-white {
-  margin: 10px;
+  // margin: 10px;
   color: white;
-  font-weight: $medium-weight;
+  // font-weight: $medium-weight;
   &:hover {
     cursor: pointer;
     color: white;
@@ -99,9 +115,9 @@ a.nav-page-white {
 
 // MOVE
 a.nav-page-black {
-  margin: 10px;
+  // margin: 10px;
   color: #4d4d4d;
-  font-weight: $medium-weight;
+  // font-weight: $medium-weight;
   &:hover {
     cursor: pointer;
     color: #4d4d4d;

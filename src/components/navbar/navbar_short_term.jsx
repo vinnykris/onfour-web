@@ -1,22 +1,22 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import logo from "../../images/logos/white_logo.png";
-import black_logo from "../../images/logos/black_logo.png";
-import new_logo from "../../images/logos/logo_icon-25.png";
+import new_logo_black from "../../images/logos/new_logo_black.png";
+import new_logo_white from "../../images/logos/new_logo_white.png";
 import "../../styles.scss";
 import { Grid, Row, Col } from "../grid";
 
 const NavBarShortTerm = () => {
   let style = "nav-page-black";
-  let icon = black_logo;
+  let icon = new_logo_black;
   let location = useLocation();
   if (location.pathname === "/") {
     style = "nav-page-white";
-    icon = logo;
+    icon = new_logo_white;
   }
 
   return (
     <div className="navbar-custom">
+      {/* MOBILE VERSION */}
       <Grid className="mobile-grid">
         <Row className="mobile-row">
           <Col size={1}>
@@ -27,7 +27,7 @@ const NavBarShortTerm = () => {
           <Col size={3}>
             <img
               className="onfour-logo-mobile"
-              src={new_logo}
+              src={new_logo_black}
               width="auto"
               alt="nav-logo"
             ></img>
@@ -36,24 +36,39 @@ const NavBarShortTerm = () => {
         </Row>
       </Grid>
 
-      <img
-        className="onfour-logo-desktop"
-        src={icon}
-        width="auto"
-        alt="nav-logo"
-      ></img>
-
-      <div className="page-links">
-        <NavLink to="/archive" className={style}>
-          PAST SHOWS
-        </NavLink>
-        <NavLink to="/stream" className={style}>
-          STREAM
-        </NavLink>
-        <NavLink exact to="/" className={style}>
-          ABOUT US
-        </NavLink>
-      </div>
+      {/* DESKTOP VERSION */}
+      <Grid className="desktop-grid">
+        <Row className="desktop-row">
+          <Col size={1}>
+            <NavLink to="/archive" className={style}>
+              PAST SHOWS
+            </NavLink>
+          </Col>
+          <Col size={1}>
+            <NavLink exact to="/" className={style}>
+              ABOUT US
+            </NavLink>
+          </Col>
+          <Col size={1}>
+            <img
+              className="onfour-logo-desktop"
+              src={icon}
+              width="auto"
+              alt="nav-logo"
+            ></img>
+          </Col>
+          <Col size={1}>
+            <NavLink to="/stream" className={style}>
+              STREAM
+            </NavLink>
+          </Col>
+          <Col size={1}>
+            <NavLink to="/upcoming" className={style}>
+              UPCOMING
+            </NavLink>
+          </Col>
+        </Row>
+      </Grid>
     </div>
   );
 };
