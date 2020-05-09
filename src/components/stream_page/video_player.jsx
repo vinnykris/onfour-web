@@ -22,7 +22,7 @@ class VideoPlayer extends Component {
       <img
         className="waiting-screen"
         src={WaitingScreen}
-        alt="waiting-screen-image"
+        alt="waiting-screen"
       ></img>
     );
   }
