@@ -118,7 +118,7 @@ const CheckoutForm = () => {
                                         </button>
                                     ) : (
                                         <div>
-                                            <p>Are you sure about this?</p>
+                                                <p>Donating ${amount_value} to the musician?</p>
                                             <button className="payment-button" type="submit" disabled={!stripe}>
                                                 Confirm
                                             </button>
