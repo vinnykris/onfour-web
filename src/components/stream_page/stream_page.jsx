@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -18,6 +19,7 @@ import "./stream_styles.scss";
 
 // Image imports
 import VenmoCode from "../../images/jon_dely_venmo.jpeg";
+import closeIcon from "../../images/close_icon.png";
 
 Amplify.configure(awsmobile);
 
@@ -59,7 +61,7 @@ const StreamPage = () => {
     setScroll(false);
   }
 
-  const sendAlert = () => {
+  const showPopup = () => {
     setShowAlert(false);
   };
 
@@ -67,17 +69,25 @@ const StreamPage = () => {
     <div className="stream-page-content">
       {showAlert ? (
         <div className="popup">
-          <form className="waiting_msg_box">
-            <h6 className="waiting_msg">The show hasn't started yet!</h6>
-            <h6 className="waiting_msg">
-              Please checkout the past shows while waiting :)
-            </h6>
-            <br></br>
-            <button onClick={sendAlert}>Got it</button>
+          <form className="waiting-msg-box">
+            <img
+              className="popup-close"
+              src={closeIcon}
+              alt="close-popup"
+              onClick={showPopup}
+            ></img>
+            <div className="popup-content">
+              <h5 className="popup-header">The show hasn't started yet!</h5>
+              <p className="waiting-msg">
+                Feel free to look around! If you would like to see clips from
+                our past shows, click the button below.
+              </p>
+              <br></br>
+              <Link to="/archive">
+                <button>Go to Past Shows</button>
+              </Link>
+            </div>
           </form>
-          {/* <div className='popup\_inner'>
-            
-          </div> */}
         </div>
       ) : null}
       <Grid>
