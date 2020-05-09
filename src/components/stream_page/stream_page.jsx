@@ -31,12 +31,7 @@ const StreamPage = () => {
   const [email, setEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [scroll, setScroll] = useState(true);
-  const [show, setShow] = useState(true);
-
-
-  const hideModal = () => {
-    setShow(false);
-  };
+  const [showAlert, setShowAlert] = useState(true);
 
 
   const joinSubmit = (name, mode) => {
@@ -69,8 +64,27 @@ const StreamPage = () => {
     setScroll(false);
   }
 
+  const sendAlert = () => {
+    setShowAlert(false);
+  }
+  
+
   return (
     <div className="stream-page-content">
+      {showAlert ?
+        <div className='popup'>
+          <form className='waiting_msg_box'>
+            <h6 className='waiting_msg'>The show hasn't started yet!</h6>
+            <h6 className='waiting_msg'>Please checkout the past shows while waiting :)</h6>
+            <br></br>
+            <button onClick={sendAlert}>Got it</button>
+          </form>
+          {/* <div className='popup\_inner'>
+            
+          </div> */}
+        </div>
+        : null
+      }  
         <Grid>
           <Row>
             <Col size={0.5}></Col>
