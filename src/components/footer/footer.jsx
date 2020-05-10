@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Row, Col } from "../grid";
 import "./footer_styles.scss";
-import black_logo from "../../images/logos/black_logo.png";
+import white_logo from "../../images/logos/white_logo.png";
 
 const Footer = () => {
   return (
@@ -24,7 +24,7 @@ const Footer = () => {
             </p> */}
             <img
               className="onfour-logo-footer"
-              src={black_logo}
+              src={white_logo}
               width="auto"
               alt="nav-logo"
             ></img>

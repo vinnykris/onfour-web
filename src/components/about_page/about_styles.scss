@@ -2,6 +2,10 @@
 
 @import "../../styles";
 
+.about-page-content {
+  background-color: black;
+}
+
 .description-text {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -9,7 +13,7 @@
   text-align: center;
   font-size: 17px;
   font-weight: $medium-weight;
-  color: #4d4d4d;
+  color: #e2e2e2;
   padding-left: 30%;
   padding-right: 30%;
   @include respond-to("x-large") {
@@ -30,6 +34,9 @@
   }
 }
 
+.our-mission-text {
+  color: #e2e2e2;
+}
 .email-link {
   color: white;
   margin-bottom: 0px;
@@ -103,6 +110,11 @@
   }
 }
 
+.button-on-black {
+  border-radius: 3px;
+  font-weight: $medium-weight;
+  letter-spacing: 0.4px;
+}
 .submit-button {
   width: 100px;
 }
