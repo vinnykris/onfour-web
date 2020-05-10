@@ -179,7 +179,7 @@ const StreamPage = () => {
               data-toggle="modal"
               data-target="#exampleModal"
             >
-              Donate on Stripe
+              Donate with Card
             </button>{" "}
             <Modal isOpen={false}></Modal>
           </Col>
@@ -188,7 +188,7 @@ const StreamPage = () => {
               className="button-border button-height paypal-button"
               onClick={donatePaypal}
             >
-              Donate on Paypal
+              Donate with Paypal
             </button>
           </Col>
           <Col size={1} className="donate-venmo donate-box-button">
