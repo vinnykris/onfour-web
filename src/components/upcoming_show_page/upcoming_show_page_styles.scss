@@ -135,3 +135,19 @@ a.nav-page-white {
 .form-spacer {
   height: 16px;
 }
+
+.subscribe-description {
+  font-size: 17px;
+  font-weight: $medium-weight;
+  color: #636363;
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.success-message {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
