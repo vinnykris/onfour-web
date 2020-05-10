@@ -132,6 +132,7 @@ const CheckoutForm = () => {
                                     label="Name"
                                     type="text"
                                     placeholder="Jane Doe"
+                                    value={name}
                                     onChange={(event) => setName(event.target.value)}
                                     required
                                 />
@@ -140,6 +141,7 @@ const CheckoutForm = () => {
                                     label="Email"
                                     type="email"
                                     placeholder="jane.doe@example.com"
+                                    value={email}
                                     onChange={(event) => setEmail(event.target.value)}
                                     required
                                 />
@@ -153,7 +155,7 @@ const CheckoutForm = () => {
                                         </button>
                                     ) : (
                                         <div>
-                                                <p>Donating ${amount_value} to the musician?</p>
+                                                <p>Please confirm you are donating ${amount_value}</p>
                                             <button className="payment-button" type="submit" disabled={!stripe}>
                                                 Confirm
                                             </button>
