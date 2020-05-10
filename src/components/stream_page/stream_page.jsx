@@ -297,7 +297,7 @@ const StreamPage = () => {
             <div className="main-content-mobile">
               {/* PAYMENT SECTION */}
               <div className="mobile-section">
-                <Row>
+                {/* <Row>
                   <Col size={1} className="donate-box-button">
                     <button
                       className="stripe-button-border button-height"
@@ -306,9 +306,9 @@ const StreamPage = () => {
                     >
                       Donate with Card
                     </button>{" "}
-                    {/* <Modal isOpen={false}></Modal> */}
+                    <Modal isOpen={false}></Modal>
                   </Col>
-                </Row>
+                </Row> */}
                 <Row>
                   <Col size={1} className="donate-box-button">
                     <button

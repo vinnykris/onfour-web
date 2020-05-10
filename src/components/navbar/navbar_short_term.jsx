@@ -4,6 +4,7 @@ import new_logo_black from "../../images/logos/new_logo_black.png";
 import new_logo_white from "../../images/logos/new_logo_white.png";
 import "../../styles.scss";
 import { Grid, Row, Col } from "../grid";
+import closeIcon from "../../images/close_icon.png";
 
 const NavBarShortTerm = () => {
   let navbar_custom = "navbar-black";
@@ -19,14 +20,33 @@ const NavBarShortTerm = () => {
 
   const openMenu = () => {
     console.log("clicked hamburger menu");
+    document.getElementById("nav-menu").style.height = "100%";
   };
 
-  const closeMenu = () => {};
+  const closeMenu = () => {
+    document.getElementById("nav-menu").style.height = "0%";
+  };
 
   return (
     <div className={navbar_custom}>
       {/* MOBILE VERSION */}
-      <div></div>
+      <div id="nav-menu" className="overlay-menu">
+        <img onClick={closeMenu} src={closeIcon}></img>
+        <div className="overlay-content">
+          <NavLink exact to="/" className={style}>
+            ABOUT US
+          </NavLink>
+          <NavLink to="/stream" className={style}>
+            STREAM
+          </NavLink>
+          <NavLink to="/upcoming" className={style}>
+            UPCOMING
+          </NavLink>
+          <NavLink to="/archive" className={style}>
+            PAST SHOWS
+          </NavLink>
+        </div>
+      </div>
       <Grid className="mobile-grid">
         <Row className="mobile-row">
           <Col size={1}>
@@ -37,7 +57,7 @@ const NavBarShortTerm = () => {
           <Col size={3}>
             <img
               className="onfour-logo-mobile"
-              src={new_logo_black}
+              src={new_logo_white}
               width="auto"
               alt="nav-logo"
             ></img>
