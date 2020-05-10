@@ -21,9 +21,12 @@ const NavBarShortTerm = () => {
     console.log("clicked hamburger menu");
   };
 
+  const closeMenu = () => {};
+
   return (
     <div className={navbar_custom}>
       {/* MOBILE VERSION */}
+      <div></div>
       <Grid className="mobile-grid">
         <Row className="mobile-row">
           <Col size={1}>
