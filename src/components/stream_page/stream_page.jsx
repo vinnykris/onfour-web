@@ -145,7 +145,7 @@ const StreamPage = () => {
                 <Col size={2}>
                   <p className="donate-title">Donate to the Artist</p>
                   <p className="donate-description">
-                    To donate to Jonathan Dely click here.{" "}
+                    To donate to Jonathan Dely with Paypal.{" "}
                     <a
                       href="http://paypal.me/jonathandely"
                       target="_blank"
@@ -159,7 +159,13 @@ const StreamPage = () => {
                   <button className="button-border button-height" data-toggle="modal" data-target="#exampleModal">Donate</button> {" "}
                   <Modal isOpen={false}></Modal>
                 </Col>
-                <Col size={1}></Col>
+                <Col size={1}>
+                  <img
+                    className="venmo-code"
+                    src={VenmoCode}
+                    alt="venmo-qr"
+                  ></img>
+                </Col>
               </Row>
             </Col>
 
