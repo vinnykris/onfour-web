@@ -66,6 +66,11 @@ const StreamPage = () => {
     setShowAlert(false);
   };
 
+  const donatePaypal = () => {
+    const url = "http://paypal.me/jonathandely";
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="stream-page-content">
       {showAlert ? (
@@ -103,135 +108,139 @@ const StreamPage = () => {
                   }
                 />
               </div>
+            </div>
+            <Row>
+              <Col size={2}>
+                <Row>
+                  <h2 className="artist-name">Jonathan Dely</h2>
+                </Row>
+                <Row>
+                  <h5 className="show-time">
+                    Sunday May 10th 8:00PM EST (refresh the page if stream
+                    doesn't show up)
+                  </h5>
+                </Row>
+              </Col>
+              <Col size={1} className="social-bar-center">
+                <SocialBar />
+              </Col>
+            </Row>
+          </Col>
+          <Col size={3}>
+            <div className="chat-main">
+              <div className="chat-wrapper">
+                {showChat ? (
+                  <Chat chatName={chatName} chatStatus={chatStatus} />
+                ) : (
+                  <Join joinSubmit={joinSubmit} />
+                )}
               </div>
-              <Row>
-                <Col size={2}>
-                  <Row>
-                    <h2 className="artist-name">Jonathan Dely</h2>
-                  </Row>
-                  <Row>
-                    <h5 className="show-time">
-                      Sunday May 10th 8:00PM EST (refresh the page if stream
-                      doesn't show up)
-                    </h5>
-                  </Row>
-                </Col>
-                <Col size={1} className="social-bar-center">
-                  <SocialBar />
-                </Col>
-              </Row>
-              <Row></Row>
-            </Col>
-            <Col size={3}>
-              <div className="chat-main">
-                <div className="chat-wrapper">
-                  {showChat ? (
-                    <Chat chatName={chatName} chatStatus={chatStatus} />
-                  ) : (
-                    <Join joinSubmit={joinSubmit} />
-                  )}
-                </div>
-              </div>
-            </Col>
-            <Col size={1}></Col>
-          </Row>
-          <Row>
-            <div className="short-term-spacer"></div>
-          </Row>
+            </div>
+          </Col>
+          <Col size={1}></Col>
+        </Row>
+        <Row>
+          <div className="short-term-spacer"></div>
+        </Row>
 
-          <Row>
-            <Col size={3} className="donate-box">
-              <Row>
-                <Col size={2}>
-                  <p className="donate-title">Donate to the Artist</p>
-                  <p className="donate-description">
-                    To donate to Jonathan Dely with Paypal.{" "}
-                    <a
-                      href="http://paypal.me/jonathandely"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      click here.
-                    </a>
-                    <br></br>Or, scan the QR code to the right to donate to
-                    <br></br>@Jonathan-Dely on Venmo.
-                  </p>
-                  <button className="button-border button-height" data-toggle="modal" data-target="#exampleModal">Donate</button> {" "}
-                  <Modal isOpen={false}></Modal>
-                </Col>
-                <Col size={1}>
-                  <img
-                    className="venmo-code"
-                    src={VenmoCode}
-                    alt="venmo-qr"
-                  ></img>
-                </Col>
-              </Row>
-            </Col>
+        {/* DONATE ROW */}
+        <Row className="donate-row">
+          <Col size={1} className="donate-stripe donate-box">
+            <p className="donate-description">
+              Click here to donate with a credit card.
+            </p>
+            <p className="donate-subdescription">
+              Your card information will not be stored anywhere.
+            </p>
+          </Col>
+          <Col size={1} className="donate-paypal donate-box">
+            <p className="donate-description">
+              Click here to donate with Paypal.{" "}
+            </p>
+            <p className="donate-subdescription">
+              Your donation will go directly to Jonathan Dely.
+            </p>
+          </Col>
+          <Col size={1} className="donate-venmo donate-box">
+            <p className="donate-description">
+              Scan the QR code below to donate on Venmo.
+            </p>
+            <p className="donate-subdescription">
+              Your donation will be sent to @Jonathan-Dely on Venmo.
+            </p>
+          </Col>
+        </Row>
 
-            <Col size={3} className="stream-subscribe-box">
-              <p className="stream-subscribe-title">Subscribe</p>
-              <p className="stream-subscribe-description">
-                To stay informed about upcoming events,<br></br> subscribe to our
-                mailing list:
-              </p>
-              {(() => {
-                if (emailSubmitted) {
-                  return <div>Thank you and stay tuned! :)</div>;
-                } else {
-                  return (
-                    <form
-                      class="inline-form"
-                      action="/"
-                      id="newsletter"
-                      onSubmit={emailSubmit}
+        {/* DONATE ROW */}
+        <Row className="donate-row-buttons">
+          <Col size={1} className="donate-stripe donate-box-button">
+            <button
+              className="stripe-button-border button-height"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >
+              Donate with Card
+            </button>{" "}
+            <Modal isOpen={false}></Modal>
+          </Col>
+          <Col size={1} className="donate-paypal donate-box-button">
+            <button
+              className="button-border button-height paypal-button"
+              onClick={donatePaypal}
+            >
+              Donate with Paypal
+            </button>
+          </Col>
+          <Col size={1} className="donate-venmo donate-box-button">
+            <img className="venmo-code" src={VenmoCode} alt="venmo-qr"></img>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col size={1} className="stream-subscribe-box">
+            <p className="stream-subscribe-title">Subscribe</p>
+            <p className="stream-subscribe-description">
+              To stay informed about upcoming events,<br></br> subscribe to our
+              mailing list:
+            </p>
+            {(() => {
+              if (emailSubmitted) {
+                return <p>Thank you and stay tuned!</p>;
+              } else {
+                return (
+                  <form
+                    class="stream-email-form"
+                    action="/"
+                    id="newsletter"
+                    onSubmit={emailSubmit}
+                  >
+                    <input
+                      type="email"
+                      placeholder="Enter your email here..."
+                      name="email"
+                      required
+                      value={email}
+                      style={{ width: "280px" }}
+                      onChange={(event) => setEmail(event.target.value)}
+                    />
+                    <button
+                      type="submit"
+                      form="newsletter"
+                      value="Submit"
+                      style={{ width: "100px" }}
+                      className="button-border button-height"
                     >
-                      <input
-                        type="email"
-                        placeholder="Enter your email here..."
-                        name="email"
-                        required
-                        value={email}
-                        style={{ width: "280px" }}
-                        onChange={(event) => setEmail(event.target.value)}
-                      />
-                      <button
-                        type="submit"
-                        form="newsletter"
-                        value="Submit"
-                        style={{ width: "100px" }}
-                        className="button-border button-height"
-                      >
-                        {" "}
-                        Submit
-                        {/* <div> */}
-                        {/* <input
-                            type="email"
-                            placeholder="Enter your email here..."
-                            name="email"
-                            required
-                            value={email}
-                            style={{ width: "280px" }}
-                            onChange={(event) => setEmail(event.target.value)}
-                          />
-                          <button
-                            type="submit"
-                            form="newsletter"
-                            value="Submit"
-                            style={{ width: "100px" }}
-                            //className="button-border button-height"
-                          > */}
-                        {/* Submit
-                            </div> */}
-                      </button>
-                    </form>
-                  );
-                }
-              })()}
-              {/* </div> */}
-            </Col>
-          </Row>
-        </Grid>
+                      {" "}
+                      Submit
+                    </button>
+                  </form>
+                );
+              }
+            })()}
+            {/* </div> */}
+          </Col>
+        </Row>
+      </Grid>
     </div>
   );
 };
