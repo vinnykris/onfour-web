@@ -74,7 +74,7 @@ const AboutPage = () => {
         </Row>
         <Row>
           <Col size={1}> </Col>
-          <Col size={11}>
+          <Col size={12}>
             <p className="description-text">
               Onfour is the premier live-streaming concert platform, built and
               designed for musicians. We are dedicated to empowering musicians
@@ -131,7 +131,7 @@ const AboutPage = () => {
           <Col size={1} className="subscribe-box">
             <div>
               <p className="subscribe-title">Subscribe</p>
-              <p className="subscribe-description">
+              <p className="subscribe-description-about">
                 To stay informed about upcoming events,<br></br> subscribe to
                 our mailing list:
               </p>
