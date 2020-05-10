@@ -241,11 +241,10 @@ select:focus {
 }
 
 .message-text {
-  width: 100%;
-  letter-spacing: 0;
-  float: left;
-  font-size: 1.1em;
+  max-width: 20em;
   word-wrap: break-word;
+  letter-spacing: 0;
+  font-size: 1.1em;
   margin-bottom: 0;
   @include respond-to("x-large") {
     font-size: 0.9em;

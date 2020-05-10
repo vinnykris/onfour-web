@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import logo from "../../images/white_logo.png";
-import black_logo from "../../images/black_logo.png";
+import logo from "../../images/logos/white_logo.png";
+import black_logo from "../../images/logos/black_logo.png";
 import "../../styles.scss";
 import Auth from "../../UserPool";
 
@@ -31,6 +31,13 @@ const NavBarShortTerm = () => {
         <NavLink to="/login" className={style}>
           {login_val}
         </NavLink>
+        {/* <NavLink to={location.pathname} className={style} data-toggle="modal" data-target="#sign_in_Modal">
+          LOG IN
+        </NavLink>  {" "}
+        <Model></Model> */}
+        {/* <NavLink to="/upcoming" className={style}>
+          UPCOMING
+        </NavLink> */}
         <NavLink to="/archive" className={style}>
           PAST SHOWS
         </NavLink>

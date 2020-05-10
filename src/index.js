@@ -5,10 +5,14 @@ import App from "./App";
 import AppShortTerm from "./App-short-term";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
+import Layout from "./components/payment/layout";
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppShortTerm />
+    <Layout>
+        <AppShortTerm />
+    </Layout>
   </React.StrictMode>,
   document.getElementById("root")
 );

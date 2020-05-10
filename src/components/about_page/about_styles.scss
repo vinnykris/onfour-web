@@ -2,6 +2,34 @@
 
 @import "../../styles";
 
+.description-text {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  line-height: 1.9rem;
+  text-align: center;
+  font-size: 17px;
+  font-weight: $medium-weight;
+  color: #4d4d4d;
+  padding-left: 30%;
+  padding-right: 30%;
+  @include respond-to("x-large") {
+    padding-left: 22%;
+    padding-right: 22%;
+  }
+  @include respond-to("large") {
+    padding-left: 16%;
+    padding-right: 16%;
+  }
+  @include respond-to("medium") {
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+  @include respond-to("small") {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 .email-link {
   color: white;
   margin-bottom: 0px;
@@ -68,6 +96,17 @@
   width: 100px;
 }
 
+.email-input {
+  width: 280px;
+  @include respond-to("large") {
+    width: 200px;
+  }
+}
+
+.submit-button {
+  width: 100px;
+}
+
 .email-button {
   float: right;
   background-color: #4d4d4d;
@@ -76,7 +115,7 @@
 }
 
 .inline-form-2 {
-  margin: 0px;
+  margin: auto;
   padding: 0px;
   float: left;
 }

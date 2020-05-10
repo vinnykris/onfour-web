@@ -18,6 +18,8 @@ import PerformAgain from "./components/old_components/perform_again";
 import "./App.css";
 import "./styles.scss";
 
+require('dotenv').config();
+
 function App() {
   return (
     <div className="App">
