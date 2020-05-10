@@ -54,6 +54,19 @@
   }
 }
 
+.desktop-grid-about {
+  @include respond-to("small") {
+    display: none;
+  }
+}
+
+.mobile-grid-about {
+  display: none;
+  @include respond-to("small") {
+    display: inline;
+  }
+}
+
 .header-tag {
   margin-top: -150px;
   color: white;
@@ -79,6 +92,19 @@
   }
 }
 
+.header-mobile {
+  text-transform: uppercase;
+  float: left;
+}
+
+.main-content-mobile {
+  padding: 5%;
+}
+
+.mobile-section {
+  margin-bottom: 3rem;
+}
+
 .description-text {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -101,10 +127,16 @@
     padding-left: 8%;
     padding-right: 8%;
   }
-  @include respond-to("small") {
-    padding-left: 0;
-    padding-right: 0;
-  }
+}
+
+.description-text-mobile {
+  // padding-top: 10px;
+  margin-bottom: 0.5rem;
+  line-height: 1.9rem;
+  text-align: left;
+  font-size: 16px;
+  font-weight: $medium-weight;
+  color: #4d4d4d;
 }
 
 .email-link {
@@ -178,6 +210,10 @@
   @include respond-to("large") {
     width: 200px;
   }
+  @include respond-to("small") {
+    box-shadow: 0px 1px 3px grey;
+    width: 100%;
+  }
 }
 
 .submit-button {
@@ -191,8 +227,12 @@
   box-shadow: 0px 3px 5px grey;
 }
 
+.email-button-mobile {
+  width: 100%;
+}
+
 .inline-form-2 {
   margin: auto;
   padding: 0px;
-  float: left;
+  width: 100%;
 }
