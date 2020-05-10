@@ -29,7 +29,7 @@ const Upcoming_show = () => {
     setClicked(true);
   };
   return (
-    <div>
+    <div className="upcoming-page-content">
       <Grid>
         <Row></Row>
         <Row>
@@ -46,7 +46,7 @@ const Upcoming_show = () => {
         <br></br>
         <br></br>
         <Row>
-          <Col size={1.3}> </Col>
+          <Col size={1}> </Col>
           <Col size={2}>
             <p className="subscribe-description">
               To stay informed about upcoming events, subscribe to our mailing
@@ -56,45 +56,43 @@ const Upcoming_show = () => {
           <Col size={1}> </Col>
         </Row>
         <Row>
-          {(() => {
-            if (clicked) {
-              return (
-                <div className="success-message">
-                  <p>Thank you and stay tuned! :)</p>
-                </div>
-              );
-            } else {
-              return (
-                <form
-                  className="inline-form-2"
-                  action="/"
-                  id="newsletter"
-                  onSubmit={onSubmit}
-                >
-                  <div>
-                    <input
-                      type="email"
-                      placeholder="Enter your email here..."
-                      name="email"
-                      required
-                      value={email}
-                      className="email-input"
-                      // style={{ width: "280px" }}
-                      onChange={(event) => setEmail(event.target.value)}
-                    />
-                    <button
-                      type="submit"
-                      form="newsletter"
-                      value="Submit"
-                      className="submit-button button-border button-height"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </form>
-              );
-            }
-          })()}
+          <Col size={1}>
+            {(() => {
+              if (clicked) {
+                return <p>Thank you and stay tuned! :)</p>;
+              } else {
+                return (
+                  <form
+                    className="inline-form-2"
+                    action="/"
+                    id="newsletter"
+                    onSubmit={onSubmit}
+                  >
+                    <div>
+                      <input
+                        type="email"
+                        placeholder="Enter your email here..."
+                        name="email"
+                        required
+                        value={email}
+                        className="email-input-upcoming"
+                        // style={{ width: "280px" }}
+                        onChange={(event) => setEmail(event.target.value)}
+                      />
+                      <button
+                        type="submit"
+                        form="newsletter"
+                        value="Submit"
+                        className="submit-button button-border button-height"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                );
+              }
+            })()}
+          </Col>
         </Row>
         <br></br>
         <br></br>
