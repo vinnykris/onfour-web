@@ -156,7 +156,7 @@
 }
 
 .stream-page-content {
-  margin-top: 4%;
+  margin-top: -1px;
   background-color: black;
 }
 
@@ -305,4 +305,9 @@
 
 .social-bar-mobile {
   margin-top: 5%;
+}
+
+.main-content-mobile-stream {
+  padding: 5%;
+  padding-bottom: 0;
 }

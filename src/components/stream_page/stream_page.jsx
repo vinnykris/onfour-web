@@ -266,6 +266,14 @@ const StreamPage = () => {
         </Row>
       </Grid>
       <Grid className="mobile-grid-stream">
+        {/* <div className="main-content-mobile-stream">
+          <Row>
+            <Col size={1}>
+              <h3 className="header-mobile"> Stream </h3>
+            </Col>
+          </Row>
+        </div> */}
+
         <Row>
           <Col size={1}>
             <div className="stream-main-mobile">
@@ -294,10 +302,11 @@ const StreamPage = () => {
                 </Col>
               </Row>
             </div>
+
             <div className="main-content-mobile">
               {/* PAYMENT SECTION */}
               <div className="mobile-section">
-                <Row>
+                {/* <Row>
                   <Col size={1} className="donate-box-button">
                     <button
                       className="stripe-button-border button-height"
@@ -306,9 +315,9 @@ const StreamPage = () => {
                     >
                       Donate with Card
                     </button>{" "}
-                    {/* <Modal isOpen={false}></Modal> */}
+                    <Modal isOpen={false}></Modal>
                   </Col>
-                </Row>
+                </Row> */}
                 <Row>
                   <Col size={1} className="donate-box-button">
                     <button

@@ -176,7 +176,7 @@ const AboutPage = () => {
       </Grid>
 
       <Grid className="mobile-grid-about">
-        <Row>
+        {/* <Row>
           <Col size={1}>
             <div className="banner-container">
               <img
@@ -186,7 +186,7 @@ const AboutPage = () => {
               ></img>
             </div>
           </Col>
-        </Row>
+        </Row> */}
         <div className="main-content-mobile">
           {/* MISSION ROW */}
           <div className="mobile-section">
