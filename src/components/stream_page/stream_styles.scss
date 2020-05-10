@@ -93,10 +93,6 @@
 
 .stream-subscribe-box {
   background-color: #e2e2e2;
-  // height: 340px;
-  // width: 50vw;
-  // padding-left: 3%;
-  // padding-top: 3.5%;
   padding: 2.5% 3%;
 }
 
@@ -104,15 +100,20 @@
   font-size: 25px;
   font-weight: $medium-weight;
   color: #303096;
-  text-align: left;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 .stream-subscribe-description {
   font-size: 17px;
   font-weight: $medium-weight;
   color: #636363;
-  text-align: left;
+  text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.stream-email-form {
+  display: inline-block;
 }
 
 .social-bar-center {
@@ -253,6 +254,9 @@
   // padding-top: 3%;
 }
 
-.stripe-button {
-  margin: auto;
+.stripe-button-border {
+  border-radius: 3px;
+  box-shadow: 0px 3px 5px rgb(83, 82, 82);
+  font-weight: $medium-weight;
+  letter-spacing: 0.4px;
 }

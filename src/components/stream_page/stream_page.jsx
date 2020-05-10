@@ -147,7 +147,7 @@ const StreamPage = () => {
         <Row className="donate-row">
           <Col size={1} className="donate-stripe donate-box">
             <p className="donate-description">
-              Click here to donate with Stripe.
+              Click here to donate with a credit card.
             </p>
             <p className="donate-subdescription">
               Your card information will not be stored anywhere.
@@ -175,7 +175,7 @@ const StreamPage = () => {
         <Row className="donate-row-buttons">
           <Col size={1} className="donate-stripe donate-box-button">
             <button
-              className="stripe-button button-border button-height"
+              className="stripe-button-border button-height"
               data-toggle="modal"
               data-target="#exampleModal"
             >
@@ -205,11 +205,11 @@ const StreamPage = () => {
             </p>
             {(() => {
               if (emailSubmitted) {
-                return <div>Thank you and stay tuned! :)</div>;
+                return <p>Thank you and stay tuned!</p>;
               } else {
                 return (
                   <form
-                    class="inline-form"
+                    class="stream-email-form"
                     action="/"
                     id="newsletter"
                     onSubmit={emailSubmit}
@@ -232,25 +232,6 @@ const StreamPage = () => {
                     >
                       {" "}
                       Submit
-                      {/* <div> */}
-                      {/* <input
-                            type="email"
-                            placeholder="Enter your email here..."
-                            name="email"
-                            required
-                            value={email}
-                            style={{ width: "280px" }}
-                            onChange={(event) => setEmail(event.target.value)}
-                          />
-                          <button
-                            type="submit"
-                            form="newsletter"
-                            value="Submit"
-                            style={{ width: "100px" }}
-                            //className="button-border button-height"
-                          > */}
-                      {/* Submit
-                            </div> */}
                     </button>
                   </form>
                 );
