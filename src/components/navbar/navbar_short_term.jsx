@@ -6,12 +6,15 @@ import "../../styles.scss";
 import { Grid, Row, Col } from "../grid";
 
 const NavBarShortTerm = () => {
-  let style = "nav-page-black";
-  let icon = new_logo_black;
+  let navbar_custom = "navbar-black";
+  let style = "nav-page-white";
+  let icon = new_logo_white;
   let location = useLocation();
   if (location.pathname === "/") {
-    style = "nav-page-white";
-    icon = new_logo_white;
+    // style = "nav-page-white";
+    // icon = new_logo_white;
+    console.log("on about page");
+    navbar_custom = "navbar-custom";
   }
 
   const openMenu = () => {
@@ -19,7 +22,7 @@ const NavBarShortTerm = () => {
   };
 
   return (
-    <div className="navbar-custom">
+    <div className={navbar_custom}>
       {/* MOBILE VERSION */}
       <Grid className="mobile-grid">
         <Row className="mobile-row">

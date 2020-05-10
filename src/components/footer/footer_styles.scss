@@ -3,34 +3,34 @@
 @import "../../styles";
 
 .footer-container {
-  background-color: #e6e6e6;
+  background-color: black;
   width: 100%;
   padding: 60px 10px 10px 10px;
 }
 
 .footer-container h3 {
   margin-top: 10px;
-  color: #4d4d4d;
+  color: #eaeaea;
   text-align: left;
   font-size: 17px;
   font-weight: $semimedium-weight;
 }
 
 .footer-container p {
-  color: #4d4d4d;
+  color: #eaeaea;
   text-align: left;
   font-size: 16px;
 }
 
 .footer-container h6 {
-  color: #4d4d4d;
+  color: #eaeaea;
   text-align: left;
   font-size: 13px;
   font-weight: $regular-weight;
 }
 
 .footer-container hr {
-  border-color: #4d4d4d;
+  border-color: #eaeaea;
   width: 82%;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .footer-links li a {
-  color: #4d4d4d;
+  color: #eaeaea;
 }
 
 .footer-social-media ul {
@@ -67,7 +67,7 @@
 
 .footer-social-media li a {
   text-decoration: none;
-  color: #4d4d4d;
+  color: #eaeaea;
 }
 
 .onfour-logo-footer {

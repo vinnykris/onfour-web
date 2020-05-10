@@ -8,7 +8,7 @@ import { Grid, Row, Col } from "../grid";
 
 const AboutPage = () => {
   return (
-    <div>
+    <div className="about-page-content">
       <Grid>
         <Row>
           <Col size={1}>
