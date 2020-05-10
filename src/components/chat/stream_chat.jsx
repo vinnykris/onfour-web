@@ -9,7 +9,7 @@ let socket;
 
 const Chat = ({ chatName, chatStatus }) => {
   const [name, setName] = useState(chatName);
-  const [room, setRoom] = useState("Chat");
+  const [room, setRoom] = useState("CHAT");
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
