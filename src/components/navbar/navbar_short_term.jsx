@@ -5,6 +5,7 @@ import new_logo_white from "../../images/logos/new_logo_white.png";
 import "../../styles.scss";
 import { Grid, Row, Col } from "../grid";
 import closeIcon from "../../images/close_icon.png";
+import { useEffect } from "react";
 
 const NavBarShortTerm = () => {
   let navbar_custom = "navbar-black";
@@ -25,6 +26,10 @@ const NavBarShortTerm = () => {
   const closeMenu = () => {
     document.getElementById("nav-menu").style.height = "0%";
   };
+
+  useEffect(() => {
+    closeMenu();
+  }, []);
 
   return (
     <div className={navbar_custom}>
@@ -48,6 +53,7 @@ const NavBarShortTerm = () => {
                     exact
                     to="/"
                     className="nav-page-white mobile-link-text"
+                    onClick={closeMenu}
                   >
                     ABOUT US
                   </NavLink>
@@ -60,6 +66,7 @@ const NavBarShortTerm = () => {
                   <NavLink
                     to="/stream"
                     className="nav-page-white mobile-link-text"
+                    onClick={closeMenu}
                   >
                     STREAM
                   </NavLink>
@@ -72,6 +79,7 @@ const NavBarShortTerm = () => {
                   <NavLink
                     to="/upcoming"
                     className="nav-page-white mobile-link-text"
+                    onClick={closeMenu}
                   >
                     UPCOMING
                   </NavLink>
@@ -84,6 +92,7 @@ const NavBarShortTerm = () => {
                   <NavLink
                     to="/archive"
                     className="nav-page-white mobile-link-text"
+                    onClick={closeMenu}
                   >
                     PAST SHOWS
                   </NavLink>
