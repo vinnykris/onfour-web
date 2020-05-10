@@ -84,6 +84,7 @@
   font-size: 19px;
   font-weight: $medium-weight;
   color: white;
+  margin-bottom: 0.5rem;
 }
 
 .donate-subdescription {
@@ -208,7 +209,7 @@
 
 .popup-close {
   padding: 3%;
-  float: left;
+  float: right;
   filter: invert(75%);
   &:hover {
     cursor: pointer;
