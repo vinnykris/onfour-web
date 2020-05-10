@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -19,9 +20,7 @@ import "./stream_styles.scss";
 
 // Image imports
 import VenmoCode from "../../images/jon_dely_venmo.jpeg";
-import waiting_image from "../../images/StreamWaitingPage.jpg";
-import { useStripe } from "@stripe/react-stripe-js";
-import modal from "../payment/payment_modal";
+import closeIcon from "../../images/close_icon.png";
 
 Amplify.configure(awsmobile);
 
@@ -32,7 +31,6 @@ const StreamPage = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [scroll, setScroll] = useState(true);
   const [showAlert, setShowAlert] = useState(true);
-
 
   const joinSubmit = (name, mode) => {
     setChatName(name);
@@ -64,39 +62,47 @@ const StreamPage = () => {
     setScroll(false);
   }
 
-  const sendAlert = () => {
+  const showPopup = () => {
     setShowAlert(false);
-  }
-  
+  };
 
   return (
     <div className="stream-page-content">
-      {showAlert ?
-        <div className='popup'>
-          <form className='waiting_msg_box'>
-            <h6 className='waiting_msg'>The show hasn't started yet!</h6>
-            <h6 className='waiting_msg'>Please checkout the past shows while waiting :)</h6>
-            <br></br>
-            <button onClick={sendAlert}>Got it</button>
+      {showAlert ? (
+        <div className="popup">
+          <form className="waiting-msg-box">
+            <img
+              className="popup-close"
+              src={closeIcon}
+              alt="close-popup"
+              onClick={showPopup}
+            ></img>
+            <div className="popup-content">
+              <h5 className="popup-header">The show hasn't started yet!</h5>
+              <p className="waiting-msg">
+                Feel free to look around! If you would like to see clips from
+                our past shows, click the button below.
+              </p>
+              <br></br>
+              <Link to="/archive">
+                <button>Go to Past Shows</button>
+              </Link>
+            </div>
           </form>
-          {/* <div className='popup\_inner'>
-            
-          </div> */}
         </div>
-        : null
-      }  
-        <Grid>
-          <Row>
-            <Col size={0.5}></Col>
-            <Col size={7}>
-              <div className="stream-main">
-                <div className="stream-wrapper">
-                  <VideoPlayer
-                    url={
-                      "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                    }
-                  />
-                </div>
+      ) : null}
+      <Grid>
+        <Row>
+          <Col size={0.5}></Col>
+          <Col size={7}>
+            <div className="stream-main">
+              <div className="stream-wrapper">
+                <VideoPlayer
+                  url={
+                    "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                  }
+                />
+              </div>
               </div>
               <Row>
                 <Col size={2}>
@@ -140,16 +146,15 @@ const StreamPage = () => {
                   <p className="donate-title">Donate to the Artist</p>
                   <p className="donate-description">
                     To donate to Jonathan Dely click here.{" "}
-                    {/* <a
+                    <a
                       href="http://paypal.me/jonathandely"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       click here.
                     </a>
-                    <br></br>
                     <br></br>Or, scan the QR code to the right to donate to
-                    <br></br>@Jonathan-Dely on Venmo. */}
+                    <br></br>@Jonathan-Dely on Venmo.
                   </p>
                   <button className="button-border button-height" data-toggle="modal" data-target="#exampleModal">Donate</button> {" "}
                   <Modal isOpen={false}></Modal>

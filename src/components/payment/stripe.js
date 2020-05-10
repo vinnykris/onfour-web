@@ -8,29 +8,20 @@ const checkout = axios.create({
     },
 });
 
-const stripeTokenHandler = async (token, amount_value) => {
-    const paymentData = { token: token.id, amount: amount_value };
+const stripeTokenHandler = async (token, amount_value, name, email) => {
+    const paymentData = { token: token.id, amount: amount_value, name: name, email: email };
 
     console.log("checking");
-
-    // return checkout.post("/onfour_payment", paymentData).catch(function (error) {
-    //     console.log(error);
-    // });
-    return checkout.post("/onfour_payment", paymentData);
-    // return checkout.post("/onfour_payment", paymentData).catch(function (error) {
-    //     if (error.response) {
-    //         // Request made and server responded
-    //         console.log(error.response.data);
-    //         console.log(error.response.status);
-    //         console.log(error.response.headers);
-    //     } else if (error.request) {
-    //         // The request was made but no response was received
-    //         console.log(error.request);
-    //     } else {
-    //         // Something happened in setting up the request that triggered an Error
-    //         console.log("Error", error.message);
-    //     }
-    // });
+    try {
+        const { data } = await checkout.post("/onfour_payment", paymentData);
+        console.log(data);
+        return data.message;
+    } catch (error) {
+        console.log(error.response.data.error);
+        return error.response.data.error;
+    }
+    
+    
 };
 
 export default stripeTokenHandler;

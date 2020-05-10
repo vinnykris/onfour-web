@@ -7,13 +7,21 @@ import {
 } from "@stripe/react-stripe-js";
 import FormField from "./FormField";
 import stripeTokenHandler from "./stripe";
+import CurrencyField from "./CurrencyField";
+
 
 const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const [payed, setPayed] = useState(false);
     const [needConfirm, setNeedConfirm] = useState(true);
-    const [amount_value, setAmount] = useState();
+    const [paymentMessage, setMessage] = useState("");
+    const [displayErr, setDisplayErr] = useState(false);
+    // state variables for the information inside payment form
+    const [amount_value, setAmount] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+
 
     const iframeStyles = {
         base: {
@@ -49,6 +57,16 @@ const CheckoutForm = () => {
         setNeedConfirm(false);
     };
 
+    const resetPayment = (event) =>{
+        event.preventDefault();
+        setPayed(false);
+        setDisplayErr(false);
+        setNeedConfirm(true);
+        setAmount('');
+        setName('');
+        setEmail('');
+    };
+
     const submitPayment = async (event) =>{
         event.preventDefault();
 
@@ -70,8 +88,15 @@ const CheckoutForm = () => {
             console.log("test2");
             // Send the token to your server.
             // This function does not exist yet; we will define it in the next step.
-            stripeTokenHandler(result.token, Math.round(amount_value*100));
-            setPayed(true);
+            const payment_result = await stripeTokenHandler(result.token, Math.round(amount_value*100), name, email);
+            setMessage(payment_result);
+            if (payment_result === "Charge processed successfully!") {
+                setPayed(true);
+            } else {
+                setNeedConfirm(true);
+                setDisplayErr(true);
+            }
+            
         }
     }
     return (
@@ -81,17 +106,25 @@ const CheckoutForm = () => {
                     if (!payed) {
                         return (
                             <div>
-                                <button className="close" data-dismiss="modal" aria-label="Close">
+                                <button className="close" data-dismiss="modal" aria-label="Close" onClick={resetPayment}>
                                     <span aria-hidden="true">&times;</span>
                                 </button>
+
                                 <br></br>
-                                <FormField
+                                {displayErr && (
+                                    <p className='error-msg'>{paymentMessage}</p>
+                                )}
+                                <CurrencyField
+                                    className="currency-form-input"
                                     name="amount"
                                     label="Amount"
-                                    type="number"
                                     placeholder="$0.00"
                                     value={amount_value}
-                                    onChange={(event) => setAmount(event.target.value)}
+                                    onChange={(event) =>
+                                        setAmount(event.target.value.substring(1))
+                                    }
+                                    prefix="$"
+                                    decimalScale={2}
                                     required
                                 />
                                 <FormField
@@ -99,6 +132,7 @@ const CheckoutForm = () => {
                                     label="Name"
                                     type="text"
                                     placeholder="Jane Doe"
+                                    onChange={(event) => setName(event.target.value)}
                                     required
                                 />
                                 <FormField
@@ -106,6 +140,7 @@ const CheckoutForm = () => {
                                     label="Email"
                                     type="email"
                                     placeholder="jane.doe@example.com"
+                                    onChange={(event) => setEmail(event.target.value)}
                                     required
                                 />
                                 <br></br>
@@ -130,11 +165,16 @@ const CheckoutForm = () => {
                     } else {
                         return (
                             <div>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={resetPayment}>
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 <br></br>
-                                <div className="pay_sucess_msg">Thank you for your donation! :)</div>
+                                <div className = "pay_sucess_msg">Payment Successful!</div>
+                                {/* if (messageRec) {
+                                    return ();
+                                } else {
+                                    return (<div className="pay_sucess_msg"></div>);
+                                }; */}
                             </div>
                         );
                     }
