@@ -44,7 +44,7 @@ const AboutPage = () => {
   }
 
   return (
-    <div>
+    <div className="about-page-content">
       <Grid>
         <Row>
           <Col size={1}>
@@ -64,7 +64,7 @@ const AboutPage = () => {
         </Row>
         <Row>
           <Col size={1}>
-            <h3> Our Mission </h3>
+            <h3 className="our-mission-text"> Our Mission </h3>
           </Col>
         </Row>
         <Row>
@@ -92,7 +92,7 @@ const AboutPage = () => {
               <Col size={1}>
                 <button
                   onClick={() => history.push("/stream")}
-                  className="button-border"
+                  className="button-on-black"
                 >
                   Tune into the stream!
                 </button>
