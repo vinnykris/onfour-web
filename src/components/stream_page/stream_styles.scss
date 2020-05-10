@@ -202,8 +202,12 @@
 
 .popup-close {
   padding: 3%;
-  float: left;
+  float: right;
   filter: invert(75%);
+}
+
+.popup-header {
+  font-size: 1.25rem;
 }
 
 .popup-content {

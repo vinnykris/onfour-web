@@ -57,6 +57,9 @@ $breakpoints: (
 
 .short-term-spacer {
   height: 100px;
+  @include respond-to("small") {
+    display: none;
+  }
 }
 
 .button-border {

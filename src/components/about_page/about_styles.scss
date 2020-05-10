@@ -6,6 +6,9 @@
 .banner-container {
   width: 100%;
   margin-top: -176px;
+  @include respond-to("large") {
+    margin-top: -140px;
+  }
   @include respond-to("small") {
     margin-top: -131px;
   }
@@ -15,18 +18,6 @@
   width: 100%;
   object-fit: cover;
   max-height: 350px;
-}
-
-.banner-container h1 {
-  color: white;
-  font-weight: bold;
-  font-size: 1.5rem;
-  line-height: 2.6rem;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  top: 20%;
-  font-size: 2rem;
 }
 
 .banner-container button {
@@ -64,6 +55,25 @@
 }
 
 .header-tag {
+  margin-top: -150px;
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  font-size: 2rem;
+  @include respond-to("x-large") {
+    margin-top: -10%;
+    font-size: 1.7rem;
+  }
+  @include respond-to("large") {
+    margin-top: -10%;
+    font-size: 1.5rem;
+  }
+  @include respond-to("medium") {
+    margin-top: -9%;
+    font-size: 1.3rem;
+  }
   @include respond-to("small") {
     display: none;
   }

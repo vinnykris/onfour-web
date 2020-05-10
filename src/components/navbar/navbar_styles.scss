@@ -34,6 +34,10 @@
   background-color: none;
   position: relative;
   display: flex;
+  @include respond-to("large") {
+    height: 140px;
+    padding: 0;
+  }
   @include respond-to("small") {
     height: 131px;
     padding: 0;
@@ -43,6 +47,14 @@
 .onfour-logo-desktop {
   height: 124px;
   margin: auto;
+  @include respond-to("large") {
+    height: 100px;
+    padding: 0;
+  }
+  @include respond-to("medium") {
+    height: 80px;
+    padding: 0;
+  }
   @include respond-to("small") {
     display: none;
   }
