@@ -45,14 +45,14 @@
 }
 
 .onfour-logo-desktop {
-  height: 124px;
+  height: 100px;
   margin: auto;
   @include respond-to("large") {
-    height: 100px;
+    height: 80px;
     padding: 0;
   }
   @include respond-to("medium") {
-    height: 80px;
+    height: 60px;
     padding: 0;
   }
   @include respond-to("small") {

@@ -60,12 +60,6 @@ const AboutPage = () => {
                 src={header_image}
                 alt="nav-logo"
               ></img>
-              {/* <img
-                className="banner-header-mobile"
-                src={gradient_header}
-                alt="nav-logo"
-              ></img> */}
-
               <h1 className="header-tag">Reimagining live music.</h1>
             </div>
           </Col>

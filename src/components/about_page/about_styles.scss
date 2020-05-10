@@ -92,19 +92,6 @@
   }
 }
 
-.header-mobile {
-  text-transform: uppercase;
-  float: left;
-}
-
-.main-content-mobile {
-  padding: 5%;
-}
-
-.mobile-section {
-  margin-bottom: 3rem;
-}
-
 .description-text {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -127,16 +114,6 @@
     padding-left: 8%;
     padding-right: 8%;
   }
-}
-
-.description-text-mobile {
-  // padding-top: 10px;
-  margin-bottom: 0.5rem;
-  line-height: 1.9rem;
-  text-align: left;
-  font-size: 16px;
-  font-weight: $medium-weight;
-  color: #4d4d4d;
 }
 
 .email-link {
@@ -228,11 +205,5 @@
 }
 
 .email-button-mobile {
-  width: 100%;
-}
-
-.inline-form-2 {
-  margin: auto;
-  padding: 0px;
   width: 100%;
 }

@@ -126,3 +126,33 @@ h5 {
   padding: 5px;
   font-size: 9px;
 }
+
+// MOBILE STYLING
+
+.header-mobile {
+  text-transform: uppercase;
+  float: left;
+}
+
+.main-content-mobile {
+  padding: 5%;
+}
+
+.mobile-section {
+  margin-bottom: 3rem;
+}
+
+.description-text-mobile {
+  margin-bottom: 0.5rem;
+  line-height: 1.9rem;
+  text-align: left;
+  font-size: 16px;
+  font-weight: $medium-weight;
+  color: #4d4d4d;
+}
+
+.inline-form-2 {
+  margin: auto;
+  padding: 0px;
+  width: 100%;
+}
