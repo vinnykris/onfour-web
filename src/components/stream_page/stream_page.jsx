@@ -185,7 +185,7 @@ const StreamPage = () => {
           </Col>
           <Col size={1} className="donate-paypal donate-box-button">
             <button
-              className="button-border button-height paypal-button"
+              className="stripe-button-border button-height paypal-button"
               onClick={donatePaypal}
             >
               Donate with Paypal
@@ -200,8 +200,8 @@ const StreamPage = () => {
           <Col size={1} className="stream-subscribe-box">
             <p className="stream-subscribe-title">Subscribe</p>
             <p className="stream-subscribe-description">
-              To stay informed about upcoming events,<br></br> subscribe to our
-              mailing list:
+              To stay informed about upcoming events, subscribe to our mailing
+              list:
             </p>
             {(() => {
               if (emailSubmitted) {

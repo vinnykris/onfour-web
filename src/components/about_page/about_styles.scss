@@ -51,13 +51,13 @@
 }
 
 .subscribe-box {
-  background-color: #e2e2e2;
+  background-color: #979bbb;
   height: 380px;
   padding: 6%;
 }
 
 .perform-box {
-  background-color: #979bbb;
+  background-color: #62628c;
   height: 380px;
   padding: 6%;
 }
@@ -65,7 +65,7 @@
 .perform-title {
   font-size: 25px;
   font-weight: $medium-weight;
-  color: white;
+  color: rgb(231, 231, 231);
   text-align: right;
 }
 
@@ -88,7 +88,7 @@
 .subscribe-description {
   font-size: 17px;
   font-weight: $medium-weight;
-  color: #636363;
+  color: white;
   text-align: left;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -117,13 +117,14 @@
 }
 .submit-button {
   width: 100px;
+  box-shadow: 0px 1px 4px rgb(49, 49, 49);
 }
 
 .email-button {
   float: right;
   background-color: #4d4d4d;
   border-radius: 3px;
-  box-shadow: 0px 3px 5px grey;
+  box-shadow: 1px 1px 4px rgb(49, 49, 49);
 }
 
 .inline-form-2 {
