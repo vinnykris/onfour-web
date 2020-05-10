@@ -9,31 +9,34 @@ const ArchivePage = () => {
   return (
     <div className="stream-page-content">
       <Grid>
-        <Row>
+        <div className="spacer"></div>
+        {/* <Row>
           <h2 className="archive-page-title">Past Onfour Shows</h2>
-        </Row>
+        </Row> */}
         <div className="archive-performance-wrapper">
-          <Row>
+          {/* <Row>
             <Col size={1}>
               <ArchivePerformance artistName="Jonathan Dely" date="4/24/20" />
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col size={1}>
               <ArchiveVideo
                 src="https://www.youtube.com/embed/3HZOv5TDoY4"
-                songName="My Funny Valentine"
+                songName="4/24/20 Jonathan Dely-My Funny Valentine"
               />
             </Col>
           </Row>
+          <div className="spacer"></div>
           <Row>
             <Col size={1}>
               <ArchiveVideo
                 src="https://www.youtube.com/embed/EOgrorpN9rw"
-                songName="Strasbourg/St. Denis"
+                songName="4/24/20 Jonathan Dely-Strasbourg/St. Denis"
               />
             </Col>
           </Row>
+          <div className="spacer"></div>
         </div>
       </Grid>
     </div>
