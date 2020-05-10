@@ -71,23 +71,6 @@
   left: 0;
 }
 
-// STREAM LAYOUT STYLES
-.donate-box {
-  background-color: #979bbb;
-  height: 340px;
-  width: 50vw;
-  padding-left: 3%;
-  padding-top: 3.5%;
-}
-
-.stream-subscribe-box {
-  background-color: #e2e2e2;
-  height: 340px;
-  width: 50vw;
-  padding-left: 3%;
-  padding-top: 3.5%;
-}
-
 .donate-title {
   font-size: 25px;
   font-weight: $medium-weight;
@@ -96,21 +79,31 @@
   margin-left: 80px;
   margin-top: 5%;
 }
+
 .donate-description {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: $medium-weight;
   color: white;
-  text-align: left;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-left: 80px;
 }
+
+.donate-subdescription {
+  color: white;
+}
+
+.stream-subscribe-box {
+  background-color: #e2e2e2;
+  // height: 340px;
+  // width: 50vw;
+  // padding-left: 3%;
+  // padding-top: 3.5%;
+  padding: 2.5% 3%;
+}
+
 .stream-subscribe-title {
   font-size: 25px;
   font-weight: $medium-weight;
   color: #303096;
   text-align: left;
-  margin-top: 5%;
 }
 .stream-subscribe-description {
   font-size: 17px;
@@ -146,10 +139,12 @@
 
 .artist-name {
   font-size: 32px;
-  margin: 4px;
-  color: #4d4d4d;
+  margin: 5px;
   letter-spacing: 1px;
   float: left;
+  font-weight: $medium-weight;
+  color: #303096;
+  text-align: left;
 }
 
 .show-time {
@@ -224,4 +219,39 @@
   margin-top: 3%;
   width: 100%;
   padding: 20px 40px 20px 40px;
+}
+
+.donate-row-buttons {
+  margin-top: -1px;
+}
+
+.donate-stripe {
+  background-color: #62628c;
+}
+
+.donate-paypal {
+  background-color: #979bbb;
+}
+
+.donate-venmo {
+  background-color: #846eac;
+}
+
+.donate-box {
+  padding: 2.5% 3% 0% 3%;
+}
+
+.donate-box-button {
+  padding: 1% 3% 0% 3%;
+}
+
+.venmo-code {
+  max-width: 125px;
+  margin-top: -3%;
+  padding-bottom: 3%;
+  // padding-top: 3%;
+}
+
+.stripe-button {
+  margin: auto;
 }
