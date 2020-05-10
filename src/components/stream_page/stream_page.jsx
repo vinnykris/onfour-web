@@ -73,7 +73,7 @@ const StreamPage = () => {
 
   return (
     <div className="stream-page-content">
-      {showAlert ? (
+      {/* {showAlert ? (
         <div className="popup">
           <form className="waiting-msg-box">
             <img
@@ -95,7 +95,7 @@ const StreamPage = () => {
             </div>
           </form>
         </div>
-      ) : null}
+      ) : null} */}
       <Grid>
         <Row>
           <Col size={0.5}></Col>
