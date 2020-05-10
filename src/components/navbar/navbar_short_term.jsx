@@ -14,15 +14,19 @@ const NavBarShortTerm = () => {
     icon = new_logo_white;
   }
 
+  const openMenu = () => {
+    console.log("clicked hamburger menu");
+  };
+
   return (
     <div className="navbar-custom">
       {/* MOBILE VERSION */}
       <Grid className="mobile-grid">
         <Row className="mobile-row">
           <Col size={1}>
-            <div className="hamburger-menu">
+            <span className="hamburger-menu" onClick={openMenu}>
               <i className="fa fa-bars fa-2x hamburger-icon"></i>
-            </div>
+            </span>
           </Col>
           <Col size={3}>
             <img
