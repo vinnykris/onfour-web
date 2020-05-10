@@ -8,7 +8,6 @@ import {
 import FormField from "./FormField";
 import stripeTokenHandler from "./stripe";
 import CurrencyField from "./CurrencyField";
-import { wait } from "@testing-library/react";
 
 
 const CheckoutForm = () => {

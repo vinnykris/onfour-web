@@ -13,7 +13,7 @@
   margin: auto;
   // padding: 25%;
   align-items: center;
-  background-color: #e2e2e2;
+  background-color: #171717;
 }
 
 .join-input {
@@ -21,13 +21,13 @@
   padding: 5% 5%;
   width: 100%;
   // color: #4d4d4d;
-  box-shadow: 0px 3px 5px #e2e2e2;
   border: 0;
   margin-top: 1%;
+  background-color: #3a3a3d;
 }
 
 .heading {
-  color: #303096;
+  color: #e2e2e2;
   font-size: 1.3em;
   padding-bottom: 10px;
   letter-spacing: 0;
@@ -50,7 +50,6 @@
   border: none;
   cursor: pointer;
   border-radius: 0px;
-  box-shadow: 0px 3px 5px grey;
 }
 
 .mt-20 {
@@ -78,15 +77,13 @@ button:focus {
   align-items: center;
   height: 100%;
   background-color: #757575;
-  border: 1px solid #d3d3d3;
 }
 
 .chat-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #ffffff;
-  border-radius: 8px;
+  background: #17171b;
   height: 100%;
   width: 100%;
 }
@@ -115,17 +112,18 @@ button:focus {
   align-items: center;
   justify-content: space-between;
   // background: #757575;
-  background: #d3d3d3;
+  background: #17171b;
   border-radius: 4px 4px 0 0;
   height: 40px;
   width: 100%;
+  padding-left: 35%;
 }
 
 .onfourtitle {
-  color: #303096;
+  color: #f3f3f3;
   font-size: 1rem;
   padding: 5px;
-  margin-top: 15px;
+  margin-top: 25px;
   font-weight: $medium-weight;
 }
 
@@ -152,13 +150,13 @@ button:focus {
 // CHAT
 .form {
   display: flex;
-  border-top: 2px solid #d3d3d3;
+  border-radius: 10px;
 }
 
 .input {
   border: none;
   border-radius: 0;
-  padding: 1% 12px;
+  padding: 3% 12px;
   width: 90%;
   font-size: 1.2em;
   @include respond-to("x-large") {
@@ -167,24 +165,26 @@ button:focus {
   @include respond-to("large") {
     font-size: 0.8em;
   }
+  background-color: #3a3a3d;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
   outline: none;
+  color: white;
 }
 
 .send-button {
   color: #fff !important;
   text-transform: none;
   text-decoration: none;
-  background: #ffffff;
+  background: #3a3a3d;
   padding: 1px;
   display: inline-block;
   border: none;
   letter-spacing: 1px;
-  width: 10%;
+  width: 18%;
   @include respond-to("x-large") {
     font-size: 1em;
   }
@@ -261,15 +261,15 @@ select:focus {
 .message-container {
   display: flex;
   justify-content: flex-end;
-  padding: 0 5%;
-  margin-top: 3px;
+  padding: 1% 3%;
+  margin-top: 2px;
 }
 
 .sent-text {
   display: flex;
   align-items: center;
   font-family: Helvetica;
-  color: #828282;
+  color: #f2f2f2;
   letter-spacing: 0.3px;
   margin-bottom: 0;
   @include respond-to("x-large") {
@@ -278,21 +278,22 @@ select:focus {
   @include respond-to("large") {
     font-size: 0.6em;
   }
+  background-color: #17171b;
 }
 
 // .fa {
 // 	color: black;
 // }
 .fa-send {
-  color: #303096;
+  color: #f1f1f3;
 }
 
 .pl-10 {
-  padding-left: 10px;
+  padding-left: 6px;
 }
 
 .pr-10 {
-  padding-right: 10px;
+  padding-right: 6px;
 }
 
 .justify-start {
