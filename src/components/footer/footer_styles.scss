@@ -8,6 +8,7 @@
   padding: 60px 10px 10px 10px;
   @include respond-to("small") {
     margin-top: -1px;
+    padding-top: 10px;
   }
 }
 
