@@ -21,6 +21,7 @@
   padding: 5% 5%;
   width: 100%;
   // color: #4d4d4d;
+  color: white;
   border: 0;
   margin-top: 1%;
   background-color: #3a3a3d;
@@ -159,6 +160,7 @@ button:focus {
   padding: 3% 12px;
   width: 90%;
   font-size: 1.2em;
+  color: white;
   @include respond-to("x-large") {
     font-size: 1em;
   }
@@ -168,12 +170,12 @@ button:focus {
   background-color: #3a3a3d;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  color: white;
-}
+// input:focus,
+// textarea:focus,
+// select:focus {
+//   outline: none;
+//   color: white;
+// }
 
 .send-button {
   color: #fff !important;
