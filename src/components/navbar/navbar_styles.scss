@@ -173,3 +173,17 @@ a.nav-page-black {
   text-align: center; /* Centered text/links */
   margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
 }
+
+.navbar-close {
+  height: 60px;
+  padding: 5%;
+  float: right;
+}
+
+.mobile-nav-link {
+  margin-top: 5%;
+}
+
+.mobile-link-text {
+  font-size: 1.3rem;
+}

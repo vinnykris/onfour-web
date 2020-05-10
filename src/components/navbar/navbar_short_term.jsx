@@ -19,7 +19,6 @@ const NavBarShortTerm = () => {
   }
 
   const openMenu = () => {
-    console.log("clicked hamburger menu");
     document.getElementById("nav-menu").style.height = "100%";
   };
 
@@ -31,21 +30,68 @@ const NavBarShortTerm = () => {
     <div className={navbar_custom}>
       {/* MOBILE VERSION */}
       <div id="nav-menu" className="overlay-menu">
-        <img onClick={closeMenu} src={closeIcon}></img>
-        <div className="overlay-content">
-          <NavLink exact to="/" className={style}>
-            ABOUT US
-          </NavLink>
-          <NavLink to="/stream" className={style}>
-            STREAM
-          </NavLink>
-          <NavLink to="/upcoming" className={style}>
-            UPCOMING
-          </NavLink>
-          <NavLink to="/archive" className={style}>
-            PAST SHOWS
-          </NavLink>
-        </div>
+        <Grid>
+          <Row>
+            <Col size={1}>
+              <img
+                className="navbar-close"
+                onClick={closeMenu}
+                src={closeIcon}
+              ></img>
+            </Col>
+          </Row>
+          <div className="overlay-content">
+            <div className="mobile-nav-link">
+              <Row>
+                <Col size={1}>
+                  <NavLink
+                    exact
+                    to="/"
+                    className="nav-page-white mobile-link-text"
+                  >
+                    ABOUT US
+                  </NavLink>
+                </Col>
+              </Row>
+            </div>
+            <div className="mobile-nav-link">
+              <Row>
+                <Col size={1}>
+                  <NavLink
+                    to="/stream"
+                    className="nav-page-white mobile-link-text"
+                  >
+                    STREAM
+                  </NavLink>
+                </Col>
+              </Row>
+            </div>
+            <div className="mobile-nav-link">
+              <Row>
+                <Col size={1}>
+                  <NavLink
+                    to="/upcoming"
+                    className="nav-page-white mobile-link-text"
+                  >
+                    UPCOMING
+                  </NavLink>
+                </Col>
+              </Row>
+            </div>
+            <div className="mobile-nav-link">
+              <Row>
+                <Col size={1}>
+                  <NavLink
+                    to="/archive"
+                    className="nav-page-white mobile-link-text"
+                  >
+                    PAST SHOWS
+                  </NavLink>
+                </Col>
+              </Row>
+            </div>
+          </div>
+        </Grid>
       </div>
       <Grid className="mobile-grid">
         <Row className="mobile-row">
