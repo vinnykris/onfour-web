@@ -1,0 +1,51 @@
+// SIGN-IN COMPONENT STYLING
+
+@import "../../styles";
+
+.modal {
+   position: absolute;
+   top: 10px;
+   right: 100px;
+   bottom: 0;
+   left: 0;
+   z-index: 10040;
+   overflow: auto;
+   overflow-y: auto;
+}
+
+// card payment section
+.payment-bar {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  background-color: none;
+  position: relative;
+}
+
+.payment-form {
+  background-color: white;
+  // border: 1px solid #30309663;
+  width: 100%;
+  max-width: 450px;
+  padding: 20px 40px 20px 40px;
+  border: none;
+  box-shadow: 0px 3px 5px rgb(238, 237, 237);
+}
+
+.payment-button {
+  width: 20%;
+  // height: 20%;
+  background-color: #303096;
+  color: white;
+  align-items: center;
+  text-align: center;
+  padding: 1vh 0.7vw;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 0px 3px 5px rgb(202, 202, 202);
+}
+
+.pay-success-msg {
+  color: #4d4d4d
+}

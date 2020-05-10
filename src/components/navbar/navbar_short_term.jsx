@@ -13,10 +13,18 @@ const NavBarShortTerm = () => {
     icon = logo;
   }
 
+
   return (
     <div className="navbar">
       <img className="onfour-logo" src={icon} width="auto" alt="nav-logo"></img>
       <div>
+        {/* <NavLink to={location.pathname} className={style} data-toggle="modal" data-target="#sign_in_Modal">
+          LOG IN
+        </NavLink>  {" "}
+        <Model></Model> */}
+        {/* <NavLink to="/upcoming" className={style}>
+          UPCOMING
+        </NavLink> */}
         <NavLink to="/archive" className={style}>
           PAST SHOWS
         </NavLink>
