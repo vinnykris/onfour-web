@@ -8,7 +8,6 @@ class VideoPlayer extends Component {
   render() {
     const { url } = this.props;
     return (
-
       // <div className="player-wrapper">
       //   <ReactPlayer
       //     className="video-player"
