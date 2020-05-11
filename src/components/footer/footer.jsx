@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Row, Col } from "../grid";
 import "./footer_styles.scss";
-import white_logo from "../../images/logos/white_logo.png";
+import white_logo from "../../images/logos/logo_blackbackground.png";
 
 const Footer = () => {
   return (

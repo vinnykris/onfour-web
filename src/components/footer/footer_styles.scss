@@ -6,6 +6,10 @@
   background-color: black;
   width: 100%;
   padding: 60px 10px 10px 10px;
+  margin-top: -1px;
+  @include respond-to("small") {
+    padding-top: 10px;
+  }
 }
 
 .footer-container h3 {
@@ -71,7 +75,7 @@
 }
 
 .onfour-logo-footer {
-  height: 53px;
+  height: 80px;
   float: left;
   @include respond-to("medium") {
     height: 40px;
