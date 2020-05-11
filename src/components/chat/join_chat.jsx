@@ -6,6 +6,8 @@ const Join = ({ joinSubmit, mode }) => {
   const handleSubmit = () => {
     if (name.length > 30) {
       alert("Username cannot exceed 30 characters.");
+    } else if (name.length < 1) {
+      alert("Username cannot be empty.");
     } else {
       mode = true;
       joinSubmit(name, mode);
