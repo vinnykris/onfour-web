@@ -10,6 +10,7 @@ const modal = () => {
       role="dialog"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
+      data-backdrop="false"
     >
       <PaymentBox></PaymentBox>
     </div>

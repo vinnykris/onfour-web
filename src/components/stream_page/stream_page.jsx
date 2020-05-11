@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { View } from "react-native";
 import { Link } from "react-router-dom";
 
 // AWS Imports
@@ -31,6 +32,20 @@ const StreamPage = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [scroll, setScroll] = useState(true);
   const [showAlert, setShowAlert] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const find_dimesions = (layout) => {
+    const { x, y, width, height } = layout;
+    if (width < 600) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+    console.warn(x);
+    console.warn(y);
+    console.warn(width);
+    console.warn(height);
+  };
 
   const joinSubmit = (name, mode) => {
     setChatName(name);
@@ -72,6 +87,7 @@ const StreamPage = () => {
   };
 
   return (
+    <View onLayout={(event) => { find_dimesions(event.nativeEvent.layout) }}>
     <div className="stream-page-content">
       {/* {showAlert ? (
         <div>
@@ -120,7 +136,8 @@ const StreamPage = () => {
           </div>
         </div>
       ) : null} */}
-      <Grid className="desktop-grid-stream">
+      {(!isMobile) ? (
+      <Grid>
         <Row>
           <Col size={0.5}></Col>
           <Col size={7}>
@@ -205,7 +222,7 @@ const StreamPage = () => {
             >
               Donate with Card
             </button>{" "}
-            <Modal isOpen={false}></Modal>
+            <Modal></Modal>
           </Col>
           <Col size={1} className="donate-paypal donate-box-button">
             <button
@@ -265,7 +282,8 @@ const StreamPage = () => {
           </Col>
         </Row>
       </Grid>
-      <Grid className="mobile-grid-stream">
+      ) : (
+      <Grid>
         {/* <div className="main-content-mobile-stream">
           <Row>
             <Col size={1}>
@@ -306,7 +324,7 @@ const StreamPage = () => {
             <div className="main-content-mobile">
               {/* PAYMENT SECTION */}
               <div className="mobile-section">
-                {/* <Row>
+                <Row>
                   <Col size={1} className="donate-box-button">
                     <button
                       className="stripe-button-border button-height"
@@ -317,7 +335,7 @@ const StreamPage = () => {
                     </button>{" "}
                     <Modal isOpen={false}></Modal>
                   </Col>
-                </Row> */}
+                </Row>
                 <Row>
                   <Col size={1} className="donate-box-button">
                     <button
@@ -393,7 +411,9 @@ const StreamPage = () => {
           </Col>
         </Row>
       </Grid>
+      )}
     </div>
+    </View>
   );
 };
 
