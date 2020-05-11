@@ -57,6 +57,9 @@ $breakpoints: (
 
 .short-term-spacer {
   height: 100px;
+  @include respond-to("small") {
+    display: none;
+  }
 }
 
 .button-border {
@@ -73,51 +76,6 @@ $breakpoints: (
 // PAGE SPECIFIC STYLES
 
 // MAIN PAGE STYLING
-
-//MUSICIAN+ Whats on four PAGE STYLING
-.banner-container {
-  width: 100%;
-  margin-top: -70px;
-}
-
-.banner-container img {
-  width: 100%;
-  object-fit: cover;
-  max-height: 350px;
-}
-
-.banner-container h1 {
-  color: white;
-  font-weight: bold;
-  font-size: 1.5rem;
-  line-height: 2.6rem;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  top: 25%;
-  font-size: 2rem;
-}
-
-.banner-container button {
-  position: absolute;
-  top: 37%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: white;
-  color: black;
-  font-size: 15px;
-  padding: 12px 17px;
-  font-weight: $medium-weight;
-  border: none;
-  cursor: pointer;
-  border-radius: 3px;
-  box-shadow: 0px 3px 5px grey;
-}
-
-.banner-container button:hover {
-  background-color: black;
-  color: white;
-}
 
 h2 {
   padding-bottom: 0;
@@ -167,4 +125,35 @@ button {
 h5 {
   padding: 5px;
   font-size: 9px;
+}
+
+// MOBILE STYLING
+
+.header-mobile {
+  text-transform: uppercase;
+  float: left;
+  color: #e2e2e2;
+}
+
+.main-content-mobile {
+  padding: 5%;
+}
+
+.mobile-section {
+  margin-bottom: 3rem;
+}
+
+.description-text-mobile {
+  margin-bottom: 0.5rem;
+  line-height: 1.9rem;
+  text-align: left;
+  font-size: 16px;
+  font-weight: $medium-weight;
+  color: #e2e2e2;
+}
+
+.inline-form-2 {
+  margin: auto;
+  padding: 0px;
+  width: 100%;
 }

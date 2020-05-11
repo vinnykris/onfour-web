@@ -9,6 +9,9 @@
 .social-list {
   padding-inline-start: 0px;
   float: right;
+  @include respond-to("small") {
+    float: none;
+  }
 }
 
 .social-media li {
