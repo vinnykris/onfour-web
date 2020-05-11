@@ -283,7 +283,7 @@ const StreamPage = () => {
         </Row>
       </Grid>
       ) : (
-      <Grid>
+      <Grid className="mobile-grid-stream">
         {/* <div className="main-content-mobile-stream">
           <Row>
             <Col size={1}>
