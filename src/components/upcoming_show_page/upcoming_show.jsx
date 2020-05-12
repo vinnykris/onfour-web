@@ -59,7 +59,9 @@ const Upcoming_show = () => {
           <Col size={1}>
             {(() => {
               if (clicked) {
-                return <p>Thank you and stay tuned!</p>;
+                return (
+                  <p className="subscribe-success">Thank you and stay tuned!</p>
+                );
               } else {
                 return (
                   <form
