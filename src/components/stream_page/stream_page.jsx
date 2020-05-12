@@ -89,7 +89,7 @@ const StreamPage = () => {
   return (
     <View onLayout={(event) => { find_dimesions(event.nativeEvent.layout) }}>
     <div className="stream-page-content">
-      {/* {showAlert ? (
+      {showAlert ? (
         <div>
           <div className="popup-desktop">
             <form className="waiting-msg-box">
@@ -135,7 +135,7 @@ const StreamPage = () => {
             </form>
           </div>
         </div>
-      ) : null} */}
+      ) : null}
       {(!isMobile) ? (
       <Grid>
         <Row>
@@ -246,7 +246,9 @@ const StreamPage = () => {
             </p>
             {(() => {
               if (emailSubmitted) {
-                return <p>Thank you and stay tuned!</p>;
+                return (
+                  <p className="subscribe-success">Thank you and stay tuned!</p>
+                );
               } else {
                 return (
                   <form

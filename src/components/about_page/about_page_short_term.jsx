@@ -10,7 +10,6 @@ import Amplify from "aws-amplify";
 import awsmobile from "../../AppSync";
 
 // Image Imports
-import header_image from "../../images/banner_background_blur.jpg";
 import gradient_header from "../../images/mobile_gradient.png";
 
 // Styling Imports
@@ -22,6 +21,8 @@ const AboutPage = () => {
   const [email, setEmail] = useState("");
   const [clicked, setClicked] = useState(false);
   const [scroll, setScroll] = useState(true);
+  const header_image_url =
+    "http://d1gbu7v6fgabn0.cloudfront.net/banner_background_blur.jpg";
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -57,7 +58,7 @@ const AboutPage = () => {
             <div className="banner-container">
               <img
                 className="banner-header-desktop"
-                src={header_image}
+                src={header_image_url}
                 alt="nav-logo"
               ></img>
               <h1 className="header-tag">Reimagining live music.</h1>
@@ -137,7 +138,11 @@ const AboutPage = () => {
               </p>
               {(() => {
                 if (clicked) {
-                  return <div>Thank you and stay tuned! :)</div>;
+                  return (
+                    <p className="subscribe-success">
+                      Thank you and stay tuned!
+                    </p>
+                  );
                 } else {
                   return (
                     <form
@@ -146,7 +151,7 @@ const AboutPage = () => {
                       id="newsletter"
                       onSubmit={onSubmit}
                     >
-                      <div>
+                      <div className="subscribe-input-about">
                         <input
                           type="email"
                           placeholder="Enter your email here..."
@@ -239,7 +244,11 @@ const AboutPage = () => {
               <Col size={1}>
                 {(() => {
                   if (clicked) {
-                    return <p>Thank you and stay tuned!</p>;
+                    return (
+                      <p className="subscribe-success about-success">
+                        Thank you and stay tuned!
+                      </p>
+                    );
                   } else {
                     return (
                       <form
