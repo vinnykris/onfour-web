@@ -2,17 +2,14 @@
 
 @import "../../styles";
 
-.desktop-grid-stream {
-  @include respond-to("small") {
-    display: none;
-  }
-}
+// .desktop-grid-stream {
+//   @include respond-to("small") {
+//     display: none;
+//   }
+// }
 
 .mobile-grid-stream {
-  display: none;
-  @include respond-to("small") {
-    display: inline;
-  }
+  display: inline;
 }
 
 // CHAT STYLING
@@ -311,3 +308,7 @@
   padding: 5%;
   padding-bottom: 0;
 }
+
+// .modal-backdrop {
+//   z-index: -1;
+// }

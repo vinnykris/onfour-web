@@ -72,6 +72,7 @@ const CheckoutForm = () => {
 
     const submitPayment = async (event) =>{
         event.preventDefault();
+        setWaiting(true);
 
         if (!stripe || !elements) {
             // Stripe.js has not yet loaded.
@@ -83,8 +84,6 @@ const CheckoutForm = () => {
         const result = await stripe.createToken(card);
 
         console.log("test1", result);
-
-        setWaiting(true);
 
         if (result.error) {
             // Show error to your customer.
@@ -105,6 +104,8 @@ const CheckoutForm = () => {
             
         }
     }
+
+
     return (
         <div>
             <form className="payment-form" onSubmit={submitPayment}>
@@ -167,7 +168,7 @@ const CheckoutForm = () => {
                                         ) : (
                                              <div>
                                                 <p>Please confirm you are donating ${amount_value}</p>
-                                                <button className="payment-button" type="submit" disabled={!stripe}>
+                                                        <button className="payment-button" type="submit" disabled={!stripe}>
                                                     Confirm
                                                 </button>
                                             </div>
