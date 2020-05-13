@@ -26,23 +26,31 @@ const Join = ({ joinSubmit, mode }) => {
               </Row>
               <Row>
                 <Col size={1}>
-                  <fieldset>
-                    <div className="join-input-container">
-                      <input
-                        placeholder="Name"
-                        className="join-input"
-                        type="text"
-                        onChange={(event) => setName(event.target.value)}
-                      />
-                    </div>
-                  </fieldset>
-                  <button
-                    className="button mt-20"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Join
-                  </button>
+                  <Row>
+                    <Col size={1}>
+                      <fieldset>
+                        <div className="join-input-container">
+                          <input
+                            placeholder="Name"
+                            className="join-input"
+                            type="text"
+                            onChange={(event) => setName(event.target.value)}
+                          />
+                        </div>
+                      </fieldset>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col size={1}>
+                      <button
+                        className="button mt-20"
+                        type="submit"
+                        onClick={handleSubmit}
+                      >
+                        Join
+                      </button>
+                    </Col>
+                  </Row>
                 </Col>
               </Row>
             </div>
