@@ -135,7 +135,7 @@ const StreamPage = () => {
             </form>
           </div>
         </div>
-      ) : null}
+      ) : null} 
       {(!isMobile) ? (
       <Grid>
         <Row>
