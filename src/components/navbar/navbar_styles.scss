@@ -2,47 +2,127 @@
 
 @import "../../styles";
 
-// MOVE
-.onfour-logo {
-  height: 53px;
-  @include respond-to("medium") {
-    height: 30px;
-  }
-  @include respond-to("x-small") {
-    height: 25px;
-  }
-  margin: 25px;
-}
-
-// MOVE
-.navbar {
+.desktop-grid {
   width: 100%;
-  height: 70px;
-  background-color: none;
+  display: flex;
+  @include respond-to("small") {
+    display: none;
+  }
 }
 
-// MOVE
+.desktop-row {
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-grid {
+  width: 100%;
+  display: none;
+  @include respond-to("small") {
+    display: flex;
+  }
+}
+
+.desktop-row,
+.mobile-row {
+  width: 100%;
+}
+
+.navbar-custom {
+  width: 100%;
+  height: 176px;
+  background-color: none;
+  position: relative;
+  display: flex;
+  @include respond-to("large") {
+    height: 140px;
+    padding: 0;
+  }
+  @include respond-to("small") {
+    height: 131px;
+    padding: 0;
+    background-color: black;
+  }
+}
+
+.navbar-black {
+  width: 100%;
+  height: 176px;
+  background-color: black;
+  position: relative;
+  display: flex;
+  @include respond-to("large") {
+    height: 140px;
+    padding: 0;
+  }
+  @include respond-to("small") {
+    height: 131px;
+    padding: 0;
+    background-color: black;
+  }
+}
+
+.onfour-logo-desktop {
+  height: 100px;
+  margin: auto;
+  @include respond-to("large") {
+    height: 80px;
+    padding: 0;
+  }
+  @include respond-to("medium") {
+    height: 60px;
+    padding: 0;
+  }
+  @include respond-to("small") {
+    display: none;
+  }
+}
+
+.onfour-logo-mobile {
+  margin-top: 42px;
+  height: 75px;
+  display: none;
+  @include respond-to("small") {
+    display: inline;
+  }
+}
+
+.hamburger-menu {
+  height: 131px;
+  width: 100%;
+  display: none;
+  @include respond-to("small") {
+    display: flex;
+  }
+}
+
+.hamburger-icon {
+  margin: auto;
+  filter: invert(95%);
+}
+
 .nav-page-black,
 .nav-page-white {
-  font-size: 0.9rem;
-  float: right;
-  text-align: end;
-  padding: 20px 30px;
+  margin: auto;
+  font-size: 1.1rem;
   font-family: "Heebo", sans-serif;
+  font-weight: $medium-weight;
+  @include respond-to("x-large") {
+    font-size: 1rem;
+  }
+  @include respond-to("large") {
+    font-size: 0.9rem;
+  }
 }
 
-// MOVE
 .nav-home {
   float: left;
   text-align: end;
   padding: 20px;
 }
 
-// MOVE
 a.nav-page-white {
-  margin: 10px;
   color: white;
-  font-weight: $medium-weight;
   &:hover {
     cursor: pointer;
     color: white;
@@ -54,11 +134,8 @@ a.nav-page-white {
   }
 }
 
-// MOVE
 a.nav-page-black {
-  margin: 10px;
   color: #4d4d4d;
-  font-weight: $medium-weight;
   &:hover {
     cursor: pointer;
     color: #4d4d4d;
@@ -66,16 +143,48 @@ a.nav-page-black {
   }
   &:active {
     color: #4d4d4d;
+    text-decoration: "underline";
   }
 }
 
-/* .nav-active {
-    // font-weight: $bold-weight;
-    color: black;
-  } */
-
-// MOVE
 .login-button {
   margin: 10px;
   background-color: green($color: #c4b1b1);
+}
+
+// mobile nav menu
+.overlay-menu {
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */
+  height: 0;
+  width: 100%;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  background-color: rgb(0, 0, 0); /* Black fallback color */
+  background-color: rgba(0, 0, 0, 0.9); /* Black w/opacity */
+  overflow-y: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%; /* 25% from the top */
+  width: 100%; /* 100% width */
+  text-align: center; /* Centered text/links */
+  margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+
+.navbar-close {
+  height: 60px;
+  padding: 5%;
+  float: right;
+}
+
+.mobile-nav-link {
+  margin-top: 5%;
+}
+
+.mobile-link-text {
+  font-size: 1.3rem;
 }

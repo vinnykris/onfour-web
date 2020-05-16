@@ -33,19 +33,19 @@ const Label = styled.label`
   //   border-right: 2px solid whitesmoke;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  font-size: 100%;
-  padding: 11px 15px 11px 8px;
-  color: #303096;
-  background-color: transparent;
-  border-radius: 5px;
-  //   border: none;
-  animation: 2ms void-animation-out;
-  &::placeholder {
-    color: #30309663;
-  }
-`;
+// const Input = styled.input`
+//   width: 100%;
+//   font-size: 100%;
+//   padding: 11px 15px 11px 8px;
+//   color: #303096;
+//   background-color: transparent;
+//   border-radius: 5px;
+//   //   border: none;
+//   animation: 2ms void-animation-out;
+//   &::placeholder {
+//     color: #30309663;
+//   }
+// `;
 
 const CurrencyField = ({
     label,

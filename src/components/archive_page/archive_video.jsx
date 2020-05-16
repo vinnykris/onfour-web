@@ -12,7 +12,18 @@ const ArchiveVideo = ({ src, songName }) => {
       </Row>
       <Row>
         <Col size={1}>
-          <ReactPlayer className="archive-video" url={src} controls />
+          <div className="archive-player-desktop">
+            <ReactPlayer className="archive-video" url={src} controls />
+          </div>
+          <div className="archive-player-mobile">
+            <ReactPlayer
+              className="archive-video"
+              width="100%"
+              height="100%"
+              url={src}
+              controls
+            />
+          </div>
         </Col>
       </Row>
     </Grid>

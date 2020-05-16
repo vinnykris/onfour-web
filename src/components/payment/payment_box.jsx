@@ -17,6 +17,8 @@ const CheckoutForm = () => {
     const [needConfirm, setNeedConfirm] = useState(true);
     const [paymentMessage, setMessage] = useState("");
     const [displayErr, setDisplayErr] = useState(false);
+    const [waiting, setWaiting] = useState(false);
+
     // state variables for the information inside payment form
     const [amount_value, setAmount] = useState('');
     const [name, setName] = useState('');
@@ -62,6 +64,7 @@ const CheckoutForm = () => {
         setPayed(false);
         setDisplayErr(false);
         setNeedConfirm(true);
+        setWaiting(false);
         setAmount('');
         setName('');
         setEmail('');
@@ -69,6 +72,7 @@ const CheckoutForm = () => {
 
     const submitPayment = async (event) =>{
         event.preventDefault();
+        setWaiting(true);
 
         if (!stripe || !elements) {
             // Stripe.js has not yet loaded.
@@ -95,10 +99,13 @@ const CheckoutForm = () => {
             } else {
                 setNeedConfirm(true);
                 setDisplayErr(true);
+                setWaiting(false);
             }
             
         }
     }
+
+
     return (
         <div>
             <form className="payment-form" onSubmit={submitPayment}>
@@ -132,6 +139,7 @@ const CheckoutForm = () => {
                                     label="Name"
                                     type="text"
                                     placeholder="Jane Doe"
+                                    value={name}
                                     onChange={(event) => setName(event.target.value)}
                                     required
                                 />
@@ -140,26 +148,33 @@ const CheckoutForm = () => {
                                     label="Email"
                                     type="email"
                                     placeholder="jane.doe@example.com"
+                                    value={email}
                                     onChange={(event) => setEmail(event.target.value)}
                                     required
                                 />
                                 <br></br>
                                 <CardElement options={cardElementOpts}/>
                                 <br></br>
-                                <div>
-                                    {needConfirm ? (
-                                        <button className="payment-button" type="toConfirm" disabled={!stripe} onClick={needConfirmation}>
-                                            Pay
-                                        </button>
-                                    ) : (
-                                        <div>
-                                                <p>Donating ${amount_value} to the musician?</p>
-                                            <button className="payment-button" type="submit" disabled={!stripe}>
-                                                Confirm
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
+                                {needConfirm ? (
+                                    <button className="payment-button" type="toConfirm" disabled={!stripe} onClick={needConfirmation}>
+                                        Pay
+                                    </button>
+                                ) : (
+                                    <div>
+                                        {waiting ? (
+                                            <div>
+                                                <p>Processing</p>
+                                            </div>
+                                        ) : (
+                                             <div>
+                                                <p>Please confirm you are donating ${amount_value}</p>
+                                                        <button className="payment-button" type="submit" disabled={!stripe}>
+                                                    Confirm
+                                                </button>
+                                            </div>
+                                        )}    
+                                    </div>
+                                )}
                             </div>
                         );
                     } else {

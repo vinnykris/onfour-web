@@ -2,6 +2,13 @@
 
 @import "../../styles";
 
+.upcoming-page-content {
+  background-color: black;
+  margin-top: -1px;
+  height: 60vh;
+  width: auto;
+}
+
 .background-image {
   width: 100%;
   object-fit: cover;
@@ -50,8 +57,8 @@ a.nav-page-white {
   height: 50px;
   vertical-align: middle;
   display: grid;
-  float: left;
   padding: 2%;
+  color: #e2e2e2;
 }
 
 .show-content-bar {
@@ -60,7 +67,7 @@ a.nav-page-white {
   background-color: #e2e2e2;
 }
 
-.artist-name {
+.upcoming-artist-name {
   font-size: 2vw;
   font-weight: $medium-weight;
   color: #303096;
@@ -92,6 +99,7 @@ a.nav-page-white {
 
 .header-text {
   margin: auto;
+  color: #e2e2e2;
 }
 
 .line-divider {
@@ -134,4 +142,26 @@ a.nav-page-white {
 
 .form-spacer {
   height: 16px;
+}
+
+.subscribe-description {
+  font-size: 17px;
+  font-weight: $medium-weight;
+  color: #636363;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #e2e2e2;
+}
+
+.success-message {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-input-upcoming {
+  width: 280px;
+  color: black;
 }

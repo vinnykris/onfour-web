@@ -6,7 +6,7 @@ const InfoBar = ({ room, users }) => {
     <div className="info-bar">
       <div className="left-inner-container">
         <p className="onfourtitle">{room}</p>
-        <p className="onfourtitle">({users.length})</p>
+        <p className="onfourtitle">{users.length}</p>
       </div>
     </div>
   );

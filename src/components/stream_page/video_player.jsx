@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import ReactPlayer from "react-player";
 import "./stream_styles.scss";
 
-import WaitingScreen from "../../images/stream_waiting_page_2.png";
+import WaitingScreen from "../../images/stream_waiting_img.png";
 
 class VideoPlayer extends Component {
   render() {
     const { url } = this.props;
     return (
-
       // <div className="player-wrapper">
       //   <ReactPlayer
       //     className="video-player"

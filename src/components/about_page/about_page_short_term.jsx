@@ -10,7 +10,7 @@ import Amplify from "aws-amplify";
 import awsmobile from "../../AppSync";
 
 // Image Imports
-import header_image from "../../images/banner_background_blur.jpg";
+import gradient_header from "../../images/mobile_gradient.png";
 
 // Styling Imports
 import "./about_styles.scss";
@@ -21,6 +21,8 @@ const AboutPage = () => {
   const [email, setEmail] = useState("");
   const [clicked, setClicked] = useState(false);
   const [scroll, setScroll] = useState(true);
+  const header_image_url =
+    "http://d1gbu7v6fgabn0.cloudfront.net/banner_background_blur.jpg";
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -43,19 +45,23 @@ const AboutPage = () => {
     setScroll(false);
   }
 
+  const sendEmail = () => {
+    const url = "mailto:onfour.box@gmail.com";
+    window.open(url, "_blank");
+  };
+
   return (
-    <div>
-      <Grid>
+    <div className="about-page-content">
+      <Grid className="desktop-grid-about">
         <Row>
           <Col size={1}>
             <div className="banner-container">
               <img
-                className="bannerbackground"
-                src={header_image}
+                className="banner-header-desktop"
+                src={header_image_url}
                 alt="nav-logo"
               ></img>
-
-              <h1>Reimagining live music.</h1>
+              <h1 className="header-tag">Reimagining live music.</h1>
             </div>
           </Col>
         </Row>
@@ -64,12 +70,12 @@ const AboutPage = () => {
         </Row>
         <Row>
           <Col size={1}>
-            <h3> Our Mission </h3>
+            <h3 className="our-mission-text"> Our Mission </h3>
           </Col>
         </Row>
         <Row>
           <Col size={1}> </Col>
-          <Col size={4}>
+          <Col size={12}>
             <p className="description-text">
               Onfour is the premier live-streaming concert platform, built and
               designed for musicians. We are dedicated to empowering musicians
@@ -92,7 +98,7 @@ const AboutPage = () => {
               <Col size={1}>
                 <button
                   onClick={() => history.push("/stream")}
-                  className="button-border"
+                  className="button-on-black"
                 >
                   Tune into the stream!
                 </button>
@@ -126,13 +132,17 @@ const AboutPage = () => {
           <Col size={1} className="subscribe-box">
             <div>
               <p className="subscribe-title">Subscribe</p>
-              <p className="subscribe-description">
+              <p className="subscribe-description-about">
                 To stay informed about upcoming events,<br></br> subscribe to
                 our mailing list:
               </p>
               {(() => {
                 if (clicked) {
-                  return <div>Thank you and stay tuned! :)</div>;
+                  return (
+                    <p className="subscribe-success">
+                      Thank you and stay tuned!
+                    </p>
+                  );
                 } else {
                   return (
                     <form
@@ -141,7 +151,7 @@ const AboutPage = () => {
                       id="newsletter"
                       onSubmit={onSubmit}
                     >
-                      <div>
+                      <div className="subscribe-input-about">
                         <input
                           type="email"
                           placeholder="Enter your email here..."
@@ -168,6 +178,151 @@ const AboutPage = () => {
             </div>
           </Col>
         </Row>
+      </Grid>
+
+      <Grid className="mobile-grid-about">
+        {/* <Row>
+          <Col size={1}>
+            <div className="banner-container">
+              <img
+                className="banner-header-mobile"
+                src={gradient_header}
+                alt="nav-logo"
+              ></img>
+            </div>
+          </Col>
+        </Row> */}
+        <div className="main-content-mobile">
+          {/* MISSION ROW */}
+          <div className="mobile-section">
+            <Row>
+              <Col size={1}>
+                <h3 className="header-mobile"> Our Mission </h3>
+              </Col>
+            </Row>
+            <Row>
+              <Col size={1}>
+                <p className="description-text-mobile">
+                  Onfour is the premier live-streaming concert platform, built
+                  and designed for musicians. We are dedicated to empowering
+                  musicians and enabling them to connect with fans in new,
+                  meaningful ways. Experience studio-like quality from the
+                  comfort of your own home.
+                  <br></br>
+                  <br></br>
+                  Due to the COVID-19 pandemic, we are hosting live-stream
+                  concerts and will donate all of our proceeds to{" "}
+                  <a
+                    href="https://www.grammy.com/musicares/donations"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    MusiCares
+                  </a>{" "}
+                  to help relieve musicians during this difficult time.
+                </p>
+              </Col>
+            </Row>
+          </div>
+
+          {/* SUBSCRIBE ROW */}
+          <div className="mobile-section">
+            <Row>
+              <Col size={1}>
+                <h3 className="header-mobile">Subscribe</h3>
+              </Col>
+            </Row>
+            <Row>
+              <Col size={1}>
+                <p className="description-text-mobile">
+                  To stay informed about upcoming events,<br></br> subscribe to
+                  our mailing list:
+                </p>
+              </Col>
+            </Row>
+            <Row>
+              <Col size={1}>
+                {(() => {
+                  if (clicked) {
+                    return (
+                      <p className="subscribe-success about-success">
+                        Thank you and stay tuned!
+                      </p>
+                    );
+                  } else {
+                    return (
+                      <form
+                        className="inline-form-2"
+                        action="/"
+                        id="newsletter"
+                        onSubmit={onSubmit}
+                      >
+                        <Row>
+                          <Col size={4}>
+                            <input
+                              type="email"
+                              placeholder="Enter email here..."
+                              name="email"
+                              required
+                              value={email}
+                              className="email-input"
+                              onChange={(event) => setEmail(event.target.value)}
+                            />
+                          </Col>
+                          <Col size={1}>
+                            <button
+                              type="submit"
+                              form="newsletter"
+                              value="Submit"
+                              className="submit-button button-border button-height"
+                            >
+                              Submit
+                            </button>
+                          </Col>
+                        </Row>
+                      </form>
+                    );
+                  }
+                })()}
+              </Col>
+            </Row>
+          </div>
+
+          {/* PERFORM ROW */}
+          <div className="mobile-section">
+            <Row>
+              <Col size={1}>
+                <Row>
+                  <Col size={1}>
+                    <h3 className="header-mobile">Perform</h3>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col size={1}>
+                    <p className="description-text-mobile">
+                      Want to perform a livestream concert with Onfour?{" "}
+                      <br></br>
+                      Send us an email and we will get back to you soon!
+                    </p>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col size={1}>
+                    <button
+                      type="submit"
+                      form="newsletter"
+                      value="Submit"
+                      className="email-button-mobile button-border button-height"
+                      onClick={sendEmail}
+                    >
+                      Send us an email
+                    </button>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </div>
+        </div>
       </Grid>
     </div>
   );
