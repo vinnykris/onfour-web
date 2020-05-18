@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import "../../styles.scss";
 import { Grid, Row, Col } from "../grid";
 import header_image from "../../images/banner_background_blur.jpg";
 import Auth from "../../UserPool";
+import * as queries from "../../graphql/queries";
+import { API, graphqlOperation } from "aws-amplify";
+import Amplify from "aws-amplify";
+import awsmobile from "../../AppSync";
+import "./login_styles.scss";
+
+Amplify.configure(awsmobile);
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -22,6 +28,14 @@ const Login = () => {
 
   if (auth) {
     logged_in = "Sign Out";
+  }
+
+  if (first === "" && name != "") {
+    API.graphql(
+      graphqlOperation(queries.query_name2, {
+        filter: { email: { eq: name } },
+      })
+    ).then((data) => setFirst(data.data.listOnfour_registers.items[0].first));
   }
 
   const onSubmit = (event) => {
@@ -46,19 +60,8 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-page-content">
       <Grid>
-        <Row>
-          <Col size={1}>
-            <div className="banner-container">
-              <img
-                className="bannerbackground"
-                src={header_image}
-                alt="nav-logo"
-              ></img>
-            </div>
-          </Col>
-        </Row>
         <Row>
           <div className="short-term-spacer"></div>
         </Row>
@@ -144,9 +147,18 @@ const Login = () => {
         <Row>
           <Col size={2}></Col>
           <Col size={1}>
-            <p className="description-text">
-              Not registered yet? <br></br>Sign up <a href="/register">here</a>!
-            </p>
+            {(() => {
+              if (auth) {
+                return;
+              } else {
+                return (
+                  <p className="description-text">
+                    Not registered yet? <br></br>Sign up{" "}
+                    <a href="/register">here</a>!
+                  </p>
+                );
+              }
+            })()}
           </Col>
           <Col size={2}></Col>
         </Row>

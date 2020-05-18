@@ -7,9 +7,17 @@ import new_logo_black from "../../images/logos/new_logo_black.png";
 import new_logo_white from "../../images/logos/new_logo_white.png";
 import "../../styles.scss";
 import Auth from "../../UserPool";
+import {
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
+import prof_image from "../../images/test-prof.png";
 
 const NavBarShortTerm = () => {
   const [login_val, setLogin] = useState("SIGN IN");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   Auth.currentAuthenticatedUser({})
     .then((user) => setLogin("SIGN OUT"))
@@ -19,11 +27,7 @@ const NavBarShortTerm = () => {
   let style = "nav-page-white";
   let icon = new_logo_white;
   let location = useLocation();
-  if (
-    location.pathname === "/" ||
-    location.pathname === "/login" ||
-    location.pathname === "/register"
-  ) {
+  if (location.pathname === "/") {
     // style = "nav-page-white";
     // icon = new_logo_white;
     console.log("on about page");
@@ -41,6 +45,8 @@ const NavBarShortTerm = () => {
   useEffect(() => {
     closeMenu();
   }, []);
+
+  const toggle = () => setDropdownOpen(!dropdownOpen);
 
   return (
     <div className={navbar_custom}>
@@ -135,11 +141,7 @@ const NavBarShortTerm = () => {
       {/* DESKTOP VERSION */}
       <Grid className="desktop-grid">
         <Row className="desktop-row">
-          <Col size={1}>
-            <NavLink to="/archive" className={style}>
-              PAST SHOWS
-            </NavLink>
-          </Col>
+          <Col size={0.7}></Col>
           <Col size={1}>
             <NavLink to="/archive" className={style}>
               PAST SHOWS
@@ -167,6 +169,25 @@ const NavBarShortTerm = () => {
             <NavLink to="/upcoming" className={style}>
               UPCOMING
             </NavLink>
+          </Col>
+          <Col size={0.7}>
+            <UncontrolledDropdown setActiveFromChild>
+              <DropdownToggle className={style} caret>
+                <img class="manImg" src={prof_image}></img>
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem
+                  href="/register"
+                  className="profile-button-border profile-button-height"
+                  active
+                >
+                  SIGN UP
+                </DropdownItem>
+                <DropdownItem href="/login" className={style} active>
+                  {login_val}
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
           </Col>
         </Row>
       </Grid>

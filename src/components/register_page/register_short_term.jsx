@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles.scss";
+import "./register_styles.scss";
 import { Grid, Row, Col } from "../grid";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
@@ -64,19 +64,8 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="register-page-content">
       <Grid>
-        <Row>
-          <Col size={1}>
-            <div className="banner-container">
-              <img
-                className="bannerbackground"
-                src={header_image}
-                alt="nav-logo"
-              ></img>
-            </div>
-          </Col>
-        </Row>
         <Row>
           <div className="short-term-spacer"></div>
         </Row>
