@@ -91,6 +91,9 @@ h2 {
 
 .spacer {
   height: 160px;
+  @include respond-to("small") {
+    display: none;
+  }
 }
 
 // FORM STYLING
@@ -160,4 +163,8 @@ h5 {
 
 .subscribe-success {
   color: #e2e2e2;
+}
+
+.full-row {
+  height: 100%;
 }

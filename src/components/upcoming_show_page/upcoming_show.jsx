@@ -2,117 +2,120 @@ import React, { useState } from "react";
 import { Grid, Row, Col } from "../grid";
 import MonthHeader from "./month_header";
 import "./upcoming_show_page_styles.scss";
+import FeaturedContent from "./featured_content";
+import jon_may_10 from "../../images/upcoming_shows/Jon_may10_cropped.jpg";
+import concert from "../../images/upcoming_shows/concert_placeholder.jpeg";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
 import awsmobile from "../../AppSync";
+import Modal from "../payment/ticket_modal";
 import { API, graphqlOperation } from "aws-amplify";
 
 Amplify.configure(awsmobile);
 
-const Upcoming_show = () => {
-  const [email, setEmail] = useState("");
-  const [clicked, setClicked] = useState(false);
+// const Upcoming_show = () => {
+//   const [email, setEmail] = useState("");
+//   const [clicked, setClicked] = useState(false);
 
-  const onSubmit = (event) => {
-    event.preventDefault();
+//   const onSubmit = (event) => {
+//     event.preventDefault();
 
-    const payload = {
-      email: email,
-      paid: false,
-    };
+//     const payload = {
+//       email: email,
+//       paid: false,
+//     };
 
-    API.graphql(
-      graphqlOperation(mutations.createOnfour_current, { input: payload })
-    );
+//     API.graphql(
+//       graphqlOperation(mutations.createOnfour_current, { input: payload })
+//     );
 
-    setEmail("");
-    setClicked(true);
-  };
-  return (
-    <div className="upcoming-page-content">
-      <Grid>
-        <Row></Row>
-        <Row>
-          <Col size={2}></Col>
-          <Col size={2}> </Col>
-          <Col size={2}>
-            {" "}
-            <MonthHeader headerTitle={"Coming Soon!"} />{" "}
-          </Col>
-          <Col size={2}> </Col>
-          <Col size={2}> </Col>
-        </Row>
-        <Row></Row>
-        <br></br>
-        <br></br>
-        <Row>
-          <Col size={1}> </Col>
-          <Col size={2}>
-            <p className="subscribe-description">
-              To stay informed about upcoming events, subscribe to our mailing
-              list:
-            </p>
-          </Col>
-          <Col size={1}> </Col>
-        </Row>
-        <Row>
-          <Col size={1}>
-            {(() => {
-              if (clicked) {
-                return (
-                  <p className="subscribe-success">Thank you and stay tuned!</p>
-                );
-              } else {
-                return (
-                  <form
-                    className="inline-form-2"
-                    action="/"
-                    id="newsletter"
-                    onSubmit={onSubmit}
-                  >
-                    <div>
-                      <input
-                        type="email"
-                        placeholder="Enter your email here..."
-                        name="email"
-                        required
-                        value={email}
-                        className="email-input-upcoming"
-                        // style={{ width: "280px" }}
-                        onChange={(event) => setEmail(event.target.value)}
-                      />
-                      <button
-                        type="submit"
-                        form="newsletter"
-                        value="Submit"
-                        className="submit-button button-border button-height"
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </form>
-                );
-              }
-            })()}
-          </Col>
-        </Row>
-        <br></br>
-        <br></br>
-      </Grid>
-    </div>
-  );
-};
+//     setEmail("");
+//     setClicked(true);
+//   };
+//   return (
+//     <div className="upcoming-page-content">
+//       <Grid>
+//         <Row></Row>
+//         <Row>
+//           <Col size={2}></Col>
+//           <Col size={2}> </Col>
+//           <Col size={2}>
+//             {" "}
+//             <MonthHeader headerTitle={"Coming Soon!"} />{" "}
+//           </Col>
+//           <Col size={2}> </Col>
+//           <Col size={2}> </Col>
+//         </Row>
+//         <Row></Row>
+//         <br></br>
+//         <br></br>
+//         <Row>
+//           <Col size={1}> </Col>
+//           <Col size={2}>
+//             <p className="subscribe-description">
+//               To stay informed about upcoming events, subscribe to our mailing
+//               list:
+//             </p>
+//           </Col>
+//           <Col size={1}> </Col>
+//         </Row>
+//         <Row>
+//           <Col size={1}>
+//             {(() => {
+//               if (clicked) {
+//                 return (
+//                   <p className="subscribe-success">Thank you and stay tuned!</p>
+//                 );
+//               } else {
+//                 return (
+//                   <form
+//                     className="inline-form-2"
+//                     action="/"
+//                     id="newsletter"
+//                     onSubmit={onSubmit}
+//                   >
+//                     <div>
+//                       <input
+//                         type="email"
+//                         placeholder="Enter your email here..."
+//                         name="email"
+//                         required
+//                         value={email}
+//                         className="email-input-upcoming"
+//                         // style={{ width: "280px" }}
+//                         onChange={(event) => setEmail(event.target.value)}
+//                       />
+//                       <button
+//                         type="submit"
+//                         form="newsletter"
+//                         value="Submit"
+//                         className="submit-button button-border button-height"
+//                       >
+//                         Submit
+//                       </button>
+//                     </div>
+//                   </form>
+//                 );
+//               }
+//             })()}
+//           </Col>
+//         </Row>
+//         <br></br>
+//         <br></br>
+//       </Grid>
+//     </div>
+//   );
+// };
 
-export default Upcoming_show;
+// export default Upcoming_show;
 
-{
-  /*
 
 const upcoming_show = () => {
   return (
-    <div>
-      <Grid>
-        <Row></Row>
+    <div className="stream-page-content">
+      <Modal></Modal>
+      <Grid className="upcoming-show-grid">
+        {/* <Row></Row>
         <Row>
           <Col size={0.5}> </Col>
           <Col size={2}>
@@ -121,44 +124,57 @@ const upcoming_show = () => {
           <Col size={2}> </Col>
           <Col size={2}> </Col>
           <Col size={0.5}> </Col>
+        </Row> */}
+        <Row className="search-bar">
+          <Col size= {1}>
+            <p>to be implemented</p>
+          </Col>
+          <Col size={1}>
+            <p>to be implemented</p>
+          </Col>
+          <Col size={1}>
+            <p>to be implemented</p>
+          </Col>
         </Row>
         <Row>
-          <Col size={1}></Col>
-          <Col size={3}>
+          <div class="col-md-8 column-in-center">
             <FeaturedContent
               img={jon_may_10}
               name={"Jonathan Dely"}
-              date={"05/10/2020"}
+              concert_name={"Mother's Day Concert"}
+              date={"Sunday, May 20, 2020"}
+              month={"MAY"}
+              day={10}
               time={"8PM EST"}
             />
-          </Col>
-          <Col size={1}></Col>
+          </div>
         </Row>
         <Row>
-          <Col size={1}></Col>
-          <Col size={2}>
+          <div class="col-md-8 column-in-center">
             <FeaturedContent
               img={concert}
               name={"Jonathan Dely"}
-              date={"05/10/2020"}
+              concert_name={"Mother's Day Concert"}
+              date={"Sunday, May 20, 2020"}
+              month={"MAY"}
+              day={10}
               time={"8PM EST"}
             />
-          </Col>
-          <Col size={1}></Col>
+          </div>
         </Row>
         <Row>
-          <Col size={1}></Col>
-          <Col size={2}>
+          <div class="col-md-8 column-in-center">
             <FeaturedContent
               img={concert}
               name={"Jonathan Dely"}
-              date={"05/10/2020"}
+              concert_name={"Mother's Day Concert"}
+              date={"Sunday, May 20, 2020"}
+              month={"MAY"}
+              day={10}
               time={"8PM EST"}
             />
-          </Col>
-          <Col size={1}></Col>
+          </div>
         </Row>
-        <Row></Row>
       </Grid>
     </div>
   );
@@ -166,5 +182,3 @@ const upcoming_show = () => {
 
 export default upcoming_show;
 
-*/
-}

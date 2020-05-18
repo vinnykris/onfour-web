@@ -2,52 +2,45 @@ import React from "react";
 import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
-const FeaturedContent = ({ img, name, date, time }) => {
+const FeaturedContent = ({ img, name, concert_name, date, month, day, time }) => {
   const joinSubmit = () => {
     console.log("clicked!")
   };
   return (
-    <div className="featured-content" onClick={joinSubmit}>
-      <Grid>
-        <Row>
-          <Col size={1}></Col>
-          <Col size={3}>
-            <div className="date-content-bar">
-              <Col size={0.5}>
-              </Col>
-              <Col size={2.5}>
-                <img className="feature-placeholder" src={img} alt="content-img"></img>
-              </Col>
-              
-            </div>
-          </Col>
-          <Col size={3}>
-            <div className="show-content-bar">
+    <Grid className="featured-content">
+      <Col size={3} className="date-content-bar">
+          <img className="concert-poster" src={img} alt="content-img"></img>
+          <div className="poster-tag">
+            <h4 className="poster-text">{month}</h4>
+            <h1 className="poster-text">{day}</h1>
+          </div>
+        </Col>
+      <Col size={3} className="show-content-bar">
               <Row>
-                <Col size={1}>
-                  <h2 className="artist-name">{name}</h2>
+                <Col size={3}>
+                  <p className="artist-name">{name} : {concert_name}</p>
                 </Col>
               </Row>
-              <br></br>
-              <br></br>
               <Row>
-                <Col size={1}>
-                  <h2 className="time">{time}</h2>
-                </Col>
-                <Col size={1}>
-                  <h2 className="date">{date}</h2>
+                <Col size={3}>
+                  <p className="time">{time}</p>
+                  <p className="date">{date}</p>
+                  
                 </Col>
               </Row>
-            </div>
+              <Row>
+                <Col size={3} className="ticket">
+                  <button
+                    className="stripe-button-border"
+                    data-toggle="modal"
+                    data-target="#ticketModal"
+                  >
+                    Ticket   >
+                  </button>{" "}
+                </Col>
+              </Row>
           </Col>
-          
-
-        </Row>
-        <Row>
-          
-        </Row>
       </Grid>
-    </div>
   );
 };
 
