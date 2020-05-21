@@ -1,14 +1,20 @@
+// React Imports
 import React, { useState } from "react";
-import { Grid, Row, Col } from "../grid";
-import MonthHeader from "./month_header";
-import "./upcoming_show_page_styles.scss";
+
+// AWS Impoorts
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
 import awsmobile from "../../apis/subscription_db";
 import { API, graphqlOperation } from "aws-amplify";
 
+// Styling Imports
+import { Grid, Row, Col } from "../grid";
+import "./upcoming_show_page_styles.scss";
+
 Amplify.configure(awsmobile);
 
+// Upcoming_show contains the layout for upcoming show page
+// Currently it's not fully implemented, changes will be made in the near future
 const Upcoming_show = () => {
   const [email, setEmail] = useState("");
   const [clicked, setClicked] = useState(false);
@@ -113,15 +119,6 @@ const upcoming_show = () => {
     <div>
       <Grid>
         <Row></Row>
-        <Row>
-          <Col size={0.5}> </Col>
-          <Col size={2}>
-            <MonthHeader headerTitle={"May 2020"} />
-          </Col>
-          <Col size={2}> </Col>
-          <Col size={2}> </Col>
-          <Col size={0.5}> </Col>
-        </Row>
         <Row>
           <Col size={1}></Col>
           <Col size={3}>
