@@ -1,41 +1,45 @@
+// React
 import React, { useState } from "react";
+// Components
 import { Grid, Row, Col } from "../grid";
-import header_image from "../../images/banner_background_blur.jpg";
-import Auth from "../../apis/UserPool";
+// GraphQL
 import * as queries from "../../graphql/queries";
-import { API, graphqlOperation } from "aws-amplify";
-import Amplify from "aws-amplify";
+// APIs/Amplify
 import awsmobile from "../../apis/AppSync";
+import Auth from "../../apis/UserPool";
+import Amplify from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+// Styles
 import "./login_styles.scss";
 
-Amplify.configure(awsmobile);
+Amplify.configure(awsmobile); // Configuring AppSync API
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [auth, setAuth] = useState(false);
-  const [name, setName] = useState("");
-  const [first, setFirst] = useState("");
+  const [email, setEmail] = useState(""); // Tracks users email
+  const [password, setPassword] = useState(""); // Tracks users password
+  const [error, setError] = useState(""); // Tracks error messages when trying to log in
+  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
+  const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
+  const [first, setFirst] = useState(""); // Tracks first name of signed in user
 
-  let logged_in = "Sign In";
-
+  // If the user is logged in/valid, set their auth value to true and track their email
+  // If the user is not logged in/invalid, reset their auth value to false
   Auth.currentAuthenticatedUser({})
-    .then((user) => setName(user.attributes.email))
+    .then((user) => setUserEmail(user.attributes.email))
     .then((user) => setAuth(true))
-
     .catch((err) => setAuth(false));
 
-  if (auth) {
-    logged_in = "Sign Out";
-  }
-
-  if (first === "" && name != "") {
+  // If the first name for the logged in user's email has not been retrieved yet,
+  // query the registration database's table to retrieve the first name filtered
+  // for the specific email and assign that value to first
+  if (first === "" && user_email !== "") {
     API.graphql(
       graphqlOperation(queries.query_name2, {
-        filter: { email: { eq: name } },
+        filter: { email: { eq: user_email } },
       })
-    ).then((data) => setFirst(data.data.listOnfour_registers.items[0].first));
+    ).then((data) =>
+      setFirst(data.data.listOnfour_registrations.items[0].first)
+    );
   }
 
   const onSubmit = (event) => {
