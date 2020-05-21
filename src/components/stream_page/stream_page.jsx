@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../../AppSync";
+import awsmobile from "../../apis/subscription_db";
 
 // Component Imports
 import VideoPlayer from "./video_player";
@@ -65,7 +65,7 @@ const StreamPage = () => {
     };
 
     API.graphql(
-      graphqlOperation(mutations.createOnfour_current, { input: payload })
+      graphqlOperation(mutations.createEmailSubscription, { input: payload })
     );
 
     setEmail("");
