@@ -4,7 +4,7 @@ import MonthHeader from "./month_header";
 import "./upcoming_show_page_styles.scss";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../../AppSync";
+import awsmobile from "../../apis/subscription_db";
 import { API, graphqlOperation } from "aws-amplify";
 
 Amplify.configure(awsmobile);
@@ -22,7 +22,7 @@ const Upcoming_show = () => {
     };
 
     API.graphql(
-      graphqlOperation(mutations.createOnfour_current, { input: payload })
+      graphqlOperation(mutations.createEmailSubscription, { input: payload })
     );
 
     setEmail("");
