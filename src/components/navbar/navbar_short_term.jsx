@@ -171,9 +171,9 @@ const NavBarShortTerm = () => {
           </Col>
           <Col size={0.5}>
             <UncontrolledDropdown setActiveFromChild>
-              <DropdownToggle caret tag="a">
-                <span style={{ fontSize: "32px" }}>
-                  <i class="fa fa-user"></i>
+              <DropdownToggle tag="a">
+                <span className="user-menu">
+                  <i className="fa fa-user-o fa-2x user-icon"></i>
                 </span>
               </DropdownToggle>
               <DropdownMenu right>

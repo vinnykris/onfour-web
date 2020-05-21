@@ -188,3 +188,16 @@ a.nav-page-black {
 .mobile-link-text {
   font-size: 1.3rem;
 }
+
+.user-menu {
+  height: 131px;
+  width: 100%;
+  @include respond-to("small") {
+    display: flex;
+  }
+}
+
+.user-icon {
+  margin: auto;
+  color: rgb(240, 231, 231);
+}
