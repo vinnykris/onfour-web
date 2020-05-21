@@ -15,7 +15,7 @@ Amplify.configure(awsmobile);
 
 // Upcoming_show contains the layout for upcoming show page
 // Currently it's not fully implemented, changes will be made in the near future
-const Upcoming_show = () => {
+const UpcomingShow = () => {
   const [email, setEmail] = useState("");
   const [clicked, setClicked] = useState(false);
 
@@ -109,7 +109,7 @@ const Upcoming_show = () => {
   );
 };
 
-export default Upcoming_show;
+export default UpcomingShow;
 
 {
   /*
