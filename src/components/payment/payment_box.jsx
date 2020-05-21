@@ -21,9 +21,9 @@ const CheckoutForm = () => {
 
     // State variables for diffenet payment form display
     const [payed, setPayed] = useState(false); // Variable to show the payment success message
-    const [needConfirm, setNeedConfirm] = useState(true); // Variable to show the CONFIRM button
-    const [paymentMessage, setMessage] = useState(""); // Variable to store the payment error message
-    const [displayErr, setDisplayErr] = useState(false); // Variable to display error message
+    const [need_confirm, setNeedConfirm] = useState(true); // Variable to show the CONFIRM button
+    const [payment_message, setMessage] = useState(""); // Variable to store the payment error message
+    const [display_err, setDisplayErr] = useState(false); // Variable to display error message
     const [waiting, setWaiting] = useState(false); // Variable to display processing message
 
     // State variables for the information inside payment form
@@ -130,8 +130,8 @@ const CheckoutForm = () => {
                                 </button>
 
                                 <br></br>
-                                {displayErr && (
-                                    <p className='error-msg'>{paymentMessage}</p>
+                                {display_err && (
+                                    <p className='error-msg'>{payment_message}</p>
                                 )}
                                 <CurrencyField
                                     className="currency-form-input"
@@ -167,7 +167,7 @@ const CheckoutForm = () => {
                                 <br></br>
                                 <CardElement options={cardElementOpts}/>
                                 <br></br>
-                                {needConfirm ? (
+                                {need_confirm ? (
                                     <button className="payment-button" type="toConfirm" disabled={!stripe} onClick={needConfirmation}>
                                         Pay
                                     </button>
