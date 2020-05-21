@@ -1,8 +1,14 @@
+// React
 import React from "react";
+// Components
 import { Grid, Row, Col } from "../grid";
+// Styles
 import "./footer_styles.scss";
+// Images
 import white_logo from "../../images/logos/logo_blackbackground.png";
 
+// Exports Footer components, containing logo, contact email, copyright information,
+// and social media links
 const Footer = () => {
   return (
     <div class="footer-container">
@@ -14,14 +20,6 @@ const Footer = () => {
         <Row>
           <Col size={1}></Col>
           <Col size={5}>
-            {/* <h3>About</h3>
-            <p>
-              Onfour is a platform that empowers music fans by providing them
-              with a more intimate and unique concert-going experience.
-              Musicians live-stream studio performances to fans at
-              non-traditional venues, engaging and interacting with fans in a
-              new way.
-            </p> */}
             <img
               className="onfour-logo-footer"
               src={white_logo}
@@ -29,15 +27,11 @@ const Footer = () => {
               alt="nav-logo"
             ></img>
           </Col>
-
           <Col size={1}></Col>
           <Col size={3}>
             <div class="footer-links">
               <h3>Quick Links</h3>
               <ul>
-                {/* <li>
-                <a href="">About Us</a>
-              </li> */}
                 <li>
                   <a
                     href="mailto:onfour.box@gmail.com"
@@ -47,12 +41,6 @@ const Footer = () => {
                     Contact Us
                   </a>
                 </li>
-                {/* <li>
-                  <a href="">Donate</a>
-                </li> */}
-                {/* <li>
-                <a href="">Privacy Policy</a>
-              </li> */}
               </ul>
             </div>
           </Col>
