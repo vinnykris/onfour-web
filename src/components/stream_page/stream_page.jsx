@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../../apis/subscription_db";
+import awsmobile from "../../apis/AppSync";
 
 // Component Imports
 import VideoPlayer from "./video_player";

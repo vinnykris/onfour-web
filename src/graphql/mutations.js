@@ -13,10 +13,15 @@ export const createEmailSubscription = `mutation createOnfour_current($input: Cr
 }
 `;
 
-export const createOnfour_registration = `mutation createRegister($input: CreateRegisterInput!) {
-  createRegister(input: $input) {
+// Mutation to create an entry in our registration DB when a user registers
+// Currently, it takes email, first, last, and concert as inputs, though concert
+// is initially empty
+export const createRegistration = `mutation createOnfour_registration($input: CreateOnfour_registrationInput!) {
+  createOnfour_registration(input: $input) {
     email
-    paid
+    first
+    last
+    concert
   }
 }
 `;

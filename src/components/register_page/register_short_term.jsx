@@ -1,42 +1,55 @@
+// React
 import React, { useState } from "react";
-import "./register_styles.scss";
-import { Grid, Row, Col } from "../grid";
-import { API, graphqlOperation } from "aws-amplify";
-import * as mutations from "../../graphql/mutations";
-import Amplify from "aws-amplify";
-import awsmobile from "../../AppSync";
-import header_image from "../../images/banner_background_blur.jpg";
-import Auth from "../../UserPool";
 import PasswordStrengthBar from "react-password-strength-bar";
+// Components
+import { Grid, Row, Col } from "../grid";
+// GraphQL
+import * as mutations from "../../graphql/mutations";
+// APIs/Amplify
+import awsmobile from "../../apis/AppSync";
+import Auth from "../../apis/UserPool";
+import Amplify from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+// Styles
+import "./register_styles.scss";
 
-Amplify.configure(awsmobile);
+Amplify.configure(awsmobile); // Configuring AppSync API
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [first, setFirst] = useState("");
-  const [last, setLast] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState(""); // Tracks users email
+  const [password, setPassword] = useState(""); // Tracks users password
+  const [first, setFirst] = useState(""); // Tracks users first name
+  const [last, setLast] = useState(""); // Tracks users last name
+  const [error, setError] = useState(""); // Tracks password failure errors
+  const [success, setSuccess] = useState(false); // Tracks if user successfully signed up
+  const [name, setName] = useState(""); // Tracks users first name after successful registration
 
+  // Function that occurs after the user clicks the submit button to sign up
   const onSubmit = (event) => {
     event.preventDefault();
 
-    const signupPayload = {
+    // Username/Password information passed into cognito API
+    const signup_payload = {
       username: email,
       password,
     };
 
-    const payload = {
+    // Email/First Name/Last Name/Concerts information passed into AppSync API/Registration Table
+    const register_payload = {
       email: email,
-      //first: first,
-      //last: last,
-      paid: false,
+      first: first,
+      last: last,
+      concert: "",
     };
 
+    // If the password is long enough, then pass the sign up payload into the
+    // cognito API. If no errors occur, set name to the user's first name, set
+    // success to true, call the registerUser function to add the user to the
+    // registered users database, and remove the text from all of the sign up fields
+    // If the registration fails, display the error message to the user and remove the
+    // text from the password field so that the user can enter a new password
     if (password.length > 7) {
-      Auth.signUp(signupPayload)
+      Auth.signUp(signup_payload)
         .then((data) => setName(first))
         .then((data) => setSuccess(true))
         .then((data) => registerUser())
@@ -49,15 +62,19 @@ const Register = () => {
           (err) => setError(err.message),
           (err) => setPassword("")
         );
-    } else {
+    }
+    // If the password is not long enough, display a message for the user
+    else {
       setPassword("");
       setError("Password must be of at least length 8.");
     }
 
+    // Function that takes the user's entered information and passes it in to
+    // the AppSync API to be stored in our registered users database table
     const registerUser = (event) => {
       API.graphql(
-        graphqlOperation(mutations.createOnfour_registration, {
-          input: payload,
+        graphqlOperation(mutations.createRegistration, {
+          input: register_payload,
         })
       );
     };
@@ -71,6 +88,9 @@ const Register = () => {
         </Row>
         <Row>
           <Col size={1}>
+            {/* If the user successfully signs up, display a message with their name
+            and notify them to check their email. Otherwise, have a message that prompts
+            the user to sign up */}
             {(() => {
               if (success) {
                 return (
@@ -93,6 +113,11 @@ const Register = () => {
         <Row>
           <Col size={2}></Col>
           <Col size={1}>
+            {/* If the user has not yet signed in, display a form so that the user can
+            enter their information and submit. For each field, update the state as the user
+            changes the values in the boxes. Additionally, add a password strength meter that
+            notifies the user of the quality of their password. Display errors to the user if
+            their sign up attempts are unsuccessful  */}
             {(() => {
               if (success) {
                 return;
@@ -157,4 +182,5 @@ const Register = () => {
     </div>
   );
 };
+
 export default Register;

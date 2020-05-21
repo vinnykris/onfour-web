@@ -4,7 +4,7 @@ import MonthHeader from "./month_header";
 import "./upcoming_show_page_styles.scss";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../../apis/subscription_db";
+import awsmobile from "../../apis/AppSync";
 import { API, graphqlOperation } from "aws-amplify";
 
 Amplify.configure(awsmobile);

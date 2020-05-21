@@ -7,7 +7,7 @@ import history from "../../history";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../../apis/subscription_db";
+import awsmobile from "../../apis/AppSync";
 
 // Image Imports
 import gradient_header from "../../images/mobile_gradient.png";

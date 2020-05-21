@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Grid, Row, Col } from "../grid";
 import header_image from "../../images/banner_background_blur.jpg";
-import Auth from "../../UserPool";
+import Auth from "../../apis/UserPool";
 import * as queries from "../../graphql/queries";
 import { API, graphqlOperation } from "aws-amplify";
 import Amplify from "aws-amplify";
-import awsmobile from "../../AppSync";
+import awsmobile from "../../apis/AppSync";
 import "./login_styles.scss";
 
 Amplify.configure(awsmobile);

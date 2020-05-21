@@ -6,7 +6,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import new_logo_black from "../../images/logos/new_logo_black.png";
 import new_logo_white from "../../images/logos/new_logo_white.png";
 import "../../styles.scss";
-import Auth from "../../UserPool";
+import Auth from "../../apis/UserPool";
 import {
   UncontrolledDropdown,
   DropdownToggle,
