@@ -4,7 +4,7 @@ import { Grid, Row, Col } from "../grid";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../../AppSync2";
+import awsmobile from "../../AppSync";
 import header_image from "../../images/banner_background_blur.jpg";
 import Auth from "../../UserPool";
 import PasswordStrengthBar from "react-password-strength-bar";
