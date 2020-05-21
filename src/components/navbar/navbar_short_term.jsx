@@ -13,7 +13,6 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import prof_image from "../../images/test-prof.png";
 
 const NavBarShortTerm = () => {
   const [login_val, setLogin] = useState("SIGN IN");
@@ -141,7 +140,7 @@ const NavBarShortTerm = () => {
       {/* DESKTOP VERSION */}
       <Grid className="desktop-grid">
         <Row className="desktop-row">
-          <Col size={0.7}></Col>
+          <Col size={0.5}></Col>
           <Col size={1}>
             <NavLink to="/archive" className={style}>
               PAST SHOWS
@@ -170,10 +169,12 @@ const NavBarShortTerm = () => {
               UPCOMING
             </NavLink>
           </Col>
-          <Col size={0.7}>
+          <Col size={0.5}>
             <UncontrolledDropdown setActiveFromChild>
-              <DropdownToggle className={style} caret>
-                <img class="manImg" src={prof_image}></img>
+              <DropdownToggle caret tag="a">
+                <span style={{ fontSize: "32px" }}>
+                  <i class="fa fa-user"></i>
+                </span>
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem
@@ -183,7 +184,8 @@ const NavBarShortTerm = () => {
                 >
                   SIGN UP
                 </DropdownItem>
-                <DropdownItem href="/login" className={style} active>
+                <DropdownItem divider />
+                <DropdownItem href="/login" active>
                   {login_val}
                 </DropdownItem>
               </DropdownMenu>

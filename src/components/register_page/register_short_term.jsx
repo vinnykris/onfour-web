@@ -30,8 +30,8 @@ const Register = () => {
 
     const payload = {
       email: email,
-      first: first,
-      last: last,
+      //first: first,
+      //last: last,
       paid: false,
     };
 
@@ -56,7 +56,7 @@ const Register = () => {
 
     const registerUser = (event) => {
       API.graphql(
-        graphqlOperation(mutations.createOnfour_reg, {
+        graphqlOperation(mutations.createOnfour_registration, {
           input: payload,
         })
       );
