@@ -1,15 +1,22 @@
 import React from "react";
-import { Grid, Row } from "../grid";
+import { Grid, Row, Col } from "../grid";
 
 import "./archive_styles.scss";
 
-const ArchivePerformance = ({ artistName, date }) => {
+const ArchivePerformance = ({ artistName, concertName, date, videoLength }) => {
   return (
     <Grid>
       <Row>
-        <h4 className="archive-header">
-          {artistName}: {date}
-        </h4>
+        <Col size={1}>
+          <h4 className="archive-video-header">
+            {artistName} - {concertName} | {date}
+          </h4>
+        </Col>
+      </Row>
+      <Row>
+        <Col size={1}>
+          <h4 className="archive-video-header">{videoLength}</h4>
+        </Col>
       </Row>
     </Grid>
   );

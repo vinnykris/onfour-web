@@ -1,4 +1,9 @@
+// React Imports
 import React from "react";
+import { Router, Switch, Route } from "react-router-dom";
+import history from "./history";
+
+// Component Imports
 import NavBar from "./components/navbar/navbar_short_term";
 import About from "./components/about_page/about_page_short_term";
 import StreamPage from "./components/stream_page/stream_page";
@@ -7,15 +12,14 @@ import Ticket from "./components/payment/payment_box";
 // import Popup_payment from "./components/payment/popup_payment";
 import ArchivePage from "./components/archive_page/archive_page";
 import Footer from "./components/footer/footer";
-import 'bootstrap/dist/js/bootstrap.min.js';
+import "bootstrap/dist/js/bootstrap.min.js";
+
 // Styles
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./styles.scss";
-import { Router, Switch, Route } from "react-router-dom";
-import history from "./history";
 
-require('dotenv').config();
+require("dotenv").config();
 
 function AppShortTerm() {
   return (

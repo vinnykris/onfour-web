@@ -1,24 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Row, Col } from "../grid";
 import ArchiveVideo from "./archive_video";
 import ArchivePerformance from "./archive_performance";
 
+import Video from "./video";
+
 import "./archive_styles.scss";
 
 const ArchivePage = () => {
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    // DO API CALL HERE
+    // TEMPORARILY HARD CODE LIST
+  }, []);
+
   return (
-    <div className="stream-page-content">
-      <Grid>
+    <div className="archive-page-content">
+      {/* <Grid>
         <div className="spacer"></div>
-        {/* <Row>
+        <Row>
           <h2 className="archive-page-title">Past Onfour Shows</h2>
-        </Row> */}
+        </Row>
         <div className="archive-performance-wrapper">
-          {/* <Row>
+          <Row>
             <Col size={1}>
               <ArchivePerformance artistName="Jonathan Dely" date="4/24/20" />
             </Col>
-          </Row> */}
+          </Row>
           <Row>
             <Col size={1}>
               <ArchiveVideo
@@ -38,7 +47,7 @@ const ArchivePage = () => {
           </Row>
           <div className="spacer"></div>
         </div>
-      </Grid>
+      </Grid> */}
     </div>
   );
 };
