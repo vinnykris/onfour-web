@@ -1,8 +1,10 @@
-// https://www.youtube.com/watch?v=woVuUbDOeMk
-
+// React
 import React from "react";
+//Styles
 import "./social_bar_styles.scss";
 
+// Export SocialBar Component, which contains the links/icons for the social
+// media pages for the performing musician
 const SocialBar = () => {
   return (
     <div className="social-media">
