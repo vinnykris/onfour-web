@@ -188,7 +188,7 @@ const AboutPage = () => {
           </Col>
         </Row>
       </Grid>
-      
+      {/* MOBILE LAYOUT */}
       <Grid className="mobile-grid-about">
         <div className="main-content-mobile">
           {/* MISSION ROW */}
