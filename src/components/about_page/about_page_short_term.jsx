@@ -7,7 +7,7 @@ import history from "../../history";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../../AppSync";
+import awsmobile from "../../apis/subscription_db";
 
 // Image Imports
 import gradient_header from "../../images/mobile_gradient.png";
@@ -33,7 +33,7 @@ const AboutPage = () => {
     };
 
     API.graphql(
-      graphqlOperation(mutations.createOnfour_current, { input: payload })
+      graphqlOperation(mutations.createEmailSubscription, { input: payload })
     );
 
     setEmail("");
