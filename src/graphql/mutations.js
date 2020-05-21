@@ -6,7 +6,7 @@ export const createOnfour_current = `mutation createOnfour_current($input: Creat
 }
 `;
 
-export const createOnfour_reg = `mutation createOnfour_register2($input: CreateOnfour_registerInput2!) {
+export const createOnfour_reg = `mutation createOnfour_register2($input: CreateOnfour_register2Input!) {
 createOnfour_register2(input: $input) {
     email
     first
