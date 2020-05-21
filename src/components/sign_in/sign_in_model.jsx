@@ -1,13 +1,19 @@
+// React Imports
 import React from 'react';
-import Payment_box from "./sign_in";
+
+// Component Imports
+import SignInBox from "./sign_in";
+
+// Styling Imports
 import "./sign_in_styles.scss";
 
-const modal = () => {
+// Modal wrapper for SignIn form 
+const SignInModal = () => {
     return (
-        <div className="modal" id="sign_in_Modal" tapindex="-1" role="dialog" aria-labelledby="sign_in_ModalLabel" aria-hidden="true">
-            <Payment_box></Payment_box>
+        <div className="modal" id="signInModal" tapindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+            <SignInBox></SignInBox>
         </div>
     );
 }
 
-export default modal;
+export default SignInModal;
