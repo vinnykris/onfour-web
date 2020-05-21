@@ -1,18 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Row, Col } from "../grid";
 import ArchiveVideo from "./archive_video";
 import ArchivePerformance from "./archive_performance";
+import FlexibleGrid from "../flexible_grid/flexible_grid";
 
 import Video from "./video";
 
 import "./archive_styles.scss";
 
 const ArchivePage = () => {
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState([
+    "X",
+    "X",
+    "X",
+    "X",
+    "X",
+    "X",
+    "X",
+    "X",
+  ]);
 
   useEffect(() => {
     // DO API CALL HERE
     // TEMPORARILY HARD CODE LIST
+    // setVideos(["X", "X", "X", "X", "X", "X", "X", "X"]);
   }, []);
 
   return (
@@ -48,6 +59,7 @@ const ArchivePage = () => {
           <div className="spacer"></div>
         </div>
       </Grid> */}
+      <FlexibleGrid content_list={videos} num_cols={3} />
     </div>
   );
 };
