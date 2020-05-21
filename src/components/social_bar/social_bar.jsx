@@ -1,6 +1,6 @@
 // React
 import React from "react";
-//Styles
+// Styles
 import "./social_bar_styles.scss";
 
 // Export SocialBar Component, which contains the links/icons for the social

@@ -1,3 +1,4 @@
+// React Imports
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Link } from "react-router-dom";
@@ -222,7 +223,7 @@ const StreamPage = () => {
                 <button
                   className="stripe-button-border button-height"
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#paymentModal"
                 >
                   Donate with Card
                 </button>{" "}
@@ -341,7 +342,7 @@ const StreamPage = () => {
                         <button
                           className="stripe-button-border button-height"
                           data-toggle="modal"
-                          data-target="#exampleModal"
+                          data-target="#paymentModal"
                         >
                           Donate with Card
                         </button>{" "}

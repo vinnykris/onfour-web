@@ -17,19 +17,23 @@ import "./about_styles.scss";
 
 Amplify.configure(awsmobile);
 
+// AboutPage component that contains all the about page layout
 const AboutPage = () => {
-  const [email, setEmail] = useState("");
-  const [clicked, setClicked] = useState(false);
-  const [scroll, setScroll] = useState(true);
+  const [email, setEmail] = useState(""); // Variable to store input emails for subscribtion form
+  const [clicked, setClicked] = useState(false); // Variable to show hide the subscribtion form
+  // const [scroll, setScroll] = useState(true); // This might be no use 
+  
   const header_image_url =
     "http://d1gbu7v6fgabn0.cloudfront.net/banner_background_blur.jpg";
 
+  // This function gets called when the email subscribtion form is submitted
+  // It calls the appsync API to send the input email to backend database
   const onSubmit = (event) => {
     event.preventDefault();
 
     const payload = {
       email: email,
-      paid: false,
+      paid: false, //paid is initialized to be false
     };
 
     API.graphql(
@@ -40,11 +44,14 @@ const AboutPage = () => {
     setClicked(true);
   };
 
-  if (scroll) {
-    window.scrollTo({ top: 0 });
-    setScroll(false);
-  }
+  // This part of code may not be used
+  // if (scroll) {
+  //   window.scrollTo({ top: 0 });
+  //   setScroll(false);
+  // }
 
+  // This function gets called when user clicked the "Send us an email"
+  // It will open a mailbox with onfour.box@gmail.com as the receiver
   const sendEmail = () => {
     const url = "mailto:onfour.box@gmail.com";
     window.open(url, "_blank");
@@ -52,7 +59,9 @@ const AboutPage = () => {
 
   return (
     <div className="about-page-content">
+      {/* DESKTOP LAYOUT */}
       <Grid className="desktop-grid-about">
+        {/* BANNER ROW */}
         <Row>
           <Col size={1}>
             <div className="banner-container">
@@ -68,6 +77,7 @@ const AboutPage = () => {
         <Row>
           <div className="short-term-spacer"></div>
         </Row>
+        {/* MISSION ROW */}
         <Row>
           <Col size={1}>
             <h3 className="our-mission-text"> Our Mission </h3>
@@ -111,7 +121,7 @@ const AboutPage = () => {
         <Row>
           <div className="short-term-spacer"></div>
         </Row>
-
+        {/* PERFORM & SUBSCRIBE ROW */}
         <Row>
           <Col size={1} className="perform-box">
             <p className="perform-title">Perform</p>
@@ -159,7 +169,6 @@ const AboutPage = () => {
                           required
                           value={email}
                           className="email-input"
-                          // style={{ width: "280px" }}
                           onChange={(event) => setEmail(event.target.value)}
                         />
                         <button
@@ -179,19 +188,8 @@ const AboutPage = () => {
           </Col>
         </Row>
       </Grid>
-
+      
       <Grid className="mobile-grid-about">
-        {/* <Row>
-          <Col size={1}>
-            <div className="banner-container">
-              <img
-                className="banner-header-mobile"
-                src={gradient_header}
-                alt="nav-logo"
-              ></img>
-            </div>
-          </Col>
-        </Row> */}
         <div className="main-content-mobile">
           {/* MISSION ROW */}
           <div className="mobile-section">
