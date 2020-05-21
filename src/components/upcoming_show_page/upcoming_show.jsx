@@ -43,7 +43,7 @@ const UpcomingShow = () => {
           <Col size={2}> </Col>
           <Col size={2}>
             {" "}
-            <MonthHeader headerTitle={"Coming Soon!"} />{" "}
+            <h1>{"Coming Soon!"}</h1>
           </Col>
           <Col size={2}> </Col>
           <Col size={2}> </Col>
