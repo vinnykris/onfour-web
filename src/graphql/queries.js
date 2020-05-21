@@ -1,21 +1,9 @@
-export const query_name = `query listOnfour_registers {
-    listOnfour_registers($filter: {
-      email: {
-        eq: TableArticleFilterInput
-      }
-      
-    }
-    $limit: Int
-    $nextToken: String) {
-      query_name(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        first
-      }
-      nextToken
-    }
-  }`;
+// This file contains all queries that can be called to interact with
+// our AppSync APIs
 
-export const query_name2 = `  query listOnfour_registers(
+// Query to retrieve the first name of a logged in user based on their email from
+// the registration DB table
+export const retrieveName = `  query listOnfour_registers(
     $filter: TableOnfour_registerFilterInput
   ) {
     listOnfour_registers(filter: $filter) {
