@@ -201,3 +201,10 @@ a.nav-page-black {
   margin: auto;
   color: rgb(240, 231, 231);
 }
+
+.dropdown-menu-profile {
+  width: 100px;
+  @include respond-to("small") {
+    display: flex;
+  }
+}

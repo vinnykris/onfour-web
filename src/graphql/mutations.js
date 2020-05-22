@@ -25,3 +25,17 @@ export const createRegistration = `mutation createOnfour_registration($input: Cr
   }
 }
 `;
+
+export const createUpcoming = `mutation createUpcomingConcerts($input: CreateUpcomingConcertsInput!) {
+  createUpcomingConcerts(input: $input) {
+    url
+    timePassed
+    date
+    time
+    artist
+    concertName
+    description
+    price
+  }
+}
+`;

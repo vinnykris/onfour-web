@@ -13,6 +13,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import Modal from "../payment/payment_modal";
 
 const NavBarShortTerm = () => {
   const [login_val, setLogin] = useState("SIGN IN");
@@ -176,15 +177,10 @@ const NavBarShortTerm = () => {
                   <i className="fa fa-user-o fa-2x user-icon"></i>
                 </span>
               </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem
-                  href="/register"
-                  className="profile-button-border profile-button-height"
-                  active
-                >
+              <DropdownMenu right className="dropdown-menu-profile">
+                <DropdownItem href="/register" active>
                   SIGN UP
                 </DropdownItem>
-                <DropdownItem divider />
                 <DropdownItem href="/login" active>
                   {login_val}
                 </DropdownItem>
