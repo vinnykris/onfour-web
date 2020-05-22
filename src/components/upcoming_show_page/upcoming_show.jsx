@@ -111,7 +111,7 @@ const UpcomingShowPage = () => {
       time={"8PM EST"}
       ticketed={true}
     />
-  ]); // List of video objects with past show information
+  ]); // List of FeaturedContent objects with upcoming show information
 
   useEffect(() => {
     // DO API CALL HERE
