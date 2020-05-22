@@ -65,6 +65,9 @@ const Login = () => {
 
   return (
     <div className="login-page-content">
+      <button className="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
       <Grid>
         <Row>
           <div className="short-term-spacer"></div>
@@ -157,8 +160,7 @@ const Login = () => {
               } else {
                 return (
                   <p className="description-text">
-                    Not registered yet? <br></br>Sign up{" "}
-                    <a href="/register">here</a>!
+                    Not registered yet? Sign up <a href="/register">here</a>!
                   </p>
                 );
               }

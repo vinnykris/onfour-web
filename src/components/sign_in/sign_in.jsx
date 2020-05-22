@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./sign_in_styles.scss";
 import FormField from "../payment/FormField";
+import Login from "../login_page/login_short_term";
 
 const CheckoutForm = () => {
   const [payed, setPayed] = useState(false);
@@ -16,7 +17,6 @@ const CheckoutForm = () => {
           if (!payed) {
             return (
               <div>
-                <br></br>
                 <button
                   className="close"
                   data-dismiss="modal"
@@ -24,6 +24,9 @@ const CheckoutForm = () => {
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
+                <br></br>
+                <br></br>
+
                 <FormField name="email" label="Email" type="email" required />
                 <FormField
                   name="password"
@@ -61,7 +64,7 @@ const payment_box = () => {
       <br></br>
       <br></br>
       <div className="paymentbar">
-        <CheckoutForm />
+        <Login />
         <br></br>
         <br></br>
       </div>

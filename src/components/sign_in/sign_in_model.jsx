@@ -8,7 +8,7 @@ const modal = () => {
     <div
       className="modal"
       id="sign_in_Modal"
-      tapindex="1000"
+      tapindex="-1"
       role="dialog"
       aria-labelledby="sign_in_ModalLabel"
       aria-hidden="true"
