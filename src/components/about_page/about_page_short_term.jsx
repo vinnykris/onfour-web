@@ -10,7 +10,7 @@ import Amplify from "aws-amplify";
 import awsmobile from "../../apis/subscription_db";
 
 // Image Imports
-import gradient_header from "../../images/mobile_gradient.png";
+// import gradient_header from "../../images/mobile_gradient.png";
 
 // Styling Imports
 import "./about_styles.scss";
