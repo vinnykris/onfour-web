@@ -5,7 +5,7 @@ import history from "./history";
 
 // Component imports
 import NavBar from "./components/navbar/navbar";
-import About from "./components/about_page/about_page_short_term";
+import About from "./components/about_page/about_page";
 import StreamPage from "./components/stream_page/stream_page";
 import UpcomingShowPage from "./components/upcoming_show_page/upcoming_show";
 import Ticket from "./components/payment/payment_box";
