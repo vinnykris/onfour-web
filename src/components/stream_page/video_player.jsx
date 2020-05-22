@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactPlayer from "react-player";
 import "./stream_styles.scss";
 
-import WaitingScreen from "../../images/stream_waiting_img.png";
+import WaitingScreen from "../../images/backgrounds/stream_waiting_img.png";
 
 class VideoPlayer extends Component {
   render() {

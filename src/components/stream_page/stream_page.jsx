@@ -21,7 +21,7 @@ import Modal from "../payment/payment_modal";
 import "./stream_styles.scss";
 
 // Image imports
-import VenmoCode from "../../images/jon_dely_venmo.jpeg";
+import VenmoCode from "../../images/venmo_codes/venmo_code.png";
 
 Amplify.configure(awsmobile);
 
