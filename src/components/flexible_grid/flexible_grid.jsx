@@ -1,15 +1,20 @@
+// React imports
 import React, { useState, useEffect } from "react";
+
+// Component imports
 import { Grid, Row, Col } from "../grid";
 
+// Styles imports
 import "./flexible_grid_styles.scss";
 
+// This grid dynamically displayed content based on numbers of columns specified
 const FlexibleGrid = ({ content_list, num_cols }) => {
   const [chunks, setChunks] = useState([]); // List of chunks based on original list
 
   // Function that splits original array into chunks based on chunk size
   // Also adds empty elements to the last chunk if necessary.
   // Reference: https://stackoverflow.com/questions/8495687/split-array-into-chunks?page=1&tab=votes#tab-top
-  const array_chunks = (array, chunk_size) => {
+  const arrayChunks = (array, chunk_size) => {
     // Creates new array with original array split into chunks
     let chunk_array = Array(Math.ceil(array.length / chunk_size))
       .fill()
@@ -32,7 +37,7 @@ const FlexibleGrid = ({ content_list, num_cols }) => {
 
   // Updates array of chunks if content_list or num_cols value changes
   useEffect(() => {
-    setChunks(array_chunks(content_list, num_cols));
+    setChunks(arrayChunks(content_list, num_cols));
   }, [content_list, num_cols]);
 
   return (

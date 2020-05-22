@@ -1,39 +1,46 @@
+// React imports
 import React from "react";
-import "./chat.scss";
+
+// Module imports
 import ReactEmoji from "react-emoji";
 
-const Message = ({ message: { user, text }, name }) => {
-  let isSentByCurrentUser = false;
-  let isAdmin = false;
-  let isStaff = false;
-  const trimmedName = name.trim().toLowerCase();
+// Styles imports
+import "./chat.scss";
 
-  if (user === trimmedName) {
-    isSentByCurrentUser = true;
+// Component that styles the message according to the sender
+const Message = ({ message: { user, text }, name }) => {
+  let is_sent_by_current_user = false; // Boolean checking if sender iscurrent user
+  let is_admin = false; // Boolean checking if sender is admin
+  let is_staff = false; // Boolean checking if sender is staff
+  const trimmed_name = name.trim().toLowerCase();
+
+  // Setting booleans based on user
+  if (user === trimmed_name) {
+    is_sent_by_current_user = true;
   }
-  
+
   if (user === "admin") {
-    isAdmin = true;
+    is_admin = true;
   }
 
   if (user === "onfour-staff") {
-    isStaff =true;
+    is_staff = true;
   }
 
-  return isSentByCurrentUser ? (
+  return is_sent_by_current_user ? (
     <div className="message-container justify-end">
-      <p className="sent-text pr-10">{trimmedName} </p>
+      <p className="sent-text pr-10">{trimmed_name} </p>
       <div className="message-box background-dark">
         <p className="message-text color-white">{ReactEmoji.emojify(text)}</p>
       </div>
     </div>
-  ) : isAdmin ? (
-      <div className="message-container justify-middle">
+  ) : is_admin ? (
+    <div className="message-container justify-middle">
       <div className="message-box-admin background-white">
-          <p className="sent-text">{ReactEmoji.emojify(text)}</p>
+        <p className="sent-text">{ReactEmoji.emojify(text)}</p>
       </div>
     </div>
-  ) : isStaff ? (
+  ) : is_staff ? (
     <div className="message-container justify-start">
       <div className="message-box background-staff">
         <p className="message-text color-white">{ReactEmoji.emojify(text)}</p>

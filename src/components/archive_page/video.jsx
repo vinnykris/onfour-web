@@ -1,3 +1,4 @@
+// Video object for archive page
 export class Video {
   constructor(artist, concert_name, concert_date, video_url, video_length) {
     this.artist = artist;

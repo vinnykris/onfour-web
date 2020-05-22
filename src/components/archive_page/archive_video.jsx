@@ -1,14 +1,19 @@
+// React imports
 import React from "react";
 import ReactPlayer from "react-player";
+
+// Component imports
 import { Grid, Row, Col } from "../grid";
 
+// Styles imports
 import "./archive_styles.scss";
 
-const ArchiveVideo = ({ src, songName }) => {
+// Component that contains video and performance text
+const ArchiveVideo = ({ src, song_name }) => {
   return (
     <Grid>
       <Row>
-        <h5 className="archive-artist">{songName}</h5>
+        <h5 className="archive-artist">{song_name}</h5>
       </Row>
       <Row>
         <Col size={1}>
