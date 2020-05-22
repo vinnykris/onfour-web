@@ -1,11 +1,22 @@
+// React Imports
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
+
+// Styling Imports
 import "./stream_styles.scss";
+
+// Image Imports
 import WaitingScreen from "../../images/backgrounds/stream_waiting_img.png";
 
-function CountdownTimer(props) {
-    const [show_start_time, setStartTime] = useState("2020-05-22T23:10:00.000-04:00");
 
+// CounddownTime displays countdown message when the current time is behind the start time
+// of the upcoming concert. When the time is up, it will display the stream video instead
+function CountdownTimer(props) {
+    // Later, this value should be extracted from the database
+    const [show_start_time, setStartTime] = useState("2020-05-22T23:10:00.000-04:00"); // Stores the start time of upcoming concert
+
+    // This function calculates the time difference between current time and show start time
+    // and represent the difference in days, hours, minuts and seconds
     const calculateTimeLeft = () => {
         const difference = +new Date(show_start_time) - +new Date();
         let timeLeft = {};
@@ -22,16 +33,19 @@ function CountdownTimer(props) {
         return timeLeft;
     };
 
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft()); // Stores the time difference
 
+    // This is a React Hook function that gets called every 1 second
     useEffect(() => {
         setTimeout(() => {
             setTimeLeft(calculateTimeLeft());
         }, 1000);
     });
 
-    const timerComponents = [];
+    const timerComponents = []; // Stores the countdown message
 
+    // This function loops through date, hours, minutes and seconds in
+    // timeLeft and combine those together to render in React
     Object.keys(timeLeft).forEach(interval => {
         if (!timeLeft[interval]) {
             return;
