@@ -5,7 +5,8 @@ import React from "react";
 import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
-const FeaturedContent = ({ img, name, concert_name, date, month, day, time }) => {
+// FeaturedContent is the unit element for an upcoming concert
+const FeaturedContent = ({ img, name, concert_name, date, month, day, time, ticketed }) => {
   return (
     <Grid className="featured-content">
       <Row>
@@ -33,13 +34,23 @@ const FeaturedContent = ({ img, name, concert_name, date, month, day, time }) =>
       </Row>
       <Row>
         <Col size={3} className="ticket">
-          <button
-            className="stripe-button-border"
-            data-toggle="modal"
-            data-target="#ticketModal"
-          >
-            Ticket   >
-          </button>{" "}
+          {ticketed? (
+            <button
+              className="stripe-button-border"
+              data-toggle="modal"
+              data-target="#ticketModal"
+            >
+              Ticket   >
+            </button>
+          ) : (
+              <button
+                className="stripe-button-border"
+                // data-toggle="modal"
+                // data-target="#ticketModal"
+              >
+                FREE
+              </button>
+          )}
         </Col>
       </Row>
       </Grid>

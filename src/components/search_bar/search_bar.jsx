@@ -8,10 +8,13 @@ import SearchBarFormField from "./search_bar_form_field";
 import { Grid, Row, Col } from "../grid";
 import "./search_bar_styles.scss"
 
+// SearchBar allows user to sort content in the upcoming page and archive page
+// using genre, artist name or date
 const SearchBar = () => {
-    const [genre_labels, setGenreLabels] = useState(["Indie", "Rock", "Jazz"]);
-    const [artist_labels, setArtistLabels] = useState(["Jonathan Dely", "Stout", "Grasso"]);
-    const [date_labels, setDateLabels] = useState(["May 10", "May 20", "May 30"]);
+    // Define state variavles for the option labels in each dropdown search bar
+    const [genre_labels, setGenreLabels] = useState(["Indie", "Rock", "Jazz"]); // Genre labels
+    const [artist_labels, setArtistLabels] = useState(["Jonathan Dely", "Stout", "Grasso"]); // Artist labels
+    const [date_labels, setDateLabels] = useState(["May 10", "May 20", "May 30"]); // Date labels
 
     useEffect(() => {
         // DO API CALL HERE
