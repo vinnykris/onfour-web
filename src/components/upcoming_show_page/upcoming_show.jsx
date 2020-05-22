@@ -111,7 +111,7 @@ const UpcomingShow = () => {
 
 export default UpcomingShow;
 
-{
+// {
   /*
 
 const upcoming_show = () => {
@@ -164,4 +164,4 @@ const upcoming_show = () => {
 export default upcoming_show;
 
 */
-}
+// }
