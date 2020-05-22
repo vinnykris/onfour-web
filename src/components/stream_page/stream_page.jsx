@@ -10,13 +10,13 @@ import Amplify from "aws-amplify";
 import awsmobile from "../../apis/subscription_db";
 
 // Component Imports
-// import VideoPlayer from "./video_player";
+// import VideoPlayer from "./video_player_old";
 import Chat from "../chat/stream_chat";
 import Join from "../chat/join_chat";
 import { Grid, Row, Col } from "../grid";
 // import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
-import CountdownTimer from "./clock";
+import VideoPlayer from "./video_player";
 
 // Styles Imports
 import "./stream_styles.scss";
@@ -33,7 +33,7 @@ const StreamPage = () => {
   const [email, setEmail] = useState(""); // User email input for subscription
   const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
   const [scroll, setScroll] = useState(true); // Auto-scroll
-  const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
+  // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
   const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
 
   // Gets dimensions of screen and sends warnings to console
@@ -85,9 +85,9 @@ const StreamPage = () => {
   }
 
   // Hides popup if closed
-  const hidePopup = () => {
-    setShowAlert(false);
-  };
+  // const hidePopup = () => {
+  //   setShowAlert(false);
+  // };
 
   // Opens link to paypal account for musician
   const donatePaypal = () => {
@@ -102,7 +102,8 @@ const StreamPage = () => {
       }}
     >
       <div className="stream-page-content">
-        {show_alert ? (
+        {/* BELOW IS THE CODE FOR THE POPUP MODAL*/}
+        {/* {show_alert ? (
           <div>
             <div className="popup-desktop">
               <form className="waiting-msg-box">
@@ -122,7 +123,6 @@ const StreamPage = () => {
                 </div>
               </form>
             </div>
-
             <div className="popup-mobile">
               <form className="waiting-msg-box">
                 <span className="popup-close" onClick={hidePopup}>
@@ -142,7 +142,7 @@ const StreamPage = () => {
               </form>
             </div>
           </div>
-        ) : null}
+        ) : null} */}
         {!is_mobile ? (
           <Grid>
             <Row>
@@ -150,14 +150,9 @@ const StreamPage = () => {
               <Col size={7}>
                 <div className="stream-main">
                   <div className="stream-wrapper">
-                    {/* <VideoPlayer
-                      url={
-                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                      }
-                    /> */}
-                    <CountdownTimer 
+                    <VideoPlayer
                     url={"https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"}>
-                    </CountdownTimer>
+                    </VideoPlayer>
                   </div>
                 </div>
                 {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
@@ -306,14 +301,9 @@ const StreamPage = () => {
               <Col size={1}>
                 <div className="stream-main-mobile">
                   <div className="stream-wrapper-mobile">
-                    {/* <VideoPlayer
-                      url={
-                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                      }
-                    /> */}
-                    <CountdownTimer 
+                    <VideoPlayer 
                     url={"https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"}>
-                    </CountdownTimer>
+                    </VideoPlayer>
                   </div>
                 </div>
                 {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}

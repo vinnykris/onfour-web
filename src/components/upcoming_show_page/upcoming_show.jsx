@@ -4,7 +4,7 @@ import searchBar from "../search_bar/search_bar";
 import jon_may_10 from "../../images/upcoming_shows/Jon_may10_cropped.jpg";
 import concert from "../../images/upcoming_shows/concert_placeholder.jpeg";
 // import * as mutations from "../../graphql/mutations";
-import CountdownTimer from "../stream_page/clock";
+import CountdownTimer from "../stream_page/video_player";
 import Modal from "../payment/ticket_modal";
 // import { API, graphqlOperation } from "aws-amplify";
 
@@ -31,7 +31,7 @@ const upcoming_show = () => {
           </Col>
         </Row>
         <Row>
-          <div class="col-md-8 column-in-center">
+          <div class="col-md-4">
             <FeaturedContent
               img={jon_may_10}
               name={"Jonathan Dely"}
@@ -42,9 +42,18 @@ const upcoming_show = () => {
               time={"8PM EST"}
             />
           </div>
-        </Row>
-        <Row>
-          <div class="col-md-8 column-in-center">
+          <div class="col-md-4">
+            <FeaturedContent
+              img={concert}
+              name={"Jonathan Dely"}
+              concert_name={"Mother's Day Concert"}
+              date={"Sunday | 20 May 2020"}
+              month={"MAY"}
+              day={10}
+              time={"8PM EST"}
+            />
+          </div>
+          <div class="col-md-4">
             <FeaturedContent
               img={concert}
               name={"Jonathan Dely"}
@@ -57,7 +66,64 @@ const upcoming_show = () => {
           </div>
         </Row>
         <Row>
-          <div class="col-md-8 column-in-center">
+          <div class="col-md-4">
+            <FeaturedContent
+              img={concert}
+              name={"Jonathan Dely"}
+              concert_name={"Mother's Day Concert"}
+              date={"Sunday | 20 May 2020"}
+              month={"MAY"}
+              day={10}
+              time={"8PM EST"}
+            />
+          </div>
+          <div class="col-md-4">
+            <FeaturedContent
+              img={concert}
+              name={"Jonathan Dely"}
+              concert_name={"Mother's Day Concert"}
+              date={"Sunday | 20 May 2020"}
+              month={"MAY"}
+              day={10}
+              time={"8PM EST"}
+            />
+          </div>
+          <div class="col-md-4">
+            <FeaturedContent
+              img={concert}
+              name={"Jonathan Dely"}
+              concert_name={"Mother's Day Concert"}
+              date={"Sunday | 20 May 2020"}
+              month={"MAY"}
+              day={10}
+              time={"8PM EST"}
+            />
+          </div>
+        </Row>
+        <Row>
+          <div class="col-md-4">
+            <FeaturedContent
+              img={concert}
+              name={"Jonathan Dely"}
+              concert_name={"Mother's Day Concert"}
+              date={"Sunday | 20 May 2020"}
+              month={"MAY"}
+              day={10}
+              time={"8PM EST"}
+            />
+          </div>
+          <div class="col-md-4">
+            <FeaturedContent
+              img={concert}
+              name={"Jonathan Dely"}
+              concert_name={"Mother's Day Concert"}
+              date={"Sunday | 20 May 2020"}
+              month={"MAY"}
+              day={10}
+              time={"8PM EST"}
+            />
+          </div>
+          <div class="col-md-4">
             <FeaturedContent
               img={concert}
               name={"Jonathan Dely"}

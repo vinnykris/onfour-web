@@ -23,6 +23,10 @@
     margin: 0 auto;
 }
 
+.centered-row {
+  align-items: center;
+}
+
 .search-bar {
   // min-height: 200px;
   background-color: #1b1b1b;
@@ -134,7 +138,8 @@
   text-align: left;
   width: 10%;
   font-size: 2rem;
-  margin-top: -25%;
+  margin-top: -50%;
+  margin-left: 10px;
   @include respond-to("small") {
     margin-top: -60%;
   }
