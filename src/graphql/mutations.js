@@ -26,6 +26,7 @@ export const createRegistration = `mutation createOnfour_registration($input: Cr
 }
 `;
 
+// Mutation to create an entry in our upcoming shows DB when a musician registers a concert
 export const createUpcoming = `mutation createFutureConcerts($input: CreateFutureConcertsInput!) {
   createFutureConcerts(input: $input) {
     url

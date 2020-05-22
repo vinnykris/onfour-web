@@ -13,6 +13,8 @@ export const retrieveName = `query listOnfour_registers(
     }
   }`;
 
+// Query to retrieve the concerts paid for by the logged in user based on their email from
+// the registration DB table
 export const retrieveConcert = `query listOnfour_registrations(
     $filter: TableOnfour_registrationFilterInput
   ) {
