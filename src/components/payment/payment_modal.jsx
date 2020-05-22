@@ -1,14 +1,19 @@
+// React Imports
 import React from "react";
+
+// Component Imports
 import PaymentBox from "./payment_box";
 
-const modal = () => {
+// PaymentModal is a modal wrappper for the PaymentBox component 
+// Each modal is identified by its id
+const PaymentModal = () => {
   return (
     <div
       className="modal"
-      id="exampleModal"
+      id="paymentModal"
       tapindex="-1"
       role="dialog"
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby="paymentModalLabel"
       aria-hidden="true"
       data-backdrop="false"
     >
@@ -17,4 +22,4 @@ const modal = () => {
   );
 };
 
-export default modal;
+export default PaymentModal;

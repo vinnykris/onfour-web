@@ -1,30 +1,37 @@
+// React Imports
 import React, { useState } from "react";
-import "./payment_styles.scss";
-import {
-    useStripe,
-    useElements,
-    CardElement,
-} from "@stripe/react-stripe-js";
-import FormField from "./FormField";
+
+// Stripe Imports
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import stripeTokenHandler from "./stripe";
-import CurrencyField from "./CurrencyField";
 
+// Component Imports
+import FormField from "./form_field";
+import CurrencyField from "./currency_field";
 
+// Styles Imports
+import "./payment_styles.scss";
+
+// The CheckoutForm component defines the userflow and layout of the payment form
+// It contains function that calls the Stripe backend with AWS lambda function
 const CheckoutForm = () => {
+    // Stripe constants
     const stripe = useStripe();
     const elements = useElements();
-    const [payed, setPayed] = useState(false);
-    const [needConfirm, setNeedConfirm] = useState(true);
-    const [paymentMessage, setMessage] = useState("");
-    const [displayErr, setDisplayErr] = useState(false);
-    const [waiting, setWaiting] = useState(false);
 
-    // state variables for the information inside payment form
-    const [amount_value, setAmount] = useState('');
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    // State variables for diffenet payment form display
+    const [payed, setPayed] = useState(false); // Variable to show the payment success message
+    const [need_confirm, setNeedConfirm] = useState(true); // Variable to show the CONFIRM button
+    const [payment_message, setMessage] = useState(""); // Variable to store the payment error message
+    const [display_err, setDisplayErr] = useState(false); // Variable to display error message
+    const [waiting, setWaiting] = useState(false); // Variable to display processing message
 
+    // State variables for the information inside payment form
+    const [amount_value, setAmount] = useState(''); // The amount of money the user input
+    const [name, setName] = useState(''); // The input username
+    const [email, setEmail] = useState(''); // The input user's email
 
+    // Style defination for card information input section
     const iframeStyles = {
         base: {
             color: "#303096",
@@ -43,12 +50,15 @@ const CheckoutForm = () => {
         }
     };
 
+    // Input content defination for card input information
     const cardElementOpts = {
         iconStyle: "solid",
         style: iframeStyles,
         hidePostalCode: true
     };
 
+    // This function set needConfirm to false
+    // It is called after the user clicks the PAY button
     const needConfirmation = (event) => {
         event.preventDefault();
         if (!stripe || !elements) {
@@ -59,6 +69,8 @@ const CheckoutForm = () => {
         setNeedConfirm(false);
     };
 
+    // This function gets called when user closed the payment modal
+    // It reset the status of the payment modal back to original
     const resetPayment = (event) =>{
         event.preventDefault();
         setPayed(false);
@@ -70,6 +82,8 @@ const CheckoutForm = () => {
         setEmail('');
     };
 
+    // This function gets called after user clicked the CONFIRM button
+    // It's sending the Stripe token to the AWS lambda function for executing the payment
     const submitPayment = async (event) =>{
         event.preventDefault();
         setWaiting(true);
@@ -83,20 +97,18 @@ const CheckoutForm = () => {
         const card = elements.getElement(CardElement);
         const result = await stripe.createToken(card);
 
-        console.log("test1", result);
-
         if (result.error) {
             // Show error to your customer.
             console.log(result.error.message);
         } else {
-            console.log("test2");
-            // Send the token to your server.
-            // This function does not exist yet; we will define it in the next step.
+            // Send the token to AWS lambda function
             const payment_result = await stripeTokenHandler(result.token, Math.round(amount_value*100), name, email);
             setMessage(payment_result);
             if (payment_result === "Charge processed successfully!") {
+                // if payment succeeds, setPay to true to display the payment success message
                 setPayed(true);
             } else {
+                // if there is an error, display the error and change the processing message back to the CONFIRM button
                 setNeedConfirm(true);
                 setDisplayErr(true);
                 setWaiting(false);
@@ -118,8 +130,8 @@ const CheckoutForm = () => {
                                 </button>
 
                                 <br></br>
-                                {displayErr && (
-                                    <p className='error-msg'>{paymentMessage}</p>
+                                {display_err && (
+                                    <p className='error-msg'>{payment_message}</p>
                                 )}
                                 <CurrencyField
                                     className="currency-form-input"
@@ -155,7 +167,7 @@ const CheckoutForm = () => {
                                 <br></br>
                                 <CardElement options={cardElementOpts}/>
                                 <br></br>
-                                {needConfirm ? (
+                                {need_confirm ? (
                                     <button className="payment-button" type="toConfirm" disabled={!stripe} onClick={needConfirmation}>
                                         Pay
                                     </button>
@@ -185,11 +197,6 @@ const CheckoutForm = () => {
                                 </button>
                                 <br></br>
                                 <div className = "pay_sucess_msg">Payment Successful!</div>
-                                {/* if (messageRec) {
-                                    return ();
-                                } else {
-                                    return (<div className="pay_sucess_msg"></div>);
-                                }; */}
                             </div>
                         );
                     }
@@ -199,10 +206,9 @@ const CheckoutForm = () => {
     );
 };
 
-
-// const stripePromise = loadStripe("pk_test_QYP6EIav9kdtsfLIRkarusKO00YsyMSiOK");
-
-const payment_box = () => {
+// PaymentBox is a wrapper component for CheckoutForm
+// It is used for cleaner layout
+const PaymentBox = () => {
     return (
         <div>
             <br></br>
@@ -216,4 +222,4 @@ const payment_box = () => {
     );
 };
 
-export default payment_box;
+export default PaymentBox;
