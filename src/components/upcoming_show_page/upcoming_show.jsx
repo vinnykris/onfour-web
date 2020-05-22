@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Row, Col } from "../grid";
-import "./upcoming_show_page_styles.scss";
 import FeaturedContent from "./featured_content";
 import searchBar from "../search_bar/search_bar";
 import jon_may_10 from "../../images/upcoming_shows/Jon_may10_cropped.jpg";
 import concert from "../../images/upcoming_shows/concert_placeholder.jpeg";
 // import * as mutations from "../../graphql/mutations";
 import CountdownTimer from "../stream_page/clock";
-import Amplify from "aws-amplify";
-import awsmobile from "../../AppSync";
 import Modal from "../payment/ticket_modal";
 // import { API, graphqlOperation } from "aws-amplify";
 
@@ -16,7 +12,6 @@ import Modal from "../payment/ticket_modal";
 import { Grid, Row, Col } from "../grid";
 import "./upcoming_show_page_styles.scss";
 
-Amplify.configure(awsmobile);
 
 
 const upcoming_show = () => {
@@ -29,7 +24,7 @@ const upcoming_show = () => {
             <p>{new Date().toLocaleString()}</p>
           </Col>
           <Col size={1}>
-            <CountdownTimer></CountdownTimer>
+            <p>{Date.now()}</p>
           </Col>
           <Col size={1}>
             <p>{+new Date("2020-06-04") - +new Date()}</p>
@@ -41,7 +36,7 @@ const upcoming_show = () => {
               img={jon_may_10}
               name={"Jonathan Dely"}
               concert_name={"Mother's Day Concert"}
-              date={"Sunday, May 20, 2020"}
+              date={"Sunday | 20 May 2020"}
               month={"MAY"}
               day={10}
               time={"8PM EST"}
@@ -54,7 +49,7 @@ const upcoming_show = () => {
               img={concert}
               name={"Jonathan Dely"}
               concert_name={"Mother's Day Concert"}
-              date={"Sunday, May 20, 2020"}
+              date={"Sunday | 20 May 2020"}
               month={"MAY"}
               day={10}
               time={"8PM EST"}
@@ -67,7 +62,7 @@ const upcoming_show = () => {
               img={concert}
               name={"Jonathan Dely"}
               concert_name={"Mother's Day Concert"}
-              date={"Sunday, May 20, 2020"}
+              date={"Sunday | 20 May 2020"}
               month={"MAY"}
               day={10}
               time={"8PM EST"}

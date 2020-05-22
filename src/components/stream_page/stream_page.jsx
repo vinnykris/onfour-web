@@ -16,6 +16,7 @@ import Join from "../chat/join_chat";
 import { Grid, Row, Col } from "../grid";
 import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
+import CountdownTimer from "./clock";
 
 // Styles Imports
 import "./stream_styles.scss";
@@ -149,11 +150,12 @@ const StreamPage = () => {
               <Col size={7}>
                 <div className="stream-main">
                   <div className="stream-wrapper">
-                    <VideoPlayer
+                    {/* <VideoPlayer
                       url={
                         "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                       }
-                    />
+                    /> */}
+                    <CountdownTimer url={"https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"}></CountdownTimer>
                   </div>
                 </div>
                 {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
@@ -302,11 +304,12 @@ const StreamPage = () => {
               <Col size={1}>
                 <div className="stream-main-mobile">
                   <div className="stream-wrapper-mobile">
-                    <VideoPlayer
+                    {/* <VideoPlayer
                       url={
                         "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                       }
-                    />
+                    /> */}
+                    <CountdownTimer url={"https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"}></CountdownTimer>
                   </div>
                 </div>
                 {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}

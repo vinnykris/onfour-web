@@ -5,9 +5,9 @@ import {
     useElements,
     CardElement,
 } from "@stripe/react-stripe-js";
-import FormField from "./FormField";
+import FormField from "./form_field";
 import stripeTokenHandler from "./stripe";
-import CurrencyField from "./CurrencyField";
+import CurrencyField from "./currency_field";
 
 
 const CheckoutForm = () => {

@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-export const createOnfour_current = `mutation createOnfour_current($input: CreateOnfour_currentInput!) {
-  createOnfour_current(input: $input) {
-    email
-    paid
-=======
 // This file contains all mutations that can be called to interact with
 // our AppSync APIs
 
@@ -15,7 +9,6 @@ export const createEmailSubscription = `mutation createOnfour_current($input: Cr
       email
       paid
     }
->>>>>>> 65b05f444333d4f1c2f16cddd3babfda6c2338ba
   }
 }
 `;

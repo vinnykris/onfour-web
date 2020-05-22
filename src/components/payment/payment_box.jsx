@@ -206,14 +206,9 @@ const CheckoutForm = () => {
     );
 };
 
-<<<<<<< HEAD
-
-const payment_box = () => {
-=======
 // PaymentBox is a wrapper component for CheckoutForm
 // It is used for cleaner layout
 const PaymentBox = () => {
->>>>>>> 65b05f444333d4f1c2f16cddd3babfda6c2338ba
     return (
         <div>
             <br></br>

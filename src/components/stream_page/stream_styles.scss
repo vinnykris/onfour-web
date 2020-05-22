@@ -310,7 +310,15 @@
 }
 
 .countdown-timer {
-  color: #e2e2e2;
+  color: white;
+  font-weight: $medium-weight;
+}
+
+.countdown-wrapper {
+  margin-top: -21%;
+  @include respond-to("small") {
+    margin-top: -10%;
+  }
 }
 
 // .modal-backdrop {
