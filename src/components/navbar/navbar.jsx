@@ -46,11 +46,9 @@ const NavBar = () => {
         <Grid>
           <Row>
             <Col size={1}>
-              <img
-                className="navbar-close"
-                onClick={closeMenu}
-                src={closeIcon}
-              ></img>
+              <span className="navbar-close" onClick={closeMenu}>
+                <i className="fa fa-times fa-2x close-icon"></i>
+              </span>
             </Col>
           </Row>
           <div className="overlay-content">
