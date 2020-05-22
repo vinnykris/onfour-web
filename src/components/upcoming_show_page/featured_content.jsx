@@ -1,13 +1,15 @@
+// React Imports
 import React from "react";
+
+// Styling Imports
 import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
+// FeaturedContent defines the layout of each upcoming concert elements
+// It takes in concert's information as input
 const FeaturedContent = ({ img, name, date, time }) => {
-  const joinSubmit = () => {
-    console.log("clicked!")
-  };
   return (
-    <div className="featured-content" onClick={joinSubmit}>
+    <div className="featured-content">
       <Grid>
         <Row>
           <Col size={1}></Col>
