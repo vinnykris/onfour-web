@@ -27,8 +27,6 @@ const FeaturedContent = ({ img, name, concert_name, date, month, day, time }) =>
               <Row>
                 <Col size={3}>
                   <p className="time">{date} | {time}</p>
-                  {/* <p className="date">{date}</p> */}
-                  
                 </Col>
               </Row>
           </Col>
@@ -41,7 +39,7 @@ const FeaturedContent = ({ img, name, concert_name, date, month, day, time }) =>
             data-target="#ticketModal"
           >
             Ticket   >
-                  </button>{" "}
+          </button>{" "}
         </Col>
       </Row>
       </Grid>

@@ -1,9 +1,18 @@
-// SSEARCH BAR COMPONENT STYLING
+// SEARCH BAR COMPONENT STYLING
 
 @import "../../styles";
 
+.search-bar-grid {
+  display: grid;
+  // grid-template-columns: repeat( auto-fill, minmax(200px, 1fr));
+  // grid-template-rows: repeat( auto-fill, minmax(230px, 1fr));
+  grid-gap: 30px;
+  padding-bottom: 3%;
+  background: black;
+}
+
 .search-bar {
-  min-height: 200px;
+  // min-height: 200px;
   background-color: #1b1b1b;
   padding: 6% 6%;
   object-fit: cover;
