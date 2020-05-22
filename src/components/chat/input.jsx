@@ -1,6 +1,10 @@
+// React imports
 import React from "react";
+
+// Styles imports
 import "./chat.scss";
 
+// Component for input field for chat
 const Input = ({ message, setMessage, sendMessage }) => (
   <form className="form">
     <input

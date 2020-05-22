@@ -21,21 +21,22 @@ import Modal from "../payment/payment_modal";
 import "./stream_styles.scss";
 
 // Image imports
-import VenmoCode from "../../images/jon_dely_venmo.jpeg";
-import closeIcon from "../../images/close_icon.png";
+import VenmoCode from "../../images/venmo_codes/venmo_code.png";
 
 Amplify.configure(awsmobile);
 
+// Main stream page component. Holds stream video, chat, and payment functionality
 const StreamPage = () => {
-  const [showChat, setShowChat] = useState(false);
-  const [chatName, setChatName] = useState("");
-  const [email, setEmail] = useState("");
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-  const [scroll, setScroll] = useState(true);
-  const [showAlert, setShowAlert] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
+  const [show_chat, setShowChat] = useState(false); // If chat should be shown
+  const [chat_name, setChatName] = useState(""); // Sets user name for chat
+  const [email, setEmail] = useState(""); // User email input for subscription
+  const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
+  const [scroll, setScroll] = useState(true); // Auto-scroll
+  const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
+  const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
 
-  const find_dimensions = (layout) => {
+  // Gets dimensions of screen and sends warnings to console
+  const findDimensions = (layout) => {
     const { x, y, width, height } = layout;
     if (width < 600) {
       setIsMobile(true);
@@ -48,15 +49,18 @@ const StreamPage = () => {
     console.warn(height);
   };
 
+  // Function passed as prop to join chat
   const joinSubmit = (name, mode) => {
     setChatName(name);
     setShowChat(mode);
   };
 
+  // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
   };
 
+  // Function when user submits email
   const emailSubmit = (event) => {
     event.preventDefault();
 
@@ -73,15 +77,18 @@ const StreamPage = () => {
     setEmailSubmitted(true);
   };
 
+  // Auto-scrolls on first navigation
   if (scroll) {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setScroll(false);
   }
 
-  const showPopup = () => {
+  // Hides popup if closed
+  const hidePopup = () => {
     setShowAlert(false);
   };
 
+  // Opens link to paypal account for musician
   const donatePaypal = () => {
     const url = "http://paypal.me/jonathandely";
     window.open(url, "_blank");
@@ -90,20 +97,17 @@ const StreamPage = () => {
   return (
     <View
       onLayout={(event) => {
-        find_dimensions(event.nativeEvent.layout);
+        findDimensions(event.nativeEvent.layout);
       }}
     >
       <div className="stream-page-content">
-        {showAlert ? (
+        {show_alert ? (
           <div>
             <div className="popup-desktop">
               <form className="waiting-msg-box">
-                <img
-                  className="popup-close"
-                  src={closeIcon}
-                  alt="close-popup"
-                  onClick={showPopup}
-                ></img>
+                <span className="popup-close" onClick={hidePopup}>
+                  <i className="fa fa-times fa-2x close-icon"></i>
+                </span>
                 <div className="popup-content">
                   <h5 className="popup-header">The show hasn't started yet!</h5>
                   <p className="waiting-msg">
@@ -120,12 +124,9 @@ const StreamPage = () => {
 
             <div className="popup-mobile">
               <form className="waiting-msg-box">
-                <img
-                  className="popup-close"
-                  src={closeIcon}
-                  alt="close-popup"
-                  onClick={showPopup}
-                ></img>
+                <span className="popup-close" onClick={hidePopup}>
+                  <i className="fa fa-times close-icon"></i>
+                </span>
                 <div className="popup-content">
                   <h5 className="popup-header">The show hasn't started yet!</h5>
                   <p className="waiting-msg">
@@ -141,7 +142,7 @@ const StreamPage = () => {
             </div>
           </div>
         ) : null}
-        {!isMobile ? (
+        {!is_mobile ? (
           <Grid>
             <Row>
               <Col size={0.5}></Col>
@@ -155,7 +156,8 @@ const StreamPage = () => {
                     />
                   </div>
                 </div>
-                <Row>
+                {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
+                {/* <Row>
                   <Col size={2}>
                     <Row>
                       <h2 className="artist-name">Jonathan Dely</h2>
@@ -170,13 +172,13 @@ const StreamPage = () => {
                   <Col size={1} className="social-bar-center">
                     <SocialBar />
                   </Col>
-                </Row>
+                </Row> */}
               </Col>
               <Col size={3}>
                 <div className="chat-main">
                   <div className="chat-wrapper">
-                    {showChat ? (
-                      <Chat chatName={chatName} chatStatus={chatStatus} />
+                    {show_chat ? (
+                      <Chat chat_name={chat_name} chatStatus={chatStatus} />
                     ) : (
                       <Join joinSubmit={joinSubmit} />
                     )}
@@ -254,7 +256,7 @@ const StreamPage = () => {
                   mailing list:
                 </p>
                 {(() => {
-                  if (emailSubmitted) {
+                  if (email_submitted) {
                     return (
                       <p className="subscribe-success">
                         Thank you and stay tuned!
@@ -291,20 +293,11 @@ const StreamPage = () => {
                     );
                   }
                 })()}
-                {/* </div> */}
               </Col>
             </Row>
           </Grid>
         ) : (
           <Grid className="mobile-grid-stream">
-            {/* <div className="main-content-mobile-stream">
-          <Row>
-            <Col size={1}>
-              <h3 className="header-mobile"> Stream </h3>
-            </Col>
-          </Row>
-        </div> */}
-
             <Row>
               <Col size={1}>
                 <div className="stream-main-mobile">
@@ -316,7 +309,8 @@ const StreamPage = () => {
                     />
                   </div>
                 </div>
-                <Row>
+                {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
+                {/* <Row>
                   <Col size={1}>
                     <Row>
                       <h2 className="artist-name">Jonathan Dely</h2>
@@ -332,7 +326,7 @@ const StreamPage = () => {
                       <SocialBar />
                     </Col>
                   </Row>
-                </div>
+                </div> */}
 
                 <div className="main-content-mobile">
                   {/* PAYMENT SECTION */}
@@ -378,7 +372,7 @@ const StreamPage = () => {
                     <Row>
                       <Col size={1}>
                         {(() => {
-                          if (emailSubmitted) {
+                          if (email_submitted) {
                             return <p>Thank you and stay tuned!</p>;
                           } else {
                             return (

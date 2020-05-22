@@ -1,9 +1,17 @@
+// React imports
 import React, { useState } from "react";
-import "./chat.scss";
+
+// Component imports
 import { Grid, Row, Col } from "../../components/grid";
 
+// Styles imports
+import "./chat.scss";
+
+//
 const Join = ({ joinSubmit, mode }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(""); // Manages state of user's chat name
+
+  // Function that is called on name submission
   const handleSubmit = () => {
     if (name.length > 30) {
       alert("Username cannot exceed 30 characters.");
@@ -12,6 +20,7 @@ const Join = ({ joinSubmit, mode }) => {
       joinSubmit(name, mode);
     }
   };
+
   return (
     <div className="join-outer-container">
       <Grid className="join-chat-grid">
@@ -58,22 +67,6 @@ const Join = ({ joinSubmit, mode }) => {
           <Col size={1}></Col>
         </Row>
       </Grid>
-      {/* <div className="join-inner-container">
-        <h4 className="heading">Join the Chat</h4>
-        <fieldset>
-        <fieldset>
-          <input
-            placeholder="Name"
-            className="join-input"
-            type="text"
-            onChange={(event) => setName(event.target.value)}
-          />{" "}
-        </fieldset>
-        <button className="button mt-20" type="submit" onClick={handleSubmit}>
-          Join
-        </button>
-        </fieldset>
-      </div> */}
     </div>
   );
 };

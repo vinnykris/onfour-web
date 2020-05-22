@@ -1,31 +1,42 @@
+// React imports
 import React, { useState, useEffect } from "react";
+
+// Module imports
 import io from "socket.io-client";
-import "./chat.scss";
+
+// Component imports
 import InfoBar from "./info_bar";
 import Input from "./input";
 import Messages from "./messages";
 
-let socket;
+// Styles imports
+import "./chat.scss";
 
-const Chat = ({ chatName, chatStatus }) => {
-  const [name, setName] = useState(chatName);
-  const [room, setRoom] = useState("CHAT");
-  const [users, setUsers] = useState("");
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
-  const ENDPOINT = "https://onfour-chat.herokuapp.com/";
+let socket; // Socket declaration
 
+// Main chat component
+const Chat = ({ chat_name, chat_status }) => {
+  const [name, setName] = useState(chat_name); // User's chat name
+  const [room, setRoom] = useState("CHAT"); // Title of chat and room all users are in
+  const [users, setUsers] = useState(""); // List of users in chat room
+  const [message, setMessage] = useState(""); // Holds inputted message
+  const [messages, setMessages] = useState([]); // Holds list of messages
+  const ENDPOINT = "https://onfour-chat.herokuapp.com/"; // Chat server endpoint
+
+  // Function that is called when user leaves chat
   const closeChat = () => {
-    chatStatus(false);
+    chat_status(false);
     socket.disconnect();
   };
 
+  // Function called on mount
   useEffect(() => {
-    socket = io(ENDPOINT);
+    socket = io(ENDPOINT); // Connect socket to server
 
     setName(name);
     setRoom(room);
 
+    // Emit event when user joins chat room
     socket.emit("join", { name, room }, (error) => {
       if (error) {
         alert(error);
@@ -34,6 +45,7 @@ const Chat = ({ chatName, chatStatus }) => {
     });
   }, [ENDPOINT, name, room]);
 
+  // Socket set to listen for messages and new users
   useEffect(() => {
     socket.on("message", (message) => {
       setMessages((messages) => [...messages, message]);
@@ -44,6 +56,7 @@ const Chat = ({ chatName, chatStatus }) => {
     });
   }, []);
 
+  // Called when user sends a message
   const sendMessage = (event) => {
     event.preventDefault();
     if (message) {
@@ -55,6 +68,7 @@ const Chat = ({ chatName, chatStatus }) => {
     }
   };
 
+  // Called on unmount
   useEffect(() => () => closeChat(), []);
 
   return (
