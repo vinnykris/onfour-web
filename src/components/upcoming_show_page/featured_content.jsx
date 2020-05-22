@@ -1,7 +1,11 @@
+// React Imports
 import React from "react";
+
+// Styling Imports
 import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
+<<<<<<< HEAD
 const FeaturedContent = ({ img, name, concert_name, date, month, day, time }) => {
   return (
     <Grid className="featured-content">
@@ -13,6 +17,28 @@ const FeaturedContent = ({ img, name, concert_name, date, month, day, time }) =>
           </div>
         </Col>
       <Col size={3} className="show-content-bar">
+=======
+// FeaturedContent defines the layout of each upcoming concert elements
+// It takes in concert's information as input
+const FeaturedContent = ({ img, name, date, time }) => {
+  return (
+    <div className="featured-content">
+      <Grid>
+        <Row>
+          <Col size={1}></Col>
+          <Col size={3}>
+            <div className="date-content-bar">
+              <Col size={0.5}>
+              </Col>
+              <Col size={2.5}>
+                <img className="feature-placeholder" src={img} alt="content-img"></img>
+              </Col>
+              
+            </div>
+          </Col>
+          <Col size={3}>
+            <div className="show-content-bar">
+>>>>>>> 65b05f444333d4f1c2f16cddd3babfda6c2338ba
               <Row>
                 <Col size={3}>
                   <p className="artist-name">{name} : {concert_name}</p>

@@ -1,11 +1,17 @@
+// React
 import React from "react";
+// Components
 import { Grid, Row, Col } from "../grid";
+// Styles
 import "./footer_styles.scss";
+// Images
 import white_logo from "../../images/logos/logo_blackbackground.png";
 
+// Exports Footer components, containing logo, contact email, copyright information,
+// and social media links
 const Footer = () => {
   return (
-    <div class="footer-container">
+    <div className="footer-container">
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -14,14 +20,6 @@ const Footer = () => {
         <Row>
           <Col size={1}></Col>
           <Col size={5}>
-            {/* <h3>About</h3>
-            <p>
-              Onfour is a platform that empowers music fans by providing them
-              with a more intimate and unique concert-going experience.
-              Musicians live-stream studio performances to fans at
-              non-traditional venues, engaging and interacting with fans in a
-              new way.
-            </p> */}
             <img
               className="onfour-logo-footer"
               src={white_logo}
@@ -29,15 +27,11 @@ const Footer = () => {
               alt="nav-logo"
             ></img>
           </Col>
-
           <Col size={1}></Col>
           <Col size={3}>
-            <div class="footer-links">
+            <div className="footer-links">
               <h3>Quick Links</h3>
               <ul>
-                {/* <li>
-                <a href="">About Us</a>
-              </li> */}
                 <li>
                   <a
                     href="mailto:onfour.box@gmail.com"
@@ -47,12 +41,6 @@ const Footer = () => {
                     Contact Us
                   </a>
                 </li>
-                {/* <li>
-                  <a href="">Donate</a>
-                </li> */}
-                {/* <li>
-                <a href="">Privacy Policy</a>
-              </li> */}
               </ul>
             </div>
           </Col>
@@ -62,17 +50,17 @@ const Footer = () => {
         <Row>
           <Col size={1}></Col>
           <Col size={5}>
-            <h6>Copyright &copy; 2020 All Rights Reserved by Onfour</h6>
+            <h6>Copyright &copy; 2020 All Rights Reserved by onfour</h6>
           </Col>
           <Col size={1}></Col>
           <Col size={3}>
-            <div class="footer-social-media">
+            <div className="footer-social-media">
               <ul>
                 <li>
                   <a
                     href="https://www.instagram.com/_onfour/"
                     target="_blank"
-                    class="fa fa-instagram"
+                    className="fa fa-instagram"
                     rel="noopener noreferrer"
                   >
                     <span className="hidden-text">Instagram Link</span>
@@ -82,7 +70,7 @@ const Footer = () => {
                   <a
                     href="https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ/featured"
                     target="_blank"
-                    class="fa fa-youtube"
+                    className="fa fa-youtube"
                     rel="noopener noreferrer"
                   >
                     <span className="hidden-text">Youtube Link</span>
@@ -92,7 +80,7 @@ const Footer = () => {
                   <a
                     href="https://twitter.com/_Onfour"
                     target="_blank"
-                    class="fa fa-twitter"
+                    className="fa fa-twitter"
                     rel="noopener noreferrer"
                   >
                     <span className="hidden-text">Twitter Link</span>

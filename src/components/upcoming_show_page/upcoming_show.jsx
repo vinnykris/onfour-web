@@ -12,6 +12,10 @@ import awsmobile from "../../AppSync";
 import Modal from "../payment/ticket_modal";
 // import { API, graphqlOperation } from "aws-amplify";
 
+// Styling Imports
+import { Grid, Row, Col } from "../grid";
+import "./upcoming_show_page_styles.scss";
+
 Amplify.configure(awsmobile);
 
 
