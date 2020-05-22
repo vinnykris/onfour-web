@@ -3,9 +3,6 @@ import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
 const FeaturedContent = ({ img, name, concert_name, date, month, day, time }) => {
-  const joinSubmit = () => {
-    console.log("clicked!")
-  };
   return (
     <Grid className="featured-content">
       <Col size={3} className="date-content-bar">

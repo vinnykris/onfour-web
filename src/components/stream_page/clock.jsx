@@ -3,7 +3,7 @@ import "./stream_styles.scss";
 import ArchiveVideo from "../archive_page/archive_video";
 
 function CountdownTimer() {
-    const [show_start_time, setStartTime] = useState("2020-05-21T14:36:00.000-04:00");
+    const [show_start_time, setStartTime] = useState("2020-05-22T14:36:00.000-04:00");
 
     const calculateTimeLeft = () => {
         const difference = +new Date(show_start_time) - +new Date();
