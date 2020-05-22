@@ -26,8 +26,8 @@ export const createRegistration = `mutation createOnfour_registration($input: Cr
 }
 `;
 
-export const createUpcoming = `mutation createUpcomingConcerts($input: CreateUpcomingConcertsInput!) {
-  createUpcomingConcerts(input: $input) {
+export const createUpcoming = `mutation createFutureConcerts($input: CreateFutureConcertsInput!) {
+  createFutureConcerts(input: $input) {
     url
     timePassed
     date
@@ -36,6 +36,7 @@ export const createUpcoming = `mutation createUpcomingConcerts($input: CreateUpc
     concertName
     description
     price
+    concertId
   }
 }
 `;

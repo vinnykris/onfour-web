@@ -39,7 +39,7 @@ const Register = () => {
       email: email,
       first: first,
       last: last,
-      concert: "",
+      concert: "0",
     };
 
     // If the password is long enough, then pass the sign up payload into the

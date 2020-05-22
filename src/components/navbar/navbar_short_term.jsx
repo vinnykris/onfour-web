@@ -13,7 +13,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import Modal from "../payment/payment_modal";
+import Modal from "../sign_in/sign_in_model";
 
 const NavBarShortTerm = () => {
   const [login_val, setLogin] = useState("SIGN IN");
@@ -183,6 +183,11 @@ const NavBarShortTerm = () => {
                 </DropdownItem>
                 <DropdownItem href="/login" active>
                   {login_val}
+                </DropdownItem>
+                <DropdownItem>
+                  <button data-toggle="modal" data-target="#sign_in_Modal">
+                    Donate with Card
+                  </button>{" "}
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
