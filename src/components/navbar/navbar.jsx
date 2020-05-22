@@ -4,7 +4,6 @@ import { NavLink, useLocation } from "react-router-dom";
 
 // Component imports
 import { Grid, Row, Col } from "../grid";
-import closeIcon from "../../images/close_icon.png";
 
 // Image imports
 import new_logo_white from "../../images/logos/new_logo_white.png";
