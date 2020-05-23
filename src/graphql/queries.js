@@ -24,3 +24,20 @@ export const query_name2 = `  query listOnfour_registers(
       }
     }
   }`;
+
+export const list_upcoming_concerts = `query listFutureConcerts {
+    listFutureConcerts {
+      items {
+        id
+        url
+        timePassed
+        date
+        time
+        artist
+        concertName
+        description
+        price
+        concertId
+      }
+    }
+  }`;

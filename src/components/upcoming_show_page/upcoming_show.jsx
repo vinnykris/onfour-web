@@ -8,96 +8,57 @@ import SearchBar from "../search_bar/search_bar";
 import Modal from "../payment/ticket_modal";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 
-// Image Imports
-import jon_may_10 from "../../images/upcoming_shows/Jon_may10_cropped.jpg";
-import concert from "../../images/upcoming_shows/concert_placeholder.jpeg";
-
 // AWS Imports
-// import * as mutations from "../../graphql/mutations";
-// import { API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+import * as queries from "../../graphql/queries";
+import Amplify from "aws-amplify";
+import awsmobile from "../../apis/subscription_db";
 
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
 
+Amplify.configure(awsmobile);
+
 // The Upcoming Show Page component
 const UpcomingShowPage = () => {
-  // List of FeaturedContent objects with upcoming show information
-  const [concerts, setConcerts] = useState([
-    <FeaturedContent
-      img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/Jon_may10_cropped.jpg"}
-      name={"Jonathan Dely"}
-      concert_name={"Mother's Day Concert"}
-      date={"Sunday | 20 May 2020"}
-      month={"MAY"}
-      day={10}
-      time={"8PM EST"}
-      ticketed={false}
-    />,
-    <FeaturedContent
-      img={concert}
-      name={"Jonathan Dely"}
-      concert_name={"Mother's Day Concert"}
-      date={"Sunday | 20 May 2020"}
-      month={"MAY"}
-      day={10}
-      time={"8PM EST"}
-      ticketed={true}
-    />,
-    <FeaturedContent
-      img={concert}
-      name={"Jonathan Dely"}
-      concert_name={"Mother's Day Concert"}
-      date={"Sunday | 20 May 2020"}
-      month={"MAY"}
-      day={10}
-      time={"8PM EST"}
-      ticketed={false}
-    />,
-    <FeaturedContent
-      img={concert}
-      name={"Jonathan Dely"}
-      concert_name={"Mother's Day Concert"}
-      date={"Sunday | 20 May 2020"}
-      month={"MAY"}
-      day={10}
-      time={"8PM EST"}
-      ticketed={false}
-    />,
-    <FeaturedContent
-      img={concert}
-      name={"Jonathan Dely"}
-      concert_name={"Mother's Day Concert"}
-      date={"Sunday | 20 May 2020"}
-      month={"MAY"}
-      day={10}
-      time={"8PM EST"}
-      ticketed={true}
-    />,
-    <FeaturedContent
-      img={concert}
-      name={"Jonathan Dely"}
-      concert_name={"Mother's Day Concert"}
-      date={"Sunday | 20 May 2020"}
-      month={"MAY"}
-      day={10}
-      time={"8PM EST"}
-      ticketed={true}
-    />,
-    <FeaturedContent
-      img={concert}
-      name={"Jonathan Dely"}
-      concert_name={"Mother's Day Concert"}
-      date={"Sunday | 20 May 2020"}
-      month={"MAY"}
-      day={10}
-      time={"8PM EST"}
-      ticketed={true}
-    />
-  ]); 
+  
+  // concerts is a list of FeaturedContent objects with upcoming show information
+  const [concerts, setConcerts] = useState([]); 
+
+  // getConcertInfo queries all elements in the future concert database
+  // and create a list of FeaturedContent objects with the data returned
+  // from the database. 
+  const getConcertInfo = async () => {
+    // Calling the API, using async and await is necessary
+    const info = await API.graphql(
+      graphqlOperation(queries.list_upcoming_concerts)
+    );
+
+    const info_list = info.data.listFutureConcerts.items; // Stores the items in databse
+    
+    // Iterate through each element in the list and add the created
+    // FeaturedContent to concerts
+    info_list.forEach((data) => {
+      setConcerts(concerts => [
+        ...concerts,
+        <FeaturedContent
+          img={data.url}
+          name={data.artist}
+          concert_name={data.concertName}
+          date={data.date}
+          month={"MAY"}
+          day={10}
+          time={data.time}
+          ticketed={data.price}
+        />
+      ]);
+    });
+  };
+
+
   useEffect(() => {
-    // DO API CALL HERE
-    // TEMPORARILY HARD CODE LIST
-  }, []);
+    getConcertInfo();
+  },[]);
 
   const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
   // Gets dimensions of screen and sends warnings to console
