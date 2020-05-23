@@ -14,7 +14,7 @@ import WaitingScreen from "../../images/backgrounds/stream_waiting_img.png";
 // of the upcoming concert. When the time is up, it will display the stream video instead
 function VideoPlayer(props) {
     // Later, this value should be extracted from the database
-    const [show_start_time, setStartTime] = useState("2020-05-23T17:17:00.000-04:00"); // Stores the start time of upcoming concert
+    const [show_start_time, setStartTime] = useState("2020-05-22T20:25:00.000-04:00"); // Stores the start time of upcoming concert
 
     // This function calculates the time difference between current time and show start time
     // and represent the difference in days, hours, minuts and seconds
