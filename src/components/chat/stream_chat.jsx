@@ -15,7 +15,7 @@ import "./chat.scss";
 let socket; // Socket declaration
 
 // Main chat component
-const Chat = ({ chat_name, chat_status }) => {
+const Chat = ({ chat_name, chatStatus }) => {
   const [name, setName] = useState(chat_name); // User's chat name
   const [room, setRoom] = useState("CHAT"); // Title of chat and room all users are in
   const [users, setUsers] = useState(""); // List of users in chat room
@@ -25,7 +25,7 @@ const Chat = ({ chat_name, chat_status }) => {
 
   // Function that is called when user leaves chat
   const closeChat = () => {
-    chat_status(false);
+    chatStatus(false);
     socket.disconnect();
   };
 
