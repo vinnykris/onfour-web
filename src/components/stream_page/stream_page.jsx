@@ -324,7 +324,10 @@ const StreamPage = () => {
                     </Col>
                   </Row>
                 </div> */}
-
+              </Col>
+            </Row>
+            <Row>
+              <Col size={1}>
                 <div className="main-content-mobile">
                   {/* PAYMENT SECTION */}
                   <div className="mobile-section">

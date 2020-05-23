@@ -141,9 +141,9 @@
   width: 5%;
   margin-top: -17%;
   margin-left: 5px;
-  // @include respond-to("small") {
-  //   margin-top: -17%;
-  // }
+  @include respond-to("small") {
+    margin-top: -52%;
+  }
 }
 
 .poster-text {

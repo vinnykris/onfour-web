@@ -1,5 +1,6 @@
 // React Imports
 import React, { useState, useEffect } from "react";
+import { View } from "react-native";
 
 // Component Imports
 import FeaturedContent from "./featured_content";
@@ -18,9 +19,10 @@ import concert from "../../images/upcoming_shows/concert_placeholder.jpeg";
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
 
-
+// The Upcoming Show Page component
 const UpcomingShowPage = () => {
-  const [videos, setVideos] = useState([
+  // List of FeaturedContent objects with upcoming show information
+  const [concerts, setConcerts] = useState([
     <FeaturedContent
       img={jon_may_10}
       name={"Jonathan Dely"}
@@ -111,20 +113,47 @@ const UpcomingShowPage = () => {
       time={"8PM EST"}
       ticketed={true}
     />
-  ]); // List of FeaturedContent objects with upcoming show information
-
+  ]); 
   useEffect(() => {
     // DO API CALL HERE
     // TEMPORARILY HARD CODE LIST
   }, []);
+
+  const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
+  // Gets dimensions of screen and sends warnings to console
+  const findDimensions = (layout) => {
+    const { x, y, width, height } = layout;
+    if (width < 600) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+    console.warn(x);
+    console.warn(y);
+    console.warn(width);
+    console.warn(height);
+  };
+
   return (
-    <div className="upcoming-show-page-content">
-      <Modal></Modal>
-      <SearchBar></SearchBar>
-      <div className="upcoming-show-grid">
-        <FlexibleGrid content_list={videos} num_cols={3} />
+    <View
+      onLayout={(event) => {
+        findDimensions(event.nativeEvent.layout);
+      }}
+    >
+      <div className="upcoming-show-page-content">
+        <Modal></Modal>
+        <SearchBar></SearchBar>
+        {!is_mobile ? (
+          <div className="upcoming-show-grid">
+            <FlexibleGrid content_list={concerts} num_cols={3} />
+          </div>
+        ) : (
+            <div className="upcoming-show-grid">
+              <FlexibleGrid content_list={concerts} num_cols={1} />
+            </div>
+        )}
       </div>
-    </div>
+    </View>
   );
 }
 
