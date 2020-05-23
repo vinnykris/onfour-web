@@ -65,113 +65,79 @@ const Login = () => {
 
   return (
     <div className="login-page-content">
-      <button className="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
       <Grid>
-        <Row>
-          <div className="short-term-spacer"></div>
-        </Row>
-        <Row>
-          <Col size={1}>
-            {(() => {
-              if (auth) {
-                return (
-                  <div>
-                    <h2>Hi {first}, Start exploring our concerts!</h2>
-                  </div>
-                );
-              } else {
-                return <h2> Welcome Back! </h2>;
-              }
-            })()}
-          </Col>
-        </Row>
-        <Row>
+        <div className="login-blackbox">
+          <Row>
+            <br></br>
+          </Row>
+          <Row>
+            <Col size={1}></Col>
+            <Col size={6}>
+              <form action="/" id="newsletter" onSubmit={onSubmit}>
+                <div className="form-row">
+                  <label className="label-text" for="email_slot">
+                    Email Address*
+                  </label>
+                  <input
+                    className="login-input"
+                    type="email"
+                    name="email"
+                    id="email_slot"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    required
+                  />
+                </div>
+                <br></br>
+                <div className="form-row">
+                  <label className="label-text" for="password_slot">
+                    Password*
+                  </label>
+                  <input
+                    className="login-input"
+                    type="password"
+                    name="password"
+                    id="password_slot"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    required
+                  />
+                  <div style={{ color: "red" }}>{error}</div>
+                </div>
+                <br></br>
+                {(() => {
+                  if (!auth) {
+                    return (
+                      <button type="submit" form="newsletter" value="Submit">
+                        Sign In
+                      </button>
+                    );
+                  }
+                })()}
+              </form>
+              <div>
+                {(() => {
+                  if (auth) {
+                    return (
+                      <button
+                        type="submit"
+                        form="newsletter"
+                        value="Submit"
+                        style={{ width: 300 }}
+                        onClick={onSubmitTwo}
+                      >
+                        Sign Out
+                      </button>
+                    );
+                  }
+                })()}
+              </div>
+            </Col>
+
+            <Col size={1}></Col>
+          </Row>
           <br></br>
-        </Row>
-        <Row>
-          <Col size={2}></Col>
-          <Col size={1}>
-            <form action="/" id="newsletter" onSubmit={onSubmit}>
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-                style={{ width: 300 }}
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                name="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                required
-                style={{ width: 300 }}
-              />
-              <div style={{ color: "red" }}>{error}</div>
-
-              {(() => {
-                if (!auth) {
-                  return (
-                    <button
-                      type="submit"
-                      form="newsletter"
-                      value="Submit"
-                      style={{ width: 300 }}
-                    >
-                      Sign In
-                    </button>
-                  );
-                }
-              })()}
-            </form>
-            <div>
-              {(() => {
-                if (auth) {
-                  return (
-                    <button
-                      type="submit"
-                      form="newsletter"
-                      value="Submit"
-                      style={{ width: 300 }}
-                      onClick={onSubmitTwo}
-                    >
-                      Sign Out
-                    </button>
-                  );
-                }
-              })()}
-            </div>
-          </Col>
-          <Col size={2}></Col>
-        </Row>
-
-        <Row>
-          <Col size={2}></Col>
-          <Col size={1}>
-            {(() => {
-              if (auth) {
-                return;
-              } else {
-                return (
-                  <p className="description-text">
-                    Not registered yet? Sign up <a href="/register">here</a>!
-                  </p>
-                );
-              }
-            })()}
-          </Col>
-          <Col size={2}></Col>
-        </Row>
-
-        <Row>
-          <div className="short-term-spacer"></div>
-        </Row>
+        </div>
       </Grid>
     </div>
   );

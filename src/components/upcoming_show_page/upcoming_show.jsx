@@ -6,7 +6,6 @@ import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 import { API, graphqlOperation } from "aws-amplify";
-import Modal from "../sign_in/sign_in_model";
 
 Amplify.configure(awsmobile);
 
@@ -31,7 +30,6 @@ const Upcoming_show = () => {
   };
   return (
     <div className="upcoming-page-content">
-      <Modal></Modal>
       <Grid>
         <Row></Row>
         <Row>

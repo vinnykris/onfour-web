@@ -16,12 +16,14 @@ import "./App.css";
 import "./styles.scss";
 import { Router, Switch, Route } from "react-router-dom";
 import history from "./history";
+import Modal from "./components/sign_in/sign_in_model";
 
 require("dotenv").config();
 
 function AppShortTerm() {
   return (
     <div className="App">
+      <Modal></Modal>
       <Router history={history}>
         <NavBar />
         <Switch>

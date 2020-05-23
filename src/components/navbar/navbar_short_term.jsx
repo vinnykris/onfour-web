@@ -7,13 +7,6 @@ import new_logo_black from "../../images/logos/new_logo_black.png";
 import new_logo_white from "../../images/logos/new_logo_white.png";
 import "../../styles.scss";
 import Auth from "../../apis/UserPool";
-import {
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
-import Modal from "../sign_in/sign_in_model";
 
 const NavBarShortTerm = () => {
   const [login_val, setLogin] = useState("SIGN IN");
@@ -171,26 +164,16 @@ const NavBarShortTerm = () => {
             </NavLink>
           </Col>
           <Col size={0.5}>
-            <UncontrolledDropdown setActiveFromChild>
-              <DropdownToggle tag="a">
-                <span className="user-menu">
-                  <i className="fa fa-user-o fa-2x user-icon"></i>
-                </span>
-              </DropdownToggle>
-              <DropdownMenu right className="dropdown-menu-profile">
-                <DropdownItem href="/register" active>
-                  SIGN UP
-                </DropdownItem>
-                <DropdownItem href="/login" active>
-                  {login_val}
-                </DropdownItem>
-                <DropdownItem>
-                  <button data-toggle="modal" data-target="#sign_in_Modal">
-                    Donate with Card
-                  </button>{" "}
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+            <NavLink
+              to=""
+              className={style}
+              data-toggle="modal"
+              data-target="#sign_in_Modal"
+            >
+              <span className="user-menu">
+                <i className="fa fa-user-o fa-2x user-icon"></i>
+              </span>
+            </NavLink>
           </Col>
         </Row>
       </Grid>

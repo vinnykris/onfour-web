@@ -3,8 +3,20 @@
 @import "../../styles";
 
 .login-page-content {
-  background-color: white;
+  background-color: black;
   margin-top: -1px;
   height: 60vh;
-  width: 100vh;
+  width: 100%;
+}
+
+.login-input {
+  width: 630px;
+}
+
+.login-blackbox {
+  background-color: black;
+}
+
+.label-text {
+  color: white;
 }
