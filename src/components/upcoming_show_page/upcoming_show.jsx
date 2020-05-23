@@ -24,7 +24,7 @@ const UpcomingShowPage = () => {
   // List of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([
     <FeaturedContent
-      img={jon_may_10}
+      img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/Jon_may10_cropped.jpg"}
       name={"Jonathan Dely"}
       concert_name={"Mother's Day Concert"}
       date={"Sunday | 20 May 2020"}
@@ -62,26 +62,6 @@ const UpcomingShowPage = () => {
       day={10}
       time={"8PM EST"}
       ticketed={false}
-    />,
-    <FeaturedContent
-      img={concert}
-      name={"Jonathan Dely"}
-      concert_name={"Mother's Day Concert"}
-      date={"Sunday | 20 May 2020"}
-      month={"MAY"}
-      day={10}
-      time={"8PM EST"}
-      ticketed={true}
-    />,
-    <FeaturedContent
-      img={concert}
-      name={"Jonathan Dely"}
-      concert_name={"Mother's Day Concert"}
-      date={"Sunday | 20 May 2020"}
-      month={"MAY"}
-      day={10}
-      time={"8PM EST"}
-      ticketed={true}
     />,
     <FeaturedContent
       img={concert}
