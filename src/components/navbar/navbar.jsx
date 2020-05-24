@@ -35,12 +35,12 @@ const NavBar = () => {
   let icon = new_logo_white; // Default navbar icon
   let location = useLocation(); // Get location of user navigation
 
-  const [dropdown_open, setDropdownOpen] = useState(false); // tracks drop down menu
+  const [dropdown_open, setDropdownOpen] = useState(false); // Tracks drop down menu
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
 
-  const toggle = () => setDropdownOpen((prevState) => !prevState); // toggle for dropdown menu
+  const toggle = () => setDropdownOpen((prevState) => !prevState); // Toggle for dropdown menu
 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
@@ -82,7 +82,7 @@ const NavBar = () => {
     closeMenu();
   }, []);
 
-  // function to sign out the user -- the window reloads after signing out
+  // Function to sign out the user -- the window reloads after signing out
   const signOut = (event) => {
     Auth.signOut().then((user) => window.location.reload());
   };

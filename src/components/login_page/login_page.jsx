@@ -19,8 +19,8 @@ const Login = () => {
   const [password, setPassword] = useState(""); // Tracks user's password
   const [error, setError] = useState(""); // Tracks error messages when trying to log in
 
-  // function when the user clicks the submit button to log in
-  // reloads the window if successful, otherwise provides error message to user
+  // Function for when the user clicks the submit button to log in
+  // Reloads the window if successful, otherwise provides error message to user
   const onSubmit = (event) => {
     event.preventDefault();
 

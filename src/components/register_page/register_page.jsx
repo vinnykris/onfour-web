@@ -44,7 +44,7 @@ const Register = () => {
       email: email,
       first: first,
       last: last,
-      concert: "0", // currently a placeholder value
+      concert: "0", // Currently a placeholder value
     };
 
     // If the password is long enough, check that the passwords match.
