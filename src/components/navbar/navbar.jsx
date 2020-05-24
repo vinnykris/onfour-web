@@ -178,7 +178,7 @@ const NavBar = () => {
       {/* DESKTOP VERSION */}
       <Grid className="desktop-grid">
         <Row className="desktop-row">
-          <Col size={0.3}></Col>
+          <Col size={1}></Col>
           <Col size={1}>
             <NavLink to="/archive" className={style}>
               PAST SHOWS
@@ -242,7 +242,6 @@ const NavBar = () => {
               }
             })()}
           </Col>
-          <Col size={0.3}></Col>
         </Row>
       </Grid>
     </div>

@@ -1,4 +1,5 @@
 // React
+
 import React from "react";
 // Styles
 import "./social_bar_styles.scss";

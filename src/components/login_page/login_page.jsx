@@ -1,11 +1,14 @@
 // React
 import React, { useState } from "react";
+
 // Components
 import { Grid, Row, Col } from "../grid";
+
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";
 import Amplify from "aws-amplify";
+
 // Styles
 import "./login_styles.scss";
 
@@ -16,6 +19,8 @@ const Login = () => {
   const [password, setPassword] = useState(""); // Tracks users password
   const [error, setError] = useState(""); // Tracks error messages when trying to log in
 
+  // function when the user clicks the submit button to log in
+  // reloads the window if successful, otherwise provides error message to user
   const onSubmit = (event) => {
     event.preventDefault();
 
