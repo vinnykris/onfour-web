@@ -56,7 +56,7 @@ const NavBar = () => {
         filter: { email: { eq: user_email } },
       })
     ).then((data) =>
-      setFirst(data.data.listOnfour_registrations.items[0].first)
+      setFirst(data.data.listOnfour_registrations.items[0].first.toUpperCase())
     );
   }
 
@@ -226,10 +226,19 @@ const NavBar = () => {
               } else {
                 return (
                   <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                    <DropdownToggle caret>Hi, {first}</DropdownToggle>
+                    <div className="toggle-color">
+                      <DropdownToggle className="toggle-greeting" tag="a" caret>
+                        HI, {first}
+                      </DropdownToggle>
+                    </div>
                     <DropdownMenu right>
                       <DropdownItem header>
-                        <button onClick={onSubmitTwo}>Sign Out</button>
+                        <button
+                          className="sign-out-button"
+                          onClick={onSubmitTwo}
+                        >
+                          SIGN OUT
+                        </button>
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>

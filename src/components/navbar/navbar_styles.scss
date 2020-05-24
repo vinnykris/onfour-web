@@ -212,3 +212,21 @@ a.nav-page-black {
     display: flex;
   }
 }
+
+.toggle-greeting {
+  font-size: 1.1rem;
+  font-family: "Heebo", sans-serif;
+  font-weight: $medium-weight;
+}
+
+.toggle-color {
+  color: white;
+}
+
+.sign-out-button {
+  width: 100%;
+  height: 100%;
+  color: white;
+  font-size: 14px;
+  font-weight: 420;
+}
