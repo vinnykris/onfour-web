@@ -129,7 +129,7 @@ const NavBar = () => {
       {/* DESKTOP VERSION */}
       <Grid className="desktop-grid">
         <Row className="desktop-row">
-          <Col size={0.5}></Col>
+          <Col size={0.4}></Col>
           <Col size={1}>
             <NavLink to="/archive" className={style}>
               PAST SHOWS
@@ -158,19 +158,20 @@ const NavBar = () => {
               UPCOMING
             </NavLink>
           </Col>
+
+          <Col size={0.4}>
+            <NavLink
+              to=""
+              className={style}
+              data-toggle="modal"
+              data-target="#sign_in_Modal"
+            >
+              <span className="user-menu">
+                <i className="fa fa-user-o fa-2x user-icon"></i>
+              </span>
+            </NavLink>
+          </Col>
         </Row>
-        <Col size={0.5}>
-          <NavLink
-            to=""
-            className={style}
-            data-toggle="modal"
-            data-target="#sign_in_Modal"
-          >
-            <span className="user-menu">
-              <i className="fa fa-user-o fa-2x user-icon"></i>
-            </span>
-          </NavLink>
-        </Col>
       </Grid>
     </div>
   );

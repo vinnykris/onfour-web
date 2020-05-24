@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 
 // Component Imports
-import Register from "../register_page/register_short_term";
-import Login from "../login_page/login_short_term";
+import Register from "../register_page/register_page";
+import Login from "../login_page/login_page";
 import { Grid, Row, Col } from "../grid";
 
 // Styling Imports
