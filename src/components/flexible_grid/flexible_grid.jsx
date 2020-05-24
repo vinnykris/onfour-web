@@ -44,13 +44,11 @@ const FlexibleGrid = ({ content_list, num_cols }) => {
     <Grid>
       {chunks.map((chunk_list, row_index) => (
         <Row key={row_index}>
-          {/* <Col size={0.2} className="black-element"></Col> */}
           {chunk_list.map((element, col_index) => (
             <Col size={1} key={col_index} className="black-element">
               {element}
             </Col>
           ))}
-          {/* <Col size={0.2} className="black-element"></Col> */}
         </Row>
       ))}
     </Grid>
