@@ -22,7 +22,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
       <Col size={3} className="show-content-bar">
               <Row>
                 <Col size={3}>
-                  <p className="artist-name">{name} : {concert_name}</p>
+                  <p className="artist-name">{name} - {concert_name}</p>
                 </Col>
               </Row>
               <Row>
