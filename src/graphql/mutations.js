@@ -10,7 +10,6 @@ export const create_email_subscription = `mutation createOnfour_current($input: 
       paid
     }
   }
-}
 `;
 
 // Mutation to create an entry in our registration DB when a user registers

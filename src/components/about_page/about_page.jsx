@@ -29,7 +29,6 @@ const AboutPage = () => {
   // This function gets called when the email subscribtion form is submitted
   // It calls the appsync API to send the input email to backend database
   const onSubmit = (event) => {
-    console.log("HERE");
     event.preventDefault();
 
     const payload = {
