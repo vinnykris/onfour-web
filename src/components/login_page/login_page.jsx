@@ -15,8 +15,8 @@ import "./login_styles.scss";
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 const Login = () => {
-  const [email, setEmail] = useState(""); // Tracks users email
-  const [password, setPassword] = useState(""); // Tracks users password
+  const [email, setEmail] = useState(""); // Tracks user's email
+  const [password, setPassword] = useState(""); // Tracks user's password
   const [error, setError] = useState(""); // Tracks error messages when trying to log in
 
   // function when the user clicks the submit button to log in

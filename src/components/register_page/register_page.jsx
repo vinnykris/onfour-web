@@ -1,29 +1,33 @@
 // React
 import React, { useState } from "react";
 import PasswordStrengthBar from "react-password-strength-bar";
+
 // Components
 import { Grid, Row, Col } from "../grid";
+
 // GraphQL
 import * as mutations from "../../graphql/mutations";
+
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";
 import Amplify from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
+
 // Styles
 import "./register_styles.scss";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 const Register = () => {
-  const [email, setEmail] = useState(""); // Tracks users email
-  const [password, setPassword] = useState(""); // Tracks users password
-  const [repeat_password, setRepeatPassword] = useState(""); // Tracks users password
-  const [first, setFirst] = useState(""); // Tracks users first name
-  const [last, setLast] = useState(""); // Tracks users last name
+  const [email, setEmail] = useState(""); // Tracks user's email
+  const [password, setPassword] = useState(""); // Tracks user's password
+  const [repeat_password, setRepeatPassword] = useState(""); // Tracks user's repeated password
+  const [first, setFirst] = useState(""); // Tracks user's first name
+  const [last, setLast] = useState(""); // Tracks user's last name
   const [error, setError] = useState(""); // Tracks password failure errors
   const [success, setSuccess] = useState(false); // Tracks if user successfully signed up
-  const [name, setName] = useState(""); // Tracks users first name after successful registration
+  const [name, setName] = useState(""); // Tracks user's first name after successful registration
 
   // Function that occurs after the user clicks the submit button to sign up
   const onSubmit = (event) => {
@@ -40,11 +44,12 @@ const Register = () => {
       email: email,
       first: first,
       last: last,
-      concert: "0",
+      concert: "0", // currently a placeholder value
     };
 
-    // If the password is long enough, then pass the sign up payload into the
-    // cognito API. If no errors occur, set name to the user's first name, set
+    // If the password is long enough, check that the passwords match.
+    // If they do then pass the sign up payload into the cognito
+    // API. If no errors occur, set name to the user's first name, set
     // success to true, call the registerUser function to add the user to the
     // registered users database, and remove the text from all of the sign up fields
     // If the registration fails, display the error message to the user and remove the
@@ -76,7 +81,7 @@ const Register = () => {
       setError("Password must be of at least length 8.");
     }
 
-    // Function that takes the user's entered information and passes it in to
+    // Function that takes the user's entered information and passes it into
     // the AppSync API to be stored in our registered users database table
     const registerUser = (event) => {
       API.graphql(
@@ -93,7 +98,7 @@ const Register = () => {
         <Row className="register-fields-section">
           <Col className="register-purple-scheme" size={0.5}></Col>
           <Col size={6}>
-            {/* If the user has not yet signed in, display a form so that the user can
+            {/* If the user has not yet signed up, display a form so that the user can
             enter their information and submit. For each field, update the state as the user
             changes the values in the boxes. Additionally, add a password strength meter that
             notifies the user of the quality of their password. Display errors to the user if
