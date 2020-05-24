@@ -2,8 +2,6 @@
 
 @import "../../styles";
 
-// ARCHIVE PAGE STYLING
-
 .archive-page-content {
   padding: 2%;
   background-color: black;
@@ -12,17 +10,6 @@
 
 .archive-container {
   padding: 2%;
-}
-
-.archive-performance-wrapper {
-  width: 60%;
-  margin: auto;
-  @include respond-to("large") {
-    width: 80%;
-  }
-  @include respond-to("medium") {
-    width: 100%;
-  }
 }
 
 .archive-video {

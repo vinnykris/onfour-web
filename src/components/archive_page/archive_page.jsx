@@ -23,17 +23,15 @@ Amplify.configure(awsmobile);
 const ArchivePage = () => {
   const [videos, setVideos] = useState([]); // List of video objects with past show information
 
+  // Asynchronous function to get list of videos from database
   const getArchiveInfo = async () => {
-    console.log("in get archive info");
-
     // Calling the API, using async and await is necessary
     const info = await API.graphql(
       graphqlOperation(queries.list_past_concerts)
     );
-    const info_list = info.data.listPastShows.items; // Stores the items in databse
+    const info_list = info.data.listPastShows.items; // Saves the items from database
 
-    // Iterate through each element in the list and add the created
-    // FeaturedContent to concerts
+    // Iterate through each element in the list and add the created ArchiveVideo to the list
     info_list.forEach((data) => {
       setVideos((videos) => [
         ...videos,
@@ -48,14 +46,14 @@ const ArchivePage = () => {
     });
   };
 
+  // API call is done on mount
   useEffect(() => {
-    // DO API CALL HERE
-    // TEMPORARILY HARD CODE LIST
     getArchiveInfo();
   }, []);
 
   const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
-  // Gets dimensions of screen and sends warnings to console
+
+  // Gets dimensions of screen and sets state accordingly
   const findDimensions = (layout) => {
     const { width } = layout;
     if (width < 600) {

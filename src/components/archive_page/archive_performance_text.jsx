@@ -14,9 +14,10 @@ const ArchivePerformanceText = ({
   date,
   video_length,
 }) => {
-  const [mins, setMins] = useState("");
-  const [formatted_date, setFormattedDate] = useState("");
+  const [mins, setMins] = useState(""); // String value of time in minutes format
+  const [formatted_date, setFormattedDate] = useState(""); // String value of date in American format
 
+  // On mount, format the time and date properly (if fields are provided)
   useEffect(() => {
     if (video_length) {
       let minutes = Math.floor(video_length / 60);
@@ -25,11 +26,8 @@ const ArchivePerformanceText = ({
     }
     if (date) {
       let year = date.slice(0, 4);
-      console.log(year);
       let month = date.slice(5, 7);
-      console.log(month);
       let day = date.slice(8, 10);
-      console.log(day);
       setFormattedDate(month + "." + day + "." + year);
     }
   }, []);
