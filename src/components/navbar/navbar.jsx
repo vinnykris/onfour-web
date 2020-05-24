@@ -209,26 +209,34 @@ const NavBar = () => {
           </Col>
 
           <Col size={1}>
-            <NavLink
-              to=""
-              className={style}
-              data-toggle="modal"
-              data-target="#sign_in_Modal"
-            >
-              <span className="user-menu">
-                <i className="fa fa-user-o fa-2x user-icon"></i>
-              </span>
-            </NavLink>
+            {(() => {
+              if (!auth) {
+                return (
+                  <NavLink
+                    to=""
+                    className={style}
+                    data-toggle="modal"
+                    data-target="#sign_in_Modal"
+                  >
+                    <span className="user-menu">
+                      <i className="fa fa-user-o fa-2x user-icon"></i>
+                    </span>
+                  </NavLink>
+                );
+              } else {
+                return (
+                  <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                    <DropdownToggle caret>Hi, {first}</DropdownToggle>
+                    <DropdownMenu right>
+                      <DropdownItem header>
+                        <button onClick={onSubmitTwo}>Sign Out</button>
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
+                );
+              }
+            })()}
           </Col>
-
-          <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-            <DropdownToggle caret>Hi, {first}</DropdownToggle>
-            <DropdownMenu right>
-              <DropdownItem header>
-                <button onClick={onSubmitTwo}>Sign Out</button>
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
         </Row>
       </Grid>
     </div>
