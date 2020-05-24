@@ -101,7 +101,7 @@ const Register = () => {
             {(() => {
               if (success) {
                 return (
-                  <h2>
+                  <h2 className="sign-up-message">
                     Welcome {name}. Please confirm your email before signing in!
                   </h2>
                 );

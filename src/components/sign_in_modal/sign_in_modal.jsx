@@ -21,6 +21,7 @@ const Modal = () => {
   };
 
   const loginTab = (event) => {
+    console.log("WAWA");
     setRegistering(false);
     setLoginStyle("black-tab");
     setRegisterStyle("purple-tab");
@@ -47,8 +48,13 @@ const Modal = () => {
         <br></br>
         <Row>
           <Col size={0.5}></Col>
-          <Col size={15}>
-            <button className="close" data-dismiss="modal" aria-label="Close">
+          <Col size={18}>
+            <button
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              onClick={loginTab}
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </Col>
