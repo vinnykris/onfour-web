@@ -10,6 +10,7 @@ import {
 
 // GraphQL
 import * as queries from "../../graphql/queries";
+
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";
@@ -34,11 +35,12 @@ const NavBar = () => {
   let icon = new_logo_white; // Default navbar icon
   let location = useLocation(); // Get location of user navigation
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdown_open, setDropdownOpen] = useState(false); // tracks drop down menu
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState); // toggle for dropdown menu
 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
@@ -80,11 +82,9 @@ const NavBar = () => {
     closeMenu();
   }, []);
 
-  const onSubmitTwo = (event) => {
-    Auth.signOut()
-      .then((data) => console.log(data))
-      .then((user) => window.location.reload())
-      .catch((err) => console.log(err));
+  // function to sign out the user -- the window reloads after signing out
+  const signOut = (event) => {
+    Auth.signOut().then((user) => window.location.reload());
   };
 
   return (
@@ -178,7 +178,7 @@ const NavBar = () => {
       {/* DESKTOP VERSION */}
       <Grid className="desktop-grid">
         <Row className="desktop-row">
-          <Col size={1}></Col>
+          <Col size={0.3}></Col>
           <Col size={1}>
             <NavLink to="/archive" className={style}>
               PAST SHOWS
@@ -207,7 +207,6 @@ const NavBar = () => {
               UPCOMING
             </NavLink>
           </Col>
-
           <Col size={1}>
             {(() => {
               if (!auth) {
@@ -225,18 +224,15 @@ const NavBar = () => {
                 );
               } else {
                 return (
-                  <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                  <Dropdown isOpen={dropdown_open} toggle={toggle}>
                     <div className="toggle-color">
                       <DropdownToggle className="toggle-greeting" tag="a" caret>
                         HI, {first}
                       </DropdownToggle>
                     </div>
                     <DropdownMenu right>
-                      <DropdownItem header>
-                        <button
-                          className="sign-out-button"
-                          onClick={onSubmitTwo}
-                        >
+                      <DropdownItem>
+                        <button className="sign-out-button" onClick={signOut}>
                           SIGN OUT
                         </button>
                       </DropdownItem>
@@ -246,6 +242,7 @@ const NavBar = () => {
               }
             })()}
           </Col>
+          <Col size={0.3}></Col>
         </Row>
       </Grid>
     </div>
