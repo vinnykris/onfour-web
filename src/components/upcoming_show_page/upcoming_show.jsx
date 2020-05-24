@@ -34,6 +34,7 @@ const UpcomingShow = () => {
     setEmail("");
     setClicked(true);
   };
+
   return (
     <div className="upcoming-page-content">
       <Grid>
@@ -84,7 +85,6 @@ const UpcomingShow = () => {
                         required
                         value={email}
                         className="email-input-upcoming"
-                        // style={{ width: "280px" }}
                         onChange={(event) => setEmail(event.target.value)}
                       />
                       <button
