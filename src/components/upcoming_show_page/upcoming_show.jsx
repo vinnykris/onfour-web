@@ -28,7 +28,7 @@ const UpcomingShow = () => {
     };
 
     API.graphql(
-      graphqlOperation(mutations.createEmailSubscription, { input: payload })
+      graphqlOperation(mutations.create_email_subscription, { input: payload })
     );
 
     setEmail("");
@@ -112,7 +112,7 @@ const UpcomingShow = () => {
 export default UpcomingShow;
 
 // {
-  /*
+/*
 
 const upcoming_show = () => {
   return (

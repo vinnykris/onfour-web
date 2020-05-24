@@ -6,17 +6,14 @@ import { Link } from "react-router-dom";
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
-import * as queries from "../../graphql/queries";
 import Amplify from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
-import Auth from "../../apis/UserPool";
 
 // Component Imports
 import VideoPlayer from "./video_player";
 import Chat from "../chat/stream_chat";
 import Join from "../chat/join_chat";
 import { Grid, Row, Col } from "../grid";
-import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 
 // Styles Imports
@@ -36,24 +33,6 @@ const StreamPage = () => {
   const [scroll, setScroll] = useState(true); // Auto-scroll
   const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
   const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
-  const [user_email, setUserEmail] = useState(""); // Tracks user's email if signed in
-  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
-  const [first, setFirst] = useState(""); // Tracks concert ids of signed in user
-
-  Auth.currentAuthenticatedUser({})
-    .then((user) => setUserEmail(user.attributes.email))
-    .then((user) => setAuth(true))
-    .catch((err) => setAuth(false));
-
-  if (first === "" && user_email !== "") {
-    API.graphql(
-      graphqlOperation(queries.retrieveConcert, {
-        filter: { email: { eq: user_email } },
-      })
-    ).then((data) =>
-      setFirst(data.data.listOnfour_registrations.items[0].concert)
-    );
-  }
 
   // Gets dimensions of screen and sends warnings to console
   const findDimensions = (layout) => {
@@ -90,7 +69,7 @@ const StreamPage = () => {
     };
 
     API.graphql(
-      graphqlOperation(mutations.createEmailSubscription, { input: payload })
+      graphqlOperation(mutations.create_email_subscription, { input: payload })
     );
 
     setEmail("");

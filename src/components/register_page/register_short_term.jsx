@@ -80,7 +80,7 @@ const Register = () => {
     // the AppSync API to be stored in our registered users database table
     const registerUser = (event) => {
       API.graphql(
-        graphqlOperation(mutations.createRegistration, {
+        graphqlOperation(mutations.create_registration, {
           input: register_payload,
         })
       );

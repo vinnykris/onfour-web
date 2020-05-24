@@ -4,7 +4,7 @@
 // Mutation to create an entry in our email subscription list DB when an email is entered
 // in a subscription box on our website. Currently takes email and paid inputs,
 // though paid is curently an arbitrary false value
-export const createEmailSubscription = `mutation createOnfour_current($input: CreateOnfour_currentInput!) {
+export const create_email_subscription = `mutation createOnfour_current($input: CreateOnfour_currentInput!) {
     createOnfour_current(input: $input) {
       email
       paid
@@ -16,7 +16,7 @@ export const createEmailSubscription = `mutation createOnfour_current($input: Cr
 // Mutation to create an entry in our registration DB when a user registers
 // Currently, it takes email, first, last, and concert as inputs, though concert
 // is initially empty
-export const createRegistration = `mutation createOnfour_registration($input: CreateOnfour_registrationInput!) {
+export const create_registration = `mutation createOnfour_registration($input: CreateOnfour_registrationInput!) {
   createOnfour_registration(input: $input) {
     email
     first
@@ -27,7 +27,7 @@ export const createRegistration = `mutation createOnfour_registration($input: Cr
 `;
 
 // Mutation to create an entry in our upcoming shows DB when a musician registers a concert
-export const createUpcoming = `mutation createFutureConcerts($input: CreateFutureConcertsInput!) {
+export const create_upcoming = `mutation createFutureConcerts($input: CreateFutureConcertsInput!) {
   createFutureConcerts(input: $input) {
     url
     timePassed

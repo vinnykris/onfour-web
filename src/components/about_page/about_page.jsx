@@ -7,7 +7,7 @@ import history from "../../history";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../../apis/subscription_db";
+import awsmobile from "../../apis/AppSync";
 
 // Image Imports
 // import gradient_header from "../../images/mobile_gradient.png";
@@ -21,8 +21,8 @@ Amplify.configure(awsmobile);
 const AboutPage = () => {
   const [email, setEmail] = useState(""); // Variable to store input emails for subscribtion form
   const [clicked, setClicked] = useState(false); // Variable to show hide the subscribtion form
-  // const [scroll, setScroll] = useState(true); // This might be no use 
-  
+  // const [scroll, setScroll] = useState(true); // This might be no use
+
   const header_image_url =
     "http://d1gbu7v6fgabn0.cloudfront.net/banner_background_blur.jpg";
 
@@ -37,7 +37,7 @@ const AboutPage = () => {
     };
 
     API.graphql(
-      graphqlOperation(mutations.createEmailSubscription, { input: payload })
+      graphqlOperation(mutations.create_email_subscription, { input: payload })
     );
 
     setEmail("");

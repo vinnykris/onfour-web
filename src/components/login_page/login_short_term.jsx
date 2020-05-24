@@ -34,7 +34,7 @@ const Login = () => {
   // for the specific email and assign that value to first
   if (first === "" && user_email !== "") {
     API.graphql(
-      graphqlOperation(queries.retrieveName, {
+      graphqlOperation(queries.query_name, {
         filter: { email: { eq: user_email } },
       })
     ).then((data) =>

@@ -12,7 +12,7 @@ import ArchiveVideo from "./archive_video";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../../graphql/queries";
 import Amplify from "aws-amplify";
-import awsmobile from "../../apis/subscription_db";
+import awsmobile from "../../apis/AppSync";
 
 // Styles imports
 import "./archive_styles.scss";

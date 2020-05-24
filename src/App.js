@@ -11,6 +11,7 @@ import UpcomingShowPage from "./components/upcoming_show_page/upcoming_show";
 import Ticket from "./components/payment/payment_box";
 import ArchivePage from "./components/archive_page/archive_page";
 import Footer from "./components/footer/footer";
+import Modal from "./components/sign_in/sign_in_model";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -26,6 +27,7 @@ require("dotenv").config();
 function App() {
   return (
     <div className="App">
+      <Modal></Modal>
       <Router history={history}>
         <NavBar />
         <Switch>
