@@ -62,24 +62,6 @@ const CheckoutForm = () => {
   );
 };
 
-// const stripePromise = loadStripe("pk_test_QYP6EIav9kdtsfLIRkarusKO00YsyMSiOK");
-
-const payment_box = () => {
-  return (
-    <div>
-      <br></br>
-      <br></br>
-      <div className="paymentbar">
-        <Login />
-        <br></br>
-        <br></br>
-      </div>
-    </div>
-  );
-};
-
-export default payment_box;
-
 const SignInBox = () => {
   return (
     <div>

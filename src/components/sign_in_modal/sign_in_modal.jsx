@@ -9,19 +9,24 @@ import { Grid, Row, Col } from "../grid";
 // Styling Imports
 import "./sign_in_styles.scss";
 
+// Modal for registering and signing up. It displays the correct page
+// inside of the model by tracking what tab the user clicks on
 const Modal = () => {
-  const [registering, setRegistering] = useState(false);
-  const [login_style, setLoginStyle] = useState("black-tab");
-  const [register_style, setRegisterStyle] = useState("purple-tab");
+  const [registering, setRegistering] = useState(false); // Tracks whether a user is registering or not
+  const [login_style, setLoginStyle] = useState("black-tab"); // Tracks what the login tab style should be
+  const [register_style, setRegisterStyle] = useState("purple-tab"); // Tracks what the register tab style should be
 
+  // Function for when the register tab is clicked
+  // Sets registering to true and updates the login and register tab styles
   const registerTab = (event) => {
     setRegistering(true);
     setLoginStyle("purple-tab");
     setRegisterStyle("black-tab");
   };
 
+  // Function for when the login tab is clicked
+  // Sets registering to false and updates the login and register tab styles
   const loginTab = (event) => {
-    console.log("WAWA");
     setRegistering(false);
     setLoginStyle("black-tab");
     setRegisterStyle("purple-tab");
