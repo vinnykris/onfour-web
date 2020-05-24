@@ -115,12 +115,12 @@ const Register = () => {
                   >
                     <Row>
                       <Col size={1}>
-                        <label className="label-text" for="first_slot">
+                        <label className="label-text-left" for="first_slot">
                           First Name*
                         </label>
                       </Col>
                       <Col size={1}>
-                        <label className="label-text" for="last_slot">
+                        <label className="label-text-right" for="last_slot">
                           Last Name*
                         </label>
                       </Col>
@@ -128,7 +128,7 @@ const Register = () => {
                     <Row>
                       <Col size={1}>
                         <input
-                          className="register-input"
+                          className="register-input-left"
                           name="first"
                           required
                           id="first_slot"
@@ -138,7 +138,7 @@ const Register = () => {
                       </Col>
                       <Col size={1}>
                         <input
-                          className="register-input"
+                          className="register-input-right"
                           id="last_slot"
                           name="last"
                           value={last}
@@ -148,10 +148,12 @@ const Register = () => {
                       </Col>
                     </Row>
                     <br></br>
-                    <div className="form-row">
+                    <Row>
                       <label className="label-text" for="email_slot">
                         Email*
                       </label>
+                    </Row>
+                    <Row>
                       <input
                         className="register-input"
                         type="email"
@@ -161,17 +163,19 @@ const Register = () => {
                         onChange={(event) => setEmail(event.target.value)}
                         required
                       />
-                    </div>
-                    <br></br>
+                    </Row>
                     <br></br>
                     <Row>
                       <Col size={1}>
-                        <label className="label-text" for="password_slot">
+                        <label className="label-text-left" for="password_slot">
                           Password*
                         </label>
                       </Col>
                       <Col size={1}>
-                        <label className="label-text" for="password_r_slot">
+                        <label
+                          className="label-text-right"
+                          for="password_r_slot"
+                        >
                           Repeat Password*
                         </label>
                       </Col>
@@ -179,7 +183,7 @@ const Register = () => {
                     <Row>
                       <Col size={1}>
                         <input
-                          className="register-input"
+                          className="register-input-left"
                           type="password"
                           name="password"
                           value={password}
@@ -190,7 +194,7 @@ const Register = () => {
                       </Col>
                       <Col size={1}>
                         <input
-                          className="register-input"
+                          className="register-input-right"
                           type="password"
                           name="password"
                           value={repeat_password}
@@ -202,18 +206,16 @@ const Register = () => {
                         />
                       </Col>
                     </Row>
-
-                    <br></br>
                     <PasswordStrengthBar password={password} minLength={8} />
                     <div style={{ color: "red" }}>{error}</div>
-
+                    <br></br>
                     <button
+                      className="register-submit-button"
                       type="submit"
                       form="newsletter"
                       value="Submit"
-                      style={{ width: 300 }}
                     >
-                      Submit
+                      SIGN UP
                     </button>
                   </form>
                 );

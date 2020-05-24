@@ -9,7 +9,7 @@
 }
 
 .register-form {
-  margin-top: 9%;
+  margin-top: 7%;
   width: 90%;
   padding-bottom: 7%;
 }
@@ -22,12 +22,18 @@
   height: 100%;
 }
 
-.register-input {
-  width: 100%;
+.register-input-left {
+  width: 95%;
+  float: left;
 }
 
-.register-input2 {
-  width: 31%;
+.register-input-right {
+  width: 95%;
+  float: right;
+}
+
+.register-input {
+  width: 100%;
 }
 
 .register-purple-scheme {
@@ -36,6 +42,17 @@
 
 .label-text {
   color: white;
+}
+
+.label-text-left {
+  color: white;
+  float: left;
+}
+
+.label-text-right {
+  color: white;
+  float: left;
+  padding-left: 5%;
 }
 
 .register-submit-button {

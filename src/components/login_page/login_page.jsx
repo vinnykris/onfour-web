@@ -75,10 +75,12 @@ const Login = () => {
               id="newsletter"
               onSubmit={onSubmit}
             >
-              <div className="form-row">
+              <Row>
                 <label className="label-text" for="email_slot">
                   Email Address*
                 </label>
+              </Row>
+              <Row>
                 <input
                   className="login-input"
                   type="email"
@@ -88,12 +90,14 @@ const Login = () => {
                   onChange={(event) => setEmail(event.target.value)}
                   required
                 />
-              </div>
+              </Row>
               <br></br>
-              <div className="form-row">
+              <Row>
                 <label className="label-text" for="password_slot">
                   Password*
                 </label>
+              </Row>
+              <Row>
                 <input
                   className="login-input"
                   type="password"
@@ -103,8 +107,9 @@ const Login = () => {
                   onChange={(event) => setPassword(event.target.value)}
                   required
                 />
-                <div style={{ color: "red" }}>{error}</div>
-              </div>
+              </Row>
+              <div style={{ color: "red" }}>{error}</div>
+
               <br></br>
               <br></br>
               {(() => {
