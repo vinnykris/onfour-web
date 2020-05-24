@@ -4,31 +4,40 @@ import ReactPlayer from "react-player";
 
 // Component imports
 import { Grid, Row, Col } from "../grid";
+import ArchivePerformanceText from "./archive_performance_text";
 
 // Styles imports
 import "./archive_styles.scss";
 
 // Component that contains video and performance text
-const ArchiveVideo = ({ src, song_name }) => {
+const ArchiveVideo = ({
+  artist_name,
+  concert_name,
+  concert_date,
+  url,
+  length,
+}) => {
   return (
-    <Grid>
+    <Grid className="archive-container">
       <Row>
-        <h5 className="archive-artist">{song_name}</h5>
+        <Col size={1}>
+          <ReactPlayer
+            className="archive-video"
+            url={url}
+            controls
+            width="100%"
+            height="100%"
+          />
+        </Col>
       </Row>
       <Row>
         <Col size={1}>
-          <div className="archive-player-desktop">
-            <ReactPlayer className="archive-video" url={src} controls />
-          </div>
-          <div className="archive-player-mobile">
-            <ReactPlayer
-              className="archive-video"
-              width="100%"
-              height="100%"
-              url={src}
-              controls
-            />
-          </div>
+          <ArchivePerformanceText
+            artist_name={artist_name}
+            concert_name={concert_name}
+            date={concert_date}
+            video_length={length}
+          />
         </Col>
       </Row>
     </Grid>

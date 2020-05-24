@@ -1,5 +1,5 @@
 // React imports
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // Component imports
 import { Grid, Row, Col } from "../grid";
@@ -14,18 +14,38 @@ const ArchivePerformanceText = ({
   date,
   video_length,
 }) => {
+  const [mins, setMins] = useState("");
+  const [formatted_date, setFormattedDate] = useState("");
+
+  useEffect(() => {
+    if (video_length) {
+      let minutes = Math.floor(video_length / 60);
+      let seconds = video_length % 60;
+      setMins(minutes + ":" + seconds);
+    }
+    if (date) {
+      let year = date.slice(0, 4);
+      console.log(year);
+      let month = date.slice(5, 7);
+      console.log(month);
+      let day = date.slice(8, 10);
+      console.log(day);
+      setFormattedDate(month + "." + day + "." + year);
+    }
+  }, []);
+
   return (
     <Grid>
       <Row>
         <Col size={1}>
           <h4 className="archive-video-header">
-            {artist_name} - {concert_name} | {date}
+            {artist_name} - {concert_name} | {formatted_date}
           </h4>
         </Col>
       </Row>
       <Row>
         <Col size={1}>
-          <h4 className="archive-video-header">{video_length}</h4>
+          <h4 className="archive-video-header">{mins}</h4>
         </Col>
       </Row>
     </Grid>
