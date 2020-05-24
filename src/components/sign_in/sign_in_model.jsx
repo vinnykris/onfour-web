@@ -1,8 +1,13 @@
+// React Imports
 import React, { useState } from "react";
-import "./sign_in_styles.scss";
-import Login from "../login_page/login_short_term";
+
+// Component Imports
 import Register from "../register_page/register_short_term";
+import Login from "../login_page/login_short_term";
 import { Grid, Row, Col } from "../grid";
+
+// Styling Imports
+import "./sign_in_styles.scss";
 
 const Modal = () => {
   const [registering, setRegistering] = useState(false);

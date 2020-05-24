@@ -1,42 +1,41 @@
-// history source: https://medium.com/@bsangars15/react-button-click-navigate-to-new-page-6af7397ea220
-
+// React imports
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import history from "./history";
-// Component Imports
-import NavBar from "./components/navbar/navbar";
-import MusicianPage from "./components/old_components/musician_page";
-import MainContent from "./components/old_components/main_content";
-import AboutPage from "./components/about_page/about_page";
-import Hosts from "./components/old_components/hosts";
-import HostApplication from "./components/old_components/apply_to_host";
-import MusicianApplication from "./components/old_components/apply_to_perform";
-import HostAgain from "./components/old_components/host_again";
-import PerformAgain from "./components/old_components/perform_again";
 
-// Styling Imports
+// Component imports
+import NavBar from "./components/navbar/navbar";
+import About from "./components/about_page/about_page";
+import StreamPage from "./components/stream_page/stream_page";
+import UpcomingShowPage from "./components/upcoming_show_page/upcoming_show";
+import Ticket from "./components/payment/payment_box";
+import ArchivePage from "./components/archive_page/archive_page";
+import Footer from "./components/footer/footer";
+
+// Bootstrap import
+import "bootstrap/dist/js/bootstrap.min.js";
+
+// Styles imports
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./styles.scss";
 
-require('dotenv').config();
+require("dotenv").config();
 
+// Main App component
 function App() {
   return (
     <div className="App">
       <Router history={history}>
         <NavBar />
-        {/* <MainContent /> */}
         <Switch>
-          <Route exact path="/" component={MainContent} />
-          <Route path="/whatisonfour" component={AboutPage} />
-          <Route path="/musicians" component={MusicianPage} />
-          <Route path="/hosts" component={Hosts} />
-          <Route path="/apply_to_host" component={HostApplication} />
-          <Route path="/apply_to_perform" component={MusicianApplication} />
-          <Route path="/host_again" component={HostAgain} />
-          <Route path="/perform_again" component={PerformAgain} />
-          {/*<Route component={NotFound} /> */}
+          <Route exact path="/" component={About} />
+          <Route path="/archive" component={ArchivePage} />
+          <Route path="/stream" component={StreamPage} />
+          <Route path="/upcoming" component={UpcomingShowPage} />
+          <Route path="/ticket" component={Ticket} />
         </Switch>
+        <Footer />
       </Router>
     </div>
   );
