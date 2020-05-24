@@ -27,6 +27,13 @@ const ArchiveVideo = ({
             controls
             width="100%"
             height="100%"
+            config={{
+              file: {
+                attributes: {
+                  controlsList: "nodownload",
+                },
+              },
+            }}
           />
         </Col>
       </Row>
