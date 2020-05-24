@@ -27,7 +27,6 @@ require("dotenv").config();
 function App() {
   return (
     <div className="App">
-      <Modal></Modal>
       <Router history={history}>
         <NavBar />
         <Switch>
@@ -39,6 +38,7 @@ function App() {
         </Switch>
         <Footer />
       </Router>
+      <Modal></Modal>
     </div>
   );
 }
