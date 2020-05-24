@@ -23,7 +23,7 @@ const Modal = () => {
 
   return (
     <div
-      className="modal-sign"
+      className="modal"
       id="sign_in_Modal"
       tapindex="-1"
       role="dialog"
@@ -31,14 +31,26 @@ const Modal = () => {
       aria-hidden="true"
       data-backdrop="false"
     >
-      <Grid>
-        <button className="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <Grid className="sign-modal-grid">
         <br></br>
         <Row>
-          <Col size={1}></Col>
+          <Col size={0.5}></Col>
+          <Col size={15}>
+            <button className="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </Col>
+          <Col size={0.5}></Col>
+        </Row>
+        <Row>
+          <Col size={0.5}></Col>
           <Col size={3}>
             <button className={login_style} onClick={loginTab}>
               SIGN IN
@@ -49,7 +61,7 @@ const Modal = () => {
               SIGN UP
             </button>
           </Col>
-          <Col size={1}></Col>
+          <Col size={0.5}></Col>
         </Row>
         <Row>
           {(() => {

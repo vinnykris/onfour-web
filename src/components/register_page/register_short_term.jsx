@@ -18,6 +18,7 @@ Amplify.configure(awsmobile); // Configuring AppSync API
 const Register = () => {
   const [email, setEmail] = useState(""); // Tracks users email
   const [password, setPassword] = useState(""); // Tracks users password
+  const [repeat_password, setRepeatPassword] = useState(""); // Tracks users password
   const [first, setFirst] = useState(""); // Tracks users first name
   const [last, setLast] = useState(""); // Tracks users last name
   const [error, setError] = useState(""); // Tracks password failure errors
@@ -49,23 +50,29 @@ const Register = () => {
     // If the registration fails, display the error message to the user and remove the
     // text from the password field so that the user can enter a new password
     if (password.length > 7) {
-      Auth.signUp(signup_payload)
-        .then((data) => setName(first))
-        .then((data) => setSuccess(true))
-        .then((data) => registerUser())
-        .then((data) => setFirst(""))
-        .then((data) => setLast(""))
-        .then((data) => setEmail(""))
-        .then((data) => setPassword(""))
-        .then((data) => setError(""))
-        .catch(
-          (err) => setError(err.message),
-          (err) => setPassword("")
-        );
+      if (password !== repeat_password) {
+        setRepeatPassword("");
+        setError("Passwords do not match");
+      } else {
+        Auth.signUp(signup_payload)
+          .then((data) => setName(first))
+          .then((data) => setSuccess(true))
+          .then((data) => registerUser())
+          .then((data) => setFirst(""))
+          .then((data) => setLast(""))
+          .then((data) => setEmail(""))
+          .then((data) => setPassword(""))
+          .then((data) => setError(""))
+          .catch(
+            (err) => setError(err.message),
+            (err) => setPassword("")
+          );
+      }
     }
     // If the password is not long enough, display a message for the user
     else {
       setPassword("");
+      setRepeatPassword("");
       setError("Password must be of at least length 8.");
     }
 
@@ -82,37 +89,10 @@ const Register = () => {
 
   return (
     <div className="register-page-content">
-      <Grid>
-        <Row>
-          <div className="short-term-spacer"></div>
-        </Row>
-        <Row>
-          <Col size={1}>
-            {/* If the user successfully signs up, display a message with their name
-            and notify them to check their email. Otherwise, have a message that prompts
-            the user to sign up */}
-            {(() => {
-              if (success) {
-                return (
-                  <div>
-                    <h2>
-                      Welcome {name}. Please confirm your email before signing
-                      in!
-                    </h2>
-                  </div>
-                );
-              } else {
-                return <h2> Sign Up With Onfour! </h2>;
-              }
-            })()}
-          </Col>
-        </Row>
-        <Row>
-          <br></br>
-        </Row>
-        <Row>
-          <Col size={2}></Col>
-          <Col size={1}>
+      <Grid register-grid>
+        <Row className="register-fields-section">
+          <Col className="register-purple-scheme" size={0.5}></Col>
+          <Col size={6}>
             {/* If the user has not yet signed in, display a form so that the user can
             enter their information and submit. For each field, update the state as the user
             changes the values in the boxes. Additionally, add a password strength meter that
@@ -120,46 +100,113 @@ const Register = () => {
             their sign up attempts are unsuccessful  */}
             {(() => {
               if (success) {
-                return;
+                return (
+                  <h2>
+                    Welcome {name}. Please confirm your email before signing in!
+                  </h2>
+                );
               } else {
                 return (
-                  <form action="/" id="newsletter" onSubmit={onSubmit}>
-                    <input
-                      placeholder="First Name"
-                      name="first"
-                      required
-                      value={first}
-                      onChange={(event) => setFirst(event.target.value)}
-                      style={{ width: 300 }}
-                    />
-                    <input
-                      placeholder="Last Name"
-                      name="last"
-                      value={last}
-                      onChange={(event) => setLast(event.target.value)}
-                      required
-                      style={{ width: 300 }}
-                    />
-                    <input
-                      placeholder="Email"
-                      type="email"
-                      name="email"
-                      value={email}
-                      onChange={(event) => setEmail(event.target.value)}
-                      required
-                      style={{ width: 300 }}
-                    />
-                    <input
-                      placeholder="Password"
-                      type="password"
-                      name="password"
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                      required
-                      style={{ width: 300 }}
-                    />
+                  <form
+                    className="register-form"
+                    action="/"
+                    id="newsletter"
+                    onSubmit={onSubmit}
+                  >
+                    <Row>
+                      <Col size={1}>
+                        <label className="label-text" for="first_slot">
+                          First Name*
+                        </label>
+                      </Col>
+                      <Col size={1}>
+                        <label className="label-text" for="last_slot">
+                          Last Name*
+                        </label>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col size={1}>
+                        <input
+                          className="register-input"
+                          name="first"
+                          required
+                          id="first_slot"
+                          value={first}
+                          onChange={(event) => setFirst(event.target.value)}
+                        />
+                      </Col>
+                      <Col size={1}>
+                        <input
+                          className="register-input"
+                          id="last_slot"
+                          name="last"
+                          value={last}
+                          onChange={(event) => setLast(event.target.value)}
+                          required
+                        />
+                      </Col>
+                    </Row>
+                    <br></br>
+                    <div className="form-row">
+                      <label className="label-text" for="email_slot">
+                        Email*
+                      </label>
+                      <input
+                        className="register-input"
+                        type="email"
+                        name="email"
+                        value={email}
+                        id="email_slot"
+                        onChange={(event) => setEmail(event.target.value)}
+                        required
+                      />
+                    </div>
+                    <br></br>
+                    <br></br>
+                    <Row>
+                      <Col size={1}>
+                        <label className="label-text" for="password_slot">
+                          Password*
+                        </label>
+                      </Col>
+                      <Col size={1}>
+                        <label className="label-text" for="password_r_slot">
+                          Repeat Password*
+                        </label>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col size={1}>
+                        <input
+                          className="register-input"
+                          type="password"
+                          name="password"
+                          value={password}
+                          id="password_slot"
+                          onChange={(event) => setPassword(event.target.value)}
+                          required
+                        />
+                      </Col>
+                      <Col size={1}>
+                        <input
+                          className="register-input"
+                          type="password"
+                          name="password"
+                          value={repeat_password}
+                          id="password_r_slot"
+                          onChange={(event) =>
+                            setRepeatPassword(event.target.value)
+                          }
+                          required
+                        />
+                      </Col>
+                    </Row>
+
+                    <br></br>
                     <PasswordStrengthBar password={password} minLength={8} />
                     <div style={{ color: "red" }}>{error}</div>
+
                     <button
                       type="submit"
                       form="newsletter"
@@ -173,10 +220,7 @@ const Register = () => {
               }
             })()}
           </Col>
-          <Col size={2}></Col>
-        </Row>
-        <Row>
-          <div className="short-term-spacer"></div>
+          <Col className="login-purple-scheme" size={0.5}></Col>
         </Row>
       </Grid>
     </div>

@@ -65,79 +65,83 @@ const Login = () => {
 
   return (
     <div className="login-page-content">
-      <Grid>
-        <div className="login-blackbox">
-          <Row>
-            <br></br>
-          </Row>
-          <Row>
-            <Col size={1}></Col>
-            <Col size={6}>
-              <form action="/" id="newsletter" onSubmit={onSubmit}>
-                <div className="form-row">
-                  <label className="label-text" for="email_slot">
-                    Email Address*
-                  </label>
-                  <input
-                    className="login-input"
-                    type="email"
-                    name="email"
-                    id="email_slot"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    required
-                  />
-                </div>
-                <br></br>
-                <div className="form-row">
-                  <label className="label-text" for="password_slot">
-                    Password*
-                  </label>
-                  <input
-                    className="login-input"
-                    type="password"
-                    name="password"
-                    id="password_slot"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    required
-                  />
-                  <div style={{ color: "red" }}>{error}</div>
-                </div>
-                <br></br>
-                {(() => {
-                  if (!auth) {
-                    return (
-                      <button type="submit" form="newsletter" value="Submit">
-                        Sign In
-                      </button>
-                    );
-                  }
-                })()}
-              </form>
-              <div>
-                {(() => {
-                  if (auth) {
-                    return (
-                      <button
-                        type="submit"
-                        form="newsletter"
-                        value="Submit"
-                        style={{ width: 300 }}
-                        onClick={onSubmitTwo}
-                      >
-                        Sign Out
-                      </button>
-                    );
-                  }
-                })()}
+      <Grid className="login-grid">
+        <Row className="login-fields-section">
+          <Col className="login-purple-scheme" size={0.5}></Col>
+          <Col size={6}>
+            <form
+              className="login-form"
+              action="/"
+              id="newsletter"
+              onSubmit={onSubmit}
+            >
+              <div className="form-row">
+                <label className="label-text" for="email_slot">
+                  Email Address*
+                </label>
+                <input
+                  className="login-input"
+                  type="email"
+                  name="email"
+                  id="email_slot"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  required
+                />
               </div>
-            </Col>
-
-            <Col size={1}></Col>
-          </Row>
-          <br></br>
-        </div>
+              <br></br>
+              <div className="form-row">
+                <label className="label-text" for="password_slot">
+                  Password*
+                </label>
+                <input
+                  className="login-input"
+                  type="password"
+                  name="password"
+                  id="password_slot"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  required
+                />
+                <div style={{ color: "red" }}>{error}</div>
+              </div>
+              <br></br>
+              <br></br>
+              {(() => {
+                if (!auth) {
+                  return (
+                    <button
+                      className="login-submit-button"
+                      type="submit"
+                      form="newsletter"
+                      value="Submit"
+                    >
+                      SIGN IN
+                    </button>
+                  );
+                }
+              })()}
+            </form>
+            <div>
+              {(() => {
+                if (auth) {
+                  return (
+                    <button
+                      type="submit"
+                      form="newsletter"
+                      value="Submit"
+                      style={{ width: 300 }}
+                      onClick={onSubmitTwo}
+                    >
+                      Sign Out
+                    </button>
+                  );
+                }
+              })()}
+            </div>
+          </Col>
+          <Col className="login-purple-scheme" size={0.5}></Col>
+        </Row>
       </Grid>
     </div>
   );
