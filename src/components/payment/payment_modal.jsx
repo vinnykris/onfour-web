@@ -9,7 +9,7 @@ import PaymentBox from "./payment_box";
 const PaymentModal = () => {
   return (
     <div
-      className="modal"
+      className="modal payment-modal"
       id="paymentModal"
       tapindex="-1"
       role="dialog"
