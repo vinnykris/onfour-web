@@ -7,14 +7,13 @@ import { Link } from "react-router-dom";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../../apis/subscription_db";
+import awsmobile from "../../apis/AppSync";
 
 // Component Imports
 // import VideoPlayer from "./video_player_old";
 import Chat from "../chat/stream_chat";
 import Join from "../chat/join_chat";
 import { Grid, Row, Col } from "../grid";
-// import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import VideoPlayer from "./video_player";
 
@@ -71,7 +70,7 @@ const StreamPage = () => {
     };
 
     API.graphql(
-      graphqlOperation(mutations.createEmailSubscription, { input: payload })
+      graphqlOperation(mutations.create_email_subscription, { input: payload })
     );
 
     setEmail("");

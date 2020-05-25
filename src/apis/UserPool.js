@@ -1,3 +1,7 @@
+// File configures out Cognito User Pool API so that we can track when
+// users register, log in, sign out, are logged in, etc.
+
+// Amplify
 import Amplify, { Auth } from "aws-amplify";
 
 Amplify.configure({

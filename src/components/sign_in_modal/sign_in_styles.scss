@@ -3,14 +3,14 @@
 @import "../../styles";
 
 .modal {
-   position: absolute;
-   top: 10px;
-   right: 100px;
-   bottom: 0;
-   left: 0;
-   z-index: 10040;
-   overflow: auto;
-   overflow-y: auto;
+  position: absolute;
+  top: 10px;
+  right: 100px;
+  bottom: 0;
+  left: 0;
+  z-index: 10040;
+  overflow: auto;
+  overflow-y: auto;
 }
 
 // card payment section
@@ -47,5 +47,31 @@
 }
 
 .pay-success-msg {
-  color: #4d4d4d
+  color: #4d4d4d;
+}
+
+.sign-modal-grid {
+  width: 45%;
+  background-color: #979bbb;
+  //right: 100%;
+  //left: 100%;
+  margin-top: 20%;
+  margin: 0 auto;
+  padding-bottom: 3%;
+}
+
+.purple-tab {
+  width: 100%;
+  background-color: #979bbb;
+  color: black;
+  font-weight: 450;
+  font-size: 16px;
+}
+
+.black-tab {
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  font-weight: 450;
 }

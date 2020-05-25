@@ -11,6 +11,7 @@ import UpcomingShowPage from "./components/upcoming_show_page/upcoming_show";
 import Ticket from "./components/payment/payment_box";
 import ArchivePage from "./components/archive_page/archive_page";
 import Footer from "./components/footer/footer";
+import Modal from "./components/sign_in_modal/sign_in_modal";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -37,6 +38,7 @@ function App() {
         </Switch>
         <Footer />
       </Router>
+      <Modal></Modal>
     </div>
   );
 }

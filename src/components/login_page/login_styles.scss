@@ -4,7 +4,39 @@
 
 .login-page-content {
   background-color: black;
-  margin-top: -1px;
-  height: 60vh;
-  width: auto;
+  height: 50%;
+  width: 100%;
+}
+
+.login-form {
+  margin-top: 7%;
+  width: 90%;
+  padding-bottom: 7%;
+}
+
+.login-fields-section {
+  height: 100%;
+}
+
+.login-grid {
+  height: 100%;
+}
+
+.login-input {
+  width: 100%;
+}
+
+.login-purple-scheme {
+  background-color: #979bbb;
+}
+
+.label-text {
+  color: white;
+}
+
+.login-submit-button {
+  width: 38%;
+  color: white;
+  font-size: 14px;
+  font-weight: 420;
 }

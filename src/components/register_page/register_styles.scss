@@ -1,10 +1,71 @@
-// LOGIN PAGE COMPONENT STYLING
+// REGISTER PAGE COMPONENT STYLING
 
 @import "../../styles";
 
 .register-page-content {
   background-color: black;
-  margin-top: -1px;
-  height: 60vh;
-  width: auto;
+  height: 50%;
+  width: 100%;
+}
+
+.register-form {
+  margin-top: 7%;
+  width: 90%;
+  padding-bottom: 7%;
+}
+
+.register-fields-section {
+  height: 100%;
+}
+
+.register-grid {
+  height: 100%;
+}
+
+.register-input-left {
+  width: 95%;
+  float: left;
+}
+
+.register-input-right {
+  width: 95%;
+  float: right;
+}
+
+.register-input {
+  width: 100%;
+}
+
+.register-purple-scheme {
+  background-color: #979bbb;
+}
+
+.label-text {
+  color: white;
+}
+
+.label-text-left {
+  color: white;
+  float: left;
+}
+
+.label-text-right {
+  color: white;
+  float: left;
+  padding-left: 5%;
+}
+
+.register-submit-button {
+  width: 38%;
+  color: white;
+  font-size: 14px;
+  font-weight: 420;
+}
+
+.sign-up-message {
+  padding-top: 32%;
+  padding-bottom: 33%;
+  padding-left: 4%;
+  padding-right: 4%;
+  color: white;
 }

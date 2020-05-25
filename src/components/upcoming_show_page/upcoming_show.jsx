@@ -12,7 +12,7 @@ import FlexibleGrid from "../flexible_grid/flexible_grid";
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../../graphql/queries";
 import Amplify from "aws-amplify";
-import awsmobile from "../../apis/subscription_db";
+import awsmobile from "../../apis/AppSync";
 
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
