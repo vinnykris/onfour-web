@@ -192,3 +192,44 @@ a.nav-page-black {
 .mobile-link-text {
   font-size: 1.3rem;
 }
+
+.user-menu {
+  height: 131px;
+  width: 100%;
+  @include respond-to("small") {
+    display: flex;
+  }
+}
+
+.user-icon {
+  margin: auto;
+  color: rgb(240, 231, 231);
+}
+
+.dropdown-menu-profile {
+  width: 100px;
+  @include respond-to("small") {
+    display: flex;
+  }
+}
+
+.toggle-greeting {
+  font-size: 1.1rem;
+  font-family: "Heebo", sans-serif;
+  font-weight: $medium-weight;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.toggle-color {
+  color: white;
+}
+
+.sign-out-button {
+  width: 100%;
+  height: 100%;
+  color: white;
+  font-size: 14px;
+  font-weight: 420;
+}

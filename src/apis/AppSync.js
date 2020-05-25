@@ -1,4 +1,4 @@
-// API to connect our email list subscription boxes to AppSync/DynamoDB
+// API to connect to AppSync/DynamoDB
 const awsmobile = {
   aws_appsync_graphqlEndpoint:
     "https://zb745udzlfhxtfsms2hbw6bogi.appsync-api.us-east-1.amazonaws.com/graphql",
