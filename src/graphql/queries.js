@@ -41,3 +41,16 @@ export const list_upcoming_concerts = `query listFutureConcerts {
       }
     }
   }`;
+
+export const list_past_concerts = `query listPastShows {
+    listPastShows {
+      items {
+        id
+        artist_name
+        concert_name
+        concert_date
+        video_url
+        video_length
+      }
+    }
+  }`;
