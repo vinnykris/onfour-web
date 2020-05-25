@@ -231,11 +231,12 @@ const NavBar = () => {
                       </DropdownToggle>
                     </div>
                     <DropdownMenu right>
-                      <DropdownItem>
-                        <button className="sign-out-button" onClick={signOut}>
-                          SIGN OUT
-                        </button>
+                      <DropdownItem className="sign-out-button" onClick={signOut}>
+                        PROFILE
                       </DropdownItem>
+                      <DropdownItem className="sign-out-button" onClick={signOut}>
+                        SIGN OUT
+                      </DropdownItem> 
                     </DropdownMenu>
                   </Dropdown>
                 );

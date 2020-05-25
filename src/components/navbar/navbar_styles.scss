@@ -217,6 +217,9 @@ a.nav-page-black {
   font-size: 1.1rem;
   font-family: "Heebo", sans-serif;
   font-weight: $medium-weight;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .toggle-color {

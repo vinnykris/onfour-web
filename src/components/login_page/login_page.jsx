@@ -17,14 +17,16 @@ Amplify.configure(awsmobile); // Configuring AppSync API
 const Login = () => {
   const [email, setEmail] = useState(""); // Tracks user's email
   const [password, setPassword] = useState(""); // Tracks user's password
+  const [is_processing, setProcessing] = useState(false); // Tracks whether user clicked sign-in or not
   const [error, setError] = useState(""); // Tracks error messages when trying to log in
 
   // Function for when the user clicks the submit button to log in
   // Reloads the window if successful, otherwise provides error message to user
-  const onSubmit = (event) => {
+  const loginSubmit = (event) => {
     event.preventDefault();
 
     Auth.signIn(email, password)
+      .then((data) => setProcessing(true))
       .then((data) => setEmail(""))
       .then((data) => setPassword(""))
       .then((data) => setError(""))
@@ -41,12 +43,15 @@ const Login = () => {
         <Row className="login-fields-section">
           <Col className="login-purple-scheme" size={0.5}></Col>
           <Col size={6}>
-            <form
+            {is_processing? (
+              <p className="promessing-message">Loading...</p>
+            ) : (
+              <form
               className="login-form"
               action="/"
-              id="newsletter"
-              onSubmit={onSubmit}
-            >
+              id="login"
+              onSubmit={loginSubmit}
+              >
               <Row>
                 <label className="label-text" for="email_slot">
                   Email Address*
@@ -87,12 +92,13 @@ const Login = () => {
               <button
                 className="login-submit-button"
                 type="submit"
-                form="newsletter"
+                form="login"
                 value="Submit"
               >
                 SIGN IN
               </button>
             </form>
+            )}
           </Col>
           <Col className="login-purple-scheme" size={0.5}></Col>
         </Row>
