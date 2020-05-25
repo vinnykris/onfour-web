@@ -19,7 +19,7 @@ const UpcomingShow = () => {
   const [email, setEmail] = useState("");
   const [clicked, setClicked] = useState(false);
 
-  const onSubmit = (event) => {
+  const emailSubmit = (event) => {
     event.preventDefault();
 
     const payload = {
@@ -75,7 +75,7 @@ const UpcomingShow = () => {
                     className="inline-form-2"
                     action="/"
                     id="newsletter"
-                    onSubmit={onSubmit}
+                    onSubmit={emailSubmit}
                   >
                     <div>
                       <input

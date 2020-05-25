@@ -29,7 +29,7 @@ function App() {
     <div className="App">
       <Router history={history}>
         <NavBar />
-        <Modal></Modal>
+
         <Switch>
           <Route exact path="/" component={About} />
           <Route path="/archive" component={ArchivePage} />
@@ -37,6 +37,7 @@ function App() {
           <Route path="/upcoming" component={UpcomingShowPage} />
           <Route path="/ticket" component={Ticket} />
         </Switch>
+        <Modal></Modal>
         <Footer />
       </Router>
     </div>

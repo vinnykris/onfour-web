@@ -21,7 +21,7 @@ const Login = () => {
 
   // Function for when the user clicks the submit button to log in
   // Reloads the window if successful, otherwise provides error message to user
-  const onSubmit = (event) => {
+  const loginSubmit = (event) => {
     event.preventDefault();
 
     Auth.signIn(email, password)
@@ -44,8 +44,8 @@ const Login = () => {
             <form
               className="login-form"
               action="/"
-              id="newsletter"
-              onSubmit={onSubmit}
+              id="login"
+              onSubmit={loginSubmit}
             >
               <Row>
                 <label className="label-text" for="email_slot">
@@ -87,7 +87,7 @@ const Login = () => {
               <button
                 className="login-submit-button"
                 type="submit"
-                form="newsletter"
+                form="login"
                 value="Submit"
               >
                 SIGN IN

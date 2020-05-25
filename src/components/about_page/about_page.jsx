@@ -28,7 +28,7 @@ const AboutPage = () => {
 
   // This function gets called when the email subscribtion form is submitted
   // It calls the appsync API to send the input email to backend database
-  const onSubmit = (event) => {
+  const emailSubmit = (event) => {
     event.preventDefault();
 
     const payload = {
@@ -159,7 +159,7 @@ const AboutPage = () => {
                       className="inline-form-2"
                       action="/"
                       id="newsletter"
-                      onSubmit={onSubmit}
+                      onSubmit={emailSubmit}
                     >
                       <div className="subscribe-input-about">
                         <input
@@ -253,7 +253,7 @@ const AboutPage = () => {
                         className="inline-form-2"
                         action="/"
                         id="newsletter"
-                        onSubmit={onSubmit}
+                        onSubmit={emailSubmit}
                       >
                         <Row>
                           <Col size={4}>

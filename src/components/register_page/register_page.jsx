@@ -30,7 +30,7 @@ const Register = () => {
   const [name, setName] = useState(""); // Tracks user's first name after successful registration
 
   // Function that occurs after the user clicks the submit button to sign up
-  const onSubmit = (event) => {
+  const registerSubmit = (event) => {
     event.preventDefault();
 
     // Username/Password information passed into cognito API
@@ -115,8 +115,8 @@ const Register = () => {
                   <form
                     className="register-form"
                     action="/"
-                    id="newsletter"
-                    onSubmit={onSubmit}
+                    id="register"
+                    onSubmit={registerSubmit}
                   >
                     <Row>
                       <Col size={1}>
@@ -217,7 +217,7 @@ const Register = () => {
                     <button
                       className="register-submit-button"
                       type="submit"
-                      form="newsletter"
+                      form="register"
                       value="Submit"
                     >
                       SIGN UP
