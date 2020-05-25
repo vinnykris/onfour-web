@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // AWS Impoorts
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
-import awsmobile from "../../apis/subscription_db";
+import awsmobile from "../../apis/AppSync";
 import { API, graphqlOperation } from "aws-amplify";
 
 // Styling Imports
@@ -19,7 +19,7 @@ const UpcomingShow = () => {
   const [email, setEmail] = useState("");
   const [clicked, setClicked] = useState(false);
 
-  const onSubmit = (event) => {
+  const emailSubmit = (event) => {
     event.preventDefault();
 
     const payload = {
@@ -28,12 +28,13 @@ const UpcomingShow = () => {
     };
 
     API.graphql(
-      graphqlOperation(mutations.createEmailSubscription, { input: payload })
+      graphqlOperation(mutations.create_email_subscription, { input: payload })
     );
 
     setEmail("");
     setClicked(true);
   };
+
   return (
     <div className="upcoming-page-content">
       <Grid>
@@ -74,7 +75,7 @@ const UpcomingShow = () => {
                     className="inline-form-2"
                     action="/"
                     id="newsletter"
-                    onSubmit={onSubmit}
+                    onSubmit={emailSubmit}
                   >
                     <div>
                       <input
@@ -84,7 +85,6 @@ const UpcomingShow = () => {
                         required
                         value={email}
                         className="email-input-upcoming"
-                        // style={{ width: "280px" }}
                         onChange={(event) => setEmail(event.target.value)}
                       />
                       <button
@@ -112,7 +112,7 @@ const UpcomingShow = () => {
 export default UpcomingShow;
 
 // {
-  /*
+/*
 
 const upcoming_show = () => {
   return (

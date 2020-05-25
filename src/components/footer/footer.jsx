@@ -1,9 +1,12 @@
 // React
 import React from "react";
+
 // Components
 import { Grid, Row, Col } from "../grid";
+
 // Styles
 import "./footer_styles.scss";
+
 // Images
 import white_logo from "../../images/logos/logo_blackbackground.png";
 
