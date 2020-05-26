@@ -1,7 +1,7 @@
 // React Imports
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -34,6 +34,9 @@ const StreamPage = () => {
   const [scroll, setScroll] = useState(true); // Auto-scroll
   // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
   const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
+  const [show_start_time, setStartTime] = useState("0");
+  const [artist_name, setArtistName] = useState("");
+  const [concert_name, setConcertName] = useState("");
 
   // Gets dimensions of screen and sends warnings to console
   const findDimensions = (layout) => {
@@ -100,7 +103,9 @@ const StreamPage = () => {
     );
 
     const info_list = info.data.listFutureConcerts.items; // Stores the items in database
-    console.log(info_list[0].date);
+    setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
+    setConcertName(info_list[0].concertName);
+    setArtistName(info_list[0].artist);
   };
 
   // Opens link to paypal account for musician
@@ -168,6 +173,9 @@ const StreamPage = () => {
                       url={
                         "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                       }
+                      start_time={show_start_time}
+                      artist_name={artist_name}
+                      concert_name={concert_name}
                     />
                   </div>
                 </div>
@@ -321,6 +329,7 @@ const StreamPage = () => {
                       url={
                         "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                       }
+                      start_time={show_start_time}
                     />
                   </div>
                 </div>
