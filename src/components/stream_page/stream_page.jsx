@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 // import { Link } from "react-router-dom";
+import { css } from "@emotion/core";
+import PulseLoader from "react-spinners/PulseLoader";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -446,7 +448,13 @@ const StreamPage = () => {
         )}
       </div>
       ) : (
-        null
+          <PulseLoader
+            css={css.override}
+            size={10}
+            color={"#123abc"}
+            background-color={""}
+            loading={(!show_start_time)}
+          />
       )}
     </View>
   );
