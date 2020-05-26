@@ -34,7 +34,7 @@ const StreamPage = () => {
   const [scroll, setScroll] = useState(true); // Auto-scroll
   // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
   const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
-  const [show_start_time, setStartTime] = useState("0");
+  const [show_start_time, setStartTime] = useState("");
   const [artist_name, setArtistName] = useState("");
   const [concert_name, setConcertName] = useState("");
 
@@ -120,6 +120,7 @@ const StreamPage = () => {
         findDimensions(event.nativeEvent.layout);
       }}
     >
+      {show_start_time ? (
       <div className="stream-page-content">
         {/* {show_alert ? (
           <div>
@@ -444,6 +445,9 @@ const StreamPage = () => {
           </Grid>
         )}
       </div>
+      ) : (
+        null
+      )}
     </View>
   );
 };
