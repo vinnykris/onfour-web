@@ -34,7 +34,7 @@ const UpcomingShowPage = () => {
       graphqlOperation(queries.list_upcoming_concerts)
     );
 
-    const info_list = info.data.listFutureConcerts.items; // Stores the items in databse
+    const info_list = info.data.listFutureConcerts.items; // Stores the items in database
     const month_map = {
       "01": "JAN",
       "02": "FEB",

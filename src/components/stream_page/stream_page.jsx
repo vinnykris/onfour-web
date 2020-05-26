@@ -1,21 +1,21 @@
 // React Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { Link } from "react-router-dom";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
+import * as queries from "../../graphql/queries";
 import Amplify from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 
 // Component Imports
-// import VideoPlayer from "./video_player_old";
+import VideoPlayer from "./video_player";
 import Chat from "../chat/stream_chat";
 import Join from "../chat/join_chat";
 import { Grid, Row, Col } from "../grid";
 import Modal from "../payment/payment_modal";
-import VideoPlayer from "./video_player";
 
 // Styles Imports
 import "./stream_styles.scss";
@@ -83,10 +83,25 @@ const StreamPage = () => {
     setScroll(false);
   }
 
-  // Hides popup if closed
+  // // Hides popup if closed
   // const hidePopup = () => {
   //   setShowAlert(false);
   // };
+
+  // get the start time for countdown_timer
+  useEffect(() => {
+    getStartTime();
+  }, []);
+
+  const getStartTime = async () => {
+    // Calling the API, using async and await is necessary
+    const info = await API.graphql(
+      graphqlOperation(queries.list_upcoming_concerts)
+    );
+
+    const info_list = info.data.listFutureConcerts.items; // Stores the items in database
+    console.log(info_list[0].date);
+  };
 
   // Opens link to paypal account for musician
   const donatePaypal = () => {
@@ -101,7 +116,6 @@ const StreamPage = () => {
       }}
     >
       <div className="stream-page-content">
-        {/* BELOW IS THE CODE FOR THE POPUP MODAL*/}
         {/* {show_alert ? (
           <div>
             <div className="popup-desktop">
@@ -122,6 +136,7 @@ const StreamPage = () => {
                 </div>
               </form>
             </div>
+
             <div className="popup-mobile">
               <form className="waiting-msg-box">
                 <span className="popup-close" onClick={hidePopup}>
@@ -150,8 +165,10 @@ const StreamPage = () => {
                 <div className="stream-main">
                   <div className="stream-wrapper">
                     <VideoPlayer
-                    url={"https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"}>
-                    </VideoPlayer>
+                      url={
+                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                      }
+                    />
                   </div>
                 </div>
                 {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
@@ -300,9 +317,11 @@ const StreamPage = () => {
               <Col size={1}>
                 <div className="stream-main-mobile">
                   <div className="stream-wrapper-mobile">
-                    <VideoPlayer 
-                    url={"https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"}>
-                    </VideoPlayer>
+                    <VideoPlayer
+                      url={
+                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                      }
+                    />
                   </div>
                 </div>
                 {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
@@ -323,10 +342,7 @@ const StreamPage = () => {
                     </Col>
                   </Row>
                 </div> */}
-              </Col>
-            </Row>
-            <Row>
-              <Col size={1}>
+
                 <div className="main-content-mobile">
                   {/* PAYMENT SECTION */}
                   <div className="mobile-section">
