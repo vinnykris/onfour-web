@@ -21,13 +21,12 @@ Amplify.configure(awsmobile);
 
 // The Upcoming Show Page component
 const UpcomingShowPage = () => {
-  
   // concerts is a list of FeaturedContent objects with upcoming show information
-  const [concerts, setConcerts] = useState([]); 
+  const [concerts, setConcerts] = useState([]);
 
   // getConcertInfo queries all elements in the future concert database
   // and create a list of FeaturedContent objects with the data returned
-  // from the database. 
+  // from the database.
   const getConcertInfo = async () => {
     // Calling the API, using async and await is necessary
     const info = await API.graphql(
@@ -75,15 +74,14 @@ const UpcomingShowPage = () => {
           day={data.date.slice(8,10)}
           time={data.time}
           ticketed={data.price}
-        />
+        />,
       ]);
     });
   };
 
-
   useEffect(() => {
     getConcertInfo();
-  },[]);
+  }, []);
 
   const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
   // Gets dimensions of screen and sends warnings to console
@@ -114,13 +112,13 @@ const UpcomingShowPage = () => {
             <FlexibleGrid content_list={concerts} num_cols={3} />
           </div>
         ) : (
-            <div className="upcoming-show-grid">
-              <FlexibleGrid content_list={concerts} num_cols={1} />
-            </div>
+          <div className="upcoming-show-grid">
+            <FlexibleGrid content_list={concerts} num_cols={1} />
+          </div>
         )}
       </div>
     </View>
   );
-}
+};
 
 export default UpcomingShowPage;

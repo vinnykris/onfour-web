@@ -17,6 +17,7 @@ import VideoPlayer from "./video_player";
 import Chat from "../chat/stream_chat";
 import Join from "../chat/join_chat";
 import { Grid, Row, Col } from "../grid";
+// import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 
 // Styles Imports
