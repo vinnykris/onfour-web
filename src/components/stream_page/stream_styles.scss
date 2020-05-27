@@ -256,6 +256,19 @@
   height: 8px;
 }
 
+.parentDisable{
+  background: black;
+  z-index: 998;
+  padding-top: 20vh;
+  height: 71vh;
+  width: 100%;
+}
+
+.overlay-box {
+  background: black; 
+  z-index: 1000;
+}
+
 .waiting-message-container {
   margin: 0;
   width: 100%;

@@ -333,6 +333,8 @@ const StreamPage = () => {
                         "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                       }
                       start_time={show_start_time}
+                      artist_name={artist_name}
+                      concert_name={concert_name}
                     />
                   </div>
                 </div>
@@ -448,13 +450,17 @@ const StreamPage = () => {
         )}
       </div>
       ) : (
-          <PulseLoader
-            css={css.override}
-            size={10}
-            color={"#123abc"}
-            background-color={""}
-            loading={(!show_start_time)}
-          />
+          <div className={!show_start_time ? 'parentDisable' : ''} width="100%">
+            <div className='overlay-box'>
+              <PulseLoader
+                // css={override}
+                sizeUnit={"px"}
+                size={25}
+                color={"#8257e6"}
+                loading={!show_start_time}
+              />
+            </div>
+          </div>
       )}
     </View>
   );
