@@ -31,18 +31,9 @@ Amplify.configure(awsmobile);
 
 // Main stream page component. Holds stream video, chat, and payment functionality
 const StreamPage = () => {
-  const [show_chat, setShowChat] = useState(false); // If chat should be shown
-  const [chat_name, setChatName] = useState(""); // Sets user name for chat
-  const [email, setEmail] = useState(""); // User email input for subscription
-  const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
-  const [scroll, setScroll] = useState(true); // Auto-scroll
-  // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
-  const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
-  const [show_start_time, setStartTime] = useState("");
-  const [artist_name, setArtistName] = useState("");
-  const [concert_name, setConcertName] = useState("");
-  
 
+  // DETERMINE MOBILE VERSION OR NOT
+  const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
   // Gets dimensions of screen and sends warnings to console
   const findDimensions = (layout) => {
     const { x, y, width, height } = layout;
@@ -57,17 +48,22 @@ const StreamPage = () => {
     console.warn(height);
   };
 
+  // CHAT SECTION
+  const [show_chat, setShowChat] = useState(false); // If chat should be shown
+  const [chat_name, setChatName] = useState(""); // Sets user name for chat
   // Function passed as prop to join chat
   const joinSubmit = (name, mode) => {
     setChatName(name);
     setShowChat(mode);
   };
-
   // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
   };
 
+  // EMAIL SUBSCRIBTION SECTION
+  const [email, setEmail] = useState(""); // User email input for subscription
+  const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
   // Function when user submits email
   const emailSubmit = (event) => {
     event.preventDefault();
@@ -85,22 +81,30 @@ const StreamPage = () => {
     setEmailSubmitted(true);
   };
 
+  // AUTO-SCROLL SECTION
   // Auto-scrolls on first navigation
+  const [scroll, setScroll] = useState(true); // Auto-scroll
   if (scroll) {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setScroll(false);
   }
 
+  // POP_UP WARNING SECTION
+  // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
   // // Hides popup if closed
   // const hidePopup = () => {
   //   setShowAlert(false);
   // };
 
+  // GETTING INFORMATION ABOUT MOST RECENT UPCOMING SHOW
+  const [show_start_time, setStartTime] = useState(""); // Stores the upcoming show's start time
+  const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
+  const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
+  const [concert_id, setConcertID] = useState("");
   // Get the start time for countdown_timer
   useEffect(() => {
     getStartTime();
   }, []);
-
  // Query upcoming show database 
   const getStartTime = async () => {
     // Calling the API, using async and await is necessary
@@ -112,13 +116,16 @@ const StreamPage = () => {
     setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
     setConcertName(info_list[0].concertName);
     setArtistName(info_list[0].artist);
+    setConcertID(info_list[0].concertId);
   };
 
-  // Query registration database
+  // GET USER'S REGISTRATION INFORMATION
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
+  const [user_id, setUserID] = useState(""); // Tracks user's id of signed in user
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
   const [last, setLast] = useState(""); // Tracks last name of signed in user
+
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
   Auth.currentAuthenticatedUser({})
@@ -138,16 +145,19 @@ const StreamPage = () => {
     .then((data) => {
       setFirst(data.data.listOnfour_registrations.items[0].first);
       setLast(data.data.listOnfour_registrations.items[0].last);
+      setUserID(data.data.listOnfour_registrations.items[0].id);
       setShowChat(true);
     });
   }
 
+  // DONATION FUNCTION
   // Opens link to paypal account for musician
   const donatePaypal = () => {
     const url = "https://paypal.me/jonathandely";
     window.open(url, "_blank");
   };
 
+  // RENDERING SECTION
   return (
     <View
       onLayout={(event) => {
@@ -211,6 +221,9 @@ const StreamPage = () => {
                       start_time={show_start_time}
                       artist_name={artist_name}
                       concert_name={concert_name}
+                      auth={auth}
+                      user_id={user_id}
+                      concert_id={concert_id}
                     />
                   </div>
                 </div>
@@ -367,6 +380,9 @@ const StreamPage = () => {
                       start_time={show_start_time}
                       artist_name={artist_name}
                       concert_name={concert_name}
+                      auth={auth}
+                      user_id={user_id}
+                      concert_id={concert_id}
                     />
                   </div>
                 </div>

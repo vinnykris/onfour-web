@@ -6,19 +6,17 @@ import ReactPlayer from "react-player";
 import "./stream_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
-// Amplify Imports
-import Auth from "../../apis/UserPool";
+// AWS Imports
+import { API, graphqlOperation } from "aws-amplify";
+import * as mutations from "../../graphql/mutations";
+import Amplify from "aws-amplify";
+import awsmobile from "../../apis/AppSync";
+
+Amplify.configure(awsmobile);
 
 // VideoPlayer displays countdown message when the current time is behind the start time
 // of the upcoming concert. When the time is up, it will display the stream video instead
-function VideoPlayer({url, start_time, artist_name, concert_name}) {
-
-  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
-
-  // If user is authenticated, set auth to true, otherwise set it to false
-  Auth.currentAuthenticatedUser({})
-    .then((user) => setAuth(true))
-    .catch((err) => setAuth(false));
+function VideoPlayer({ url, start_time, artist_name, concert_name, auth, user_id, concert_id }) {
 
   // This function calculates the time difference between current time and show start time
   // and represent the difference in days, hours, minuts and seconds
@@ -103,6 +101,28 @@ function VideoPlayer({url, start_time, artist_name, concert_name}) {
       );
     }
   });
+
+  const [registered_concert, setRegisteredConcert] = useState(false);
+  const registerConcert = async (concert_reg_load) => {
+    // Calling the API, using async and await is necessary
+    await API.graphql(
+      graphqlOperation(mutations.update_registration_concert, { input: concert_reg_load })
+    );
+  }
+
+  if (!timer_placeholder.length) {
+    if (auth && (!registered_concert)) {
+      if (concert_id) {
+        console.log(concert_id);
+        const concert_reg_load = {
+          id: user_id,
+          concert: concert_id,
+        };
+        registerConcert(concert_reg_load);
+        setRegisteredConcert(true);
+      }
+    }
+  }
 
   // If the user is logged in, show them either the logged in waiting page or the
   // stream depending on the countdown

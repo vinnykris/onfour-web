@@ -40,3 +40,12 @@ export const create_upcoming = `mutation createFutureConcerts($input: CreateFutu
   }
 }
 `;
+
+// Mutation to update the concert variable in registartion DB based on user_email
+export const update_registration_concert = `mutation updateOnfour_registration($input: UpdateOnfour_registrationInput!) {
+  updateOnfour_registration(input: $input) {
+    id
+    concert
+  }
+}
+`;
