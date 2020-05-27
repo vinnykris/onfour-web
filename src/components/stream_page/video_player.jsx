@@ -9,6 +9,9 @@ import { Grid, Row, Col } from "../grid";
 // Image Imports
 import WaitingScreen from "../../images/backgrounds/stream_waiting_img.png";
 
+// Amplify Imports
+import Auth from "../../apis/UserPool";
+
 // VideoPlayer displays countdown message when the current time is behind the start time
 // of the upcoming concert. When the time is up, it will display the stream video instead
 function VideoPlayer(props) {
@@ -16,6 +19,12 @@ function VideoPlayer(props) {
   const [show_start_time, setStartTime] = useState(
     "2020-05-24T20:25:00.000-04:00"
   ); // Stores the start time of upcoming concert
+
+  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
+
+  Auth.currentAuthenticatedUser({})
+    .then((user) => setAuth(true))
+    .catch((err) => setAuth(false));
 
   // This function calculates the time difference between current time and show start time
   // and represent the difference in days, hours, minuts and seconds
@@ -101,35 +110,50 @@ function VideoPlayer(props) {
     }
   });
 
-  return (
-    <div className="countdown-wrapper">
-      {timer_placeholder.length ? (
+  if (auth) {
+    return (
+      <div className="countdown-wrapper">
+        {timer_placeholder.length ? (
+          <div className="waiting-screen">
+            <div className="waiting-message-container">
+              <h3 className="waiting-message1">Next Stream Coming Soon</h3>
+              <h5 className="waiting-message2">
+                For updates, follow us on Instagram @_onfour
+              </h5>
+            </div>
+            <div className="countdown-component-wrapper">
+              <Grid>
+                <Row>{timer_components}</Row>
+              </Grid>
+            </div>
+          </div>
+        ) : (
+          <div className="player-wrapper">
+            <ReactPlayer
+              className="video-player"
+              url={props.url}
+              width="100%"
+              height="100%"
+              playing
+              controls
+            />
+          </div>
+        )}
+      </div>
+    );
+  } else {
+    return (
+      <div className="countdown-wrapper">
         <div className="waiting-screen">
           <div className="waiting-message-container">
             <h3 className="waiting-message1">Next Stream Coming Soon</h3>
             <h5 className="waiting-message2">
-              For updates, follow us on Instagram @_onfour
+              Please sign in to vew the stream!
             </h5>
           </div>
-          <div className="countdown-component-wrapper">
-            <Grid>
-              <Row>{timer_components}</Row>
-            </Grid>
-          </div>
         </div>
-      ) : (
-        <div className="player-wrapper">
-          <ReactPlayer
-            className="video-player"
-            url={props.url}
-            width="100%"
-            height="100%"
-            playing
-            controls
-          />
-        </div>
-      )}
-    </div>
-  );
+      </div>
+    );
+  }
 }
 export default VideoPlayer;
