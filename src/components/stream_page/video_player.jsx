@@ -19,9 +19,9 @@ function VideoPlayer(props) {
   const [show_start_time, setStartTime] = useState(
     "2020-05-24T20:25:00.000-04:00"
   ); // Stores the start time of upcoming concert
-
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
 
+  // If user is authenticated, set auth to true, otherwise set it to false
   Auth.currentAuthenticatedUser({})
     .then((user) => setAuth(true))
     .catch((err) => setAuth(false));
@@ -110,6 +110,9 @@ function VideoPlayer(props) {
     }
   });
 
+  // If the user is logged in, show them either the logged in waiting page or the
+  // stream depending on the countdown
+  // If the user is not logged in, show them the alternate waiting page
   if (auth) {
     return (
       <div className="countdown-wrapper">
