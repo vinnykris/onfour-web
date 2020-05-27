@@ -16,6 +16,9 @@ import Join from "../chat/join_chat";
 import { Grid, Row, Col } from "../grid";
 import Modal from "../payment/payment_modal";
 
+// Module Imports
+import { Jutsu } from "react-jutsu";
+
 // Styles Imports
 import "./stream_styles.scss";
 
@@ -185,6 +188,14 @@ const StreamPage = () => {
                 </div>
               </Col>
               <Col size={1}></Col>
+            </Row>
+            <Row>
+              <div className="short-term-spacer"></div>
+            </Row>
+            <Row>
+              <Col size={1}>
+                <Jutsu roomName="Yuxin" displayName="Vinod" />
+              </Col>
             </Row>
             <Row>
               <div className="short-term-spacer"></div>
