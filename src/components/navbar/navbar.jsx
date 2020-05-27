@@ -19,12 +19,17 @@ import { API, graphqlOperation } from "aws-amplify";
 
 // Component imports
 import { Grid, Row, Col } from "../grid";
+// import Login from "../login_page/login_page";
+// import Register from "../register_page/register_page";
+
+import LoginSwitcher from "../sign_in_mobile/login_switcher";
 
 // Image imports
 import new_logo_white from "../../images/logos/new_logo_white.png";
 
 // Styles imports
 import "./navbar_styles.scss";
+import "../login_page/login_styles.scss";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -39,6 +44,14 @@ const NavBar = () => {
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
+
+  // Mobile login fields
+  const [email, setEmail] = useState(""); // Tracks user's email
+  const [password, setPassword] = useState(""); // Tracks user's password
+  const [is_processing, setProcessing] = useState(false); // Tracks whether user clicked sign-in or not
+  const [error, setError] = useState(""); // Tracks error messages when trying to log in
+
+  const [show_mobile_login, setShowMobileLogin] = useState(false); // Tracks whether user clicked sign-in or not on mobile
 
   const toggle = () => setDropdownOpen((prevState) => !prevState); // Toggle for dropdown menu
 
@@ -75,6 +88,7 @@ const NavBar = () => {
   // Close menu function for mobile
   const closeMenu = () => {
     document.getElementById("nav-menu").style.height = "0%";
+    // document.getElementById("nav-login").style.visibility = "hidden";
   };
 
   // Close menu after user navigates to new page
@@ -85,6 +99,41 @@ const NavBar = () => {
   // Function to sign out the user -- the window reloads after signing out
   const signOut = (event) => {
     Auth.signOut().then((user) => window.location.reload());
+  };
+
+  // Function to sign out the user for mobile -- no reload
+  const mobileSignIn = (event) => {
+    event.preventDefault();
+    setProcessing(true);
+    Auth.signIn(email, password)
+      .then((data) => setEmail(""))
+      .then((data) => setPassword(""))
+      .then((data) => setError(""))
+      .then((data) => closeMenu())
+      .catch(
+        (err) => setError(err.message),
+        (err) => setPassword("")
+      );
+  };
+
+  // Function to show the sign-in form
+  const signInToggle = () => {
+    // document.getElementById("nav-login").style.visibility = "visible";
+    // document.getElementById("nav-links").style.visibility = "hidden";
+    setShowMobileLogin(true);
+  };
+
+  // Function to sign out the user
+  const signOutToggle = () => {
+    // document.getElementById("nav-login").style.visibility = "hidden";
+    Auth.signOut();
+    setShowMobileLogin(false);
+    closeMenu();
+  };
+
+  const signUpToggle = () => {
+    document.getElementById("nav-sign-up").style.visibility = "visible";
+    document.getElementById("nav-login").style.visibility = "hidden";
   };
 
   return (
@@ -99,7 +148,7 @@ const NavBar = () => {
               </span>
             </Col>
           </Row>
-          <div className="overlay-content">
+          <div id="nav-links" className="overlay-content">
             <div className="mobile-nav-link">
               <Row>
                 <Col size={1}>
@@ -153,7 +202,107 @@ const NavBar = () => {
                 </Col>
               </Row>
             </div>
+            <div className="mobile-nav-link">
+              <Row>
+                <Col size={1}>
+                  {(() => {
+                    if (!auth) {
+                      return (
+                        <NavLink
+                          to=""
+                          className="nav-page-white mobile-link-text"
+                          onClick={signInToggle}
+                        >
+                          SIGN IN
+                        </NavLink>
+                      );
+                    } else {
+                      return (
+                        <NavLink
+                          to=""
+                          className="nav-page-white mobile-link-text"
+                          onClick={signOutToggle}
+                        >
+                          SIGN OUT
+                        </NavLink>
+                      );
+                    }
+                  })()}
+                </Col>
+              </Row>
+            </div>
           </div>
+          {show_mobile_login ? (
+            <div className="overlay-content">
+              <LoginSwitcher />
+            </div>
+          ) : null}
+          {/* <div id="nav-login" className="overlay-content">
+            <Col size={6}>
+              {is_processing ? (
+                <p className="processing-message">Loading...</p>
+              ) : (
+                <form
+                  className="login-form"
+                  action="/"
+                  id="login"
+                  onSubmit={mobileSignIn}
+                >
+                  <Row>
+                    <label className="label-text" for="email_slot">
+                      Email Address*
+                    </label>
+                  </Row>
+                  <Row>
+                    <input
+                      className="login-input"
+                      type="email"
+                      name="email"
+                      id="email_slot"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      required
+                    />
+                  </Row>
+                  <br></br>
+                  <Row>
+                    <label className="label-text" for="password_slot">
+                      Password*
+                    </label>
+                  </Row>
+                  <Row>
+                    <input
+                      className="login-input"
+                      type="password"
+                      name="password"
+                      id="password_slot"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      required
+                    />
+                  </Row>
+                  <div style={{ color: "red" }}>{error}</div>
+
+                  <br></br>
+                  <br></br>
+                  <button
+                    className="login-submit-button"
+                    type="submit"
+                    form="login"
+                    value="Submit"
+                  >
+                    SIGN IN
+                  </button>
+                  <br></br>
+                  <br></br>
+                  <p className="label-text">
+                    Don't have an account? Click{" "}
+                    <span onClick={signUpToggle}>here</span> to sign up.
+                  </p>
+                </form>
+              )}
+            </Col>
+          </div> */}
         </Grid>
       </div>
       <Grid className="mobile-grid">
@@ -231,8 +380,11 @@ const NavBar = () => {
                       </DropdownToggle>
                     </div>
                     <DropdownMenu right>
-                      <DropdownItem className="sign-out-button" onClick={signOut}>
-                          SIGN OUT
+                      <DropdownItem
+                        className="sign-out-button"
+                        onClick={signOut}
+                      >
+                        SIGN OUT
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
