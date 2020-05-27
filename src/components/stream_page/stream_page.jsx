@@ -113,7 +113,7 @@ const StreamPage = () => {
 
   // Opens link to paypal account for musician
   const donatePaypal = () => {
-    const url = "http://paypal.me/jonathandely";
+    const url = "https://paypal.me/jonathandely";
     window.open(url, "_blank");
   };
 

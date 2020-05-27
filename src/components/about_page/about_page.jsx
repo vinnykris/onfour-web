@@ -24,7 +24,7 @@ const AboutPage = () => {
   // const [scroll, setScroll] = useState(true); // This might be no use
 
   const header_image_url =
-    "http://d1gbu7v6fgabn0.cloudfront.net/banner_background_blur.jpg";
+    "https://d1gbu7v6fgabn0.cloudfront.net/banner_background_blur.jpg";
 
   // This function gets called when the email subscribtion form is submitted
   // It calls the appsync API to send the input email to backend database
