@@ -6,9 +6,6 @@ import ReactPlayer from "react-player";
 import "./stream_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
-// Image Imports
-import WaitingScreen from "../../images/backgrounds/stream_waiting_img.png";
-
 // Amplify Imports
 import Auth from "../../apis/UserPool";
 

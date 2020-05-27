@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 // import { Link } from "react-router-dom";
-import { css } from "@emotion/core";
 import PulseLoader from "react-spinners/PulseLoader";
 
 // AWS Imports
@@ -11,6 +10,8 @@ import * as mutations from "../../graphql/mutations";
 import * as queries from "../../graphql/queries";
 import Amplify from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
+// Amplify Imports
+import Auth from "../../apis/UserPool";
 
 // Component Imports
 import VideoPlayer from "./video_player";
@@ -40,6 +41,7 @@ const StreamPage = () => {
   const [show_start_time, setStartTime] = useState("");
   const [artist_name, setArtistName] = useState("");
   const [concert_name, setConcertName] = useState("");
+  
 
   // Gets dimensions of screen and sends warnings to console
   const findDimensions = (layout) => {
@@ -94,11 +96,12 @@ const StreamPage = () => {
   //   setShowAlert(false);
   // };
 
-  // get the start time for countdown_timer
+  // Get the start time for countdown_timer
   useEffect(() => {
     getStartTime();
   }, []);
 
+ // Query upcoming show database 
   const getStartTime = async () => {
     // Calling the API, using async and await is necessary
     const info = await API.graphql(
@@ -110,6 +113,34 @@ const StreamPage = () => {
     setConcertName(info_list[0].concertName);
     setArtistName(info_list[0].artist);
   };
+
+  // Query registration database
+  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
+  const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
+  const [first, setFirst] = useState(""); // Tracks first name of signed in user
+  const [last, setLast] = useState(""); // Tracks last name of signed in user
+  // If the user is logged in/valid, set their auth value to true and track their email
+  // If the user is not logged in/invalid, reset their auth value to false
+  Auth.currentAuthenticatedUser({})
+    .then((user) => setUserEmail(user.attributes.email))
+    .then((user) => setAuth(true))
+    .catch((err) => setAuth(false));
+
+  // If the first name for the logged in user's email has not been retrieved yet,
+  // query the registration database's table to retrieve the first name filtered
+  // for the specific email and assign that value to first
+  if (first === "" && user_email !== "") {
+    API.graphql(
+      graphqlOperation(queries.query_name, {
+        filter: { email: { eq: user_email } },
+      })
+    )
+    .then((data) => {
+      setFirst(data.data.listOnfour_registrations.items[0].first);
+      setLast(data.data.listOnfour_registrations.items[0].last);
+      setShowChat(true);
+    });
+  }
 
   // Opens link to paypal account for musician
   const donatePaypal = () => {
@@ -204,8 +235,8 @@ const StreamPage = () => {
               <Col size={3}>
                 <div className="chat-main">
                   <div className="chat-wrapper">
-                    {show_chat ? (
-                      <Chat chat_name={chat_name} chatStatus={chatStatus} />
+                    {(show_chat || first) ? (
+                      <Chat chat_name={first? (first + " " + last) : (chat_name)} chatStatus={chatStatus} />
                     ) : (
                       <Join joinSubmit={joinSubmit} />
                     )}
