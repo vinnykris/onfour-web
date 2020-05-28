@@ -151,7 +151,7 @@ function VideoPlayer(props) {
           <div className="waiting-message-container">
             <h3 className="waiting-message1">Next Stream Coming Soon</h3>
             <h5 className="waiting-message2">
-              Please sign in to vew the stream!
+              Please sign in to view the stream!
             </h5>
           </div>
         </div>
