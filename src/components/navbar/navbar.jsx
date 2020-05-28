@@ -210,11 +210,11 @@ const NavBar = () => {
               </Row>
             </div>
           </div>
-          {show_mobile_login ? (
+          {/* {show_mobile_login ? (
             <div className="overlay-content">
               <LoginSwitcher closeMenu={closeMenu} />
             </div>
-          ) : null}
+          ) : null} */}
           {/* <div id="nav-login" className="overlay-content">
             <Col size={6}>
               {is_processing ? (
@@ -283,6 +283,24 @@ const NavBar = () => {
           </div> */}
         </Grid>
       </div>
+      
+      {show_mobile_login ? (
+        <div className="overlay-signin">
+          <Grid>
+            <Row>
+              <Col size={1}>
+                <span className="navbar-close" onClick={closeMenu}>
+                  <i className="fa fa-times fa-2x close-icon"></i>
+                </span>
+              </Col>
+            </Row>
+            <div className="signin-content">
+              <LoginSwitcher closeMenu={closeMenu} />
+            </div>
+          </Grid>
+        </div>
+      ) : null}
+    
       <Grid className="mobile-grid">
         <Row className="mobile-row">
           <Col size={1}>
@@ -298,7 +316,40 @@ const NavBar = () => {
               alt="nav-logo"
             ></img>
           </Col>
-          <Col size={1}></Col>
+          <Col size={1}>
+            {(() => {
+              if (!auth) {
+                return (
+                  <NavLink
+                    to=""
+                    onClick={signInMobile}
+                  >
+                    <span className="user-menu">
+                      <i className="fa fa-user-o fa-2x user-icon"></i>
+                    </span>
+                  </NavLink>
+                );
+              } else {
+                return (
+                  <Dropdown isOpen={dropdown_open} toggle={toggle}>
+                    <div className="toggle-color">
+                      <DropdownToggle className="toggle-greeting" tag="a" caret>
+                        HI, {first}
+                      </DropdownToggle>
+                    </div>
+                    <DropdownMenu right>
+                      <DropdownItem
+                        className="sign-out-button"
+                        onClick={signOutMobile}
+                      >
+                        SIGN OUT
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
+                );
+              }
+            })()}
+          </Col>
         </Row>
       </Grid>
 
