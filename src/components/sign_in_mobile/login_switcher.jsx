@@ -10,8 +10,9 @@ import "./sign_in_mobile_styles.scss";
 
 // Switches between the login and register pages
 const LoginSwitcher = ({ closeMenu }) => {
-  const [show_sign_up, setShowSignUp] = useState(false); // Tracks whether to show sign up
+  const [show_sign_up, setShowSignUp] = useState(false); // Tracks which child to show
 
+  // Function that is passed to children components to switch between one or the other
   const toggle = () => {
     setShowSignUp(!show_sign_up);
   };
@@ -21,7 +22,6 @@ const LoginSwitcher = ({ closeMenu }) => {
       {!show_sign_up ? (
         <LoginMobile toggleRegister={toggle} closeMenu={closeMenu} />
       ) : (
-        // <div></div>
         <RegisterMobile toggleLogin={toggle} />
       )}
     </div>
