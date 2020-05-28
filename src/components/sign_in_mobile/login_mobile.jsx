@@ -29,14 +29,23 @@ const LoginMobile = ({ toggleRegister, closeMenu }) => {
       .then((data) => setPassword(""))
       .then((data) => setError(""))
       .then((data) => closeMenu())
-      .catch(
-        (err) => setError(err.message),
-        (err) => setPassword("")
-      );
+      .catch((err) => showError(err));
+  };
+
+  // Function that displays error on screen
+  const showError = (err) => {
+    setError(err.message);
+    setProcessing(false);
+    setPassword("");
   };
 
   return (
     <Grid className="login-grid">
+      <Row>
+        <Col size={1}>
+          <p className="mobile-page-title">LOGIN</p>
+        </Col>
+      </Row>
       <Row className="login-fields-section">
         <div id="nav-login" className="overlay-content">
           <Col size={1}>
@@ -98,7 +107,10 @@ const LoginMobile = ({ toggleRegister, closeMenu }) => {
                 <br></br>
                 <p className="label-text">
                   Don't have an account? Click{" "}
-                  <span onClick={toggleRegister}>here</span> to sign up.
+                  <span className="register-prompt" onClick={toggleRegister}>
+                    here
+                  </span>{" "}
+                  to sign up.
                 </p>
               </form>
             )}

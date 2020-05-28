@@ -94,10 +94,14 @@ const RegisterMobile = () => {
 
   return (
     <div className="register-page-content">
-      <Grid register-grid>
+      <Grid>
+        <Row>
+          <Col size={1}>
+            <p className="mobile-page-title">REGISTER</p>
+          </Col>
+        </Row>
         <Row className="register-fields-section">
-          <Col className="register-purple-scheme" size={0.5}></Col>
-          <Col size={6}>
+          <Col size={1}>
             {/* If the user has not yet signed up, display a form so that the user can
             enter their information and submit. For each field, update the state as the user
             changes the values in the boxes. Additionally, add a password strength meter that
@@ -106,9 +110,10 @@ const RegisterMobile = () => {
             {(() => {
               if (success) {
                 return (
-                  <h2 className="sign-up-message">
-                    Welcome {name}. Please confirm your email before signing in!
-                  </h2>
+                  <h4 className="sign-up-message">
+                    Welcome {name}. <br></br>Please confirm your email before
+                    signing in!
+                  </h4>
                 );
               } else {
                 return (
@@ -124,16 +129,11 @@ const RegisterMobile = () => {
                           First Name*
                         </label>
                       </Col>
-                      <Col size={1}>
-                        <label className="label-text-right" for="last_slot">
-                          Last Name*
-                        </label>
-                      </Col>
                     </Row>
                     <Row>
                       <Col size={1}>
                         <input
-                          className="register-input-left"
+                          className="register-input"
                           name="first"
                           required
                           id="first_slot"
@@ -141,9 +141,19 @@ const RegisterMobile = () => {
                           onChange={(event) => setFirst(event.target.value)}
                         />
                       </Col>
+                    </Row>
+                    <br></br>
+                    <Row>
+                      <Col size={1}>
+                        <label className="label-text-left" for="last_slot">
+                          Last Name*
+                        </label>
+                      </Col>
+                    </Row>
+                    <Row>
                       <Col size={1}>
                         <input
-                          className="register-input-right"
+                          className="register-input"
                           id="last_slot"
                           name="last"
                           value={last}
@@ -154,9 +164,11 @@ const RegisterMobile = () => {
                     </Row>
                     <br></br>
                     <Row>
-                      <label className="label-text" for="email_slot">
-                        Email*
-                      </label>
+                      <Col size={1}>
+                        <label className="label-text-left" for="email_slot">
+                          Email*
+                        </label>
+                      </Col>
                     </Row>
                     <Row>
                       <input
@@ -176,19 +188,11 @@ const RegisterMobile = () => {
                           Password*
                         </label>
                       </Col>
-                      <Col size={1}>
-                        <label
-                          className="label-text-right"
-                          for="password_r_slot"
-                        >
-                          Repeat Password*
-                        </label>
-                      </Col>
                     </Row>
                     <Row>
                       <Col size={1}>
                         <input
-                          className="register-input-left"
+                          className="register-input"
                           type="password"
                           name="password"
                           value={password}
@@ -197,9 +201,23 @@ const RegisterMobile = () => {
                           required
                         />
                       </Col>
+                    </Row>
+                    <PasswordStrengthBar password={password} minLength={8} />
+                    <Row>
+                      <Col size={1}>
+                        <label
+                          className="label-text-left"
+                          for="password_r_slot"
+                        >
+                          Repeat Password*
+                        </label>
+                      </Col>
+                    </Row>
+
+                    <Row>
                       <Col size={1}>
                         <input
-                          className="register-input-right"
+                          className="register-input"
                           type="password"
                           name="password"
                           value={repeat_password}
@@ -211,7 +229,8 @@ const RegisterMobile = () => {
                         />
                       </Col>
                     </Row>
-                    <PasswordStrengthBar password={password} minLength={8} />
+                    <br></br>
+
                     <div style={{ color: "red" }}>{error}</div>
                     <br></br>
                     <button
@@ -227,7 +246,6 @@ const RegisterMobile = () => {
               }
             })()}
           </Col>
-          <Col className="login-purple-scheme" size={0.5}></Col>
         </Row>
       </Grid>
     </div>

@@ -24,17 +24,21 @@ const Login = () => {
   // Reloads the window if successful, otherwise provides error message to user
   const loginSubmit = (event) => {
     event.preventDefault();
-
+    setProcessing(true);
     Auth.signIn(email, password)
-      .then((data) => setProcessing(true))
+      // .then((data) => setProcessing(true))
       .then((data) => setEmail(""))
       .then((data) => setPassword(""))
       .then((data) => setError(""))
       .then((data) => window.location.reload())
-      .catch(
-        (err) => setError(err.message),
-        (err) => setPassword("")
-      );
+      .catch((err) => showError(err));
+  };
+
+  // Function that displays error on screen
+  const showError = (err) => {
+    setError(err.message);
+    setProcessing(false);
+    setPassword("");
   };
 
   return (

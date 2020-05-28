@@ -22,8 +22,8 @@ const LoginSwitcher = ({ closeMenu }) => {
       {!show_sign_up ? (
         <LoginMobile toggleRegister={toggle} closeMenu={closeMenu} />
       ) : (
-        <div></div>
-        // <RegisterMobile toggleLogin={toggle} />
+        // <div></div>
+        <RegisterMobile toggleLogin={toggle} />
       )}
     </div>
   );
