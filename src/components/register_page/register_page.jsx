@@ -30,7 +30,6 @@ const Register = () => {
   const [name, setName] = useState(""); // Tracks user's first name after successful registration
   const [checked, setChecked] = useState(true); // Tracks whether the subscribe to email list serve box is checked
 
-  console.log("checked", checked);
   // Function that occurs after the user clicks the submit button to sign up
   const registerSubmit = (event) => {
     event.preventDefault();
@@ -49,11 +48,18 @@ const Register = () => {
       concert: "0", // Currently a placeholder value
     };
 
+    // Email and paid values to be passed into the emailing list through AppSync API
+    const subscription_payload = {
+      email: email,
+      paid: false,
+    };
+
     // If the password is long enough, check that the passwords match.
     // If they do then pass the sign up payload into the cognito
     // API. If no errors occur, set name to the user's first name, set
     // success to true, call the registerUser function to add the user to the
-    // registered users database, and remove the text from all of the sign up fields
+    // registered users database, call the subscribeUser function to add the user to the
+    // subscribed users database, and remove the text from all of the sign up fields
     // If the registration fails, display the error message to the user and remove the
     // text from the password field so that the user can enter a new password
     if (password.length > 7) {
@@ -65,6 +71,7 @@ const Register = () => {
           .then((data) => setName(first))
           .then((data) => setSuccess(true))
           .then((data) => registerUser())
+          .then((data) => subscribeUser())
           .then((data) => setFirst(""))
           .then((data) => setLast(""))
           .then((data) => setEmail(""))
@@ -91,6 +98,18 @@ const Register = () => {
           input: register_payload,
         })
       );
+    };
+
+    // Function that store's the user's email in an email list database if the user
+    // kept the subscribe box checked
+    const subscribeUser = (event) => {
+      if (checked) {
+        API.graphql(
+          graphqlOperation(mutations.create_email_subscription, {
+            input: subscription_payload,
+          })
+        );
+      }
     };
   };
 
@@ -223,8 +242,7 @@ const Register = () => {
                         checked={checked}
                         onChange={(event) => setChecked(!checked)}
                       />
-                      I want to receive news and updates about future Onfour
-                      shows.
+                      I want to receive updates about future Onfour shows.
                     </label>
                     <br></br>
                     <div style={{ color: "red" }}>{error}</div>
