@@ -113,6 +113,7 @@ const StreamPage = () => {
     );
 
     const info_list = info.data.listFutureConcerts.items; // Stores the items in database
+    info_list.sort((a, b) => a.timePassed - b.timePassed);
     setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
     setConcertName(info_list[0].concertName);
     setArtistName(info_list[0].artist);

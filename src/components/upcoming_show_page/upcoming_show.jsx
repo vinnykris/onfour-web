@@ -34,6 +34,8 @@ const UpcomingShowPage = () => {
     );
 
     const info_list = info.data.listFutureConcerts.items; // Stores the items in database
+    info_list.sort((a, b) => a.timePassed - b.timePassed);
+    console.log(info_list);
     const month_map = {
       "01": "JAN",
       "02": "FEB",
@@ -106,7 +108,7 @@ const UpcomingShowPage = () => {
     >
       <div className="upcoming-show-page-content">
         <Modal></Modal>
-        <SearchBar></SearchBar>
+        {/* <SearchBar></SearchBar> */}
         {!is_mobile ? (
           <div className="upcoming-show-grid">
             <FlexibleGrid content_list={concerts} num_cols={3} />
