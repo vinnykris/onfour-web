@@ -22,7 +22,7 @@ import VideoPlayer from "./video_player";
 import "./stream_styles.scss";
 
 // Image imports
-import VenmoCode from "../../images/venmo_codes/venmo_code.png";
+import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
 
 Amplify.configure(awsmobile);
 
@@ -33,7 +33,7 @@ const StreamPage = () => {
   const [email, setEmail] = useState(""); // User email input for subscription
   const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
   const [scroll, setScroll] = useState(true); // Auto-scroll
-  // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
+  const [show_alert, setShowAlert] = useState(false); // If pre-show alert should be shown
   const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
 
   // Gets dimensions of screen and sends warnings to console
@@ -91,7 +91,7 @@ const StreamPage = () => {
 
   // Opens link to paypal account for musician
   const donatePaypal = () => {
-    const url = "http://paypal.me/jonathandely";
+    const url = "https://www.paypal.me/onfourdonations";
     window.open(url, "_blank");
   };
 
@@ -207,7 +207,7 @@ const StreamPage = () => {
                   Click here to donate with Paypal.{" "}
                 </p>
                 <p className="donate-subdescription">
-                  Your donation will go directly to Jonathan Dely.
+                  Your donation will go to onfour donations.
                 </p>
               </Col>
               <Col size={1} className="donate-venmo donate-box">
@@ -215,7 +215,7 @@ const StreamPage = () => {
                   Scan the QR code below to donate on Venmo.
                 </p>
                 <p className="donate-subdescription">
-                  Your donation will be sent to @Jonathan-Dely on Venmo.
+                  Your donation will be sent to @SpencerAmer from onfour.
                 </p>
               </Col>
             </Row>

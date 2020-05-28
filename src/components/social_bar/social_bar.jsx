@@ -12,7 +12,7 @@ const SocialBar = () => {
       <ul className="social-list">
         <li>
           <a
-            href="http://instagram.com/jonathan_dely"
+            href="https://instagram.com/jonathan_dely"
             class="fa fa-instagram"
             target="_blank"
             rel="noopener noreferrer"
@@ -52,7 +52,7 @@ const SocialBar = () => {
         </li>
         <li>
           <a
-            href="http://paypal.me/jonathandely"
+            href="https://paypal.me/jonathandely"
             class="fa fa-paypal"
             target="_blank"
             rel="noopener noreferrer"

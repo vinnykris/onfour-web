@@ -231,10 +231,8 @@ const NavBar = () => {
                       </DropdownToggle>
                     </div>
                     <DropdownMenu right>
-                      <DropdownItem>
-                        <button className="sign-out-button" onClick={signOut}>
+                      <DropdownItem className="sign-out-button" onClick={signOut}>
                           SIGN OUT
-                        </button>
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>

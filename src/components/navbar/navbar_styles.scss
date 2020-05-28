@@ -217,6 +217,9 @@ a.nav-page-black {
   font-size: 1.1rem;
   font-family: "Heebo", sans-serif;
   font-weight: $medium-weight;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .toggle-color {
@@ -226,7 +229,7 @@ a.nav-page-black {
 .sign-out-button {
   width: 100%;
   height: 100%;
-  color: white;
+  color: rgb(124, 124, 124);
   font-size: 14px;
   font-weight: 420;
 }
