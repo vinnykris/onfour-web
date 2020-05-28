@@ -48,7 +48,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
                 // data-toggle="modal"
                 // data-target="#ticketModal"
               >
-                FREE
+                MORE INFO
               </button>
           )}
         </Col>

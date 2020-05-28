@@ -498,17 +498,16 @@ const StreamPage = () => {
         )}
       </div>
       ) : (
-          <div className={!show_start_time ? 'parentDisable' : ''} width="100%">
+          // <div className={!show_start_time ? 'parentDisable' : ''} width="100%">
             <div className='overlay-box'>
               <PulseLoader
-                // css={override}
                 sizeUnit={"px"}
-                size={25}
-                color={"#8257e6"}
+                size={18}
+                color={"#7b6dac"}
                 loading={!show_start_time}
               />
             </div>
-          </div>
+          // </div>
       )}
     </View>
   );

@@ -266,7 +266,9 @@
 
 .overlay-box {
   background: black; 
-  z-index: 1000;
+  padding-top: 20vh;
+  height: 71vh;
+  width: 100%;
 }
 
 .waiting-message-container {
