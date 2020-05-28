@@ -28,7 +28,9 @@ const Register = () => {
   const [error, setError] = useState(""); // Tracks password failure errors
   const [success, setSuccess] = useState(false); // Tracks if user successfully signed up
   const [name, setName] = useState(""); // Tracks user's first name after successful registration
+  const [checked, setChecked] = useState(true); // Tracks whether the subscribe to email list serve box is checked
 
+  console.log("checked", checked);
   // Function that occurs after the user clicks the submit button to sign up
   const registerSubmit = (event) => {
     event.preventDefault();
@@ -212,6 +214,19 @@ const Register = () => {
                       </Col>
                     </Row>
                     <PasswordStrengthBar password={password} minLength={8} />
+                    <br></br>
+                    <label className="email-unsubscribe-text">
+                      <input
+                        className="email-unsubscribe-checkbox"
+                        name="isGoing"
+                        type="checkbox"
+                        checked={checked}
+                        onChange={(event) => setChecked(!checked)}
+                      />
+                      I want to receive news and updates about future Onfour
+                      shows.
+                    </label>
+                    <br></br>
                     <div style={{ color: "red" }}>{error}</div>
                     <br></br>
                     <button
