@@ -45,12 +45,6 @@ const NavBar = () => {
   const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
 
-  // Mobile login fields
-  const [email, setEmail] = useState(""); // Tracks user's email
-  const [password, setPassword] = useState(""); // Tracks user's password
-  const [is_processing, setProcessing] = useState(false); // Tracks whether user clicked sign-in or not
-  const [error, setError] = useState(""); // Tracks error messages when trying to log in
-
   const [show_mobile_login, setShowMobileLogin] = useState(false); // Tracks whether user clicked sign-in or not on mobile
 
   const toggle = () => setDropdownOpen((prevState) => !prevState); // Toggle for dropdown menu
@@ -60,6 +54,7 @@ const NavBar = () => {
   Auth.currentAuthenticatedUser({})
     .then((user) => setUserEmail(user.attributes.email))
     .then((user) => setAuth(true))
+    // .then((user) => closeMenu())
     .catch((err) => setAuth(false));
 
   // If the first name for the logged in user's email has not been retrieved yet,
@@ -86,9 +81,13 @@ const NavBar = () => {
   };
 
   // Close menu function for mobile
+  // This function is also passed as a prop to the grandchildren of this component,
+  // in order to properly dismiss the image once the user is logged in.
   const closeMenu = () => {
     document.getElementById("nav-menu").style.height = "0%";
-    // document.getElementById("nav-login").style.visibility = "hidden";
+    document.getElementById("nav-links").style.visibility = "visible";
+    document.getElementById("nav-links").style.display = "inline";
+    setShowMobileLogin(false);
   };
 
   // Close menu after user navigates to new page
@@ -101,39 +100,18 @@ const NavBar = () => {
     Auth.signOut().then((user) => window.location.reload());
   };
 
-  // Function to sign out the user for mobile -- no reload
-  const mobileSignIn = (event) => {
-    event.preventDefault();
-    setProcessing(true);
-    Auth.signIn(email, password)
-      .then((data) => setEmail(""))
-      .then((data) => setPassword(""))
-      .then((data) => setError(""))
-      .then((data) => closeMenu())
-      .catch(
-        (err) => setError(err.message),
-        (err) => setPassword("")
-      );
-  };
-
   // Function to show the sign-in form
-  const signInToggle = () => {
-    // document.getElementById("nav-login").style.visibility = "visible";
-    // document.getElementById("nav-links").style.visibility = "hidden";
+  const signInMobile = () => {
     setShowMobileLogin(true);
+    document.getElementById("nav-links").style.visibility = "hidden";
+    document.getElementById("nav-links").style.display = "none";
   };
 
   // Function to sign out the user
-  const signOutToggle = () => {
-    // document.getElementById("nav-login").style.visibility = "hidden";
+  const signOutMobile = () => {
     Auth.signOut();
     setShowMobileLogin(false);
     closeMenu();
-  };
-
-  const signUpToggle = () => {
-    document.getElementById("nav-sign-up").style.visibility = "visible";
-    document.getElementById("nav-login").style.visibility = "hidden";
   };
 
   return (
@@ -211,7 +189,7 @@ const NavBar = () => {
                         <NavLink
                           to=""
                           className="nav-page-white mobile-link-text"
-                          onClick={signInToggle}
+                          onClick={signInMobile}
                         >
                           SIGN IN
                         </NavLink>
@@ -221,7 +199,7 @@ const NavBar = () => {
                         <NavLink
                           to=""
                           className="nav-page-white mobile-link-text"
-                          onClick={signOutToggle}
+                          onClick={signOutMobile}
                         >
                           SIGN OUT
                         </NavLink>
@@ -234,7 +212,7 @@ const NavBar = () => {
           </div>
           {show_mobile_login ? (
             <div className="overlay-content">
-              <LoginSwitcher />
+              <LoginSwitcher closeMenu={closeMenu} />
             </div>
           ) : null}
           {/* <div id="nav-login" className="overlay-content">

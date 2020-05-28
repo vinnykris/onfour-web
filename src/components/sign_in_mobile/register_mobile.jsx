@@ -15,7 +15,7 @@ import Amplify from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
 
 // Styles
-import "./register_styles.scss";
+import "./sign_in_mobile_styles.scss";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
