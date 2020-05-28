@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 // Components
 import { Grid, Row, Col } from "../grid";
+import PulseLoader from "react-spinners/PulseLoader";
 
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
@@ -50,7 +51,14 @@ const LoginMobile = ({ toggleRegister, closeMenu }) => {
         <div id="nav-login" className="overlay-content">
           <Col size={1}>
             {is_processing ? (
-              <p className="processing-message">Loading...</p>
+              <div className="loading-container">
+                <PulseLoader
+                  sizeUnit={"px"}
+                  size={15}
+                  color={"#7b6dac"}
+                  loading={is_processing}
+                />
+              </div>
             ) : (
               <form
                 className="login-form"
