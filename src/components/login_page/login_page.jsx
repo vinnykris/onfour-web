@@ -26,7 +26,6 @@ const Login = () => {
     event.preventDefault();
     setProcessing(true);
     Auth.signIn(email, password)
-      // .then((data) => setProcessing(true))
       .then((data) => setEmail(""))
       .then((data) => setPassword(""))
       .then((data) => setError(""))

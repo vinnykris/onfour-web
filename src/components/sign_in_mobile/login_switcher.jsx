@@ -8,8 +8,7 @@ import LoginMobile from "./login_mobile";
 // Styling Imports
 import "./sign_in_mobile_styles.scss";
 
-// Modal for registering and signing up. It displays the correct page
-// inside of the model by tracking what tab the user clicks on
+// Switches between the login and register pages
 const LoginSwitcher = ({ closeMenu }) => {
   const [show_sign_up, setShowSignUp] = useState(false); // Tracks whether to show sign up
 

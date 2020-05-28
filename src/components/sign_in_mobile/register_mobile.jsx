@@ -19,7 +19,7 @@ import "./sign_in_mobile_styles.scss";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
-const RegisterMobile = () => {
+const RegisterMobile = ({ toggleLogin }) => {
   const [email, setEmail] = useState(""); // Tracks user's email
   const [password, setPassword] = useState(""); // Tracks user's password
   const [repeat_password, setRepeatPassword] = useState(""); // Tracks user's repeated password
@@ -241,6 +241,21 @@ const RegisterMobile = () => {
                     >
                       SIGN UP
                     </button>
+                    <br></br>
+                    <Row>
+                      <Col size={1}>
+                        <p className="label-text login-prompt">
+                          Already have an account? Click{" "}
+                          <span
+                            className="register-prompt"
+                            onClick={toggleLogin}
+                          >
+                            here
+                          </span>{" "}
+                          to log in.
+                        </p>
+                      </Col>
+                    </Row>
                   </form>
                 );
               }
