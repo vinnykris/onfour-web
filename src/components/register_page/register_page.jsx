@@ -234,16 +234,23 @@ const Register = () => {
                     </Row>
                     <PasswordStrengthBar password={password} minLength={8} />
                     <br></br>
-                    <label className="email-unsubscribe-text">
-                      <input
-                        className="email-unsubscribe-checkbox"
-                        name="isGoing"
-                        type="checkbox"
-                        checked={checked}
-                        onChange={(event) => setChecked(!checked)}
-                      />
-                      I want to receive updates about future Onfour shows.
-                    </label>
+                    <Row>
+                      <Col size={0.5}>
+                        <input
+                          className="email-unsubscribe-checkbox"
+                          name="isGoing"
+                          type="checkbox"
+                          checked={checked}
+                          onChange={(event) => setChecked(!checked)}
+                        />
+                      </Col>
+                      <Col size={10}>
+                        <label className="email-unsubscribe-text">
+                          I want to receive email updates about future Onfour
+                          shows.
+                        </label>
+                      </Col>
+                    </Row>
                     <br></br>
                     <div style={{ color: "red" }}>{error}</div>
                     <br></br>
