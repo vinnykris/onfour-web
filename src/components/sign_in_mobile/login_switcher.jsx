@@ -1,5 +1,5 @@
 // React Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Component Imports
 import RegisterMobile from "./register_mobile";
@@ -16,6 +16,11 @@ const LoginSwitcher = ({ closeMenu }) => {
   const toggle = () => {
     setShowSignUp(!show_sign_up);
   };
+
+  useEffect(() => {
+    console.log("switcher mounted");
+    setShowSignUp(false);
+  }, []);
 
   return (
     <div>

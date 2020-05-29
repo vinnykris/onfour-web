@@ -1,9 +1,9 @@
 // React
 import React, { useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import PulseLoader from "react-spinners/PulseLoader";
 
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";

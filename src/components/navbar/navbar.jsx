@@ -26,6 +26,8 @@ import LoginSwitcher from "../sign_in_mobile/login_switcher";
 
 // Image imports
 import new_logo_white from "../../images/logos/new_logo_white.png";
+import login_icon from "../../images/icons/login.png";
+import logout_icon from "../../images/icons/login-purple.png";
 
 // Styles imports
 import "./navbar_styles.scss";
@@ -76,23 +78,21 @@ const NavBar = () => {
   }
 
   // Open menu function for mobile
-  const openMenu = () => {
-    document.getElementById("nav-menu").style.height = "100%";
+  const openMenu = (id) => {
+    document.getElementById(id).style.height = "100%";
   };
 
   // Close menu function for mobile
   // This function is also passed as a prop to the grandchildren of this component,
   // in order to properly dismiss the image once the user is logged in.
-  const closeMenu = () => {
-    document.getElementById("nav-menu").style.height = "0%";
-    document.getElementById("nav-links").style.visibility = "visible";
-    document.getElementById("nav-links").style.display = "inline";
+  const closeMenu = (id) => {
+    document.getElementById(id).style.height = "0%";
     setShowMobileLogin(false);
   };
 
   // Close menu after user navigates to new page
   useEffect(() => {
-    closeMenu();
+    closeMenu("nav-menu");
   }, []);
 
   // Function to sign out the user -- the window reloads after signing out
@@ -103,25 +103,27 @@ const NavBar = () => {
   // Function to show the sign-in form
   const signInMobile = () => {
     setShowMobileLogin(true);
-    document.getElementById("nav-links").style.visibility = "hidden";
-    document.getElementById("nav-links").style.display = "none";
+    openMenu("nav-signin");
   };
 
   // Function to sign out the user
   const signOutMobile = () => {
-    Auth.signOut();
-    setShowMobileLogin(false);
-    closeMenu();
+    signOut();
+    // Auth.signOut();
+    closeMenu("nav-signout");
   };
 
   return (
     <div className={navbar_custom}>
       {/* MOBILE VERSION */}
-      <div id="nav-menu" className="overlay-menu">
+      <div id="nav-menu" className="overlay">
         <Grid>
           <Row>
             <Col size={1}>
-              <span className="navbar-close" onClick={closeMenu}>
+              <span
+                className="navbar-close"
+                onClick={() => closeMenu("nav-menu")}
+              >
                 <i className="fa fa-times fa-2x close-icon"></i>
               </span>
             </Col>
@@ -134,7 +136,7 @@ const NavBar = () => {
                     exact
                     to="/"
                     className="nav-page-white mobile-link-text"
-                    onClick={closeMenu}
+                    onClick={() => closeMenu("nav-menu")}
                   >
                     ABOUT US
                   </NavLink>
@@ -147,7 +149,7 @@ const NavBar = () => {
                   <NavLink
                     to="/stream"
                     className="nav-page-white mobile-link-text"
-                    onClick={closeMenu}
+                    onClick={() => closeMenu("nav-menu")}
                   >
                     STREAM
                   </NavLink>
@@ -160,7 +162,7 @@ const NavBar = () => {
                   <NavLink
                     to="/upcoming"
                     className="nav-page-white mobile-link-text"
-                    onClick={closeMenu}
+                    onClick={() => closeMenu("nav-menu")}
                   >
                     UPCOMING
                   </NavLink>
@@ -173,138 +175,76 @@ const NavBar = () => {
                   <NavLink
                     to="/archive"
                     className="nav-page-white mobile-link-text"
-                    onClick={closeMenu}
+                    onClick={() => closeMenu("nav-menu")}
                   >
                     PAST SHOWS
                   </NavLink>
                 </Col>
               </Row>
             </div>
-            <div className="mobile-nav-link">
-              <Row>
-                <Col size={1}>
-                  {(() => {
-                    if (!auth) {
-                      return (
-                        <NavLink
-                          to=""
-                          className="nav-page-white mobile-link-text"
-                          onClick={signInMobile}
-                        >
-                          SIGN IN
-                        </NavLink>
-                      );
-                    } else {
-                      return (
-                        <NavLink
-                          to=""
-                          className="nav-page-white mobile-link-text"
-                          onClick={signOutMobile}
-                        >
-                          SIGN OUT
-                        </NavLink>
-                      );
-                    }
-                  })()}
-                </Col>
-              </Row>
-            </div>
           </div>
-          {/* {show_mobile_login ? (
-            <div className="overlay-content">
-              <LoginSwitcher closeMenu={closeMenu} />
-            </div>
-          ) : null} */}
-          {/* <div id="nav-login" className="overlay-content">
-            <Col size={6}>
-              {is_processing ? (
-                <p className="processing-message">Loading...</p>
-              ) : (
-                <form
-                  className="login-form"
-                  action="/"
-                  id="login"
-                  onSubmit={mobileSignIn}
-                >
-                  <Row>
-                    <label className="label-text" for="email_slot">
-                      Email Address*
-                    </label>
-                  </Row>
-                  <Row>
-                    <input
-                      className="login-input"
-                      type="email"
-                      name="email"
-                      id="email_slot"
-                      value={email}
-                      onChange={(event) => setEmail(event.target.value)}
-                      required
-                    />
-                  </Row>
-                  <br></br>
-                  <Row>
-                    <label className="label-text" for="password_slot">
-                      Password*
-                    </label>
-                  </Row>
-                  <Row>
-                    <input
-                      className="login-input"
-                      type="password"
-                      name="password"
-                      id="password_slot"
-                      value={password}
-                      onChange={(event) => setPassword(event.target.value)}
-                      required
-                    />
-                  </Row>
-                  <div style={{ color: "red" }}>{error}</div>
-
-                  <br></br>
-                  <br></br>
-                  <button
-                    className="login-submit-button"
-                    type="submit"
-                    form="login"
-                    value="Submit"
-                  >
-                    SIGN IN
-                  </button>
-                  <br></br>
-                  <br></br>
-                  <p className="label-text">
-                    Don't have an account? Click{" "}
-                    <span onClick={signUpToggle}>here</span> to sign up.
-                  </p>
-                </form>
-              )}
-            </Col>
-          </div> */}
         </Grid>
       </div>
-      
-      {show_mobile_login ? (
-        <div className="overlay-signin">
-          <Grid>
+
+      <div id="nav-signin" className="overlay">
+        <Grid>
+          <Row>
+            <Col size={1}>
+              <span
+                className="navbar-close"
+                onClick={() => closeMenu("nav-signin")}
+              >
+                <i className="fa fa-times fa-2x close-icon"></i>
+              </span>
+            </Col>
+          </Row>
+          <div className="signin-content">
+            {show_mobile_login ? (
+              <LoginSwitcher closeMenu={() => closeMenu("nav-signin")} />
+            ) : null}
+          </div>
+        </Grid>
+      </div>
+
+      <div id="nav-signout" className="overlay">
+        <Grid>
+          <Row>
+            <Col size={1}>
+              <span
+                className="navbar-close"
+                onClick={() => closeMenu("nav-signout")}
+              >
+                <i className="fa fa-times fa-2x close-icon"></i>
+              </span>
+            </Col>
+          </Row>
+          <div className="signin-content">
             <Row>
-              <Col size={1}>
-                <span className="navbar-close" onClick={closeMenu}>
-                  <i className="fa fa-times fa-2x close-icon"></i>
-                </span>
-              </Col>
+              <div className="sign-out-container">
+                <Col size={1}>
+                  <div className="greeting-mobile">
+                    <p className="greeting-mobile-text">HI, {first} </p>
+                  </div>
+                  <button
+                    className="sign-out-button-mobile"
+                    onClick={signOutMobile}
+                  >
+                    SIGN OUT
+                  </button>
+                </Col>
+              </div>
             </Row>
-            <div className="signin-content">
-              <LoginSwitcher closeMenu={closeMenu} />
-            </div>
-          </Grid>
-        </div>
-      ) : null}
-    
+          </div>
+        </Grid>
+      </div>
+
       <Grid className="mobile-grid">
         <Row className="mobile-row">
           <Col size={1}>
-            <span className="hamburger-menu" onClick={openMenu}>
+            <span
+              className="hamburger-menu"
+              onClick={() => openMenu("nav-menu")}
+            >
               <i className="fa fa-bars fa-2x hamburger-icon"></i>
             </span>
           </Col>
@@ -320,32 +260,37 @@ const NavBar = () => {
             {(() => {
               if (!auth) {
                 return (
-                  <NavLink
-                    to=""
-                    onClick={signInMobile}
-                  >
-                    <span className="user-menu">
-                      <i className="fa fa-user-o fa-2x user-icon"></i>
-                    </span>
-                  </NavLink>
+                  <span className="user-menu" onClick={signInMobile}>
+                    <img className="user-icon" src={login_icon}></img>
+                  </span>
                 );
               } else {
                 return (
-                  <Dropdown isOpen={dropdown_open} toggle={toggle}>
-                    <div className="toggle-color">
-                      <DropdownToggle className="toggle-greeting" tag="a" caret>
-                        HI, {first}
-                      </DropdownToggle>
-                    </div>
-                    <DropdownMenu right>
-                      <DropdownItem
-                        className="sign-out-button"
-                        onClick={signOutMobile}
-                      >
-                        SIGN OUT
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </Dropdown>
+                  <span
+                    className="user-menu"
+                    onClick={() => openMenu("nav-signout")}
+                  >
+                    <img className="user-icon" src={logout_icon}></img>
+                  </span>
+                  // <Dropdown
+                  //   isOpen={dropdown_open}
+                  //   toggle={toggle}
+                  //   className="greeting-container"
+                  // >
+                  //   <div className="toggle-color">
+                  //     <DropdownToggle className="toggle-greeting" tag="a" caret>
+                  //       HI, {first}
+                  //     </DropdownToggle>
+                  //   </div>
+                  //   <DropdownMenu right>
+                  //     <DropdownItem
+                  //       className="sign-out-button"
+                  //       onClick={signOutMobile}
+                  //     >
+                  //       SIGN OUT
+                  //     </DropdownItem>
+                  //   </DropdownMenu>
+                  // </Dropdown>
                 );
               }
             })()}
