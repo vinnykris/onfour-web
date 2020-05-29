@@ -33,7 +33,7 @@ const StreamPage = () => {
   const [email, setEmail] = useState(""); // User email input for subscription
   const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
   const [scroll, setScroll] = useState(true); // Auto-scroll
-  const [show_alert, setShowAlert] = useState(false); // If pre-show alert should be shown
+  const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
   const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
 
   // Gets dimensions of screen and sends warnings to console
