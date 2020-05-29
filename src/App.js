@@ -21,7 +21,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./styles.scss";
 
+// // Amplify imports
+// import Amplify from 'aws-amplify';
+// import awsconfig from './aws-exports';
+
+
 require("dotenv").config();
+// Amplify.configure(awsconfig);
 
 // Main App component
 function App() {

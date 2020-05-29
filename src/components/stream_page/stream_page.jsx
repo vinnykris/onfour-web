@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
+import { Prompt } from 'react-router';
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -165,6 +166,10 @@ const StreamPage = () => {
         findDimensions(event.nativeEvent.layout);
       }}
     >
+      <Prompt
+        // when={formIsHalfFilledOut}
+        message="Are you sure you want to leave?"
+      />
       {show_start_time ? (
       <div className="stream-page-content">
         {/* {show_alert ? (
