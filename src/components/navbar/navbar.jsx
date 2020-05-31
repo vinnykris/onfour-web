@@ -19,12 +19,17 @@ import { API, graphqlOperation } from "aws-amplify";
 
 // Component imports
 import { Grid, Row, Col } from "../grid";
+import LoginSwitcher from "../sign_in_mobile/login_switcher";
+import LoggedInUser from "../sign_in_mobile/logged_in_user";
+import { useWindowDimensions } from "../custom_hooks";
 
 // Image imports
 import new_logo_white from "../../images/logos/new_logo_white.png";
+import login_icon from "../../images/icons/login.png";
 
 // Styles imports
 import "./navbar_styles.scss";
+import "../login_page/login_styles.scss";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -39,6 +44,11 @@ const NavBar = () => {
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
+  const [last, setLast] = useState(""); // Tracks first name of signed in user
+
+  const [show_mobile_login, setShowMobileLogin] = useState(false); // Tracks whether user clicked sign-in or not on mobile
+
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   const toggle = () => setDropdownOpen((prevState) => !prevState); // Toggle for dropdown menu
 
@@ -47,19 +57,21 @@ const NavBar = () => {
   Auth.currentAuthenticatedUser({})
     .then((user) => setUserEmail(user.attributes.email))
     .then((user) => setAuth(true))
+    // .then((user) => closeMenu())
     .catch((err) => setAuth(false));
 
-  // If the first name for the logged in user's email has not been retrieved yet,
-  // query the registration database's table to retrieve the first name filtered
-  // for the specific email and assign that value to first
-  if (first === "" && user_email !== "") {
+  // If the first and last name for the logged in user's email has not been retrieved yet,
+  // query the registration database's table to retrieve the first and last name filtered
+  // for the specific email and assign that value to first and last
+  if (first === "" && last === "" && user_email !== "") {
     API.graphql(
       graphqlOperation(queries.query_name, {
         filter: { email: { eq: user_email } },
       })
-    ).then((data) =>
-      setFirst(data.data.listOnfour_registrations.items[0].first.toUpperCase())
-    );
+    ).then((data) => {
+      setFirst(data.data.listOnfour_registrations.items[0].first.toUpperCase());
+      setLast(data.data.listOnfour_registrations.items[0].last.toUpperCase());
+    });
   }
 
   // Change styles if on about page
@@ -68,183 +80,285 @@ const NavBar = () => {
   }
 
   // Open menu function for mobile
-  const openMenu = () => {
-    document.getElementById("nav-menu").style.height = "100%";
+  const openMenu = (id) => {
+    document.getElementById(id).style.height = "100%";
   };
 
   // Close menu function for mobile
-  const closeMenu = () => {
-    document.getElementById("nav-menu").style.height = "0%";
+  // This function is also passed as a prop to the grandchildren of this component,
+  // in order to properly dismiss the image once the user is logged in.
+  const closeMenu = (id) => {
+    document.getElementById(id).style.height = "0%";
+    setShowMobileLogin(false);
   };
-
-  // Close menu after user navigates to new page
-  useEffect(() => {
-    closeMenu();
-  }, []);
 
   // Function to sign out the user -- the window reloads after signing out
   const signOut = (event) => {
     Auth.signOut().then((user) => window.location.reload());
   };
 
+  // Function to show the sign-in form
+  const signInMobile = () => {
+    setShowMobileLogin(true);
+    openMenu("nav-signin");
+  };
+
+  // Function to sign out the user
+  const signOutMobile = () => {
+    signOut();
+    setShowMobileLogin(false);
+    closeMenu("nav-signout");
+  };
+
   return (
     <div className={navbar_custom}>
-      {/* MOBILE VERSION */}
-      <div id="nav-menu" className="overlay-menu">
-        <Grid>
-          <Row>
-            <Col size={1}>
-              <span className="navbar-close" onClick={closeMenu}>
-                <i className="fa fa-times fa-2x close-icon"></i>
-              </span>
-            </Col>
-          </Row>
-          <div className="overlay-content">
-            <div className="mobile-nav-link">
+      {console.log(width)}
+      {width <= 600 ? (
+        <div className="main-content">
+          {/* MOBILE CODE */}
+          <div id="nav-menu" className="overlay">
+            <Grid>
               <Row>
                 <Col size={1}>
-                  <NavLink
-                    exact
-                    to="/"
-                    className="nav-page-white mobile-link-text"
-                    onClick={closeMenu}
+                  <span
+                    className="navbar-close"
+                    onClick={() => closeMenu("nav-menu")}
                   >
-                    ABOUT US
-                  </NavLink>
+                    <i className="fa fa-times fa-2x close-icon"></i>
+                  </span>
                 </Col>
               </Row>
-            </div>
-            <div className="mobile-nav-link">
-              <Row>
-                <Col size={1}>
-                  <NavLink
-                    to="/stream"
-                    className="nav-page-white mobile-link-text"
-                    onClick={closeMenu}
-                  >
-                    STREAM
-                  </NavLink>
-                </Col>
-              </Row>
-            </div>
-            <div className="mobile-nav-link">
-              <Row>
-                <Col size={1}>
-                  <NavLink
-                    to="/upcoming"
-                    className="nav-page-white mobile-link-text"
-                    onClick={closeMenu}
-                  >
-                    UPCOMING
-                  </NavLink>
-                </Col>
-              </Row>
-            </div>
-            <div className="mobile-nav-link">
-              <Row>
-                <Col size={1}>
-                  <NavLink
-                    to="/archive"
-                    className="nav-page-white mobile-link-text"
-                    onClick={closeMenu}
-                  >
-                    PAST SHOWS
-                  </NavLink>
-                </Col>
-              </Row>
-            </div>
+              <div id="nav-links" className="overlay-content">
+                <div className="mobile-nav-link">
+                  <Row>
+                    <Col size={1}>
+                      <NavLink
+                        exact
+                        to="/"
+                        className="nav-page-white mobile-link-text"
+                        onClick={() => closeMenu("nav-menu")}
+                      >
+                        ABOUT US
+                      </NavLink>
+                    </Col>
+                  </Row>
+                </div>
+                <div className="mobile-nav-link">
+                  <Row>
+                    <Col size={1}>
+                      <NavLink
+                        to="/stream"
+                        className="nav-page-white mobile-link-text"
+                        onClick={() => closeMenu("nav-menu")}
+                      >
+                        STREAM
+                      </NavLink>
+                    </Col>
+                  </Row>
+                </div>
+                <div className="mobile-nav-link">
+                  <Row>
+                    <Col size={1}>
+                      <NavLink
+                        to="/upcoming"
+                        className="nav-page-white mobile-link-text"
+                        onClick={() => closeMenu("nav-menu")}
+                      >
+                        UPCOMING
+                      </NavLink>
+                    </Col>
+                  </Row>
+                </div>
+                <div className="mobile-nav-link">
+                  <Row>
+                    <Col size={1}>
+                      <NavLink
+                        to="/archive"
+                        className="nav-page-white mobile-link-text"
+                        onClick={() => closeMenu("nav-menu")}
+                      >
+                        PAST SHOWS
+                      </NavLink>
+                    </Col>
+                  </Row>
+                </div>
+              </div>
+            </Grid>
           </div>
-        </Grid>
-      </div>
-      <Grid className="mobile-grid">
-        <Row className="mobile-row">
-          <Col size={1}>
-            <span className="hamburger-menu" onClick={openMenu}>
-              <i className="fa fa-bars fa-2x hamburger-icon"></i>
-            </span>
-          </Col>
-          <Col size={3}>
-            <img
-              className="onfour-logo-mobile"
-              src={new_logo_white}
-              width="auto"
-              alt="nav-logo"
-            ></img>
-          </Col>
-          <Col size={1}></Col>
-        </Row>
-      </Grid>
 
-      {/* DESKTOP VERSION */}
-      <Grid className="desktop-grid">
-        <Row className="desktop-row">
-          <Col size={1}></Col>
-          <Col size={1}>
-            <NavLink to="/archive" className={style}>
-              PAST SHOWS
-            </NavLink>
-          </Col>
-          <Col size={1}>
-            <NavLink exact to="/" className={style}>
-              ABOUT US
-            </NavLink>
-          </Col>
-          <Col size={1}>
-            <img
-              className="onfour-logo-desktop"
-              src={icon}
-              width="auto"
-              alt="nav-logo"
-            ></img>
-          </Col>
-          <Col size={1}>
-            <NavLink to="/stream" className={style}>
-              STREAM
-            </NavLink>
-          </Col>
-          <Col size={1}>
-            <NavLink to="/upcoming" className={style}>
-              UPCOMING
-            </NavLink>
-          </Col>
-          <Col size={1}>
-            {(() => {
-              if (!auth) {
-                return (
-                  <NavLink
-                    to=""
-                    className={style}
-                    data-toggle="modal"
-                    data-target="#sign_in_Modal"
+          <div id="nav-signin" className="overlay">
+            <Grid>
+              <Row>
+                <Col size={1}>
+                  <span
+                    className="navbar-close"
+                    onClick={() => closeMenu("nav-signin")}
                   >
-                    <span className="user-menu">
-                      <i className="fa fa-user-o fa-2x user-icon"></i>
-                    </span>
-                  </NavLink>
-                );
-              } else {
-                return (
-                  <Dropdown isOpen={dropdown_open} toggle={toggle}>
-                    <div className="toggle-color">
-                      <DropdownToggle className="toggle-greeting" tag="a" caret>
-                        HI, {first}
-                      </DropdownToggle>
-                    </div>
-                    <DropdownMenu right>
-                      {/* <DropdownItem className="sign-out-button" onClick={signOut}>
-                        PROFILE
-                      </DropdownItem> */}
-                      <DropdownItem className="sign-out-button" onClick={signOut}>
+                    <i className="fa fa-times fa-2x close-icon"></i>
+                  </span>
+                </Col>
+              </Row>
+              <div className="signin-content">
+                {show_mobile_login ? (
+                  <LoginSwitcher closeMenu={() => closeMenu("nav-signin")} />
+                ) : null}
+              </div>
+            </Grid>
+          </div>
+
+          <div id="nav-signout" className="overlay">
+            <Grid>
+              <Row>
+                <Col size={1}>
+                  <span
+                    className="navbar-close"
+                    onClick={() => closeMenu("nav-signout")}
+                  >
+                    <i className="fa fa-times fa-2x close-icon"></i>
+                  </span>
+                </Col>
+              </Row>
+              <div className="signin-content">
+                <Row>
+                  <div className="sign-out-container">
+                    <Col size={1}>
+                      <div className="greeting-mobile">
+                        <p className="greeting-mobile-text">HI, {first} </p>
+                      </div>
+                      <button
+                        className="sign-out-button-mobile"
+                        onClick={signOutMobile}
+                      >
                         SIGN OUT
-                      </DropdownItem> 
-                    </DropdownMenu>
-                  </Dropdown>
-                );
-              }
-            })()}
-          </Col>
-        </Row>
-      </Grid>
+                      </button>
+                    </Col>
+                  </div>
+                </Row>
+              </div>
+            </Grid>
+          </div>
+
+          <Grid className="mobile-grid">
+            <Row className="mobile-row">
+              <Col size={1}>
+                <span
+                  className="hamburger-menu"
+                  onClick={() => openMenu("nav-menu")}
+                >
+                  <i className="fa fa-bars fa-2x hamburger-icon"></i>
+                </span>
+              </Col>
+              <Col size={3}>
+                <img
+                  className="onfour-logo-mobile"
+                  src={new_logo_white}
+                  width="auto"
+                  alt="nav-logo"
+                ></img>
+              </Col>
+              <Col size={1}>
+                {!auth ? (
+                  <span className="user-menu" onClick={signInMobile}>
+                    <img
+                      className="user-icon"
+                      src={login_icon}
+                      alt="profile-icon"
+                    ></img>
+                  </span>
+                ) : (
+                  <span
+                    className="user-menu"
+                    onClick={() => openMenu("nav-signout")}
+                  >
+                    <LoggedInUser
+                      className="logged-in-icon"
+                      first={first}
+                      last={last}
+                    />
+                  </span>
+                )}
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+      ) : (
+        <div className="main-content">
+          {/* DESKTOP CODE */}
+          <Grid className="desktop-grid">
+            <Row className="desktop-row">
+              <Col size={1}></Col>
+              <Col size={1}>
+                <NavLink to="/archive" className={style}>
+                  PAST SHOWS
+                </NavLink>
+              </Col>
+              <Col size={1}>
+                <NavLink exact to="/" className={style}>
+                  ABOUT US
+                </NavLink>
+              </Col>
+              <Col size={1}>
+                <img
+                  className="onfour-logo-desktop"
+                  src={icon}
+                  width="auto"
+                  alt="nav-logo"
+                ></img>
+              </Col>
+              <Col size={1}>
+                <NavLink to="/stream" className={style}>
+                  STREAM
+                </NavLink>
+              </Col>
+              <Col size={1}>
+                <NavLink to="/upcoming" className={style}>
+                  UPCOMING
+                </NavLink>
+              </Col>
+              <Col size={1}>
+                {(() => {
+                  if (!auth) {
+                    return (
+                      <NavLink
+                        to=""
+                        className={style}
+                        data-toggle="modal"
+                        data-target="#sign_in_Modal"
+                      >
+                        <span className="user-menu">
+                          <i className="fa fa-user-o fa-2x user-icon"></i>
+                        </span>
+                      </NavLink>
+                    );
+                  } else {
+                    return (
+                      <Dropdown isOpen={dropdown_open} toggle={toggle}>
+                        <div className="toggle-color">
+                          <DropdownToggle
+                            className="toggle-greeting"
+                            tag="a"
+                            caret
+                          >
+                            HI, {first}
+                          </DropdownToggle>
+                        </div>
+                        <DropdownMenu right>
+                          <DropdownItem
+                            className="sign-out-button"
+                            onClick={signOut}
+                          >
+                            SIGN OUT
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </Dropdown>
+                    );
+                  }
+                })()}
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+      )}
     </div>
   );
 };

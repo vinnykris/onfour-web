@@ -15,11 +15,11 @@ import Amplify from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
 
 // Styles
-import "./register_styles.scss";
+import "./sign_in_mobile_styles.scss";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
-const Register = () => {
+const RegisterMobile = ({ toggleLogin }) => {
   const [email, setEmail] = useState(""); // Tracks user's email
   const [password, setPassword] = useState(""); // Tracks user's password
   const [repeat_password, setRepeatPassword] = useState(""); // Tracks user's repeated password
@@ -58,8 +58,7 @@ const Register = () => {
     // If they do then pass the sign up payload into the cognito
     // API. If no errors occur, set name to the user's first name, set
     // success to true, call the registerUser function to add the user to the
-    // registered users database, call the subscribeUser function to add the user to the
-    // subscribed users database, and remove the text from all of the sign up fields
+    // registered users database, and remove the text from all of the sign up fields
     // If the registration fails, display the error message to the user and remove the
     // text from the password field so that the user can enter a new password
     if (password.length > 7) {
@@ -115,10 +114,14 @@ const Register = () => {
 
   return (
     <div className="register-page-content">
-      <Grid register-grid>
+      <Grid>
+        <Row>
+          <Col size={1}>
+            <p className="mobile-page-title">REGISTER</p>
+          </Col>
+        </Row>
         <Row className="register-fields-section">
-          <Col className="register-purple-scheme" size={0.5}></Col>
-          <Col size={6}>
+          <Col size={1}>
             {/* If the user has not yet signed up, display a form so that the user can
             enter their information and submit. For each field, update the state as the user
             changes the values in the boxes. Additionally, add a password strength meter that
@@ -127,9 +130,10 @@ const Register = () => {
             {(() => {
               if (success) {
                 return (
-                  <h2 className="sign-up-message">
-                    Welcome {name}. Please confirm your email before signing in!
-                  </h2>
+                  <h4 className="sign-up-message">
+                    Welcome {name}. <br></br>Please confirm your email before
+                    signing in!
+                  </h4>
                 );
               } else {
                 return (
@@ -145,16 +149,11 @@ const Register = () => {
                           First Name*
                         </label>
                       </Col>
-                      <Col size={1}>
-                        <label className="label-text-right" for="last_slot">
-                          Last Name*
-                        </label>
-                      </Col>
                     </Row>
                     <Row>
                       <Col size={1}>
                         <input
-                          className="register-input-left"
+                          className="register-input"
                           name="first"
                           required
                           id="first_slot"
@@ -162,9 +161,19 @@ const Register = () => {
                           onChange={(event) => setFirst(event.target.value)}
                         />
                       </Col>
+                    </Row>
+                    <br></br>
+                    <Row>
+                      <Col size={1}>
+                        <label className="label-text-left" for="last_slot">
+                          Last Name*
+                        </label>
+                      </Col>
+                    </Row>
+                    <Row>
                       <Col size={1}>
                         <input
-                          className="register-input-right"
+                          className="register-input"
                           id="last_slot"
                           name="last"
                           value={last}
@@ -175,9 +184,11 @@ const Register = () => {
                     </Row>
                     <br></br>
                     <Row>
-                      <label className="label-text" for="email_slot">
-                        Email*
-                      </label>
+                      <Col size={1}>
+                        <label className="label-text-left" for="email_slot">
+                          Email*
+                        </label>
+                      </Col>
                     </Row>
                     <Row>
                       <input
@@ -197,19 +208,11 @@ const Register = () => {
                           Password*
                         </label>
                       </Col>
-                      <Col size={1}>
-                        <label
-                          className="label-text-right"
-                          for="password_r_slot"
-                        >
-                          Repeat Password*
-                        </label>
-                      </Col>
                     </Row>
                     <Row>
                       <Col size={1}>
                         <input
-                          className="register-input-left"
+                          className="register-input"
                           type="password"
                           name="password"
                           value={password}
@@ -218,9 +221,23 @@ const Register = () => {
                           required
                         />
                       </Col>
+                    </Row>
+                    <PasswordStrengthBar password={password} minLength={8} />
+                    <Row>
+                      <Col size={1}>
+                        <label
+                          className="label-text-left"
+                          for="password_r_slot"
+                        >
+                          Repeat Password*
+                        </label>
+                      </Col>
+                    </Row>
+
+                    <Row>
                       <Col size={1}>
                         <input
-                          className="register-input-right"
+                          className="register-input"
                           type="password"
                           name="password"
                           value={repeat_password}
@@ -232,7 +249,6 @@ const Register = () => {
                         />
                       </Col>
                     </Row>
-                    <PasswordStrengthBar password={password} minLength={8} />
                     <br></br>
                     <Row>
                       <Col size={0.5}>
@@ -262,16 +278,30 @@ const Register = () => {
                     >
                       SIGN UP
                     </button>
+                    <br></br>
+                    <Row>
+                      <Col size={1}>
+                        <p className="label-text login-prompt">
+                          Already have an account? Click{" "}
+                          <span
+                            className="register-prompt"
+                            onClick={toggleLogin}
+                          >
+                            here
+                          </span>{" "}
+                          to log in.
+                        </p>
+                      </Col>
+                    </Row>
                   </form>
                 );
               }
             })()}
           </Col>
-          <Col className="login-purple-scheme" size={0.5}></Col>
         </Row>
       </Grid>
     </div>
   );
 };
 
-export default Register;
+export default RegisterMobile;

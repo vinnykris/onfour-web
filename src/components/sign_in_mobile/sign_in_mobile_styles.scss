@@ -1,0 +1,53 @@
+// REGISTER PAGE COMPONENT STYLING
+
+@import "../../styles";
+
+.register-prompt {
+  color: #7b6dac;
+  font-weight: bold;
+}
+
+.login-prompt {
+  margin-top: 5%;
+  margin-bottom: 0;
+}
+
+.mobile-page-title {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.loading-container {
+  margin-top: 12vh;
+}
+
+.logged-in-container {
+  position: relative;
+  text-align: center;
+  display: flex;
+  margin: auto;
+  height: 131px;
+}
+
+.circle {
+  height: 30%;
+  width: 30%;
+  border-radius: 50%;
+  border-color: blanchedalmond;
+}
+
+.initials {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.user-icon {
+  margin: auto;
+  filter: invert(10%);
+  height: 30%;
+  width: auto;
+}

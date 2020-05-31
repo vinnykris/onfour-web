@@ -1,5 +1,6 @@
 // React
 import React, { useState } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 
 // Components
 import { Grid, Row, Col } from "../grid";
@@ -10,26 +11,25 @@ import Auth from "../../apis/UserPool";
 import Amplify from "aws-amplify";
 
 // Styles
-import "./login_styles.scss";
+import "./sign_in_mobile_styles.scss";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
-const Login = () => {
+const LoginMobile = ({ toggleRegister, closeMenu }) => {
   const [email, setEmail] = useState(""); // Tracks user's email
   const [password, setPassword] = useState(""); // Tracks user's password
   const [is_processing, setProcessing] = useState(false); // Tracks whether user clicked sign-in or not
   const [error, setError] = useState(""); // Tracks error messages when trying to log in
 
-  // Function for when the user clicks the submit button to log in
-  // Reloads the window if successful, otherwise provides error message to user
-  const loginSubmit = (event) => {
+  // Function to sign out the user for mobile -- no reload
+  const mobileSignIn = (event) => {
     event.preventDefault();
     setProcessing(true);
     Auth.signIn(email, password)
       .then((data) => setEmail(""))
       .then((data) => setPassword(""))
       .then((data) => setError(""))
-      .then((data) => window.location.reload())
+      .then((data) => closeMenu())
       .catch((err) => showError(err));
   };
 
@@ -41,19 +41,30 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page-content">
-      <Grid className="login-grid">
-        <Row className="login-fields-section">
-          <Col className="login-purple-scheme" size={0.5}></Col>
-          <Col size={6}>
+    <Grid className="login-grid">
+      <Row>
+        <Col size={1}>
+          <p className="mobile-page-title">LOGIN</p>
+        </Col>
+      </Row>
+      <Row className="login-fields-section">
+        <div id="nav-login" className="overlay-content">
+          <Col size={1}>
             {is_processing ? (
-              <p className="processing-message">Loading...</p>
+              <div className="loading-container">
+                <PulseLoader
+                  sizeUnit={"px"}
+                  size={15}
+                  color={"#7b6dac"}
+                  loading={is_processing}
+                />
+              </div>
             ) : (
               <form
                 className="login-form"
                 action="/"
                 id="login"
-                onSubmit={loginSubmit}
+                onSubmit={mobileSignIn}
               >
                 <Row>
                   <label className="label-text" for="email_slot">
@@ -100,13 +111,21 @@ const Login = () => {
                 >
                   SIGN IN
                 </button>
+                <br></br>
+                <br></br>
+                <p className="label-text">
+                  Don't have an account? Click{" "}
+                  <span className="register-prompt" onClick={toggleRegister}>
+                    here
+                  </span>{" "}
+                  to sign up.
+                </p>
               </form>
             )}
           </Col>
-          <Col className="login-purple-scheme" size={0.5}></Col>
-        </Row>
-      </Grid>
-    </div>
+        </div>
+      </Row>
+    </Grid>
   );
 };
-export default Login;
+export default LoginMobile;
