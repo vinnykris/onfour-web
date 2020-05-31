@@ -425,7 +425,7 @@ const StreamPage = () => {
                     <Row>
                       <Col size={1} className="donate-box-button">
                         <button
-                          className="button-border button-height paypal-button"
+                              className="stripe-button-border button-height paypal-button"
                           onClick={donatePaypal}
                         >
                           Tip with Paypal
