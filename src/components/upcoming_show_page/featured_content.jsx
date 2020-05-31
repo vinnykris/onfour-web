@@ -10,7 +10,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
   return (
     <Grid className="featured-content">
       <Row>
-      <Col size={3} className="date-content-bar">
+        <Col size={3} className="poster-container">
           <img className="concert-poster" src={img} alt="content-img"></img>
           <div className="poster-tag">
             <h4 className="poster-text">{month}</h4>
@@ -27,7 +27,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
               </Row>
               <Row>
                 <Col size={3}>
-                  <p className="time">{week_day} | {date} | {time.slice(0, 5)} EST</p>
+                  <p className="time">{week_day} | {date} | {time} EST</p>
                 </Col>
               </Row>
           </Col>
