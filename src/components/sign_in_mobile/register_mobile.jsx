@@ -28,6 +28,7 @@ const RegisterMobile = ({ toggleLogin }) => {
   const [error, setError] = useState(""); // Tracks password failure errors
   const [success, setSuccess] = useState(false); // Tracks if user successfully signed up
   const [name, setName] = useState(""); // Tracks user's first name after successful registration
+  const [checked, setChecked] = useState(true); // Tracks whether the subscribe to email list serve box is checked
 
   // Function that occurs after the user clicks the submit button to sign up
   const registerSubmit = (event) => {
@@ -47,6 +48,12 @@ const RegisterMobile = ({ toggleLogin }) => {
       concert: "0", // Currently a placeholder value
     };
 
+    // Email and paid values to be passed into the emailing list through AppSync API
+    const subscription_payload = {
+      email: email,
+      paid: false,
+    };
+
     // If the password is long enough, check that the passwords match.
     // If they do then pass the sign up payload into the cognito
     // API. If no errors occur, set name to the user's first name, set
@@ -63,6 +70,7 @@ const RegisterMobile = ({ toggleLogin }) => {
           .then((data) => setName(first))
           .then((data) => setSuccess(true))
           .then((data) => registerUser())
+          .then((data) => subscribeUser())
           .then((data) => setFirst(""))
           .then((data) => setLast(""))
           .then((data) => setEmail(""))
@@ -89,6 +97,18 @@ const RegisterMobile = ({ toggleLogin }) => {
           input: register_payload,
         })
       );
+    };
+
+    // Function that store's the user's email in an email list database if the user
+    // kept the subscribe box checked
+    const subscribeUser = (event) => {
+      if (checked) {
+        API.graphql(
+          graphqlOperation(mutations.create_email_subscription, {
+            input: subscription_payload,
+          })
+        );
+      }
     };
   };
 
@@ -230,7 +250,24 @@ const RegisterMobile = ({ toggleLogin }) => {
                       </Col>
                     </Row>
                     <br></br>
-
+                    <Row>
+                      <Col size={0.5}>
+                        <input
+                          className="email-unsubscribe-checkbox"
+                          name="isGoing"
+                          type="checkbox"
+                          checked={checked}
+                          onChange={(event) => setChecked(!checked)}
+                        />
+                      </Col>
+                      <Col size={10}>
+                        <label className="email-unsubscribe-text">
+                          I want to receive email updates about future Onfour
+                          shows.
+                        </label>
+                      </Col>
+                    </Row>
+                    <br></br>
                     <div style={{ color: "red" }}>{error}</div>
                     <br></br>
                     <button
