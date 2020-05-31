@@ -115,21 +115,47 @@ function VideoPlayer(props) {
   // If the user is not logged in, show them the alternate waiting page
   if (auth) {
     return (
-      // <div className="player-wrapper">
-      //   <ReactPlayer
-      //     className="video-player"
-      //     url={url}
-      //     width="100%"
-      //     height="100%"
-      //     playing
-      //     controls
-      //   />
-      // </div>
-      <img
-        className="waiting-screen"
-        src={WaitingScreen}
-        alt="waiting-screen"
-      ></img>
+      <div className="countdown-wrapper">
+        {timer_placeholder.length ? (
+          <div className="waiting-screen">
+            <div className="waiting-message-container">
+              <h3 className="waiting-message1">Next Stream Coming Soon</h3>
+              <h5 className="waiting-message2">
+                For updates, follow us on Instagram @_onfour
+              </h5>
+            </div>
+            <div className="countdown-component-wrapper">
+              <Grid>
+                <Row>{timer_components}</Row>
+              </Grid>
+            </div>
+          </div>
+        ) : (
+          <div className="player-wrapper">
+            <ReactPlayer
+              className="video-player"
+              url={props.url}
+              width="100%"
+              height="100%"
+              playing
+              controls
+            />
+          </div>
+        )}
+      </div>
+    );
+  } else {
+    return (
+      <div className="countdown-wrapper">
+        <div className="waiting-screen">
+          <div className="waiting-message-container">
+            <h3 className="waiting-message1">Next Stream Coming Soon</h3>
+            <h5 className="waiting-message2">
+              Please sign in to view the stream!
+            </h5>
+          </div>
+        </div>
+      </div>
     );
   }
 }
