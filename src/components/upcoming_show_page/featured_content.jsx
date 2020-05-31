@@ -36,7 +36,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
         <Col size={3} className="ticket">
           {ticketed? (
             <button
-              className="stripe-button-border"
+              className="featured-content-button-border"
               data-toggle="modal"
               data-target="#ticketModal"
             >
@@ -44,7 +44,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
             </button>
           ) : (
               <button
-                className="stripe-button-border"
+                className="featured-content-button-border"
                 data-toggle="modal"
                 data-target="#concertInfoModal"
               >
