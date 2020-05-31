@@ -1,22 +1,26 @@
 // React Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import PulseLoader from "react-spinners/PulseLoader";
+import { Prompt } from 'react-router';
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
+import * as queries from "../../graphql/queries";
 import Amplify from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
+// Amplify Imports
+import Auth from "../../apis/UserPool";
 
 // Component Imports
-// import VideoPlayer from "./video_player_old";
+import VideoPlayer from "./video_player";
 import Chat from "../chat/stream_chat";
 import Join from "../chat/join_chat";
 import { Grid, Row, Col } from "../grid";
 // import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
-import VideoPlayer from "./video_player";
 
 // Styles Imports
 import "./stream_styles.scss";
@@ -28,14 +32,9 @@ Amplify.configure(awsmobile);
 
 // Main stream page component. Holds stream video, chat, and payment functionality
 const StreamPage = () => {
-  const [show_chat, setShowChat] = useState(false); // If chat should be shown
-  const [chat_name, setChatName] = useState(""); // Sets user name for chat
-  const [email, setEmail] = useState(""); // User email input for subscription
-  const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
-  const [scroll, setScroll] = useState(true); // Auto-scroll
-  const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
-  const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
 
+  // DETERMINE MOBILE VERSION OR NOT
+  const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
   // Gets dimensions of screen and sends warnings to console
   const findDimensions = (layout) => {
     const { x, y, width, height } = layout;
@@ -50,17 +49,22 @@ const StreamPage = () => {
     console.warn(height);
   };
 
+  // CHAT SECTION
+  const [show_chat, setShowChat] = useState(false); // If chat should be shown
+  const [chat_name, setChatName] = useState(""); // Sets user name for chat
   // Function passed as prop to join chat
   const joinSubmit = (name, mode) => {
     setChatName(name);
     setShowChat(mode);
   };
-
   // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
   };
 
+  // EMAIL SUBSCRIBTION SECTION
+  const [email, setEmail] = useState(""); // User email input for subscription
+  const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
   // Function when user submits email
   const emailSubmit = (event) => {
     event.preventDefault();
@@ -78,31 +82,92 @@ const StreamPage = () => {
     setEmailSubmitted(true);
   };
 
+  // AUTO-SCROLL SECTION
   // Auto-scrolls on first navigation
+  const [scroll, setScroll] = useState(true); // Auto-scroll
   if (scroll) {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setScroll(false);
   }
 
-  // Hides popup if closed
+  // POP_UP WARNING SECTION
+  // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
+  // // Hides popup if closed
   // const hidePopup = () => {
   //   setShowAlert(false);
   // };
 
+  // GETTING INFORMATION ABOUT MOST RECENT UPCOMING SHOW
+  const [show_start_time, setStartTime] = useState(""); // Stores the upcoming show's start time
+  const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
+  const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
+  const [concert_id, setConcertID] = useState("");
+  // Get the start time for countdown_timer
+  useEffect(() => {
+    getStartTime();
+  }, []);
+ // Query upcoming show database 
+  const getStartTime = async () => {
+    // Calling the API, using async and await is necessary
+    const info = await API.graphql(
+      graphqlOperation(queries.list_upcoming_concerts)
+    );
+
+    const info_list = info.data.listFutureConcerts.items; // Stores the items in database
+    info_list.sort((a, b) => a.timePassed - b.timePassed);
+    setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
+    setConcertName(info_list[0].concertName);
+    setArtistName(info_list[0].artist);
+    setConcertID(info_list[0].concertId);
+  };
+
+  // GET USER'S REGISTRATION INFORMATION
+  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
+  const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
+  const [user_id, setUserID] = useState(""); // Tracks user's id of signed in user
+  const [first, setFirst] = useState(""); // Tracks first name of signed in user
+  const [last, setLast] = useState(""); // Tracks last name of signed in user
+
+  // If the user is logged in/valid, set their auth value to true and track their email
+  // If the user is not logged in/invalid, reset their auth value to false
+  Auth.currentAuthenticatedUser({})
+    .then((user) => setUserEmail(user.attributes.email))
+    .then((user) => setAuth(true))
+    .catch((err) => setAuth(false));
+
+  // If the first name for the logged in user's email has not been retrieved yet,
+  // query the registration database's table to retrieve the first name filtered
+  // for the specific email and assign that value to first
+  if (first === "" && user_email !== "") {
+    API.graphql(
+      graphqlOperation(queries.query_name, {
+        filter: { email: { eq: user_email } },
+      })
+    )
+    .then((data) => {
+      setFirst(data.data.listOnfour_registrations.items[0].first);
+      setLast(data.data.listOnfour_registrations.items[0].last);
+      setUserID(data.data.listOnfour_registrations.items[0].id);
+      setShowChat(true);
+    });
+  }
+
+  // DONATION FUNCTION
   // Opens link to paypal account for musician
   const donatePaypal = () => {
     const url = "https://www.paypal.me/onfourdonations";
     window.open(url, "_blank");
   };
 
+  // RENDERING SECTION
   return (
     <View
       onLayout={(event) => {
         findDimensions(event.nativeEvent.layout);
       }}
     >
+      {show_start_time ? (
       <div className="stream-page-content">
-        {/* BELOW IS THE CODE FOR THE POPUP MODAL*/}
         {/* {show_alert ? (
           <div>
             <div className="popup-desktop">
@@ -123,6 +188,7 @@ const StreamPage = () => {
                 </div>
               </form>
             </div>
+
             <div className="popup-mobile">
               <form className="waiting-msg-box">
                 <span className="popup-close" onClick={hidePopup}>
@@ -154,7 +220,13 @@ const StreamPage = () => {
                       url={
                         "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                       }
-                    ></VideoPlayer>
+                      start_time={show_start_time}
+                      artist_name={artist_name}
+                      concert_name={concert_name}
+                      auth={auth}
+                      user_id={user_id}
+                      concert_id={concert_id}
+                    />
                   </div>
                 </div>
                 {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
@@ -178,8 +250,8 @@ const StreamPage = () => {
               <Col size={3}>
                 <div className="chat-main">
                   <div className="chat-wrapper">
-                    {show_chat ? (
-                      <Chat chat_name={chat_name} chatStatus={chatStatus} />
+                    {(show_chat || first) ? (
+                      <Chat chat_name={first? (first + " " + last) : (chat_name)} chatStatus={chatStatus} />
                     ) : (
                       <Join joinSubmit={joinSubmit} />
                     )}
@@ -307,7 +379,13 @@ const StreamPage = () => {
                       url={
                         "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                       }
-                    ></VideoPlayer>
+                      start_time={show_start_time}
+                      artist_name={artist_name}
+                      concert_name={concert_name}
+                      auth={auth}
+                      user_id={user_id}
+                      concert_id={concert_id}
+                    />
                   </div>
                 </div>
                 {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
@@ -328,10 +406,7 @@ const StreamPage = () => {
                     </Col>
                   </Row>
                 </div> */}
-              </Col>
-            </Row>
-            <Row>
-              <Col size={1}>
+
                 <div className="main-content-mobile">
                   {/* PAYMENT SECTION */}
                   <div className="mobile-section">
@@ -424,6 +499,18 @@ const StreamPage = () => {
           </Grid>
         )}
       </div>
+      ) : (
+          // <div className={!show_start_time ? 'parentDisable' : ''} width="100%">
+            <div className='overlay-box'>
+              <PulseLoader
+                sizeUnit={"px"}
+                size={18}
+                color={"#7b6dac"}
+                loading={!show_start_time}
+              />
+            </div>
+          // </div>
+      )}
     </View>
   );
 };

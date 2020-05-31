@@ -108,7 +108,7 @@ const CheckoutForm = () => {
 
     return (
         <div>
-            <form className="payment-form" onSubmit={submitPayment}>
+            <form id="ticket" className="payment-form" onSubmit={submitPayment}>
                 {(() => {
                     if (!payed) {
                         return (
@@ -168,7 +168,7 @@ const CheckoutForm = () => {
                                         ) : (
                                              <div>
                                                 <p>Please confirm you are donating ${amount_value}</p>
-                                                        <button className="payment-button" type="submit" disabled={!stripe}>
+                                                        <button form="ticket" className="payment-button" type="submit" disabled={!stripe}>
                                                     Confirm
                                                 </button>
                                             </div>

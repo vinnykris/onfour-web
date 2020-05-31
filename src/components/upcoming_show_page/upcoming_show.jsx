@@ -5,7 +5,7 @@ import { View } from "react-native";
 // Component Imports
 import FeaturedContent from "./featured_content";
 import SearchBar from "../search_bar/search_bar";
-import Modal from "../payment/ticket_modal";
+import Modal from "./concert_info/concert_info_modal";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 
 // AWS Imports
@@ -33,20 +33,47 @@ const UpcomingShowPage = () => {
       graphqlOperation(queries.list_upcoming_concerts)
     );
 
-    const info_list = info.data.listFutureConcerts.items; // Stores the items in databse
+    const info_list = info.data.listFutureConcerts.items; // Stores the items in database
+    info_list.sort((a, b) => a.timePassed - b.timePassed);
+    console.log(info_list);
+    const month_map = {
+      "01": "JAN",
+      "02": "FEB",
+      "03": "MAR",
+      "04": "APR",
+      "05": "MAY",
+      "06": "JUN",
+      "07": "JUL",
+      "08": "AUG",
+      "09": "SEP",
+      "10": "OCT",
+      "11": "NOV",
+      "12": "DEC"
+    };
+    const day_map = {
+      "Sat": "Sunday", 
+      "Sun": "Monday", 
+      "Mon": "Tuesday", 
+      "Tue": "Wednesday", 
+      "Wed": "Thursday", 
+      "Thu": "Friday", 
+      "Fri": "Saturday"
+    };
 
     // Iterate through each element in the list and add the created
     // FeaturedContent to concerts
     info_list.forEach((data) => {
-      setConcerts((concerts) => [
+      const day_in_week = new Date(data.date).toString();
+      setConcerts(concerts => [
         ...concerts,
         <FeaturedContent
           img={data.url}
           name={data.artist}
           concert_name={data.concertName}
-          date={data.date}
-          month={"MAY"}
-          day={10}
+          week_day={day_map[day_in_week.slice(0,3)]}
+          date={data.date.slice(8, 10) + " " + month_map[data.date.slice(5, 7)] + " " + data.date.slice(0, 4)}
+          month={month_map[data.date.slice(5,7)]}
+          day={data.date.slice(8,10)}
           time={data.time}
           ticketed={data.price}
         />,
@@ -81,7 +108,7 @@ const UpcomingShowPage = () => {
     >
       <div className="upcoming-show-page-content">
         <Modal></Modal>
-        <SearchBar></SearchBar>
+        {/* <SearchBar></SearchBar> */}
         {!is_mobile ? (
           <div className="upcoming-show-grid">
             <FlexibleGrid content_list={concerts} num_cols={3} />
