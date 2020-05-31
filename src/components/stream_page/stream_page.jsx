@@ -194,7 +194,7 @@ const StreamPage = () => {
             <Row className="donate-row">
               <Col size={1} className="donate-stripe donate-box">
                 <p className="donate-description">
-                  Click here to donate with a credit card.
+                  Click here to tip with a credit card.
                 </p>
                 <p className="donate-subdescription">
                   Your card information will not be stored anywhere.
@@ -202,7 +202,7 @@ const StreamPage = () => {
               </Col>
               <Col size={1} className="donate-paypal donate-box">
                 <p className="donate-description">
-                  Click here to donate with Paypal.{" "}
+                  Click here to tip with Paypal.{" "}
                 </p>
                 <p className="donate-subdescription">
                   Your donation will go to onfour donations.
@@ -210,7 +210,7 @@ const StreamPage = () => {
               </Col>
               <Col size={1} className="donate-venmo donate-box">
                 <p className="donate-description">
-                  Scan the QR code below to donate on Venmo.
+                  Scan the QR code below to tip on Venmo.
                 </p>
                 <p className="donate-subdescription">
                   Your donation will be sent to @SpencerAmer from onfour.
@@ -226,7 +226,7 @@ const StreamPage = () => {
                   data-toggle="modal"
                   data-target="#paymentModal"
                 >
-                  Donate with Card
+                  Tip with Card
                 </button>{" "}
                 <Modal></Modal>
               </Col>
@@ -235,7 +235,7 @@ const StreamPage = () => {
                   className="stripe-button-border button-height paypal-button"
                   onClick={donatePaypal}
                 >
-                  Donate with Paypal
+                  Tip with Paypal
                 </button>
               </Col>
               <Col size={1} className="donate-venmo donate-box-button">
@@ -337,7 +337,7 @@ const StreamPage = () => {
                           data-toggle="modal"
                           data-target="#paymentModal"
                         >
-                          Donate with Card
+                          Tip with Card
                         </button>{" "}
                         <Modal isOpen={false}></Modal>
                       </Col>
@@ -348,7 +348,7 @@ const StreamPage = () => {
                           className="button-border button-height paypal-button"
                           onClick={donatePaypal}
                         >
-                          Donate with Paypal
+                          Tip with Paypal
                         </button>
                       </Col>
                     </Row>
