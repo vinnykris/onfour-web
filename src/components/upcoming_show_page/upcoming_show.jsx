@@ -64,6 +64,8 @@ const UpcomingShowPage = () => {
     // FeaturedContent to concerts
     info_list.forEach((data) => {
       const day_in_week = new Date(data.date).toString();
+      const hour = parseInt(data.time.slice(0, 2));
+      const minutes = data.time.slice(2, 5);
       setConcerts(concerts => [
         ...concerts,
         <FeaturedContent
@@ -74,7 +76,8 @@ const UpcomingShowPage = () => {
           date={data.date.slice(8, 10) + " " + month_map[data.date.slice(5, 7)] + " " + data.date.slice(0, 4)}
           month={month_map[data.date.slice(5,7)]}
           day={data.date.slice(8,10)}
-          time={data.time}
+          time={(hour > 12) ? 
+            ((hour - 12).toString() + minutes + "PM") : ((hour < 12) ? (data.time.slice(0, 5) + "AM") : (data.time.slice(0, 5) + "PM"))}
           ticketed={data.price}
         />,
       ]);
