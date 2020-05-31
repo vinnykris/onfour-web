@@ -5,51 +5,55 @@ import React from "react";
 import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
-// FeaturedContent defines the layout of each upcoming concert elements
-// It takes in concert's information as input
-const FeaturedContent = ({ img, name, date, time }) => {
+// FeaturedContent is the unit element for an upcoming concert
+const FeaturedContent = ({ img, name, concert_name, date, month, day, time, ticketed }) => {
   return (
-    <div className="featured-content">
-      <Grid>
-        <Row>
-          <Col size={1}></Col>
-          <Col size={3}>
-            <div className="date-content-bar">
-              <Col size={0.5}>
-              </Col>
-              <Col size={2.5}>
-                <img className="feature-placeholder" src={img} alt="content-img"></img>
-              </Col>
-              
-            </div>
-          </Col>
-          <Col size={3}>
-            <div className="show-content-bar">
+    <Grid className="featured-content">
+      <Row>
+      <Col size={3} className="date-content-bar">
+          <img className="concert-poster" src={img} alt="content-img"></img>
+          <div className="poster-tag">
+            <h4 className="poster-text">{month}</h4>
+            <h1 className="poster-text">{day}</h1>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+      <Col size={3} className="show-content-bar">
               <Row>
-                <Col size={1}>
-                  <h2 className="artist-name">{name}</h2>
+                <Col size={3}>
+                  <p className="artist-name">{name} : {concert_name}</p>
                 </Col>
               </Row>
-              <br></br>
-              <br></br>
               <Row>
-                <Col size={1}>
-                  <h2 className="time">{time}</h2>
-                </Col>
-                <Col size={1}>
-                  <h2 className="date">{date}</h2>
+                <Col size={3}>
+                  <p className="time">{date} | {time}</p>
                 </Col>
               </Row>
-            </div>
           </Col>
-          
-
-        </Row>
-        <Row>
-          
-        </Row>
+      </Row>
+      <Row>
+        <Col size={3} className="ticket">
+          {ticketed? (
+            <button
+              className="stripe-button-border"
+              data-toggle="modal"
+              data-target="#ticketModal"
+            >
+              Ticket   >
+            </button>
+          ) : (
+              <button
+                className="stripe-button-border"
+                // data-toggle="modal"
+                // data-target="#ticketModal"
+              >
+                FREE
+              </button>
+          )}
+        </Col>
+      </Row>
       </Grid>
-    </div>
   );
 };
 

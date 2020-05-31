@@ -14,24 +14,6 @@ export const query_name = `query listOnfour_registrations(
     }
   }`;
 
-// Query to retrieve all upcoming shows
-export const list_upcoming_concerts = `query listFutureConcerts {
-    listFutureConcerts {
-      items {
-        id
-        url
-        timePassed
-        date
-        time
-        artist
-        concertName
-        description
-        price
-        concertId
-      }
-    }
-  }`;
-
 // Query to retrieve all past shows
 export const list_past_concerts = `query listPastShows {
     listPastShows {
@@ -45,3 +27,21 @@ export const list_past_concerts = `query listPastShows {
       }
     }
   }`;
+
+// Query to retrieve all upcoming shows
+export const list_upcoming_concerts = `query listFutureConcerts {
+  listFutureConcerts {
+    items {
+      id
+      url
+      timePassed
+      date
+      time
+      artist
+      concertName
+      description
+      price
+      concertId
+    }
+  }
+}`;

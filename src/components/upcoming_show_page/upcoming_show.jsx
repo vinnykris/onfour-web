@@ -1,167 +1,99 @@
 // React Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { View } from "react-native";
 
-// AWS Impoorts
-import * as mutations from "../../graphql/mutations";
+// Component Imports
+import FeaturedContent from "./featured_content";
+import SearchBar from "../search_bar/search_bar";
+import Modal from "../payment/ticket_modal";
+import FlexibleGrid from "../flexible_grid/flexible_grid";
+
+// AWS Imports
+import { API, graphqlOperation } from "aws-amplify";
+import * as queries from "../../graphql/queries";
 import Amplify from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
-import { API, graphqlOperation } from "aws-amplify";
 
 // Styling Imports
-import { Grid, Row, Col } from "../grid";
 import "./upcoming_show_page_styles.scss";
 
 Amplify.configure(awsmobile);
 
-// Upcoming_show contains the layout for upcoming show page
-// Currently it's not fully implemented, changes will be made in the near future
-const UpcomingShow = () => {
-  const [email, setEmail] = useState("");
-  const [clicked, setClicked] = useState(false);
+// The Upcoming Show Page component
+const UpcomingShowPage = () => {
+  // concerts is a list of FeaturedContent objects with upcoming show information
+  const [concerts, setConcerts] = useState([]);
 
-  const emailSubmit = (event) => {
-    event.preventDefault();
-
-    const payload = {
-      email: email,
-      paid: false,
-    };
-
-    API.graphql(
-      graphqlOperation(mutations.create_email_subscription, { input: payload })
+  // getConcertInfo queries all elements in the future concert database
+  // and create a list of FeaturedContent objects with the data returned
+  // from the database.
+  const getConcertInfo = async () => {
+    // Calling the API, using async and await is necessary
+    const info = await API.graphql(
+      graphqlOperation(queries.list_upcoming_concerts)
     );
 
-    setEmail("");
-    setClicked(true);
+    const info_list = info.data.listFutureConcerts.items; // Stores the items in databse
+
+    // Iterate through each element in the list and add the created
+    // FeaturedContent to concerts
+    info_list.forEach((data) => {
+      setConcerts((concerts) => [
+        ...concerts,
+        <FeaturedContent
+          img={data.url}
+          name={data.artist}
+          concert_name={data.concertName}
+          date={data.date}
+          month={"MAY"}
+          day={10}
+          time={data.time}
+          ticketed={data.price}
+        />,
+      ]);
+    });
+  };
+
+  useEffect(() => {
+    getConcertInfo();
+  }, []);
+
+  const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
+  // Gets dimensions of screen and sends warnings to console
+  const findDimensions = (layout) => {
+    const { x, y, width, height } = layout;
+    if (width < 600) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+    console.warn(x);
+    console.warn(y);
+    console.warn(width);
+    console.warn(height);
   };
 
   return (
-    <div className="upcoming-page-content">
-      <Grid>
-        <Row></Row>
-        <Row>
-          <Col size={2}></Col>
-          <Col size={2}> </Col>
-          <Col size={2}>
-            {" "}
-            <h1>{"Coming Soon!"}</h1>
-          </Col>
-          <Col size={2}> </Col>
-          <Col size={2}> </Col>
-        </Row>
-        <Row></Row>
-        <br></br>
-        <br></br>
-        <Row>
-          <Col size={1}> </Col>
-          <Col size={2}>
-            <p className="subscribe-description">
-              To stay informed about upcoming events, subscribe to our mailing
-              list:
-            </p>
-          </Col>
-          <Col size={1}> </Col>
-        </Row>
-        <Row>
-          <Col size={1}>
-            {(() => {
-              if (clicked) {
-                return (
-                  <p className="subscribe-success">Thank you and stay tuned!</p>
-                );
-              } else {
-                return (
-                  <form
-                    className="inline-form-2"
-                    action="/"
-                    id="newsletter"
-                    onSubmit={emailSubmit}
-                  >
-                    <div>
-                      <input
-                        type="email"
-                        placeholder="Enter your email here..."
-                        name="email"
-                        required
-                        value={email}
-                        className="email-input-upcoming"
-                        onChange={(event) => setEmail(event.target.value)}
-                      />
-                      <button
-                        type="submit"
-                        form="newsletter"
-                        value="Submit"
-                        className="submit-button button-border button-height"
-                      >
-                        Submit
-                      </button>
-                    </div>
-                  </form>
-                );
-              }
-            })()}
-          </Col>
-        </Row>
-        <br></br>
-        <br></br>
-      </Grid>
-    </div>
+    <View
+      onLayout={(event) => {
+        findDimensions(event.nativeEvent.layout);
+      }}
+    >
+      <div className="upcoming-show-page-content">
+        <Modal></Modal>
+        <SearchBar></SearchBar>
+        {!is_mobile ? (
+          <div className="upcoming-show-grid">
+            <FlexibleGrid content_list={concerts} num_cols={3} />
+          </div>
+        ) : (
+          <div className="upcoming-show-grid">
+            <FlexibleGrid content_list={concerts} num_cols={1} />
+          </div>
+        )}
+      </div>
+    </View>
   );
 };
 
-export default UpcomingShow;
-
-// {
-/*
-
-const upcoming_show = () => {
-  return (
-    <div>
-      <Grid>
-        <Row></Row>
-        <Row>
-          <Col size={1}></Col>
-          <Col size={3}>
-            <FeaturedContent
-              img={jon_may_10}
-              name={"Jonathan Dely"}
-              date={"05/10/2020"}
-              time={"8PM EST"}
-            />
-          </Col>
-          <Col size={1}></Col>
-        </Row>
-        <Row>
-          <Col size={1}></Col>
-          <Col size={2}>
-            <FeaturedContent
-              img={concert}
-              name={"Jonathan Dely"}
-              date={"05/10/2020"}
-              time={"8PM EST"}
-            />
-          </Col>
-          <Col size={1}></Col>
-        </Row>
-        <Row>
-          <Col size={1}></Col>
-          <Col size={2}>
-            <FeaturedContent
-              img={concert}
-              name={"Jonathan Dely"}
-              date={"05/10/2020"}
-              time={"8PM EST"}
-            />
-          </Col>
-          <Col size={1}></Col>
-        </Row>
-        <Row></Row>
-      </Grid>
-    </div>
-  );
-};
-
-export default upcoming_show;
-
-*/
-// }
+export default UpcomingShowPage;
