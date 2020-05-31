@@ -9,6 +9,7 @@ export const query_name = `query listOnfour_registrations(
     listOnfour_registrations(filter: $filter) {
       items {
         first
+        last
       }
     }
   }`;
