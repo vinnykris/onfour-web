@@ -45,8 +45,8 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
           ) : (
               <button
                 className="stripe-button-border"
-                // data-toggle="modal"
-                // data-target="#ticketModal"
+                data-toggle="modal"
+                data-target="#concertInfoModal"
               >
                 MORE INFO
               </button>

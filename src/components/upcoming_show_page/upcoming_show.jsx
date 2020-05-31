@@ -5,7 +5,7 @@ import { View } from "react-native";
 // Component Imports
 import FeaturedContent from "./featured_content";
 import SearchBar from "../search_bar/search_bar";
-import Modal from "../payment/ticket_modal";
+import Modal from "./concert_info/concert_info_modal";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 
 // AWS Imports

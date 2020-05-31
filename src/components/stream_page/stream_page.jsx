@@ -166,10 +166,6 @@ const StreamPage = () => {
         findDimensions(event.nativeEvent.layout);
       }}
     >
-      <Prompt
-        // when={formIsHalfFilledOut}
-        message="Are you sure you want to leave?"
-      />
       {show_start_time ? (
       <div className="stream-page-content">
         {/* {show_alert ? (
