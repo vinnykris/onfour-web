@@ -2,6 +2,11 @@
 
 @import "../../styles";
 
+.main-content {
+  width: 100%;
+  display: flex;
+}
+
 .desktop-grid {
   width: 100%;
   display: flex;
@@ -161,9 +166,12 @@ a.nav-page-black {
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
-  // background-color: rgb(0, 0, 0); /* Black fallback color */
-  background-color: rgba(0, 0, 0, 0.95); /* Black w/opacity */
-  overflow-y: hidden; /* Disable horizontal scroll */
+  background-color: rgb(0, 0, 0); /* Black fallback color */
+  // background-color: rgba(0, 0, 0, 0.95); /* Black w/opacity */
+  // overflow-y: auto; /* Disable horizontal scroll */
+  // overflow-y: scroll;
+  // overscroll-behavior: contain;
+  overflow: auto;
   transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
 }
 
@@ -269,4 +277,10 @@ a.nav-page-black {
 .sign-out-button-mobile {
   margin-top: 10%;
   margin-bottom: 20%;
+}
+
+.logged-in-icon {
+  margin: auto;
+  height: 30%;
+  width: auto;
 }
