@@ -262,12 +262,14 @@ const NavBar = () => {
                 </span>
               </Col>
               <Col size={3}>
-                <img
-                  className="onfour-logo-mobile"
-                  src={new_logo_white}
-                  width="auto"
-                  alt="nav-logo"
-                ></img>
+                <NavLink exact to="/">
+                  <img
+                    className="onfour-logo-mobile"
+                    src={new_logo_white}
+                    width="auto"
+                    alt="nav-logo"
+                  ></img>
+                </NavLink>
               </Col>
               <Col size={1}>
                 {!auth ? (
@@ -300,13 +302,13 @@ const NavBar = () => {
           <Grid className="desktop-grid">
             <Row className="desktop-row">
               <Col size={1}>
-                <NavLink to="/artists" className={style}>
-                  FOR ARTISTS
+                <NavLink to="/archive" className={style}>
+                  PAST SHOWS
                 </NavLink>
               </Col>
               <Col size={1}>
-                <NavLink to="/archive" className={style}>
-                  PAST SHOWS
+                <NavLink to="/artists" className={style}>
+                  FOR ARTISTS
                 </NavLink>
               </Col>
               <Col size={1}>
@@ -315,12 +317,15 @@ const NavBar = () => {
                 </NavLink>
               </Col>
               <Col size={1}>
-                <img
-                  className="onfour-logo-desktop"
-                  src={icon}
-                  width="auto"
-                  alt="nav-logo"
-                ></img>
+                <NavLink exact to="/">
+                  {" "}
+                  <img
+                    className="onfour-logo-desktop"
+                    src={icon}
+                    width="auto"
+                    alt="nav-logo"
+                  ></img>
+                </NavLink>
               </Col>
               <Col size={1}>
                 <NavLink to="/stream" className={style}>
