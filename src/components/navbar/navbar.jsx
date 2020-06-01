@@ -147,6 +147,19 @@ const NavBar = () => {
                   <Row>
                     <Col size={1}>
                       <NavLink
+                        to="/artists"
+                        className="nav-page-white mobile-link-text"
+                        onClick={() => closeMenu("nav-menu")}
+                      >
+                        FOR ARTISTS
+                      </NavLink>
+                    </Col>
+                  </Row>
+                </div>
+                <div className="mobile-nav-link">
+                  <Row>
+                    <Col size={1}>
+                      <NavLink
                         to="/stream"
                         className="nav-page-white mobile-link-text"
                         onClick={() => closeMenu("nav-menu")}
