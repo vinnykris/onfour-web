@@ -286,7 +286,11 @@ const NavBar = () => {
           {/* DESKTOP CODE */}
           <Grid className="desktop-grid">
             <Row className="desktop-row">
-              <Col size={1}></Col>
+              <Col size={1}>
+                <NavLink to="/artists" className={style}>
+                  FOR ARTISTS
+                </NavLink>
+              </Col>
               <Col size={1}>
                 <NavLink to="/archive" className={style}>
                   PAST SHOWS
@@ -325,9 +329,7 @@ const NavBar = () => {
                         data-toggle="modal"
                         data-target="#sign_in_Modal"
                       >
-                        <span className="user-menu">
-                          <i className="fa fa-user-o fa-2x user-icon"></i>
-                        </span>
+                        LOGIN
                       </NavLink>
                     );
                   } else {
