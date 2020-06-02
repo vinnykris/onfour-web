@@ -17,7 +17,7 @@ import Auth from "../../apis/UserPool";
 import VideoPlayer from "./video_player";
 import Chat from "../chat/stream_chat";
 // import Join from "../chat/join_chat";
-import WaitingChat from "../chat/chat_waiting"
+import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
 // import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
@@ -360,21 +360,43 @@ const StreamPage = () => {
             <Grid className="mobile-grid-stream">
               <Row>
                 <Col size={1}>
-                  <div className="stream-main-mobile">
-                    <div className="stream-wrapper-mobile">
-                      <VideoPlayer
-                        url={
-                          "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                        }
-                        start_time={show_start_time}
-                        artist_name={artist_name}
-                        concert_name={concert_name}
-                        auth={auth}
-                        user_id={user_id}
-                        concert_id={concert_id}
-                      />
-                    </div>
-                  </div>
+                  <Row>
+                    <Col size={1}>
+                      <div className="stream-main-mobile">
+                        <div className="stream-wrapper-mobile">
+                          <VideoPlayer
+                            url={
+                              "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                            }
+                            start_time={show_start_time}
+                            artist_name={artist_name}
+                            concert_name={concert_name}
+                            auth={auth}
+                            user_id={user_id}
+                            concert_id={concert_id}
+                          />
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col size={1}>
+                      <div className="chat-main-mobile">
+                        <div className="chat-wrapper-mobile">
+                          {first ? (
+                            <Chat
+                              chat_name={first ? first + " " + last : chat_name}
+                              chatStatus={chatStatus}
+                            />
+                          ) : (
+                            // <Join joinSubmit={joinSubmit} />
+                            <WaitingChat />
+                          )}
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+
                   {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
                   {/* <Row>
                   <Col size={1}>

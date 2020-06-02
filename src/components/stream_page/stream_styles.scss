@@ -43,12 +43,30 @@
   }
 }
 
+.chat-main-mobile {
+  height: 300px;
+  width: 100%;
+  position: relative;
+  // margin: auto;
+  margin-top: 0%;
+  justify-content: center;
+  align-items: center;
+}
+
 .chat-wrapper {
   display: inline-block;
   position: relative;
   width: 100%;
   height: 105%;
   margin-left: 5%;
+  // margin: auto;
+}
+
+.chat-wrapper-mobile {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 100%;
   // margin: auto;
 }
 
@@ -204,7 +222,7 @@
 }
 
 // Waiting Screen
-.countdown-wrapper{
+.countdown-wrapper {
   width: 100%;
   height: 100%;
 }
@@ -212,7 +230,12 @@
 .waiting-screen {
   width: 100%;
   height: 100%;
-  background: linear-gradient(240.7deg, #8C4FDC 1.46%, rgba(255, 255, 255, 0) 96.73%), #497BE0;
+  background: linear-gradient(
+      240.7deg,
+      #8c4fdc 1.46%,
+      rgba(255, 255, 255, 0) 96.73%
+    ),
+    #497be0;
   @include respond-to("small") {
     height: 220px;
   }
@@ -225,7 +248,7 @@
   top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #E7281E;
+  background: #e7281e;
   @include respond-to("small") {
     top: 38%;
   }
@@ -256,7 +279,7 @@
   height: 8px;
 }
 
-.parentDisable{
+.parentDisable {
   background: black;
   z-index: 998;
   padding-top: 20vh;
@@ -265,7 +288,7 @@
 }
 
 .overlay-box {
-  background: black; 
+  background: black;
   padding-top: 20vh;
   height: 71vh;
   width: 100%;
@@ -284,14 +307,14 @@
 }
 
 .waiting-message1 {
-  color:white;
+  color: white;
   @include respond-to("small") {
     font-size: 20px;
   }
 }
 
 .waiting-message2 {
-  color:white;
+  color: white;
   font-weight: lighter;
   letter-spacing: 0.5px;
   @include respond-to("small") {

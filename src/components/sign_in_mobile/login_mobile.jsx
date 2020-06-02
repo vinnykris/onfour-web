@@ -30,6 +30,7 @@ const LoginMobile = ({ toggleRegister, closeMenu }) => {
       .then((data) => setPassword(""))
       .then((data) => setError(""))
       .then((data) => closeMenu())
+      .then((data) => window.location.reload())
       .catch((err) => showError(err));
   };
 
