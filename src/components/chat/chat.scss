@@ -153,6 +153,9 @@ button:focus {
 .form {
   display: flex;
   border-radius: 10px;
+  @include respond-to("small") {
+    min-height: 50px;
+  }
 }
 
 .input {
@@ -223,6 +226,7 @@ button:focus {
   padding: 0% 0;
   overflow: auto;
   flex: auto;
+  max-width: 100%;
 }
 // MESSAGE
 

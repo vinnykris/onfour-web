@@ -359,7 +359,7 @@ const StreamPage = () => {
           ) : (
             <Grid className="mobile-grid-stream">
               <Row>
-                <Col size={1}>
+                <Col size={1} className="main-column">
                   <Row>
                     <Col size={1}>
                       <div className="stream-main-mobile">
@@ -380,7 +380,7 @@ const StreamPage = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <Col size={1}>
+                    <Col size={1} className="chat-column">
                       <div className="chat-main-mobile">
                         <div className="chat-wrapper-mobile">
                           {first ? (

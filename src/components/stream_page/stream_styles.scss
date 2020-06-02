@@ -43,12 +43,28 @@
   }
 }
 
+.main-column {
+  max-width: 100%;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.chat-column {
+  max-width: 100%;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
 .chat-main-mobile {
   height: 400px;
-  max-width: 100%;
+  min-width: 0;
+  max-width: 100vh;
   position: relative;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  flex-grow: 1;
+  display: flex;
 
   @media only screen and (max-height: 750px) {
     height: 300px;
