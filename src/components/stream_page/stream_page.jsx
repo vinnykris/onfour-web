@@ -1,6 +1,5 @@
 // React Imports
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
 import { Prompt } from "react-router";
@@ -21,6 +20,7 @@ import Join from "../chat/join_chat";
 import { Grid, Row, Col } from "../grid";
 // import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
+import { useWindowDimensions } from "../custom_hooks";
 
 // Styles Imports
 import "./stream_styles.scss";
@@ -33,20 +33,7 @@ Amplify.configure(awsmobile);
 // Main stream page component. Holds stream video, chat, and payment functionality
 const StreamPage = () => {
   // DETERMINE MOBILE VERSION OR NOT
-  const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
-  // Gets dimensions of screen and sends warnings to console
-  const findDimensions = (layout) => {
-    const { x, y, width, height } = layout;
-    if (width < 600) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-    console.warn(x);
-    console.warn(y);
-    console.warn(width);
-    console.warn(height);
-  };
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
@@ -159,11 +146,7 @@ const StreamPage = () => {
 
   // RENDERING SECTION
   return (
-    <View
-      onLayout={(event) => {
-        findDimensions(event.nativeEvent.layout);
-      }}
-    >
+    <div className="stream-page-content">
       {show_start_time ? (
         <div className="stream-page-content">
           {/* {show_alert ? (
@@ -207,7 +190,7 @@ const StreamPage = () => {
             </div>
           </div>
         ) : null} */}
-          {!is_mobile ? (
+          {width > 600 ? (
             <Grid>
               <Row>
                 <Col size={0.5}></Col>
@@ -513,7 +496,7 @@ const StreamPage = () => {
         </div>
         // </div>
       )}
-    </View>
+    </div>
   );
 };
 

@@ -227,7 +227,7 @@
   transform: translate(-50%, -50%);
   background: #E7281E;
   @include respond-to("small") {
-    top: 25%;
+    top: 38%;
   }
 }
 
@@ -279,7 +279,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   @include respond-to("small") {
-    top: 15%;
+    top: 30%;
   }
 }
 
