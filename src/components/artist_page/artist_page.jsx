@@ -101,9 +101,7 @@ const ArtistPage = () => {
         <Row className="onboarding-row">
           <Col size={1}>
             <div className="artist-page-text">
-              <h2 className="onboarding-header">
-                Live Studio Session Performance.
-              </h2>
+              <h2 className="onboarding-header">Own Your Recorded Content.</h2>
               <p className="onboarding-description">
                 Record your show for free in high definition audio and video
                 quality so that you can cherish the moment and use it as
@@ -233,7 +231,7 @@ const ArtistPage = () => {
             <Col size={1}>
               <div className="artist-page-text">
                 <h2 className="onboarding-header">
-                  Live Studio Session Performance.
+                  Own Your Recorded Content.
                 </h2>
                 <p className="onboarding-description">
                   Record your show for free in high definition audio and video

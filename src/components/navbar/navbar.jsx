@@ -112,7 +112,6 @@ const NavBar = () => {
 
   return (
     <div className={navbar_custom}>
-      {console.log(width)}
       {width <= 600 ? (
         <div className="main-content">
           {/* MOBILE CODE */}
