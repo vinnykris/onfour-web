@@ -168,6 +168,14 @@ button:focus {
   @include respond-to("large") {
     font-size: 0.8em;
   }
+  @include respond-to("small") {
+    font-size: 1em;
+    padding: 3% 10px;
+  }
+  @include respond-to("x-small") {
+    font-size: 1em;
+    padding: 2% 10px;
+  }
   background-color: #3a3a3d;
 }
 
@@ -186,6 +194,9 @@ button:focus {
   }
   @include respond-to("large") {
     font-size: 0.4em;
+  }
+  @include respond-to("small") {
+    font-size: 1em;
   }
 }
 
@@ -223,6 +234,11 @@ button:focus {
   display: inline-block;
   max-width: 80%;
   text-align: left;
+  @include respond-to("small") {
+    max-width: 60%;
+    border-radius: 12px;
+    padding: 5px 12px;
+  }
 }
 
 .message-box-admin {
@@ -234,6 +250,10 @@ button:focus {
   display: inline-block;
   max-width: 80%;
   text-align: left;
+  @include respond-to("small") {
+    max-width: 60%;
+    border-radius: 12px;
+  }
 }
 
 .message-text {
@@ -247,6 +267,9 @@ button:focus {
   }
   @include respond-to("large") {
     font-size: 0.7em;
+  }
+  @include respond-to("small") {
+    font-size: 1em;
   }
 }
 
@@ -273,6 +296,9 @@ button:focus {
   }
   @include respond-to("large") {
     font-size: 0.6em;
+  }
+  @include respond-to("small") {
+    font-size: 1em;
   }
   background-color: #17171b;
 }
