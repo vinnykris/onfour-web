@@ -69,8 +69,12 @@ const NavBar = () => {
         filter: { email: { eq: user_email } },
       })
     ).then((data) => {
-      setFirst(data.data.listOnfour_registrations.items[0].first.toUpperCase());
-      setLast(data.data.listOnfour_registrations.items[0].last.toUpperCase());
+      setFirst(
+        data.data.listCreateOnfourRegistrations.items[0].first.toUpperCase()
+      );
+      setLast(
+        data.data.listCreateOnfourRegistrations.items[0].last.toUpperCase()
+      );
     });
   }
 

@@ -20,6 +20,7 @@ import "./register_styles.scss";
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 const Register = () => {
+  const [username, setUsername] = useState(""); // Tracks user's email
   const [email, setEmail] = useState(""); // Tracks user's email
   const [password, setPassword] = useState(""); // Tracks user's password
   const [repeat_password, setRepeatPassword] = useState(""); // Tracks user's repeated password
@@ -36,12 +37,13 @@ const Register = () => {
 
     // Username/Password information passed into cognito API
     const signup_payload = {
-      username: email,
+      username: username,
       password,
     };
 
     // Email/First Name/Last Name/Concerts information passed into AppSync API/Registration Table
     const register_payload = {
+      username: username,
       email: email,
       first: first,
       last: last,
@@ -68,13 +70,15 @@ const Register = () => {
         setError("Passwords do not match");
       } else {
         Auth.signUp(signup_payload)
+          .then((data) => registerUser())
           .then((data) => setName(first))
           .then((data) => setSuccess(true))
-          .then((data) => registerUser())
+
           .then((data) => subscribeUser())
           .then((data) => setFirst(""))
           .then((data) => setLast(""))
           .then((data) => setEmail(""))
+          .then((data) => setUsername(""))
           .then((data) => setPassword(""))
           .then((data) => setError(""))
           .catch(
@@ -97,7 +101,9 @@ const Register = () => {
         graphqlOperation(mutations.create_registration, {
           input: register_payload,
         })
-      );
+      ).catch((err) => {
+        setError("Username taken!");
+      });
     };
 
     // Function that store's the user's email in an email list database if the user
@@ -172,6 +178,23 @@ const Register = () => {
                           required
                         />
                       </Col>
+                    </Row>
+                    <br></br>
+                    <Row>
+                      <label className="label-text" for="email_slot">
+                        Username*
+                      </label>
+                    </Row>
+                    <Row>
+                      <input
+                        className="register-input"
+                        type="username"
+                        name="username"
+                        value={username}
+                        id="username_slot"
+                        onChange={(event) => setUsername(event.target.value)}
+                        required
+                      />
                     </Row>
                     <br></br>
                     <Row>

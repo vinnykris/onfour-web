@@ -3,12 +3,12 @@
 
 // Query to retrieve the first name of a logged in user based on their email from
 // the registration DB table
-export const query_name = `query listOnfour_registrations(
-    $filter: TableOnfour_registrationFilterInput
+export const query_name = `query listCreateOnfourRegistrations(
+    $filter: TableCreateOnfourRegistrationFilterInput
   ) {
-    listOnfour_registrations(filter: $filter) {
+    listCreateOnfourRegistrations(filter: $filter) {
       items {
-        id
+        username
         first
         last
       }
