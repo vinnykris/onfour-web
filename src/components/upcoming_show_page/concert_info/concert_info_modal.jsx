@@ -1,7 +1,7 @@
 import React from "react";
 import ConcertInfo from "./concert_info";
 
-const ConcertInfoModal = () => {
+const ConcertInfoModal = ({descriptions}) => {
     return (
         <div
             className="modal"
@@ -12,7 +12,7 @@ const ConcertInfoModal = () => {
             aria-hidden="true"
             data-backdrop="false"
         >
-            <ConcertInfo></ConcertInfo>
+            <ConcertInfo descriptions={descriptions}></ConcertInfo>
         </div>
     );
 };

@@ -23,6 +23,7 @@ Amplify.configure(awsmobile);
 const UpcomingShowPage = () => {
   // concerts is a list of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([]);
+  const [descriptions, setDescriptions] = useState([]);
 
   // getConcertInfo queries all elements in the future concert database
   // and create a list of FeaturedContent objects with the data returned
@@ -35,7 +36,7 @@ const UpcomingShowPage = () => {
 
     const info_list = info.data.listFutureConcerts.items; // Stores the items in database
     info_list.sort((a, b) => a.timePassed - b.timePassed);
-    console.log(info_list);
+    // console.log(info_list);
     const month_map = {
       "01": "JAN",
       "02": "FEB",
@@ -81,6 +82,10 @@ const UpcomingShowPage = () => {
           ticketed={data.price}
         />,
       ]);
+      console.log(data.description[0]);
+      setDescriptions(descriptions => [
+        ...descriptions, data.description
+      ])
     });
   };
 
@@ -110,7 +115,7 @@ const UpcomingShowPage = () => {
       }}
     >
       <div className="upcoming-show-page-content">
-        <Modal></Modal>
+        <Modal content={descriptions[0]}></Modal>
         {/* <SearchBar></SearchBar> */}
         {!is_mobile ? (
           <div className="upcoming-show-grid">
