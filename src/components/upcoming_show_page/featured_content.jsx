@@ -1,14 +1,37 @@
 // React Imports
-import React from "react";
+import React, { useState } from "react";
 
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
 // FeaturedContent is the unit element for an upcoming concert
-const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, time, ticketed }) => {
+const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, time, price, description }) => {
+  const [show_more_info, setClickedInfo] = useState(false);
+
+  const open_info = () => {
+    setClickedInfo(true);
+  };
+
+  const close_info = () => {
+    setClickedInfo(false);
+  };
+
   return (
     <Grid className="featured-content">
+      {show_more_info ? (
+        <div className="popup-artist-info">
+              <form className="concert-form">
+                <span className="popup-info-close" onClick={close_info}>
+                  <i className="fa fa-times close-icon"></i>
+                </span>
+                <br></br>
+                <div className="popup-info-content">
+                  <pre className="concert-description">{description}</pre>
+                </div>
+              </form>
+        </div>
+        ) : null}
       <Row>
         <Col size={3} className="poster-container">
           <img className="concert-poster" src={img} alt="content-img"></img>
@@ -34,7 +57,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
       </Row>
       <Row>
         <Col size={3} className="ticket">
-          {ticketed? (
+          {price? (
             <button
               className="featured-content-button-border"
               data-toggle="modal"
@@ -45,8 +68,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
           ) : (
               <button
                 className="featured-content-button-border"
-                data-toggle="modal"
-                data-target="#concertInfoModal"
+                onClick={open_info}
               >
                 MORE INFO
               </button>

@@ -5,7 +5,6 @@ import { View } from "react-native";
 // Component Imports
 import FeaturedContent from "./featured_content";
 import SearchBar from "../search_bar/search_bar";
-import Modal from "./concert_info/concert_info_modal";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 
 // AWS Imports
@@ -67,6 +66,7 @@ const UpcomingShowPage = () => {
       const day_in_week = new Date(data.date).toString();
       const hour = parseInt(data.time.slice(0, 2));
       const minutes = data.time.slice(2, 5);
+      
       setConcerts(concerts => [
         ...concerts,
         <FeaturedContent
@@ -79,13 +79,15 @@ const UpcomingShowPage = () => {
           day={data.date.slice(8,10)}
           time={(hour > 12) ? 
             ((hour - 12).toString() + minutes + "PM") : ((hour < 12) ? (data.time.slice(0, 5) + "AM") : (data.time.slice(0, 5) + "PM"))}
-          ticketed={data.price}
+          price={data.price}
+          description={data.description.toString()}
         />,
       ]);
-      console.log(data.description[0]);
+
       setDescriptions(descriptions => [
-        ...descriptions, data.description
-      ])
+        ...descriptions,
+        data.description.toString(),
+      ]);
     });
   };
 
@@ -115,7 +117,6 @@ const UpcomingShowPage = () => {
       }}
     >
       <div className="upcoming-show-page-content">
-        <Modal content={descriptions[0]}></Modal>
         {/* <SearchBar></SearchBar> */}
         {!is_mobile ? (
           <div className="upcoming-show-grid">
