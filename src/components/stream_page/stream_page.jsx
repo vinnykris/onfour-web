@@ -16,7 +16,8 @@ import Auth from "../../apis/UserPool";
 // Component Imports
 import VideoPlayer from "./video_player";
 import Chat from "../chat/stream_chat";
-import Join from "../chat/join_chat";
+// import Join from "../chat/join_chat";
+import WaitingChat from "../chat/chat_waiting"
 import { Grid, Row, Col } from "../grid";
 // import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
@@ -41,7 +42,7 @@ const StreamPage = () => {
   // Function passed as prop to join chat
   const joinSubmit = (name, mode) => {
     setChatName(name);
-    setShowChat(mode);
+    // setShowChat(mode);
   };
   // Function passed as prop to chat
   const chatStatus = (mode) => {
@@ -231,13 +232,14 @@ const StreamPage = () => {
                 <Col size={3}>
                   <div className="chat-main">
                     <div className="chat-wrapper">
-                      {show_chat || first ? (
+                      {first ? (
                         <Chat
                           chat_name={first ? first + " " + last : chat_name}
                           chatStatus={chatStatus}
                         />
                       ) : (
-                        <Join joinSubmit={joinSubmit} />
+                        // <Join joinSubmit={joinSubmit} />
+                        <WaitingChat />
                       )}
                     </div>
                   </div>
