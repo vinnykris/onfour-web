@@ -113,10 +113,13 @@
   font-family: "Heebo", sans-serif;
   font-weight: $medium-weight;
   @include respond-to("x-large") {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
   @include respond-to("large") {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+  }
+  @include respond-to("medium") {
+    font-size: 0.65rem;
   }
 }
 

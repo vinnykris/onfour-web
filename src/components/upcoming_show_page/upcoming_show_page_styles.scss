@@ -2,11 +2,10 @@
 
 @import "../../styles";
 
-.upcoming-page-content {
+.upcoming-show-page-content {
   background-color: black;
-  // margin-top: -1px;
-  // height: 60vh;
-  // width: auto;
+  margin-top: -1px;
+  min-height: 62vh;
 }
 
 .upcoming-show-grid {
@@ -15,15 +14,14 @@
   padding-right: 6%;
 }
 
-.column-in-center{
-    float: none;
-    margin: 0 auto;
+.column-in-center {
+  float: none;
+  margin: 0 auto;
 }
 
 .centered-row {
   align-items: center;
 }
-
 
 .featured-content {
   background-color: #dbdbdb;
@@ -47,7 +45,6 @@
   width: 100%;
   height: 100%;
 }
-
 
 .featured-header {
   margin-top: 50px;
@@ -133,7 +130,6 @@
     background-color: #303096dc;
     text-decoration: "none";
   }
-  
 }
 
 .free-concert {
@@ -145,10 +141,9 @@
   width: 100%;
 }
 
-
 .ticket {
-  // position: absolute; 
-  // bottom: 0px; 
+  // position: absolute;
+  // bottom: 0px;
   width: 50%;
 }
 

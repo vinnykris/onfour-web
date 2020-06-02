@@ -10,6 +10,7 @@ import StreamPage from "./components/stream_page/stream_page";
 import UpcomingShowPage from "./components/upcoming_show_page/upcoming_show";
 import Ticket from "./components/payment/payment_box";
 import ArchivePage from "./components/archive_page/archive_page";
+import ArtistsPage from "./components/artist_page/artist_page";
 import Footer from "./components/footer/footer";
 import Modal from "./components/sign_in_modal/sign_in_modal";
 
@@ -24,7 +25,6 @@ import "./styles.scss";
 // // Amplify imports
 // import Amplify from 'aws-amplify';
 // import awsconfig from './aws-exports';
-
 
 require("dotenv").config();
 // Amplify.configure(awsconfig);
@@ -42,6 +42,7 @@ function App() {
           <Route path="/stream" component={StreamPage} />
           <Route path="/upcoming" component={UpcomingShowPage} />
           <Route path="/ticket" component={Ticket} />
+          <Route path="/artists" component={ArtistsPage} />
         </Switch>
         <Modal></Modal>
         <Footer />
