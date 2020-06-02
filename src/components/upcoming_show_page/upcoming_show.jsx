@@ -90,20 +90,6 @@ const UpcomingShowPage = () => {
   }, []);
 
   const { height, width } = useWindowDimensions(); // Dimensions of screen
-  // const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
-  // // Gets dimensions of screen and sends warnings to console
-  // const findDimensions = (layout) => {
-  //   const { x, y, width, height } = layout;
-  //   if (width < 600) {
-  //     setIsMobile(true);
-  //   } else {
-  //     setIsMobile(false);
-  //   }
-  //   console.warn(x);
-  //   console.warn(y);
-  //   console.warn(width);
-  //   console.warn(height);
-  // };
 
   return (
     <div className="upcoming-show-page-content">

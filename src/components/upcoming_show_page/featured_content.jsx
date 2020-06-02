@@ -33,7 +33,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
                 </span>
                 <br></br>
                 <div className="popup-info-content">
-                  <pre className="concert-description">{description}</pre>
+                  <p className="concert-description">{description}</p>
                 </div>
               </form>
         </div>
