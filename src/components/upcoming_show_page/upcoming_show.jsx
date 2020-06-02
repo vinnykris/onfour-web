@@ -22,7 +22,6 @@ Amplify.configure(awsmobile);
 const UpcomingShowPage = () => {
   // concerts is a list of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([]);
-  const [descriptions, setDescriptions] = useState([]);
 
   // getConcertInfo queries all elements in the future concert database
   // and create a list of FeaturedContent objects with the data returned
@@ -82,11 +81,6 @@ const UpcomingShowPage = () => {
           price={data.price}
           description={data.description.toString()}
         />,
-      ]);
-
-      setDescriptions(descriptions => [
-        ...descriptions,
-        data.description.toString(),
       ]);
     });
   };

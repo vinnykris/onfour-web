@@ -7,18 +7,24 @@ import { Grid, Row, Col } from "../grid";
 
 // FeaturedContent is the unit element for an upcoming concert
 const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, time, price, description }) => {
-  const [show_more_info, setClickedInfo] = useState(false);
 
+  const [show_more_info, setClickedInfo] = useState(false); // Determines whether to show the popup for musician's bio or not
+
+  // This function gets called when the MORE INFO button is clicked
+  // and it sets the show_more_info to true
   const open_info = () => {
     setClickedInfo(true);
   };
 
+  // This function gets called when the close button on the popup
+  // is clicked and it sets the show_more_info to false
   const close_info = () => {
     setClickedInfo(false);
   };
 
   return (
     <Grid className="featured-content">
+      {/* POP-UP FOR MUSICIAN'S BIO SECTION */}
       {show_more_info ? (
         <div className="popup-artist-info">
               <form className="concert-form">
