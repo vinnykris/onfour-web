@@ -123,7 +123,6 @@ const NavBar = () => {
 
   return (
     <div className={navbar_custom}>
-      {console.log(width)}
       {width <= 600 ? (
         <div className="main-content">
           {/* MOBILE CODE */}
@@ -150,6 +149,19 @@ const NavBar = () => {
                         onClick={() => closeMenu("nav-menu")}
                       >
                         ABOUT US
+                      </NavLink>
+                    </Col>
+                  </Row>
+                </div>
+                <div className="mobile-nav-link">
+                  <Row>
+                    <Col size={1}>
+                      <NavLink
+                        to="/artists"
+                        className="nav-page-white mobile-link-text"
+                        onClick={() => closeMenu("nav-menu")}
+                      >
+                        FOR ARTISTS
                       </NavLink>
                     </Col>
                   </Row>
@@ -260,12 +272,14 @@ const NavBar = () => {
                 </span>
               </Col>
               <Col size={3}>
-                <img
-                  className="onfour-logo-mobile"
-                  src={new_logo_white}
-                  width="auto"
-                  alt="nav-logo"
-                ></img>
+                <NavLink exact to="/">
+                  <img
+                    className="onfour-logo-mobile"
+                    src={new_logo_white}
+                    width="auto"
+                    alt="nav-logo"
+                  ></img>
+                </NavLink>
               </Col>
               <Col size={1}>
                 {!auth ? (
@@ -297,10 +311,14 @@ const NavBar = () => {
           {/* DESKTOP CODE */}
           <Grid className="desktop-grid">
             <Row className="desktop-row">
-              <Col size={1}></Col>
               <Col size={1}>
                 <NavLink to="/archive" className={style}>
                   PAST SHOWS
+                </NavLink>
+              </Col>
+              <Col size={1}>
+                <NavLink to="/artists" className={style}>
+                  FOR ARTISTS
                 </NavLink>
               </Col>
               <Col size={1}>
@@ -309,12 +327,15 @@ const NavBar = () => {
                 </NavLink>
               </Col>
               <Col size={1}>
-                <img
-                  className="onfour-logo-desktop"
-                  src={icon}
-                  width="auto"
-                  alt="nav-logo"
-                ></img>
+                <NavLink exact to="/">
+                  {" "}
+                  <img
+                    className="onfour-logo-desktop"
+                    src={icon}
+                    width="auto"
+                    alt="nav-logo"
+                  ></img>
+                </NavLink>
               </Col>
               <Col size={1}>
                 <NavLink to="/stream" className={style}>
@@ -336,9 +357,7 @@ const NavBar = () => {
                         data-toggle="modal"
                         data-target="#sign_in_Modal"
                       >
-                        <span className="user-menu">
-                          <i className="fa fa-user-o fa-2x user-icon"></i>
-                        </span>
+                        LOGIN
                       </NavLink>
                     );
                   } else {

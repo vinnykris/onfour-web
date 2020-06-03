@@ -1,12 +1,12 @@
 // React imports
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
 
 // Component imports
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import Video from "./video";
 import { Grid, Row, Col } from "../grid";
 import ArchiveVideo from "./archive_video";
+import { useWindowDimensions } from "../custom_hooks";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -51,38 +51,23 @@ const ArchivePage = () => {
     getArchiveInfo();
   }, []);
 
-  const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
-
-  // Gets dimensions of screen and sets state accordingly
-  const findDimensions = (layout) => {
-    const { width } = layout;
-    if (width < 600) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  };
+  // DETERMINE MOBILE VERSION OR NOT
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   return (
-    <View
-      onLayout={(event) => {
-        findDimensions(event.nativeEvent.layout);
-      }}
-    >
-      <div className="archive-page-content">
-        {/* <Modal></Modal>
-        <SearchBar></SearchBar> */}
-        {!is_mobile ? (
-          <div className="archive-grid">
-            <FlexibleGrid content_list={videos} num_cols={3} />
-          </div>
-        ) : (
-          <div className="archive-grid">
-            <FlexibleGrid content_list={videos} num_cols={1} />
-          </div>
-        )}
-      </div>
-    </View>
+    <div className="archive-page-content">
+      {/* <Modal></Modal>
+      <SearchBar></SearchBar> */}
+      {width > 600 ? (
+        <div className="archive-grid">
+          <FlexibleGrid content_list={videos} num_cols={3} />
+        </div>
+      ) : (
+        <div className="archive-grid">
+          <FlexibleGrid content_list={videos} num_cols={1} />
+        </div>
+      )}
+    </div>
   );
 };
 
