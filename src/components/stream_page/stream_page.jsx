@@ -380,6 +380,18 @@ const StreamPage = () => {
                     </Col>
                   </Row>
                   <Row>
+                    <Col size={1}>
+                      <button
+                        className="stripe-button-border mobile-payment-button"
+                        data-toggle="modal"
+                        data-target="#paymentModal"
+                      >
+                        Tip the Artist
+                      </button>{" "}
+                      <Modal isOpen={false}></Modal>
+                    </Col>
+                  </Row>
+                  <Row>
                     <Col size={1} className="chat-column">
                       <div className="chat-main-mobile">
                         <div className="chat-wrapper-mobile">
@@ -396,113 +408,6 @@ const StreamPage = () => {
                       </div>
                     </Col>
                   </Row>
-
-                  {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
-                  {/* <Row>
-                  <Col size={1}>
-                    <Row>
-                      <h2 className="artist-name">Jonathan Dely</h2>
-                    </Row>
-                    <Row>
-                      <h5 className="show-time">Sunday May 10th 8:00PM EST</h5>
-                    </Row>
-                  </Col>
-                </Row>
-                <div className="social-bar-mobile">
-                  <Row>
-                    <Col size={1} className="social-bar-center">
-                      <SocialBar />
-                    </Col>
-                  </Row>
-                </div> */}
-
-                  <div className="main-content-mobile">
-                    {/* PAYMENT SECTION */}
-                    <div className="mobile-section">
-                      <Row>
-                        <Col size={1} className="donate-box-button">
-                          <button
-                            className="stripe-button-border button-height"
-                            data-toggle="modal"
-                            data-target="#paymentModal"
-                          >
-                            Tip with Card
-                          </button>{" "}
-                          <Modal isOpen={false}></Modal>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col size={1} className="donate-box-button">
-                          <button
-                            className="stripe-button-border button-height paypal-button"
-                            onClick={donatePaypal}
-                          >
-                            Tip with Paypal
-                          </button>
-                        </Col>
-                      </Row>
-                    </div>
-                    {/* SUBSCRIBE ROW */}
-                    <div className="mobile-section">
-                      <Row>
-                        <Col size={1}>
-                          <h3 className="header-mobile">Subscribe</h3>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col size={1}>
-                          <p className="description-text-mobile">
-                            To stay informed about upcoming events,<br></br>{" "}
-                            subscribe to our mailing list:
-                          </p>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col size={1}>
-                          {(() => {
-                            if (email_submitted) {
-                              return <p>Thank you and stay tuned!</p>;
-                            } else {
-                              return (
-                                <form
-                                  className="inline-form-2"
-                                  action="/"
-                                  id="newsletter"
-                                  onSubmit={emailSubmit}
-                                >
-                                  <Row>
-                                    <Col size={4}>
-                                      <input
-                                        type="email"
-                                        placeholder="Enter email here..."
-                                        name="email"
-                                        required
-                                        value={email}
-                                        className="email-input"
-                                        onChange={(event) =>
-                                          setEmail(event.target.value)
-                                        }
-                                      />
-                                    </Col>
-                                    <Col size={1}>
-                                      <button
-                                        type="submit"
-                                        form="newsletter"
-                                        value="Submit"
-                                        className="submit-button button-border button-height"
-                                      >
-                                        Submit
-                                      </button>
-                                    </Col>
-                                  </Row>
-                                </form>
-                              );
-                            }
-                          })()}
-                        </Col>
-                      </Row>
-                    </div>
-                  </div>
                 </Col>
               </Row>
             </Grid>

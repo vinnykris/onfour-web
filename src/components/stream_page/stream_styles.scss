@@ -47,6 +47,7 @@
   max-width: 100%;
   min-width: 0;
   flex-wrap: wrap;
+  flex: 1 1 auto;
 }
 
 .chat-column {
@@ -212,6 +213,11 @@
   background-color: black;
   height: auto;
   width: 100%;
+  @include respond-to("small") {
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: column;
+  }
 }
 
 .artist-name {
@@ -442,6 +448,10 @@
   margin-top: -3%;
   padding-bottom: 3%;
   // padding-top: 3%;
+}
+
+.mobile-payment-button {
+  height: 60px;
 }
 
 .stripe-button-border {
