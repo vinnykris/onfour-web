@@ -57,7 +57,7 @@ const Login = () => {
               >
                 <Row>
                   <label className="label-text" for="email_slot">
-                    Email Address*
+                    Email Address or Username*
                   </label>
                 </Row>
                 <Row>
