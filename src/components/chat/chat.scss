@@ -103,8 +103,11 @@ button:focus {
   flex-direction: column;
   justify-content: space-between;
   background: #17171b;
+  min-height: 0;
   height: 100%;
+  max-height: 100%;
   width: 100%;
+  flex: auto;
 }
 
 // INFO BAR
@@ -227,6 +230,8 @@ button:focus {
   overflow: auto;
   flex: auto;
   max-width: 100%;
+  min-height: 0;
+  max-height: 100%;
 }
 // MESSAGE
 
