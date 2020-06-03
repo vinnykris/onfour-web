@@ -51,13 +51,13 @@ const Forgot = () => {
                 <form onSubmit={sendCode} className="forgot-form" id="forgot">
                   <Row>
                     <label className="label-text" for="email_slot">
-                      Email Address*
+                      Email Address or Username*
                     </label>
                   </Row>
                   <Row>
                     <input
                       className="forgot-input"
-                      type="email"
+                      //type="email"
                       name="email"
                       id="email_slot"
                       value={email}
@@ -89,13 +89,13 @@ const Forgot = () => {
                 >
                   <Row>
                     <label className="label-text" for="email_slot">
-                      Email Address*
+                      Email Address or Username*
                     </label>
                   </Row>
                   <Row>
                     <input
                       className="forgot-input"
-                      type="email"
+                      //type="email"
                       name="email"
                       id="email_slot"
                       value={email}
