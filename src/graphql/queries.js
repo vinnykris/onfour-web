@@ -15,6 +15,16 @@ export const query_name = `query listCreateOnfourRegistrations(
     }
   }`;
 
+export const list_users = `query listCreateOnfourRegistrations {
+    listCreateOnfourRegistrations {
+      items {
+        username
+        first
+        last
+      }
+    }
+  }`;
+
 // Query to retrieve all past shows
 export const list_past_concerts = `query listPastShows {
     listPastShows {

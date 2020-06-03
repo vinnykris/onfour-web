@@ -63,7 +63,7 @@ const Login = () => {
                 <Row>
                   <input
                     className="login-input"
-                    type="email"
+                    // type="email"
                     name="email"
                     id="email_slot"
                     value={email}

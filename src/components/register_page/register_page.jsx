@@ -7,6 +7,7 @@ import { Grid, Row, Col } from "../grid";
 
 // GraphQL
 import * as mutations from "../../graphql/mutations";
+import * as queries from "../../graphql/queries";
 
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
@@ -38,7 +39,11 @@ const Register = () => {
     // Username/Password information passed into cognito API
     const signup_payload = {
       username: username,
+      // email: email,
       password,
+      attributes: {
+        email: email,
+      },
     };
 
     // Email/First Name/Last Name/Concerts information passed into AppSync API/Registration Table
@@ -69,11 +74,11 @@ const Register = () => {
         setRepeatPassword("");
         setError("Passwords do not match");
       } else {
+        console.log(email);
         Auth.signUp(signup_payload)
           .then((data) => registerUser())
           .then((data) => setName(first))
-          .then((data) => setSuccess(true))
-
+          // .then((data) => setSuccess(true))
           .then((data) => subscribeUser())
           .then((data) => setFirst(""))
           .then((data) => setLast(""))
@@ -94,16 +99,34 @@ const Register = () => {
       setError("Password must be of at least length 8.");
     }
 
+    // Checks if user's email exists in the database already, shows error if so
+    const registerUser = (event) => {
+      API.graphql(
+        graphqlOperation(queries.query_name, {
+          filter: { email: { eq: email } },
+        })
+      ).then((data) => {
+        if (data.data.listCreateOnfourRegistrations.items.length === 0) {
+          doMutation();
+        } else {
+          setSuccess(false);
+          setError("Email already exists.");
+        }
+      });
+    };
+
     // Function that takes the user's entered information and passes it into
     // the AppSync API to be stored in our registered users database table
-    const registerUser = (event) => {
+    const doMutation = () => {
       API.graphql(
         graphqlOperation(mutations.create_registration, {
           input: register_payload,
         })
-      ).catch((err) => {
-        setError("Username taken!");
-      });
+      )
+        .then(() => setSuccess(true))
+        .catch((err) => {
+          setError("Username taken!");
+        });
     };
 
     // Function that store's the user's email in an email list database if the user
