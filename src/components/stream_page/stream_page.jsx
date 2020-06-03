@@ -111,6 +111,7 @@ const StreamPage = () => {
   // GET USER'S REGISTRATION INFORMATION
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
+  const [username, setUsername] = useState(""); // Username from login
   const [user_id, setUserID] = useState(""); // Tracks user's id of signed in user
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
   const [last, setLast] = useState(""); // Tracks last name of signed in user
@@ -131,7 +132,7 @@ const StreamPage = () => {
         filter: { email: { eq: user_email } },
       })
     ).then((data) => {
-      console.log(data);
+      setUsername(data.data.listCreateOnfourRegistrations.items[0].username);
       setFirst(data.data.listCreateOnfourRegistrations.items[0].first);
       setLast(data.data.listCreateOnfourRegistrations.items[0].last);
       setUserID(data.data.listCreateOnfourRegistrations.items[0].id);
@@ -233,9 +234,9 @@ const StreamPage = () => {
                 <Col size={3}>
                   <div className="chat-main">
                     <div className="chat-wrapper">
-                      {first ? (
+                      {username ? (
                         <Chat
-                          chat_name={first ? first + " " + last : chat_name}
+                          chat_name={username ? username : chat_name}
                           chatStatus={chatStatus}
                         />
                       ) : (
@@ -384,9 +385,9 @@ const StreamPage = () => {
                     <Col size={1}>
                       <div className="chat-main-mobile">
                         <div className="chat-wrapper-mobile">
-                          {first ? (
+                          {username ? (
                             <Chat
-                              chat_name={first ? first + " " + last : chat_name}
+                              chat_name={username ? username : chat_name}
                               chatStatus={chatStatus}
                             />
                           ) : (
