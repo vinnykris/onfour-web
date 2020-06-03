@@ -1,6 +1,5 @@
 // React Imports
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
 import { Prompt } from "react-router";
@@ -17,10 +16,12 @@ import Auth from "../../apis/UserPool";
 // Component Imports
 import VideoPlayer from "./video_player";
 import Chat from "../chat/stream_chat";
-import Join from "../chat/join_chat";
+// import Join from "../chat/join_chat";
+import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
 // import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
+import { useWindowDimensions } from "../custom_hooks";
 
 // Styles Imports
 import "./stream_styles.scss";
@@ -33,20 +34,7 @@ Amplify.configure(awsmobile);
 // Main stream page component. Holds stream video, chat, and payment functionality
 const StreamPage = () => {
   // DETERMINE MOBILE VERSION OR NOT
-  const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
-  // Gets dimensions of screen and sends warnings to console
-  const findDimensions = (layout) => {
-    const { x, y, width, height } = layout;
-    if (width < 600) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-    console.warn(x);
-    console.warn(y);
-    console.warn(width);
-    console.warn(height);
-  };
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
@@ -54,7 +42,7 @@ const StreamPage = () => {
   // Function passed as prop to join chat
   const joinSubmit = (name, mode) => {
     setChatName(name);
-    setShowChat(mode);
+    // setShowChat(mode);
   };
   // Function passed as prop to chat
   const chatStatus = (mode) => {
@@ -160,11 +148,7 @@ const StreamPage = () => {
 
   // RENDERING SECTION
   return (
-    <View
-      onLayout={(event) => {
-        findDimensions(event.nativeEvent.layout);
-      }}
-    >
+    <div className="stream-page-content">
       {show_start_time ? (
         <div className="stream-page-content">
           {/* {show_alert ? (
@@ -208,7 +192,7 @@ const StreamPage = () => {
             </div>
           </div>
         ) : null} */}
-          {!is_mobile ? (
+          {width > 600 ? (
             <Grid>
               <Row>
                 <Col size={0.5}></Col>
@@ -249,13 +233,14 @@ const StreamPage = () => {
                 <Col size={3}>
                   <div className="chat-main">
                     <div className="chat-wrapper">
-                      {show_chat || first ? (
+                      {first ? (
                         <Chat
                           chat_name={first ? first + " " + last : chat_name}
                           chatStatus={chatStatus}
                         />
                       ) : (
-                        <Join joinSubmit={joinSubmit} />
+                        // <Join joinSubmit={joinSubmit} />
+                        <WaitingChat />
                       )}
                     </div>
                   </div>
@@ -281,7 +266,7 @@ const StreamPage = () => {
                     Click here to tip with Paypal.{" "}
                   </p>
                   <p className="donate-subdescription">
-                    Your donation will go to onfour donations.
+                    onfour will ensure your tip is sent to the artist.
                   </p>
                 </Col>
                 <Col size={1} className="donate-venmo donate-box">
@@ -289,7 +274,8 @@ const StreamPage = () => {
                     Scan the QR code below to tip on Venmo.
                   </p>
                   <p className="donate-subdescription">
-                    Your donation will be sent to @SpencerAmer from onfour.
+                    @SpencerAmer from onfour will ensure your tip is sent to the
+                    artist.
                   </p>
                 </Col>
               </Row>
@@ -375,21 +361,43 @@ const StreamPage = () => {
             <Grid className="mobile-grid-stream">
               <Row>
                 <Col size={1}>
-                  <div className="stream-main-mobile">
-                    <div className="stream-wrapper-mobile">
-                      <VideoPlayer
-                        url={
-                          "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                        }
-                        start_time={show_start_time}
-                        artist_name={artist_name}
-                        concert_name={concert_name}
-                        auth={auth}
-                        user_id={user_id}
-                        concert_id={concert_id}
-                      />
-                    </div>
-                  </div>
+                  <Row>
+                    <Col size={1}>
+                      <div className="stream-main-mobile">
+                        <div className="stream-wrapper-mobile">
+                          <VideoPlayer
+                            url={
+                              "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                            }
+                            start_time={show_start_time}
+                            artist_name={artist_name}
+                            concert_name={concert_name}
+                            auth={auth}
+                            user_id={user_id}
+                            concert_id={concert_id}
+                          />
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col size={1}>
+                      <div className="chat-main-mobile">
+                        <div className="chat-wrapper-mobile">
+                          {first ? (
+                            <Chat
+                              chat_name={first ? first + " " + last : chat_name}
+                              chatStatus={chatStatus}
+                            />
+                          ) : (
+                            // <Join joinSubmit={joinSubmit} />
+                            <WaitingChat />
+                          )}
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+
                   {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
                   {/* <Row>
                   <Col size={1}>
@@ -513,7 +521,7 @@ const StreamPage = () => {
         </div>
         // </div>
       )}
-    </View>
+    </div>
   );
 };
 

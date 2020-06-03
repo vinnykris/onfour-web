@@ -31,6 +31,7 @@ const LoginMobile = ({ toggleRegister, closeMenu }) => {
       .then((data) => setError(""))
       .then(() => window.location.reload())
       .then((data) => closeMenu())
+      .then((data) => window.location.reload())
       .catch((err) => showError(err));
   };
 
