@@ -147,7 +147,7 @@ const StreamPage = () => {
 
   // RENDERING SECTION
   return (
-    <div className="stream-page-content">
+    <div className="stream-container">
       {show_start_time ? (
         <div className="stream-page-content">
           {/* {show_alert ? (
@@ -357,155 +357,47 @@ const StreamPage = () => {
               </Row>
             </Grid>
           ) : (
-            <Grid className="mobile-grid-stream">
-              <Row>
-                <Col size={1}>
-                  <Row>
-                    <Col size={1}>
-                      <div className="stream-main-mobile">
-                        <div className="stream-wrapper-mobile">
-                          <VideoPlayer
-                            url={
-                              "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                            }
-                            start_time={show_start_time}
-                            artist_name={artist_name}
-                            concert_name={concert_name}
-                            auth={auth}
-                            user_id={user_id}
-                            concert_id={concert_id}
-                          />
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col size={1}>
-                      <div className="chat-main-mobile">
-                        <div className="chat-wrapper-mobile">
-                          {first ? (
-                            <Chat
-                              chat_name={first ? first + " " + last : chat_name}
-                              chatStatus={chatStatus}
-                            />
-                          ) : (
-                            // <Join joinSubmit={joinSubmit} />
-                            <WaitingChat />
-                          )}
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
-
-                  {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
-                  {/* <Row>
-                  <Col size={1}>
-                    <Row>
-                      <h2 className="artist-name">Jonathan Dely</h2>
-                    </Row>
-                    <Row>
-                      <h5 className="show-time">Sunday May 10th 8:00PM EST</h5>
-                    </Row>
-                  </Col>
-                </Row>
-                <div className="social-bar-mobile">
-                  <Row>
-                    <Col size={1} className="social-bar-center">
-                      <SocialBar />
-                    </Col>
-                  </Row>
-                </div> */}
-
-                  <div className="main-content-mobile">
-                    {/* PAYMENT SECTION */}
-                    <div className="mobile-section">
-                      <Row>
-                        <Col size={1} className="donate-box-button">
-                          <button
-                            className="stripe-button-border button-height"
-                            data-toggle="modal"
-                            data-target="#paymentModal"
-                          >
-                            Tip with Card
-                          </button>{" "}
-                          <Modal isOpen={false}></Modal>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col size={1} className="donate-box-button">
-                          <button
-                            className="stripe-button-border button-height paypal-button"
-                            onClick={donatePaypal}
-                          >
-                            Tip with Paypal
-                          </button>
-                        </Col>
-                      </Row>
-                    </div>
-                    {/* SUBSCRIBE ROW */}
-                    <div className="mobile-section">
-                      <Row>
-                        <Col size={1}>
-                          <h3 className="header-mobile">Subscribe</h3>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col size={1}>
-                          <p className="description-text-mobile">
-                            To stay informed about upcoming events,<br></br>{" "}
-                            subscribe to our mailing list:
-                          </p>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col size={1}>
-                          {(() => {
-                            if (email_submitted) {
-                              return <p>Thank you and stay tuned!</p>;
-                            } else {
-                              return (
-                                <form
-                                  className="inline-form-2"
-                                  action="/"
-                                  id="newsletter"
-                                  onSubmit={emailSubmit}
-                                >
-                                  <Row>
-                                    <Col size={4}>
-                                      <input
-                                        type="email"
-                                        placeholder="Enter email here..."
-                                        name="email"
-                                        required
-                                        value={email}
-                                        className="email-input"
-                                        onChange={(event) =>
-                                          setEmail(event.target.value)
-                                        }
-                                      />
-                                    </Col>
-                                    <Col size={1}>
-                                      <button
-                                        type="submit"
-                                        form="newsletter"
-                                        value="Submit"
-                                        className="submit-button button-border button-height"
-                                      >
-                                        Submit
-                                      </button>
-                                    </Col>
-                                  </Row>
-                                </form>
-                              );
-                            }
-                          })()}
-                        </Col>
-                      </Row>
-                    </div>
+            <div className="mobile-grid-stream">
+              <div className="main-column">
+                <div className="mobile-row stream-main-mobile">
+                  <div className="stream-wrapper-mobile">
+                    <VideoPlayer
+                      url={
+                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                      }
+                      start_time={show_start_time}
+                      artist_name={artist_name}
+                      concert_name={concert_name}
+                      auth={auth}
+                      user_id={user_id}
+                      concert_id={concert_id}
+                    />
                   </div>
-                </Col>
-              </Row>
-            </Grid>
+                </div>
+                <div className="mobile-row payment-row-mobile">
+                  <button
+                    className="stripe-button-border mobile-payment-button"
+                    data-toggle="modal"
+                    data-target="#paymentModal"
+                  >
+                    Tip the Artist
+                  </button>{" "}
+                  <Modal isOpen={false}></Modal>
+                </div>
+                <div className="chat-main-mobile">
+                  <div className="chat-wrapper-mobile">
+                    {first ? (
+                      <Chat
+                        chat_name={first ? first + " " + last : chat_name}
+                        chatStatus={chatStatus}
+                      />
+                    ) : (
+                      <WaitingChat />
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       ) : (
