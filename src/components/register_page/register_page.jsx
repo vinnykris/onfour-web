@@ -21,7 +21,7 @@ import "./register_styles.scss";
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 const Register = () => {
-  const [username, setUsername] = useState(""); // Tracks user's email
+  const [username, setUsername] = useState(""); // Tracks user's username
   const [email, setEmail] = useState(""); // Tracks user's email
   const [password, setPassword] = useState(""); // Tracks user's password
   const [repeat_password, setRepeatPassword] = useState(""); // Tracks user's repeated password
