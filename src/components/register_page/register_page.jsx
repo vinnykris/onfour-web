@@ -7,6 +7,7 @@ import { Grid, Row, Col } from "../grid";
 
 // GraphQL
 import * as mutations from "../../graphql/mutations";
+import * as queries from "../../graphql/queries";
 
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
@@ -20,6 +21,7 @@ import "./register_styles.scss";
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 const Register = () => {
+  const [username, setUsername] = useState(""); // Tracks user's email
   const [email, setEmail] = useState(""); // Tracks user's email
   const [password, setPassword] = useState(""); // Tracks user's password
   const [repeat_password, setRepeatPassword] = useState(""); // Tracks user's repeated password
@@ -36,12 +38,17 @@ const Register = () => {
 
     // Username/Password information passed into cognito API
     const signup_payload = {
-      username: email,
+      username: username,
+      // email: email,
       password,
+      attributes: {
+        email: email,
+      },
     };
 
     // Email/First Name/Last Name/Concerts information passed into AppSync API/Registration Table
     const register_payload = {
+      username: username,
       email: email,
       first: first,
       last: last,
@@ -67,16 +74,9 @@ const Register = () => {
         setRepeatPassword("");
         setError("Passwords do not match");
       } else {
+        console.log(email);
         Auth.signUp(signup_payload)
-          .then((data) => setName(first))
-          .then((data) => setSuccess(true))
           .then((data) => registerUser())
-          .then((data) => subscribeUser())
-          .then((data) => setFirst(""))
-          .then((data) => setLast(""))
-          .then((data) => setEmail(""))
-          .then((data) => setPassword(""))
-          .then((data) => setError(""))
           .catch(
             (err) => setError(err.message),
             (err) => setPassword("")
@@ -90,14 +90,55 @@ const Register = () => {
       setError("Password must be of at least length 8.");
     }
 
+    // Checks if user's email exists in the database already, shows error if so
+    const registerUser = (event) => {
+      console.log("registering user");
+      API.graphql(
+        graphqlOperation(queries.query_name, {
+          filter: { email: { eq: email } },
+        })
+      ).then((data) => {
+        if (data.data.listCreateOnfourRegistrations.items.length === 0) {
+          doMutation();
+        } else {
+          setError("Email already exists.");
+          cleanupForm();
+        }
+      });
+    };
+
     // Function that takes the user's entered information and passes it into
     // the AppSync API to be stored in our registered users database table
-    const registerUser = (event) => {
+    const doMutation = () => {
+      console.log("doing mutation");
       API.graphql(
         graphqlOperation(mutations.create_registration, {
           input: register_payload,
         })
-      );
+      )
+        .then(() => successfulSignUp())
+        .catch((err) => {
+          setError("Username taken!");
+        });
+    };
+
+    // Function that is called when the mutation is run successfully
+    const successfulSignUp = () => {
+      subscribeUser();
+      cleanupForm();
+      setSuccess(true);
+      setError("");
+    };
+
+    // Function that cleans up all of the fields in the form
+    const cleanupForm = () => {
+      setName(first);
+      setFirst("");
+      setLast("");
+      setEmail("");
+      setUsername("");
+      setPassword("");
+      setRepeatPassword("");
     };
 
     // Function that store's the user's email in an email list database if the user
@@ -172,6 +213,23 @@ const Register = () => {
                           required
                         />
                       </Col>
+                    </Row>
+                    <br></br>
+                    <Row>
+                      <label className="label-text" for="email_slot">
+                        Username*
+                      </label>
+                    </Row>
+                    <Row>
+                      <input
+                        className="register-input"
+                        type="username"
+                        name="username"
+                        value={username}
+                        id="username_slot"
+                        onChange={(event) => setUsername(event.target.value)}
+                        required
+                      />
                     </Row>
                     <br></br>
                     <Row>
