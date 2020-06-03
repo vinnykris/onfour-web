@@ -55,6 +55,11 @@ $breakpoints: (
   }
 }
 
+.custom-app {
+  display: flex;
+  flex-direction: column;
+}
+
 .short-term-spacer {
   height: 100px;
   @include respond-to("small") {
