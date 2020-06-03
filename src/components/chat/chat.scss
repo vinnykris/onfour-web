@@ -103,8 +103,11 @@ button:focus {
   flex-direction: column;
   justify-content: space-between;
   background: #17171b;
+  min-height: 0;
   height: 100%;
+  max-height: 100%;
   width: 100%;
+  flex: auto;
 }
 
 // INFO BAR
@@ -118,7 +121,6 @@ button:focus {
   border-radius: 4px 4px 0 0;
   height: 40px;
   width: 100%;
-  padding-left: 35%;
 }
 
 .onfour-title {
@@ -129,12 +131,25 @@ button:focus {
   font-weight: $medium-weight;
 }
 
-.left-inner-container {
-  flex: 0.5;
+.info-container {
   display: flex;
   align-items: center;
-  margin-left: 5%;
+  height: 100%;
+  flex-flow: row;
   color: white;
+  margin: auto;
+}
+
+.chat-header-text {
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  p {
+    padding: 0px 5px;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
 }
 
 .right-inner-container {
@@ -153,6 +168,9 @@ button:focus {
 .form {
   display: flex;
   border-radius: 10px;
+  @include respond-to("small") {
+    min-height: 50px;
+  }
 }
 
 .input {
@@ -223,6 +241,9 @@ button:focus {
   padding: 0% 0;
   overflow: auto;
   flex: auto;
+  max-width: 100%;
+  min-height: 0;
+  max-height: 100%;
 }
 // MESSAGE
 
@@ -249,7 +270,7 @@ button:focus {
   color: white;
   display: inline-block;
   max-width: 80%;
-  text-align: left;
+  text-align: center;
   @include respond-to("small") {
     max-width: 60%;
     border-radius: 12px;

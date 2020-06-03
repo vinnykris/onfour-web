@@ -44,7 +44,8 @@
     padding: 0;
   }
   @include respond-to("small") {
-    height: 131px;
+    flex: 0 1 131px;
+    // height: 131px;
     padding: 0;
     background-color: black;
   }
@@ -61,7 +62,8 @@
     padding: 0;
   }
   @include respond-to("small") {
-    height: 131px;
+    flex: 0 1 131px;
+    // height: 131px;
     padding: 0;
     background-color: black;
   }

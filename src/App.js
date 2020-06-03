@@ -32,7 +32,7 @@ require("dotenv").config();
 // Main App component
 function App() {
   return (
-    <div className="App">
+    <div className="App custom-app">
       <Router history={history}>
         <NavBar />
 
