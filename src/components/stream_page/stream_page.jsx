@@ -360,7 +360,6 @@ const StreamPage = () => {
             <div className="mobile-grid-stream">
               <div className="main-column">
                 <div className="mobile-row stream-main-mobile">
-                  {/* <div className="stream-main-mobile"> */}
                   <div className="stream-wrapper-mobile">
                     <VideoPlayer
                       url={
@@ -374,7 +373,6 @@ const StreamPage = () => {
                       concert_id={concert_id}
                     />
                   </div>
-                  {/* </div> */}
                 </div>
                 <div className="mobile-row payment-row-mobile">
                   <button
@@ -386,8 +384,6 @@ const StreamPage = () => {
                   </button>{" "}
                   <Modal isOpen={false}></Modal>
                 </div>
-                {/* <div className="mobile-row chat-row-mobile">
-                  <div className="chat-column"> */}
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
                     {first ? (
@@ -396,69 +392,12 @@ const StreamPage = () => {
                         chatStatus={chatStatus}
                       />
                     ) : (
-                      // <Join joinSubmit={joinSubmit} />
                       <WaitingChat />
                     )}
                   </div>
                 </div>
-                {/* </div>
-                </div> */}
               </div>
             </div>
-            // <Grid className="mobile-grid-stream">
-            //   <Row>
-            //     <Col size={1} className="main-column">
-            //       <Row>
-            //         <Col size={1}>
-            //           <div className="stream-main-mobile">
-            //             <div className="stream-wrapper-mobile">
-            //               <VideoPlayer
-            //                 url={
-            //                   "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-            //                 }
-            //                 start_time={show_start_time}
-            //                 artist_name={artist_name}
-            //                 concert_name={concert_name}
-            //                 auth={auth}
-            //                 user_id={user_id}
-            //                 concert_id={concert_id}
-            //               />
-            //             </div>
-            //           </div>
-            //         </Col>
-            //       </Row>
-            //       <Row>
-            //         <Col size={1}>
-            //           <button
-            //             className="stripe-button-border mobile-payment-button"
-            //             data-toggle="modal"
-            //             data-target="#paymentModal"
-            //           >
-            //             Tip the Artist
-            //           </button>{" "}
-            //           <Modal isOpen={false}></Modal>
-            //         </Col>
-            //       </Row>
-            //       <Row>
-            //         <Col size={1} className="chat-column">
-            //           <div className="chat-main-mobile">
-            //             <div className="chat-wrapper-mobile">
-            //               {first ? (
-            //                 <Chat
-            //                   chat_name={first ? first + " " + last : chat_name}
-            //                   chatStatus={chatStatus}
-            //                 />
-            //               ) : (
-            //                 // <Join joinSubmit={joinSubmit} />
-            //                 <WaitingChat />
-            //               )}
-            //             </div>
-            //           </div>
-            //         </Col>
-            //       </Row>
-            //     </Col>
-            //   </Row>
-            // </Grid>
           )}
         </div>
       ) : (

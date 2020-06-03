@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 
 // Components
 import { Grid, Row, Col } from "../grid";
+import { useWindowDimensions } from "../custom_hooks";
 
 // Styles
 import "./footer_styles.scss";
@@ -16,15 +17,17 @@ import white_logo from "../../images/logos/logo_blackbackground.png";
 const Footer = () => {
   const [show_footer, setShowFooter] = useState(true); // Decide to show/hide the footer
   let location = useLocation(); // Get location of user navigation
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
+  // When either screen width or location are updated, effect hook is run
+  // Hides footer if stream page and on mobile
   useEffect(() => {
-    if (location.pathname === "/stream") {
-      console.log();
+    if (location.pathname === "/stream" && width <= 600) {
       setShowFooter(false);
     } else {
       setShowFooter(true);
     }
-  }, [location]);
+  }, [location, width]);
 
   return (
     <div>

@@ -121,7 +121,6 @@ button:focus {
   border-radius: 4px 4px 0 0;
   height: 40px;
   width: 100%;
-  padding-left: 35%;
 }
 
 .onfour-title {
@@ -132,12 +131,25 @@ button:focus {
   font-weight: $medium-weight;
 }
 
-.left-inner-container {
-  flex: 0.5;
+.info-container {
   display: flex;
   align-items: center;
-  margin-left: 5%;
+  height: 100%;
+  flex-flow: row;
   color: white;
+  margin: auto;
+}
+
+.chat-header-text {
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  p {
+    padding: 0px 5px;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
 }
 
 .right-inner-container {
