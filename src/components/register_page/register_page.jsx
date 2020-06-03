@@ -77,15 +77,6 @@ const Register = () => {
         console.log(email);
         Auth.signUp(signup_payload)
           .then((data) => registerUser())
-          .then((data) => setName(first))
-          // .then((data) => setSuccess(true))
-          .then((data) => subscribeUser())
-          .then((data) => setFirst(""))
-          .then((data) => setLast(""))
-          .then((data) => setEmail(""))
-          .then((data) => setUsername(""))
-          .then((data) => setPassword(""))
-          .then((data) => setError(""))
           .catch(
             (err) => setError(err.message),
             (err) => setPassword("")
@@ -101,6 +92,7 @@ const Register = () => {
 
     // Checks if user's email exists in the database already, shows error if so
     const registerUser = (event) => {
+      console.log("registering user");
       API.graphql(
         graphqlOperation(queries.query_name, {
           filter: { email: { eq: email } },
@@ -109,8 +101,8 @@ const Register = () => {
         if (data.data.listCreateOnfourRegistrations.items.length === 0) {
           doMutation();
         } else {
-          setSuccess(false);
           setError("Email already exists.");
+          cleanupForm();
         }
       });
     };
@@ -118,15 +110,35 @@ const Register = () => {
     // Function that takes the user's entered information and passes it into
     // the AppSync API to be stored in our registered users database table
     const doMutation = () => {
+      console.log("doing mutation");
       API.graphql(
         graphqlOperation(mutations.create_registration, {
           input: register_payload,
         })
       )
-        .then(() => setSuccess(true))
+        .then(() => successfulSignUp())
         .catch((err) => {
           setError("Username taken!");
         });
+    };
+
+    // Function that is called when the mutation is run successfully
+    const successfulSignUp = () => {
+      subscribeUser();
+      cleanupForm();
+      setSuccess(true);
+      setError("");
+    };
+
+    // Function that cleans up all of the fields in the form
+    const cleanupForm = () => {
+      setName(first);
+      setFirst("");
+      setLast("");
+      setEmail("");
+      setUsername("");
+      setPassword("");
+      setRepeatPassword("");
     };
 
     // Function that store's the user's email in an email list database if the user
