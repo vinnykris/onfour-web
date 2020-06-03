@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
-import { Prompt } from 'react-router';
+import { Prompt } from "react-router";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -32,7 +32,6 @@ Amplify.configure(awsmobile);
 
 // Main stream page component. Holds stream video, chat, and payment functionality
 const StreamPage = () => {
-
   // DETERMINE MOBILE VERSION OR NOT
   const [is_mobile, setIsMobile] = useState(false); // If mobile should be rendered
   // Gets dimensions of screen and sends warnings to console
@@ -106,7 +105,7 @@ const StreamPage = () => {
   useEffect(() => {
     getStartTime();
   }, []);
- // Query upcoming show database 
+  // Query upcoming show database
   const getStartTime = async () => {
     // Calling the API, using async and await is necessary
     const info = await API.graphql(
@@ -143,11 +142,11 @@ const StreamPage = () => {
       graphqlOperation(queries.query_name, {
         filter: { email: { eq: user_email } },
       })
-    )
-    .then((data) => {
-      setFirst(data.data.listOnfour_registrations.items[0].first);
-      setLast(data.data.listOnfour_registrations.items[0].last);
-      setUserID(data.data.listOnfour_registrations.items[0].id);
+    ).then((data) => {
+      console.log(data);
+      setFirst(data.data.listCreateOnfourRegistrations.items[0].first);
+      setLast(data.data.listCreateOnfourRegistrations.items[0].last);
+      setUserID(data.data.listCreateOnfourRegistrations.items[0].id);
       setShowChat(true);
     });
   }
@@ -167,8 +166,8 @@ const StreamPage = () => {
       }}
     >
       {show_start_time ? (
-      <div className="stream-page-content">
-        {/* {show_alert ? (
+        <div className="stream-page-content">
+          {/* {show_alert ? (
           <div>
             <div className="popup-desktop">
               <form className="waiting-msg-box">
@@ -209,28 +208,28 @@ const StreamPage = () => {
             </div>
           </div>
         ) : null} */}
-        {!is_mobile ? (
-          <Grid>
-            <Row>
-              <Col size={0.5}></Col>
-              <Col size={7}>
-                <div className="stream-main">
-                  <div className="stream-wrapper">
-                    <VideoPlayer
-                      url={
-                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                      }
-                      start_time={show_start_time}
-                      artist_name={artist_name}
-                      concert_name={concert_name}
-                      auth={auth}
-                      user_id={user_id}
-                      concert_id={concert_id}
-                    />
+          {!is_mobile ? (
+            <Grid>
+              <Row>
+                <Col size={0.5}></Col>
+                <Col size={7}>
+                  <div className="stream-main">
+                    <div className="stream-wrapper">
+                      <VideoPlayer
+                        url={
+                          "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                        }
+                        start_time={show_start_time}
+                        artist_name={artist_name}
+                        concert_name={concert_name}
+                        auth={auth}
+                        user_id={user_id}
+                        concert_id={concert_id}
+                      />
+                    </div>
                   </div>
-                </div>
-                {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
-                {/* <Row>
+                  {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
+                  {/* <Row>
                   <Col size={2}>
                     <Row>
                       <h2 className="artist-name">Jonathan Dely</h2>
@@ -246,150 +245,153 @@ const StreamPage = () => {
                     <SocialBar />
                   </Col>
                 </Row> */}
-              </Col>
-              <Col size={3}>
-                <div className="chat-main">
-                  <div className="chat-wrapper">
-                    {(show_chat || first) ? (
-                      <Chat chat_name={first? (first + " " + last) : (chat_name)} chatStatus={chatStatus} />
-                    ) : (
-                      <Join joinSubmit={joinSubmit} />
-                    )}
-                  </div>
-                </div>
-              </Col>
-              <Col size={1}></Col>
-            </Row>
-            <Row>
-              <div className="short-term-spacer"></div>
-            </Row>
-
-            {/* DONATE ROW */}
-            <Row className="donate-row">
-              <Col size={1} className="donate-stripe donate-box">
-                <p className="donate-description">
-                  Click here to tip with a credit card.
-                </p>
-                <p className="donate-subdescription">
-                  Your card information will not be stored anywhere.
-                </p>
-              </Col>
-              <Col size={1} className="donate-paypal donate-box">
-                <p className="donate-description">
-                  Click here to tip with Paypal.{" "}
-                </p>
-                <p className="donate-subdescription">
-                  Your donation will go to onfour donations.
-                </p>
-              </Col>
-              <Col size={1} className="donate-venmo donate-box">
-                <p className="donate-description">
-                  Scan the QR code below to tip on Venmo.
-                </p>
-                <p className="donate-subdescription">
-                  Your donation will be sent to @SpencerAmer from onfour.
-                </p>
-              </Col>
-            </Row>
-
-            {/* DONATE ROW */}
-            <Row className="donate-row-buttons">
-              <Col size={1} className="donate-stripe donate-box-button">
-                <button
-                  className="stripe-button-border button-height"
-                  data-toggle="modal"
-                  data-target="#paymentModal"
-                >
-                  Tip with Card
-                </button>{" "}
-                <Modal></Modal>
-              </Col>
-              <Col size={1} className="donate-paypal donate-box-button">
-                <button
-                  className="stripe-button-border button-height paypal-button"
-                  onClick={donatePaypal}
-                >
-                  Tip with Paypal
-                </button>
-              </Col>
-              <Col size={1} className="donate-venmo donate-box-button">
-                <img
-                  className="venmo-code"
-                  src={VenmoCode}
-                  alt="venmo-qr"
-                ></img>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col size={1} className="stream-subscribe-box">
-                <p className="stream-subscribe-title">Subscribe</p>
-                <p className="stream-subscribe-description">
-                  To stay informed about upcoming events, subscribe to our
-                  mailing list:
-                </p>
-                {(() => {
-                  if (email_submitted) {
-                    return (
-                      <p className="subscribe-success">
-                        Thank you and stay tuned!
-                      </p>
-                    );
-                  } else {
-                    return (
-                      <form
-                        class="stream-email-form"
-                        action="/"
-                        id="newsletter"
-                        onSubmit={emailSubmit}
-                      >
-                        <input
-                          type="email"
-                          placeholder="Enter your email here..."
-                          name="email"
-                          required
-                          value={email}
-                          style={{ width: "280px" }}
-                          onChange={(event) => setEmail(event.target.value)}
+                </Col>
+                <Col size={3}>
+                  <div className="chat-main">
+                    <div className="chat-wrapper">
+                      {show_chat || first ? (
+                        <Chat
+                          chat_name={first ? first + " " + last : chat_name}
+                          chatStatus={chatStatus}
                         />
-                        <button
-                          type="submit"
-                          form="newsletter"
-                          value="Submit"
-                          style={{ width: "100px" }}
-                          className="button-border button-height"
-                        >
-                          {" "}
-                          Submit
-                        </button>
-                      </form>
-                    );
-                  }
-                })()}
-              </Col>
-            </Row>
-          </Grid>
-        ) : (
-          <Grid className="mobile-grid-stream">
-            <Row>
-              <Col size={1}>
-                <div className="stream-main-mobile">
-                  <div className="stream-wrapper-mobile">
-                    <VideoPlayer
-                      url={
-                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                      }
-                      start_time={show_start_time}
-                      artist_name={artist_name}
-                      concert_name={concert_name}
-                      auth={auth}
-                      user_id={user_id}
-                      concert_id={concert_id}
-                    />
+                      ) : (
+                        <Join joinSubmit={joinSubmit} />
+                      )}
+                    </div>
                   </div>
-                </div>
-                {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
-                {/* <Row>
+                </Col>
+                <Col size={1}></Col>
+              </Row>
+              <Row>
+                <div className="short-term-spacer"></div>
+              </Row>
+
+              {/* DONATE ROW */}
+              <Row className="donate-row">
+                <Col size={1} className="donate-stripe donate-box">
+                  <p className="donate-description">
+                    Click here to tip with a credit card.
+                  </p>
+                  <p className="donate-subdescription">
+                    Your card information will not be stored anywhere.
+                  </p>
+                </Col>
+                <Col size={1} className="donate-paypal donate-box">
+                  <p className="donate-description">
+                    Click here to tip with Paypal.{" "}
+                  </p>
+                  <p className="donate-subdescription">
+                    Your donation will go to onfour donations.
+                  </p>
+                </Col>
+                <Col size={1} className="donate-venmo donate-box">
+                  <p className="donate-description">
+                    Scan the QR code below to tip on Venmo.
+                  </p>
+                  <p className="donate-subdescription">
+                    Your donation will be sent to @SpencerAmer from onfour.
+                  </p>
+                </Col>
+              </Row>
+
+              {/* DONATE ROW */}
+              <Row className="donate-row-buttons">
+                <Col size={1} className="donate-stripe donate-box-button">
+                  <button
+                    className="stripe-button-border button-height"
+                    data-toggle="modal"
+                    data-target="#paymentModal"
+                  >
+                    Tip with Card
+                  </button>{" "}
+                  <Modal></Modal>
+                </Col>
+                <Col size={1} className="donate-paypal donate-box-button">
+                  <button
+                    className="stripe-button-border button-height paypal-button"
+                    onClick={donatePaypal}
+                  >
+                    Tip with Paypal
+                  </button>
+                </Col>
+                <Col size={1} className="donate-venmo donate-box-button">
+                  <img
+                    className="venmo-code"
+                    src={VenmoCode}
+                    alt="venmo-qr"
+                  ></img>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col size={1} className="stream-subscribe-box">
+                  <p className="stream-subscribe-title">Subscribe</p>
+                  <p className="stream-subscribe-description">
+                    To stay informed about upcoming events, subscribe to our
+                    mailing list:
+                  </p>
+                  {(() => {
+                    if (email_submitted) {
+                      return (
+                        <p className="subscribe-success">
+                          Thank you and stay tuned!
+                        </p>
+                      );
+                    } else {
+                      return (
+                        <form
+                          class="stream-email-form"
+                          action="/"
+                          id="newsletter"
+                          onSubmit={emailSubmit}
+                        >
+                          <input
+                            type="email"
+                            placeholder="Enter your email here..."
+                            name="email"
+                            required
+                            value={email}
+                            style={{ width: "280px" }}
+                            onChange={(event) => setEmail(event.target.value)}
+                          />
+                          <button
+                            type="submit"
+                            form="newsletter"
+                            value="Submit"
+                            style={{ width: "100px" }}
+                            className="button-border button-height"
+                          >
+                            {" "}
+                            Submit
+                          </button>
+                        </form>
+                      );
+                    }
+                  })()}
+                </Col>
+              </Row>
+            </Grid>
+          ) : (
+            <Grid className="mobile-grid-stream">
+              <Row>
+                <Col size={1}>
+                  <div className="stream-main-mobile">
+                    <div className="stream-wrapper-mobile">
+                      <VideoPlayer
+                        url={
+                          "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                        }
+                        start_time={show_start_time}
+                        artist_name={artist_name}
+                        concert_name={concert_name}
+                        auth={auth}
+                        user_id={user_id}
+                        concert_id={concert_id}
+                      />
+                    </div>
+                  </div>
+                  {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
+                  {/* <Row>
                   <Col size={1}>
                     <Row>
                       <h2 className="artist-name">Jonathan Dely</h2>
@@ -407,109 +409,109 @@ const StreamPage = () => {
                   </Row>
                 </div> */}
 
-                <div className="main-content-mobile">
-                  {/* PAYMENT SECTION */}
-                  <div className="mobile-section">
-                    <Row>
-                      <Col size={1} className="donate-box-button">
-                        <button
-                          className="stripe-button-border button-height"
-                          data-toggle="modal"
-                          data-target="#paymentModal"
-                        >
-                          Tip with Card
-                        </button>{" "}
-                        <Modal isOpen={false}></Modal>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col size={1} className="donate-box-button">
-                        <button
-                              className="stripe-button-border button-height paypal-button"
-                          onClick={donatePaypal}
-                        >
-                          Tip with Paypal
-                        </button>
-                      </Col>
-                    </Row>
+                  <div className="main-content-mobile">
+                    {/* PAYMENT SECTION */}
+                    <div className="mobile-section">
+                      <Row>
+                        <Col size={1} className="donate-box-button">
+                          <button
+                            className="stripe-button-border button-height"
+                            data-toggle="modal"
+                            data-target="#paymentModal"
+                          >
+                            Tip with Card
+                          </button>{" "}
+                          <Modal isOpen={false}></Modal>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col size={1} className="donate-box-button">
+                          <button
+                            className="stripe-button-border button-height paypal-button"
+                            onClick={donatePaypal}
+                          >
+                            Tip with Paypal
+                          </button>
+                        </Col>
+                      </Row>
+                    </div>
+                    {/* SUBSCRIBE ROW */}
+                    <div className="mobile-section">
+                      <Row>
+                        <Col size={1}>
+                          <h3 className="header-mobile">Subscribe</h3>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col size={1}>
+                          <p className="description-text-mobile">
+                            To stay informed about upcoming events,<br></br>{" "}
+                            subscribe to our mailing list:
+                          </p>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col size={1}>
+                          {(() => {
+                            if (email_submitted) {
+                              return <p>Thank you and stay tuned!</p>;
+                            } else {
+                              return (
+                                <form
+                                  className="inline-form-2"
+                                  action="/"
+                                  id="newsletter"
+                                  onSubmit={emailSubmit}
+                                >
+                                  <Row>
+                                    <Col size={4}>
+                                      <input
+                                        type="email"
+                                        placeholder="Enter email here..."
+                                        name="email"
+                                        required
+                                        value={email}
+                                        className="email-input"
+                                        onChange={(event) =>
+                                          setEmail(event.target.value)
+                                        }
+                                      />
+                                    </Col>
+                                    <Col size={1}>
+                                      <button
+                                        type="submit"
+                                        form="newsletter"
+                                        value="Submit"
+                                        className="submit-button button-border button-height"
+                                      >
+                                        Submit
+                                      </button>
+                                    </Col>
+                                  </Row>
+                                </form>
+                              );
+                            }
+                          })()}
+                        </Col>
+                      </Row>
+                    </div>
                   </div>
-                  {/* SUBSCRIBE ROW */}
-                  <div className="mobile-section">
-                    <Row>
-                      <Col size={1}>
-                        <h3 className="header-mobile">Subscribe</h3>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col size={1}>
-                        <p className="description-text-mobile">
-                          To stay informed about upcoming events,<br></br>{" "}
-                          subscribe to our mailing list:
-                        </p>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col size={1}>
-                        {(() => {
-                          if (email_submitted) {
-                            return <p>Thank you and stay tuned!</p>;
-                          } else {
-                            return (
-                              <form
-                                className="inline-form-2"
-                                action="/"
-                                id="newsletter"
-                                onSubmit={emailSubmit}
-                              >
-                                <Row>
-                                  <Col size={4}>
-                                    <input
-                                      type="email"
-                                      placeholder="Enter email here..."
-                                      name="email"
-                                      required
-                                      value={email}
-                                      className="email-input"
-                                      onChange={(event) =>
-                                        setEmail(event.target.value)
-                                      }
-                                    />
-                                  </Col>
-                                  <Col size={1}>
-                                    <button
-                                      type="submit"
-                                      form="newsletter"
-                                      value="Submit"
-                                      className="submit-button button-border button-height"
-                                    >
-                                      Submit
-                                    </button>
-                                  </Col>
-                                </Row>
-                              </form>
-                            );
-                          }
-                        })()}
-                      </Col>
-                    </Row>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </Grid>
-        )}
-      </div>
+                </Col>
+              </Row>
+            </Grid>
+          )}
+        </div>
       ) : (
-          // <div className={!show_start_time ? 'parentDisable' : ''} width="100%">
-            <div className='overlay-box'>
-              <PulseLoader
-                sizeUnit={"px"}
-                size={18}
-                color={"#7b6dac"}
-                loading={!show_start_time}
-              />
-            </div>
-          // </div>
+        // <div className={!show_start_time ? 'parentDisable' : ''} width="100%">
+        <div className="overlay-box">
+          <PulseLoader
+            sizeUnit={"px"}
+            size={18}
+            color={"#7b6dac"}
+            loading={!show_start_time}
+          />
+        </div>
+        // </div>
       )}
     </View>
   );
