@@ -21,6 +21,7 @@ const Chat = ({ chat_name, chatStatus }) => {
   const [users, setUsers] = useState(""); // List of users in chat room
   const [message, setMessage] = useState(""); // Holds inputted message
   const [messages, setMessages] = useState([]); // Holds list of messages
+  const [error, setError] = useState("");
   const ENDPOINT = "https://onfour-chat.herokuapp.com/"; // Chat server endpoint
 
   // Function that is called when user leaves chat
@@ -56,6 +57,16 @@ const Chat = ({ chat_name, chatStatus }) => {
     });
   }, []);
 
+  // Hook is run when error is updated
+  useEffect(() => {
+    if (error) {
+      const is_confirmed = window.confirm(error);
+      if (is_confirmed) {
+        window.location.reload();
+      }
+    }
+  }, [error]);
+
   // Called when user sends a message
   const sendMessage = (event) => {
     event.preventDefault();
@@ -63,7 +74,16 @@ const Chat = ({ chat_name, chatStatus }) => {
       if (message.length > 140) {
         alert("Message cannot be longer than 140 characters.");
       } else {
-        socket.emit("sendMessage", message, () => setMessage(""));
+        socket.emit("sendMessage", message, (error) => {
+          // Error checking if connection is lost
+          if (error) {
+            setError("Lost connection to chat. Press 'OK' to reconnect.");
+            closeChat();
+          } else {
+            setError("");
+            setMessage("");
+          }
+        });
       }
     }
   };
@@ -76,6 +96,7 @@ const Chat = ({ chat_name, chatStatus }) => {
       <div className="chat-container">
         <InfoBar room={room} users={users} />
         <Messages messages={messages} name={name} />
+
         <Input
           message={message}
           setMessage={setMessage}

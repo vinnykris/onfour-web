@@ -127,7 +127,6 @@ function VideoPlayer({
   if (!timer_placeholder.length) {
     if (auth && !registered_concert) {
       if (concert_id) {
-        console.log(concert_id);
         const concert_reg_load = {
           id: user_id,
           concert: concert_id,
