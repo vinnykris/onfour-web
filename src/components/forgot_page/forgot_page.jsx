@@ -13,17 +13,26 @@ import "./forgot_styles.scss";
 // Forgot Username Page
 const Forgot = () => {
   const [stage, setStage] = useState("first"); // first = email stage, second = verification code stage
-  const [email, setEmail] = useState(""); // Email on initial email page
+  const [email, setEmail] = useState(""); // Email or username entered on initial email page
   const [code, setCode] = useState(""); // Verification code
   const [password, setPassword] = useState(""); // Password
   const [confirm_password, setConfirmPassword] = useState(""); // Repeated password
-  const [error_one, setErrorOne] = useState("");
-  const [error_two, setErrorTwo] = useState("");
+  const [error, setError] = useState(""); // Tracking/setting error message when changing password
+  const [error_color, setErrorColor] = useState("red"); // Tracking/setting error message when changing password
+
+  const acceptPasswordChange = () => {
+    setError("Password successfully changed!");
+    setErrorColor("white");
+    setEmail("");
+    setCode("");
+    setPassword("");
+    setConfirmPassword("");
+  };
 
   // Function to send a verification code to the input email
   const sendCode = (event) => {
     event.preventDefault();
-    Auth.forgotPassword(email).catch((err) => setErrorOne(err));
+    Auth.forgotPassword(email);
     setStage("second"); // set stage to "second" so that the next page is rendered
   };
 
@@ -32,13 +41,13 @@ const Forgot = () => {
     event.preventDefault();
 
     if (password !== confirm_password) {
-      setErrorTwo("Passwords are not the same");
+      setError("Passwords are not the same");
       return;
     }
 
-    Auth.forgotPasswordSubmit(email, code, password).catch((err) =>
-      setErrorTwo(err.message)
-    );
+    Auth.forgotPasswordSubmit(email, code, password)
+      .then((data) => acceptPasswordChange())
+      .catch((err) => setError(err.message));
   };
 
   return (
@@ -66,7 +75,6 @@ const Forgot = () => {
                     />
                   </Row>
                   <br></br>
-                  <div style={{ color: "red" }}>{error_one}</div>
                   <br></br>
                   <button
                     className="forgot-submit-button"
@@ -98,6 +106,7 @@ const Forgot = () => {
                       //type="email"
                       name="email"
                       id="email_slot"
+                      disabled="true"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
                       required
@@ -156,7 +165,7 @@ const Forgot = () => {
                     />
                   </Row>
                   <br></br>
-                  <div style={{ color: "red" }}>{error_two}</div>
+                  <div style={{ color: error_color }}>{error}</div>
                   <br></br>
                   <button
                     className="forgot-submit-button"
