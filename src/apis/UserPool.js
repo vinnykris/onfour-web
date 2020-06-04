@@ -10,10 +10,10 @@ Amplify.configure({
     region: "us-east-1",
 
     // OPTIONAL - Amazon Cognito User Pool ID
-    userPoolId: "us-east-1_qgIFKD7ne",
+    userPoolId: "us-east-1_zHyCq5Y6W",
 
     // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-    userPoolWebClientId: "42ejcjmuaslnoboi6k2fag3qph",
+    userPoolWebClientId: "11os48ai0lk5uo63gc0gnfdtl0",
   },
 });
 

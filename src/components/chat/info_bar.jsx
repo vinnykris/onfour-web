@@ -8,9 +8,11 @@ import "./chat.scss";
 const InfoBar = ({ room, users }) => {
   return (
     <div className="info-bar">
-      <div className="left-inner-container">
-        <p className="onfour-title">{room}</p>
-        <p className="onfour-title">{users.length}</p>
+      <div className="info-container">
+        <div className="chat-header-text">
+          <p className="onfour-title">{room}</p>
+          <p className="onfour-title">{users.length}</p>
+        </div>
       </div>
     </div>
   );

@@ -8,8 +8,54 @@
 //   }
 // }
 
+// html,
+// body {
+//   height: 100%;
+// }
+
+.stream-container {
+  @include respond-to("small") {
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: column;
+  }
+}
+
+.stream-page-content {
+  margin-top: -1px;
+  background-color: black;
+  height: auto;
+  width: 100%;
+  @include respond-to("small") {
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: column;
+  }
+}
+
 .mobile-grid-stream {
   display: inline;
+  @include respond-to("small") {
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: column;
+  }
+}
+
+.mobile-row {
+  display: flex;
+  flex: 1 1 auto;
+  // flex-flow: column;
+}
+
+.payment-row-mobile {
+  flex: 0 1 60px;
+}
+
+.chat-row-mobile {
+  flex-flow: column;
+  flex: 1 0 auto;
+  overflow-y: auto;
 }
 
 // CHAT STYLING
@@ -43,28 +89,58 @@
   }
 }
 
-.chat-main-mobile {
-  height: 400px;
+.main-column {
   max-width: 100%;
-  position: relative;
+  min-width: 0;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+}
+
+.chat-column {
+  max-width: 100%;
+  min-width: 0;
+  max-height: 100%;
+  min-height: 0;
+  display: flex;
+  flex: 1 1 auto;
+  flex-flow: column;
+}
+
+.chat-main-mobile {
+  height: calc(100vh - 411px);
+  max-height: calc(100vh - 411px);
+  // height: 400px;
+  display: flex;
+  flex-flow: column;
+  // flex: 1 1 auto;
+  overflow-y: auto;
+  flex-grow: 1;
+  // height: 60vh;
+  min-width: 0;
+  max-width: 100vh;
+  // position: relative;
   justify-content: center;
   align-items: center;
+  // height: 100%;
+  // // overflow: hidden;
+  // display: flex;
+  // flex: 1;
 
-  @media only screen and (max-height: 750px) {
-    height: 300px;
-  }
-  @media only screen and (max-height: 700px) {
-    height: 300px;
-  }
-  @media only screen and (max-height: 680px) {
-    height: 250px;
-  }
-  @media only screen and (max-height: 650px) {
-    height: 230px;
-  }
-  @media only screen and (max-height: 580px) {
-    height: 150px;
-  }
+  // @media only screen and (max-height: 750px) {
+  //   height: 300px;
+  // }
+  // @media only screen and (max-height: 700px) {
+  //   height: 300px;
+  // }
+  // @media only screen and (max-height: 680px) {
+  //   height: 250px;
+  // }
+  // @media only screen and (max-height: 650px) {
+  //   height: 230px;
+  // }
+  // @media only screen and (max-height: 580px) {
+  //   height: 150px;
+  // }
 }
 
 .chat-wrapper {
@@ -189,13 +265,6 @@
   width: 20%;
 }
 
-.stream-page-content {
-  margin-top: -1px;
-  background-color: black;
-  height: auto;
-  width: 100%;
-}
-
 .artist-name {
   font-size: 32px;
   margin: 5px;
@@ -306,6 +375,9 @@
   padding-top: 20vh;
   height: 71vh;
   width: 100%;
+  @include respond-to("small") {
+    height: 100vh;
+  }
 }
 
 .waiting-message-container {
@@ -428,6 +500,10 @@
   margin-top: -3%;
   padding-bottom: 3%;
   // padding-top: 3%;
+}
+
+.mobile-payment-button {
+  height: 60px;
 }
 
 .stripe-button-border {
