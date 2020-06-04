@@ -25,20 +25,22 @@
   margin: 3% 8%;
   margin-bottom: 5%;
   @include respond-to("x-large") {
-    margin: 7% 6%;
+    margin: 7% 10%;
   }
   @include respond-to("large") {
     margin: 10% 5%;
   }
 }
-
+.onboarding-row:first-child {
+  margin-top: 0%;
+}
 .onboarding-row:last-child {
   margin-bottom: 0%;
 }
 
 .artist-page-img {
   width: 80%;
-  padding: 3% 5%;
+  padding: 0% 5%;
   @include respond-to("x-large") {
     width: 90%;
   }
@@ -55,7 +57,7 @@
   margin: auto;
   width: 80%;
   height: 100%;
-  padding: 0% 3%;
+  padding: 0% 0%;
   justify-content: center;
   flex-direction: column;
   @include respond-to("x-large") {
