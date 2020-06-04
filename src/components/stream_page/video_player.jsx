@@ -5,6 +5,7 @@ import ReactPlayer from "react-player";
 // Styling Imports
 import "./stream_styles.scss";
 import { Grid, Row, Col } from "../grid";
+import { useWindowDimensions } from "../custom_hooks";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -25,12 +26,14 @@ function VideoPlayer({
   user_id,
   concert_id,
 }) {
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
+
   // This function calculates the time difference between current time and show start time
   // and represent the difference in days, hours, minuts and seconds
   const calculateTimeLeft = () => {
-    // const difference = +new Date(start_time) - +new Date();
-    const difference =
-      +new Date("2020-06-03T19:00:00.000 - 04: 00") - +new Date();
+    const difference = +new Date(start_time) - +new Date();
+    // const difference =
+    //   +new Date("2020-06-03T19:00:00.000 - 04: 00") - +new Date();
     let time_left = {};
 
     if (difference > 0) {
@@ -157,14 +160,26 @@ function VideoPlayer({
           </div>
         ) : (
           <div className="player-wrapper">
-            <ReactPlayer
-              className="video-player"
-              url={url}
-              width="100%"
-              height="100%"
-              playing
-              controls
-            />
+            {width <= 600 ? (
+              <ReactPlayer
+                className="video-player"
+                url={url}
+                width="100%"
+                height="100%"
+                playing
+                controls
+                playsinline
+              />
+            ) : (
+              <ReactPlayer
+                className="video-player"
+                url={url}
+                width="100%"
+                height="100%"
+                playing
+                controls
+              />
+            )}
           </div>
         )}
       </div>
