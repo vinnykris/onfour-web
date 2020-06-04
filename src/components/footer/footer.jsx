@@ -33,7 +33,7 @@ const Footer = () => {
           <Col size={1}></Col>
           <Col size={3}>
             <div className="footer-links">
-              <h3>Quick Links</h3>
+              {/* <h3>Quick Links</h3> */}
               <ul>
                 <li>
                   <a

@@ -134,34 +134,44 @@ h5 {
 .header-mobile {
   text-transform: uppercase;
   float: left;
-  color: #e2e2e2;
+  color: white;
+  padding-bottom: 24px;
+  font-size: 24px;
+  margin-top: 0.5rem;
 }
 
 .main-content-mobile {
-  padding: 5%;
+  padding: 3%;
 }
 
 .mobile-section {
-  margin-bottom: 3rem;
+  // margin-bottom: 1rem;
+  border: 1px solid white;
+  padding: 1.4rem;
 }
 
 .description-text-mobile {
-  margin-bottom: 0.5rem;
-  line-height: 1.9rem;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.1px;
+  line-height: 2rem;
   text-align: left;
-  font-size: 16px;
-  font-weight: $medium-weight;
-  color: #e2e2e2;
+  font-size: 18px;
+  font-weight: $regular-weight;
+  color: white;
 }
 
 .inline-form-2 {
   margin: auto;
   padding: 0px;
   width: 100%;
+  margin-bottom: 1.3rem;
 }
 
+.email-button-mobile {
+  margin-bottom: 1.3rem;
+}
 .subscribe-success {
-  color: #e2e2e2;
+  color: white;
 }
 
 .full-row {
