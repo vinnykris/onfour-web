@@ -16,13 +16,21 @@ Amplify.configure(awsmobile);
 
 // VideoPlayer displays countdown message when the current time is behind the start time
 // of the upcoming concert. When the time is up, it will display the stream video instead
-function VideoPlayer({ url, start_time, artist_name, concert_name, auth, user_id, concert_id }) {
-
+function VideoPlayer({
+  url,
+  start_time,
+  artist_name,
+  concert_name,
+  auth,
+  user_id,
+  concert_id,
+}) {
   // This function calculates the time difference between current time and show start time
   // and represent the difference in days, hours, minuts and seconds
   const calculateTimeLeft = () => {
     // const difference = +new Date(start_time) - +new Date();
-    const difference = +new Date("2020-06-03T19:00:00.000 - 04: 00") - +new Date();
+    const difference =
+      +new Date("2020-06-03T19:00:00.000 - 04: 00") - +new Date();
     let time_left = {};
 
     if (difference > 0) {
@@ -107,14 +115,15 @@ function VideoPlayer({ url, start_time, artist_name, concert_name, auth, user_id
   const registerConcert = async (concert_reg_load) => {
     // Calling the API, using async and await is necessary
     await API.graphql(
-      graphqlOperation(mutations.update_registration_concert, { input: concert_reg_load })
+      graphqlOperation(mutations.update_registration_concert, {
+        input: concert_reg_load,
+      })
     );
-  }
+  };
 
   if (!timer_placeholder.length) {
-    if (auth && (!registered_concert)) {
+    if (auth && !registered_concert) {
       if (concert_id) {
-        console.log(concert_id);
         const concert_reg_load = {
           id: user_id,
           concert: concert_id,
@@ -124,7 +133,6 @@ function VideoPlayer({ url, start_time, artist_name, concert_name, auth, user_id
       }
     }
   }
-
 
   // If the user is logged in, show them either the logged in waiting page or the
   // stream depending on the countdown
@@ -137,29 +145,28 @@ function VideoPlayer({ url, start_time, artist_name, concert_name, auth, user_id
             <div className="waiting-message-container">
               <h3 className="waiting-message1">Next Stream Coming Soon</h3>
               {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
-              <h5 className="waiting-message2">{artist_name} - {concert_name}</h5>
+              <h5 className="waiting-message2">
+                {artist_name} - {concert_name}
+              </h5>
             </div>
-            <div className='countdown-component-wrapper'>
+            <div className="countdown-component-wrapper">
               <Grid>
-                <Row>
-                  {timer_components}
-                </Row>
+                <Row>{timer_components}</Row>
               </Grid>
             </div>
           </div>
         ) : (
-            <div className="player-wrapper">
-              <ReactPlayer
-                className="video-player"
-                url={url}
-                width="100%"
-                height="100%"
-                playing
-                controls
-              />
-            </div>
-          )
-        }
+          <div className="player-wrapper">
+            <ReactPlayer
+              className="video-player"
+              url={url}
+              width="100%"
+              height="100%"
+              playing
+              controls
+            />
+          </div>
+        )}
       </div>
     );
   } else {
@@ -167,7 +174,9 @@ function VideoPlayer({ url, start_time, artist_name, concert_name, auth, user_id
       <div className="countdown-wrapper">
         <div className="waiting-screen">
           <div className="waiting-message-container">
-            <h3 className="waiting-message1">Please sign in to view the stream</h3>
+            <h3 className="waiting-message1">
+              Please sign in to view the stream
+            </h3>
           </div>
         </div>
       </div>
