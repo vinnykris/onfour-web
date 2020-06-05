@@ -32,12 +32,12 @@ const Register = () => {
   const [success, setSuccess] = useState(false); // Tracks if user successfully signed up
   const [name, setName] = useState(""); // Tracks user's first name after successful registration
   const [checked, setChecked] = useState(true); // Tracks whether the subscribe to email list serve box is checked
-  const [is_processing, setProcessing] = useState(true); // This is true only when register suceeds
+  const [is_processing, setProcessing] = useState(false); // This is true only when register suceeds
 
   // Function that occurs after the user clicks the submit button to sign up
   const registerSubmit = (event) => {
     event.preventDefault();
-
+    setProcessing(true);
     // Username/Password information passed into cognito API
     const signup_payload = {
       username: username,
@@ -73,19 +73,25 @@ const Register = () => {
     // text from the password field so that the user can enter a new password
     if (password.length > 7) {
       if (password !== repeat_password) {
+        setProcessing(false);
         setRepeatPassword("");
         setError("Passwords do not match");
       } else {
         Auth.signUp(signup_payload)
           .then((data) => registerUser())
           .catch(
-            (err) => setError(err.message),
-            (err) => setPassword("")
+            (err) => {
+              setProcessing(false);
+              setError(err.message);
+              setPassword("");
+              setRepeatPassword("");
+            }
           );
       }
     }
     // If the password is not long enough, display a message for the user
     else {
+      setProcessing(false);
       setPassword("");
       setRepeatPassword("");
       setError("Password must be of at least length 8.");
@@ -101,8 +107,9 @@ const Register = () => {
         if (data.data.listCreateOnfourRegistrations.items.length === 0) {
           doMutation();
         } else {
+          setProcessing(false);
           setError("Email already exists.");
-          cleanupForm();
+          // cleanupForm();
         }
       });
     };
@@ -117,9 +124,9 @@ const Register = () => {
       )
         .then(() => {
           successfulSignUp();
-          setProcessing(true);
         })
         .catch((err) => {
+          setProcessing(false);
           setError("Username taken!");
         });
     };
@@ -178,7 +185,7 @@ const Register = () => {
                 return (
                   <div>
                     {is_processing? (
-                      <div className="loader-container">
+                      <div className="login-loader-container">
                         <FadeLoader
                           height={15}
                           width={6}

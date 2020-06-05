@@ -48,7 +48,7 @@ const Login = () => {
           <Col className="login-purple-scheme" size={0.5}></Col>
           <Col size={6}>
             {is_processing ? (
-              <div className="loader-container">
+              <div className="login-loader-container">
                 <FadeLoader
                   height={15}
                   width={6}
@@ -111,6 +111,13 @@ const Login = () => {
                 >
                   SIGN IN
                 </button>
+                <Row>
+                  <Col size={6} className="forgot-password-box">
+                    <a href="/forgot" className="forgot-link">
+                      Forgot Password?
+                    </a>
+                  </Col>
+                </Row>
               </form>
             )}
           </Col>
