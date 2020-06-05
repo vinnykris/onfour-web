@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 // Components
 import { Grid, Row, Col } from "../grid";
+import PulseLoader from "react-spinners/PulseLoader";
 
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
@@ -47,7 +48,15 @@ const Login = () => {
           <Col className="login-purple-scheme" size={0.5}></Col>
           <Col size={6}>
             {is_processing ? (
-              <p className="processing-message">Loading...</p>
+              <div className="login-loader-container">
+                <PulseLoader
+                  sizeUnit={"px"}
+                  size={15}
+                  color={"#7b6dac"}
+                  loading={is_processing}
+                />
+              </div>
+              // <p className="processing-message">Loading...</p>
             ) : (
               <form
                 className="login-form"
@@ -100,6 +109,13 @@ const Login = () => {
                 >
                   SIGN IN
                 </button>
+                <Row>
+                  <Col size={6} className="forgot-password-box">
+                    <a href="/forgot" className="forgot-link">
+                      Forgot Password?
+                    </a>
+                  </Col>
+                </Row>
               </form>
             )}
           </Col>

@@ -6,7 +6,7 @@
 export const query_name = `query listCreateOnfourRegistrations(
     $filter: TableCreateOnfourRegistrationFilterInput
   ) {
-    listCreateOnfourRegistrations(filter: $filter) {
+    listCreateOnfourRegistrations(filter: $filter, limit: 1000) {
       items {
         username
         first
@@ -16,7 +16,7 @@ export const query_name = `query listCreateOnfourRegistrations(
   }`;
 
 export const list_users = `query listCreateOnfourRegistrations {
-    listCreateOnfourRegistrations {
+    listCreateOnfourRegistrations(limit: 1000) {
       items {
         username
         first
@@ -27,7 +27,7 @@ export const list_users = `query listCreateOnfourRegistrations {
 
 // Query to retrieve all past shows
 export const list_past_concerts = `query listPastShows {
-    listPastShows {
+    listPastShows(limit: 1000) {
       items {
         id
         artist_name
@@ -41,7 +41,7 @@ export const list_past_concerts = `query listPastShows {
 
 // Query to retrieve all upcoming shows
 export const list_upcoming_concerts = `query listFutureConcerts {
-  listFutureConcerts {
+  listFutureConcerts(limit: 1000) {
     items {
       id
       url
