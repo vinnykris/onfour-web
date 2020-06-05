@@ -105,7 +105,7 @@
 
 .hamburger-icon {
   margin: auto;
-  filter: invert(95%);
+  color: white;
 }
 
 .nav-page-black,
@@ -145,14 +145,14 @@ a.nav-page-white {
 }
 
 a.nav-page-black {
-  color: #4d4d4d;
+  color: white;
   &:hover {
     cursor: pointer;
-    color: #4d4d4d;
+    color: white;
     text-decoration: "none";
   }
   &:active {
-    color: #4d4d4d;
+    color: white;
     text-decoration: "underline";
   }
 }
@@ -203,7 +203,7 @@ a.nav-page-black {
 }
 
 .close-icon {
-  filter: invert(95%);
+  color: white;
 }
 
 .mobile-nav-link {

@@ -18,7 +18,6 @@ const LoginSwitcher = ({ closeMenu }) => {
   };
 
   useEffect(() => {
-    console.log("switcher mounted");
     setShowSignUp(false);
   }, []);
 

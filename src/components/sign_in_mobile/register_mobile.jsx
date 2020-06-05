@@ -72,7 +72,6 @@ const RegisterMobile = ({ toggleLogin }) => {
         setRepeatPassword("");
         setError("Passwords do not match");
       } else {
-        console.log(email);
         Auth.signUp(signup_payload)
           .then((data) => registerUser())
           .catch(
@@ -90,7 +89,6 @@ const RegisterMobile = ({ toggleLogin }) => {
 
     // Checks if user's email exists in the database already, shows error if so
     const registerUser = (event) => {
-      console.log("registering user");
       API.graphql(
         graphqlOperation(queries.query_name, {
           filter: { email: { eq: email } },
@@ -108,7 +106,6 @@ const RegisterMobile = ({ toggleLogin }) => {
     // Function that takes the user's entered information and passes it into
     // the AppSync API to be stored in our registered users database table
     const doMutation = () => {
-      console.log("doing mutation");
       API.graphql(
         graphqlOperation(mutations.create_registration, {
           input: register_payload,

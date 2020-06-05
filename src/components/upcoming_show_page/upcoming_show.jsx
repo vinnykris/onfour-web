@@ -47,16 +47,16 @@ const UpcomingShowPage = () => {
       "09": "SEP",
       "10": "OCT",
       "11": "NOV",
-      "12": "DEC"
+      "12": "DEC",
     };
     const day_map = {
-      "Sat": "Sunday", 
-      "Sun": "Monday", 
-      "Mon": "Tuesday", 
-      "Tue": "Wednesday", 
-      "Wed": "Thursday", 
-      "Thu": "Friday", 
-      "Fri": "Saturday"
+      Sat: "Sunday",
+      Sun: "Monday",
+      Mon: "Tuesday",
+      Tue: "Wednesday",
+      Wed: "Thursday",
+      Thu: "Friday",
+      Fri: "Saturday",
     };
 
     // Iterate through each element in the list and add the created
@@ -65,19 +65,30 @@ const UpcomingShowPage = () => {
       const day_in_week = new Date(data.date).toString();
       const hour = parseInt(data.time.slice(0, 2));
       const minutes = data.time.slice(2, 5);
-      
-      setConcerts(concerts => [
+
+      setConcerts((concerts) => [
         ...concerts,
         <FeaturedContent
           img={data.url}
           name={data.artist}
           concert_name={data.concertName}
-          week_day={day_map[day_in_week.slice(0,3)]}
-          date={data.date.slice(8, 10) + " " + month_map[data.date.slice(5, 7)] + " " + data.date.slice(0, 4)}
-          month={month_map[data.date.slice(5,7)]}
-          day={data.date.slice(8,10)}
-          time={(hour > 12) ? 
-            ((hour - 12).toString() + minutes + "PM") : ((hour < 12) ? (data.time.slice(0, 5) + "AM") : (data.time.slice(0, 5) + "PM"))}
+          week_day={day_map[day_in_week.slice(0, 3)]}
+          date={
+            data.date.slice(8, 10) +
+            " " +
+            month_map[data.date.slice(5, 7)] +
+            " " +
+            data.date.slice(0, 4)
+          }
+          month={month_map[data.date.slice(5, 7)]}
+          day={data.date.slice(8, 10)}
+          time={
+            hour > 12
+              ? (hour - 12).toString() + minutes + "PM"
+              : hour < 12
+              ? data.time.slice(0, 5) + "AM"
+              : data.time.slice(0, 5) + "PM"
+          }
           price={data.price}
           description={data.description.toString()}
         />,
@@ -96,7 +107,7 @@ const UpcomingShowPage = () => {
       {/* <SearchBar></SearchBar> */}
       {width > 600 ? (
         <div className="upcoming-show-grid">
-          <FlexibleGrid content_list={concerts} num_cols={3} />
+          <FlexibleGrid content_list={concerts} num_cols={4} />
         </div>
       ) : (
         <div className="upcoming-show-grid">
