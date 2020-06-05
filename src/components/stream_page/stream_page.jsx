@@ -86,6 +86,7 @@ const StreamPage = () => {
 
   // GETTING INFORMATION ABOUT MOST RECENT UPCOMING SHOW
   const [show_start_time, setStartTime] = useState(""); // Stores the upcoming show's start time
+  const [show_time, setShowTime] = useState(""); // Store the upcoming show's start time to display
   const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
@@ -102,7 +103,16 @@ const StreamPage = () => {
 
     const info_list = info.data.listFutureConcerts.items; // Stores the items in database
     info_list.sort((a, b) => a.timePassed - b.timePassed);
+
+    const hour = parseInt(info_list[0].time.slice(0, 2));
+    const minutes = info_list[0].time.slice(2, 5);
+   
     setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
+    setShowTime(info_list[0].date + " " +
+      (hour > 12 ? (hour - 12).toString() + minutes + "PM"
+      : hour < 12 ? info_list[0].time.slice(0, 5) + "AM"
+        : info_list[0].time.slice(0, 5) + "PM"
+      ))
     setConcertName(info_list[0].concertName);
     setArtistName(info_list[0].artist);
     setConcertID(info_list[0].concertId);
@@ -221,7 +231,7 @@ const StreamPage = () => {
                     </Row>
                     <Row>
                       <h5 className="show-time">
-                        Friday 06/05/2020 7:00PM EST (refresh the page if stream
+                        {show_time} (refresh the page if stream
                         doesn't show up)
                       </h5>
                     </Row>
