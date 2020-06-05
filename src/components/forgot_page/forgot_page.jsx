@@ -20,10 +20,13 @@ const Forgot = () => {
   const [error, setError] = useState(""); // Tracking/setting error message when changing password
   const [error_color, setErrorColor] = useState("red"); // Tracking/setting error message when changing password
 
+  // Function to redirect to stream page
   const redirect = () => {
     window.location.href = "http://onfour.live/stream";
   };
 
+  // After a successfull password change, clear the input fields, display a success
+  // message, and then redirect the user to the stream page after ~3 seconds
   const acceptPasswordChange = () => {
     setError("Password successfully changed!");
     setErrorColor("white");
@@ -45,6 +48,7 @@ const Forgot = () => {
   const resetPassword = (event) => {
     event.preventDefault();
 
+    // Set passworth length error
     if (password.length < 8 && confirm_password.length < 8) {
       setPassword("");
       setConfirmPassword("");
@@ -52,12 +56,15 @@ const Forgot = () => {
       return;
     }
 
+    // Set passwords not matching error
     if (password !== confirm_password) {
       setConfirmPassword("");
       setError("Passwords are not the same");
       return;
     }
 
+    // If everything passes, call the accepPasswordChange function
+    // Otherwise, display the error message
     Auth.forgotPasswordSubmit(email, code, password)
       .then((data) => acceptPasswordChange())
       .catch((err) => setError(err.message));
@@ -79,7 +86,6 @@ const Forgot = () => {
                   <Row>
                     <input
                       className="forgot-input"
-                      //type="email"
                       name="email"
                       id="email_slot"
                       value={email}
@@ -116,7 +122,6 @@ const Forgot = () => {
                   <Row>
                     <input
                       className="forgot-input"
-                      //type="email"
                       name="email"
                       id="email_slot"
                       disabled="true"
