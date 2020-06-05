@@ -214,22 +214,22 @@ const StreamPage = () => {
                     </div>
                   </div>
                   {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
-                  {/* <Row>
+                  <Row>
                   <Col size={2}>
                     <Row>
-                      <h2 className="artist-name">Jonathan Dely</h2>
+                      <h3 className="artist-name-stream">{artist_name}</h3>
                     </Row>
                     <Row>
                       <h5 className="show-time">
-                        Sunday May 10th 8:00PM EST (refresh the page if stream
+                        Friday 06/05/2020 8:00PM EST (refresh the page if stream
                         doesn't show up)
                       </h5>
                     </Row>
                   </Col>
-                  <Col size={1} className="social-bar-center">
+                  {/* <Col size={1} className="social-bar-center">
                     <SocialBar />
-                  </Col>
-                </Row> */}
+                  </Col> */}
+                </Row>
                 </Col>
                 <Col size={3}>
                   <div className="chat-main">
