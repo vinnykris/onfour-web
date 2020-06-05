@@ -6,6 +6,7 @@ import Auth from "../../apis/UserPool";
 
 // Components
 import { Grid, Row, Col } from "../grid";
+import FadeLoader from "react-spinners/FadeLoader";
 
 // Styles
 import "./forgot_styles.scss";
@@ -19,19 +20,22 @@ const Forgot = () => {
   const [confirm_password, setConfirmPassword] = useState(""); // Repeated password
   const [error, setError] = useState(""); // Tracking/setting error message when changing password
   const [error_color, setErrorColor] = useState("red"); // Tracking/setting error message when changing password
+  const [success, setSuccess] = useState(true); //Track if the reset password is seccessful
 
   const redirect = () => {
     window.location.href = "http://onfour.live/stream";
   };
 
   const acceptPasswordChange = () => {
-    setError("Password successfully changed!");
-    setErrorColor("white");
+    // setError("Password successfully changed!");
+    setSuccess(true);
+    // setErrorColor("white");
     setEmail("");
     setCode("");
     setPassword("");
     setConfirmPassword("");
     window.setTimeout(redirect, 2800);
+    
   };
 
   // Function to send a verification code to the input email
@@ -44,7 +48,6 @@ const Forgot = () => {
   // Function to change the user's password given the username, password, and verifiation code
   const resetPassword = (event) => {
     event.preventDefault();
-
     if (password.length < 8 && confirm_password.length < 8) {
       setPassword("");
       setConfirmPassword("");
@@ -59,7 +62,10 @@ const Forgot = () => {
     }
 
     Auth.forgotPasswordSubmit(email, code, password)
-      .then((data) => acceptPasswordChange())
+      .then((data) => {
+        acceptPasswordChange();
+        setStage("third"); // set stage to "third" so that the success message is rendered
+      })
       .catch((err) => setError(err.message));
   };
 
@@ -189,6 +195,22 @@ const Forgot = () => {
                     CHANGE PASSWORD
                   </button>
                 </form>
+              </div>
+            )}
+            {stage === "third" && (
+              <div className="success-container">
+                <p className="success-message-forgot">{"Password successfully changed!\n Please wait for the page to be reloaded"}</p>
+                <div className="loader-container">
+                  <FadeLoader
+                    sizeUnit={"px"}
+                    height={15}
+                    width={6}
+                    radius={2}
+                    margin={2}
+                    color={"#7b6dac"}
+                    loading={success}
+                  ></FadeLoader>
+                </div>
               </div>
             )}
           </Col>

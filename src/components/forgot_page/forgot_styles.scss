@@ -47,3 +47,20 @@
 .login-purple-scheme {
   background-color: #979bbb;
 }
+
+.success-container {
+  height: 100vh;
+  width: 100%;
+  background-color: black;
+}
+
+.loader-container {
+  width: 60px;
+  margin: 0 auto;
+}
+
+.success-message-forgot {
+  color: white;
+  margin-top: 20vh;
+  white-space: pre-wrap;
+}
