@@ -221,7 +221,7 @@ const StreamPage = () => {
                     </Row>
                     <Row>
                       <h5 className="show-time">
-                        Friday 06/05/2020 8:00PM EST (refresh the page if stream
+                        Friday 06/05/2020 7:00PM EST (refresh the page if stream
                         doesn't show up)
                       </h5>
                     </Row>
