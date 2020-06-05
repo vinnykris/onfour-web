@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import FadeLoader from "react-spinners/FadeLoader";
+import PulseLoader from "react-spinners/PulseLoader";
 
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
@@ -49,11 +49,9 @@ const Login = () => {
           <Col size={6}>
             {is_processing ? (
               <div className="login-loader-container">
-                <FadeLoader
-                  height={15}
-                  width={6}
-                  radius={2}
-                  margin={2}
+                <PulseLoader
+                  sizeUnit={"px"}
+                  size={15}
                   color={"#7b6dac"}
                   loading={is_processing}
                 />

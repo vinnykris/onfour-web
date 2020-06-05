@@ -4,7 +4,7 @@ import PasswordStrengthBar from "react-password-strength-bar";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import FadeLoader from "react-spinners/FadeLoader";
+import PulseLoader from "react-spinners/PulseLoader";
 
 // GraphQL
 import * as mutations from "../../graphql/mutations";
@@ -186,11 +186,9 @@ const Register = () => {
                   <div>
                     {is_processing? (
                       <div className="login-loader-container">
-                        <FadeLoader
-                          height={15}
-                          width={6}
-                          radius={2}
-                          margin={2}
+                        <PulseLoader
+                          sizeUnit={"px"}
+                          size={15}
                           color={"#7b6dac"}
                           loading={is_processing}
                         />
