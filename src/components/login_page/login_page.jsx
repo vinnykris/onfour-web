@@ -100,6 +100,13 @@ const Login = () => {
                 >
                   SIGN IN
                 </button>
+                <Row>
+                  <Col size={6} className="forgot-password-box">
+                    <a href="/forgot" className="forgot-link">
+                      Forgot Password?
+                    </a>
+                  </Col>
+                </Row>
               </form>
             )}
           </Col>
