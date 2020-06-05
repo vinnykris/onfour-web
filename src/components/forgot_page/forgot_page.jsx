@@ -6,7 +6,7 @@ import Auth from "../../apis/UserPool";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import FadeLoader from "react-spinners/FadeLoader";
+import PulseLoader from "react-spinners/PulseLoader";
 
 // Styles
 import "./forgot_styles.scss";
@@ -207,15 +207,12 @@ const Forgot = () => {
               <div className="success-container">
                 <p className="success-message-forgot">{"Password successfully changed!\n Please wait for the page to be reloaded"}</p>
                 <div className="loader-container">
-                  <FadeLoader
+                  <PulseLoader
                     sizeUnit={"px"}
-                    height={15}
-                    width={6}
-                    radius={2}
-                    margin={2}
+                    size={15}
                     color={"#7b6dac"}
                     loading={success}
-                  ></FadeLoader>
+                  />
                 </div>
               </div>
             )}
