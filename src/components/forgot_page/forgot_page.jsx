@@ -20,6 +20,10 @@ const Forgot = () => {
   const [error, setError] = useState(""); // Tracking/setting error message when changing password
   const [error_color, setErrorColor] = useState("red"); // Tracking/setting error message when changing password
 
+  const redirect = () => {
+    window.location.href = "http://onfour.live/stream";
+  };
+
   const acceptPasswordChange = () => {
     setError("Password successfully changed!");
     setErrorColor("white");
@@ -27,6 +31,7 @@ const Forgot = () => {
     setCode("");
     setPassword("");
     setConfirmPassword("");
+    window.setTimeout(redirect, 2800);
   };
 
   // Function to send a verification code to the input email
@@ -40,7 +45,15 @@ const Forgot = () => {
   const resetPassword = (event) => {
     event.preventDefault();
 
+    if (password.length < 8 && confirm_password.length < 8) {
+      setPassword("");
+      setConfirmPassword("");
+      setError("Password must be of at least length 8.");
+      return;
+    }
+
     if (password !== confirm_password) {
+      setConfirmPassword("");
       setError("Passwords are not the same");
       return;
     }
