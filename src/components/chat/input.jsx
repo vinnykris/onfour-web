@@ -4,6 +4,9 @@ import React from "react";
 // Styles imports
 import "./chat.scss";
 
+// AWS imports
+import Amplify, { Analytics } from "aws-amplify";
+
 // Component for input field for chat
 const Input = ({ message, setMessage, sendMessage }) => (
   <form className="form">
@@ -17,7 +20,9 @@ const Input = ({ message, setMessage, sendMessage }) => (
         event.key === "Enter" ? sendMessage(event) : null
       }
     />
-    <button className="send-button" onClick={(event) => sendMessage(event)}>
+    <button className="send-button" onClick={(event) => {sendMessage(event)
+                                                         Analytics.record({ name: 'chatButtonPressed' });
+                                                         console.log("chatButtonPressed recorded for Analytics");}}>
       <i class="fa fa-send"></i>
     </button>
   </form>
