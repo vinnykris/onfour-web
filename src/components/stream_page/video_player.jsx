@@ -50,7 +50,7 @@ function VideoPlayer({
 
   const [time_left, setTimeLeft] = useState(calculateTimeLeft()); // Stores the time difference
 
-  // This is a React Hook function that gets called every 1 second
+  // This is a React Hook function that gets called every second
   useEffect(() => {
     setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
@@ -59,6 +59,8 @@ function VideoPlayer({
 
   const timer_components = []; // Stores the countdown message
   const timer_placeholder = []; // Placehoder to store the countdown message
+  // For timer_components, the value for hours, minutes, etc is always two diigits 
+  // and when it's zero, it will be represented as 00.
   // However, for timer_placeholder, if one element counts towards zero, the length of that element value
   // will be zero unlike timer_components
 
@@ -137,10 +139,10 @@ function VideoPlayer({
     }
   }
 
-  // If the user is logged in, show them either the logged in waiting page or the
+  // Showing the user either the logged in waiting page or the
   // stream depending on the countdown
-  // If the user is not logged in, show them the alternate waiting page
-  if (auth) {
+  
+  // if (auth) {
     return (
       <div className="countdown-wrapper">
         {timer_placeholder.length ? (
@@ -184,18 +186,18 @@ function VideoPlayer({
         )}
       </div>
     );
-  } else {
-    return (
-      <div className="countdown-wrapper">
-        <div className="waiting-screen">
-          <div className="waiting-message-container">
-            <h3 className="waiting-message1">
-              Please sign in to view the stream
-            </h3>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // } else {
+  //   return (
+  //     <div className="countdown-wrapper">
+  //       <div className="waiting-screen">
+  //         <div className="waiting-message-container">
+  //           <h3 className="waiting-message1">
+  //             Please sign in to view the stream
+  //           </h3>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 }
 export default VideoPlayer;
