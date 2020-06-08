@@ -32,6 +32,7 @@ const Chat = ({ chat_name, chatStatus }) => {
 
   // Function called on mount
   useEffect(() => {
+    console.log(name);
     socket = io(ENDPOINT); // Connect socket to server
 
     setName(name);
@@ -70,20 +71,28 @@ const Chat = ({ chat_name, chatStatus }) => {
   // Called when user sends a message
   const sendMessage = (event) => {
     event.preventDefault();
-    if (message) {
-      if (message.length > 140) {
-        alert("Message cannot be longer than 140 characters.");
-      } else {
-        socket.emit("sendMessage", message, (error) => {
-          // Error checking if connection is lost
-          if (error) {
-            setError("Lost connection to chat. Press 'OK' to reconnect.");
-            closeChat();
-          } else {
-            setError("");
+    if (name === "GUEST") {
+      alert(
+        "You cannot send messages as a guest. Please log in to send messages!"
+      );
+    } else {
+      console.log(name);
+      if (message) {
+        if (message.length > 140) {
+          alert("Message cannot be longer than 140 characters.");
+        } else {
+          socket.emit("sendMessage", message, (error) => {
+            // Error checking if connection is lost
             setMessage("");
-          }
-        });
+            if (error) {
+              setError("Lost connection to chat. Press 'OK' to reconnect.");
+              closeChat();
+            } else {
+              setError("");
+              setMessage("");
+            }
+          });
+        }
       }
     }
   };
@@ -96,7 +105,6 @@ const Chat = ({ chat_name, chatStatus }) => {
       <div className="chat-container">
         <InfoBar room={room} users={users} />
         <Messages messages={messages} name={name} />
-
         <Input
           message={message}
           setMessage={setMessage}
