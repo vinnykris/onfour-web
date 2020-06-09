@@ -169,7 +169,7 @@ const StreamPage = () => {
       setButtonIcon("<<");
       document.getElementById("chat_container").style.display = "none";
       // document.getElementById("chat_container").style.display = "none";
-      document.getElementById("stream_col").style.flex = "10";
+      document.getElementById("stream_col").style.flex = "9.5";
     } else {
       setButtonIcon(">>");
       document.getElementById("chat_container").style.display = "inline";
@@ -247,7 +247,7 @@ const StreamPage = () => {
                     </div>
                   </div>
                 </Col>
-                <Col size={3} id="chat_container">
+                <Col size={2.5} id="chat_container">
                   <div className="chat-main">
                     <div className="chat-wrapper">
                       {/* {
@@ -290,7 +290,7 @@ const StreamPage = () => {
                     <SocialBar />
                   </Col> */}
                 </Col>
-                <Col size={3}></Col>
+                <Col size={2.5}></Col>
                 <Col size={0.5}></Col>
               </Row>
               <Row>
