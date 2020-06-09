@@ -223,23 +223,6 @@ const StreamPage = () => {
                       />
                     </div>
                   </div>
-                  {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
-                  <Row>
-                  <Col size={2}>
-                    <Row>
-                      <h3 className="artist-name-stream">{artist_name}</h3>
-                    </Row>
-                    <Row>
-                      <h5 className="show-time">
-                        {show_time} (refresh the page if stream
-                        doesn't show up)
-                      </h5>
-                    </Row>
-                  </Col>
-                  {/* <Col size={1} className="social-bar-center">
-                    <SocialBar />
-                  </Col> */}
-                </Row>
                 </Col>
                 <Col size={3}>
                   <div className="chat-main">
@@ -256,6 +239,28 @@ const StreamPage = () => {
                     </div>
                   </div>
                 </Col>
+                <Col size={0.5}></Col>
+              </Row>
+              {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
+              <Row>
+                <Col size={0.5}></Col>
+                <Col size={7}>
+                  <Col size={2}>
+                    <Row>
+                      <h3 className="artist-name-stream">{artist_name}</h3>
+                    </Row>
+                    <Row>
+                      <h5 className="show-time">
+                        {show_time} (refresh the page if stream
+                          doesn't show up)
+                        </h5>
+                    </Row>
+                  </Col>
+                  {/* <Col size={1} className="social-bar-center">
+                      <SocialBar />
+                    </Col> */}
+                </Col>
+                <Col size={3}></Col>
                 <Col size={0.5}></Col>
               </Row>
               <Row>
