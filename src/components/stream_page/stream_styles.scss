@@ -60,34 +60,57 @@
 
 // CHAT STYLING
 .chat-main {
-  height: 660px;
+  height: 100%;
   width: 100%;
   position: relative;
   // margin: auto;
   // margin-top: 7%;
   justify-content: center;
   align-items: center;
+  // height: 660px;
+  // @include respond-to("xx-large") {
+  //   height: 560px;
+  // }
 
-  @include respond-to("xx-large") {
-    height: 560px;
-  }
+  // @include respond-to("x-large") {
+  //   height: 465px;
+  // }
 
-  @include respond-to("x-large") {
-    height: 465px;
-  }
+  // @include respond-to("large") {
+  //   height: 380px;
+  // }
 
-  @include respond-to("large") {
-    height: 380px;
-  }
+  // @include respond-to("medium") {
+  //   height: 310px;
+  // }
 
-  @include respond-to("medium") {
-    height: 310px;
-  }
-
-  @include respond-to("small") {
-    display: none;
-  }
+  // @include respond-to("small") {
+  //   display: none;
+  // }
 }
+
+// .stream-row {
+//   height: 660px;
+//   @include respond-to("xx-large") {
+//     height: 560px;
+//   }
+
+//   @include respond-to("x-large") {
+//     height: 465px;
+//   }
+
+//   @include respond-to("large") {
+//     height: 380px;
+//   }
+
+//   @include respond-to("medium") {
+//     height: 310px;
+//   }
+
+//   @include respond-to("small") {
+//     display: none;
+//   }
+// }
 
 .main-column {
   max-width: 100%;
@@ -152,6 +175,10 @@
   border-radius: 5px 0px 0px 5px;
   background-color: #17171b;
   padding: 5px;
+  font-weight: bolder;
+  &:hover {
+    color: rgb(128, 157, 252);
+  }
 }
 
 .chat-wrapper {
@@ -174,7 +201,7 @@
 // STREAM VIDEO STYLING
 .stream-main {
   position: relative;
-  height: 100%;
+  // height: 100%;
   width: 100%;
   // margin-top: 3%;
   // margin-right: 0.5%;
@@ -188,7 +215,8 @@
 .stream-wrapper {
   margin: auto;
   width: 100%;
-  height: 100%;
+  // height: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
   position: relative;
   // @include respond-to("small") {
   //   width: 100vh;
@@ -321,32 +349,21 @@
   position: absolute;
   width: 100%;
   height: 100%;
+
+  @include respond-to("small") {
+    position: inherit;
+  }
 }
 
 .waiting-screen {
   width: 100%;
-  height: 660px;
+  height: 100%;
   background: linear-gradient(
       240.7deg,
       #8c4fdc 1.46%,
       rgba(255, 255, 255, 0) 96.73%
     ),
     #497be0;
-  @include respond-to("xx-large") {
-    height: 560px;
-  }
-
-  @include respond-to("x-large") {
-    height: 465px;
-  }
-
-  @include respond-to("large") {
-    height: 380px;
-  }
-
-  @include respond-to("medium") {
-    height: 310px;
-  }
 
   @include respond-to("small") {
     height: 220px;
