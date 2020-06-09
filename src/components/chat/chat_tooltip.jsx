@@ -17,7 +17,7 @@ const useStylesBootstrap = makeStyles((theme) => ({
   },
 }));
 
-function LoginTooltip(props) {
+function ChatTooltip(props) {
   const classes = useStylesBootstrap();
 
   return (
@@ -25,4 +25,4 @@ function LoginTooltip(props) {
   );
 }
 
-export default LoginTooltip;
+export default ChatTooltip;
