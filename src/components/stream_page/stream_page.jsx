@@ -150,11 +150,23 @@ const StreamPage = () => {
     });
   }
 
-  // DONATION FUNCTION
+  // DONATION SECTION
   // Opens link to paypal account for musician
   const donatePaypal = () => {
     const url = "https://www.paypal.me/onfourdonations";
     window.open(url, "_blank");
+  };
+
+  // TOGGLE CHAT SECTION 
+  const [buttonIcon, setButtonIcon] = useState(">>");
+  const toggleChat = () => {
+    if (buttonIcon === ">>") {
+      setButtonIcon("<<");
+      document.getElementById("chat_container").style.display = "none";
+    } else {
+      setButtonIcon(">>");
+      document.getElementById("chat_container").style.display = "inline";
+    }
   };
 
   // RENDERING SECTION
@@ -221,6 +233,9 @@ const StreamPage = () => {
                         user_id={user_id}
                         concert_id={concert_id}
                       />
+                      <div className="toggle-chat">
+                        <button className="toggle-chat-button" onClick={toggleChat}>{buttonIcon}</button>
+                      </div>
                     </div>
                   </div>
                   {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
@@ -241,7 +256,7 @@ const StreamPage = () => {
                   </Col> */}
                 </Row>
                 </Col>
-                <Col size={3}>
+                <Col size={3} id="chat_container">
                   <div className="chat-main">
                     <div className="chat-wrapper">
                       {username ? (
