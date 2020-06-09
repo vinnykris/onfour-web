@@ -409,14 +409,10 @@ const StreamPage = () => {
                 </div>
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
-                    {username ? (
-                      <Chat
-                        chat_name={username ? username : chat_name}
-                        chatStatus={chatStatus}
-                      />
-                    ) : (
-                      <WaitingChat />
-                    )}
+                    <Chat
+                      chat_name={username ? username : "GUEST"}
+                      chatStatus={chatStatus}
+                    />
                   </div>
                 </div>
               </div>

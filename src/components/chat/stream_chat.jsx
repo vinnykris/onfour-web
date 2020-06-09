@@ -109,6 +109,7 @@ const Chat = ({ chat_name, chatStatus }) => {
           message={message}
           setMessage={setMessage}
           sendMessage={sendMessage}
+          name={name}
         />
       </div>
     </div>
