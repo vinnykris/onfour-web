@@ -106,13 +106,17 @@ const StreamPage = () => {
 
     const hour = parseInt(info_list[0].time.slice(0, 2));
     const minutes = info_list[0].time.slice(2, 5);
-   
+
     setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
-    setShowTime(info_list[0].date + " " +
-      (hour > 12 ? (hour - 12).toString() + minutes + "PM"
-      : hour < 12 ? info_list[0].time.slice(0, 5) + "AM"
-        : info_list[0].time.slice(0, 5) + "PM"
-      ))
+    setShowTime(
+      info_list[0].date +
+        " " +
+        (hour > 12
+          ? (hour - 12).toString() + minutes + "PM"
+          : hour < 12
+          ? info_list[0].time.slice(0, 5) + "AM"
+          : info_list[0].time.slice(0, 5) + "PM")
+    );
     setConcertName(info_list[0].concertName);
     setArtistName(info_list[0].artist);
     setConcertID(info_list[0].concertId);
@@ -225,34 +229,41 @@ const StreamPage = () => {
                   </div>
                   {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
                   <Row>
-                  <Col size={2}>
-                    <Row>
-                      <h3 className="artist-name-stream">{artist_name}</h3>
-                    </Row>
-                    <Row>
-                      <h5 className="show-time">
-                        {show_time} (refresh the page if stream
-                        doesn't show up)
-                      </h5>
-                    </Row>
-                  </Col>
-                  {/* <Col size={1} className="social-bar-center">
+                    <Col size={2}>
+                      <Row>
+                        <h3 className="artist-name-stream">{artist_name}</h3>
+                      </Row>
+                      <Row>
+                        <h5 className="show-time">
+                          {show_time} (refresh the page if stream doesn't show
+                          up)
+                        </h5>
+                      </Row>
+                    </Col>
+                    {/* <Col size={1} className="social-bar-center">
                     <SocialBar />
                   </Col> */}
-                </Row>
+                  </Row>
                 </Col>
                 <Col size={3}>
                   <div className="chat-main">
                     <div className="chat-wrapper">
-                      {username ? (
+                      {/* {
+                      username ? (
                         <Chat
-                          chat_name={username ? username : chat_name}
+                          chat_name={username ? username : null}
                           chatStatus={chatStatus}
                         />
                       ) : (
                         // <Join joinSubmit={joinSubmit} />
                         <WaitingChat />
-                      )}
+                      )
+                      } */}
+                      {/* {console.log(username)} */}
+                      <Chat
+                        chat_name={username ? username : "GUEST"}
+                        chatStatus={chatStatus}
+                      />
                     </div>
                   </div>
                 </Col>
@@ -398,14 +409,10 @@ const StreamPage = () => {
                 </div>
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
-                    {username ? (
-                      <Chat
-                        chat_name={username ? username : chat_name}
-                        chatStatus={chatStatus}
-                      />
-                    ) : (
-                      <WaitingChat />
-                    )}
+                    <Chat
+                      chat_name={username ? username : "GUEST"}
+                      chatStatus={chatStatus}
+                    />
                   </div>
                 </div>
               </div>
