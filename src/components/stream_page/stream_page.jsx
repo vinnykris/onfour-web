@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
-import { Prompt } from "react-router";
+// import { Prompt } from "react-router";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -17,7 +17,7 @@ import Auth from "../../apis/UserPool";
 import VideoPlayer from "./video_player";
 import Chat from "../chat/stream_chat";
 // import Join from "../chat/join_chat";
-import WaitingChat from "../chat/chat_waiting";
+// import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
 // import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
@@ -40,10 +40,10 @@ const StreamPage = () => {
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat
   // Function passed as prop to join chat
-  const joinSubmit = (name, mode) => {
-    setChatName(name);
-    // setShowChat(mode);
-  };
+  // const joinSubmit = (name, mode) => {
+  //   setChatName(name);
+  //   // setShowChat(mode);
+  // };
   // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
@@ -106,13 +106,17 @@ const StreamPage = () => {
 
     const hour = parseInt(info_list[0].time.slice(0, 2));
     const minutes = info_list[0].time.slice(2, 5);
-   
+
     setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
-    setShowTime(info_list[0].date + " " +
-      (hour > 12 ? (hour - 12).toString() + minutes + "PM"
-      : hour < 12 ? info_list[0].time.slice(0, 5) + "AM"
-        : info_list[0].time.slice(0, 5) + "PM"
-      ))
+    setShowTime(
+      info_list[0].date +
+        " " +
+        (hour > 12
+          ? (hour - 12).toString() + minutes + "PM"
+          : hour < 12
+          ? info_list[0].time.slice(0, 5) + "AM"
+          : info_list[0].time.slice(0, 5) + "PM")
+    );
     setConcertName(info_list[0].concertName);
     setArtistName(info_list[0].artist);
     setConcertID(info_list[0].concertId);
@@ -124,7 +128,7 @@ const StreamPage = () => {
   const [username, setUsername] = useState(""); // Username from login
   const [user_id, setUserID] = useState(""); // Tracks user's id of signed in user
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
-  const [last, setLast] = useState(""); // Tracks last name of signed in user
+  // const [last, setLast] = useState(""); // Tracks last name of signed in user
 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
@@ -144,7 +148,7 @@ const StreamPage = () => {
     ).then((data) => {
       setUsername(data.data.listCreateOnfourRegistrations.items[0].username);
       setFirst(data.data.listCreateOnfourRegistrations.items[0].first);
-      setLast(data.data.listCreateOnfourRegistrations.items[0].last);
+      // setLast(data.data.listCreateOnfourRegistrations.items[0].last);
       setUserID(data.data.listCreateOnfourRegistrations.items[0].id);
       setShowChat(true);
     });
@@ -246,15 +250,22 @@ const StreamPage = () => {
                 <Col size={3} id="chat_container">
                   <div className="chat-main">
                     <div className="chat-wrapper">
-                      {username ? (
+                      {/* {
+                      username ? (
                         <Chat
-                          chat_name={username ? username : chat_name}
+                          chat_name={username ? username : null}
                           chatStatus={chatStatus}
                         />
                       ) : (
                         // <Join joinSubmit={joinSubmit} />
                         <WaitingChat />
-                      )}
+                      )
+                      } */}
+                      {/* {console.log(username)} */}
+                      <Chat
+                        chat_name={username ? username : "GUEST"}
+                        chatStatus={chatStatus}
+                      />
                     </div>
                   </div>
                 </Col>
@@ -422,14 +433,10 @@ const StreamPage = () => {
                 </div>
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
-                    {username ? (
-                      <Chat
-                        chat_name={username ? username : chat_name}
-                        chatStatus={chatStatus}
-                      />
-                    ) : (
-                      <WaitingChat />
-                    )}
+                    <Chat
+                      chat_name={username ? username : "GUEST"}
+                      chatStatus={chatStatus}
+                    />
                   </div>
                 </div>
               </div>

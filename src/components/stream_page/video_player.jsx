@@ -31,9 +31,9 @@ function VideoPlayer({
   // This function calculates the time difference between current time and show start time
   // and represent the difference in days, hours, minuts and seconds
   const calculateTimeLeft = () => {
-    // const difference = +new Date(start_time) - +new Date();
-    const difference =
-      +new Date("2020-06-03T19:00:00.000 - 04: 00") - +new Date();
+    const difference = +new Date(start_time) - +new Date();
+    // const difference =
+    //   +new Date("2020-06-03T19:00:00.000 - 04: 00") - +new Date();
     let time_left = {};
 
     if (difference > 0) {
