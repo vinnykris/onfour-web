@@ -256,7 +256,7 @@ const StreamPage = () => {
                     </div>
                   </div>
                 </Col>
-                <Col size={1}></Col>
+                <Col size={0.5}></Col>
               </Row>
               <Row>
                 <div className="short-term-spacer"></div>
