@@ -133,7 +133,10 @@ const StreamPage = () => {
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
   Auth.currentAuthenticatedUser({})
-    .then((user) => setUserEmail(user.attributes.email))
+    .then((user) => {
+      setUserEmail(user.attributes.email);
+      setUsername(user.username);
+    })
     .then((user) => setAuth(true))
     .catch((err) => setAuth(false));
 
