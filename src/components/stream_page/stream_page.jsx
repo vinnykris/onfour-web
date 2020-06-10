@@ -229,7 +229,7 @@ const StreamPage = () => {
           {width > 600 ? (
             <Grid>
               <Row>
-                <Col size={0.5}></Col>
+                {/* <Col size={0.5}></Col> */}
                 <Col size={7} id="stream_col">
                   <div className="stream-main">
                     <div className="stream-wrapper">
@@ -404,7 +404,7 @@ const StreamPage = () => {
                     </div>
                   </div>
                 </Col>
-                <Col size={0.5}></Col>
+                {/* <Col size={0.5}></Col> */}
               </Row>
               {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
             </Grid>
