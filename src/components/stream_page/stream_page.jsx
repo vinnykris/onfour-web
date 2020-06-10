@@ -71,11 +71,27 @@ const StreamPage = () => {
 
   // AUTO-SCROLL SECTION
   // Auto-scrolls on first navigation
-  const [scroll, setScroll] = useState(true); // Auto-scroll
-  if (scroll) {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setScroll(false);
-  }
+  // const [scroll, setScroll] = useState(true); // Auto-scroll
+  // if (scroll) {
+  //   window.scrollTo({ top: "10px", behavior: "smooth" });
+  //   setScroll(false);
+  // }
+  
+  // ADJUST CHAT HEIGHT BASED ON SCROLL AMOUNT
+  useEffect(() => {
+    document.addEventListener("scroll", () => {
+      const scrollCheck_top = window.scrollY < (176 + width /100 * 41 - height);
+      const scrollCheck_bottom = window.scrollY < 176;
+      if (!scrollCheck_top && scrollCheck_bottom && document.getElementById("chat_main")) {
+        // console.log(window.scrollY);
+        document.getElementById("chat_main").style.height = (width / 100 * 41 + (window.scrollY - 100)) + "px";
+      } else {
+        if (!scrollCheck_bottom && document.getElementById("chat_main")) {
+          document.getElementById("chat_main").style.height = (width / 100 * 41 + 77) + "px";
+        }
+      }
+    })
+  })
 
   // POP_UP WARNING SECTION
   // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
@@ -128,8 +144,7 @@ const StreamPage = () => {
   const [username, setUsername] = useState(""); // Username from login
   const [user_id, setUserID] = useState(""); // Tracks user's id of signed in user
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
-  // const [last, setLast] = useState(""); // Tracks last name of signed in user
-
+ 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
   Auth.currentAuthenticatedUser({})
@@ -151,7 +166,6 @@ const StreamPage = () => {
     ).then((data) => {
       setUsername(data.data.listCreateOnfourRegistrations.items[0].username);
       setFirst(data.data.listCreateOnfourRegistrations.items[0].first);
-      // setLast(data.data.listCreateOnfourRegistrations.items[0].last);
       setUserID(data.data.listCreateOnfourRegistrations.items[0].id);
       setShowChat(true);
     });
@@ -179,6 +193,7 @@ const StreamPage = () => {
       document.getElementById("stream_col").style.flex = "7";
     }
   };
+
 
   // RENDERING SECTION
   return (
@@ -383,7 +398,7 @@ const StreamPage = () => {
                   </Row>
                 </Col>
                 <Col size={2.5} id="chat_container" className="sticky-container">
-                  <div className="chat-main">
+                  <div className="chat-main" id="chat_main">
                     <div className="chat-wrapper">
                       {/* {
                       username ? (
