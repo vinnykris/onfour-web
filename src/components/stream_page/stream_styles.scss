@@ -176,8 +176,21 @@
   background-color: #17171b;
   padding: 5px;
   font-weight: bolder;
+}
+
+.fa-chevron-right {
+  margin-left: 2px;
+  color: #f3f3f3;
   &:hover {
-    color: rgb(128, 157, 252);
+    color: #497be0;
+  }
+}
+
+.fa-chevron-left {
+  margin-left: 2px;
+  color: #f3f3f3;
+  &:hover {
+    color: #497be0;
   }
 }
 

@@ -163,9 +163,9 @@ const StreamPage = () => {
 
 
   // TOGGLE CHAT SECTION 
-  const [buttonIcon, setButtonIcon] = useState(">>");
+  const [button_icon, setButtonIcon] = useState(">>");
   const toggleChat = () => {
-    if (buttonIcon === ">>") {
+    if (button_icon === ">>") {
       setButtonIcon("<<");
       document.getElementById("chat_container").style.display = "none";
       // document.getElementById("chat_container").style.display = "none";
@@ -242,7 +242,14 @@ const StreamPage = () => {
                         concert_id={concert_id}
                       />
                       <div className="toggle-chat">
-                        <button className="toggle-chat-button" onClick={toggleChat}>{buttonIcon}</button>
+                        <button className="toggle-chat-button" onClick={toggleChat}>
+                          {(button_icon===">>") ? (
+                            <i class="fa fa-chevron-right"></i>
+                          ) : (
+                            <i class="fa fa-chevron-left"></i>
+                          )}
+                          
+                        </button>
                       </div>
                     </div>
                   </div>
