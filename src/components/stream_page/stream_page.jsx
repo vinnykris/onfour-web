@@ -100,6 +100,8 @@ const StreamPage = () => {
             document.getElementById("chat_main").style.height = (width / 100 * 41) + "px";
           } else if (scrollCheck_bottom) {
             document.getElementById("chat_main").style.height = (width / 100 * 41 + window.scrollY) + "px";
+          } else {
+            document.getElementById("chat_main").style.height = height + "px";
           }
         }
       }
