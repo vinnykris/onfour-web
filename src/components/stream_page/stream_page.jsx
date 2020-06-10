@@ -169,7 +169,7 @@ const StreamPage = () => {
       setButtonIcon("<<");
       document.getElementById("chat_container").style.display = "none";
       // document.getElementById("chat_container").style.display = "none";
-      document.getElementById("stream_col").style.flex = "9.5";
+      document.getElementById("stream_col").style.flex = "9";
     } else {
       setButtonIcon(">>");
       document.getElementById("chat_container").style.display = "inline";
