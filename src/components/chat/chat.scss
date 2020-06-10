@@ -131,6 +131,17 @@ button:focus {
   font-weight: $medium-weight;
 }
 
+.number-of-users {
+  color: #f3f3f3;
+  font-size: 1rem;
+  padding: 5px;
+  margin-top: 25px;
+  font-weight: $medium-weight;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .info-container {
   display: flex;
   align-items: center;
