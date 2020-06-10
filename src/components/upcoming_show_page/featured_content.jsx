@@ -5,6 +5,9 @@ import React, { useState } from "react";
 import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
+// Component Imports 
+import BioModal from "./bio_modal";
+
 // FeaturedContent is the unit element for an upcoming concert
 const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, time, price, description }) => {
 
@@ -33,7 +36,8 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
                 </span>
                 <br></br>
                 <div className="popup-info-content">
-                  <p className="concert-description">{description}</p>
+                  <BioModal></BioModal>
+                  {/* <p className="concert-description">{description}</p> */}
                 </div>
               </form>
         </div>

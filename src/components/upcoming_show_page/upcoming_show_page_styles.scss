@@ -260,14 +260,13 @@ a.nav-page-white {
 }
 
 .concert-form {
-  background-color: whitesmoke;
-  // border: 1px solid #30309663;
+  background-color: white;
   width: 70vw;
   height: 70vh;
   padding: 10px 20px 10px 20px;
   border: none;
-  border-radius: 5px;
-  box-shadow: 0px 3px 5px rgb(238, 237, 237);
+  // border-radius: 5px;
+  // box-shadow: 0px 3px 5px rgb(238, 237, 237);
   overflow: auto;
   @include respond-to("small") {
     width: 93vw;
@@ -288,7 +287,7 @@ a.nav-page-white {
 }
 
 .popup-info-close {
-  padding: 3%;
+  // padding: 3%;
   float: right;
   filter: invert(75%);
   &:hover {
@@ -297,7 +296,7 @@ a.nav-page-white {
 }
 
 .popup-info-content {
-  margin-top: 3%;
+  // margin-top: 1.5%;
   width: 100%;
   padding: 10px 40px 10px 40px;
   @include respond-to("small") {
@@ -309,4 +308,14 @@ a.nav-page-white {
   white-space: pre-wrap;
   // text-align: left;
   text-align: justify;
+}
+
+
+// MODAL STYLING 
+.modal-date {
+  width: auto;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding: 2px 10px 2px 10px;
 }
