@@ -128,12 +128,15 @@ const StreamPage = () => {
   const [username, setUsername] = useState(""); // Username from login
   const [user_id, setUserID] = useState(""); // Tracks user's id of signed in user
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
-  const [last, setLast] = useState(""); // Tracks last name of signed in user
+  // const [last, setLast] = useState(""); // Tracks last name of signed in user
 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
   Auth.currentAuthenticatedUser({})
-    .then((user) => setUserEmail(user.attributes.email))
+    .then((user) => {
+      setUserEmail(user.attributes.email);
+      setUsername(user.username);
+    })
     .then((user) => setAuth(true))
     .catch((err) => setAuth(false));
 
@@ -148,7 +151,7 @@ const StreamPage = () => {
     ).then((data) => {
       setUsername(data.data.listCreateOnfourRegistrations.items[0].username);
       setFirst(data.data.listCreateOnfourRegistrations.items[0].first);
-      setLast(data.data.listCreateOnfourRegistrations.items[0].last);
+      // setLast(data.data.listCreateOnfourRegistrations.items[0].last);
       setUserID(data.data.listCreateOnfourRegistrations.items[0].id);
       setShowChat(true);
     });
