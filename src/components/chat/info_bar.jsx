@@ -61,7 +61,7 @@ const InfoBar = ({ room, users }) => {
                 title={participants_string}
               >
                 <span onClick={handleTooltipOpen}>
-                  <p className="onfour-title">{users.length}</p>
+                  <p className="number-of-users">{users.length}</p>
                 </span>
               </ChatTooltip>
             </div>
