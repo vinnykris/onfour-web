@@ -80,14 +80,27 @@ const StreamPage = () => {
   // ADJUST CHAT HEIGHT BASED ON SCROLL AMOUNT
   useEffect(() => {
     document.addEventListener("scroll", () => {
-      const scrollCheck_top = window.scrollY < (176 + width /100 * 41 - height);
-      const scrollCheck_bottom = window.scrollY < 176;
-      if (!scrollCheck_top && scrollCheck_bottom && document.getElementById("chat_main")) {
-        // console.log(window.scrollY);
-        document.getElementById("chat_main").style.height = (width / 100 * 41 + (window.scrollY - 100)) + "px";
+      if ((176 + width / 100 * 41 - height) > 0) {
+        if (document.getElementById("chat_main")) {
+          const scrollCheck_top = window.scrollY > (176 + width / 100 * 41 - height);
+          const scrollCheck_bottom = window.scrollY < 176;
+          if (!scrollCheck_top) { // if the scroll is not larger than threshold to increase height
+            document.getElementById("chat_main").style.height = (width / 100 * 41) + "px";
+          } else if (scrollCheck_bottom) { // is scroll is larger than lower threshold but less than higher threshold
+            document.getElementById("chat_main").style.height = (window.scrollY - 176  + height) + "px";
+          } else {
+            document.getElementById("chat_main").style.height = height + "px";
+          }
+        }
       } else {
-        if (!scrollCheck_bottom && document.getElementById("chat_main")) {
-          document.getElementById("chat_main").style.height = (width / 100 * 41 + 77) + "px";
+        if (document.getElementById("chat_main")) {
+          const scrollCheck_top = window.scrollY === 0;
+          const scrollCheck_bottom = window.scrollY < 176;
+          if (scrollCheck_top) {
+            document.getElementById("chat_main").style.height = (width / 100 * 41) + "px";
+          } else if (scrollCheck_bottom) {
+            document.getElementById("chat_main").style.height = (width / 100 * 41 + window.scrollY) + "px";
+          }
         }
       }
     })
