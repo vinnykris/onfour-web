@@ -163,15 +163,15 @@ const StreamPage = () => {
 
 
   // TOGGLE CHAT SECTION 
-  const [button_icon, setButtonIcon] = useState(">>");
+  const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
   const toggleChat = () => {
-    if (button_icon === ">>") {
-      setButtonIcon("<<");
+    if (button_icon === "fa fa-chevron-right") {
+      setButtonIcon("fa fa-chevron-left");
       document.getElementById("chat_container").style.display = "none";
       // document.getElementById("chat_container").style.display = "none";
       document.getElementById("stream_col").style.flex = "9";
     } else {
-      setButtonIcon(">>");
+      setButtonIcon("fa fa-chevron-right");
       document.getElementById("chat_container").style.display = "inline";
       document.getElementById("stream_col").style.flex = "7";
     }
@@ -243,12 +243,7 @@ const StreamPage = () => {
                       />
                       <div className="toggle-chat">
                         <button className="toggle-chat-button" onClick={toggleChat}>
-                          {(button_icon===">>") ? (
-                            <i class="fa fa-chevron-right"></i>
-                          ) : (
-                            <i class="fa fa-chevron-left"></i>
-                          )}
-                          
+                          <i class={button_icon}></i>
                         </button>
                       </div>
                     </div>
