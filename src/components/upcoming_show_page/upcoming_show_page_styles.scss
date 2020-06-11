@@ -270,7 +270,7 @@ a.nav-page-white {
   overflow: auto;
   @include respond-to("small") {
     width: 93vw;
-    padding: 0;
+    padding: 2vh 2vw 2vh 2vw;
   }
 }
 
@@ -389,6 +389,34 @@ a.nav-page-white {
   }
 }
 
+.mobile-modal-bio-description {
+  margin-top: 2vh;
+  // position: absolute;
+  right: 4vw;
+  // bottom: -12.5vh;
+  height: 35vh;
+  padding-right: 8px;
+  overflow: auto;
+  // margin-right: 5px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.8rem;
+  color: #000000;
+  text-align: justify;
+  white-space: pre-wrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(209, 209, 209, 0.596); 
+    border-radius: 20px;
+  }
+}
+
 .modal-info-col {
   width: 100%; // 22vw
 }
@@ -398,6 +426,7 @@ a.nav-page-white {
   height: 26vh;
   position: relative;
 }
+
 .modal-bio-image {
   position: absolute;
   top: 0;
@@ -476,6 +505,10 @@ a.nav-page-white {
   object-fit: cover;
   overflow: hidden;
   border-radius: 50%;
+  @include respond-to("small") {
+    width: 11.5vh;
+    height: 11.5vh;
+  }
 }
 
 .festival-bio-description {
@@ -557,6 +590,11 @@ a.nav-page-white {
     background: rgba(255, 188, 183, 0.424); 
     border-radius: 20px;
   }
+
+  @include respond-to("small") {
+    width: 100%;
+    height: 10vh;
+  }
 }
 
 .festival-read-more {
@@ -587,3 +625,61 @@ a.nav-page-white {
   margin-bottom: -10px;
 }
 
+.mobile {
+  width: 100%;
+  padding-right: 0px;
+}
+
+.mobile-modal-row {
+  margin-top: 7vh;
+}
+
+.mobile-modal-image-container {
+  width: auto;
+  height: 13vh;
+  margin-right: 10px;
+  position: relative;
+}
+
+.mobile-modal-info {
+  width: 100%;
+  // padding-top: 10px;
+  // padding-bottom: 10px;
+  padding-top: 0.7vh;
+  height: 3vh;
+  // margin-top: auto;
+  // margin-bottom: auto;
+  border-bottom: 1px solid #E3E3E3;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.6rem;
+  color: #000000;
+  text-align: left;
+}
+
+.mobile-modal-ticket-button {
+  width: 100%;
+  height: 3vh;
+  background-color: black;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.6rem;
+}
+
+.mobile-modal-free-button{
+  width: 100%;
+  height: 3vh;
+  background-color: black;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.6rem;
+  padding: 0px;
+  &:hover{
+    cursor: initial;
+  }
+}

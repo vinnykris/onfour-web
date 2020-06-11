@@ -9,7 +9,7 @@ import { Grid, Row, Col } from "../grid";
 import BioModal from "./bio_modal";
 
 // FeaturedContent is the unit element for an upcoming concert
-const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, time, price, description, days_left }) => {
+const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, time, price, description, days_left, width }) => {
 
   const [show_more_info, setClickedInfo] = useState(false); // Determines whether to show the popup for musician's bio or not
 
@@ -47,6 +47,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
                     date={date}
                     time={time}
                     description={description}
+                    width={width}
                   ></BioModal>
                   {/* <p className="concert-description">{description}</p> */}
                 </div>

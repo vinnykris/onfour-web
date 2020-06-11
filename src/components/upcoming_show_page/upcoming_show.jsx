@@ -20,6 +20,9 @@ Amplify.configure(awsmobile);
 
 // The Upcoming Show Page component
 const UpcomingShowPage = () => {
+
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
+
   // concerts is a list of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([]);
 
@@ -94,6 +97,7 @@ const UpcomingShowPage = () => {
           price={data.price}
           description={data.description.toString()}
           days_left={days_left}
+          width={width}
         />,
       ]);
     });
@@ -103,7 +107,6 @@ const UpcomingShowPage = () => {
     getConcertInfo();
   }, []);
 
-  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   return (
     <div className="upcoming-show-page-content">
