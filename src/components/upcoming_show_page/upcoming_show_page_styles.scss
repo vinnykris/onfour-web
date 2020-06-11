@@ -59,11 +59,11 @@
     }
   }
 
-  @include respond-to("small") {
-    &:hover {
-    opacity: 1;
-  }
-  }
+  // @include respond-to("small") {
+  //   &:hover {
+  //   opacity: 1;
+  //   }
+  // }
 }
 
 .RSVP {
@@ -76,10 +76,21 @@
 .RSVP-text {
   margin: 0 auto;
   text-align: center;
-  padding-top: 50%;
+  padding-top: 45%;
   color: white;
   font-size: 30px;
   font-weight: bold;
+  @include respond-to("large") {
+    padding-top: 35%;
+  }
+
+  @include respond-to("medium") {
+    padding-top: 30%;
+  }
+
+  @include respond-to("small") {
+    padding-top: 25%;
+  }
 }
 
 .poster-container {
@@ -87,7 +98,7 @@
   width: 100%;
   height: 17vw;
   @include respond-to("small") {
-    height: 45vw;
+    height: 47vw;
   }
 }
 
@@ -112,10 +123,21 @@
 .show-content-bar {
   max-width: 100%;
   height: 100%;
+}
+
+.genre-box {
+  background-color: black;
+  color: white;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: "Heebo", sans-serif;
+  padding: 1px 10px 1px 10px;
   @include respond-to("small") {
-    padding-bottom: 48px;
+    margin-left: 5px;
+    margin-top: 7px;
   }
-  
 }
 
 .artist-name {
@@ -124,11 +146,11 @@
   // overflow: hidden;
   // display: inherit;
   // width:300px;
-  font-size: 95%;
+  font-size: 90%;
   font-weight: bold;
   color: #1b1b1b;
   text-align: left;
-  margin-top: 10px;
+  margin-top: 8px;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 40px;
@@ -136,10 +158,11 @@
   vertical-align: text-top;
   font-family: "Heebo", sans-serif;
   @include respond-to("small") {
-    // font-size: 85%;
+    font-size: 100%;
     margin-top: 7px;
     margin-right: 7px;
     margin-left: 5px;
+    margin-bottom: 30px;
   }
 }
 
@@ -160,7 +183,8 @@
 // }
 
 .time {
-  font-size: 85%;
+  // font-size: 80%;
+  font-size: 12px;
   font-weight: $medium-weight;
   color: #1b1b1b;
   text-align: left;
@@ -179,9 +203,6 @@
 .time-row {
   position: absolute;
   bottom: 0px;
-  @include respond-to("small") {
-    bottom: 48px;
-  }
 }
 
 .featured-content-button-border {
@@ -218,10 +239,10 @@
   position: absolute;
   text-align: left;
   width: 5%;
-  margin-left: 10px;
+  margin-left: 15px;
   margin-top: 15px;
   @include respond-to("small") {
-    margin-left: 5px;
+    margin-left: 4px;
     margin-top: 10px;
   }
 }
@@ -343,7 +364,9 @@ a.nav-page-white {
   // box-shadow: 0px 3px 5px rgb(238, 237, 237);
   overflow: auto;
   @include respond-to("small") {
-    width: 93vw;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
     padding: 2vh 2vw 2vh 2vw;
   }
 }
@@ -358,6 +381,9 @@ a.nav-page-white {
   z-index: 10;
   margin: auto;
   background-color: rgba(0, 0, 0, 0.5);
+  @include respond-to("small") {
+    padding-top: 0vh;    
+  }
 }
 
 .popup-info-close {
@@ -369,6 +395,11 @@ a.nav-page-white {
   &:hover {
     cursor: pointer;
   }
+
+  @include respond-to("small") {
+    filter: invert(0%);   
+  }
+
 }
 
 .popup-info-content {
@@ -397,6 +428,11 @@ a.nav-page-white {
   color: white;
   font-weight: bold;
   padding: 2px 10px 2px 10px;
+
+  @include respond-to("small") {
+    background-color: white;
+    color: black;
+  }
 }
 
 .modal-description-col {
@@ -414,6 +450,10 @@ a.nav-page-white {
   font-size: 100%;
   color: #000000;
   text-align: left;
+
+  @include respond-to("small") {
+    color: white;
+  }
 }
 
 .modal-bio-description {
@@ -465,10 +505,12 @@ a.nav-page-white {
 
 .mobile-modal-bio-description {
   margin-top: 2vh;
+  margin-bottom: 4vh;
   // position: absolute;
   right: 4vw;
   // bottom: -12.5vh;
-  height: 35vh;
+  // height: 35vh;
+  height: auto;
   padding-right: 8px;
   overflow: auto;
   // margin-right: 5px;
@@ -476,7 +518,7 @@ a.nav-page-white {
   font-style: normal;
   font-weight: normal;
   font-size: 0.8rem;
-  color: #000000;
+  color: white;
   text-align: justify;
   white-space: pre-wrap;
   scrollbar-width: none; /* Firefox */
@@ -508,6 +550,9 @@ a.nav-page-white {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  @include respond-to("small") {
+    position: relative;
+  }
 }
 
 .modal-info {
@@ -593,6 +638,7 @@ a.nav-page-white {
   height: 52vh;
   padding-right: 8px;
   overflow: auto;
+  left: 0px;
   // margin-right: 5px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -629,6 +675,7 @@ a.nav-page-white {
 
   @include respond-to("small") {
     height: 53vh;
+    color: white;
   }
 }
 
@@ -648,6 +695,9 @@ a.nav-page-white {
   font-size: 0.85rem;
   color: #000000;
   text-align: left;
+   @include respond-to("small") {
+    color: white;
+  }
 }
 
 .festival-bio {
@@ -668,6 +718,7 @@ a.nav-page-white {
   @include respond-to("small") {
     width: 100%;
     height: 10vh;
+    color: white;
   }
 }
 
@@ -686,6 +737,10 @@ a.nav-page-white {
   color: #000000;
   text-align: justify;
   white-space: pre-wrap;
+
+  @include respond-to("small") {
+    color: white;
+  }
 }
 
 .line-up {
@@ -697,11 +752,16 @@ a.nav-page-white {
   text-align: left;
   white-space: pre-wrap;
   margin-bottom: -10px;
+
+  @include respond-to("small") {
+    color: white;
+  }
 }
 
 .mobile {
   width: 100%;
   padding-right: 0px;
+  
 }
 
 .mobile-modal-row {
@@ -710,25 +770,23 @@ a.nav-page-white {
 
 .mobile-modal-image-container {
   width: auto;
-  height: 13vh;
-  margin-right: 10px;
-  position: relative;
+  height: 27vh;
+  margin-top: 1vh;
+  margin-bottom: 3vh;
+  // margin-right: 10px;
+  // position: relative;
 }
 
 .mobile-modal-info {
   width: 100%;
   // padding-top: 10px;
   // padding-bottom: 10px;
-  padding-top: 0.7vh;
   height: 3vh;
-  // margin-top: auto;
-  // margin-bottom: auto;
-  border-bottom: 1px solid #E3E3E3;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 0.6rem;
-  color: #000000;
+  font-size: 0.8rem;
+  color: white;
   text-align: left;
 }
 

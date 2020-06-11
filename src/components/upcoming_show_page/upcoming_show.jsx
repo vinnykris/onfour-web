@@ -112,13 +112,21 @@ const UpcomingShowPage = () => {
   return (
     <div className="upcoming-show-page-content">
       {/* <SearchBar></SearchBar> */}
-      {width > 600 ? (
-        <div className="upcoming-show-grid">
-          <FlexibleGrid content_list={concerts} num_cols={4} />
-        </div>
-      ) : (
+      {width <= 600 ? (
         <div className="upcoming-show-grid">
           <FlexibleGrid content_list={concerts} num_cols={1} />
+        </div>
+      ) : (
+        <div>
+          {width <= 1024 ? (
+            <div className="upcoming-show-grid">
+              <FlexibleGrid content_list={concerts} num_cols={3} />
+            </div>
+          ) : (
+            <div className="upcoming-show-grid">
+              <FlexibleGrid content_list={concerts} num_cols={4} />
+            </div>
+          )}
         </div>
       )}
     </div>

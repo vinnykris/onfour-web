@@ -29,140 +29,63 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
 
   return (
     <div className="single-element">
-      {width > 600 ? (
-        <div className="single-element">
-          {/* POP-UP FOR MUSICIAN'S BIO SECTION */}
-          {show_more_info ? (
-            <div className="popup-artist-info">
-              <form className="concert-form">
-                <span className="popup-info-close" onClick={close_info}>
-                  <i className="fa fa-times close-icon"></i>
-                </span>
-                <div className="popup-info-content">
-                  <BioModal
-                    days_left={days_left}
-                    artist_name={name}
-                    concert_name={concert_name}
-                    img={img}
-                    price={price}
-                    weekday={week_day}
-                    date={date}
-                    time={time}
-                    description={description}
-                    width={width}
-                  ></BioModal>
-                </div>
-              </form>
+      {/* POP-UP FOR MUSICIAN'S BIO SECTION */}
+      {show_more_info ? (
+        <div className="popup-artist-info">
+          <form className="concert-form">
+            <span className="popup-info-close" onClick={close_info}>
+              <i className="fa fa-times close-icon"></i>
+            </span>
+            <div className="popup-info-content">
+              <BioModal
+                days_left={days_left}
+                artist_name={name}
+                concert_name={concert_name}
+                img={img}
+                price={price}
+                weekday={week_day}
+                date={date}
+                time={time}
+                description={description}
+                width={width}
+              ></BioModal>
             </div>
-          ) : null}
-          <Row className="RSVP">
-            <p className="RSVP-text">MORE INFO</p>
-          </Row>
-          <Grid className="featured-content" onClick={open_info} >
-            <Row>
-              <Col size={3} className="poster-container">
-                <img className="concert-poster" src={img} alt="content-img"></img>
-                <div className="poster-tag">
-                  <h4 className="poster-text">{month}</h4>
-                  <h1 className="poster-text">{day}</h1>
-                </div>
-                <div className="genre-tag">{genre}</div>
-              </Col>
-            </Row>
-            <Row>
-            <Col size={3} className="show-content-bar">
-                    <Row>
-                      <Col size={3}>
-                        <p className="artist-name">{name} - {concert_name}</p>
-                      </Col>
-                    </Row>
-                    <Row className="time-row">
-                      <Col size={3}>
-                        <p className="time">{week_day} | {date} | {time} EST </p>
-                      </Col>
-                    </Row>
-                </Col>
-            </Row>
-          </Grid>
-        </div> 
-      ) : (
-        <div className="single-element">
-          {/* POP-UP FOR MUSICIAN'S BIO SECTION */}
-          {show_more_info ? (
-            <div className="popup-artist-info">
-              <form className="concert-form">
-                <span className="popup-info-close" onClick={close_info}>
-                  <i className="fa fa-times close-icon"></i>
-                </span>
-                <div className="popup-info-content">
-                  <BioModal
-                    days_left={days_left}
-                    artist_name={name}
-                    concert_name={concert_name}
-                    img={img}
-                    price={price}
-                    weekday={week_day}
-                    date={date}
-                    time={time}
-                    description={description}
-                    width={width}
-                  ></BioModal>
-                  {/* <p className="concert-description">{description}</p> */}
-                </div>
-              </form>
-            </div>
-          ) : null}
-          <Grid className="featured-content">
-            <Row>
-              <Col size={3} className="poster-container">
-                <img className="concert-poster" src={img} alt="content-img"></img>
-                <div className="poster-tag">
-                  <h4 className="poster-text">{month}</h4>
-                  <h1 className="poster-text">{day}</h1>
-                </div>
-                <div className="genre-tag">{genre}</div>
-              </Col>
-            </Row>
-            <Row>
-            <Col size={3} className="show-content-bar">
-                    <Row>
-                      <Col size={3}>
-                        <p className="artist-name">{name} - {concert_name}</p>
-                      </Col>
-                    </Row>
-                    <Row className="time-row">
-                      <Col size={3}>
-                        <p className="time">{week_day} | {date} | {time} EST </p>
-                      </Col>
-                    </Row>
-                </Col>
-            </Row>
-            <Row className="ticket">
-              <Col size={3}>
-                {price? (
-                  <button
-                    className="featured-content-button-border"
-                    // data-toggle="modal"
-                    // data-target="#ticketModal"
-                    id="ticket_button"
-                  >
-                    Ticket   {">"}
-                  </button>
-                ) : (
-                    <button
-                      className="featured-content-button-border"
-                      onClick={open_info}
-                      id="more_info_button"
-                    >
-                      MORE INFO
-                    </button>
-                )}
-              </Col>
-            </Row>
-          </Grid>
-        </div> 
-      )}
-    </div>
+          </form>
+        </div>
+      ) : null}
+      <Row className="RSVP">
+        <p className="RSVP-text">MORE INFO</p>
+      </Row>
+      <Grid className="featured-content" onClick={open_info} >
+        <Row>
+          <Col size={3} className="poster-container">
+            <img className="concert-poster" src={img} alt="content-img"></img>
+            {/* <div className="poster-tag">
+              <h4 className="poster-text">{month}</h4>
+              <h1 className="poster-text">{day}</h1>
+            </div> */}
+            {/* <div className="genre-tag">{genre}</div> */}
+          </Col>
+        </Row>
+        <Row>
+        <Col size={3} className="show-content-bar">
+                <Row>
+                  <div className="genre-box">{genre.toUpperCase()}</div>
+                </Row>
+                <Row>
+                  <Col size={3}>
+                    <p className="artist-name">{name} - {concert_name}</p>
+                  </Col>
+                </Row>
+                <Row className="time-row">
+                  <Col size={3}>
+                    <p className="time">{week_day} | {date} | {time} EST </p>
+                  </Col>
+                </Row>
+            </Col>
+        </Row>
+      </Grid>
+    </div> 
   );
 };
 
