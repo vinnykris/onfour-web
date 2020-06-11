@@ -53,6 +53,7 @@ export const list_upcoming_concerts = `query listFutureConcerts {
       description
       price
       concertId
+      genre
     }
   }
 }`;
