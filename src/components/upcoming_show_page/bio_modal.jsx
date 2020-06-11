@@ -77,12 +77,12 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                         {concert_name === "Part I" ? (
                                             <div className="festival-bio-description">
                                                 <div className="disclaimer">
-                                                    {"\n"}{description} {"\n \nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
+                                                    {"\n \nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
                                                 </div>
                                                 <a href="https://www.justicespeaks.info/the-cause">learn more about both organizations</a>
                                                 <div className="line-up">
                                                     {"\n"}LINE UP
-                                    </div>
+                                                </div>
                                                 <FestivalBio
                                                     img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/achille.png"}
                                                     name={"Achille Tenkiang"}
@@ -152,6 +152,13 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                             </div>
                                         ) : (
                                                 <div className="festival-bio-description">
+                                                    <div className="disclaimer">
+                                                        {"\n \nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
+                                                    </div>
+                                                    <a href="https://www.justicespeaks.info/the-cause">learn more about both organizations</a>
+                                                    <div className="line-up">
+                                                        {"\n"}LINE UP
+                                                    </div>
                                                     <FestivalBio
                                                         img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/achille.png"}
                                                         name={"Achille Tenkiang"}
@@ -319,12 +326,12 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                     {concert_name === "Part I" ? (
                                                         <div className="mobile-modal-bio-description">
                                                             <div className="disclaimer">
-                                                                {"\n"}{description} {"\n \nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
+                                                                {"\n \nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
                                                             </div>
                                                             <a href="https://www.justicespeaks.info/the-cause">learn more about both organizations</a>
                                                             <div className="line-up">
                                                                 {"\n"}LINE UP
-                                </div>
+                                                            </div>
                                                             <FestivalBio
                                                                 img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/achille.png"}
                                                                 name={"Achille Tenkiang"}
@@ -394,6 +401,13 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                         </div>
                                                     ) : (
                                                             <div className="mobile-modal-bio-description">
+                                                                <div className="disclaimer">
+                                                                    {"\n \nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
+                                                                </div>
+                                                                <a href="https://www.justicespeaks.info/the-cause">learn more about both organizations</a>
+                                                                <div className="line-up">
+                                                                    {"\n"}LINE UP
+                                                                </div>
                                                                 <FestivalBio
                                                                     img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/achille.png"}
                                                                     name={"Achille Tenkiang"}
