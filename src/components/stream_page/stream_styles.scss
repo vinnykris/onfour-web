@@ -48,6 +48,13 @@
   // flex-flow: column;
 }
 
+.sticky-container {
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
 .payment-row-mobile {
   flex: 0 1 60px;
 }
@@ -60,34 +67,64 @@
 
 // CHAT STYLING
 .chat-main {
-  height: 660px;
+  // height: 37vw;
+  height: 41vw;
+  // height: 100vh;
   width: 100%;
-  position: relative;
+  // position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  // bottom: 0;
+  // align-self: flex-end;
   // margin: auto;
-  margin-top: 7%;
+  // margin-top: 7%;
   justify-content: center;
   align-items: center;
+  // height: 660px;
+  // @include respond-to("xx-large") {
+  //   height: 560px;
+  // }
 
-  @include respond-to("xx-large") {
-    height: 560px;
-  }
+  // @include respond-to("x-large") {
+  //   height: 465px;
+  // }
 
-  @include respond-to("x-large") {
-    height: 465px;
-  }
+  // @include respond-to("large") {
+  //   height: 380px;
+  // }
 
-  @include respond-to("large") {
-    height: 380px;
-  }
+  // @include respond-to("medium") {
+  //   height: 310px;
+  // }
 
-  @include respond-to("medium") {
-    height: 310px;
-  }
-
-  @include respond-to("small") {
-    display: none;
-  }
+  // @include respond-to("small") {
+  //   display: none;
+  // }
 }
+
+// .stream-row {
+//   height: 660px;
+//   @include respond-to("xx-large") {
+//     height: 560px;
+//   }
+
+//   @include respond-to("x-large") {
+//     height: 465px;
+//   }
+
+//   @include respond-to("large") {
+//     height: 380px;
+//   }
+
+//   @include respond-to("medium") {
+//     height: 310px;
+//   }
+
+//   @include respond-to("small") {
+//     display: none;
+//   }
+// }
 
 .main-column {
   max-width: 100%;
@@ -143,12 +180,40 @@
   // }
 }
 
+.toggle-chat {
+  position: absolute;
+  right: 0px;
+}
+
+.toggle-chat-button {
+  border-radius: 5px 0px 0px 5px;
+  background-color: #17171b;
+  padding: 5px;
+  font-weight: bolder;
+}
+
+.fa-chevron-right {
+  margin-left: 2px;
+  color: #f3f3f3;
+  &:hover {
+    color: #497be0;
+  }
+}
+
+.fa-chevron-left {
+  margin-left: 2px;
+  color: #f3f3f3;
+  &:hover {
+    color: #497be0;
+  }
+}
+
 .chat-wrapper {
   display: inline-block;
   position: relative;
   width: 100%;
-  height: 105%;
-  margin-left: 5%;
+  height: 100%;
+  // padding-left: 3%;
   // margin: auto;
 }
 
@@ -163,10 +228,10 @@
 // STREAM VIDEO STYLING
 .stream-main {
   position: relative;
-  height: 97%;
-  width: 99.5%;
-  margin-top: 3%;
-  margin-right: 0.5%;
+  // height: 100%;
+  width: 100%;
+  // margin-top: 3%;
+  // margin-right: 0.5%;
 }
 
 .stream-main-mobile {
@@ -177,7 +242,11 @@
 .stream-wrapper {
   margin: auto;
   width: 100%;
-  height: 100%;
+  // height: 100%;
+  // height: 41.4473684vw;
+  // width: auto;
+  padding-bottom: 56.25%; /* 16:9 */
+  position: relative;
   // @include respond-to("small") {
   //   width: 100vh;
   //   height: auto;
@@ -265,8 +334,8 @@
   width: 20%;
 }
 
-.artist-name {
-  font-size: 32px;
+.artist-name-stream {
+  font-size: 28px;
   margin: 5px;
   margin-top: 10px;
   letter-spacing: 1px;
@@ -306,19 +375,26 @@
 
 // Waiting Screen
 .countdown-wrapper {
+  position: absolute;
   width: 100%;
   height: 100%;
+
+  @include respond-to("small") {
+    position: inherit;
+  }
 }
 
 .waiting-screen {
   width: 100%;
-  height: 100%;
+  // height: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
   background: linear-gradient(
       240.7deg,
       #8c4fdc 1.46%,
       rgba(255, 255, 255, 0) 96.73%
     ),
     #497be0;
+
   @include respond-to("small") {
     height: 220px;
   }
