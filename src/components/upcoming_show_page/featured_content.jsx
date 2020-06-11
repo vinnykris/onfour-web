@@ -28,32 +28,36 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
   
 
   return (
-    <Grid className="featured-content">
+    <div className="single-element">
       {/* POP-UP FOR MUSICIAN'S BIO SECTION */}
       {show_more_info ? (
         <div className="popup-artist-info">
-              <form className="concert-form">
-                <span className="popup-info-close" onClick={close_info}>
-                  <i className="fa fa-times close-icon"></i>
-                </span>
-                <div className="popup-info-content">
-                  <BioModal 
-                    days_left={days_left}
-                    artist_name={name}
-                    concert_name={concert_name}
-                    img={img}
-                    price={price}
-                    weekday={week_day}
-                    date={date}
-                    time={time}
-                    description={description}
-                    width={width}
-                  ></BioModal>
-                  {/* <p className="concert-description">{description}</p> */}
-                </div>
-              </form>
+          <form className="concert-form">
+            <span className="popup-info-close" onClick={close_info}>
+              <i className="fa fa-times close-icon"></i>
+            </span>
+            <div className="popup-info-content">
+              <BioModal
+                days_left={days_left}
+                artist_name={name}
+                concert_name={concert_name}
+                img={img}
+                price={price}
+                weekday={week_day}
+                date={date}
+                time={time}
+                description={description}
+                width={width}
+              ></BioModal>
+              {/* <p className="concert-description">{description}</p> */}
+            </div>
+          </form>
         </div>
-        ) : null}
+      ) : null}
+      <Row className="RSVP">
+        <p className="RSVP-text">MORE INFO</p>
+      </Row>
+    <Grid className="featured-content" onClick={open_info} >
       <Row>
         <Col size={3} className="poster-container">
           <img className="concert-poster" src={img} alt="content-img"></img>
@@ -71,14 +75,14 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
                   <p className="artist-name">{name} - {concert_name}</p>
                 </Col>
               </Row>
-              <Row>
+              <Row className="time-row">
                 <Col size={3}>
                   <p className="time">{week_day} | {date} | {time} EST </p>
                 </Col>
               </Row>
           </Col>
       </Row>
-      <Row className="ticket">
+      {/* <Row className="ticket">
         <Col size={3}>
           {price? (
             <button
@@ -99,8 +103,9 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
               </button>
           )}
         </Col>
-      </Row>
+      </Row> */}
       </Grid>
+    </div>
   );
 };
 
