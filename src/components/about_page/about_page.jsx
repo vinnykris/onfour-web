@@ -1,5 +1,5 @@
 // Main Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Row, Col } from "../grid";
 import history from "../../history";
 
@@ -8,6 +8,12 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
+
+// Component Imports
+import FlexibleGrid from "../flexible_grid/flexible_grid";
+
+// API Imports
+import { getConcertInfo } from "../../apis/get_upcoming_concerts";
 
 // Image Imports
 // import gradient_header from "../../images/mobile_gradient.png";
@@ -22,6 +28,9 @@ const AboutPage = () => {
   const [email, setEmail] = useState(""); // Variable to store input emails for subscribtion form
   const [clicked, setClicked] = useState(false); // Variable to show hide the subscribtion form
   // const [scroll, setScroll] = useState(true); // This might be no use
+
+  // concerts is a list of FeaturedContent objects with upcoming show information
+  const [concerts, setConcerts] = useState([]);
 
   const header_image_url =
     "https://d1gbu7v6fgabn0.cloudfront.net/banner_background_blur.jpg";
@@ -57,6 +66,21 @@ const AboutPage = () => {
     window.open(url, "_blank");
   };
 
+  // const getConcertData = async () => {
+  //   set await getConcertInfo();
+  // }
+
+  useEffect(() => {
+    const fetchConcertData = async () => {
+      const result = await getConcertInfo();
+      setConcerts(result.slice(0, 4));
+    };
+    fetchConcertData();
+    // getConcertData();
+    // console.log(await );
+    // setConcerts(await getConcertInfo());
+  }, []);
+
   return (
     <div className="about-page-content">
       {/* DESKTOP LAYOUT */}
@@ -78,11 +102,11 @@ const AboutPage = () => {
           <div className="short-term-spacer"></div>
         </Row>
         {/* MISSION ROW */}
-        <Row>
+        {/* <Row>
           <Col size={1}>
             <h3 className="our-mission-text"> Our Mission </h3>
           </Col>
-        </Row>
+        </Row> */}
         <Row>
           <Col size={1}> </Col>
           <Col size={12}>
@@ -104,7 +128,7 @@ const AboutPage = () => {
               </a>{" "}
               to help relieve musicians during this difficult time.
             </p>
-            <Row>
+            {/* <Row>
               <Col size={1}>
                 <button
                   onClick={() => history.push("/stream")}
@@ -113,14 +137,38 @@ const AboutPage = () => {
                   Tune into the stream!
                 </button>
               </Col>
-            </Row>
+            </Row> */}
           </Col>
           <Col size={1}> </Col>
         </Row>
-
         <Row>
           <div className="short-term-spacer"></div>
         </Row>
+        <Row>
+          <Col size={1} className="why-perform-about">
+            <Row>
+              <div className="short-term-spacer"></div>
+            </Row>
+          </Col>
+        </Row>
+        <Row>
+          <Col size={1}>
+            <div className="about-preview-content">
+              <Row>
+                <Col size={1}>
+                  <h3 className="preview-content-header">UPCOMING</h3>
+                </Col>
+                <Col size={1}>
+                  <span className="view-all">VIEW ALL</span>
+                </Col>
+              </Row>
+              <Row>
+                <FlexibleGrid content_list={concerts} num_cols={4} />
+              </Row>
+            </div>
+          </Col>
+        </Row>
+
         {/* PERFORM & SUBSCRIBE ROW */}
         <Row>
           <Col size={1} className="perform-box">
