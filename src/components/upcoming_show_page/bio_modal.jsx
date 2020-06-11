@@ -83,7 +83,7 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                 <div className="disclaimer">
                                                     {"\n \nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
                                                 </div>
-                                                <a href="https://www.justicespeaks.info/the-cause">learn more about both organizations</a>
+                                                <a href="https://www.justicespeaks.info/the-cause" target="_blank">learn more about both organizations</a>
                                                 <div className="line-up">
                                                     {"\n"}LINE UP
                                                 </div>
@@ -159,7 +159,7 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                     <div className="disclaimer">
                                                         {"\n \nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
                                                     </div>
-                                                    <a href="https://www.justicespeaks.info/the-cause">learn more about both organizations</a>
+                                                    <a href="https://www.justicespeaks.info/the-cause" target="_blank">learn more about both organizations</a>
                                                     <div className="line-up">
                                                         {"\n"}LINE UP
                                                     </div>
@@ -315,7 +315,7 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                             <div className="disclaimer">
                                                 {"\nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
                                             </div>
-                                            <a href="https://www.justicespeaks.info/the-cause">learn more about both organizations</a>
+                                            <a href="https://www.justicespeaks.info/the-cause" target="_blank">learn more about both organizations</a>
                                             <div className="line-up">
                                                 {"\n"}LINE UP
                                             </div>
@@ -391,7 +391,7 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                 <div className="disclaimer">
                                                     {"\nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
                                                 </div>
-                                                <a href="https://www.justicespeaks.info/the-cause">learn more about both organizations</a>
+                                                <a href="https://www.justicespeaks.info/the-cause" target="_blank">learn more about both organizations</a>
                                                 <div className="line-up">
                                                     {"\n"}LINE UP
                                                 </div>
