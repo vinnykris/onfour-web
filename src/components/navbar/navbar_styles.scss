@@ -39,10 +39,10 @@
   background-color: none;
   position: relative;
   display: flex;
-  // @include respond-to("large") {
-  //   height: 140px;
-  //   padding: 0;
-  // }
+  @include respond-to("large") {
+    height: 140px;
+    padding: 0;
+  }
   @include respond-to("small") {
     flex: 0 1 131px;
     // height: 131px;
@@ -57,10 +57,10 @@
   background-color: black;
   position: relative;
   display: flex;
-  // @include respond-to("large") {
-  //   height: 140px;
-  //   padding: 0;
-  // }
+  @include respond-to("large") {
+    height: 140px;
+    padding: 0;
+  }
   @include respond-to("small") {
     flex: 0 1 131px;
     // height: 131px;
