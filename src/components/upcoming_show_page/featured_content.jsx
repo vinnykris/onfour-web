@@ -72,11 +72,8 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
                 </Col>
               </Row>
               <Row>
-                <Col size={2.5}>
+                <Col size={3}>
                   <p className="time">{week_day} | {date} | {time} EST </p>
-                </Col>
-                <Col size={0.5}>
-                  <p className="time">{genre}</p>
                 </Col>
               </Row>
           </Col>
