@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Row, Col } from "../grid";
 import history from "../../history";
+import { NavLink, useLocation } from "react-router-dom";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -13,7 +14,7 @@ import awsmobile from "../../apis/AppSync";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 
 // API Imports
-import { getConcertInfo } from "../../apis/get_upcoming_concerts";
+import { getConcertInfo, getArchiveInfo } from "../../apis/get_concert_data";
 
 // Image Imports
 // import gradient_header from "../../images/mobile_gradient.png";
@@ -31,6 +32,7 @@ const AboutPage = () => {
 
   // concerts is a list of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([]);
+  const [videos, setVideos] = useState([]); // List of video objects with past show information
 
   const header_image_url =
     "https://d1gbu7v6fgabn0.cloudfront.net/banner_background_blur.jpg";
@@ -71,11 +73,16 @@ const AboutPage = () => {
   // }
 
   useEffect(() => {
-    const fetchConcertData = async () => {
-      const result = await getConcertInfo();
-      setConcerts(result.slice(0, 4));
+    const fetchData = async () => {
+      // Upcoming shows
+      const upcoming_result = await getConcertInfo();
+      setConcerts(upcoming_result.slice(0, 4));
+
+      // Archive videos
+      const archive_result = await getArchiveInfo();
+      setVideos(archive_result.slice(0, 4));
     };
-    fetchConcertData();
+    fetchData();
     // getConcertData();
     // console.log(await );
     // setConcerts(await getConcertInfo());
@@ -156,14 +163,29 @@ const AboutPage = () => {
             <div className="about-preview-content">
               <Row>
                 <Col size={1}>
-                  <h3 className="preview-content-header">UPCOMING</h3>
+                  <h4 className="preview-content-header">UPCOMING</h4>
                 </Col>
                 <Col size={1}>
-                  <span className="view-all">VIEW ALL</span>
+                  <NavLink to="/upcoming">
+                    <span className="view-all">VIEW ALL</span>
+                  </NavLink>
                 </Col>
               </Row>
               <Row>
                 <FlexibleGrid content_list={concerts} num_cols={4} />
+              </Row>
+              <Row className="archive-preview-row">
+                <Col size={1}>
+                  <h4 className="preview-content-header">PAST SHOWS</h4>
+                </Col>
+                <Col size={1}>
+                  <NavLink to="/archive">
+                    <span className="view-all">VIEW ALL</span>
+                  </NavLink>
+                </Col>
+              </Row>
+              <Row>
+                <FlexibleGrid content_list={videos} num_cols={4} />
               </Row>
             </div>
           </Col>
