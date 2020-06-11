@@ -616,9 +616,11 @@ a.nav-page-white {
   font-style: normal;
   font-weight: bold;
   font-size: 0.85rem;
-  &:hover{
-    cursor: initial;
-  }
+  padding-top: 15px;
+  height: 48px;
+  // &:hover{
+  //   cursor: initial;
+  // }
 }
 
 // FESTIVAL SECTION 

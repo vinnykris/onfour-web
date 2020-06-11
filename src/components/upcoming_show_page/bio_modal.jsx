@@ -10,6 +10,9 @@ import FestivalBio from "./festival_bio";
 
 
 const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, date, time, description, width }) => {
+    const toBeImplemented = () => {
+    };
+
     return (
         <div>
             {width > 600 ? (
@@ -57,7 +60,8 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                     {price ? (
                                         <button className="modal-ticket-button" id="buy_ticket">BUY TICKET</button>
                                     ) : (
-                                            <button className="modal-free-button" id="free">FREE</button>
+                                        // <button className="modal-free-button" id="free" onClick={toBeImplemented}>FREE</button>
+                                        <div className="modal-free-button">FREE</div>
                                         )}
 
                                 </Row>
@@ -250,7 +254,8 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                         {price ? (
                                             <button className="modal-ticket-button" value="buy_ticket">BUY TICKET</button>
                                         ) : (
-                                                <button className="modal-free-button" value="free">FREE</button>
+                                                // <button className="modal-free-button" value="free">FREE</button>
+                                                <div className="modal-free-button">FREE</div>
                                             )}
 
                                     </Row>
