@@ -30,6 +30,11 @@
 .featured-content {
   background-color: #dbdbdb;
   margin: 5% 3% 5% 3%;
+  position: relative;
+  // float: none;
+  // display: table-cell;
+  // vertical-align: top;
+  height: 94%;
 }
 
 .poster-container {
@@ -61,9 +66,8 @@
 
 .show-content-bar {
   max-width: 100%;
-  max-height: 100%;
-  min-height: 90px;
-  // background-color: #e2e2e2;
+  height: 100%;
+  padding-bottom: 48px;
 }
 
 .artist-name {
@@ -146,10 +150,12 @@
 }
 
 .ticket {
-  // position: absolute;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   // bottom: 0px;
-  width: 50%;
 }
+
 
 .poster-tag {
   position: absolute;

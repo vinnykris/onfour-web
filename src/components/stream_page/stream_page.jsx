@@ -189,7 +189,7 @@ const StreamPage = () => {
   // DONATION SECTION
   // Opens link to paypal account for musician
   const donatePaypal = () => {
-    const url = "https://www.paypal.me/onfourdonations";
+    const url = "https://bit.ly/3dN8gOB";
     window.open(url, "_blank");
   };
 
