@@ -98,20 +98,19 @@ const AboutPage = () => {
             </div>
           </Col>
         </Row>
-        <Row>
-          <div className="short-term-spacer"></div>
-        </Row>
         {/* MISSION ROW */}
         {/* <Row>
           <Col size={1}>
             <h3 className="our-mission-text"> Our Mission </h3>
           </Col>
         </Row> */}
-        <Row>
-          <Col size={1}> </Col>
+        <Row className="view-height-row">
           <Col size={12}>
             <p className="description-text">
-              Onfour is the premier live-streaming concert platform, built and
+              Onfour empowers music fans by providing a new way to interact with 
+              your favorite musicians, no matter where you are. Musicians gain more 
+              control over their careers and connect with fans in new, meaningful ways.
+              {/* Onfour is the premier live-streaming concert platform, built and
               designed for musicians. We are dedicated to empowering musicians
               and enabling them to connect with fans in new, meaningful ways.
               Experience studio-like quality from the comfort of your own home.
@@ -126,7 +125,7 @@ const AboutPage = () => {
               >
                 MusiCares
               </a>{" "}
-              to help relieve musicians during this difficult time.
+              to help relieve musicians during this difficult time. */}
             </p>
             {/* <Row>
               <Col size={1}>
@@ -139,19 +138,15 @@ const AboutPage = () => {
               </Col>
             </Row> */}
           </Col>
-          <Col size={1}> </Col>
         </Row>
-        <Row>
-          <div className="short-term-spacer"></div>
-        </Row>
-        <Row>
+        <Row className="view-height-row">
           <Col size={1} className="why-perform-about">
             <Row>
               <div className="short-term-spacer"></div>
             </Row>
           </Col>
         </Row>
-        <Row>
+        {/* <Row>
           <Col size={1}>
             <div className="about-preview-content">
               <Row>
@@ -167,7 +162,7 @@ const AboutPage = () => {
               </Row>
             </div>
           </Col>
-        </Row>
+        </Row> */}
 
         {/* PERFORM & SUBSCRIBE ROW */}
         <Row>
