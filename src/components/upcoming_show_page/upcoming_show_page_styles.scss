@@ -59,11 +59,14 @@
     }
   }
 
-  // @include respond-to("small") {
-  //   &:hover {
-  //   opacity: 1;
-  //   }
-  // }
+  @include respond-to("small") {
+    &:hover {
+    opacity: 1;
+    }
+    .RSVP {
+      z-index: 0;
+    }
+  }
 }
 
 .RSVP {
