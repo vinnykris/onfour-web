@@ -160,7 +160,7 @@ const StreamPage = () => {
   // DONATION FUNCTION
   // Opens link to paypal account for musician
   const donatePaypal = () => {
-    const url = "https://www.paypal.me/onfourdonations";
+    const url = "https://bit.ly/3dN8gOB";
     window.open(url, "_blank");
   };
 
@@ -265,9 +265,8 @@ const StreamPage = () => {
                     </Row>
                     <Row>
                       <h5 className="show-time">
-                        {show_time} (refresh the page if stream
-                          doesn't show up)
-                        </h5>
+                        {show_time} (refresh the page if stream doesn't show up)
+                      </h5>
                     </Row>
                   </Col>
                   {/* <Col size={1} className="social-bar-center">
