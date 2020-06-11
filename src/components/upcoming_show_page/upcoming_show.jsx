@@ -65,7 +65,7 @@ const UpcomingShowPage = () => {
       const day_in_week = new Date(data.date).toString();
       const hour = parseInt(data.time.slice(0, 2));
       const minutes = data.time.slice(2, 5);
-      const time_left = +new Date(data.date + "T" + data.time + ".000-04:00") - +new Date();
+      const time_left = +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
       const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
 
       setConcerts((concerts) => [

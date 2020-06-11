@@ -24,6 +24,8 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
   const close_info = () => {
     setClickedInfo(false);
   };
+  
+  
 
   return (
     <Grid className="featured-content">
@@ -34,12 +36,17 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
                 <span className="popup-info-close" onClick={close_info}>
                   <i className="fa fa-times close-icon"></i>
                 </span>
-                <br></br>
                 <div className="popup-info-content">
                   <BioModal 
                     days_left={days_left}
                     artist_name={name}
                     concert_name={concert_name}
+                    img={img}
+                    price={price}
+                    weekday={week_day}
+                    date={date}
+                    time={time}
+                    description={description}
                   ></BioModal>
                   {/* <p className="concert-description">{description}</p> */}
                 </div>
@@ -74,15 +81,17 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
           {price? (
             <button
               className="featured-content-button-border"
-              data-toggle="modal"
-              data-target="#ticketModal"
+              // data-toggle="modal"
+              // data-target="#ticketModal"
+              id="ticket_button"
             >
-              Ticket   >
+              Ticket   {">"}
             </button>
           ) : (
               <button
                 className="featured-content-button-border"
                 onClick={open_info}
+                id="more_info_button"
               >
                 MORE INFO
               </button>

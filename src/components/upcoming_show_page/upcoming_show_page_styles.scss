@@ -262,8 +262,8 @@ a.nav-page-white {
 .concert-form {
   background-color: white;
   width: 70vw;
-  height: 75vh;
-  padding: 10px 20px 10px 20px;
+  height: 80vh;
+  padding: 2vh 2vw 2vh 2vw;
   border: none;
   // border-radius: 5px;
   // box-shadow: 0px 3px 5px rgb(238, 237, 237);
@@ -280,7 +280,7 @@ a.nav-page-white {
   width: 100%;
   height: 100%;
   top: 0;
-  padding-top: 14vh;
+  padding-top: 10vh;
   z-index: 10;
   margin: auto;
   background-color: rgba(0, 0, 0, 0.5);
@@ -289,6 +289,8 @@ a.nav-page-white {
 .popup-info-close {
   // padding: 3%;
   float: right;
+  position: relative;
+  z-index: 1;
   filter: invert(75%);
   &:hover {
     cursor: pointer;
@@ -298,9 +300,11 @@ a.nav-page-white {
 .popup-info-content {
   // margin-top: 1.5%;
   width: 100%;
-  padding: 10px 30px 10px 30px;
+  height: 76vh;
+  position: relative;
+  padding: 4vh 4vw 4vh 4vw;
   @include respond-to("small") {
-    padding: 10px 30px 10px 30px;
+    padding: 4vh 4vw 4vh 4vw;
   }
 }
 
@@ -321,18 +325,265 @@ a.nav-page-white {
   padding: 2px 10px 2px 10px;
 }
 
-.modal-break {
-  height: 10px;
+.modal-description-col {
+  padding-right: 4vw;
+  position: relative;
 }
 
 .modal-bio-title {
   width: auto;
+  padding-top: 2vh;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 100%;
+  color: #000000;
+  text-align: left;
+}
+
+.modal-bio-description {
+  margin-top: 2vh;
+  position: absolute;
+  right: 4vw;
+  bottom: -12.5vh;
+  height: 52vh;
+  padding-right: 8px;
+  overflow: auto;
+  // margin-right: 5px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.2rem;
-  letter-spacing: 0.001em;
+  font-size: 0.8rem;
+  color: #000000;
+  text-align: justify;
+  white-space: pre-wrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(209, 209, 209, 0.596); 
+    border-radius: 20px;
+  }
+  @include respond-to("xx-large") {
+    height: 54vh;
+  }
+
+  @include respond-to("x-large") {
+    height: 53vh;
+  }
+
+  @include respond-to("large") {
+    height: 48vh;
+  }
+
+  @include respond-to("medium") {
+    height: 45vh;
+  }
+
+  @include respond-to("small") {
+    height: 53vh;
+  }
+}
+
+.modal-info-col {
+  width: 100%; // 22vw
+}
+
+.modal-image-container {
+  width: 100%;
+  height: 26vh;
+  position: relative;
+}
+.modal-bio-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-info {
+  width: 100%;
+  // padding-top: 10px;
+  // padding-bottom: 10px;
+  padding-top: 2.1vh;
+  height: 8.4vh;
+  // margin-top: auto;
+  // margin-bottom: auto;
+  border-bottom: 1px solid #E3E3E3;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.85rem;
   color: #000000;
   text-align: left;
-
+  @include respond-to("small") {
+    font-size: 0.4rem;
+  }
 }
+
+.first-row {
+  margin-top: 4.2vh;
+}
+
+.last-row {
+  border-bottom: none;
+}
+
+.modal-ticket {
+  position: absolute;
+  bottom: 4vh;
+  // width: 19vw;
+  width: 216px;
+  @include respond-to ("small") {
+    width: 102px;
+  }
+}
+
+.modal-ticket-button {
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.modal-free-button{
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.85rem;
+  &:hover{
+    cursor: initial;
+  }
+}
+
+// FESTIVAL SECTION 
+
+.festival-image {
+  width: 10vw;
+  height: 10vw;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.festival-bio-description {
+  margin-top: 2vh;
+  position: absolute;
+  right: 4vw;
+  bottom: -12.5vh;
+  height: 52vh;
+  padding-right: 8px;
+  overflow: auto;
+  // margin-right: 5px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.7rem;
+  color: #000000;
+  text-align: justify;
+  white-space: pre-wrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(209, 209, 209, 0.596); 
+    border-radius: 20px;
+  }
+  @include respond-to("xx-large") {
+    height: 54vh;
+  }
+
+  @include respond-to("x-large") {
+    height: 53vh;
+  }
+
+  @include respond-to("large") {
+    height: 48vh;
+  }
+
+  @include respond-to("medium") {
+    height: 45vh;
+  }
+
+  @include respond-to("small") {
+    height: 53vh;
+  }
+}
+
+.festival-row {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.festival-bio-col {
+  padding-left: 10px;
+}
+
+.festival-bio-name {
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #000000;
+  text-align: left;
+}
+
+.festival-bio {
+  height: 6vw;
+  overflow: hidden;
+  padding-right: 4px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 188, 183, 0.424); 
+    border-radius: 20px;
+  }
+}
+
+.festival-read-more {
+  color: #007bff;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.disclaimer {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.8rem;
+  color: #000000;
+  text-align: justify;
+  white-space: pre-wrap;
+}
+
+.line-up {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #000000;
+  text-align: left;
+  white-space: pre-wrap;
+  margin-bottom: -10px;
+}
+
