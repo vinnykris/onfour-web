@@ -58,7 +58,7 @@ function VideoPlayer({
 
   const [time_left, setTimeLeft] = useState(calculateTimeLeft()); // Stores the time difference
 
-  // This is a React Hook function that gets called every 1 second
+  // This is a React Hook function that gets called every second
   useEffect(() => {
     setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
@@ -67,6 +67,8 @@ function VideoPlayer({
 
   const timer_components = []; // Stores the countdown message
   const timer_placeholder = []; // Placehoder to store the countdown message
+  // For timer_components, the value for hours, minutes, etc is always two diigits
+  // and when it's zero, it will be represented as 00.
   // However, for timer_placeholder, if one element counts towards zero, the length of that element value
   // will be zero unlike timer_components
 
@@ -151,70 +153,70 @@ function VideoPlayer({
     console.log("event recorded for Analytics");
   };
 
-  // If the user is logged in, show them either the logged in waiting page or the
+  // Showing the user either the logged in waiting page or the
   // stream depending on the countdown
-  // If the user is not logged in, show them the alternate waiting page
-  if (auth) {
-    return (
-      <div className="countdown-wrapper">
-        {timer_placeholder.length ? (
-          <div className="waiting-screen">
-            <div className="waiting-message-container">
-              <h3 className="waiting-message1">Next Stream Coming Soon</h3>
-              {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
-              <h5 className="waiting-message2">
-                {artist_name} - {concert_name}
-              </h5>
-            </div>
-            <div className="countdown-component-wrapper">
-              <Grid>
-                <Row>{timer_components}</Row>
-              </Grid>
-            </div>
+
+  // if (auth) {
+  return (
+    <div className="countdown-wrapper">
+      {timer_placeholder.length ? (
+        <div className="waiting-screen">
+          <div className="waiting-message-container">
+            <h3 className="waiting-message1">Next Stream Coming Soon</h3>
+            {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
+            <h5 className="waiting-message2">
+              {artist_name} - {concert_name}
+            </h5>
           </div>
-        ) : (
-          <div className="player-wrapper">
-            {width <= 600 ? (
-              <ReactPlayer
-                className="video-player"
-                url={url}
-                width="100%"
-                height="100%"
-                playing
-                controls
-                playsinline
-              />
-            ) : (
-              <ReactPlayer
-                className="video-player"
-                url={url}
-                width="100%"
-                height="100%"
-                playing
-                controls
-              />
-            )}
-            {/* I try to call this function here and thought it would only be called only once when the user 
+          <div className="countdown-component-wrapper">
+            <Grid>
+              <Row>{timer_components}</Row>
+            </Grid>
+          </div>
+        </div>
+      ) : (
+        <div className="player-wrapper">
+          {width <= 600 ? (
+            <ReactPlayer
+              className="video-player"
+              url={url}
+              width="100%"
+              height="100%"
+              playing
+              controls
+              playsinline
+            />
+          ) : (
+            <ReactPlayer
+              className="video-player"
+              url={url}
+              width="100%"
+              height="100%"
+              playing
+              controls
+            />
+          )}
+          {/* I try to call this function here and thought it would only be called only once when the user 
                 go to the stream page AND the show is starting. However, if you look at the console logs, 
                 this function gets called for infinite times. Maybe we need to figure out a better place to 
                 call this function*/}
-            {/* {recordEvent()}  */}
-          </div>
-        )}
-      </div>
-    );
-  } else {
-    return (
-      <div className="countdown-wrapper">
-        <div className="waiting-screen">
-          <div className="waiting-message-container">
-            <h3 className="waiting-message1">
-              Please sign in to view the stream
-            </h3>
-          </div>
+          {/* {recordEvent()}  */}
         </div>
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
+  // } else {
+  //   return (
+  //     <div className="countdown-wrapper">
+  //       <div className="waiting-screen">
+  //         <div className="waiting-message-container">
+  //           <h3 className="waiting-message1">
+  //             Please sign in to view the stream
+  //           </h3>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 }
 export default VideoPlayer;

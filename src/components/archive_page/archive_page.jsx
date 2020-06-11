@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 
 // Component imports
 import FlexibleGrid from "../flexible_grid/flexible_grid";
-import Video from "./video";
-import { Grid, Row, Col } from "../grid";
 import ArchiveVideo from "./archive_video";
 import { useWindowDimensions } from "../custom_hooks";
 

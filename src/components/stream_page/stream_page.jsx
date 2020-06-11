@@ -134,12 +134,15 @@ const StreamPage = () => {
   const [username, setUsername] = useState(""); // Username from login
   const [user_id, setUserID] = useState(""); // Tracks user's id of signed in user
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
-  const [last, setLast] = useState(""); // Tracks last name of signed in user
+  // const [last, setLast] = useState(""); // Tracks last name of signed in user
 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
   Auth.currentAuthenticatedUser({})
-    .then((user) => setUserEmail(user.attributes.email))
+    .then((user) => {
+      setUserEmail(user.attributes.email);
+      setUsername(user.username);
+    })
     .then((user) => setAuth(true))
     .catch((err) => setAuth(false));
 
@@ -154,7 +157,7 @@ const StreamPage = () => {
     ).then((data) => {
       setUsername(data.data.listCreateOnfourRegistrations.items[0].username);
       setFirst(data.data.listCreateOnfourRegistrations.items[0].first);
-      setLast(data.data.listCreateOnfourRegistrations.items[0].last);
+      // setLast(data.data.listCreateOnfourRegistrations.items[0].last);
       setUserID(data.data.listCreateOnfourRegistrations.items[0].id);
       setShowChat(true);
     });
@@ -238,40 +241,51 @@ const StreamPage = () => {
                       />
                     </div>
                   </div>
-                  {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
-                  <Row>
-                    <Col size={2}>
-                      <Row>
-                        <h3 className="artist-name-stream">{artist_name}</h3>
-                      </Row>
-                      <Row>
-                        <h5 className="show-time">
-                          {show_time} (refresh the page if stream doesn't show
-                          up)
-                        </h5>
-                      </Row>
-                    </Col>
-                    {/* <Col size={1} className="social-bar-center">
-                    <SocialBar />
-                  </Col> */}
-                  </Row>
                 </Col>
                 <Col size={3}>
                   <div className="chat-main">
                     <div className="chat-wrapper">
-                      {username ? (
+                      {/* {
+                      username ? (
                         <Chat
-                          chat_name={username ? username : chat_name}
+                          chat_name={username ? username : null}
                           chatStatus={chatStatus}
                         />
                       ) : (
                         // <Join joinSubmit={joinSubmit} />
                         <WaitingChat />
-                      )}
+                      )
+                      } */}
+                      {/* {console.log(username)} */}
+                      <Chat
+                        chat_name={username ? username : "GUEST"}
+                        chatStatus={chatStatus}
+                      />
                     </div>
                   </div>
                 </Col>
-                <Col size={1}></Col>
+                <Col size={0.5}></Col>
+              </Row>
+              {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
+              <Row>
+                <Col size={0.5}></Col>
+                <Col size={7}>
+                  <Col size={2}>
+                    <Row>
+                      <h3 className="artist-name-stream">{artist_name}</h3>
+                    </Row>
+                    <Row>
+                      <h5 className="show-time">
+                        {show_time} (refresh the page if stream doesn't show up)
+                      </h5>
+                    </Row>
+                  </Col>
+                  {/* <Col size={1} className="social-bar-center">
+                      <SocialBar />
+                    </Col> */}
+                </Col>
+                <Col size={3}></Col>
+                <Col size={0.5}></Col>
               </Row>
               <Row>
                 <div className="short-term-spacer"></div>
@@ -413,14 +427,10 @@ const StreamPage = () => {
                 </div>
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
-                    {username ? (
-                      <Chat
-                        chat_name={username ? username : chat_name}
-                        chatStatus={chatStatus}
-                      />
-                    ) : (
-                      <WaitingChat />
-                    )}
+                    <Chat
+                      chat_name={username ? username : "GUEST"}
+                      chatStatus={chatStatus}
+                    />
                   </div>
                 </div>
               </div>

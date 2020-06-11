@@ -61,8 +61,8 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
               </Row>
           </Col>
       </Row>
-      <Row>
-        <Col size={3} className="ticket">
+      <Row className="ticket">
+        <Col size={3}>
           {price? (
             <button
               className="featured-content-button-border"
