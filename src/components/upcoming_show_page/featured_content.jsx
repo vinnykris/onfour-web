@@ -9,7 +9,7 @@ import { Grid, Row, Col } from "../grid";
 import BioModal from "./bio_modal";
 
 // FeaturedContent is the unit element for an upcoming concert
-const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, time, price, description, days_left, width }) => {
+const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, time, price, description, days_left, width, genre }) => {
 
   const [show_more_info, setClickedInfo] = useState(false); // Determines whether to show the popup for musician's bio or not
 
@@ -61,6 +61,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
             <h4 className="poster-text">{month}</h4>
             <h1 className="poster-text">{day}</h1>
           </div>
+          <div className="genre-tag">{genre}</div>
         </Col>
       </Row>
       <Row>
@@ -71,8 +72,11 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
                 </Col>
               </Row>
               <Row>
-                <Col size={3}>
-                  <p className="time">{week_day} | {date} | {time} EST</p>
+                <Col size={2.5}>
+                  <p className="time">{week_day} | {date} | {time} EST </p>
+                </Col>
+                <Col size={0.5}>
+                  <p className="time">{genre}</p>
                 </Col>
               </Row>
           </Col>

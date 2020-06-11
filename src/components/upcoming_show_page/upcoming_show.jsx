@@ -98,6 +98,7 @@ const UpcomingShowPage = () => {
           description={data.description.toString()}
           days_left={days_left}
           width={width}
+          genre={data.genre}
         />,
       ]);
     });

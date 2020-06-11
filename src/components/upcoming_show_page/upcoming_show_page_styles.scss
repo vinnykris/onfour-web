@@ -169,6 +169,23 @@
   }
 }
 
+.genre-tag {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  background-color: #303096;
+  // background-color: black;
+  font-size: 100%;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  right: 10px;
+  top : 15px;
+  padding: 0px 5px 0px 5px;
+  @include respond-to("small") {
+    top: 10px;
+    right: 5px;
+  }
+}
 .poster-text {
   color: white;
   text-align: center;
