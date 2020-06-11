@@ -8,7 +8,7 @@ import { Prompt } from "react-router";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import * as queries from "../../graphql/queries";
-import Amplify from "aws-amplify";
+import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 // Amplify Imports
 import Auth from "../../apis/UserPool";
@@ -90,9 +90,15 @@ const StreamPage = () => {
   const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
+
+  // Analytics state variables
+  //const [arrival, setArrival] = useState(true);
+
   // Get the start time for countdown_timer
+  // Call stream page analtics
   useEffect(() => {
     getStartTime();
+    streamPageVisit();
   }, []);
   // Query upcoming show database
   const getStartTime = async () => {
@@ -106,13 +112,17 @@ const StreamPage = () => {
 
     const hour = parseInt(info_list[0].time.slice(0, 2));
     const minutes = info_list[0].time.slice(2, 5);
-   
+
     setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
-    setShowTime(info_list[0].date + " " +
-      (hour > 12 ? (hour - 12).toString() + minutes + "PM"
-      : hour < 12 ? info_list[0].time.slice(0, 5) + "AM"
-        : info_list[0].time.slice(0, 5) + "PM"
-      ))
+    setShowTime(
+      info_list[0].date +
+        " " +
+        (hour > 12
+          ? (hour - 12).toString() + minutes + "PM"
+          : hour < 12
+          ? info_list[0].time.slice(0, 5) + "AM"
+          : info_list[0].time.slice(0, 5) + "PM")
+    );
     setConcertName(info_list[0].concertName);
     setArtistName(info_list[0].artist);
     setConcertID(info_list[0].concertId);
@@ -155,6 +165,11 @@ const StreamPage = () => {
   const donatePaypal = () => {
     const url = "https://www.paypal.me/onfourdonations";
     window.open(url, "_blank");
+  };
+
+  // Record in analytics that stream page was visited
+  const streamPageVisit = () => {
+    Analytics.record({ name: "totalStreamPageVisits" });
   };
 
   // RENDERING SECTION
@@ -225,21 +240,21 @@ const StreamPage = () => {
                   </div>
                   {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
                   <Row>
-                  <Col size={2}>
-                    <Row>
-                      <h3 className="artist-name-stream">{artist_name}</h3>
-                    </Row>
-                    <Row>
-                      <h5 className="show-time">
-                        {show_time} (refresh the page if stream
-                        doesn't show up)
-                      </h5>
-                    </Row>
-                  </Col>
-                  {/* <Col size={1} className="social-bar-center">
+                    <Col size={2}>
+                      <Row>
+                        <h3 className="artist-name-stream">{artist_name}</h3>
+                      </Row>
+                      <Row>
+                        <h5 className="show-time">
+                          {show_time} (refresh the page if stream doesn't show
+                          up)
+                        </h5>
+                      </Row>
+                    </Col>
+                    {/* <Col size={1} className="social-bar-center">
                     <SocialBar />
                   </Col> */}
-                </Row>
+                  </Row>
                 </Col>
                 <Col size={3}>
                   <div className="chat-main">

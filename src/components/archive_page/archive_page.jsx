@@ -11,7 +11,7 @@ import { useWindowDimensions } from "../custom_hooks";
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../../graphql/queries";
-import Amplify from "aws-amplify";
+import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 
 // Styles imports
@@ -47,9 +47,14 @@ const ArchivePage = () => {
   };
 
   // API call is done on mount
+  // Add in Analytics that archive page was visited
   useEffect(() => {
     getArchiveInfo();
+    archivePageVisit();
   }, []);
+  const archivePageVisit = () => {
+    Analytics.record({ name: "totalArchivePageVisits" });
+  };
 
   // DETERMINE MOBILE VERSION OR NOT
   const { height, width } = useWindowDimensions(); // Dimensions of screen

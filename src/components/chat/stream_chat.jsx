@@ -9,6 +9,9 @@ import InfoBar from "./info_bar";
 import Input from "./input";
 import Messages from "./messages";
 
+// AWS imports
+import Amplify, { Analytics } from "aws-amplify";
+
 // Styles imports
 import "./chat.scss";
 
@@ -74,6 +77,7 @@ const Chat = ({ chat_name, chatStatus }) => {
       if (message.length > 140) {
         alert("Message cannot be longer than 140 characters.");
       } else {
+        Analytics.record({ name: "chatButtonPressed" }); // this record the chat button press
         socket.emit("sendMessage", message, (error) => {
           // Error checking if connection is lost
           if (error) {

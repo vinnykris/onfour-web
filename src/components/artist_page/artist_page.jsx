@@ -1,5 +1,5 @@
 // Main Imports
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Row, Col } from "../grid";
 
 // Image Imports
@@ -9,11 +9,21 @@ import onboarding_3 from "../../images/icons/onboarding_artist_3.png";
 import onboarding_4 from "../../images/icons/onboarding_artist_4.png";
 import onboarding_5 from "../../images/icons/onboarding_artist_5.png";
 
+//AWS Imports
+import Amplify, { Analytics } from "aws-amplify";
+
 // Styling Imports
 import "./artist_styles.scss";
 
 // Artist component that contains the features we provide to artists
 const ArtistPage = () => {
+  // Add in analytics that arist page was visited
+  useEffect(() => {
+    artistPageVisit();
+  }, []);
+  const artistPageVisit = () => {
+    Analytics.record({ name: "totalArtistPageVisits" });
+  };
   return (
     <div className="artist-page-content">
       {/* DESKTOP LAYOUT */}

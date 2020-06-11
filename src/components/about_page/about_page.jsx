@@ -1,12 +1,12 @@
 // Main Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Row, Col } from "../grid";
 import history from "../../history";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
-import Amplify from "aws-amplify";
+import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 
 // Image Imports
@@ -22,6 +22,14 @@ const AboutPage = () => {
   const [email, setEmail] = useState(""); // Variable to store input emails for subscribtion form
   const [clicked, setClicked] = useState(false); // Variable to show hide the subscribtion form
   // const [scroll, setScroll] = useState(true); // This might be no use
+
+  // Add in Analytics that about page was visited
+  useEffect(() => {
+    aboutPageVisit();
+  }, []);
+  const aboutPageVisit = () => {
+    Analytics.record({ name: "totalaboutPageVisits" });
+  };
 
   const header_image_url =
     "https://d1gbu7v6fgabn0.cloudfront.net/banner_background_blur.jpg";

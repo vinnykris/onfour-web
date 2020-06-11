@@ -31,8 +31,7 @@ function VideoPlayer({
   // This function calculates the time difference between current time and show start time
   // and represent the difference in days, hours, minuts and seconds
   const calculateTimeLeft = () => {
-
-    // FOR LIVE WEBSITE: uncomment out line 38 and commment out line 43-44 
+    // FOR LIVE WEBSITE: uncomment out line 38 and commment out line 43-44
     // to block the stream when the show hasn't started
 
     const difference = +new Date(start_time) - +new Date();
@@ -148,7 +147,7 @@ function VideoPlayer({
 
   // this function asks Amplify analytics to record the streamVisit event
   const recordEvent = () => {
-    Analytics.record({ name: 'streamVisit' });
+    Analytics.record({ name: "streamVisit" });
     console.log("event recorded for Analytics");
   };
 

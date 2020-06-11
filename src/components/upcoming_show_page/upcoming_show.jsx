@@ -10,7 +10,7 @@ import { useWindowDimensions } from "../custom_hooks";
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../../graphql/queries";
-import Amplify from "aws-amplify";
+import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 
 // Styling Imports
@@ -96,9 +96,14 @@ const UpcomingShowPage = () => {
     });
   };
 
+  // Get Concert Info and Record in Analytics that Upcoming show page was viewed
   useEffect(() => {
     getConcertInfo();
+    upcomingShowVisit();
   }, []);
+  const upcomingShowVisit = () => {
+    Analytics.record({ name: "totalUpcomingPageVisits" });
+  };
 
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 

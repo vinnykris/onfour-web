@@ -20,9 +20,12 @@ const Input = ({ message, setMessage, sendMessage }) => (
         event.key === "Enter" ? sendMessage(event) : null
       }
     />
-    <button className="send-button" onClick={(event) => {sendMessage(event)
-                                                         Analytics.record({ name: 'chatButtonPressed' }); // this record the chat button press
-                                                         console.log("chatButtonPressed recorded for Analytics");}}>
+    <button
+      className="send-button"
+      onClick={(event) => {
+        sendMessage(event);
+      }}
+    >
       <i class="fa fa-send"></i>
     </button>
   </form>
