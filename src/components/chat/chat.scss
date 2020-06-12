@@ -129,6 +129,10 @@ button:focus {
   padding: 5px;
   margin-top: 25px;
   font-weight: $medium-weight;
+  &:hover {
+    cursor: pointer;
+    color: rgb(163, 163, 163);
+  }
 }
 
 .number-of-users {
