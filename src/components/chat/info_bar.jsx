@@ -7,6 +7,9 @@ import ChatTooltip from "./chat_tooltip";
 // Module imports
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
+// Custom hooks
+import { useWindowDimensions } from "../custom_hooks";
+
 // Styles imports
 import "./chat.scss";
 
@@ -14,6 +17,8 @@ import "./chat.scss";
 const InfoBar = ({ room, users }) => {
   const [open, setOpen] = React.useState(false); // Manages if tooltip is open/cloesd
   const [participants_string, setParticipantsString] = useState(""); // String (with newlines) of participant names
+
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   var users_in_chat = []; // List of usernames in the chat
 
@@ -33,7 +38,6 @@ const InfoBar = ({ room, users }) => {
     <div className="info-bar">
       <div className="info-container">
         <div className="chat-header-text">
-          {/* <p className="onfour-title">{room}</p> */}
           <ClickAwayListener onClickAway={handleTooltipClose}>
             <div>
               <ChatTooltip
@@ -49,13 +53,13 @@ const InfoBar = ({ room, users }) => {
               >
                 <span onClick={handleTooltipOpen}>
                   <p className="onfour-title">{room}</p>
-                  {/* <p className="number-of-users">{users.length}</p> */}
                 </span>
               </ChatTooltip>
             </div>
           </ClickAwayListener>
-
-          {/* <p className="onfour-title">{users.length}</p> */}
+          {width <= 600 ? (
+            <p className="number-of-users">{users.length}</p>
+          ) : null}
         </div>
       </div>
     </div>
