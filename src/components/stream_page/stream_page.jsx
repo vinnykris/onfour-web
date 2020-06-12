@@ -39,6 +39,7 @@ const StreamPage = () => {
   // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat
+  const [viewers, setViewers] = useState(0); // Sets number of live viewers on page
   // Function passed as prop to join chat
   // const joinSubmit = (name, mode) => {
   //   setChatName(name);
@@ -47,6 +48,11 @@ const StreamPage = () => {
   // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
+  };
+
+  // Function passed as prop to chat to get viewer numbers
+  const getViewers = (num_viewers) => {
+    setViewers(num_viewers);
   };
 
   // EMAIL SUBSCRIBTION SECTION
@@ -76,18 +82,23 @@ const StreamPage = () => {
   //   window.scrollTo({ top: "10px", behavior: "smooth" });
   //   setScroll(false);
   // }
-  
+
   // ADJUST CHAT HEIGHT BASED ON SCROLL AMOUNT
   useEffect(() => {
     document.addEventListener("scroll", () => {
-      if ((176 + width / 100 * 41 - height) > 0) {
+      if (176 + (width / 100) * 41 - height > 0) {
         if (document.getElementById("chat_main")) {
-          const scrollCheck_top = window.scrollY > (176 + width / 100 * 41 - height);
+          const scrollCheck_top =
+            window.scrollY > 176 + (width / 100) * 41 - height;
           const scrollCheck_bottom = window.scrollY < 176;
-          if (!scrollCheck_top) { // if the scroll is not larger than threshold to increase height
-            document.getElementById("chat_main").style.height = (width / 100 * 41) + "px";
-          } else if (scrollCheck_bottom) { // is scroll is larger than lower threshold but less than higher threshold
-            document.getElementById("chat_main").style.height = (window.scrollY - 176  + height) + "px";
+          if (!scrollCheck_top) {
+            // if the scroll is not larger than threshold to increase height
+            document.getElementById("chat_main").style.height =
+              (width / 100) * 41 + "px";
+          } else if (scrollCheck_bottom) {
+            // is scroll is larger than lower threshold but less than higher threshold
+            document.getElementById("chat_main").style.height =
+              window.scrollY - 176 + height + "px";
           } else {
             document.getElementById("chat_main").style.height = height + "px";
           }
@@ -97,16 +108,18 @@ const StreamPage = () => {
           const scrollCheck_top = window.scrollY === 0;
           const scrollCheck_bottom = window.scrollY < 176;
           if (scrollCheck_top) {
-            document.getElementById("chat_main").style.height = (width / 100 * 41) + "px";
+            document.getElementById("chat_main").style.height =
+              (width / 100) * 41 + "px";
           } else if (scrollCheck_bottom) {
-            document.getElementById("chat_main").style.height = (width / 100 * 41 + window.scrollY) + "px";
+            document.getElementById("chat_main").style.height =
+              (width / 100) * 41 + window.scrollY + "px";
           } else {
             document.getElementById("chat_main").style.height = height + "px";
           }
         }
       }
-    })
-  })
+    });
+  });
 
   // POP_UP WARNING SECTION
   // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
@@ -159,14 +172,14 @@ const StreamPage = () => {
   const [username, setUsername] = useState(""); // Username from login
   const [user_id, setUserID] = useState(""); // Tracks user's id of signed in user
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
- 
+
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
   Auth.currentAuthenticatedUser({})
     .then((user) => {
       setUserEmail(user.attributes.email);
       setUsername(user.username);
-    })    
+    })
     .then((user) => setAuth(true))
     .catch((err) => setAuth(false));
 
@@ -193,8 +206,7 @@ const StreamPage = () => {
     window.open(url, "_blank");
   };
 
-
-  // TOGGLE CHAT SECTION 
+  // TOGGLE CHAT SECTION
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
   const toggleChat = () => {
     if (button_icon === "fa fa-chevron-right") {
@@ -208,7 +220,6 @@ const StreamPage = () => {
       document.getElementById("stream_col").style.flex = "7";
     }
   };
-
 
   // RENDERING SECTION
   return (
@@ -275,32 +286,43 @@ const StreamPage = () => {
                         concert_id={concert_id}
                       />
                       <div className="toggle-chat">
-                        <button className="toggle-chat-button" onClick={toggleChat}>
+                        <button
+                          className="toggle-chat-button"
+                          onClick={toggleChat}
+                        >
                           <i class={button_icon}></i>
                         </button>
                       </div>
                     </div>
                   </div>
-                  <Row>
-                    {/* <Col size={0.5}></Col> */}
+                  <Row className="stream-info-row">
+                    {/* <Col size={0.3}></Col> */}
                     <Col size={7}>
-                      <Col size={2}>
-                        <Row>
+                      <Row>
+                        <Col size={2}>
                           <h3 className="artist-name-stream">{artist_name}</h3>
-                        </Row>
-                        <Row>
-                          <h5 className="show-time">
-                            {show_time} (refresh the page if stream
-                        doesn't show up)
-                      </h5>
-                        </Row>
-                      </Col>
+                        </Col>
+                        <Col size={1}>
+                          <div className="viewers">
+                            <h5 className="viewer-count show-time">
+                              {viewers} watching now
+                            </h5>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <h5 className="show-time">
+                          {show_time} (refresh the page if stream doesn't show
+                          up)
+                        </h5>
+                      </Row>
+                      {/* </Col> */}
                       {/* <Col size={1} className="social-bar-center">
-                    <SocialBar />
-                  </Col> */}
+                           <SocialBar />
+                      </Col> */}
                     </Col>
-                    <Col size={2.5}></Col>
-                    {/* <Col size={0.5}></Col> */}
+                    {/* <Col size={2.5}></Col>
+                    <Col size={0.5}></Col> */}
                   </Row>
                   <Row>
                     <div className="short-term-spacer"></div>
@@ -311,10 +333,10 @@ const StreamPage = () => {
                     <Col size={1} className="donate-stripe donate-box">
                       <p className="donate-description">
                         Click here to tip with a credit card.
-                  </p>
+                      </p>
                       <p className="donate-subdescription">
                         Your card information will not be stored anywhere.
-                  </p>
+                      </p>
                     </Col>
                     <Col size={1} className="donate-paypal donate-box">
                       <p className="donate-description">
@@ -322,16 +344,16 @@ const StreamPage = () => {
                       </p>
                       <p className="donate-subdescription">
                         onfour will ensure your tip is sent to the artist.
-                  </p>
+                      </p>
                     </Col>
                     <Col size={1} className="donate-venmo donate-box">
                       <p className="donate-description">
                         Scan the QR code below to tip on Venmo.
-                  </p>
+                      </p>
                       <p className="donate-subdescription">
-                        @SpencerAmer from onfour will ensure your tip is sent to the
-                        artist.
-                  </p>
+                        @SpencerAmer from onfour will ensure your tip is sent to
+                        the artist.
+                      </p>
                     </Col>
                   </Row>
 
@@ -344,7 +366,7 @@ const StreamPage = () => {
                         data-target="#paymentModal"
                       >
                         Tip with Card
-                  </button>{" "}
+                      </button>{" "}
                       <Modal></Modal>
                     </Col>
                     <Col size={1} className="donate-paypal donate-box-button">
@@ -353,7 +375,7 @@ const StreamPage = () => {
                         onClick={donatePaypal}
                       >
                         Tip with Paypal
-                  </button>
+                      </button>
                     </Col>
                     <Col size={1} className="donate-venmo donate-box-button">
                       <img
@@ -370,7 +392,7 @@ const StreamPage = () => {
                       <p className="stream-subscribe-description">
                         To stay informed about upcoming events, subscribe to our
                         mailing list:
-                  </p>
+                      </p>
                       {(() => {
                         if (email_submitted) {
                           return (
@@ -393,7 +415,9 @@ const StreamPage = () => {
                                 required
                                 value={email}
                                 style={{ width: "280px" }}
-                                onChange={(event) => setEmail(event.target.value)}
+                                onChange={(event) =>
+                                  setEmail(event.target.value)
+                                }
                               />
                               <button
                                 type="submit"
@@ -403,8 +427,8 @@ const StreamPage = () => {
                                 className="button-border button-height"
                               >
                                 {" "}
-                            Submit
-                          </button>
+                                Submit
+                              </button>
                             </form>
                           );
                         }
@@ -412,7 +436,11 @@ const StreamPage = () => {
                     </Col>
                   </Row>
                 </Col>
-                <Col size={2.5} id="chat_container" className="sticky-container">
+                <Col
+                  size={2.5}
+                  id="chat_container"
+                  className="sticky-container"
+                >
                   <div className="chat-main" id="chat_main">
                     <div className="chat-wrapper">
                       {/* {
@@ -430,6 +458,7 @@ const StreamPage = () => {
                       <Chat
                         chat_name={username ? username : "GUEST"}
                         chatStatus={chatStatus}
+                        setViewers={getViewers}
                       />
                     </div>
                   </div>
@@ -471,6 +500,7 @@ const StreamPage = () => {
                     <Chat
                       chat_name={username ? username : "GUEST"}
                       chatStatus={chatStatus}
+                      setViewers={getViewers}
                     />
                   </div>
                 </div>
