@@ -377,6 +377,7 @@ const StreamPage = () => {
                         className="stripe-button-border button-height"
                         data-toggle="modal"
                         data-target="#paymentModal"
+                        onClick={donateModal}
                       >
                         Tip with Card
                       </button>{" "}
