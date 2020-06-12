@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
-import { Prompt } from "react-router";
+// import { Prompt } from "react-router";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -17,7 +17,7 @@ import Auth from "../../apis/UserPool";
 import VideoPlayer from "./video_player";
 import Chat from "../chat/stream_chat";
 // import Join from "../chat/join_chat";
-import WaitingChat from "../chat/chat_waiting";
+// import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
 // import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
@@ -40,10 +40,10 @@ const StreamPage = () => {
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat
   // Function passed as prop to join chat
-  const joinSubmit = (name, mode) => {
-    setChatName(name);
-    // setShowChat(mode);
-  };
+  // const joinSubmit = (name, mode) => {
+  //   setChatName(name);
+  //   // setShowChat(mode);
+  // };
   // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
@@ -71,11 +71,49 @@ const StreamPage = () => {
 
   // AUTO-SCROLL SECTION
   // Auto-scrolls on first navigation
-  const [scroll, setScroll] = useState(true); // Auto-scroll
-  if (scroll) {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setScroll(false);
-  }
+  // const [scroll, setScroll] = useState(true); // Auto-scroll
+  // if (scroll) {
+  //   window.scrollTo({ top: "10px", behavior: "smooth" });
+  //   setScroll(false);
+  // }
+
+  // ADJUST CHAT HEIGHT BASED ON SCROLL AMOUNT
+  useEffect(() => {
+    document.addEventListener("scroll", () => {
+      if (176 + (width / 100) * 41 - height > 0) {
+        if (document.getElementById("chat_main")) {
+          const scrollCheck_top =
+            window.scrollY > 176 + (width / 100) * 41 - height;
+          const scrollCheck_bottom = window.scrollY < 176;
+          if (!scrollCheck_top) {
+            // if the scroll is not larger than threshold to increase height
+            document.getElementById("chat_main").style.height =
+              (width / 100) * 41 + "px";
+          } else if (scrollCheck_bottom) {
+            // is scroll is larger than lower threshold but less than higher threshold
+            document.getElementById("chat_main").style.height =
+              window.scrollY - 176 + height + "px";
+          } else {
+            document.getElementById("chat_main").style.height = height + "px";
+          }
+        }
+      } else {
+        if (document.getElementById("chat_main")) {
+          const scrollCheck_top = window.scrollY === 0;
+          const scrollCheck_bottom = window.scrollY < 176;
+          if (scrollCheck_top) {
+            document.getElementById("chat_main").style.height =
+              (width / 100) * 41 + "px";
+          } else if (scrollCheck_bottom) {
+            document.getElementById("chat_main").style.height =
+              (width / 100) * 41 + window.scrollY + "px";
+          } else {
+            document.getElementById("chat_main").style.height = height + "px";
+          }
+        }
+      }
+    });
+  });
 
   // POP_UP WARNING SECTION
   // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
@@ -134,7 +172,6 @@ const StreamPage = () => {
   const [username, setUsername] = useState(""); // Username from login
   const [user_id, setUserID] = useState(""); // Tracks user's id of signed in user
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
-  // const [last, setLast] = useState(""); // Tracks last name of signed in user
 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
@@ -157,17 +194,16 @@ const StreamPage = () => {
     ).then((data) => {
       setUsername(data.data.listCreateOnfourRegistrations.items[0].username);
       setFirst(data.data.listCreateOnfourRegistrations.items[0].first);
-      // setLast(data.data.listCreateOnfourRegistrations.items[0].last);
       setUserID(data.data.listCreateOnfourRegistrations.items[0].id);
       setShowChat(true);
     });
   }
 
-  // DONATION FUNCTION
+  // DONATION SECTION
   // Opens link to paypal account for musician
   const donatePaypal = () => {
     Analytics.record({ name: "paypalClicked" });
-    const url = "https://www.paypal.me/onfourdonations";
+    const url = "https://bit.ly/3dN8gOB";
     window.open(url, "_blank");
   };
 
@@ -189,6 +225,21 @@ const StreamPage = () => {
   }, []);
   const authenticatedStreamPageVisit = () => {
     Analytics.record({ name: "totalAuthenticatedStreamPageVisits" });
+  };
+
+  // TOGGLE CHAT SECTION
+  const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
+  const toggleChat = () => {
+    if (button_icon === "fa fa-chevron-right") {
+      setButtonIcon("fa fa-chevron-left");
+      document.getElementById("chat_container").style.display = "none";
+      // document.getElementById("chat_container").style.display = "none";
+      document.getElementById("stream_col").style.flex = "9";
+    } else {
+      setButtonIcon("fa fa-chevron-right");
+      document.getElementById("chat_container").style.display = "inline";
+      document.getElementById("stream_col").style.flex = "7";
+    }
   };
 
   // RENDERING SECTION
@@ -240,8 +291,8 @@ const StreamPage = () => {
           {width > 600 ? (
             <Grid>
               <Row>
-                <Col size={0.5}></Col>
-                <Col size={7}>
+                {/* <Col size={0.5}></Col> */}
+                <Col size={7} id="stream_col">
                   <div className="stream-main">
                     <div className="stream-wrapper">
                       <VideoPlayer
@@ -255,11 +306,155 @@ const StreamPage = () => {
                         user_id={user_id}
                         concert_id={concert_id}
                       />
+                      <div className="toggle-chat">
+                        <button
+                          className="toggle-chat-button"
+                          onClick={toggleChat}
+                        >
+                          <i class={button_icon}></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
+                  <Row>
+                    {/* <Col size={0.5}></Col> */}
+                    <Col size={7}>
+                      <Col size={2}>
+                        <Row>
+                          <h3 className="artist-name-stream">{artist_name}</h3>
+                        </Row>
+                        <Row>
+                          <h5 className="show-time">
+                            {show_time} (refresh the page if stream doesn't show
+                            up)
+                          </h5>
+                        </Row>
+                      </Col>
+                      {/* <Col size={1} className="social-bar-center">
+                    <SocialBar />
+                  </Col> */}
+                    </Col>
+                    <Col size={2.5}></Col>
+                    {/* <Col size={0.5}></Col> */}
+                  </Row>
+                  <Row>
+                    <div className="short-term-spacer"></div>
+                  </Row>
+
+                  {/* DONATE ROW */}
+                  <Row className="donate-row">
+                    <Col size={1} className="donate-stripe donate-box">
+                      <p className="donate-description">
+                        Click here to tip with a credit card.
+                      </p>
+                      <p className="donate-subdescription">
+                        Your card information will not be stored anywhere.
+                      </p>
+                    </Col>
+                    <Col size={1} className="donate-paypal donate-box">
+                      <p className="donate-description">
+                        Click here to tip with Paypal.{" "}
+                      </p>
+                      <p className="donate-subdescription">
+                        onfour will ensure your tip is sent to the artist.
+                      </p>
+                    </Col>
+                    <Col size={1} className="donate-venmo donate-box">
+                      <p className="donate-description">
+                        Scan the QR code below to tip on Venmo.
+                      </p>
+                      <p className="donate-subdescription">
+                        @SpencerAmer from onfour will ensure your tip is sent to
+                        the artist.
+                      </p>
+                    </Col>
+                  </Row>
+
+                  {/* DONATE ROW */}
+                  <Row className="donate-row-buttons">
+                    <Col size={1} className="donate-stripe donate-box-button">
+                      <button
+                        className="stripe-button-border button-height"
+                        data-toggle="modal"
+                        data-target="#paymentModal"
+                      >
+                        Tip with Card
+                      </button>{" "}
+                      <Modal></Modal>
+                    </Col>
+                    <Col size={1} className="donate-paypal donate-box-button">
+                      <button
+                        className="stripe-button-border button-height paypal-button"
+                        onClick={donatePaypal}
+                      >
+                        Tip with Paypal
+                      </button>
+                    </Col>
+                    <Col size={1} className="donate-venmo donate-box-button">
+                      <img
+                        className="venmo-code"
+                        src={VenmoCode}
+                        alt="venmo-qr"
+                      ></img>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col size={1} className="stream-subscribe-box">
+                      <p className="stream-subscribe-title">Subscribe</p>
+                      <p className="stream-subscribe-description">
+                        To stay informed about upcoming events, subscribe to our
+                        mailing list:
+                      </p>
+                      {(() => {
+                        if (email_submitted) {
+                          return (
+                            <p className="subscribe-success">
+                              Thank you and stay tuned!
+                            </p>
+                          );
+                        } else {
+                          return (
+                            <form
+                              class="stream-email-form"
+                              action="/"
+                              id="newsletter"
+                              onSubmit={emailSubmit}
+                            >
+                              <input
+                                type="email"
+                                placeholder="Enter your email here..."
+                                name="email"
+                                required
+                                value={email}
+                                style={{ width: "280px" }}
+                                onChange={(event) =>
+                                  setEmail(event.target.value)
+                                }
+                              />
+                              <button
+                                type="submit"
+                                form="newsletter"
+                                value="Submit"
+                                style={{ width: "100px" }}
+                                className="button-border button-height"
+                              >
+                                {" "}
+                                Submit
+                              </button>
+                            </form>
+                          );
+                        }
+                      })()}
+                    </Col>
+                  </Row>
                 </Col>
-                <Col size={3}>
-                  <div className="chat-main">
+                <Col
+                  size={2.5}
+                  id="chat_container"
+                  className="sticky-container"
+                >
+                  <div className="chat-main" id="chat_main">
                     <div className="chat-wrapper">
                       {/* {
                       username ? (
@@ -280,139 +475,9 @@ const StreamPage = () => {
                     </div>
                   </div>
                 </Col>
-                <Col size={0.5}></Col>
+                {/* <Col size={0.5}></Col> */}
               </Row>
               {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
-              <Row>
-                <Col size={0.5}></Col>
-                <Col size={7}>
-                  <Col size={2}>
-                    <Row>
-                      <h3 className="artist-name-stream">{artist_name}</h3>
-                    </Row>
-                    <Row>
-                      <h5 className="show-time">
-                        {show_time} (refresh the page if stream doesn't show up)
-                      </h5>
-                    </Row>
-                  </Col>
-                  {/* <Col size={1} className="social-bar-center">
-                      <SocialBar />
-                    </Col> */}
-                </Col>
-                <Col size={3}></Col>
-                <Col size={0.5}></Col>
-              </Row>
-              <Row>
-                <div className="short-term-spacer"></div>
-              </Row>
-
-              {/* DONATE ROW */}
-              <Row className="donate-row">
-                <Col size={1} className="donate-stripe donate-box">
-                  <p className="donate-description">
-                    Click here to tip with a credit card.
-                  </p>
-                  <p className="donate-subdescription">
-                    Your card information will not be stored anywhere.
-                  </p>
-                </Col>
-                <Col size={1} className="donate-paypal donate-box">
-                  <p className="donate-description">
-                    Click here to tip with Paypal.{" "}
-                  </p>
-                  <p className="donate-subdescription">
-                    onfour will ensure your tip is sent to the artist.
-                  </p>
-                </Col>
-                <Col size={1} className="donate-venmo donate-box">
-                  <p className="donate-description">
-                    Scan the QR code below to tip on Venmo.
-                  </p>
-                  <p className="donate-subdescription">
-                    @SpencerAmer from onfour will ensure your tip is sent to the
-                    artist.
-                  </p>
-                </Col>
-              </Row>
-
-              {/* DONATE ROW */}
-              <Row className="donate-row-buttons">
-                <Col size={1} className="donate-stripe donate-box-button">
-                  <button
-                    className="stripe-button-border button-height"
-                    data-toggle="modal"
-                    data-target="#paymentModal"
-                    onClick={donateModal}
-                  >
-                    Tip with Card
-                  </button>{" "}
-                  <Modal></Modal>
-                </Col>
-                <Col size={1} className="donate-paypal donate-box-button">
-                  <button
-                    className="stripe-button-border button-height paypal-button"
-                    onClick={donatePaypal}
-                  >
-                    Tip with Paypal
-                  </button>
-                </Col>
-                <Col size={1} className="donate-venmo donate-box-button">
-                  <img
-                    className="venmo-code"
-                    src={VenmoCode}
-                    alt="venmo-qr"
-                  ></img>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col size={1} className="stream-subscribe-box">
-                  <p className="stream-subscribe-title">Subscribe</p>
-                  <p className="stream-subscribe-description">
-                    To stay informed about upcoming events, subscribe to our
-                    mailing list:
-                  </p>
-                  {(() => {
-                    if (email_submitted) {
-                      return (
-                        <p className="subscribe-success">
-                          Thank you and stay tuned!
-                        </p>
-                      );
-                    } else {
-                      return (
-                        <form
-                          class="stream-email-form"
-                          action="/"
-                          id="newsletter"
-                          onSubmit={emailSubmit}
-                        >
-                          <input
-                            type="email"
-                            placeholder="Enter your email here..."
-                            name="email"
-                            required
-                            value={email}
-                            style={{ width: "280px" }}
-                            onChange={(event) => setEmail(event.target.value)}
-                          />
-                          <button
-                            type="submit"
-                            form="newsletter"
-                            value="Submit"
-                            style={{ width: "100px" }}
-                            className="button-border button-height"
-                          >
-                            {" "}
-                            Submit
-                          </button>
-                        </form>
-                      );
-                    }
-                  })()}
-                </Col>
-              </Row>
             </Grid>
           ) : (
             <div className="mobile-grid-stream">

@@ -21,6 +21,9 @@ Amplify.configure(awsmobile);
 
 // The Upcoming Show Page component
 const UpcomingShowPage = () => {
+
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
+
   // concerts is a list of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([]);
 
@@ -66,6 +69,8 @@ const UpcomingShowPage = () => {
       const day_in_week = new Date(data.date).toString();
       const hour = parseInt(data.time.slice(0, 2));
       const minutes = data.time.slice(2, 5);
+      const time_left = +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
+      const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
 
       setConcerts((concerts) => [
         ...concerts,
@@ -92,6 +97,9 @@ const UpcomingShowPage = () => {
           }
           price={data.price}
           description={data.description.toString()}
+          days_left={days_left}
+          width={width}
+          genre={data.genre}
         />,
       ]);
     });
@@ -116,18 +124,25 @@ const UpcomingShowPage = () => {
     Analytics.record({ name: "totalAuthenticatedUpcomingPageVisits" });
   };
 
-  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   return (
     <div className="upcoming-show-page-content">
       {/* <SearchBar></SearchBar> */}
-      {width > 600 ? (
-        <div className="upcoming-show-grid">
-          <FlexibleGrid content_list={concerts} num_cols={4} />
-        </div>
-      ) : (
+      {width <= 600 ? (
         <div className="upcoming-show-grid">
           <FlexibleGrid content_list={concerts} num_cols={1} />
+        </div>
+      ) : (
+        <div>
+          {width <= 1024 ? (
+            <div className="upcoming-show-grid">
+              <FlexibleGrid content_list={concerts} num_cols={3} />
+            </div>
+          ) : (
+            <div className="upcoming-show-grid">
+              <FlexibleGrid content_list={concerts} num_cols={4} />
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -7,6 +7,8 @@ import { Grid, Row, Col } from "../grid";
 
 // AWS Imports
 import Amplify, { Analytics } from "aws-amplify";
+// Component Imports
+import BioModal from "./bio_modal";
 
 // FeaturedContent is the unit element for an upcoming concert
 const FeaturedContent = ({
@@ -20,6 +22,9 @@ const FeaturedContent = ({
   time,
   price,
   description,
+  days_left,
+  width,
+  genre,
 }) => {
   const [show_more_info, setClickedInfo] = useState(false); // Determines whether to show the popup for musician's bio or not
 
@@ -38,7 +43,7 @@ const FeaturedContent = ({
   };
 
   return (
-    <Grid className="featured-content">
+    <div className="single-element">
       {/* POP-UP FOR MUSICIAN'S BIO SECTION */}
       {show_more_info ? (
         <div className="popup-artist-info">
@@ -46,61 +51,60 @@ const FeaturedContent = ({
             <span className="popup-info-close" onClick={close_info}>
               <i className="fa fa-times close-icon"></i>
             </span>
-            <br></br>
             <div className="popup-info-content">
-              <p className="concert-description">{description}</p>
+              <BioModal
+                days_left={days_left}
+                artist_name={name}
+                concert_name={concert_name}
+                img={img}
+                price={price}
+                weekday={week_day}
+                date={date}
+                time={time}
+                description={description}
+                width={width}
+              ></BioModal>
             </div>
           </form>
         </div>
       ) : null}
-      <Row>
-        <Col size={3} className="poster-container">
-          <img className="concert-poster" src={img} alt="content-img"></img>
-          <div className="poster-tag">
-            <h4 className="poster-text">{month}</h4>
-            <h1 className="poster-text">{day}</h1>
-          </div>
-        </Col>
+      <Row className="RSVP">
+        <p className="RSVP-text">MORE INFO</p>
       </Row>
-      <Row>
-        <Col size={3} className="show-content-bar">
-          <Row>
-            <Col size={3}>
-              <p className="artist-name">
-                {name} - {concert_name}
-              </p>
-            </Col>
-          </Row>
-          <Row>
-            <Col size={3}>
-              <p className="time">
-                {week_day} | {date} | {time} EST
-              </p>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-      <Row className="ticket">
-        <Col size={3}>
-          {price ? (
-            <button
-              className="featured-content-button-border"
-              data-toggle="modal"
-              data-target="#ticketModal"
-            >
-              Ticket >
-            </button>
-          ) : (
-            <button
-              className="featured-content-button-border"
-              onClick={open_info}
-            >
-              MORE INFO
-            </button>
-          )}
-        </Col>
-      </Row>
-    </Grid>
+      <Grid className="featured-content" onClick={open_info}>
+        <Row>
+          <Col size={3} className="poster-container">
+            <img className="concert-poster" src={img} alt="content-img"></img>
+            {/* <div className="poster-tag">
+              <h4 className="poster-text">{month}</h4>
+              <h1 className="poster-text">{day}</h1>
+            </div> */}
+            {/* <div className="genre-tag">{genre}</div> */}
+          </Col>
+        </Row>
+        <Row>
+          <Col size={3} className="show-content-bar">
+            <Row>
+              <div className="genre-box">{genre.toUpperCase()}</div>
+            </Row>
+            <Row>
+              <Col size={3}>
+                <p className="artist-name">
+                  {name} - {concert_name}
+                </p>
+              </Col>
+            </Row>
+            <Row className="time-row">
+              <Col size={3}>
+                <p className="time">
+                  {week_day} | {date} | {time} EST{" "}
+                </p>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Grid>
+    </div>
   );
 };
 
