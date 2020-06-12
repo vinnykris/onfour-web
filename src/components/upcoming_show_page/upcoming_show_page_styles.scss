@@ -70,30 +70,27 @@
 }
 
 .RSVP {
-  position: absolute;
-  top: 0; bottom: 0; left: 0; right: 0;
+  // margin: 0;
+  // position: absolute;
+  // top: 50%;
+  // -ms-transform: translateY(-50%);
+  // transform: translateY(-50%);
   // width: 100%;
-  z-index: 0;
+  // z-index: 0;
+
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .RSVP-text {
-  margin: 0 auto;
   text-align: center;
-  padding-top: 45%;
   color: white;
-  font-size: 30px;
+  font-size: 1.5rem;
   font-weight: bold;
-  @include respond-to("large") {
-    padding-top: 35%;
-  }
-
-  @include respond-to("medium") {
-    padding-top: 30%;
-  }
-
-  @include respond-to("small") {
-    padding-top: 25%;
-  }
 }
 
 .poster-container {
@@ -101,7 +98,7 @@
   width: 100%;
   height: 17vw;
   @include respond-to("small") {
-    height: 47vw;
+    height: 27vh;
   }
 }
 

@@ -282,7 +282,7 @@ const StreamPage = () => {
                     </div>
                   </div>
                   <Row>
-                    {/* <Col size={0.5}></Col> */}
+                    <Col size={0.3}></Col>
                     <Col size={7}>
                       <Col size={2}>
                         <Row>
@@ -296,11 +296,11 @@ const StreamPage = () => {
                         </Row>
                       </Col>
                       {/* <Col size={1} className="social-bar-center">
-                    <SocialBar />
-                  </Col> */}
+                           <SocialBar />
+                      </Col> */}
                     </Col>
                     <Col size={2.5}></Col>
-                    {/* <Col size={0.5}></Col> */}
+                    <Col size={0.5}></Col>
                   </Row>
                   <Row>
                     <div className="short-term-spacer"></div>

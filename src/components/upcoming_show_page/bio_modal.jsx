@@ -118,9 +118,9 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                     num={4}
                                                 />
                                                 <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/crystal.png"}
-                                                    name={"Crystal Valentine"}
-                                                    bio={"Born and raised in the Bronx, Crystal Valentine is a nationally and internationally acclaimed poet. Crystal has traveled across seas performing on platforms in Paris, Brazil, Botswana, South Africa and elsewhere. She was named Glamour Magazine's 2016 College Woman of the Year, Teen Vogue's Rising Young Black Thought Leader, and was the recipient of the National Conference of College Women Student Leaders Woman’s Distinction Award. A Callaloo Fellow and former New York City Youth Poet Laureate, Crystal’s work has been featured on programming for MSNBC, Blavity, Button Poetry, BET, CNN, The New York Daily News and more. She earned her B.A in Psychology at New York University, where she is returning as a MFA candidate in Poetry. She is a coordinator for the Bronx Council on the Arts and is the current Wednesday Night host at the Nuyorican Poets Café."}
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/jenna.png"}
+                                                    name={"Jenna Putnam"}
+                                                    bio={"Jenna Putnam is a writer, poet, musician, and visual artist living and working in Los Angeles. She likes long walks down dark crooked streets, Arthur Russel, and tasteful nudes."}
                                                     num={5}
                                                 />
                                                 <FestivalBio
@@ -350,9 +350,9 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                 num={4}
                                             />
                                             <FestivalBio
-                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/crystal.png"}
-                                                name={"Crystal Valentine"}
-                                                bio={"Born and raised in the Bronx, Crystal Valentine is a nationally and internationally acclaimed poet. Crystal has traveled across seas performing on platforms in Paris, Brazil, Botswana, South Africa and elsewhere. She was named Glamour Magazine's 2016 College Woman of the Year, Teen Vogue's Rising Young Black Thought Leader, and was the recipient of the National Conference of College Women Student Leaders Woman’s Distinction Award. A Callaloo Fellow and former New York City Youth Poet Laureate, Crystal’s work has been featured on programming for MSNBC, Blavity, Button Poetry, BET, CNN, The New York Daily News and more. She earned her B.A in Psychology at New York University, where she is returning as a MFA candidate in Poetry. She is a coordinator for the Bronx Council on the Arts and is the current Wednesday Night host at the Nuyorican Poets Café."}
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/jenna.png"}
+                                                name={"Jenna Putnam"}
+                                                bio={"Jenna Putnam is a writer, poet, musician, and visual artist living and working in Los Angeles. She likes long walks down dark crooked streets, Arthur Russel, and tasteful nudes."}
                                                 num={5}
                                             />
                                             <FestivalBio
