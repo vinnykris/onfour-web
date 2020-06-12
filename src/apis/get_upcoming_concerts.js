@@ -100,6 +100,7 @@ export const getConcertInfo = async () => {
         }
         price={data.price}
         description={data.description.toString()}
+        genre={data.genre}
       />
     );
 
