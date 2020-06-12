@@ -36,6 +36,13 @@ const StreamPage = () => {
   // DETERMINE MOBILE VERSION OR NOT
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
+  const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
+  // Auto scroll to the top on page load
+  if (scroll) {
+    window.scrollTo({ top: 0 });
+    setScroll(false);
+  }
+
   // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat

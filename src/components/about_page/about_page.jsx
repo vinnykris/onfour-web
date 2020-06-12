@@ -27,7 +27,12 @@ Amplify.configure(awsmobile);
 const AboutPage = () => {
   const [email, setEmail] = useState(""); // Variable to store input emails for subscribtion form
   const [clicked, setClicked] = useState(false); // Variable to show hide the subscribtion form
-  // const [scroll, setScroll] = useState(true); // This might be no use
+  const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
+  // Auto scroll to the top on page load
+  if (scroll) {
+    window.scrollTo({ top: 0 });
+    setScroll(false);
+  }
 
   // concerts is a list of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([]);
@@ -53,11 +58,6 @@ const AboutPage = () => {
     setClicked(true);
   };
 
-  // This part of code may not be used
-  // if (scroll) {
-  //   window.scrollTo({ top: 0 });
-  //   setScroll(false);
-  // }
 
   // This function gets called when user clicked the "Send us an email"
   // It will open a mailbox with onfour.box@gmail.com as the receiver
@@ -81,32 +81,58 @@ const AboutPage = () => {
     // setConcerts(await getConcertInfo());
   }, []);
 
+
+  const [isVisible, setVisible] = React.useState(true);
+  const domRef = React.useRef();
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => setVisible(entry.isIntersecting));
+    });
+    observer.observe(domRef.current);
+    return () => observer.unobserve(domRef.current);
+  }, []);
+
+
   return (
     <div className="about-page-content">
       {/* DESKTOP LAYOUT */}
       <Grid className="desktop-grid-about">
         {/* BANNER ROW */}
-        <Row>
-          <Col size={1}>
-            <div className="banner-container">
-              <img
-                className="banner-header-desktop"
-                src={header_image_url}
-                alt="nav-logo"
-              ></img>
-              <h1 className="header-tag">Reimagining live music.</h1>
-            </div>
-          </Col>
+        <Row className="banner-row">
+          <div className="banner-container">
+            <img
+              className="banner-header-desktop"
+              src={header_image_url}
+              alt="nav-logo"
+            ></img>
+            <Row className="header-tag-row">
+              <Col>
+                <Row>
+                  <span className="header-tag">REIMAGINING</span>
+                </Row>
+                <Row>
+                  <span className="header-tag">LIVE</span>
+                </Row>
+                <Row>
+                  <span className="header-tag">MUSIC.</span>
+                </Row>
+              </Col>
+            </Row>
+            <Row className="upcoming-row">
+              <Col>
+                <Row>
+                  <span className="upcoming-header-tag">UP NEXT</span>
+                </Row>
+                <Row>
+                  <div className="upcoming-description">Jerry Weldon has his international jazz chops and you've never experienced sax playing like his!</div>
+                </Row>
+              </Col>
+            </Row>
+          </div>
         </Row>
-        {/* MISSION ROW */}
-        {/* <Row>
-          <Col size={1}>
-            <h3 className="our-mission-text"> Our Mission </h3>
-          </Col>
-        </Row> */}
         <Row className="view-height-row">
           <Col size={12}>
-            <p className="description-text">
+            <p className={"description-text" + isVisible ? "is-visible" : ""} ref={domRef}>
               Onfour empowers music fans by providing a new way to interact with 
               your favorite musicians, no matter where you are. Musicians gain more 
               control over their careers and connect with fans in new, meaningful ways.
@@ -139,12 +165,25 @@ const AboutPage = () => {
             </Row> */}
           </Col>
         </Row>
-        <Row className="view-height-row">
-          <Col size={1} className="why-perform-about">
-            <Row>
-              <div className="short-term-spacer"></div>
+        <Row className="view-height-row why-perform-about">
+            <Row className="why-perform-text-container">
+              <Col>
+                <Row>
+                  <div className="why-perform-title">Perform with onfour</div>
+                </Row>
+                <Row>
+                  <div className="why-perform-text">{
+                  "Provide your fans with a better live experience: \nPlug in with your audio interface and mixer. \nTicket your shows, set your own prices, and receive tips. \nChat with your fans in real-time. \nRecord your full show for free in high definition. \nReal-time tech support for setting up and streaming."
+                  }</div>
+                </Row>
+              </Col>
             </Row>
-          </Col>
+            <Row className="why-perform-learn-more-row">
+              <button className="why-perform-learn-more-button" onClick={() => history.push("/artists")}>LEARN MORE ></button>
+            </Row>
+            <Row className="why-perform-image-container">
+              <img className="why-perform-image" src={"https://onfour-media.s3.amazonaws.com/singing+photo.jpg"} alt="singer-image"></img>
+            </Row>
         </Row>
         {/* <Row>
           <Col size={1}>

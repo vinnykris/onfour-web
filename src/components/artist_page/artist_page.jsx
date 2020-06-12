@@ -1,5 +1,5 @@
 // Main Imports
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Row, Col } from "../grid";
 
 // Image Imports
@@ -14,6 +14,14 @@ import "./artist_styles.scss";
 
 // Artist component that contains the features we provide to artists
 const ArtistPage = () => {
+
+  const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
+  // Auto scroll to the top on page load
+  if (scroll) {
+    window.scrollTo({ top: 0 });
+    setScroll(false);
+  }
+
   return (
     <div className="artist-page-content">
       {/* DESKTOP LAYOUT */}
