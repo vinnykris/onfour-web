@@ -113,39 +113,16 @@
   width: 70vw;
   height: 20vh;
   margin: 0;
-  top: 0%;
-  left: 50%;
-  -ms-transform: translate(-50%, -0%);
-  transform: translate(-50%, -0%);
-  line-height: 7vh;
-  text-align: center;
-  font-size: 2vw;
-  font-weight: $medium-weight;
-  color: #e2e2e2;
-
-  // this is for text fade-in
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.6s ease-out, transform 1.2s ease-out;
-  will-change: opacity, visibility;
-}
-
-.is-visible {
-  position: absolute;
-  line-height: 7vh;
-  text-align: center;
-  font-size: 2vw;
-  font-weight: $medium-weight;
-  color: #e2e2e2;
-  width: 70vw;
-  height: 20vh;
-  margin: 0;
-  opacity: 1;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  visibility: visible;
+  line-height: 7vh;
+  text-align: center;
+  font-size: 2vw;
+  font-weight: $medium-weight;
+  color: #e2e2e2;
+  opacity: 0;
 }
 
 .why-perform-about {

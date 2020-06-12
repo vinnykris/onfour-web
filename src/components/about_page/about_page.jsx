@@ -11,6 +11,7 @@ import awsmobile from "../../apis/AppSync";
 
 // Component Imports
 import FlexibleGrid from "../flexible_grid/flexible_grid";
+import { useWindowDimensions } from "../custom_hooks";
 
 // API Imports
 import { getConcertInfo } from "../../apis/get_upcoming_concerts";
@@ -25,6 +26,10 @@ Amplify.configure(awsmobile);
 
 // AboutPage component that contains all the about page layout
 const AboutPage = () => {
+
+  // DETERMINE MOBILE VERSION OR NOT
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
+
   const [email, setEmail] = useState(""); // Variable to store input emails for subscribtion form
   const [clicked, setClicked] = useState(false); // Variable to show hide the subscribtion form
   const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
@@ -81,17 +86,23 @@ const AboutPage = () => {
     // setConcerts(await getConcertInfo());
   }, []);
 
+  // ADD ANIMATION TO CSS BASED ON SCROLL AMOUNT
+  useEffect(() => {
+    document.addEventListener("scroll", () => {
+        if (document.getElementById("section2-text")) {
+          const scrollCheck_top_section2 = window.scrollY > (height/2);
+          const scrollCheck_bottom_section2 = window.scrollY > height;
+          if (scrollCheck_top_section2 && !scrollCheck_bottom_section2) {
+            // if the scroll amount is larger than view height to increase opacity
+            document.getElementById("section2-text").style.opacity = (window.scrollY - height/3) / height * 2.5;
 
-  const [isVisible, setVisible] = React.useState(true);
-  const domRef = React.useRef();
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => setVisible(entry.isIntersecting));
-    });
-    observer.observe(domRef.current);
-    return () => observer.unobserve(domRef.current);
-  }, []);
-
+          } else if (scrollCheck_bottom_section2 && (window.scrollY < height*2)) {
+            document.getElementById("section2-text").style.opacity = 1 - (window.scrollY - height) / height * 2;
+            // document.getElementById("why-perform-text-container").style.left = (-34 + (54 / ((window.scrollY - height) / height))) + "%";
+          }
+        }
+      })
+  });
 
   return (
     <div className="about-page-content">
@@ -132,7 +143,7 @@ const AboutPage = () => {
         </Row>
         <Row className="view-height-row">
           <Col size={12}>
-            <p className={"description-text" + isVisible ? "is-visible" : ""} ref={domRef}>
+            <p className="description-text" id="section2-text">
               Onfour empowers music fans by providing a new way to interact with 
               your favorite musicians, no matter where you are. Musicians gain more 
               control over their careers and connect with fans in new, meaningful ways.
@@ -166,7 +177,7 @@ const AboutPage = () => {
           </Col>
         </Row>
         <Row className="view-height-row why-perform-about">
-            <Row className="why-perform-text-container">
+            <Row className="why-perform-text-container" id="why-perform-text-container">
               <Col>
                 <Row>
                   <div className="why-perform-title">Perform with onfour</div>
