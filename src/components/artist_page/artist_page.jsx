@@ -11,6 +11,7 @@ import onboarding_5 from "../../images/icons/onboarding_artist_5.png";
 
 //AWS Imports
 import Amplify, { Analytics } from "aws-amplify";
+import Auth from "../../apis/UserPool";
 
 // Styling Imports
 import "./artist_styles.scss";
@@ -24,6 +25,17 @@ const ArtistPage = () => {
   const artistPageVisit = () => {
     Analytics.record({ name: "totalArtistPageVisits" });
   };
+
+  // Record in analytics that artist page was visited only if user is logged in
+  useEffect(() => {
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedArtistPageVisit();
+    });
+  }, []);
+  const authenticatedArtistPageVisit = () => {
+    Analytics.record({ name: "totalAuthenticatedArtistPageVisits" });
+  };
+
   return (
     <div className="artist-page-content">
       {/* DESKTOP LAYOUT */}

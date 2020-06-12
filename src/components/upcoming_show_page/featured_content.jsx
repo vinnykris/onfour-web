@@ -5,15 +5,30 @@ import React, { useState } from "react";
 import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
-// FeaturedContent is the unit element for an upcoming concert
-const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, time, price, description }) => {
+// AWS Imports
+import Amplify, { Analytics } from "aws-amplify";
 
+// FeaturedContent is the unit element for an upcoming concert
+const FeaturedContent = ({
+  img,
+  name,
+  concert_name,
+  week_day,
+  date,
+  month,
+  day,
+  time,
+  price,
+  description,
+}) => {
   const [show_more_info, setClickedInfo] = useState(false); // Determines whether to show the popup for musician's bio or not
 
   // This function gets called when the MORE INFO button is clicked
   // and it sets the show_more_info to true
   const open_info = () => {
     setClickedInfo(true);
+    const event_name = (name + date).replace(/\s/g, ""); // unique identifier for event
+    Analytics.record({ name: event_name }); // record analytics for specific "MORE INFO" click
   };
 
   // This function gets called when the close button on the popup
@@ -27,17 +42,17 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
       {/* POP-UP FOR MUSICIAN'S BIO SECTION */}
       {show_more_info ? (
         <div className="popup-artist-info">
-              <form className="concert-form">
-                <span className="popup-info-close" onClick={close_info}>
-                  <i className="fa fa-times close-icon"></i>
-                </span>
-                <br></br>
-                <div className="popup-info-content">
-                  <p className="concert-description">{description}</p>
-                </div>
-              </form>
+          <form className="concert-form">
+            <span className="popup-info-close" onClick={close_info}>
+              <i className="fa fa-times close-icon"></i>
+            </span>
+            <br></br>
+            <div className="popup-info-content">
+              <p className="concert-description">{description}</p>
+            </div>
+          </form>
         </div>
-        ) : null}
+      ) : null}
       <Row>
         <Col size={3} className="poster-container">
           <img className="concert-poster" src={img} alt="content-img"></img>
@@ -48,40 +63,44 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
         </Col>
       </Row>
       <Row>
-      <Col size={3} className="show-content-bar">
-              <Row>
-                <Col size={3}>
-                  <p className="artist-name">{name} - {concert_name}</p>
-                </Col>
-              </Row>
-              <Row>
-                <Col size={3}>
-                  <p className="time">{week_day} | {date} | {time} EST</p>
-                </Col>
-              </Row>
-          </Col>
+        <Col size={3} className="show-content-bar">
+          <Row>
+            <Col size={3}>
+              <p className="artist-name">
+                {name} - {concert_name}
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            <Col size={3}>
+              <p className="time">
+                {week_day} | {date} | {time} EST
+              </p>
+            </Col>
+          </Row>
+        </Col>
       </Row>
       <Row className="ticket">
         <Col size={3}>
-          {price? (
+          {price ? (
             <button
               className="featured-content-button-border"
               data-toggle="modal"
               data-target="#ticketModal"
             >
-              Ticket   >
+              Ticket >
             </button>
           ) : (
-              <button
-                className="featured-content-button-border"
-                onClick={open_info}
-              >
-                MORE INFO
-              </button>
+            <button
+              className="featured-content-button-border"
+              onClick={open_info}
+            >
+              MORE INFO
+            </button>
           )}
         </Col>
       </Row>
-      </Grid>
+    </Grid>
   );
 };
 

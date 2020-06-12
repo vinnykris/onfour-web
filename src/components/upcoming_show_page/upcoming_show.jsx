@@ -12,6 +12,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../../graphql/queries";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
+import Auth from "../../apis/UserPool";
 
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
@@ -103,6 +104,16 @@ const UpcomingShowPage = () => {
   }, []);
   const upcomingShowVisit = () => {
     Analytics.record({ name: "totalUpcomingPageVisits" });
+  };
+
+  // Record in analytics that upcoming show page was visited only if user is logged in
+  useEffect(() => {
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedUpcomingPageVisit();
+    });
+  }, []);
+  const authenticatedUpcomingPageVisit = () => {
+    Analytics.record({ name: "totalAuthenticatedUpcomingPageVisits" });
   };
 
   const { height, width } = useWindowDimensions(); // Dimensions of screen

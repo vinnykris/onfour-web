@@ -11,6 +11,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../../graphql/queries";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
+import Auth from "../../apis/UserPool";
 
 // Styles imports
 import "./archive_styles.scss";
@@ -52,6 +53,16 @@ const ArchivePage = () => {
   }, []);
   const archivePageVisit = () => {
     Analytics.record({ name: "totalArchivePageVisits" });
+  };
+
+  // Record in analytics that archive page was visited only if user is logged in
+  useEffect(() => {
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedArchivePageVisit();
+    });
+  }, []);
+  const authenticatedArchivePageVisit = () => {
+    Analytics.record({ name: "totalAuthenticatedArchivePageVisits" });
   };
 
   // DETERMINE MOBILE VERSION OR NOT

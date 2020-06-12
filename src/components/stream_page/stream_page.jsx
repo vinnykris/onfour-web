@@ -166,13 +166,29 @@ const StreamPage = () => {
   // DONATION FUNCTION
   // Opens link to paypal account for musician
   const donatePaypal = () => {
+    Analytics.record({ name: "paypalClicked" });
     const url = "https://www.paypal.me/onfourdonations";
     window.open(url, "_blank");
+  };
+
+  // Analytics tracker for payment modal
+  const donateModal = () => {
+    Analytics.record({ name: "paymentModalClicked" });
   };
 
   // Record in analytics that stream page was visited
   const streamPageVisit = () => {
     Analytics.record({ name: "totalStreamPageVisits" });
+  };
+
+  // Record in analytics that stream page was visited only if user is logged in
+  useEffect(() => {
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedStreamPageVisit();
+    });
+  }, []);
+  const authenticatedStreamPageVisit = () => {
+    Analytics.record({ name: "totalAuthenticatedStreamPageVisits" });
   };
 
   // RENDERING SECTION
@@ -327,6 +343,7 @@ const StreamPage = () => {
                     className="stripe-button-border button-height"
                     data-toggle="modal"
                     data-target="#paymentModal"
+                    onClick={donateModal}
                   >
                     Tip with Card
                   </button>{" "}

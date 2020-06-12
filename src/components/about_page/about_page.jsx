@@ -8,6 +8,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
+import Auth from "../../apis/UserPool";
 
 // Image Imports
 // import gradient_header from "../../images/mobile_gradient.png";
@@ -29,6 +30,16 @@ const AboutPage = () => {
   }, []);
   const aboutPageVisit = () => {
     Analytics.record({ name: "totalaboutPageVisits" });
+  };
+
+  // Record in analytics that about page was visited only if user is logged in
+  useEffect(() => {
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedAboutPageVisit();
+    });
+  }, []);
+  const authenticatedAboutPageVisit = () => {
+    Analytics.record({ name: "totalAuthenticatedAboutPageVisits" });
   };
 
   const header_image_url =
