@@ -14,11 +14,11 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
     };
 
     return (
-        <div>
+        <div className="modal-container">
             {width > 600 ? (
-                <Grid>
+                <Grid className="modal-container">
                     {artist_name != "Justice Speaks" ? (
-                        <Row>
+                        <Row className="modal-container">
                             <Col size={4} className="modal-description-col">
                                 <Row>
                                     <div className="modal-date">IN {days_left} DAYS</div>
@@ -27,7 +27,7 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                     <div className="modal-bio-title">{artist_name.toUpperCase()} - {concert_name.toUpperCase()}
                                     </div>
                                 </Row>
-                                <Row>
+                                <Row className="modal-description-container">
                                     <div className="modal-bio-description">
                                         {description}
                                     </div>
@@ -39,22 +39,16 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                         <img className="modal-bio-image" src={img} alt="artist-img"></img>
                                     </div>
                                 </Row>
-                                <Row>
-                                    {/* {(artist_name === "Justice Speaks") ?
-                                <a className="modal-info first-row" href="https://www.justicespeaks.info">
-                                    https://www.justicespeaks.info
-                                </a>
-                            :  */}
-                                    <a className="modal-info first-row" href="https://www.onfour.live/stream">
+                                <Row className="modal-info-row first-row">
+                                    <a className="modal-info" href="https://www.onfour.live/stream">
                                         https://www.onfour.live/stream
-                                </a>
-                                    {/* } */}
+                                     </a>
                                 </Row>
-                                <Row>
+                                <Row className="modal-info-row">
                                     <div className="modal-info">{weekday.toUpperCase()}, {date}</div>
                                 </Row>
-                                <Row>
-                                    <div className="modal-info last-row">{time} EST</div>
+                                <Row className="modal-info-row last-row">
+                                    <div className="modal-info">{time} EST</div>
                                 </Row>
                                 <Row className="modal-ticket">
                                     {price ? (
@@ -68,7 +62,7 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                             </Col>
                         </Row>
                     ) : (
-                            <Row>
+                            <Row className="modal-container">
                                 <Col size={4} className="modal-description-col">
                                     <Row>
                                         <div className="modal-date">IN {days_left} DAYS</div>
@@ -77,11 +71,11 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                         <div className="modal-bio-title">{artist_name.toUpperCase()}: A Festival for Queer and Trans Black Lives - {concert_name.toUpperCase()}
                                         </div>
                                     </Row>
-                                    <Row>
+                                    <Row className="modal-description-container">
                                         {concert_name === "Part I" ? (
                                             <div className="festival-bio-description">
                                                 <div className="disclaimer">
-                                                    {"\n \nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
+                                                    {"ALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
                                                 </div>
                                                 <a href="https://www.justicespeaks.info/the-cause" target="_blank">learn more about both organizations</a>
                                                 <div className="line-up">
@@ -157,7 +151,7 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                         ) : (
                                                 <div className="festival-bio-description">
                                                     <div className="disclaimer">
-                                                        {"\n \nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
+                                                        {"ALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
                                                     </div>
                                                     <a href="https://www.justicespeaks.info/the-cause" target="_blank">learn more about both organizations</a>
                                                     <div className="line-up">
@@ -233,22 +227,16 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                             <img className="modal-bio-image" src={img} alt="artist-img"></img>
                                         </div>
                                     </Row>
-                                    <Row>
-                                        {/* {(artist_name === "Justice Speaks") ?
-                                <a className="modal-info first-row" href="https://www.justicespeaks.info">
-                                    https://www.justicespeaks.info
-                                </a>
-                            :  */}
-                                        <a className="modal-info first-row" href="https://www.onfour.live/stream">
+                                    <Row className="modal-info-row first-row">
+                                        <a className="modal-info" href="https://www.onfour.live/stream">
                                             https://www.onfour.live/stream
-                                </a>
-                                        {/* } */}
+                                        </a>
                                     </Row>
-                                    <Row>
+                                    <Row className="modal-info-row">
                                         <div className="modal-info">{weekday.toUpperCase()}, {date}</div>
                                     </Row>
-                                    <Row>
-                                        <div className="modal-info last-row">{time} EST</div>
+                                    <Row className="modal-info-row last-row">
+                                        <div className="modal-info">{time} EST</div>
                                     </Row>
                                     <Row className="modal-ticket">
                                         {price ? (

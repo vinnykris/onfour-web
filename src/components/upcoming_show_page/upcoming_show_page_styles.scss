@@ -70,20 +70,13 @@
 }
 
 .RSVP {
-  // margin: 0;
-  // position: absolute;
-  // top: 50%;
-  // -ms-transform: translateY(-50%);
-  // transform: translateY(-50%);
-  // width: 100%;
-  // z-index: 0;
-
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  z-index: 0;
 }
 
 .RSVP-text {
@@ -423,6 +416,22 @@ a.nav-page-white {
 
 
 // MODAL STYLING 
+.modal-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.modal-description-container {
+  // width: 100%;
+  // height: 85%;
+  // margin-top: 5%;
+  position: absolute;
+  top: 110px;
+  bottom: 0;
+  right: 2vw;
+}
+
 .modal-date {
   font-size: 0.7rem;
   width: auto;
@@ -459,14 +468,9 @@ a.nav-page-white {
 }
 
 .modal-bio-description {
-  margin-top: 2vh;
-  position: absolute;
-  right: 4vw;
-  bottom: -12.5vh;
-  height: 52vh;
+  height: 100%;
   padding-right: 8px;
   overflow: auto;
-  // margin-right: 5px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -484,38 +488,15 @@ a.nav-page-white {
     background: rgba(209, 209, 209, 0.596); 
     border-radius: 20px;
   }
-  @include respond-to("xx-large") {
-    height: 54vh;
-  }
-
-  @include respond-to("x-large") {
-    height: 53vh;
-  }
-
-  @include respond-to("large") {
-    height: 48vh;
-  }
-
-  @include respond-to("medium") {
-    height: 45vh;
-  }
-
-  @include respond-to("small") {
-    height: 53vh;
-  }
 }
 
 .mobile-modal-bio-description {
   margin-top: 2vh;
-  margin-bottom: 4vh;
-  // position: absolute;
+  margin-bottom: 18vh;
   right: 4vw;
-  // bottom: -12.5vh;
-  // height: 35vh;
   height: auto;
   padding-right: 8px;
   overflow: auto;
-  // margin-right: 5px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -537,6 +518,8 @@ a.nav-page-white {
 
 .modal-info-col {
   width: 100%; // 22vw
+  height: 100%;
+  position: relative;
 }
 
 .modal-image-container {
@@ -557,15 +540,19 @@ a.nav-page-white {
   }
 }
 
-.modal-info {
+.modal-info-row {
+  height: 40px;
+  position: relative;
   width: 100%;
-  // padding-top: 10px;
-  // padding-bottom: 10px;
-  padding-top: 2.1vh;
-  height: 8.4vh;
-  // margin-top: auto;
-  // margin-bottom: auto;
   border-bottom: 1px solid #E3E3E3;
+}
+
+.modal-info {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: bold;
@@ -587,12 +574,12 @@ a.nav-page-white {
 
 .modal-ticket {
   position: absolute;
-  bottom: 4vh;
+  bottom: 0;
   // width: 19vw;
-  width: 216px;
-  @include respond-to ("small") {
-    width: 102px;
-  }
+  width: 100%;
+  // @include respond-to ("small") {
+  //   width: 102px;
+  // }
 }
 
 .modal-ticket-button {
@@ -635,15 +622,9 @@ a.nav-page-white {
 }
 
 .festival-bio-description {
-  margin-top: 2vh;
-  position: absolute;
-  right: 4vw;
-  bottom: -12.5vh;
-  height: 52vh;
+  height: 100%;
   padding-right: 8px;
   overflow: auto;
-  left: 0px;
-  // margin-right: 5px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -660,26 +641,6 @@ a.nav-page-white {
   &::-webkit-scrollbar-thumb {
     background: rgba(209, 209, 209, 0.596); 
     border-radius: 20px;
-  }
-  @include respond-to("xx-large") {
-    height: 54vh;
-  }
-
-  @include respond-to("x-large") {
-    height: 53vh;
-  }
-
-  @include respond-to("large") {
-    height: 48vh;
-  }
-
-  @include respond-to("medium") {
-    height: 45vh;
-  }
-
-  @include respond-to("small") {
-    height: 53vh;
-    color: white;
   }
 }
 
@@ -705,7 +666,7 @@ a.nav-page-white {
 }
 
 .festival-bio {
-  height: 6vw;
+  height: 7vw;
   overflow: hidden;
   padding-right: 4px;
   scrollbar-width: none; /* Firefox */
