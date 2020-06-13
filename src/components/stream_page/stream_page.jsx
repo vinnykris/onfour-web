@@ -77,11 +77,11 @@ const StreamPage = () => {
 
   // AUTO-SCROLL SECTION
   // Auto-scrolls on first navigation
-  // const [scroll, setScroll] = useState(true); // Auto-scroll
-  // if (scroll) {
-  //   window.scrollTo({ top: "10px", behavior: "smooth" });
-  //   setScroll(false);
-  // }
+  const [scroll, setScroll] = useState(true); // Auto-scroll
+  if (scroll) {
+    window.scrollTo({ top: "10px", behavior: "smooth" });
+    setScroll(false);
+  }
 
   // ADJUST CHAT HEIGHT BASED ON SCROLL AMOUNT
   useEffect(() => {
@@ -296,7 +296,7 @@ const StreamPage = () => {
                     </div>
                   </div>
                   <Row className="stream-info-row">
-                    {/* <Col size={0.3}></Col> */}
+                    {/* <Col size={0.1}></Col> */}
                     <Col size={7}>
                       <Row>
                         <Col size={2}>

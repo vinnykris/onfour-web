@@ -70,7 +70,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
         <Row>
         <Col size={3} className="show-content-bar">
                 <Row>
-                  <div className="genre-box">{genre.toUpperCase()}</div>
+              <div className="genre-box">{genre.toUpperCase()}</div>
                 </Row>
                 <Row>
                   <Col size={3}>

@@ -1,5 +1,5 @@
 // Main Imports
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Row, Col } from "../grid";
 
 // Image Imports
@@ -14,6 +14,15 @@ import "./artist_styles.scss";
 
 // Artist component that contains the features we provide to artists
 const ArtistPage = () => {
+
+  // AUTO-SCROLL SECTION
+  // Auto-scrolls on first navigation
+  const [scroll, setScroll] = useState(true); // Auto-scroll
+  if (scroll) {
+    window.scrollTo({ top: "10px", behavior: "smooth" });
+    setScroll(false);
+  }
+
   return (
     <div className="artist-page-content">
       {/* DESKTOP LAYOUT */}
