@@ -120,7 +120,7 @@ const AboutPage = () => {
         if (scrollCheck_top_section2 && !scrollCheck_bottom_section2) {
           // if the scroll amount is larger than view height to increase opacity
           document.getElementById("section2-text").style.opacity =
-            ((window.scrollY - height / 3) / height) * 2.5;
+            ((window.scrollY - height / 2) / height) * 2;
         } else if (scrollCheck_bottom_section2 && window.scrollY < height * 2) {
           document.getElementById("section2-text").style.opacity =
             1 - ((window.scrollY - height) / height) * 2;
