@@ -14,6 +14,7 @@ import ArtistsPage from "./components/artist_page/artist_page";
 import Footer from "./components/footer/footer";
 import Modal from "./components/sign_in_modal/sign_in_modal";
 import Forgot from "./components/forgot_page/forgot_page";
+import SoundCheck from "./components/soundcheck_page/soundcheck_page";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -45,6 +46,7 @@ function App() {
           <Route path="/ticket" component={Ticket} />
           <Route path="/artists" component={ArtistsPage} />
           <Route path="/forgot" component={Forgot} />
+          <Route path="/soundcheck" component={SoundCheck} />
         </Switch>
         <Modal></Modal>
         <Footer />
