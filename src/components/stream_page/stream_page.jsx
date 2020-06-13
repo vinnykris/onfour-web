@@ -276,7 +276,7 @@ const StreamPage = () => {
                     <div className="stream-wrapper">
                       <VideoPlayer
                         url={
-                          "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                          "https://d3dqypz8o42s60.cloudfront.net/out/v1/aca8ce98566d436f832f610976806eaf/index.m3u8"
                         }
                         start_time={show_start_time}
                         artist_name={artist_name}
@@ -469,7 +469,7 @@ const StreamPage = () => {
                   <div className="stream-wrapper-mobile">
                     <VideoPlayer
                       url={
-                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                        "https://d3dqypz8o42s60.cloudfront.net/out/v1/aca8ce98566d436f832f610976806eaf/index.m3u8"
                       }
                       start_time={show_start_time}
                       artist_name={artist_name}
