@@ -195,7 +195,7 @@ const AboutPage = () => {
             <p className="description-text" id="section2-text">
               Onfour is the premier live-streaming concert platform. We are
               redefining what it means to experience live music digitally and
-              are dedicated to empowering musicians to connect with fans in new,
+              are dedicated to empowering artists to connect with fans in new,
               meaningful ways.
               {/* Onfour is the premier live-streaming concert platform, built and
               designed for musicians. We are dedicated to empowering musicians
@@ -312,7 +312,7 @@ const AboutPage = () => {
                 <p className="description-text-mobile">
                   Onfour is the premier live-streaming concert platform. We are
                   redefining what it means to experience live music digitally
-                  and are dedicated to empowering musicians to connect with fans
+                  and are dedicated to empowering artists to connect with fans
                   in new, meaningful ways.
                 </p>
               </Col>
