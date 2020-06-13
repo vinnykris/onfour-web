@@ -6,6 +6,7 @@ import ReactEmoji from "react-emoji";
 
 // Styles imports
 import "./chat.scss";
+import { useReducer } from "react";
 
 // Component that styles the message according to the sender
 const Message = ({ message: { user, text }, name }) => {
@@ -13,6 +14,14 @@ const Message = ({ message: { user, text }, name }) => {
   let is_admin = false; // Boolean checking if sender is admin
   let is_staff = false; // Boolean checking if sender is staff
   const trimmed_name = name.trim().toLowerCase();
+
+  const staff = [
+    "onfour-staff",
+    "onfour-vinod",
+    "onfour-bar",
+    "onfour-lily",
+    "onfour-yuxin",
+  ];
 
   // Setting booleans based on user
   if (user === trimmed_name) {
@@ -23,7 +32,7 @@ const Message = ({ message: { user, text }, name }) => {
     is_admin = true;
   }
 
-  if (user === "onfour-staff") {
+  if (staff.find(user)) {
     is_staff = true;
   }
 
