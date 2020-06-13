@@ -340,6 +340,9 @@
 .view-all {
   float: right;
   color: white;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .about-preview-content {
