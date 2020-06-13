@@ -6,6 +6,7 @@
 .view-height-row {
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 .banner-container {
@@ -130,17 +131,18 @@
 }
 
 .why-perform-text-container {
-  width: 42vw;
-  height: 40vh;
+  width: 45vw;
+  height: 45vh;
   margin: 0;
   padding: 2vw;
   background-color: white;
   position: absolute;
-  top: 35%;
+  top: 33%;
   left: 20%;
-  -ms-transform: translate(-20%, -35%);
-  transform: translate(-20%, -35%);
+  -ms-transform: translate(-20%, -33%);
+  transform: translate(-20%, -33%);
   opacity: 0;
+  z-index: 2;
 }
 
 .why-perform-title {
@@ -161,7 +163,7 @@
 }
 
 .why-perform-learn-more-row {
-  width: 42vw;
+  width: 45vw;
   height: 10vh;
   margin: 0;
   position: absolute;
@@ -188,10 +190,10 @@
   margin: 0;
   position: absolute;
   top: 50%;
-  right: 10%;
+  right: 20%;
   background-color: black;
-  -ms-transform: translate(10%, -50%);
-  transform: translate(10%, -50%);
+  -ms-transform: translate(20%, -50%);
+  transform: translate(20%, -50%);
 }
 
 .why-perform-image {
