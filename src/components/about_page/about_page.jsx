@@ -129,14 +129,15 @@ const AboutPage = () => {
               src={header_image_url}
               alt="nav-logo"
             ></img> */}
-            <video autoPlay loop className="banner-video">
-              <source
-                src={
-                  "https://onfour-media.s3.amazonaws.com/website+component/banner_video_guitar.mp4"
-                }
-                type="video/mp4"
-              />
-            </video>
+            <video 
+              className="banner-video"
+              data-src="https://onfour-media.s3.amazonaws.com/website+component/banner_video_guitar.mp4"
+              loop
+              autoPlay
+              muted
+              volume="0"
+              src="https://onfour-media.s3.amazonaws.com/website+component/banner_video_guitar.mp4"
+            ></video>
             <Row className="header-tag-row">
               <Col>
                 <Row>
