@@ -245,7 +245,9 @@ const NavBar = () => {
                   <div className="sign-out-container">
                     <Col size={1}>
                       <div className="greeting-mobile">
-                        <p className="greeting-mobile-text">HI, {username.toUpperCase()} </p>
+                        <p className="greeting-mobile-text">
+                          HI, {username.toUpperCase()}{" "}
+                        </p>
                       </div>
                       <button
                         className="sign-out-button-mobile"
