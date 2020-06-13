@@ -27,7 +27,6 @@ Amplify.configure(awsmobile);
 
 // AboutPage component that contains all the about page layout
 const AboutPage = () => {
-
   // DETERMINE MOBILE VERSION OR NOT
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
@@ -65,7 +64,6 @@ const AboutPage = () => {
     setClicked(true);
   };
 
-
   // This function gets called when user clicked the "Send us an email"
   // It will open a mailbox with onfour.box@gmail.com as the receiver
   const sendEmail = () => {
@@ -96,20 +94,23 @@ const AboutPage = () => {
   // ADD ANIMATION TO CSS BASED ON SCROLL AMOUNT
   useEffect(() => {
     document.addEventListener("scroll", () => {
-        if (document.getElementById("section2-text")) {
-          const scrollCheck_top_section2 = window.scrollY > (height/2);
-          const scrollCheck_bottom_section2 = window.scrollY > height;
-          if (scrollCheck_top_section2 && !scrollCheck_bottom_section2) {
-            // if the scroll amount is larger than view height to increase opacity
-            document.getElementById("section2-text").style.opacity = (window.scrollY - height/3) / height * 2.5;
-
-          } else if (scrollCheck_bottom_section2 && (window.scrollY < height*2)) {
-            document.getElementById("section2-text").style.opacity = 1 - (window.scrollY - height) / height * 2;
-            document.getElementById("why-perform-text-container").style.left = (-34 + (54 / ((window.scrollY - height) / height))) + "%";
-            document.getElementById("why-perform-text-container").style.opacity = (window.scrollY - height) / height;
-          }
+      if (document.getElementById("section2-text")) {
+        const scrollCheck_top_section2 = window.scrollY > height / 2;
+        const scrollCheck_bottom_section2 = window.scrollY > height;
+        if (scrollCheck_top_section2 && !scrollCheck_bottom_section2) {
+          // if the scroll amount is larger than view height to increase opacity
+          document.getElementById("section2-text").style.opacity =
+            ((window.scrollY - height / 3) / height) * 2.5;
+        } else if (scrollCheck_bottom_section2 && window.scrollY < height * 2) {
+          document.getElementById("section2-text").style.opacity =
+            1 - ((window.scrollY - height) / height) * 2;
+          document.getElementById("why-perform-text-container").style.left =
+            -34 + 54 / ((window.scrollY - height) / height) + "%";
+          document.getElementById("why-perform-text-container").style.opacity =
+            (window.scrollY - height) / height;
         }
-      })
+      }
+    });
   });
 
   return (
@@ -143,7 +144,10 @@ const AboutPage = () => {
                   <span className="upcoming-header-tag">UP NEXT</span>
                 </Row>
                 <Row>
-                  <div className="upcoming-description">Jerry Weldon has his international jazz chops and you've never experienced sax playing like his!</div>
+                  <div className="upcoming-description">
+                    Jerry Weldon has his international jazz chops and you've
+                    never experienced sax playing like his!
+                  </div>
                 </Row>
               </Col>
             </Row>
@@ -152,9 +156,10 @@ const AboutPage = () => {
         <Row className="view-height-row">
           <Col size={12}>
             <p className="description-text" id="section2-text">
-              Onfour empowers music fans by providing a new way to interact with 
-              your favorite musicians, no matter where you are. Musicians gain more 
-              control over their careers and connect with fans in new, meaningful ways.
+              Onfour empowers music fans by providing a new way to interact with
+              your favorite musicians, no matter where you are. Musicians gain
+              more control over their careers and connect with fans in new,
+              meaningful ways.
               {/* Onfour is the premier live-streaming concert platform, built and
               designed for musicians. We are dedicated to empowering musicians
               and enabling them to connect with fans in new, meaningful ways.
@@ -185,26 +190,40 @@ const AboutPage = () => {
           </Col>
         </Row>
         <Row className="view-height-row why-perform-about">
-            <Row className="why-perform-text-container" id="why-perform-text-container">
-              <Col>
-                <Row>
-                  <div className="why-perform-title">Perform with onfour</div>
-                </Row>
-                <Row>
-                  <div className="why-perform-text">{
-                  "Provide your fans with a better live experience: \nPlug in with your audio interface and mixer. \nTicket your shows, set your own prices, and receive tips. \nChat with your fans in real-time. \nRecord your full show for free in high definition. \nReal-time tech support for setting up and streaming."
-                  }</div>
-                </Row>
-              </Col>
-            </Row>
-            <Row className="why-perform-learn-more-row">
-              <button className="why-perform-learn-more-button" onClick={() => history.push("/artists")}>LEARN MORE ></button>
-            </Row>
-            <Row className="why-perform-image-container">
-              <img className="why-perform-image" src={"https://onfour-media.s3.amazonaws.com/singing+photo.jpg"} alt="singer-image"></img>
-            </Row>
+          <Row
+            className="why-perform-text-container"
+            id="why-perform-text-container"
+          >
+            <Col>
+              <Row>
+                <div className="why-perform-title">Perform with onfour</div>
+              </Row>
+              <Row>
+                <div className="why-perform-text">
+                  {
+                    "Provide your fans with a better live experience: \nPlug in with your audio interface and mixer. \nTicket your shows, set your own prices, and receive tips. \nChat with your fans in real-time. \nRecord your full show for free in high definition. \nReal-time tech support for setting up and streaming."
+                  }
+                </div>
+              </Row>
+            </Col>
+          </Row>
+          <Row className="why-perform-learn-more-row">
+            <button
+              className="why-perform-learn-more-button"
+              onClick={() => history.push("/artists")}
+            >
+              LEARN MORE >
+            </button>
+          </Row>
+          <Row className="why-perform-image-container">
+            <img
+              className="why-perform-image"
+              src={"https://onfour-media.s3.amazonaws.com/singing+photo.jpg"}
+              alt="singer-image"
+            ></img>
+          </Row>
         </Row>
-        {/* <Row>
+        <Row>
           <Col size={1}>
             <div className="about-preview-content">
               <Row>
@@ -233,73 +252,6 @@ const AboutPage = () => {
               <Row>
                 <FlexibleGrid content_list={videos} num_cols={4} />
               </Row>
-            </div>
-          </Col>
-        </Row> */}
-
-        {/* PERFORM & SUBSCRIBE ROW */}
-        <Row>
-          <Col size={1} className="perform-box">
-            <p className="perform-title">Perform</p>
-            <p className="perform-description">
-              Want to perform a livestream concert with Onfour? <br></br>Send us
-              an email and we will get back to you soon!
-            </p>
-            <a
-              href="mailto:onfour.box@gmail.com"
-              target="_blank"
-              className="email-link"
-              rel="noopener noreferrer"
-            >
-              <button className="email-button">Send us an Email</button>
-            </a>
-          </Col>
-
-          <Col size={1} className="subscribe-box">
-            <div>
-              <p className="subscribe-title">Subscribe</p>
-              <p className="subscribe-description-about">
-                To stay informed about upcoming events,<br></br> subscribe to
-                our mailing list:
-              </p>
-              {(() => {
-                if (clicked) {
-                  return (
-                    <p className="subscribe-success">
-                      Thank you and stay tuned!
-                    </p>
-                  );
-                } else {
-                  return (
-                    <form
-                      className="inline-form-2"
-                      action="/"
-                      id="newsletter"
-                      onSubmit={emailSubmit}
-                    >
-                      <div className="subscribe-input-about">
-                        <input
-                          type="email"
-                          placeholder="Enter your email here..."
-                          name="email"
-                          required
-                          value={email}
-                          className="email-input"
-                          onChange={(event) => setEmail(event.target.value)}
-                        />
-                        <button
-                          type="submit"
-                          form="newsletter"
-                          value="Submit"
-                          className="submit-button button-border button-height"
-                        >
-                          Submit
-                        </button>
-                      </div>
-                    </form>
-                  );
-                }
-              })()}
             </div>
           </Col>
         </Row>
