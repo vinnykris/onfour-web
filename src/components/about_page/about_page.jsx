@@ -1,5 +1,6 @@
 // Main Imports
 import React, { useState, useEffect } from "react";
+import ReactPlayer from "react-player";
 import { Grid, Row, Col } from "../grid";
 import history from "../../history";
 import { NavLink, useLocation } from "react-router-dom";
@@ -13,6 +14,7 @@ import awsmobile from "../../apis/AppSync";
 // Component Imports
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import { useWindowDimensions } from "../custom_hooks";
+
 
 // API Imports
 import { getConcertInfo, getArchiveInfo } from "../../apis/get_concert_data";
@@ -32,10 +34,12 @@ const AboutPage = () => {
 
   const [email, setEmail] = useState(""); // Variable to store input emails for subscribtion form
   const [clicked, setClicked] = useState(false); // Variable to show hide the subscribtion form
-  const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
-  // Auto scroll to the top on page load
+  
+  // AUTO-SCROLL SECTION
+  // Auto-scrolls on first navigation
+  const [scroll, setScroll] = useState(true); // Auto-scroll
   if (scroll) {
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: "10px", behavior: "smooth" });
     setScroll(false);
   }
 
@@ -121,11 +125,14 @@ const AboutPage = () => {
         {/* BANNER ROW */}
         <Row className="banner-row">
           <div className="banner-container">
-            <img
+            {/* <img
               className="banner-header-desktop"
               src={header_image_url}
               alt="nav-logo"
-            ></img>
+            ></img> */}
+            <video autoPlay loop className="banner-video">
+              <source src={"https://onfour-media.s3.amazonaws.com/website+component/banner_video_guitar.mp4"} type="video/mp4" />
+            </video>
             <Row className="header-tag-row">
               <Col>
                 <Row>

@@ -48,6 +48,11 @@
   color: white;
 }
 
+.banner-video {
+  width: 100%;
+  object-fit: cover;
+  height: 100vh;
+}
 .banner-header-desktop {
   @include respond-to("small") {
     display: none;
