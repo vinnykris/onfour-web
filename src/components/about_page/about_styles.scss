@@ -88,7 +88,7 @@
 
 .upcoming-row {
   width: 30vw;
-  height: 33vh;
+  height: auto;
   padding: 2.5vw;
   margin: 0;
   position: absolute;
@@ -121,10 +121,10 @@
 }
 
 .upcoming-button-container {
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  margin-top: 5%;
   width: auto;
-  height:auto;
+  height: auto;
 }
 
 .upcoming-button {
