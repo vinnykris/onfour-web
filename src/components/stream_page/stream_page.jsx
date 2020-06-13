@@ -349,7 +349,11 @@ const StreamPage = () => {
                     <Col size={0.5}></Col> */}
                   </Row>
                   <Row>
-                    <div className="short-term-spacer"></div>
+                    <div className="short-term-spacer">
+                      {/* <Col>
+                        <img className="artist-image" src={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/achille.png"}></img>
+                      </Col> */}
+                    </div>
                   </Row>
 
                   {/* DONATE ROW */}
