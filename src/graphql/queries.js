@@ -16,7 +16,7 @@ export const query_name = `query listCreateOnfourRegistrations(
   }`;
 
 export const list_users = `query listCreateOnfourRegistrations {
-    listCreateOnfourRegistrations(limit: 25, nextToken: null) {
+    listCreateOnfourRegistrations(limit: 1000, nextToken: null) {
       items {
         username
         first
