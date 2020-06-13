@@ -237,7 +237,11 @@ const AboutPage = () => {
                 </Col>
               </Row>
               <Row>
-                <FlexibleGrid content_list={concerts} num_cols={4} />
+                <FlexibleGrid
+                  className="preview-flex-row"
+                  content_list={concerts}
+                  num_cols={4}
+                />
               </Row>
               <Row className="archive-preview-row">
                 <Col size={1}>
