@@ -9,10 +9,13 @@ import "./social_bar_styles.scss";
 const SocialBar = () => {
   return (
     <div className="social-media">
+      <p className="social-subscribe-description">
+        Follow us on social media to stay informed:
+      </p>
       <ul className="social-list">
         <li>
           <a
-            href="https://instagram.com/jonathan_dely"
+            href="https://www.instagram.com/_onfour"
             class="fa fa-instagram"
             target="_blank"
             rel="noopener noreferrer"
@@ -22,7 +25,7 @@ const SocialBar = () => {
         </li>
         <li>
           <a
-            href="https://open.spotify.com/artist/5wdmp3H2QC7tfMYAabtQN3"
+            href="https://open.spotify.com/playlist/3KbuKf1zti8EtbJ4Ot7Iq4"
             class="fa fa-spotify"
             target="_blank"
             rel="noopener noreferrer"
@@ -32,7 +35,7 @@ const SocialBar = () => {
         </li>
         <li>
           <a
-            href="https://www.youtube.com/channel/UCdh0zQFUEYKQsbTJI00Q2SA"
+            href="https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ"
             class="fa fa-youtube"
             target="_blank"
             rel="noopener noreferrer"
@@ -42,7 +45,7 @@ const SocialBar = () => {
         </li>
         <li>
           <a
-            href="https://www.facebook.com/jonathandelymusic"
+            href="https://www.facebook.com/onfour"
             class="fa fa-facebook"
             target="_blank"
             rel="noopener noreferrer"
@@ -52,12 +55,12 @@ const SocialBar = () => {
         </li>
         <li>
           <a
-            href="https://paypal.me/jonathandely"
-            class="fa fa-paypal"
+            href="https://twitter.com/_Onfour"
+            class="fa fa-twitter"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span>Paypal Link</span>
+            <span>Twitter Link</span>
           </a>
         </li>
       </ul>

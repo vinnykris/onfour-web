@@ -19,7 +19,7 @@ import Chat from "../chat/stream_chat";
 // import Join from "../chat/join_chat";
 // import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
-// import SocialBar from "../social_bar/social_bar";
+import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 
@@ -411,56 +411,69 @@ const StreamPage = () => {
                     </Col>
                   </Row>
 
-                  <Row>
-                    <Col size={1} className="stream-subscribe-box">
-                      <p className="stream-subscribe-title">Subscribe</p>
-                      <p className="stream-subscribe-description">
-                        To stay informed about upcoming events, subscribe to our
-                        mailing list:
-                      </p>
-                      {(() => {
-                        if (email_submitted) {
-                          return (
-                            <p className="subscribe-success">
-                              Thank you and stay tuned!
+                  <Row className="stream-subscribe-box">
+                      <Col size={0.5}></Col>
+                      <Col size={7}>
+                        <Row>
+                          <p className="stream-subscribe-title">Subscribe</p>
+                        </Row>
+                        <Row>
+                          <Col size={3}>
+                            <p className="stream-subscribe-description">
+                              To stay informed about upcoming events, subscribe to our
+                              mailing list:
                             </p>
-                          );
-                        } else {
-                          return (
-                            <form
-                              class="stream-email-form"
-                              action="/"
-                              id="newsletter"
-                              onSubmit={emailSubmit}
-                            >
-                              <input
-                                type="email"
-                                placeholder="Enter your email here..."
-                                name="email"
-                                required
-                                value={email}
-                                style={{ width: "280px" }}
-                                onChange={(event) =>
-                                  setEmail(event.target.value)
-                                }
-                              />
-                              <button
-                                type="submit"
-                                form="newsletter"
-                                value="Submit"
-                                style={{ width: "100px" }}
-                                className="button-border button-height"
-                              >
-                                {" "}
-                                Submit
-                              </button>
-                            </form>
-                          );
-                        }
-                      })()}
-                    </Col>
+                            {(() => {
+                              if (email_submitted) {
+                                return (
+                                  <p className="subscribe-success">
+                                    Thank you and stay tuned!
+                                  </p>
+                                );
+                              } else {
+                                return (
+                                  <form
+                                    class="stream-email-form"
+                                    action="/"
+                                    id="newsletter"
+                                    onSubmit={emailSubmit}
+                                  >
+                                    <input
+                                      type="email"
+                                      placeholder="Enter your email here..."
+                                      name="email"
+                                      required
+                                      value={email}
+                                      style={{ width: "70%" }}
+                                      onChange={(event) =>
+                                        setEmail(event.target.value)
+                                      }
+                                    />
+                                    <button
+                                      type="submit"
+                                      form="newsletter"
+                                      value="Submit"
+                                      style={{ width: "auto" }}
+                                      className="button-border button-height adjust-font-size"
+                                    >
+                                      {" "}
+                                      Submit
+                                    </button>
+                                  </form>
+                                );
+                              }
+                            })()}
+                          </Col>
+                          <Col size={1}></Col>
+                          <Col size={3}>
+                            <SocialBar></SocialBar>
+                          </Col>
+                        </Row>
+                      </Col>
+                      <Col size={0.5}></Col>
                   </Row>
                 </Col>
+                
                 <Col
                   size={2.5}
                   id="chat_container"
