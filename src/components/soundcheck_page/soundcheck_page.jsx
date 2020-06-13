@@ -314,20 +314,21 @@ const StreamPage = () => {
                     <Col size={1} className="donate-stripe donate-box">
                       <p className="donate-description">Credit Card</p>
                       <p className="donate-subdescription">
-                        Your card information will not be stored anywhere.
+                        Donate via credit card to For the GWORLS
+                        and LGBT Freedom Fund. Your card information will not be stored anywhere.
                       </p>
                     </Col>
                     <Col size={1} className="donate-paypal donate-box">
                       <p className="donate-description">PayPal</p>
                       <p className="donate-subdescription">
-                        onfour will ensure your tip is sent to For the GWORLS
+                        onfour will ensure your donation is sent to For the GWORLS
                         and LGBT Freedom Fund.
                       </p>
                     </Col>
                     <Col size={1} className="donate-venmo donate-box">
                       <p className="donate-description">Venmo</p>
                       <p className="donate-subdescription">
-                        @SpencerAmer from onfour will ensure your tip is sent to
+                        @SpencerAmer from onfour will ensure your donation is sent to
                         For the GWORLS and LGBT Freedom Fund.
                       </p>
                     </Col>
