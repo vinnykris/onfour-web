@@ -10,12 +10,14 @@ import awsmobile from "./AppSync";
 import FeaturedContent from "../components/upcoming_show_page/featured_content";
 import ArchiveVideo from "../components/archive_page/archive_video";
 
+
 Amplify.configure(awsmobile);
 
 // getConcertInfo queries all elements in the future concert database
 // and create a list of FeaturedContent objects with the data returned
 // from the database.
-export const getConcertInfo = async () => {
+export const getConcertInfo = async (width) => {
+  
   var upcoming_concerts = [];
   // Calling the API, using async and await is necessary
   const info = await API.graphql(
@@ -79,6 +81,7 @@ export const getConcertInfo = async () => {
         }
         price={data.price}
         description={data.description.toString()}
+        width={width}
         genre={data.genre}
       />
     );

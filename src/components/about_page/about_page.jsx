@@ -78,7 +78,7 @@ const AboutPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       // Upcoming shows
-      const upcoming_result = await getConcertInfo();
+      const upcoming_result = await getConcertInfo(width);
       setConcerts(upcoming_result.slice(0, 4));
 
       // Archive videos
