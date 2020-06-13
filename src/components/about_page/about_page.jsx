@@ -98,7 +98,8 @@ const AboutPage = () => {
 
           } else if (scrollCheck_bottom_section2 && (window.scrollY < height*2)) {
             document.getElementById("section2-text").style.opacity = 1 - (window.scrollY - height) / height * 2;
-            // document.getElementById("why-perform-text-container").style.left = (-34 + (54 / ((window.scrollY - height) / height))) + "%";
+            document.getElementById("why-perform-text-container").style.left = (-34 + (54 / ((window.scrollY - height) / height))) + "%";
+            document.getElementById("why-perform-text-container").style.opacity = (window.scrollY - height) / height;
           }
         }
       })

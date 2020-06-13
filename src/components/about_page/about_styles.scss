@@ -126,7 +126,7 @@
 }
 
 .why-perform-about {
-  background-color: #6C6B97;
+  background: linear-gradient(244.27deg, #3D3ADD 0%, #935AF0 99.23%), #514EFF;
 }
 
 .why-perform-text-container {
@@ -140,6 +140,7 @@
   left: 20%;
   -ms-transform: translate(-20%, -35%);
   transform: translate(-20%, -35%);
+  opacity: 0;
 }
 
 .why-perform-title {
