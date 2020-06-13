@@ -173,36 +173,33 @@ const StreamPage = () => {
 
   // GET USER'S REGISTRATION INFORMATION
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
-  const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
   const [username, setUsername] = useState(""); // Username from login
-  const [user_id, setUserID] = useState(""); // Tracks user's id of signed in user
-  const [first, setFirst] = useState(""); // Tracks first name of signed in user
 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
   Auth.currentAuthenticatedUser({})
     .then((user) => {
-      setUserEmail(user.attributes.email);
       setUsername(user.username);
+      setShowChat(true);
+      setAuth(true);
     })
-    .then((user) => setAuth(true))
     .catch((err) => setAuth(false));
 
   // If the first name for the logged in user's email has not been retrieved yet,
   // query the registration database's table to retrieve the first name filtered
   // for the specific email and assign that value to first
-  if (first === "" && user_email !== "") {
-    API.graphql(
-      graphqlOperation(queries.query_name, {
-        filter: { email: { eq: user_email } },
-      })
-    ).then((data) => {
-      setUsername(data.data.listCreateOnfourRegistrations.items[0].username);
-      setFirst(data.data.listCreateOnfourRegistrations.items[0].first);
-      setUserID(data.data.listCreateOnfourRegistrations.items[0].id);
-      setShowChat(true);
-    });
-  }
+  // if (first === "" && user_email !== "") {
+  //   API.graphql(
+  //     graphqlOperation(queries.query_name, {
+  //       filter: { email: { eq: user_email } },
+  //     })
+  //   ).then((data) => {
+  //     setUsername(data.data.listCreateOnfourRegistrations.items[0].username);
+  //     setFirst(data.data.listCreateOnfourRegistrations.items[0].first);
+  //     setUserID(data.data.listCreateOnfourRegistrations.items[0].id);
+  //     setShowChat(true);
+  //   });
+  // }
 
   // DONATION SECTION
   // Opens link to paypal account for musician
@@ -309,7 +306,7 @@ const StreamPage = () => {
                         artist_name={artist_name}
                         concert_name={concert_name}
                         auth={auth}
-                        user_id={user_id}
+                        username={username}
                         concert_id={concert_id}
                       />
                       <div className="toggle-chat">
@@ -503,7 +500,7 @@ const StreamPage = () => {
                       artist_name={artist_name}
                       concert_name={concert_name}
                       auth={auth}
-                      user_id={user_id}
+                      username={username}
                       concert_id={concert_id}
                     />
                   </div>

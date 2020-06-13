@@ -22,6 +22,7 @@ export const list_users = `query listCreateOnfourRegistrations {
         first
         last
       }
+      nextToken
     }
   }`;
 

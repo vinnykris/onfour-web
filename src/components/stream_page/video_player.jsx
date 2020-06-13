@@ -23,7 +23,7 @@ function VideoPlayer({
   artist_name,
   concert_name,
   auth,
-  user_id,
+  username,
   concert_id,
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
@@ -126,6 +126,7 @@ function VideoPlayer({
 
   const [registered_concert, setRegisteredConcert] = useState(false);
   const registerConcert = async (concert_reg_load) => {
+    console.log(concert_reg_load.concert);
     // Calling the API, using async and await is necessary
     await API.graphql(
       graphqlOperation(mutations.update_registration_concert, {
@@ -138,7 +139,7 @@ function VideoPlayer({
     if (auth && !registered_concert) {
       if (concert_id) {
         const concert_reg_load = {
-          id: user_id,
+          username: username,
           concert: concert_id,
         };
         registerConcert(concert_reg_load);
