@@ -15,7 +15,6 @@ import awsmobile from "../../apis/AppSync";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import { useWindowDimensions } from "../custom_hooks";
 
-
 // API Imports
 import { getConcertInfo, getArchiveInfo } from "../../apis/get_concert_data";
 
@@ -34,7 +33,7 @@ const AboutPage = () => {
 
   const [email, setEmail] = useState(""); // Variable to store input emails for subscribtion form
   const [clicked, setClicked] = useState(false); // Variable to show hide the subscribtion form
-  
+
   // AUTO-SCROLL SECTION
   // Auto-scrolls on first navigation
   const [scroll, setScroll] = useState(true); // Auto-scroll
@@ -131,7 +130,12 @@ const AboutPage = () => {
               alt="nav-logo"
             ></img> */}
             <video autoPlay loop className="banner-video">
-              <source src={"https://onfour-media.s3.amazonaws.com/website+component/banner_video_guitar.mp4"} type="video/mp4" />
+              <source
+                src={
+                  "https://onfour-media.s3.amazonaws.com/website+component/banner_video_guitar.mp4"
+                }
+                type="video/mp4"
+              />
             </video>
             <Row className="header-tag-row">
               <Col>
@@ -153,12 +157,16 @@ const AboutPage = () => {
                 </Row>
                 <Row>
                   <div className="upcoming-description">
-                    JUSTICE SPEAKS: A Festival for Queer and Trans Black Lives, Part I
+                    JUSTICE SPEAKS: A Festival for Queer and Trans Black Lives,
+                    Part I
                   </div>
                 </Row>
                 <Row className="upcoming-button-container">
-                  <button className="upcoming-button" onClick={() => history.push("/stream")}>
-                      GO TO VENUE
+                  <button
+                    className="upcoming-button"
+                    onClick={() => history.push("/stream")}
+                  >
+                    GO TO VENUE
                   </button>
                 </Row>
               </Col>
@@ -168,9 +176,9 @@ const AboutPage = () => {
         <Row className="view-height-row">
           <Col size={12}>
             <p className="description-text" id="section2-text">
-              Onfour empowers music fans by providing a new way to interact with
-              your favorite musicians, no matter where you are. Musicians gain
-              more control over their careers and connect with fans in new,
+              Onfour is the premier live-streaming concert platform. We are
+              redefining what it means to experience live music digitally and
+              are dedicated to empowering musicians to connect with fans in new,
               meaningful ways.
               {/* Onfour is the premier live-streaming concert platform, built and
               designed for musicians. We are dedicated to empowering musicians
@@ -285,23 +293,10 @@ const AboutPage = () => {
             <Row>
               <Col size={1}>
                 <p className="description-text-mobile">
-                  Onfour is the premier live-streaming concert platform, built
-                  and designed for musicians. We are dedicated to empowering
-                  musicians and enabling them to connect with fans in new,
-                  meaningful ways. Experience studio-like quality from the
-                  comfort of your own home.
-                  <br></br>
-                  <br></br>
-                  Due to the COVID-19 pandemic, we are hosting live-stream
-                  concerts and will donate all of our proceeds to{" "}
-                  <a
-                    href="https://www.grammy.com/musicares/donations"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    MusiCares
-                  </a>{" "}
-                  to help relieve musicians during this difficult time.
+                  Onfour is the premier live-streaming concert platform. We are
+                  redefining what it means to experience live music digitally
+                  and are dedicated to empowering musicians to connect with fans
+                  in new, meaningful ways.
                 </p>
               </Col>
             </Row>
