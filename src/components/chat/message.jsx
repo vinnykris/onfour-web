@@ -21,6 +21,7 @@ const Message = ({ message: { user, text }, name }) => {
     "onfour-bar",
     "onfour-lily",
     "onfour-yuxin",
+    "onfour-spencer",
   ];
 
   // Setting booleans based on user
@@ -32,7 +33,7 @@ const Message = ({ message: { user, text }, name }) => {
     is_admin = true;
   }
 
-  if (staff.find(user)) {
+  if (staff.indexOf(user) > -1) {
     is_staff = true;
   }
 
