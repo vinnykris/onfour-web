@@ -23,6 +23,13 @@ Amplify.configure(awsmobile);
 const UpcomingShowPage = () => {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
+  const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
+  // Auto scroll to the top on page load
+  if (scroll) {
+    window.scrollTo({ top: 0 });
+    setScroll(false);
+  }
+
   // concerts is a list of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([]);
 

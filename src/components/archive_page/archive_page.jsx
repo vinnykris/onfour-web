@@ -20,6 +20,14 @@ Amplify.configure(awsmobile);
 
 // Main Archive page component
 const ArchivePage = () => {
+
+  const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
+  // Auto scroll to the top on page load
+  if (scroll) {
+    window.scrollTo({ top: 0 });
+    setScroll(false);
+  }
+  
   const [videos, setVideos] = useState([]); // List of video objects with past show information
 
   // Asynchronous function to get list of videos from database

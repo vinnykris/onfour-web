@@ -77,11 +77,11 @@ const StreamPage = () => {
 
   // AUTO-SCROLL SECTION
   // Auto-scrolls on first navigation
-  // const [scroll, setScroll] = useState(true); // Auto-scroll
-  // if (scroll) {
-  //   window.scrollTo({ top: "10px", behavior: "smooth" });
-  //   setScroll(false);
-  // }
+  const [scroll, setScroll] = useState(true); // Auto-scroll
+  if (scroll) {
+    window.scrollTo({ top: "10px", behavior: "smooth" });
+    setScroll(false);
+  }
 
   // ADJUST CHAT HEIGHT BASED ON SCROLL AMOUNT
   useEffect(() => {
@@ -323,7 +323,7 @@ const StreamPage = () => {
                     </div>
                   </div>
                   <Row className="stream-info-row">
-                    {/* <Col size={0.3}></Col> */}
+                    {/* <Col size={0.1}></Col> */}
                     <Col size={7}>
                       <Row>
                         <Col size={2}>
@@ -358,28 +358,23 @@ const StreamPage = () => {
                   {/* DONATE ROW */}
                   <Row className="donate-row">
                     <Col size={1} className="donate-stripe donate-box">
-                      <p className="donate-description">
-                        Click here to tip with a credit card.
-                      </p>
+                      <p className="donate-description">Credit Card</p>
                       <p className="donate-subdescription">
                         Your card information will not be stored anywhere.
                       </p>
                     </Col>
                     <Col size={1} className="donate-paypal donate-box">
-                      <p className="donate-description">
-                        Click here to tip with Paypal.{" "}
-                      </p>
+                      <p className="donate-description">PayPal</p>
                       <p className="donate-subdescription">
-                        onfour will ensure your tip is sent to the artist.
+                        onfour will ensure your tip is sent to For the GWORLS
+                        and LGBT Freedom Fund.
                       </p>
                     </Col>
                     <Col size={1} className="donate-venmo donate-box">
-                      <p className="donate-description">
-                        Scan the QR code below to tip on Venmo.
-                      </p>
+                      <p className="donate-description">Venmo</p>
                       <p className="donate-subdescription">
                         @SpencerAmer from onfour will ensure your tip is sent to
-                        the artist.
+                        For the GWORLS and LGBT Freedom Fund.
                       </p>
                     </Col>
                   </Row>
@@ -393,7 +388,7 @@ const StreamPage = () => {
                         data-target="#paymentModal"
                         onClick={donateModal}
                       >
-                        Tip with Card
+                        Donate with Card
                       </button>{" "}
                       <Modal></Modal>
                     </Col>
@@ -402,7 +397,7 @@ const StreamPage = () => {
                         className="stripe-button-border button-height paypal-button"
                         onClick={donatePaypal}
                       >
-                        Tip with Paypal
+                        Donate with Paypal
                       </button>
                     </Col>
                     <Col size={1} className="donate-venmo donate-box-button">

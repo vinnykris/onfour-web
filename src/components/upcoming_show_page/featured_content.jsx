@@ -83,25 +83,21 @@ const FeaturedContent = ({
           </Col>
         </Row>
         <Row>
-          <Col size={3} className="show-content-bar">
-            <Row>
+        <Col size={3} className="show-content-bar">
+                <Row>
               <div className="genre-box">{genre.toUpperCase()}</div>
-            </Row>
-            <Row>
-              <Col size={3}>
-                <p className="artist-name">
-                  {name} - {concert_name}
-                </p>
-              </Col>
-            </Row>
-            <Row className="time-row">
-              <Col size={3}>
-                <p className="time">
-                  {week_day} | {date} | {time} EST{" "}
-                </p>
-              </Col>
-            </Row>
-          </Col>
+                </Row>
+                <Row>
+                  <Col size={3}>
+                    <p className="artist-name">{name} - {concert_name}</p>
+                  </Col>
+                </Row>
+                <Row className="time-row">
+                  <Col size={3}>
+                    <p className="time">{week_day} | {date} | {time} EST </p>
+                  </Col>
+                </Row>
+            </Col>
         </Row>
       </Grid>
     </div>

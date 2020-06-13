@@ -41,7 +41,7 @@ const FlexibleGrid = ({ content_list, num_cols }) => {
   }, [content_list, num_cols]);
 
   return (
-    <Grid>
+    <Grid className="flex-grid">
       {chunks.map((chunk_list, row_index) => (
         <Row key={row_index} className="grid-row">
           {chunk_list.map((element, col_index) => (

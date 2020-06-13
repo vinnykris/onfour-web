@@ -1,5 +1,5 @@
 // Main Imports
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Row, Col } from "../grid";
 
 // Image Imports
@@ -33,6 +33,14 @@ const ArtistPage = () => {
   const authenticatedArtistPageVisit = () => {
     Analytics.record({ name: "totalAuthenticatedArtistPageVisits" });
   };
+
+  // AUTO-SCROLL SECTION
+  // Auto-scrolls on first navigation
+  const [scroll, setScroll] = useState(true); // Auto-scroll
+  if (scroll) {
+    window.scrollTo({ top: "10px", behavior: "smooth" });
+    setScroll(false);
+  }
 
   return (
     <div className="artist-page-content">
