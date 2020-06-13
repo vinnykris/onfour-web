@@ -27,17 +27,14 @@ const AboutPage = () => {
   // Add in Analytics that about page was visited
   useEffect(() => {
     aboutPageVisit();
-  }, []);
-  const aboutPageVisit = () => {
-    Analytics.record({ name: "totalaboutPageVisits" });
-  };
-
-  // Record in analytics that about page was visited only if user is logged in
-  useEffect(() => {
     Auth.currentAuthenticatedUser({}).then((user) => {
       authenticatedAboutPageVisit();
     });
   }, []);
+  const aboutPageVisit = () => {
+    Analytics.record({ name: "totalaboutPageVisits" });
+  };
+  // Record in analytics that about page was visited only if user is logged in
   const authenticatedAboutPageVisit = () => {
     Analytics.record({ name: "totalAuthenticatedAboutPageVisits" });
   };

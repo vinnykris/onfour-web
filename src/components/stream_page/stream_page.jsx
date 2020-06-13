@@ -39,6 +39,7 @@ const StreamPage = () => {
   // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat
+  const [viewers, setViewers] = useState(0); // Sets number of live viewers on page
   // Function passed as prop to join chat
   // const joinSubmit = (name, mode) => {
   //   setChatName(name);
@@ -47,6 +48,11 @@ const StreamPage = () => {
   // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
+  };
+
+  // Function passed as prop to chat to get viewer numbers
+  const getViewers = (num_viewers) => {
+    setViewers(num_viewers);
   };
 
   // EMAIL SUBSCRIBTION SECTION
@@ -136,7 +142,6 @@ const StreamPage = () => {
   // Call stream page analtics
   useEffect(() => {
     getStartTime();
-    streamPageVisit();
   }, []);
   // Query upcoming show database
   const getStartTime = async () => {
@@ -217,8 +222,9 @@ const StreamPage = () => {
     Analytics.record({ name: "totalStreamPageVisits" });
   };
 
-  // Record in analytics that stream page was visited only if user is logged in
+  // Record in analytics that stream page was visited (logged in and logged out)
   useEffect(() => {
+    streamPageVisit();
     Auth.currentAuthenticatedUser({}).then((user) => {
       authenticatedStreamPageVisit();
     });
@@ -316,26 +322,34 @@ const StreamPage = () => {
                       </div>
                     </div>
                   </div>
-                  <Row>
-                    {/* <Col size={0.5}></Col> */}
+                  <Row className="stream-info-row">
+                    {/* <Col size={0.3}></Col> */}
                     <Col size={7}>
-                      <Col size={2}>
-                        <Row>
+                      <Row>
+                        <Col size={2}>
                           <h3 className="artist-name-stream">{artist_name}</h3>
-                        </Row>
-                        <Row>
-                          <h5 className="show-time">
-                            {show_time} (refresh the page if stream doesn't show
-                            up)
-                          </h5>
-                        </Row>
-                      </Col>
+                        </Col>
+                        <Col size={1}>
+                          <div className="viewers">
+                            <h5 className="viewer-count show-time">
+                              {viewers} watching now
+                            </h5>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <h5 className="show-time">
+                          {show_time} (refresh the page if stream doesn't show
+                          up)
+                        </h5>
+                      </Row>
+                      {/* </Col> */}
                       {/* <Col size={1} className="social-bar-center">
-                    <SocialBar />
-                  </Col> */}
+                           <SocialBar />
+                      </Col> */}
                     </Col>
-                    <Col size={2.5}></Col>
-                    {/* <Col size={0.5}></Col> */}
+                    {/* <Col size={2.5}></Col>
+                    <Col size={0.5}></Col> */}
                   </Row>
                   <Row>
                     <div className="short-term-spacer"></div>
@@ -472,6 +486,7 @@ const StreamPage = () => {
                       <Chat
                         chat_name={username ? username : "GUEST"}
                         chatStatus={chatStatus}
+                        setViewers={getViewers}
                       />
                     </div>
                   </div>
@@ -513,6 +528,7 @@ const StreamPage = () => {
                     <Chat
                       chat_name={username ? username : "GUEST"}
                       chatStatus={chatStatus}
+                      setViewers={getViewers}
                     />
                   </div>
                 </div>

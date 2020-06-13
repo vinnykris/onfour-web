@@ -50,7 +50,6 @@ const NavBar = () => {
   const [show_mobile_login, setShowMobileLogin] = useState(false); // Tracks whether user clicked sign-in or not on mobile
 
   const { height, width } = useWindowDimensions(); // Dimensions of screen
-  console.log(width);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState); // Toggle for dropdown menu
 

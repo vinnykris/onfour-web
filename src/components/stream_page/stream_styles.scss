@@ -334,6 +334,10 @@
   width: 20%;
 }
 
+.stream-info-row {
+  padding-left: 10px;
+}
+
 .artist-name-stream {
   font-size: 28px;
   margin: 5px;
@@ -343,6 +347,15 @@
   font-weight: $medium-weight;
   color: #e2e2e2;
   text-align: left;
+}
+
+.viewers {
+  display: flex;
+  width: auto;
+  height: 100%;
+  float: right;
+  margin-right: 5px;
+  margin-top: 5px;
 }
 
 .show-time {

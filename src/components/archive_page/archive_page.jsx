@@ -50,17 +50,15 @@ const ArchivePage = () => {
   useEffect(() => {
     getArchiveInfo();
     archivePageVisit();
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedArchivePageVisit();
+    });
   }, []);
   const archivePageVisit = () => {
     Analytics.record({ name: "totalArchivePageVisits" });
   };
 
   // Record in analytics that archive page was visited only if user is logged in
-  useEffect(() => {
-    Auth.currentAuthenticatedUser({}).then((user) => {
-      authenticatedArchivePageVisit();
-    });
-  }, []);
   const authenticatedArchivePageVisit = () => {
     Analytics.record({ name: "totalAuthenticatedArchivePageVisits" });
   };

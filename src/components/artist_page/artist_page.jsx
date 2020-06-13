@@ -21,17 +21,15 @@ const ArtistPage = () => {
   // Add in analytics that arist page was visited
   useEffect(() => {
     artistPageVisit();
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedArtistPageVisit();
+    });
   }, []);
   const artistPageVisit = () => {
     Analytics.record({ name: "totalArtistPageVisits" });
   };
 
   // Record in analytics that artist page was visited only if user is logged in
-  useEffect(() => {
-    Auth.currentAuthenticatedUser({}).then((user) => {
-      authenticatedArtistPageVisit();
-    });
-  }, []);
   const authenticatedArtistPageVisit = () => {
     Analytics.record({ name: "totalAuthenticatedArtistPageVisits" });
   };

@@ -18,7 +18,7 @@ import "./chat.scss";
 let socket; // Socket declaration
 
 // Main chat component
-const Chat = ({ chat_name, chatStatus }) => {
+const Chat = ({ chat_name, chatStatus, setViewers }) => {
   const [name, setName] = useState(chat_name); // User's chat name
   const [room, setRoom] = useState("CHAT"); // Title of chat and room all users are in
   const [users, setUsers] = useState(""); // List of users in chat room
@@ -58,6 +58,7 @@ const Chat = ({ chat_name, chatStatus }) => {
 
     socket.on("roomData", ({ users }) => {
       setUsers(users);
+      setViewers(users.length);
     });
   }, []);
 
@@ -89,6 +90,7 @@ const Chat = ({ chat_name, chatStatus }) => {
             // Error checking if connection is lost
             setMessage("");
             if (error) {
+              Analytics.record({ name: "chatError" }); // this record the chat button press
               setError("Lost connection to chat. Press 'OK' to reconnect.");
               closeChat();
             } else {

@@ -21,7 +21,6 @@ Amplify.configure(awsmobile);
 
 // The Upcoming Show Page component
 const UpcomingShowPage = () => {
-
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   // concerts is a list of FeaturedContent objects with upcoming show information
@@ -69,7 +68,8 @@ const UpcomingShowPage = () => {
       const day_in_week = new Date(data.date).toString();
       const hour = parseInt(data.time.slice(0, 2));
       const minutes = data.time.slice(2, 5);
-      const time_left = +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
+      const time_left =
+        +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
       const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
 
       setConcerts((concerts) => [
@@ -109,21 +109,18 @@ const UpcomingShowPage = () => {
   useEffect(() => {
     getConcertInfo();
     upcomingShowVisit();
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedUpcomingPageVisit();
+    });
   }, []);
   const upcomingShowVisit = () => {
     Analytics.record({ name: "totalUpcomingPageVisits" });
   };
 
   // Record in analytics that upcoming show page was visited only if user is logged in
-  useEffect(() => {
-    Auth.currentAuthenticatedUser({}).then((user) => {
-      authenticatedUpcomingPageVisit();
-    });
-  }, []);
   const authenticatedUpcomingPageVisit = () => {
     Analytics.record({ name: "totalAuthenticatedUpcomingPageVisits" });
   };
-
 
   return (
     <div className="upcoming-show-page-content">
