@@ -97,6 +97,7 @@ const AboutPage = () => {
       if (document.getElementById("section2-text")) {
         const scrollCheck_top_section2 = window.scrollY > height / 2;
         const scrollCheck_bottom_section2 = window.scrollY > height;
+
         if (scrollCheck_top_section2 && !scrollCheck_bottom_section2) {
           // if the scroll amount is larger than view height to increase opacity
           document.getElementById("section2-text").style.opacity =
@@ -139,15 +140,19 @@ const AboutPage = () => {
               </Col>
             </Row>
             <Row className="upcoming-row">
-              <Col>
+              <Col className="upcoming-col">
                 <Row>
                   <span className="upcoming-header-tag">UP NEXT</span>
                 </Row>
                 <Row>
                   <div className="upcoming-description">
-                    Jerry Weldon has his international jazz chops and you've
-                    never experienced sax playing like his!
+                    JUSTICE SPEAKS: A Festival for Queer and Trans Black Lives, Part I
                   </div>
+                </Row>
+                <Row className="upcoming-button-container">
+                  <button className="upcoming-button" onClick={() => history.push("/stream")}>
+                      GO TO VENUE
+                  </button>
                 </Row>
               </Col>
             </Row>
