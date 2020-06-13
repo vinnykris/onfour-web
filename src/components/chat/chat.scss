@@ -259,8 +259,32 @@ button:focus {
   max-width: 100%;
   min-height: 0;
   max-height: 100%;
+  // scrollbar-width: none; /* Firefox */
+  // -ms-overflow-style: none;  /* IE 10+ */
+  // &::-webkit-scrollbar {
+  //   width: 10px;
+  //   background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
+  // }
+  // &::-webkit-scrollbar-thumb {
+  //   background: rgba(209, 209, 209, 0.596); 
+  //   border-radius: 20px;
+  // }
 }
 // MESSAGE
+
+
+.css-y1c0xs {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(141, 141, 141, 0.596); 
+    border-radius: 20px;
+  }
+}
 
 .message-box {
   background: #f3f3f3;
