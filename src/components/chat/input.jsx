@@ -7,6 +7,9 @@ import ChatTooltip from "./chat_tooltip";
 // Styles imports
 import "./chat.scss";
 
+// AWS imports
+import Amplify, { Analytics } from "aws-amplify";
+
 // Component for input field for chat
 const Input = ({ message, setMessage, sendMessage, name }) => {
   return (

@@ -5,18 +5,35 @@ import React, { useState } from "react";
 import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
-// Component Imports 
+// AWS Imports
+import Amplify, { Analytics } from "aws-amplify";
+// Component Imports
 import BioModal from "./bio_modal";
 
 // FeaturedContent is the unit element for an upcoming concert
-const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, time, price, description, days_left, width, genre }) => {
-
+const FeaturedContent = ({
+  img,
+  name,
+  concert_name,
+  week_day,
+  date,
+  month,
+  day,
+  time,
+  price,
+  description,
+  days_left,
+  width,
+  genre,
+}) => {
   const [show_more_info, setClickedInfo] = useState(false); // Determines whether to show the popup for musician's bio or not
 
   // This function gets called when the MORE INFO button is clicked
   // and it sets the show_more_info to true
   const open_info = () => {
     setClickedInfo(true);
+    const event_name = (name + date).replace(/\s/g, ""); // unique identifier for event
+    Analytics.record({ name: event_name }); // record analytics for specific "MORE INFO" click
   };
 
   // This function gets called when the close button on the popup
@@ -24,8 +41,6 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
   const close_info = () => {
     setClickedInfo(false);
   };
-  
-  
 
   return (
     <div className="single-element">
@@ -56,7 +71,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
       <Row className="RSVP">
         <p className="RSVP-text">MORE INFO</p>
       </Row>
-      <Grid className="featured-content" onClick={open_info} >
+      <Grid className="featured-content" onClick={open_info}>
         <Row>
           <Col size={3} className="poster-container">
             <img className="concert-poster" src={img} alt="content-img"></img>
@@ -85,7 +100,7 @@ const FeaturedContent = ({ img, name, concert_name, week_day, date, month, day, 
             </Col>
         </Row>
       </Grid>
-    </div> 
+    </div>
   );
 };
 

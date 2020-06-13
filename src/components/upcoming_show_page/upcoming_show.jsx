@@ -10,8 +10,9 @@ import { useWindowDimensions } from "../custom_hooks";
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
 import * as queries from "../../graphql/queries";
-import Amplify from "aws-amplify";
+import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
+import Auth from "../../apis/UserPool";
 
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
@@ -20,7 +21,6 @@ Amplify.configure(awsmobile);
 
 // The Upcoming Show Page component
 const UpcomingShowPage = () => {
-
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
@@ -75,7 +75,8 @@ const UpcomingShowPage = () => {
       const day_in_week = new Date(data.date).toString();
       const hour = parseInt(data.time.slice(0, 2));
       const minutes = data.time.slice(2, 5);
-      const time_left = +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
+      const time_left =
+        +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
       const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
 
       setConcerts((concerts) => [
@@ -111,10 +112,22 @@ const UpcomingShowPage = () => {
     });
   };
 
+  // Get Concert Info and Record in Analytics that Upcoming show page was viewed
   useEffect(() => {
     getConcertInfo();
+    upcomingShowVisit();
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedUpcomingPageVisit();
+    });
   }, []);
+  const upcomingShowVisit = () => {
+    Analytics.record({ name: "totalUpcomingPageVisits" });
+  };
 
+  // Record in analytics that upcoming show page was visited only if user is logged in
+  const authenticatedUpcomingPageVisit = () => {
+    Analytics.record({ name: "totalAuthenticatedUpcomingPageVisits" });
+  };
 
   return (
     <div className="upcoming-show-page-content">

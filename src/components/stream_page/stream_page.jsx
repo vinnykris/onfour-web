@@ -8,7 +8,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import * as queries from "../../graphql/queries";
-import Amplify from "aws-amplify";
+import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 // Amplify Imports
 import Auth from "../../apis/UserPool";
@@ -134,7 +134,12 @@ const StreamPage = () => {
   const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
+
+  // Analytics state variables
+  //const [arrival, setArrival] = useState(true);
+
   // Get the start time for countdown_timer
+  // Call stream page analtics
   useEffect(() => {
     getStartTime();
   }, []);
@@ -202,8 +207,30 @@ const StreamPage = () => {
   // DONATION SECTION
   // Opens link to paypal account for musician
   const donatePaypal = () => {
+    Analytics.record({ name: "paypalClicked" });
     const url = "https://bit.ly/3dN8gOB";
     window.open(url, "_blank");
+  };
+
+  // Analytics tracker for payment modal
+  const donateModal = () => {
+    Analytics.record({ name: "paymentModalClicked" });
+  };
+
+  // Record in analytics that stream page was visited
+  const streamPageVisit = () => {
+    Analytics.record({ name: "totalStreamPageVisits" });
+  };
+
+  // Record in analytics that stream page was visited (logged in and logged out)
+  useEffect(() => {
+    streamPageVisit();
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedStreamPageVisit();
+    });
+  }, []);
+  const authenticatedStreamPageVisit = () => {
+    Analytics.record({ name: "totalAuthenticatedStreamPageVisits" });
   };
 
   // TOGGLE CHAT SECTION
@@ -359,6 +386,7 @@ const StreamPage = () => {
                         className="stripe-button-border button-height"
                         data-toggle="modal"
                         data-target="#paymentModal"
+                        onClick={donateModal}
                       >
                         Donate with Card
                       </button>{" "}

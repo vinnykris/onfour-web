@@ -1,0 +1,14 @@
+{
+	"auth": {
+		"cognitoe7372b2d": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"analytics": {
+		"onfourweb": {
+			"service": "Pinpoint",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}

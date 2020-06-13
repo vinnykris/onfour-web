@@ -8,8 +8,9 @@ import { NavLink, useLocation } from "react-router-dom";
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
-import Amplify from "aws-amplify";
+import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
+import Auth from "../../apis/UserPool";
 
 // Component Imports
 import FlexibleGrid from "../flexible_grid/flexible_grid";
@@ -45,6 +46,21 @@ const AboutPage = () => {
   // concerts is a list of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([]);
   const [videos, setVideos] = useState([]); // List of video objects with past show information
+
+  // Add in Analytics that about page was visited
+  useEffect(() => {
+    aboutPageVisit();
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedAboutPageVisit();
+    });
+  }, []);
+  const aboutPageVisit = () => {
+    Analytics.record({ name: "totalaboutPageVisits" });
+  };
+  // Record in analytics that about page was visited only if user is logged in
+  const authenticatedAboutPageVisit = () => {
+    Analytics.record({ name: "totalAuthenticatedAboutPageVisits" });
+  };
 
   const header_image_url =
     "https://d1gbu7v6fgabn0.cloudfront.net/banner_background_blur.jpg";
