@@ -23,7 +23,7 @@ function VideoPlayer({
   artist_name,
   concert_name,
   auth,
-  user_id,
+  username,
   concert_id,
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
@@ -130,7 +130,7 @@ function VideoPlayer({
     if (auth && !registered_concert) {
       if (concert_id) {
         const concert_reg_load = {
-          id: user_id,
+          username: username,
           concert: concert_id,
         };
         registerConcert(concert_reg_load);

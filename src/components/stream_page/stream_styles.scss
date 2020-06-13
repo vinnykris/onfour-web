@@ -413,6 +413,18 @@
   }
 }
 
+.artist-image {
+  width: 5vw;
+  height: 5vw;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 50%;
+  @include respond-to("small") {
+    width: 11.5vh;
+    height: 11.5vh;
+  }
+}
+
 .countdown-component-wrapper {
   margin: 0;
   position: absolute;
