@@ -212,7 +212,7 @@ const AboutPage = () => {
               className="why-perform-learn-more-button"
               onClick={() => history.push("/artists")}
             >
-              LEARN MORE >
+              LEARN MORE
             </button>
           </Row>
           <Row className="why-perform-image-container">
