@@ -24,7 +24,7 @@ import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 
 // Styles Imports
-import "./stream_styles.scss";
+import "../stream_page/stream_styles.scss";
 
 // Image imports
 import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";

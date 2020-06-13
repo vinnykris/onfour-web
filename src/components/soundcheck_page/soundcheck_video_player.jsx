@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 
 // Styling Imports
-import "./stream_styles.scss";
+import "../stream_page/stream_styles.scss";
 import { Grid, Row, Col } from "../grid";
 import { useWindowDimensions } from "../custom_hooks";
 
@@ -59,7 +59,7 @@ function VideoPlayer({
 
   const timer_components = []; // Stores the countdown message
   const timer_placeholder = []; // Placehoder to store the countdown message
-  // For timer_components, the value for hours, minutes, etc is always two diigits 
+  // For timer_components, the value for hours, minutes, etc is always two diigits
   // and when it's zero, it will be represented as 00.
   // However, for timer_placeholder, if one element counts towards zero, the length of that element value
   // will be zero unlike timer_components
@@ -141,51 +141,51 @@ function VideoPlayer({
 
   // Showing the user either the logged in waiting page or the
   // stream depending on the countdown
-  
+
   // if (auth) {
-    return (
-      <div className="countdown-wrapper">
-        {timer_placeholder.length ? (
-          <div className="waiting-screen">
-            <div className="waiting-message-container">
-              <h3 className="waiting-message1">Next Stream Coming Soon</h3>
-              {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
-              <h5 className="waiting-message2">
-                {artist_name} - {concert_name}
-              </h5>
-            </div>
-            <div className="countdown-component-wrapper">
-              <Grid>
-                <Row>{timer_components}</Row>
-              </Grid>
-            </div>
+  return (
+    <div className="countdown-wrapper">
+      {timer_placeholder.length ? (
+        <div className="waiting-screen">
+          <div className="waiting-message-container">
+            <h3 className="waiting-message1">Next Stream Coming Soon</h3>
+            {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
+            <h5 className="waiting-message2">
+              {artist_name} - {concert_name}
+            </h5>
           </div>
-        ) : (
-          <div className="player-wrapper">
-            {width <= 600 ? (
-              <ReactPlayer
-                className="video-player"
-                url={url}
-                width="100%"
-                height="100%"
-                playing
-                controls
-                playsinline
-              />
-            ) : (
-              <ReactPlayer
-                className="video-player"
-                url={url}
-                width="100%"
-                height="100%"
-                playing
-                controls
-              />
-            )}
+          <div className="countdown-component-wrapper">
+            <Grid>
+              <Row>{timer_components}</Row>
+            </Grid>
           </div>
-        )}
-      </div>
-    );
+        </div>
+      ) : (
+        <div className="player-wrapper">
+          {width <= 600 ? (
+            <ReactPlayer
+              className="video-player"
+              url={url}
+              width="100%"
+              height="100%"
+              playing
+              controls
+              playsinline
+            />
+          ) : (
+            <ReactPlayer
+              className="video-player"
+              url={url}
+              width="100%"
+              height="100%"
+              playing
+              controls
+            />
+          )}
+        </div>
+      )}
+    </div>
+  );
   // } else {
   //   return (
   //     <div className="countdown-wrapper">
