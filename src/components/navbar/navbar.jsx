@@ -80,6 +80,29 @@ const NavBar = () => {
     });
   }
 
+  // const [nextTokenP, setNextToken] = useState("initial");
+  // if (nextTokenP != "null") {
+  //   if (nextTokenP === "initial") {
+  //     API.graphql(
+  //       graphqlOperation(queries.list_users, {
+  //         nextToken: "null",
+  //       })
+  //     ).then((data) => {
+  //       console.log(data.data.listCreateOnfourRegistrations.nextToken);
+  //       setNextToken(data.data.listCreateOnfourRegistrations.nextToken);
+  //     });
+  //   } 
+  //   else {
+  //     API.graphql(
+  //       graphqlOperation(queries.list_users, {
+  //         nextToken: nextTokenP,
+  //       })
+  //     ).then((data) => {
+  //       console.log(data.data.listCreateOnfourRegistrations.nextToken);
+  //       setNextToken(data.data.listCreateOnfourRegistrations.nextToken);
+  //     });
+  //   }
+  // }
   // Change styles if on about page
   if (location.pathname === "/") {
     navbar_custom = "navbar-custom";
