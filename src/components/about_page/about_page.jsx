@@ -6,7 +6,7 @@ import history from "../../history";
 import { NavLink, useLocation } from "react-router-dom";
 
 // AWS Imports
-import { API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation, loadingBar } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
@@ -17,7 +17,7 @@ import FlexibleGrid from "../flexible_grid/flexible_grid";
 import { useWindowDimensions } from "../custom_hooks";
 
 // API Imports
-import { getConcertInfo, getArchiveInfo } from "../../apis/get_concert_data";
+import { getConcertInfo, getArchiveInfo, getMostRecentUpcomingInfo } from "../../apis/get_concert_data";
 
 // Image Imports
 // import gradient_header from "../../images/mobile_gradient.png";
@@ -45,6 +45,7 @@ const AboutPage = () => {
 
   // concerts is a list of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([]);
+  const [most_recent_concert, setMostRecentConcert] = useState("");
   const [videos, setVideos] = useState([]); // List of video objects with past show information
 
   // Add in Analytics that about page was visited
@@ -103,11 +104,11 @@ const AboutPage = () => {
       // Archive videos
       const archive_result = await getArchiveInfo();
       setVideos(archive_result.slice(0, 4));
+
+      const recent_concert = await getMostRecentUpcomingInfo(); 
+      setMostRecentConcert(recent_concert);
     };
     fetchData();
-    // getConcertData();
-    // console.log(await );
-    // setConcerts(await getConcertInfo());
   }, []);
 
   // ADD ANIMATION TO CSS BASED ON SCROLL AMOUNT
@@ -174,8 +175,7 @@ const AboutPage = () => {
                 </Row>
                 <Row>
                   <div className="upcoming-description">
-                    JUSTICE SPEAKS: A Festival for Queer and Trans Black Lives,
-                    Part I
+                    {most_recent_concert ? (most_recent_concert.artist + " - " + most_recent_concert.concertName) : "loading..."}
                   </div>
                 </Row>
                 <Row className="upcoming-button-container">

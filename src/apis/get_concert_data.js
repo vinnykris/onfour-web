@@ -122,3 +122,15 @@ export const getArchiveInfo = async () => {
 
   return archive_videos;
 };
+
+export const getMostRecentUpcomingInfo = async () => {
+  // Calling the API, using async and await is necessary
+  const info = await API.graphql(
+    graphqlOperation(queries.list_upcoming_concerts)
+  );
+
+  const info_list = info.data.listFutureConcerts.items; // Stores the items in database
+  info_list.sort((a, b) => a.timePassed - b.timePassed);
+
+  return info_list[0];
+};
