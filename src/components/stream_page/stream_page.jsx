@@ -361,22 +361,21 @@ const StreamPage = () => {
                     <Col size={1} className="donate-stripe donate-box">
                       <p className="donate-description">Credit Card</p>
                       <p className="donate-subdescription">
-                        Donate via credit card to For the GWORLS
-                        and LGBT Freedom Fund. Your card information will not be stored anywhere.
+                        Tip the artist via credit card. Your card information
+                        will not be stored anywhere.
                       </p>
                     </Col>
                     <Col size={1} className="donate-paypal donate-box">
                       <p className="donate-description">PayPal</p>
                       <p className="donate-subdescription">
-                        onfour will ensure your donation is sent to For the GWORLS
-                        and LGBT Freedom Fund.
+                        onfour will ensure your tip is sent to the artist.
                       </p>
                     </Col>
                     <Col size={1} className="donate-venmo donate-box">
                       <p className="donate-description">Venmo</p>
                       <p className="donate-subdescription">
-                        @SpencerAmer from onfour will ensure your donation is sent to
-                        For the GWORLS and LGBT Freedom Fund.
+                        @SpencerAmer from onfour will ensure your tip is sent to
+                        the artist.
                       </p>
                     </Col>
                   </Row>
@@ -390,7 +389,7 @@ const StreamPage = () => {
                         data-target="#paymentModal"
                         onClick={donateModal}
                       >
-                        Donate with Card
+                        Tip with Card
                       </button>{" "}
                       <Modal></Modal>
                     </Col>
@@ -399,7 +398,7 @@ const StreamPage = () => {
                         className="stripe-button-border button-height paypal-button"
                         onClick={donatePaypal}
                       >
-                        Donate with Paypal
+                        Tip with Paypal
                       </button>
                     </Col>
                     <Col size={1} className="donate-venmo donate-box-button">
@@ -412,68 +411,68 @@ const StreamPage = () => {
                   </Row>
 
                   <Row className="stream-subscribe-box">
-                      <Col size={0.5}></Col>
-                      <Col size={7}>
-                        <Row>
-                          <p className="stream-subscribe-title">Subscribe</p>
-                        </Row>
-                        <Row>
-                          <Col size={3}>
-                            <p className="stream-subscribe-description">
-                              To stay informed about upcoming events, subscribe to our
-                              mailing list:
-                            </p>
-                            {(() => {
-                              if (email_submitted) {
-                                return (
-                                  <p className="subscribe-success">
-                                    Thank you and stay tuned!
-                                  </p>
-                                );
-                              } else {
-                                return (
-                                  <form
-                                    class="stream-email-form"
-                                    action="/"
-                                    id="newsletter"
-                                    onSubmit={emailSubmit}
+                    <Col size={0.5}></Col>
+                    <Col size={7}>
+                      <Row>
+                        <p className="stream-subscribe-title">Subscribe</p>
+                      </Row>
+                      <Row>
+                        <Col size={3}>
+                          <p className="stream-subscribe-description">
+                            To stay informed about upcoming events, subscribe to
+                            our mailing list:
+                          </p>
+                          {(() => {
+                            if (email_submitted) {
+                              return (
+                                <p className="subscribe-success">
+                                  Thank you and stay tuned!
+                                </p>
+                              );
+                            } else {
+                              return (
+                                <form
+                                  class="stream-email-form"
+                                  action="/"
+                                  id="newsletter"
+                                  onSubmit={emailSubmit}
+                                >
+                                  <input
+                                    type="email"
+                                    placeholder="Enter your email here..."
+                                    name="email"
+                                    required
+                                    value={email}
+                                    style={{ width: "70%" }}
+                                    onChange={(event) =>
+                                      setEmail(event.target.value)
+                                    }
+                                  />
+                                  <button
+                                    type="submit"
+                                    form="newsletter"
+                                    value="Submit"
+                                    style={{ width: "auto" }}
+                                    className="button-border button-height adjust-font-size"
                                   >
-                                    <input
-                                      type="email"
-                                      placeholder="Enter your email here..."
-                                      name="email"
-                                      required
-                                      value={email}
-                                      style={{ width: "70%" }}
-                                      onChange={(event) =>
-                                        setEmail(event.target.value)
-                                      }
-                                    />
-                                    <button
-                                      type="submit"
-                                      form="newsletter"
-                                      value="Submit"
-                                      style={{ width: "auto" }}
-                                      className="button-border button-height adjust-font-size"
-                                    >
-                                      {" "}
-                                      Submit
-                                    </button>
-                                  </form>
-                                );
-                              }
-                            })()}
-                          </Col>
-                          <Col size={1}></Col>
-                          <Col size={3}>
-                            <SocialBar></SocialBar>
-                          </Col>
-                        </Row>
-                      </Col>
-                      <Col size={0.5}></Col>
+                                    {" "}
+                                    Submit
+                                  </button>
+                                </form>
+                              );
+                            }
+                          })()}
+                        </Col>
+                        <Col size={1}></Col>
+                        <Col size={3}>
+                          <SocialBar></SocialBar>
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col size={0.5}></Col>
                   </Row>
                 </Col>
-                
+
                 <Col
                   size={2.5}
                   id="chat_container"
