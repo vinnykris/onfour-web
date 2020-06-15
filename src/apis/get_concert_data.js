@@ -57,6 +57,9 @@ export const getConcertInfo = async (width) => {
     const day_in_week = new Date(data.date).toString();
     const hour = parseInt(data.time.slice(0, 2));
     const minutes = data.time.slice(2, 5);
+    const time_left = +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
+    const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
+
     upcoming_concerts.push(
       <FeaturedContent
         img={data.url}
@@ -81,6 +84,7 @@ export const getConcertInfo = async (width) => {
         }
         price={data.price}
         description={data.description.toString()}
+        days_left={days_left}
         width={width}
         genre={data.genre}
       />

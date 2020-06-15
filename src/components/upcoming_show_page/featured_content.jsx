@@ -69,7 +69,11 @@ const FeaturedContent = ({
         </div>
       ) : null}
       <Row className="RSVP">
-        <p className="RSVP-text">MORE INFO</p>
+        {price? (
+          <p className="RSVP-text">BUY TICKET</p>
+        ) : (
+          <p className="RSVP-text">MORE INFO</p>
+        )}
       </Row>
       <Grid className="featured-content" onClick={open_info}>
         <Row>

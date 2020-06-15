@@ -11,6 +11,7 @@ import FestivalBio from "./festival_bio";
 
 const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, date, time, description, width }) => {
     const toBeImplemented = () => {
+        console.log("clicked");
     };
 
     return (
@@ -57,7 +58,6 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                         // <button className="modal-free-button" id="free" onClick={toBeImplemented}>FREE</button>
                                         <div className="modal-free-button">FREE</div>
                                         )}
-
                                 </Row>
                             </Col>
                         </Row>
@@ -72,7 +72,7 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                         </div>
                                     </Row>
                                     <Row className="modal-description-container">
-                                        {concert_name === "Part I" ? (
+                                        {concert_name === "Part III" ? (
                                             <div className="festival-bio-description">
                                                 <div className="disclaimer">
                                                     {"ALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
