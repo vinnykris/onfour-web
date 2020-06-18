@@ -316,7 +316,7 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                     <div className="mobile-modal-info">{weekday.toUpperCase()} | {date} | {time} EST</div>
                                 </Row>
                                 <Row>
-                                    {concert_name === "Part I" ? (
+                                    {concert_name === "Part III" ? (
                                         <div className="mobile-modal-bio-description">
                                             <div className="disclaimer">
                                                 {"\nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
@@ -393,74 +393,92 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                             />
                                         </div>
                                     ) : (
-                                            <div className="mobile-modal-bio-description">
-                                                <div className="disclaimer">
-                                                    {"\nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
-                                                </div>
-                                                <a href="https://www.justicespeaks.info/the-cause" target="_blank">learn more about both organizations</a>
-                                                <div className="line-up">
-                                                    {"\n"}LINE UP
-                                                </div>
-                                                <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/achille.png"}
-                                                    name={"Achille Tenkiang"}
-                                                    bio={"Achille Tenkiang is an aspiring attorney and creative passionate about connecting and equipping people with the tools and resources they need to advocate for Black Lives. A multitalented performer, Tenkiang is a proud alumnus of Princeton University’s Ellipses Slam Poetry Team and Umqombothi African Music Ensemble. While living in Nairobi, he organized a series of slam poetry workshops with urban refugee youth. And while living in Paris last year, he continued his creative pursuits, starring in Loline Stage and Film’s production of Katori Hall’s award-winning play \"The Mountaintop.\""}
-                                                    num={1}
-                                                />
-                                                <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/alex.png"}
-                                                    name={"Alex Brunson"}
-                                                    bio={"Since moving to New York in 2017, Alex has had the pleasure of performing venues across New York, D.C. and along the east coast, as well as internationally with his indie r&b duo, bluesoul. bluesoul comprises Alex on keys and vocals and his good friend Sid Gopinath on guitar and vocals. You can keep up with bluesoul on their instagram, find their debut EP on all streaming platforms, and check out their live work on YouTube."}
-                                                    num={9}
-                                                />
-                                                <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Aryeh+Nussbaum+Cohen.jpg"}
-                                                    name={"Aryeh Nussbaum Cohen"}
-                                                    bio={"Acclaimed as a \"young star\" and \"complete artist\" by the New York Times and \"extravagantly gifted... poised to redefine what’s possible for singers of this distinctive voice type\" by the San Francisco Chronicle, countertenor Aryeh Nussbaum Cohen is one of the classical vocal world's most promising rising stars. Aryeh's first commercial recording - the world premiere recording of Kenneth Fuchs' Poems of Life with the London Symphony Orchestra - won a 2019 GRAMMY® Award in the Best Classical Compendium category. His numerous awards include Grand Finals Winner of the Metropolitan Opera National Council Auditions and Third Prize in Operalia 2019 in Prague, the only American to place in the international competition. Aryeh's performance credits include productions with San Francisco Opera, Theater an der Wien, Houston Grand Opera, Cincinnati Opera and San Francisco Ballet, and concert engagements with the San Francisco Symphony, Philharmonia Baroque Orchestra, the Buffalo Philharmonic and American Bach Soloists; his upcoming engagements will take him to many of the world’s leading opera houses, across Europe and the United States. He is proud to stand in support of the Black Lives Matter Movement."}
-                                                    num={2}
-                                                />
-                                                <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/crystal.png"}
-                                                    name={"Crystal Valentine"}
-                                                    bio={"Born and raised in the Bronx, Crystal Valentine is a nationally and internationally acclaimed poet. Crystal has traveled across seas performing on platforms in Paris, Brazil, Botswana, South Africa and elsewhere. She was named Glamour Magazine's 2016 College Woman of the Year, Teen Vogue's Rising Young Black Thought Leader, and was the recipient of the National Conference of College Women Student Leaders Woman’s Distinction Award. A Callaloo Fellow and former New York City Youth Poet Laureate, Crystal’s work has been featured on programming for MSNBC, Blavity, Button Poetry, BET, CNN, The New York Daily News and more. She earned her B.A in Psychology at New York University, where she is returning as a MFA candidate in Poetry. She is a coordinator for the Bronx Council on the Arts and is the current Wednesday Night host at the Nuyorican Poets Café."}
-                                                    num={3}
-                                                />
-                                                <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Dani+Stephenson.jpg"}
-                                                    name={"Dani Stephenson"}
-                                                    bio={"Dani is a 20-year old musician, singer, and songwriter who was born in Birmingham, Alabama and grew up in Guam, USA. Classically trained in music since she was five years old and a Jazz Studies minor, Dani only began writing her own music halfway through college. Her recent EP, Water Signs (available on all major streaming platforms) fuses low-slung hip hop beats, jazz-inspired melodies, and intimately vulnerable lyrics into a distinct, soulful sound. She is a class of 2020 graduate of Princeton University and will be based in Los Angeles this fall."}
-                                                    num={4}
-                                                />
-                                                <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Saunghee+and+Mike.jpg"}
-                                                    name={"Delgado & Ko"}
-                                                    bio={"Delgado & Ko are an electro-acoustic duo based in New York City. While both have their respective backgrounds in jazz guitar and classical singing, they first started performing popular music together in the funk-afrobeat collective Sensemaya at Princeton. Since then they have started performing regularly in NYC, both as a duo and alongside other musicians and bands, and have expanded their repertoire to include funk, pop, soul, and everything in between."}
-                                                    num={10}
-                                                />
-                                                <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Emily+Miller.jpeg"}
-                                                    name={"Emily Miller"}
-                                                    bio={"Emily spent her time in college in a variety of music groups singing jazz, funk, and pop music. Most recently she’s been active in the soul/folk group \"Baby Dreams.\""}
-                                                    num={5}
-                                                />
-                                                <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Kovey+Coles.png"}
-                                                    name={"Kovey Coles"}
-                                                    bio={"Kovey Coles is a rapper/instrumentalist whose guitar-driven songs blend soulful and indie rock vibes into hip-hop. He is currently based in Los Angeles, and you can find his newest release 'TTST' available on all platforms now."}
-                                                    num={6}
-                                                />
-                                                <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Malachi+Bird.jpg"}
-                                                    name={"MalPractice"}
-                                                    bio={"Hailing from Northeast, D.C., Chocolate City’s own MalPractice is trying to give rap a seat at the table. The Inaugural DC Youth Poet Laureate has published three books, four mixtapes, and is the founder of the Crowning Too Early Scholarship Fund. Among the first ever cohort of Black men to receive African-American Studies degrees from Princeton University, MalPrac has always been propelled by love for his city and love for language. He has shared stages with artists such as Talib Kweli, The Last Poets, Chuck Brown, Vic Mensa, A Boogie Wit Da Hoodie, and many more incredible artists. His favorite quote is “Without art, the Earth is just Eh,” and he goes by Practice because he knows that he’ll never be perfect enough."}
-                                                    num={7}
-                                                />
-                                                <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/tanya.png"}
-                                                    name={"Tanyaradzwa Tawengwa"}
-                                                    bio={"Professor Tanyaradzwa Tawengwa is a Zimbabwean Gwenyambira, composer and singer whose storytelling serves to bridge Zimbabwe's past and present, in order to inform a self-crafted future. Her craft lives at the intersection of music and healing, drawing from the generations of Svikiro (spirit mediums) and N'anga (healers) in her bloodline. Tawengwa is also the founder and music director of the Mushandirapamwe Singers, a Zimbabwean vocal ensemble. Tawengwa earned her B.A. in Music Composition at Princeton University (cum laude), her M.M. in Voice Performance from the University of Kentucky and is currently a doctoral candidate in Voice Performance at the University of Kentucky.\nhttps://www.mushandirapamwe-singers.com/bio"}
-                                                    num={8}
-                                                />
+                                            <div className="festival-bio-description">
+                                                    <div className="disclaimer">
+                                                        {"ALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
+                                                    </div>
+                                                    <a href="https://www.justicespeaks.info/the-cause" target="_blank">learn more about both organizations</a>
+                                                    <div className="line-up">
+                                                        {"\n"}LINE UP
+                                                    </div>
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/achille.png"}
+                                                        name={"Achille Tenkiang"}
+                                                        bio={"Achille Tenkiang is an aspiring attorney and creative passionate about connecting and equipping people with the tools and resources they need to advocate for Black Lives. A multitalented performer, Tenkiang is a proud alumnus of Princeton University’s Ellipses Slam Poetry Team and Umqombothi African Music Ensemble. While living in Nairobi, he organized a series of slam poetry workshops with urban refugee youth. And while living in Paris last year, he continued his creative pursuits, starring in Loline Stage and Film’s production of Katori Hall’s award-winning play \"The Mountaintop.\""}
+                                                        num={1}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/amina.png"}
+                                                        name={"Amina Iro"}
+                                                        bio={"Amina Iro, raised in Prince Georges County, MD, holds a B.S. from UW-Madison in Neurobiology and English Creative Writing. Amina has performed in venues including the John F. Kennedy Center for Performing Arts, the Washington Convention Center, the Auditorium Theatre in Chicago, IL, and the State Theatre in Tshwane, South Africa. She is a 2020/2021 Brooklyn Poets Hampton Retreat Fellow. Amina's work can be found in Beltway Poetry Quarterly and Dreginald."}
+                                                        num={9}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Aryeh+Nussbaum+Cohen.jpg"}
+                                                        name={"Aryeh Nussbaum Cohen"}
+                                                        bio={"Acclaimed as a \"young star\" and \"complete artist\" by the New York Times and \"extravagantly gifted... poised to redefine what’s possible for singers of this distinctive voice type\" by the San Francisco Chronicle, countertenor Aryeh Nussbaum Cohen is one of the classical vocal world's most promising rising stars. Aryeh's first commercial recording - the world premiere recording of Kenneth Fuchs' Poems of Life with the London Symphony Orchestra - won a 2019 GRAMMY® Award in the Best Classical Compendium category. His numerous awards include Grand Finals Winner of the Metropolitan Opera National Council Auditions and Third Prize in Operalia 2019 in Prague, the only American to place in the international competition. Aryeh's performance credits include productions with San Francisco Opera, Theater an der Wien, Houston Grand Opera, Cincinnati Opera and San Francisco Ballet, and concert engagements with the San Francisco Symphony, Philharmonia Baroque Orchestra, the Buffalo Philharmonic and American Bach Soloists; his upcoming engagements will take him to many of the world’s leading opera houses, across Europe and the United States. He is proud to stand in support of the Black Lives Matter Movement."}
+                                                        num={2}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Cierra.png"}
+                                                        name={"Cierra"}
+                                                        bio={"Cierra Moore is a rising senior at Princeton University, and a member of Princeton's slam poetry group, Ellipses. Normally quite an introverted person, Cierra uses poetry as a safe and explorative outlet for expressing her inner self, her anxious black woman inner self. Recently, in this moment (and movement) when being vocal is so crucial to enacting change, Cierra has been able to find her voice through poetry, and she hopes to continue to use this voice as a rebellion against those who wish her and other black women would remain silenced."}
+                                                        num={3}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Dani+Stephenson.jpg"}
+                                                        name={"Dani Stephenson"}
+                                                        bio={"Dani is a 20-year old musician, singer, and songwriter who was born in Birmingham, Alabama and grew up in Guam, USA. Classically trained in music since she was five years old and a Jazz Studies minor, Dani only began writing her own music halfway through college. Her recent EP, Water Signs (available on all major streaming platforms) fuses low-slung hip hop beats, jazz-inspired melodies, and intimately vulnerable lyrics into a distinct, soulful sound. She is a class of 2020 graduate of Princeton University and will be based in Los Angeles this fall."}
+                                                        num={4}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Saunghee+and+Mike.jpg"}
+                                                        name={"Delgado & Ko"}
+                                                        bio={"Delgado & Ko are an electro-acoustic duo based in New York City. While both have their respective backgrounds in jazz guitar and classical singing, they first started performing popular music together in the funk-afrobeat collective Sensemaya at Princeton. Since then they have started performing regularly in NYC, both as a duo and alongside other musicians and bands, and have expanded their repertoire to include funk, pop, soul, and everything in between."}
+                                                        num={10}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Drew_Forde.png"}
+                                                        name={"Drew Forde"}
+                                                        bio={""}
+                                                        num={12}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Emily+Miller.jpeg"}
+                                                        name={"Emily Miller"}
+                                                        bio={"Emily spent her time in college in a variety of music groups singing jazz, funk, and pop music. Most recently she’s been active in the soul/folk group \"Baby Dreams.\""}
+                                                        num={5}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Kovey+Coles.png"}
+                                                        name={"Kovey Coles"}
+                                                        bio={"Kovey Coles is a rapper/instrumentalist whose guitar-driven songs blend soulful and indie rock vibes into hip-hop. He is currently based in Los Angeles, and you can find his newest release 'TTST' available on all platforms now."}
+                                                        num={6}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/tanya.png"}
+                                                        name={"Tanyaradzwa Tawengwa"}
+                                                        bio={"Professor Tanyaradzwa Tawengwa is a Zimbabwean Gwenyambira, composer and singer whose storytelling serves to bridge Zimbabwe's past and present, in order to inform a self-crafted future. Her craft lives at the intersection of music and healing, drawing from the generations of Svikiro (spirit mediums) and N'anga (healers) in her bloodline. Tawengwa is also the founder and music director of the Mushandirapamwe Singers, a Zimbabwean vocal ensemble. Tawengwa earned her B.A. in Music Composition at Princeton University (cum laude), her M.M. in Voice Performance from the University of Kentucky and is currently a doctoral candidate in Voice Performance at the University of Kentucky.\nhttps://www.mushandirapamwe-singers.com/bio"}
+                                                        num={8}
+                                                    />
+                                                    <FestivalBio 
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Tom_Cat.png"}
+                                                        name={"Tom Cat"}
+                                                        bio={"Tom Cat is a NYC based, Black Non-binary Femme performance artist, community organizer, and internationally recognized spoken word poet whose work lives at the intersection of contemporary queer experiences and racial politics. Since being named the 2014 Washington DC Youth Poetry Champion Tom has worked to substantiate Black Trans and Non-Gender Conforming voices within the national literary community. Leading workshops and creating content that offers perspective interrogates the intersection of gender, race, and sociology."}
+                                                        num={11}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/vinod.png"}
+                                                        name={"Vinod Krishnamurthy"}
+                                                        bio={"Vinod Krishnamurthy is a singer, songwriter and co-producer for the duo Superfriend alongside his close friend (and primary producer) Zayn Mufti. The duo’s inspirations include R&B/soul, psychedelic rock, and jazz. Superfriend has released 2 EPs and a single on all streaming platforms, and they are slated to release their first album in the latter half of 2020. Find them on Instagram @superduperfriend \nIn addition to his passion for creating music, Vinod is also a co-founder of the concert live-streaming startup onfour. https://open.spotify.com/artist/58aQLz2Bw72YzALyncUm9T?si=n6sVr3u_TiW6JABh9QHpjQ"}
+                                                        num={13}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Xavier+Washington.jpg"}
+                                                        name={"Xavier Washington"}
+                                                        bio={"Xavier is a rising senior from Atlanta, GA majoring in African-American Studies at Yale University. He has participated in various musical ensembles and productions during his time in college, including currently taking a gap year in order to sing and travel with the Yale Whiffenpoofs—the nation’s oldest a cappella group. Ultimately, Xavier hopes to one day be a full time artist and entertainer."}
+                                                        num={7}
+                                                    />
                                             </div>
                                         )}
                                 </Row>
