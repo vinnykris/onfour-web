@@ -164,9 +164,9 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                         num={1}
                                                     />
                                                     <FestivalBio
-                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/alex.png"}
-                                                        name={"Alex Brunson"}
-                                                        bio={"Since moving to New York in 2017, Alex has had the pleasure of performing venues across New York, D.C. and along the east coast, as well as internationally with his indie r&b duo, bluesoul. bluesoul comprises Alex on keys and vocals and his good friend Sid Gopinath on guitar and vocals. You can keep up with bluesoul on their instagram, find their debut EP on all streaming platforms, and check out their live work on YouTube."}
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/amina.png"}
+                                                        name={"Amina Iro"}
+                                                        bio={"Amina Iro, raised in Prince Georges County, MD, holds a B.S. from UW-Madison in Neurobiology and English Creative Writing. Amina has performed in venues including the John F. Kennedy Center for Performing Arts, the Washington Convention Center, the Auditorium Theatre in Chicago, IL, and the State Theatre in Tshwane, South Africa. She is a 2020/2021 Brooklyn Poets Hampton Retreat Fellow. Amina's work can be found in Beltway Poetry Quarterly and Dreginald."}
                                                         num={9}
                                                     />
                                                     <FestivalBio
@@ -176,9 +176,9 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                         num={2}
                                                     />
                                                     <FestivalBio
-                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/crystal.png"}
-                                                        name={"Crystal Valentine"}
-                                                        bio={"Born and raised in the Bronx, Crystal Valentine is a nationally and internationally acclaimed poet. Crystal has traveled across seas performing on platforms in Paris, Brazil, Botswana, South Africa and elsewhere. She was named Glamour Magazine's 2016 College Woman of the Year, Teen Vogue's Rising Young Black Thought Leader, and was the recipient of the National Conference of College Women Student Leaders Woman’s Distinction Award. A Callaloo Fellow and former New York City Youth Poet Laureate, Crystal’s work has been featured on programming for MSNBC, Blavity, Button Poetry, BET, CNN, The New York Daily News and more. She earned her B.A in Psychology at New York University, where she is returning as a MFA candidate in Poetry. She is a coordinator for the Bronx Council on the Arts and is the current Wednesday Night host at the Nuyorican Poets Café."}
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Cierra.png"}
+                                                        name={"Cierra"}
+                                                        bio={"Cierra Moore is a rising senior at Princeton University, and a member of Princeton's slam poetry group, Ellipses. Normally quite an introverted person, Cierra uses poetry as a safe and explorative outlet for expressing her inner self, her anxious black woman inner self. Recently, in this moment (and movement) when being vocal is so crucial to enacting change, Cierra has been able to find her voice through poetry, and she hopes to continue to use this voice as a rebellion against those who wish her and other black women would remain silenced."}
                                                         num={3}
                                                     />
                                                     <FestivalBio
@@ -194,6 +194,12 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                         num={10}
                                                     />
                                                     <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Drew_Forde.png"}
+                                                        name={"Drew Forde"}
+                                                        bio={""}
+                                                        num={12}
+                                                    />
+                                                    <FestivalBio
                                                         img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Emily+Miller.jpeg"}
                                                         name={"Emily Miller"}
                                                         bio={"Emily spent her time in college in a variety of music groups singing jazz, funk, and pop music. Most recently she’s been active in the soul/folk group \"Baby Dreams.\""}
@@ -206,16 +212,28 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                         num={6}
                                                     />
                                                     <FestivalBio
-                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Malachi+Bird.jpg"}
-                                                        name={"MalPractice"}
-                                                        bio={"Hailing from Northeast, D.C., Chocolate City’s own MalPractice is trying to give rap a seat at the table. The Inaugural DC Youth Poet Laureate has published three books, four mixtapes, and is the founder of the Crowning Too Early Scholarship Fund. Among the first ever cohort of Black men to receive African-American Studies degrees from Princeton University, MalPrac has always been propelled by love for his city and love for language. He has shared stages with artists such as Talib Kweli, The Last Poets, Chuck Brown, Vic Mensa, A Boogie Wit Da Hoodie, and many more incredible artists. His favorite quote is “Without art, the Earth is just Eh,” and he goes by Practice because he knows that he’ll never be perfect enough."}
-                                                        num={7}
-                                                    />
-                                                    <FestivalBio
                                                         img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/tanya.png"}
                                                         name={"Tanyaradzwa Tawengwa"}
                                                         bio={"Professor Tanyaradzwa Tawengwa is a Zimbabwean Gwenyambira, composer and singer whose storytelling serves to bridge Zimbabwe's past and present, in order to inform a self-crafted future. Her craft lives at the intersection of music and healing, drawing from the generations of Svikiro (spirit mediums) and N'anga (healers) in her bloodline. Tawengwa is also the founder and music director of the Mushandirapamwe Singers, a Zimbabwean vocal ensemble. Tawengwa earned her B.A. in Music Composition at Princeton University (cum laude), her M.M. in Voice Performance from the University of Kentucky and is currently a doctoral candidate in Voice Performance at the University of Kentucky.\nhttps://www.mushandirapamwe-singers.com/bio"}
                                                         num={8}
+                                                    />
+                                                    <FestivalBio 
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Tom_Cat.png"}
+                                                        name={"Tom Cat"}
+                                                        bio={"Tom Cat is a NYC based, Black Non-binary Femme performance artist, community organizer, and internationally recognized spoken word poet whose work lives at the intersection of contemporary queer experiences and racial politics. Since being named the 2014 Washington DC Youth Poetry Champion Tom has worked to substantiate Black Trans and Non-Gender Conforming voices within the national literary community. Leading workshops and creating content that offers perspective interrogates the intersection of gender, race, and sociology."}
+                                                        num={11}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/vinod.png"}
+                                                        name={"Vinod Krishnamurthy"}
+                                                        bio={"Vinod Krishnamurthy is a singer, songwriter and co-producer for the duo Superfriend alongside his close friend (and primary producer) Zayn Mufti. The duo’s inspirations include R&B/soul, psychedelic rock, and jazz. Superfriend has released 2 EPs and a single on all streaming platforms, and they are slated to release their first album in the latter half of 2020. Find them on Instagram @superduperfriend \nIn addition to his passion for creating music, Vinod is also a co-founder of the concert live-streaming startup onfour. https://open.spotify.com/artist/58aQLz2Bw72YzALyncUm9T?si=n6sVr3u_TiW6JABh9QHpjQ"}
+                                                        num={13}
+                                                    />
+                                                    <FestivalBio
+                                                        img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Xavier+Washington.jpg"}
+                                                        name={"Xavier Washington"}
+                                                        bio={"Xavier is a rising senior from Atlanta, GA majoring in African-American Studies at Yale University. He has participated in various musical ensembles and productions during his time in college, including currently taking a gap year in order to sing and travel with the Yale Whiffenpoofs—the nation’s oldest a cappella group. Ultimately, Xavier hopes to one day be a full time artist and entertainer."}
+                                                        num={7}
                                                     />
                                                 </div>
                                             )}
