@@ -87,6 +87,7 @@ export const getConcertInfo = async (width) => {
         days_left={days_left}
         width={width}
         genre={data.genre}
+        formated_date={data.date + "T" + data.time + ".000-04:00"}
       />
     );
   });

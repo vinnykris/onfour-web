@@ -598,10 +598,10 @@ a.nav-page-white {
   font-size: 0.85rem;
   padding-top: 15px;
   height: 48px;
-  // &:hover{
-  //   cursor: pointer;
-  //   border: 1px solid white;
-  // }
+  &:hover{
+    cursor: pointer;
+    border: 1px solid white;
+  }
 }
 
 // FESTIVAL SECTION 
@@ -776,4 +776,13 @@ a.nav-page-white {
   &:hover{
     cursor: initial;
   }
+}
+
+.google-signin {
+    background-color: black;
+    color: white;
+    &:hover {
+        cursor: pointer;
+        margin: 1px;
+    }
 }

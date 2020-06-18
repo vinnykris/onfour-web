@@ -25,6 +25,7 @@ const FeaturedContent = ({
   days_left,
   width,
   genre,
+  formated_date
 }) => {
   const [show_more_info, setClickedInfo] = useState(false); // Determines whether to show the popup for musician's bio or not
 
@@ -63,6 +64,7 @@ const FeaturedContent = ({
                 time={time}
                 description={description}
                 width={width}
+                formated_date={formated_date}
               ></BioModal>
             </div>
           </form>
