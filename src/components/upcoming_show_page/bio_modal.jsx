@@ -12,22 +12,12 @@ import ApiCalendar from 'react-google-calendar-api';
 
 const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, date, time, description, width, formated_date }) => {
     const toBeImplemented = async() => {
-        await ApiCalendar.handleAuthClick()
-            .then((result) => {
-                console.log(result);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        const result = await ApiCalendar.handleAuthClick()
             
-        addEvent();
-            // .then((result) => {
-            //     console.log(result);
-            //     addEvent();
-            // })
-            // .catch((error) => {
-            //     console.log(error);
-            // });
+        console.log(result);
+        if (result) {
+            addEvent();
+        }
     };
 
     const addEvent = () => {
