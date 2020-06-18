@@ -13,6 +13,13 @@ import ApiCalendar from 'react-google-calendar-api';
 const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, date, time, description, width, formated_date }) => {
     const toBeImplemented = async() => {
         await ApiCalendar.handleAuthClick()
+            .then((result) => {
+                console.log(result);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            
         addEvent();
             // .then((result) => {
             //     console.log(result);
@@ -24,14 +31,10 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
     };
 
     const addEvent = () => {
-        const eventFromNow = {
-            summary: formated_date,
-            time: 480,
-        };
 
         const eventLoad = {
             summary: artist_name + "-" + concert_name,
-            // summary: date + "T" + time + ".000-04:00",
+            description: "onfour concert!",
             start: {
                 dateTime: new Date(formated_date).toISOString()
             },
