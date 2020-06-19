@@ -2,6 +2,10 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
+import Popup from "reactjs-popup";
+import SharePopup from "./share_popup";
+import styled from "styled-components";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 // import { Prompt } from "react-router";
 
 // AWS Imports
@@ -245,6 +249,28 @@ const StreamPage = () => {
     }
   };
 
+  // const StyledPopup = styled(Popup)`
+  //   // use your custom style for ".popup-overlay"
+  //   &-overlay {
+  //   }
+  //   // use your custom style for ".popup-content"
+  //   &-content {
+  //     top: 0;
+  //     background-color: yellow;
+  //   }
+  // `;
+
+  const [show_popup, setShowPopup] = useState(false); // If popup should be shown
+  const openPopup = () => {
+    console.log("share button clicked");
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    console.log("clicked away");
+    setShowPopup(false);
+  };
+
   // RENDERING SECTION
   return (
     <div className="stream-container">
@@ -323,23 +349,52 @@ const StreamPage = () => {
                     {/* <Col size={0.1}></Col> */}
                     <Col size={7}>
                       <Row>
-                        <Col size={2}>
+                        <Col size={3}>
                           <h3 className="artist-name-stream">{artist_name}</h3>
                         </Col>
-                        <Col size={1}>
-                          <div className="viewers">
-                            <h5 className="viewer-count show-time">
-                              {viewers} watching now
-                            </h5>
-                          </div>
+                        <Col size={2}>
+                          <Row className="stream-share-row">
+                            {/* <div className="stream-info"> */}
+                            <ClickAwayListener onClickAway={closePopup}>
+                              <div className="share-container">
+                                <span
+                                  className="share-button"
+                                  onClick={openPopup}
+                                >
+                                  <i
+                                    class="fa fa-share show-time"
+                                    aria-hidden="true"
+                                  ></i>
+                                  <h5 className="show-time">SHARE</h5>
+                                </span>
+
+                                <SharePopup show={show_popup} />
+                              </div>
+                            </ClickAwayListener>
+
+                            {/* <Col size={1}> */}
+
+                            {/* </Col> */}
+
+                            <div className="viewers">
+                              <h5 className="viewer-count show-time">
+                                {viewers} watching now
+                              </h5>
+                            </div>
+                            {/* </div> */}
+                            {/* </Col> */}
+                          </Row>
                         </Col>
                       </Row>
                       <Row>
-                        <h5 className="show-time">
-                          {show_time} (refresh the page if stream doesn't show
-                          up)
-                        </h5>
+                        <Col size={2}>
+                          <h5 className="show-time">
+                            {show_time} (refresh the page if stream doesn't show
+                            up)
+                          </h5>
+                        </Col>
                       </Row>
+
                       {/* </Col> */}
                       {/* <Col size={1} className="social-bar-center">
                            <SocialBar />

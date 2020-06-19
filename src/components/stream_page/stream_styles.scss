@@ -362,6 +362,49 @@
   float: right;
   margin-right: 5px;
   margin-top: 5px;
+  position: absolute;
+  right: 0;
+}
+
+.viewer-count {
+  width: 150px;
+}
+
+.share-button {
+  position: relative;
+  display: flex;
+  // float: right;
+  width: auto;
+  // margin-right: 50%;
+  margin-top: 5px;
+}
+
+.share-popup {
+  top: 0;
+  margin-top: 0;
+}
+
+.share-popup-content {
+  background-color: yellow;
+}
+
+.stream-info {
+  // display: flex;
+  // right: 0;
+  // position: absolute;
+  // width: 100%;
+}
+
+.stream-share-row {
+  position: relative;
+  height: 100%;
+  margin-left: 50%;
+}
+
+.share-container {
+  width: auto;
+  position: absolute;
+  right: 150px;
 }
 
 .show-time {
@@ -371,7 +414,7 @@
   letter-spacing: 0.5px;
   float: left;
   padding: 5px;
-  text-align: left;
+  text-align: right;
 }
 
 .inline-form {
