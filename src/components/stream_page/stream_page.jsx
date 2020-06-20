@@ -346,7 +346,6 @@ const StreamPage = () => {
                     </div>
                   </div>
                   <Row className="stream-info-row">
-                    {/* <Col size={0.1}></Col> */}
                     <Col size={7}>
                       <Row>
                         <Col size={3}>
@@ -354,7 +353,6 @@ const StreamPage = () => {
                         </Col>
                         <Col size={2}>
                           <Row className="stream-share-row">
-                            {/* <div className="stream-info"> */}
                             <ClickAwayListener onClickAway={closePopup}>
                               <div className="share-container">
                                 <span
@@ -372,17 +370,11 @@ const StreamPage = () => {
                               </div>
                             </ClickAwayListener>
 
-                            {/* <Col size={1}> */}
-
-                            {/* </Col> */}
-
                             <div className="viewers">
                               <h5 className="viewer-count show-time">
                                 {viewers} watching now
                               </h5>
                             </div>
-                            {/* </div> */}
-                            {/* </Col> */}
                           </Row>
                         </Col>
                       </Row>
