@@ -1,11 +1,23 @@
-import React, { Component } from "react";
-import { Grid } from "../grid";
+import React, { useEffect, useState } from "react";
 
 import Tooltip from "@material-ui/core/Tooltip";
 
 import "./popup_styles.scss";
 
 const SharePopup = ({ show }) => {
+  const [tooltip_text, setTooltipText] = useState("");
+
+  // When tooltip "shown" value is changed, change tooltip text to default
+  useEffect(() => {
+    setTooltipText("Copy to clipboard");
+  }, [show]);
+
+  // If copy to clipboard button is clicked, change tooltip text and copy stream page link
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText("https://onfour.live/stream");
+    setTooltipText("Copied!");
+  };
+
   return (
     <div>
       {show ? (
@@ -41,12 +53,8 @@ const SharePopup = ({ show }) => {
               ></script>
             </li>
             <li>
-              <Tooltip title="Copy to clipboard">
-                <span
-                  onClick={() => {
-                    navigator.clipboard.writeText("https://onfour.live/stream");
-                  }}
-                >
+              <Tooltip title={tooltip_text}>
+                <span onClick={copyToClipboard}>
                   <i className="fa fa-clone">
                     <span>Copy Link</span>
                   </i>

@@ -260,14 +260,16 @@ const StreamPage = () => {
   //   }
   // `;
 
+  // Social media sharing
   const [show_popup, setShowPopup] = useState(false); // If popup should be shown
+
+  // Opens custom popup
   const openPopup = () => {
-    console.log("share button clicked");
     setShowPopup(true);
   };
 
+  // Close popup when user clicks away
   const closePopup = () => {
-    console.log("clicked away");
     setShowPopup(false);
   };
 
