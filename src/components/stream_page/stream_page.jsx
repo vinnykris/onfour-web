@@ -40,6 +40,9 @@ const StreamPage = () => {
   // DETERMINE MOBILE VERSION OR NOT
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
+  // DONATION SECTION
+  const tip_based = true; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
+
   // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat
@@ -423,56 +426,127 @@ const StreamPage = () => {
                   <Row className="donate-row">
                     <Col size={1} className="donate-stripe donate-box">
                       <p className="donate-description">Credit Card</p>
-                      <p className="donate-subdescription">
-                        Donate via credit card to For the GWORLS and LGBTQ
-                        Freedom Fund. Your card information will not be stored
-                        anywhere.
-                      </p>
+                      {tip_based ? (
+                        <p className="donate-subdescription">
+                          Tip the artist via credit card. Your card information
+                          will not be stored anywhere.
+                        </p>
+                      ) : (
+                        <p className="donate-subdescription">
+                          Donate via credit card to For the GWORLS and LGBTQ
+                          Freedom Fund. Your card information will not be stored
+                          anywhere.
+                        </p>
+                      )}
                     </Col>
                     <Col size={1} className="donate-paypal donate-box">
                       <p className="donate-description">PayPal</p>
-                      <p className="donate-subdescription">
-                        onfour will ensure your donation is sent to For the
-                        GWORLS and LGBTQ Freedom Fund.
-                      </p>
+                      {tip_based ? (
+                        <p className="donate-subdescription">
+                          onfour will ensure your tip is sent to the artist.
+                        </p>
+                      ) : (
+                        <p className="donate-subdescription">
+                          onfour will ensure your donation is sent to For the
+                          GWORLS and LGBTQ Freedom Fund.
+                        </p>
+                      )}
                     </Col>
                     <Col size={1} className="donate-venmo donate-box">
                       <p className="donate-description">Venmo</p>
-                      <p className="donate-subdescription">
-                        @SpencerAmer from onfour will ensure your donation is
-                        sent to For the GWORLS and LGBTQ Freedom Fund.
-                      </p>
+                      {tip_based ? (
+                        <p className="donate-subdescription">
+                          @SpencerAmer from onfour will ensure your tip is sent
+                          to the artist.
+                        </p>
+                      ) : (
+                        <p className="donate-subdescription">
+                          @SpencerAmer from onfour will ensure your donation is
+                          sent to For the GWORLS and LGBTQ Freedom Fund.
+                        </p>
+                      )}
                     </Col>
                   </Row>
 
                   {/* DONATE ROW */}
                   <Row className="donate-row-buttons">
-                    <Col size={1} className="donate-stripe donate-box-button">
-                      <button
-                        className="stripe-button-border button-height"
-                        data-toggle="modal"
-                        data-target="#paymentModal"
-                        onClick={donateModal}
-                      >
-                        Donate with Card
-                      </button>{" "}
-                      <Modal></Modal>
-                    </Col>
-                    <Col size={1} className="donate-paypal donate-box-button">
-                      <button
-                        className="stripe-button-border button-height paypal-button"
-                        onClick={donatePaypal}
-                      >
-                        Donate with Paypal
-                      </button>
-                    </Col>
-                    <Col size={1} className="donate-venmo donate-box-button">
-                      <img
-                        className="venmo-code"
-                        src={VenmoCode}
-                        alt="venmo-qr"
-                      ></img>
-                    </Col>
+                    {tip_based ? (
+                      <div className="payment-container">
+                        <Col
+                          size={1}
+                          className="donate-stripe donate-box-button"
+                        >
+                          <button
+                            className="stripe-button-border button-height"
+                            data-toggle="modal"
+                            data-target="#paymentModal"
+                            onClick={donateModal}
+                          >
+                            Tip with Card
+                          </button>{" "}
+                          <Modal></Modal>
+                        </Col>
+                        <Col
+                          size={1}
+                          className="donate-paypal donate-box-button"
+                        >
+                          <button
+                            className="stripe-button-border button-height paypal-button"
+                            onClick={donatePaypal}
+                          >
+                            Tip with Paypal
+                          </button>
+                        </Col>
+                        <Col
+                          size={1}
+                          className="donate-venmo donate-box-button"
+                        >
+                          <img
+                            className="venmo-code"
+                            src={VenmoCode}
+                            alt="venmo-qr"
+                          ></img>
+                        </Col>
+                      </div>
+                    ) : (
+                      <div className="payment-container">
+                        <Col
+                          size={1}
+                          className="donate-stripe donate-box-button"
+                        >
+                          <button
+                            className="stripe-button-border button-height"
+                            data-toggle="modal"
+                            data-target="#paymentModal"
+                            onClick={donateModal}
+                          >
+                            Donate with Card
+                          </button>{" "}
+                          <Modal></Modal>
+                        </Col>
+                        <Col
+                          size={1}
+                          className="donate-paypal donate-box-button"
+                        >
+                          <button
+                            className="stripe-button-border button-height paypal-button"
+                            onClick={donatePaypal}
+                          >
+                            Donate with Paypal
+                          </button>
+                        </Col>
+                        <Col
+                          size={1}
+                          className="donate-venmo donate-box-button"
+                        >
+                          <img
+                            className="venmo-code"
+                            src={VenmoCode}
+                            alt="venmo-qr"
+                          ></img>
+                        </Col>
+                      </div>
+                    )}
                   </Row>
 
                   <Row className="stream-subscribe-box">
@@ -588,13 +662,23 @@ const StreamPage = () => {
                   </div>
                 </div>
                 <div className="mobile-row payment-row-mobile">
-                  <button
-                    className="stripe-button-border mobile-payment-button"
-                    data-toggle="modal"
-                    data-target="#paymentModal"
-                  >
-                    Donate
-                  </button>{" "}
+                  {tip_based ? (
+                    <button
+                      className="stripe-button-border mobile-payment-button"
+                      data-toggle="modal"
+                      data-target="#paymentModal"
+                    >
+                      Tip the Artist
+                    </button>
+                  ) : (
+                    <button
+                      className="stripe-button-border mobile-payment-button"
+                      data-toggle="modal"
+                      data-target="#paymentModal"
+                    >
+                      Donate
+                    </button>
+                  )}
                   <Modal isOpen={false}></Modal>
                 </div>
                 <div className="chat-main-mobile">
