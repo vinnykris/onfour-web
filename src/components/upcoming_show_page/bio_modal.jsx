@@ -153,6 +153,12 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                     bio={"Yezekiel Williams is a gay, African American poet who often mobilizes his art for queer and black activism. He is currently studying Molecular Biology at Princeton University while pursuing endeavors in creative writing on and off campus."}
                                                     num={20}
                                                 />
+                                                <FestivalBio
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Dani+Stephenson.jpg"}
+                                                    name={"Dani Stephenson"}
+                                                    bio={"Dani is a 20-year old musician, singer, and songwriter who was born in Birmingham, Alabama and grew up in Guam, USA. Classically trained in music since she was five years old and a Jazz Studies minor, Dani only began writing her own music halfway through college. Her recent EP, Water Signs (available on all major streaming platforms) fuses low-slung hip hop beats, jazz-inspired melodies, and intimately vulnerable lyrics into a distinct, soulful sound. She is a class of 2020 graduate of Princeton University and will be based in Los Angeles this fall."}
+                                                    num={21}
+                                                />
                                             </div>
                                         ) : (
                                                 <div className="festival-bio-description">
@@ -403,6 +409,12 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                 bio={"Yezekiel Williams is a gay, African American poet who often mobilizes his art for queer and black activism. He is currently studying Molecular Biology at Princeton University while pursuing endeavors in creative writing on and off campus."}
                                                 num={20}
                                             />
+                                            <FestivalBio
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Dani+Stephenson.jpg"}
+                                                    name={"Dani Stephenson"}
+                                                    bio={"Dani is a 20-year old musician, singer, and songwriter who was born in Birmingham, Alabama and grew up in Guam, USA. Classically trained in music since she was five years old and a Jazz Studies minor, Dani only began writing her own music halfway through college. Her recent EP, Water Signs (available on all major streaming platforms) fuses low-slung hip hop beats, jazz-inspired melodies, and intimately vulnerable lyrics into a distinct, soulful sound. She is a class of 2020 graduate of Princeton University and will be based in Los Angeles this fall."}
+                                                    num={21}
+                                                />
                                         </div>
                                     ) : (
                                             <div className="festival-bio-description">
