@@ -18,7 +18,11 @@ import { useWindowDimensions } from "../custom_hooks";
 import PulseLoader from "react-spinners/PulseLoader";
 
 // API Imports
-import { getConcertInfo, getArchiveInfo, getMostRecentUpcomingInfo } from "../../apis/get_concert_data";
+import {
+  getConcertInfo,
+  getArchiveInfo,
+  getMostRecentUpcomingInfo,
+} from "../../apis/get_concert_data";
 
 // Image Imports
 // import gradient_header from "../../images/mobile_gradient.png";
@@ -102,11 +106,18 @@ const AboutPage = () => {
       const upcoming_result = await getConcertInfo(width);
       setConcerts(upcoming_result.slice(0, 4));
 
-      // Archive videos
+      // Archive videos (sorting from most recent -> oldest)
       const archive_result = await getArchiveInfo();
-      setVideos(archive_result.slice(0, 4));
+      setVideos(
+        archive_result
+          .sort(
+            (a, b) =>
+              new Date(b.props.concert_date) - new Date(a.props.concert_date)
+          )
+          .slice(0, 4)
+      );
 
-      const recent_concert = await getMostRecentUpcomingInfo(); 
+      const recent_concert = await getMostRecentUpcomingInfo();
       setMostRecentConcert(recent_concert);
     };
     fetchData();
@@ -150,7 +161,7 @@ const AboutPage = () => {
         </div>
       ) : (
       <div> */}
-        {width > 600 ? (
+      {width > 600 ? (
         // {/* DESKTOP LAYOUT */}
         <Grid className="desktop-grid-about">
           {/* BANNER ROW */}
@@ -161,7 +172,7 @@ const AboutPage = () => {
                 src={header_image_url}
                 alt="nav-logo"
               ></img> */}
-              <video 
+              <video
                 className="banner-video"
                 data-src="https://onfour-media.s3.amazonaws.com/website+component/banner_video_guitar.mp4"
                 loop
@@ -190,7 +201,11 @@ const AboutPage = () => {
                   </Row>
                   <Row>
                     <div className="upcoming-description">
-                      {most_recent_concert ? (most_recent_concert.artist.toUpperCase() + " - " + most_recent_concert.concertName.toUpperCase()) : "loading..."}
+                      {most_recent_concert
+                        ? most_recent_concert.artist.toUpperCase() +
+                          " - " +
+                          most_recent_concert.concertName.toUpperCase()
+                        : "loading..."}
                     </div>
                   </Row>
                   <Row className="upcoming-button-container">
@@ -312,7 +327,7 @@ const AboutPage = () => {
             </Col>
           </Row>
         </Grid>
-        ) : (
+      ) : (
         // {/* MOBILE LAYOUT */}
         <Grid className="mobile-grid-about">
           <div className="main-content-mobile">
@@ -326,10 +341,10 @@ const AboutPage = () => {
               <Row>
                 <Col size={1}>
                   <p className="description-text-mobile">
-                    Onfour is the premier live-streaming concert platform. We are
-                    redefining what it means to experience live music digitally
-                    and are dedicated to empowering artists to connect with fans
-                    in new, meaningful ways.
+                    Onfour is the premier live-streaming concert platform. We
+                    are redefining what it means to experience live music
+                    digitally and are dedicated to empowering artists to connect
+                    with fans in new, meaningful ways.
                   </p>
                 </Col>
               </Row>
@@ -345,8 +360,8 @@ const AboutPage = () => {
               <Row>
                 <Col size={1}>
                   <p className="description-text-mobile">
-                    To stay informed about upcoming events,<br></br> subscribe to
-                    our mailing list:
+                    To stay informed about upcoming events,<br></br> subscribe
+                    to our mailing list:
                   </p>
                 </Col>
               </Row>
@@ -376,7 +391,9 @@ const AboutPage = () => {
                                 required
                                 value={email}
                                 className="email-input"
-                                onChange={(event) => setEmail(event.target.value)}
+                                onChange={(event) =>
+                                  setEmail(event.target.value)
+                                }
                               />
                             </Col>
                             <Col size={1}>
@@ -435,7 +452,7 @@ const AboutPage = () => {
           </div>
         </Grid>
       )}
-    {/* //   </div>
+      {/* //   </div>
     // )} */}
     </div>
   );
