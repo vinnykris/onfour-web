@@ -355,13 +355,9 @@ const StreamPage = () => {
                         </Col>
                         <Col size={3}>
                           <Row className="stream-share-row">
-                            {/* <span className="send-feedback" onClick={}>
-                              
-                            </span> */}
                             <div className="feedback-container">
                               <a
                                 href="https://forms.gle/5rP8nXznckGCuRE77"
-                                // className="show-time"
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
@@ -381,7 +377,9 @@ const StreamPage = () => {
                                     class="fa fa-share show-time"
                                     aria-hidden="true"
                                   ></i>
-                                  <h5 className="show-time share-text">SHARE</h5>
+                                  <h5 className="show-time share-text">
+                                    SHARE
+                                  </h5>
                                 </span>
 
                                 <SharePopup show={show_popup} />
