@@ -22,6 +22,9 @@ const ArchivePerformanceText = ({
     if (video_length) {
       let minutes = Math.floor(video_length / 60);
       let seconds = video_length % 60;
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
       setMins(minutes + ":" + seconds);
     }
     if (date) {

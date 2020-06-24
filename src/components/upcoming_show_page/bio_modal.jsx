@@ -116,64 +116,70 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                     num={1}
                                                 />
                                                 <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/amina.png"}
-                                                    name={"Amina Iro"}
-                                                    bio={"Amina Iro, raised in Prince Georges County, MD, holds a B.S. from UW-Madison in Neurobiology and English Creative Writing. Amina has performed in venues including the John F. Kennedy Center for Performing Arts, the Washington Convention Center, the Auditorium Theatre in Chicago, IL, and the State Theatre in Tshwane, South Africa. She is a 2020/2021 Brooklyn Poets Hampton Retreat Fellow. Amina's work can be found in Beltway Poetry Quarterly and Dreginald."}
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/girl.png"}
+                                                    name={"Aisha Oxley"}
+                                                    bio={"Aisha Oxley is a visual artist, writer and creative based in Chicago, IL, and hailing from Plainfield, NJ. She hosts the podcast, “Young, Original & Black,” which celebrates and curates conversations with young, black creatives pushing the culture forward today."}
                                                     num={11}
                                                 />
                                                 <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Anjali+Taneja.jpg"}
-                                                    name={"Anjali Taneja"}
-                                                    bio={"Listening to Anjali Taneja, it’s easy to hear how she seamlessly blends soulful beats with silken vocal textures fueled by an upbringing in South Asian classical music and R&B. Anjali has performed as an Artist-in-Residence at Strathmore Music Center, Kennedy Center Millennium Stage, Terminal 5 (NYC), Union Stage, Rockwood Music Hall (NYC), the Hamilton among several others, and most recently toured with Red Baraat on the northeast leg of their \"Festival of Colors\" tour. Her upcoming EP is slated for release this summer, and explores themes of identity, culture, and introspection in the eyes of a young woman."}
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/2.png"}
+                                                    name={"DJ Rx"}
+                                                    bio={"DJ Rx (they/them) is a Baltimore-based DJ and third culture kid whose sets highlight the breadth and creativity of the African diaspora. They are a resident DJ in Miss/chief, a music collective for womxn and nonbinary people of color."}
                                                     num={2}
                                                 />
                                                 <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Ben+Barron.jpg"}
-                                                    name={"Ben Barron"}
-                                                    bio={"Ben Barron is a musician, film producer, and environmental activist based in Boulder, Colorado. He plays banjo, guitar, and sings in the indie folk quartet The Infamous Flapjack Affair. Learn more about their award-winning film Confluence, which follows the band on a journey through the national parks and monuments of the Colorado River basin, by visiting confluencethejourney.com"}
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/3.png"}
+                                                    name={"Quiet Light"}
+                                                    bio={"Quiet Light is the indie pop-rock solo project of Austin based singer-songwriter Riya Mahesh. She is currently a junior at UT Austin studying Biology and Math. Her debut album will be out on all streaming services in August."}
                                                     num={3}
                                                 />
                                                 <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Calvin+Wentling.jpg"}
-                                                    name={"Calvin Wentling"}
-                                                    bio={"Calvin Wentling is a vocalist and educator from New York City. Calvin graduated from Princeton University in 2018 with a BA in Music and certificate in African Studies. At Princeton, Calvin sang with the Glee Club and Chamber Choir as well as serving as the Music Director of the Nassoons. Calvin now teaches Music Theory at his alma mater The Saint Thomas Choir School and sings professionally with various choirs in NYC."}
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/4.png"}
+                                                    name={"Nayamal Tuor"}
+                                                    bio={"My name is Nayamal Tuor.  I'm a vocalist from Tennessee. I think music is such a beautiful decoration of time."}
                                                     num={4}
                                                 />
                                                 <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/jenna.png"}
-                                                    name={"Jenna Putnam"}
-                                                    bio={"Jenna Putnam is a writer, poet, musician, and visual artist living and working in Los Angeles. She likes long walks down dark crooked streets, Arthur Russel, and tasteful nudes."}
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Tom_Cat.png"}
+                                                    name={"Tom Cat"}
+                                                    bio={"Tom Cat is a NYC based, Black Non-binary Femme performance artist, community organizer, and internationally recognized spoken word poet whose work lives at the intersection of contemporary queer experiences and racial politics. Since being named the 2014 Washington DC Youth Poetry Champion Tom has worked to substantiate Black Trans and Non-Gender Conforming voices within the national literary community. Leading workshops and creating content that offers perspective interrogate the intersection of gender, race, and sociology."}
                                                     num={5}
                                                 />
                                                 <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Julia+Danitz.jpeg"}
-                                                    name={"Julia Danitz"}
-                                                    bio={"Julia Danitz, violinist and composer, enjoys a multifaceted and diverse musical career. She has had the pleasure of working in different types concert venues, from playing in ensembles and as soloist at Carnegie Hall and Lincoln Center to the TV set of The Late Show with Stephen Colbert, Live From Here with Chris Thile, and the Barclays Center arena. Trained as a classical violinist, Julia is a graduate of the Juilliard School with a Masters of Music in violin performance and also holds a B.A. in Political Science with a concentration in Business Management from Columbia University. She has had the privilege of working alongside iconic musicians such as Yo-Yo Ma and the Silk Road Ensemble, Chris Thile, Jon Batiste, and more. She is currently pursuing a Doctorate of Musical Arts at the Graduate Center of City University of New York  (CUNY). "}
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/6.png"}
+                                                    name={"metroparkavenue"}
+                                                    bio={"My name is Christien Ayers, and I release music under the name metroparkavenue. My music is an eclectic blend of different indie music styles that aims to make people feel comfortable being who they want to be."}
                                                     num={6}
                                                 />
                                                 <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Katie+and+Jerem%C3%ADas.jpg"}
-                                                    name={"Jeremías Sergiani-Velázquez & Katie Althen"}
-                                                    bio={"Argentine violinist Jeremías Sergiani-Velázquez and American flutist Katie Althen have presented duo recitals in the U.S. and South America. Katie is known to a wide audience for her contributions to the flute community on Instagram and YouTube as @katieflute, where she has amassed over 85,000 followers and subscribers, as well as over 4,000,000 views. Jeremías has been a member of the Pittsburgh Symphony Orchestra since 2019. Katie and Jeremías are both graduates of The Juilliard School and the New England Conservatory."}
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/7.png"}
+                                                    name={"Kakuyon Mataeh"}
+                                                    bio={"Kakuyon Mataeh is a 19 year old trumpet player from Montclair, New Jersey, going into his sophomore year at Princeton University. He's been playing for about 10 years now mostly in the genres of jazz, funk, R&B. Kakuyon has performed at venues like Dizzy's Club Co-ca Cola, Montclair Jazz Festival, and for Ralph Pucci International and alongside critically acclaimed musicians like Chrisitian McBride, Diana Krall, and Ledisi."}
                                                     num={7}
                                                 />
                                                 <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Kovey+Coles.png"}
-                                                    name={"Kovey Coles"}
-                                                    bio={"Kovey Coles is a rapper/instrumentalist whose guitar-driven songs blend soulful and indie rock vibes into hip-hop. He is currently based in Los Angeles, and you can find his newest release 'TTST' available on all platforms now."}
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/8.png"}
+                                                    name={"Victoria Davidjohn"}
+                                                    bio={"Victoria is a theater director, writer, and lighting designer who was born in Charlotte, North Carolina and grew up in San Juan, Puerto Rico. After graduating from Princeton University in 2019 and receiving the Martin A. Dale ’53 Fellowship, she is currently working on writing a new musical about the pivotal work of Black women organizers in the Civil Rights Movement while based in Harlem, New York."}
                                                     num={8}
                                                 />
                                                 <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Malachi+Bird.jpg"}
-                                                    name={"MalPractice"}
-                                                    bio={"Hailing from Northeast, D.C., Chocolate City’s own MalPractice is trying to give rap a seat at the table. The Inaugural DC Youth Poet Laureate has published three books, four mixtapes, and is the founder of the Crowning Too Early Scholarship Fund. Among the first ever cohort of Black men to receive African-American Studies degrees from Princeton University, MalPrac has always been propelled by love for his city and love for language. He has shared stages with artists such as Talib Kweli, The Last Poets, Chuck Brown, Vic Mensa, A Boogie Wit Da Hoodie, and many more incredible artists. His favorite quote is “Without art, the Earth is just Eh,” and he goes by Practice because he knows that he’ll never be perfect enough."}
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/crystal.png"}
+                                                    name={"Crystal Valentine"}
+                                                    bio={"Born and raised in the Bronx, Crystal Valentine is a nationally and internationally acclaimed poet. She was named Glamour Magazine's 2016 College Woman of the Year, Teen Vogue's Rising Young Black Thought Leader, and was the recipient of the National Conference of College Women Student Leaders Woman’s Distinction Award. A Callaloo Fellow and former New York City Youth Poet Laureate,  Crystal’s work has been featured on programming for MSNBC, Blavity, Button Poetry, BET, CNN, The New York Daily News and more. She earned her B.A in Psychology at New York University, where she is returning as a MFA candidate in Poetry. She is a coordinator for the Bronx Council on the Arts and is the current Wednesday Night host at the Nuyorican Poets Café. Crystal is a generator and fierce protector of black joy, and strongly believes that intersectionality is a key factor in liberation. As a queer, black woman, a lot of her work revolves around bridging the ever present gap between her identities. Her goal is to provide a sanctuary within her poems that can be accessible to ALL black people: queer, trans, women, gender non-conforming, disabled, poor, loud, angry, ghetto, for it is when all of these voices are present and accounted for that we can really begin the gruesome work of understanding and breaking down systematic oppression."}
                                                     num={9}
                                                 />
                                                 <FestivalBio
-                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Sam+Gravitte.jpg"}
-                                                    name={"Sam Gravitte"}
-                                                    bio={"Sam is primarily an actor.  A veteran of the Broadway musicals Wicked and Almost Famous, he is an aspiring writer, a burgeoning Marxist, and a player of the guitar, piano, and sax (in descending order of capability). "}
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/alex.png"}
+                                                    name={"Alex Brunson"}
+                                                    bio={"Since moving to New York in 2017, Alex has had the pleasure of performing venues across New York, D.C. and along the east coast, as well as internationally with his indie r&b duo, bluesoul. bluesoul comprises Alex on keys and vocals and his good friend Sid Gopinath on guitar and vocals. You can keep up with bluesoul on their instagram, find their debut EP on all streaming platforms, and check out their live work on YouTube. Alex is currently working on his first solo project, a full length album, to be released later this year. For those interested in his journey as brunson, you're cordially invited to lead him/follow him/join him here."}
                                                     num={10}
+                                                />
+                                                <FestivalBio
+                                                    img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/9.png"}
+                                                    name={"Zeke"}
+                                                    bio={"Yezekiel Williams is a gay, African American poet who often mobilizes his art for queer and black activism. He is currently studying Molecular Biology at Princeton University while pursuing endeavors in creative writing on and off campus."}
+                                                    num={20}
                                                 />
                                             </div>
                                         ) : (
@@ -360,64 +366,70 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                                 num={1}
                                             />
                                             <FestivalBio
-                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/amina.png"}
-                                                name={"Amina Iro"}
-                                                bio={"Amina Iro, raised in Prince Georges County, MD, holds a B.S. from UW-Madison in Neurobiology and English Creative Writing. Amina has performed in venues including the John F. Kennedy Center for Performing Arts, the Washington Convention Center, the Auditorium Theatre in Chicago, IL, and the State Theatre in Tshwane, South Africa. She is a 2020/2021 Brooklyn Poets Hampton Retreat Fellow. Amina's work can be found in Beltway Poetry Quarterly and Dreginald."}
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/girl.png"}
+                                                name={"Aisha Oxley"}
+                                                bio={"Aisha Oxley is a visual artist, writer and creative based in Chicago, IL, and hailing from Plainfield, NJ. She hosts the podcast, “Young, Original & Black,” which celebrates and curates conversations with young, black creatives pushing the culture forward today."}
                                                 num={11}
                                             />
                                             <FestivalBio
-                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Anjali+Taneja.jpg"}
-                                                name={"Anjali Taneja"}
-                                                bio={"Listening to Anjali Taneja, it’s easy to hear how she seamlessly blends soulful beats with silken vocal textures fueled by an upbringing in South Asian classical music and R&B. Anjali has performed as an Artist-in-Residence at Strathmore Music Center, Kennedy Center Millennium Stage, Terminal 5 (NYC), Union Stage, Rockwood Music Hall (NYC), the Hamilton among several others, and most recently toured with Red Baraat on the northeast leg of their \"Festival of Colors\" tour. Her upcoming EP is slated for release this summer, and explores themes of identity, culture, and introspection in the eyes of a young woman."}
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/2.png"}
+                                                name={"DJ Rx"}
+                                                bio={"DJ Rx (they/them) is a Baltimore-based DJ and third culture kid whose sets highlight the breadth and creativity of the African diaspora. They are a resident DJ in Miss/chief, a music collective for womxn and nonbinary people of color."}
                                                 num={2}
                                             />
                                             <FestivalBio
-                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Ben+Barron.jpg"}
-                                                name={"Ben Barron"}
-                                                bio={"Ben Barron is a musician, film producer, and environmental activist based in Boulder, Colorado. He plays banjo, guitar, and sings in the indie folk quartet The Infamous Flapjack Affair. Learn more about their award-winning film Confluence, which follows the band on a journey through the national parks and monuments of the Colorado River basin, by visiting confluencethejourney.com"}
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/3.png"}
+                                                name={"Quiet Light"}
+                                                bio={"Quiet Light is the indie pop-rock solo project of Austin based singer-songwriter Riya Mahesh. She is currently a junior at UT Austin studying Biology and Math. Her debut album will be out on all streaming services in August."}
                                                 num={3}
                                             />
                                             <FestivalBio
-                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Calvin+Wentling.jpg"}
-                                                name={"Calvin Wentling"}
-                                                bio={"Calvin Wentling is a vocalist and educator from New York City. Calvin graduated from Princeton University in 2018 with a BA in Music and certificate in African Studies. At Princeton, Calvin sang with the Glee Club and Chamber Choir as well as serving as the Music Director of the Nassoons. Calvin now teaches Music Theory at his alma mater The Saint Thomas Choir School and sings professionally with various choirs in NYC."}
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/4.png"}
+                                                name={"Nayamal Tuor"}
+                                                bio={"My name is Nayamal Tuor.  I'm a vocalist from Tennessee. I think music is such a beautiful decoration of time."}
                                                 num={4}
                                             />
                                             <FestivalBio
-                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/jenna.png"}
-                                                name={"Jenna Putnam"}
-                                                bio={"Jenna Putnam is a writer, poet, musician, and visual artist living and working in Los Angeles. She likes long walks down dark crooked streets, Arthur Russel, and tasteful nudes."}
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Tom_Cat.png"}
+                                                name={"Tom Cat"}
+                                                bio={"Tom Cat is a NYC based, Black Non-binary Femme performance artist, community organizer, and internationally recognized spoken word poet whose work lives at the intersection of contemporary queer experiences and racial politics. Since being named the 2014 Washington DC Youth Poetry Champion Tom has worked to substantiate Black Trans and Non-Gender Conforming voices within the national literary community. Leading workshops and creating content that offers perspective interrogate the intersection of gender, race, and sociology."}
                                                 num={5}
                                             />
                                             <FestivalBio
-                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Julia+Danitz.jpeg"}
-                                                name={"Julia Danitz"}
-                                                bio={"Julia Danitz, violinist and composer, enjoys a multifaceted and diverse musical career. She has had the pleasure of working in different types concert venues, from playing in ensembles and as soloist at Carnegie Hall and Lincoln Center to the TV set of The Late Show with Stephen Colbert, Live From Here with Chris Thile, and the Barclays Center arena. Trained as a classical violinist, Julia is a graduate of the Juilliard School with a Masters of Music in violin performance and also holds a B.A. in Political Science with a concentration in Business Management from Columbia University. She has had the privilege of working alongside iconic musicians such as Yo-Yo Ma and the Silk Road Ensemble, Chris Thile, Jon Batiste, and more. She is currently pursuing a Doctorate of Musical Arts at the Graduate Center of City University of New York  (CUNY). "}
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/6.png"}
+                                                name={"metroparkavenue"}
+                                                bio={"My name is Christien Ayers, and I release music under the name metroparkavenue. My music is an eclectic blend of different indie music styles that aims to make people feel comfortable being who they want to be."}
                                                 num={6}
                                             />
                                             <FestivalBio
-                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Katie+and+Jerem%C3%ADas.jpg"}
-                                                name={"Jeremías Sergiani-Velázquez & Katie Althen"}
-                                                bio={"Argentine violinist Jeremías Sergiani-Velázquez and American flutist Katie Althen have presented duo recitals in the U.S. and South America. Katie is known to a wide audience for her contributions to the flute community on Instagram and YouTube as @katieflute, where she has amassed over 85,000 followers and subscribers, as well as over 4,000,000 views. Jeremías has been a member of the Pittsburgh Symphony Orchestra since 2019. Katie and Jeremías are both graduates of The Juilliard School and the New England Conservatory."}
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/7.png"}
+                                                name={"Kakuyon Mataeh"}
+                                                bio={"Kakuyon Mataeh is a 19 year old trumpet player from Montclair, New Jersey, going into his sophomore year at Princeton University. He's been playing for about 10 years now mostly in the genres of jazz, funk, R&B. Kakuyon has performed at venues like Dizzy's Club Co-ca Cola, Montclair Jazz Festival, and for Ralph Pucci International and alongside critically acclaimed musicians like Chrisitian McBride, Diana Krall, and Ledisi."}
                                                 num={7}
                                             />
                                             <FestivalBio
-                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Kovey+Coles.png"}
-                                                name={"Kovey Coles"}
-                                                bio={"Kovey Coles is a rapper/instrumentalist whose guitar-driven songs blend soulful and indie rock vibes into hip-hop. He is currently based in Los Angeles, and you can find his newest release 'TTST' available on all platforms now."}
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/8.png"}
+                                                name={"Victoria Davidjohn"}
+                                                bio={"Victoria is a theater director, writer, and lighting designer who was born in Charlotte, North Carolina and grew up in San Juan, Puerto Rico. After graduating from Princeton University in 2019 and receiving the Martin A. Dale ’53 Fellowship, she is currently working on writing a new musical about the pivotal work of Black women organizers in the Civil Rights Movement while based in Harlem, New York."}
                                                 num={8}
                                             />
                                             <FestivalBio
-                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Malachi+Bird.jpg"}
-                                                name={"MalPractice"}
-                                                bio={"Hailing from Northeast, D.C., Chocolate City’s own MalPractice is trying to give rap a seat at the table. The Inaugural DC Youth Poet Laureate has published three books, four mixtapes, and is the founder of the Crowning Too Early Scholarship Fund. Among the first ever cohort of Black men to receive African-American Studies degrees from Princeton University, MalPrac has always been propelled by love for his city and love for language. He has shared stages with artists such as Talib Kweli, The Last Poets, Chuck Brown, Vic Mensa, A Boogie Wit Da Hoodie, and many more incredible artists. His favorite quote is “Without art, the Earth is just Eh,” and he goes by Practice because he knows that he’ll never be perfect enough."}
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/crystal.png"}
+                                                name={"Crystal Valentine"}
+                                                bio={"Born and raised in the Bronx, Crystal Valentine is a nationally and internationally acclaimed poet. She was named Glamour Magazine's 2016 College Woman of the Year, Teen Vogue's Rising Young Black Thought Leader, and was the recipient of the National Conference of College Women Student Leaders Woman’s Distinction Award. A Callaloo Fellow and former New York City Youth Poet Laureate,  Crystal’s work has been featured on programming for MSNBC, Blavity, Button Poetry, BET, CNN, The New York Daily News and more. She earned her B.A in Psychology at New York University, where she is returning as a MFA candidate in Poetry. She is a coordinator for the Bronx Council on the Arts and is the current Wednesday Night host at the Nuyorican Poets Café. Crystal is a generator and fierce protector of black joy, and strongly believes that intersectionality is a key factor in liberation. As a queer, black woman, a lot of her work revolves around bridging the ever present gap between her identities. Her goal is to provide a sanctuary within her poems that can be accessible to ALL black people: queer, trans, women, gender non-conforming, disabled, poor, loud, angry, ghetto, for it is when all of these voices are present and accounted for that we can really begin the gruesome work of understanding and breaking down systematic oppression."}
                                                 num={9}
                                             />
                                             <FestivalBio
-                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/Sam+Gravitte.jpg"}
-                                                name={"Sam Gravitte"}
-                                                bio={"Sam is primarily an actor.  A veteran of the Broadway musicals Wicked and Almost Famous, he is an aspiring writer, a burgeoning Marxist, and a player of the guitar, piano, and sax (in descending order of capability). "}
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/alex.png"}
+                                                name={"Alex Brunson"}
+                                                bio={"Since moving to New York in 2017, Alex has had the pleasure of performing venues across New York, D.C. and along the east coast, as well as internationally with his indie r&b duo, bluesoul. bluesoul comprises Alex on keys and vocals and his good friend Sid Gopinath on guitar and vocals. You can keep up with bluesoul on their instagram, find their debut EP on all streaming platforms, and check out their live work on YouTube. Alex is currently working on his first solo project, a full length album, to be released later this year. For those interested in his journey as brunson, you're cordially invited to lead him/follow him/join him here."}
                                                 num={10}
+                                            />
+                                            <FestivalBio 
+                                                img={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/9.png"}
+                                                name={"Zeke"}
+                                                bio={"Yezekiel Williams is a gay, African American poet who often mobilizes his art for queer and black activism. He is currently studying Molecular Biology at Princeton University while pursuing endeavors in creative writing on and off campus."}
+                                                num={20}
                                             />
                                         </div>
                                     ) : (

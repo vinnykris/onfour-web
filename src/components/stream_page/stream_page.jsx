@@ -2,6 +2,10 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
+import Popup from "reactjs-popup";
+import SharePopup from "./share_popup";
+import styled from "styled-components";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 // import { Prompt } from "react-router";
 
 // AWS Imports
@@ -245,6 +249,30 @@ const StreamPage = () => {
     }
   };
 
+  // const StyledPopup = styled(Popup)`
+  //   // use your custom style for ".popup-overlay"
+  //   &-overlay {
+  //   }
+  //   // use your custom style for ".popup-content"
+  //   &-content {
+  //     top: 0;
+  //     background-color: yellow;
+  //   }
+  // `;
+
+  // Social media sharing
+  const [show_popup, setShowPopup] = useState(false); // If popup should be shown
+
+  // Opens custom popup
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  // Close popup when user clicks away
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
   // RENDERING SECTION
   return (
     <div className="stream-container">
@@ -320,26 +348,47 @@ const StreamPage = () => {
                     </div>
                   </div>
                   <Row className="stream-info-row">
-                    {/* <Col size={0.1}></Col> */}
                     <Col size={7}>
                       <Row>
-                        <Col size={2}>
+                        <Col size={3}>
                           <h3 className="artist-name-stream">{artist_name}</h3>
                         </Col>
-                        <Col size={1}>
-                          <div className="viewers">
-                            <h5 className="viewer-count show-time">
-                              {viewers} watching now
-                            </h5>
-                          </div>
+                        <Col size={2}>
+                          <Row className="stream-share-row">
+                            <ClickAwayListener onClickAway={closePopup}>
+                              <div className="share-container">
+                                <span
+                                  className="share-button"
+                                  onClick={openPopup}
+                                >
+                                  <i
+                                    class="fa fa-share show-time"
+                                    aria-hidden="true"
+                                  ></i>
+                                  <h5 className="show-time">SHARE</h5>
+                                </span>
+
+                                <SharePopup show={show_popup} />
+                              </div>
+                            </ClickAwayListener>
+
+                            <div className="viewers">
+                              <h5 className="viewer-count show-time">
+                                {viewers} watching now
+                              </h5>
+                            </div>
+                          </Row>
                         </Col>
                       </Row>
                       <Row>
-                        <h5 className="show-time">
-                          {show_time} (refresh the page if stream doesn't show
-                          up)
-                        </h5>
+                        <Col size={2}>
+                          <h5 className="show-time">
+                            {show_time} (refresh the page if stream doesn't show
+                            up)
+                          </h5>
+                        </Col>
                       </Row>
+
                       {/* </Col> */}
                       {/* <Col size={1} className="social-bar-center">
                            <SocialBar />
@@ -361,21 +410,23 @@ const StreamPage = () => {
                     <Col size={1} className="donate-stripe donate-box">
                       <p className="donate-description">Credit Card</p>
                       <p className="donate-subdescription">
-                        Tip the artist via credit card. Your card information
-                        will not be stored anywhere.
+                        Donate via credit card to For the GWORLS and LGBTQ
+                        Freedom Fund. Your card information will not be stored
+                        anywhere.
                       </p>
                     </Col>
                     <Col size={1} className="donate-paypal donate-box">
                       <p className="donate-description">PayPal</p>
                       <p className="donate-subdescription">
-                        onfour will ensure your tip is sent to the artist.
+                        onfour will ensure your donation is sent to For the
+                        GWORLS and LGBTQ Freedom Fund.
                       </p>
                     </Col>
                     <Col size={1} className="donate-venmo donate-box">
                       <p className="donate-description">Venmo</p>
                       <p className="donate-subdescription">
-                        @SpencerAmer from onfour will ensure your tip is sent to
-                        the artist.
+                        @SpencerAmer from onfour will ensure your donation is
+                        sent to For the GWORLS and LGBTQ Freedom Fund.
                       </p>
                     </Col>
                   </Row>
@@ -389,7 +440,7 @@ const StreamPage = () => {
                         data-target="#paymentModal"
                         onClick={donateModal}
                       >
-                        Tip with Card
+                        Donate with Card
                       </button>{" "}
                       <Modal></Modal>
                     </Col>
@@ -398,7 +449,7 @@ const StreamPage = () => {
                         className="stripe-button-border button-height paypal-button"
                         onClick={donatePaypal}
                       >
-                        Tip with Paypal
+                        Donate with Paypal
                       </button>
                     </Col>
                     <Col size={1} className="donate-venmo donate-box-button">
@@ -528,7 +579,7 @@ const StreamPage = () => {
                     data-toggle="modal"
                     data-target="#paymentModal"
                   >
-                    Tip the Artist
+                    Donate
                   </button>{" "}
                   <Modal isOpen={false}></Modal>
                 </div>
