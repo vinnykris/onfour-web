@@ -69,6 +69,8 @@ const StreamPage = () => {
   const emailSubmit = (event) => {
     event.preventDefault();
 
+    Analytics.record({ name: "emailSubscribeClicked" });
+
     const payload = {
       email: email,
       paid: false,
@@ -266,8 +268,9 @@ const StreamPage = () => {
   // Social media sharing
   const [show_popup, setShowPopup] = useState(false); // If popup should be shown
 
-  // Opens custom popup
+  // Opens custom popup and records analytics for share button being clicked
   const openPopup = () => {
+    Analytics.record({ name: "shareButtonClicked" });
     setShowPopup(true);
   };
 
@@ -360,6 +363,9 @@ const StreamPage = () => {
                           <Row className="stream-share-row">
                             <div className="feedback-container">
                               <a
+                                onClick={Analytics.record({
+                                  name: "sendFeedbackClicked",
+                                })}
                                 href="https://forms.gle/5rP8nXznckGCuRE77"
                                 target="_blank"
                                 rel="noopener noreferrer"
