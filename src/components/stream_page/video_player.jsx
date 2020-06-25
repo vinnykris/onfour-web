@@ -31,11 +31,6 @@ function VideoPlayer({
   // This function calculates the time difference between current time and show start time
   // and represent the difference in days, hours, minuts and seconds
   const calculateTimeLeft = () => {
-<<<<<<< HEAD
-    // const difference = +new Date(start_time) - +new Date();
-    const difference =
-      +new Date("2020-06-03T19:00:00.000 - 04: 00") - +new Date();
-=======
     // FOR LIVE WEBSITE: uncomment out line 38 and commment out line 43-44
     // to block the stream when the show hasn't started
 
@@ -47,7 +42,6 @@ function VideoPlayer({
     // const difference =
     //   +new Date("2020-06-03T19:00:00.000 - 04: 00") - +new Date();
 
->>>>>>> 17786d230e5c4748da6214435759afbcbd761fd6
     let time_left = {};
 
     if (difference > 0) {
@@ -130,30 +124,6 @@ function VideoPlayer({
     }
   });
 
-<<<<<<< HEAD
-  // const [registered_concert, setRegisteredConcert] = useState(false);
-  // const registerConcert = async (concert_reg_load) => {
-  //   // Calling the API, using async and await is necessary
-  //   await API.graphql(
-  //     graphqlOperation(mutations.update_registration_concert, {
-  //       input: concert_reg_load,
-  //     })
-  //   );
-  // };
-
-  // if (!timer_placeholder.length) {
-  //   if (auth && !registered_concert) {
-  //     if (concert_id) {
-  //       const concert_reg_load = {
-  //         id: user_id,
-  //         concert: concert_id,
-  //       };
-  //       registerConcert(concert_reg_load);
-  //       setRegisteredConcert(true);
-  //     }
-  //   }
-  // }
-=======
   const [registered_concert, setRegisteredConcert] = useState(false);
   const registerConcert = async (concert_reg_load) => {
     console.log(concert_reg_load.concert);
@@ -177,7 +147,6 @@ function VideoPlayer({
       }
     }
   }
->>>>>>> 17786d230e5c4748da6214435759afbcbd761fd6
 
   // this function asks Amplify analytics to record the streamVisit event
   const recordEvent = () => {

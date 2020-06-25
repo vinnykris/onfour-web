@@ -3,17 +3,11 @@ import React, { useEffect, useState, useCallback } from "react";
 // import StartButton from "../StartButton/StartButton";
 // import api from "../../api";
 import "./video_chat_styles.scss";
-<<<<<<< HEAD
-import Tray from "../Tray/Tray";
-=======
 // import Tray from "../Tray/Tray";
->>>>>>> 17786d230e5c4748da6214435759afbcbd761fd6
 // import CallObjectContext from "../../CallObjectContext";
 // import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from "../../urlUtils";
 // import DailyIframe from "@daily-co/daily-js";
 // import { logDailyEvent } from "../../logUtils";
-<<<<<<< HEAD
-=======
 
 useEffect(() => {
     if (!callObject) return;
@@ -54,4 +48,3 @@ useEffect(() => {
         }
     };
 }, [callObject]);
->>>>>>> 17786d230e5c4748da6214435759afbcbd761fd6

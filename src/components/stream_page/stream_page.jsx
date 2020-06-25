@@ -26,6 +26,7 @@ import { Grid, Row, Col } from "../grid";
 import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
+import VideoChat from "../video_chat/App/video_chat_App";
 
 // Styles Imports
 import "./stream_styles.scss";
@@ -40,45 +41,8 @@ const StreamPage = () => {
   // DETERMINE MOBILE VERSION OR NOT
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
-<<<<<<< HEAD
-  // GET USER'S REGISTRATION INFORMATION
-  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
-  const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
-  const [username, setUsername] = useState(""); // Username from login
-  const [user_id, setUserID] = useState(""); // Tracks user's id of signed in user
-  const [first, setFirst] = useState(""); // Tracks first name of signed in user
-  // const [last, setLast] = useState(""); // Tracks last name of signed in user
-
-  // If the user is logged in/valid, set their auth value to true and track their email
-  // If the user is not logged in/invalid, reset their auth value to false
-  Auth.currentAuthenticatedUser({})
-    .then((user) => {
-      setUserEmail(user.attributes.email);
-      setUsername(user.username);
-    })
-    .then((user) => setAuth(true))
-    .catch((err) => setAuth(false));
-
-  // If the first name for the logged in user's email has not been retrieved yet,
-  // query the registration database's table to retrieve the first name filtered
-  // for the specific email and assign that value to first
-  if (first === "" && user_email !== "") {
-    API.graphql(
-      graphqlOperation(queries.query_name, {
-        filter: { email: { eq: user_email } },
-      })
-    ).then((data) => {
-      setUsername(data.data.listCreateOnfourRegistrations.items[0].username);
-      setFirst(data.data.listCreateOnfourRegistrations.items[0].first);
-      // setLast(data.data.listCreateOnfourRegistrations.items[0].last);
-      setUserID(data.data.listCreateOnfourRegistrations.items[0].id);
-      setShowChat(true);
-    });
-  }
-=======
   // DONATION SECTION
   const tip_based = true; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
->>>>>>> 17786d230e5c4748da6214435759afbcbd761fd6
 
   // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
@@ -215,8 +179,6 @@ const StreamPage = () => {
     setConcertID(info_list[0].concertId);
   };
 
-<<<<<<< HEAD
-=======
   // GET USER'S REGISTRATION INFORMATION
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
@@ -247,7 +209,6 @@ const StreamPage = () => {
   //   });
   // }
 
->>>>>>> 17786d230e5c4748da6214435759afbcbd761fd6
   // DONATION SECTION
   // Opens link to paypal account for musician
   const donatePaypal = () => {
@@ -266,17 +227,6 @@ const StreamPage = () => {
     Analytics.record({ name: "totalStreamPageVisits" });
   };
 
-<<<<<<< HEAD
-  // TOGGLE CHAT SECTION 
-  const [button_icon, setButtonIcon] = useState(">>");
-  const toggleChat = () => {
-    if (button_icon === ">>") {
-      setButtonIcon("<<");
-      document.getElementById("chat_container").style.display = "none";
-      // document.getElementById("chat_container").style.display = "none";
-      document.getElementById("stream_col").style.flex = "9.5";
-      console.log(document.getElementById("chat_container"));
-=======
   // Record in analytics that stream page was visited (logged in and logged out)
   useEffect(() => {
     streamPageVisit();
@@ -296,7 +246,6 @@ const StreamPage = () => {
       document.getElementById("chat_container").style.display = "none";
       // document.getElementById("chat_container").style.display = "none";
       document.getElementById("stream_col").style.flex = "9";
->>>>>>> 17786d230e5c4748da6214435759afbcbd761fd6
     } else {
       setButtonIcon("fa fa-chevron-right");
       document.getElementById("chat_container").style.display = "inline";
@@ -304,15 +253,6 @@ const StreamPage = () => {
     }
   };
 
-<<<<<<< HEAD
-  // // INITIALIZE CHAT HEIGHT 
-  // useEffect(() => {
-  //   const stream_h = document.getElementById("video_player");
-  //   console.log(stream_h);
-  // }, [show_start_time]);
- 
-
-=======
   // const StyledPopup = styled(Popup)`
   //   // use your custom style for ".popup-overlay"
   //   &-overlay {
@@ -336,7 +276,6 @@ const StreamPage = () => {
   const closePopup = () => {
     setShowPopup(false);
   };
->>>>>>> 17786d230e5c4748da6214435759afbcbd761fd6
 
   // RENDERING SECTION
   return (
@@ -403,16 +342,12 @@ const StreamPage = () => {
                         concert_id={concert_id}
                       />
                       <div className="toggle-chat">
-<<<<<<< HEAD
-                        <button className="toggle-chat-button" onClick={toggleChat}>{button_icon}</button>
-=======
                         <button
                           className="toggle-chat-button"
                           onClick={toggleChat}
                         >
                           <i class={button_icon}></i>
                         </button>
->>>>>>> 17786d230e5c4748da6214435759afbcbd761fd6
                       </div>
                     </div>
                   </div>
@@ -486,6 +421,7 @@ const StreamPage = () => {
                         <img className="artist-image" src={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/achille.png"}></img>
                       </Col> */}
                     </div>
+                    <VideoChat></VideoChat>
                   </Row>
 
                   {/* DONATE ROW */}
