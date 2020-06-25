@@ -3,9 +3,40 @@
 @import "../../styles";
 
 //MUSICIAN+ Whats on four PAGE STYLING
+.view-height-row {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-page-loading-background {
+  width: 100%;
+  height: 100vh;
+  margin-top: -176px;
+  background-color: black;
+  position: relative;
+
+  @include respond-to("large") {
+    margin-top: -140px;
+  }
+  @include respond-to("small") {
+    margin-top: -131px;
+  }
+}
+
+.about-page-loader {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 .banner-container {
   width: 100%;
   margin-top: -176px;
+  // height: 100vh;
   @include respond-to("large") {
     margin-top: -140px;
   }
@@ -17,30 +48,35 @@
 .banner-container img {
   width: 100%;
   object-fit: cover;
-  max-height: 350px;
+  height: 100vh;
 }
 
-.banner-container button {
-  position: absolute;
-  top: 37%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: white;
-  color: black;
-  font-size: 15px;
-  padding: 12px 17px;
-  font-weight: $medium-weight;
-  border: none;
-  cursor: pointer;
-  border-radius: 3px;
-  box-shadow: 0px 3px 5px grey;
-}
+// .banner-container button {
+//   position: absolute;
+//   top: 37%;
+//   transform: translate(-50%, -50%);
+//   -ms-transform: translate(-50%, -50%);
+//   background-color: white;
+//   color: black;
+//   font-size: 15px;
+//   padding: 12px 17px;
+//   font-weight: $medium-weight;
+//   border: none;
+//   cursor: pointer;
+//   border-radius: 3px;
+//   box-shadow: 0px 3px 5px grey;
+// }
 
 .banner-container button:hover {
   background-color: black;
   color: white;
 }
 
+.banner-video {
+  width: 100%;
+  object-fit: cover;
+  height: 100vh;
+}
 .banner-header-desktop {
   @include respond-to("small") {
     display: none;
@@ -48,10 +84,175 @@
 }
 
 .banner-header-mobile {
-  display: none;
+  // display: none;
   @include respond-to("small") {
     display: inline;
   }
+}
+
+.header-tag-row {
+  width: 25vw;
+  height: 33vh;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  -ms-transform: translate(-15%, -50%);
+  transform: translate(-15%, -50%);
+}
+
+.header-tag {
+  color: white;
+  font-weight: $medium-weight;
+  text-align: left;
+  width: 100%;
+  text-decoration: underline;
+  font-size: 8vh;
+}
+
+.upcoming-row {
+  width: 30vw;
+  height: auto;
+  padding: 2.5vw;
+  margin: 0;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 50%;
+  right: 0;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.upcoming-col {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.upcoming-header-tag {
+  color: white;
+  font-weight: $medium-weight;
+  text-align: left;
+  width: 100%;
+  font-size: 4vh;
+}
+
+.upcoming-description {
+  color: white;
+  text-align: left;
+  font-weight: lighter;
+  font-size: 1.1vw;
+}
+
+.upcoming-button-container {
+  position: relative;
+  margin-top: 5%;
+  width: auto;
+  height: auto;
+}
+
+.upcoming-button {
+  background-color: white;
+  color: rgb(0, 0, 0);
+  font-size: 1.2vw;
+  font-weight: bold;
+  padding: 6px 15px 6px 15px;
+}
+
+.description-text {
+  position: absolute;
+  width: 70vw;
+  height: 20vh;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  line-height: 7vh;
+  text-align: center;
+  font-size: 2vw;
+  font-weight: $medium-weight;
+  color: #e2e2e2;
+  opacity: 0;
+}
+
+.why-perform-about {
+  background: linear-gradient(244.27deg, #3d3add 0%, #935af0 99.23%), #514eff;
+}
+
+.why-perform-text-container {
+  width: 45vw;
+  height: 45vh;
+  margin: 0;
+  padding: 2vw;
+  background-color: white;
+  position: absolute;
+  top: 33%;
+  left: 20%;
+  -ms-transform: translate(-20%, -33%);
+  transform: translate(-20%, -33%);
+  opacity: 0;
+  z-index: 2;
+}
+
+.why-perform-title {
+  color: black;
+  font-weight: $medium-weight;
+  text-align: left;
+  font-size: 3vh;
+}
+
+.why-perform-text {
+  margin-top: 3vh;
+  color: black;
+  font-weight: $medium-weight;
+  text-align: left;
+  font-size: 2.3vh;
+  white-space: pre-wrap;
+  line-height: 4vh;
+}
+
+.why-perform-learn-more-row {
+  width: 45vw;
+  height: 10vh;
+  margin: 0;
+  position: absolute;
+  bottom: 25%;
+  left: 20%;
+  -ms-transform: translate(-20%, 25%);
+  transform: translate(-20%, 25%);
+}
+
+.why-perform-learn-more-button {
+  height: 8vh;
+  width: 15vw;
+  background-color: #656565;
+  color: white;
+  font-size: 2.3vh;
+  font-weight: normal;
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.33);
+}
+
+.why-perform-image-container {
+  width: 37vw;
+  height: 85vh;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  right: 20%;
+  background-color: black;
+  -ms-transform: translate(20%, -50%);
+  transform: translate(20%, -50%);
+}
+
+.why-perform-image {
+  position: absolute;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .desktop-grid-about {
@@ -67,57 +268,9 @@
   }
 }
 
-.header-tag {
-  margin-top: -150px;
-  color: white;
-  font-weight: bold;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  font-size: 2rem;
-  @include respond-to("x-large") {
-    margin-top: -10%;
-    font-size: 1.7rem;
-  }
-  @include respond-to("large") {
-    margin-top: -10%;
-    font-size: 1.5rem;
-  }
-  @include respond-to("medium") {
-    margin-top: -9%;
-    font-size: 1.3rem;
-  }
-  @include respond-to("small") {
-    display: none;
-  }
-}
 .about-page-content {
   background-color: black;
   margin-top: -1px;
-}
-
-.description-text {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  line-height: 1.9rem;
-  text-align: center;
-  font-size: 17px;
-  font-weight: $medium-weight;
-  color: #e2e2e2;
-  padding-left: 30%;
-  padding-right: 30%;
-  @include respond-to("x-large") {
-    padding-left: 22%;
-    padding-right: 22%;
-  }
-  @include respond-to("large") {
-    padding-left: 16%;
-    padding-right: 16%;
-  }
-  @include respond-to("medium") {
-    padding-left: 8%;
-    padding-right: 8%;
-  }
 }
 
 .our-mission-text {
@@ -227,4 +380,29 @@
 
 .about-success {
   float: left;
+}
+
+.preview-content-header {
+  float: left;
+  color: white;
+}
+
+.view-all {
+  float: right;
+  color: white;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.about-preview-content {
+  padding: 3%;
+}
+
+.archive-preview-row {
+  margin-top: 5%;
+}
+
+.preview-flex-row {
+  width: 100%;
 }

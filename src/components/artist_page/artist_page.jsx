@@ -1,5 +1,5 @@
 // Main Imports
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Row, Col } from "../grid";
 
 // Image Imports
@@ -9,11 +9,39 @@ import onboarding_3 from "../../images/icons/onboarding_artist_3.png";
 import onboarding_4 from "../../images/icons/onboarding_artist_4.png";
 import onboarding_5 from "../../images/icons/onboarding_artist_5.png";
 
+//AWS Imports
+import Amplify, { Analytics } from "aws-amplify";
+import Auth from "../../apis/UserPool";
+
 // Styling Imports
 import "./artist_styles.scss";
 
 // Artist component that contains the features we provide to artists
 const ArtistPage = () => {
+  // Add in analytics that arist page was visited
+  useEffect(() => {
+    artistPageVisit();
+    Auth.currentAuthenticatedUser({}).then((user) => {
+      authenticatedArtistPageVisit();
+    });
+  }, []);
+  const artistPageVisit = () => {
+    Analytics.record({ name: "totalArtistPageVisits" });
+  };
+
+  // Record in analytics that artist page was visited only if user is logged in
+  const authenticatedArtistPageVisit = () => {
+    Analytics.record({ name: "totalAuthenticatedArtistPageVisits" });
+  };
+
+  // AUTO-SCROLL SECTION
+  // Auto-scrolls on first navigation
+  const [scroll, setScroll] = useState(true); // Auto-scroll
+  if (scroll) {
+    window.scrollTo({ top: "10px", behavior: "smooth" });
+    setScroll(false);
+  }
+
   return (
     <div className="artist-page-content">
       {/* DESKTOP LAYOUT */}

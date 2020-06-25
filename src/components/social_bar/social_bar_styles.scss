@@ -7,18 +7,33 @@
 }
 
 .social-list {
+  width: 100%;
   padding-inline-start: 0px;
-  float: right;
   @include respond-to("small") {
     float: none;
   }
 }
 
+.social-subscribe-description {
+  font-size: 17px;
+  font-weight: $medium-weight;
+  color: #cacaca;
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.social-media {
+  width: 100%;
+  height: 100%;
+}
+
 .social-media li {
   list-style: none;
   margin: 10px 10px 0px 10px;
-  display: inline-block;
-  font-size: 25px;
+  // display: inline-block;
+  float: left;
+  font-size: 2.4rem;
   color: #e2e2e2;
   border-radius: 50%;
 }
@@ -50,12 +65,16 @@
   color: #3b5998;
 }
 
+.fa-facebook-official:hover {
+  color: #3b5998;
+}
+
 .fa-spotify:hover {
   color: #1db954;
 }
 
 .fa-instagram:hover {
-  color: #833ab4;
+  color: #eb5edf;
 }
 
 .fa-youtube:hover {
@@ -63,5 +82,5 @@
 }
 
 .fa-twitter:hover {
-  color: lightblue;
+  color: rgba(29, 161, 242, 1);
 }

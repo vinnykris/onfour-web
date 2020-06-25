@@ -56,29 +56,33 @@ const NavBar = () => {
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
   Auth.currentAuthenticatedUser({})
-    .then((user) => setUserEmail(user.attributes.email))
+    .then((user) => {
+      setUserEmail(user.attributes.email);
+      setAuth(true);
+      setUsername(user.username);
+    })
     // .then((user) => setUsername(user.username))
-    .then((user) => setAuth(true))
+    // .then((user) => setAuth(true))
     // .then((user) => closeMenu())
     .catch((err) => setAuth(false));
 
   // If the first and last name for the logged in user's email has not been retrieved yet,
   // query the registration database's table to retrieve the first and last name filtered
   // for the specific email and assign that value to first and last
-  if (first === "" && last === "" && user_email !== "") {
-    API.graphql(
-      graphqlOperation(queries.query_name, {
-        filter: { email: { eq: user_email } },
-      })
-    ).then((data) => {
-      setFirst(
-        data.data.listCreateOnfourRegistrations.items[0].first.toUpperCase()
-      );
-      setLast(
-        data.data.listCreateOnfourRegistrations.items[0].last.toUpperCase()
-      );
-    });
-  }
+  // if (first === "" && last === "" && user_email !== "") {
+  //   API.graphql(
+  //     graphqlOperation(queries.query_name, {
+  //       filter: { email: { eq: user_email } },
+  //     })
+  //   ).then((data) => {
+  //     setFirst(
+  //       data.data.listCreateOnfourRegistrations.items[0].first.toUpperCase()
+  //     );
+  //     setLast(
+  //       data.data.listCreateOnfourRegistrations.items[0].last.toUpperCase()
+  //     );
+  //   });
+  // }
 
   // Change styles if on about page
   if (location.pathname === "/") {
@@ -241,7 +245,9 @@ const NavBar = () => {
                   <div className="sign-out-container">
                     <Col size={1}>
                       <div className="greeting-mobile">
-                        <p className="greeting-mobile-text">HI, {first} </p>
+                        <p className="greeting-mobile-text">
+                          HI, {username.toUpperCase()}{" "}
+                        </p>
                       </div>
                       <button
                         className="sign-out-button-mobile"
@@ -292,8 +298,8 @@ const NavBar = () => {
                   >
                     <LoggedInUser
                       className="logged-in-icon"
-                      first={first}
-                      last={last}
+                      first={username}
+                      // last={last}
                     />
                   </span>
                 )}
@@ -364,7 +370,7 @@ const NavBar = () => {
                             tag="a"
                             caret
                           >
-                            HI, {first}
+                            HI, {username.toUpperCase()}
                           </DropdownToggle>
                         </div>
                         <DropdownMenu right>

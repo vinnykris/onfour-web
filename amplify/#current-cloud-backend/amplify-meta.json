@@ -1,0 +1,48 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "amplify-onfourweb-test-150445-authRole",
+			"UnauthRoleArn": "arn:aws:iam::556351844479:role/amplify-onfourweb-test-150445-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::556351844479:role/amplify-onfourweb-test-150445-authRole",
+			"Region": "us-east-1",
+			"DeploymentBucketName": "amplify-onfourweb-test-150445-deployment",
+			"UnauthRoleName": "amplify-onfourweb-test-150445-unauthRole",
+			"StackName": "amplify-onfourweb-test-150445",
+			"StackId": "arn:aws:cloudformation:us-east-1:556351844479:stack/amplify-onfourweb-test-150445/c20a48a0-a8f1-11ea-8a08-0a279eeb3bc1",
+			"AmplifyAppId": "d2ttrrfsua432p"
+		}
+	},
+	"auth": {
+		"cognitoe7372b2d": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-onfourweb-test-150445-deployment/amplify-cfn-templates/auth/cognitoe7372b2d-cloudformation-template.yml",
+				"logicalId": "authcognitoe7372b2d"
+			},
+			"lastPushTimeStamp": "2020-06-07T19:08:09.869Z",
+			"output": {
+				"IdentityPoolId": "us-east-1:8892263f-96c1-4829-b89d-f602936e8158",
+				"IdentityPoolName": "onfourweb_identitypool_28f1197c__test"
+			},
+			"lastPushDirHash": "zhgWiF/RPgPWlV7SbU59GP6trdE="
+		}
+	},
+	"analytics": {
+		"onfourweb": {
+			"service": "Pinpoint",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-onfourweb-test-150445-deployment/amplify-cfn-templates/analytics/pinpoint-cloudformation-template.json",
+				"logicalId": "analyticsonfourweb"
+			},
+			"lastPushTimeStamp": "2020-06-07T19:08:09.869Z",
+			"output": {
+				"appName": "onfourweb-test",
+				"Region": "us-east-1",
+				"Id": "0bf55fdf6da3407190c60e0a6c0d6a5d"
+			},
+			"lastPushDirHash": "MQDvjY8ffkSmjRin/bpsqEGbHuo="
+		}
+	}
+}

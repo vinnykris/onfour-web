@@ -16,12 +16,13 @@ export const query_name = `query listCreateOnfourRegistrations(
   }`;
 
 export const list_users = `query listCreateOnfourRegistrations {
-    listCreateOnfourRegistrations(limit: 1000) {
+    listCreateOnfourRegistrations(limit: 1000, nextToken: null) {
       items {
         username
         first
         last
       }
+      nextToken
     }
   }`;
 
@@ -53,6 +54,7 @@ export const list_upcoming_concerts = `query listFutureConcerts {
       description
       price
       concertId
+      genre
     }
   }
 }`;

@@ -4,5 +4,13 @@
 
 // FLEXIBLE GRID STYLING
 .black-element {
-    background-color: black;
+  background-color: black;
+}
+
+.grid-row {
+  display: table;
+}
+
+.flex-grid {
+  width: 100%;
 }

@@ -27,9 +27,59 @@
   align-items: center;
 }
 
+.single-element {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
 .featured-content {
-  background-color: #dbdbdb;
-  margin: 5% 3% 5% 3%;
+  background-color: white;
+  margin: 7% 3% 7% 3%;
+  position: relative;
+  height: 90%;
+  &:hover {
+    color: #fff;
+    opacity: 0.25;
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    cursor: pointer;
+    .RSVP {
+      z-index: 50;
+    }
+  }
+  &:hover:after {
+    opacity: 1;
+    .RSVP {
+      z-index: 0;
+    }
+  }
+
+  @include respond-to("small") {
+    &:hover {
+    opacity: 1;
+    }
+    .RSVP {
+      z-index: 0;
+    }
+  }
+}
+
+.RSVP {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.RSVP-text {
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .poster-container {
@@ -37,7 +87,7 @@
   width: 100%;
   height: 17vw;
   @include respond-to("small") {
-    height: 45vw;
+    height: 30vh;
   }
 }
 
@@ -61,9 +111,22 @@
 
 .show-content-bar {
   max-width: 100%;
-  max-height: 100%;
-  min-height: 90px;
-  // background-color: #e2e2e2;
+  height: 100%;
+}
+
+.genre-box {
+  background-color: black;
+  color: white;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  font-family: "Heebo", sans-serif;
+  padding: 1px 10px 1px 10px;
+  @include respond-to("small") {
+    margin-left: 5px;
+    margin-top: 7px;
+  }
 }
 
 .artist-name {
@@ -72,21 +135,23 @@
   // overflow: hidden;
   // display: inherit;
   // width:300px;
-  font-size: 95%;
+  font-size: 1rem;
   font-weight: bold;
   color: #1b1b1b;
   text-align: left;
-  margin-top: 10px;
+  margin-top: 8px;
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 40px;
   letter-spacing: 0.4px;
   vertical-align: text-top;
   font-family: "Heebo", sans-serif;
   @include respond-to("small") {
-    // font-size: 85%;
+    font-size: 100%;
     margin-top: 7px;
     margin-right: 7px;
     margin-left: 5px;
+    margin-bottom: 30px;
   }
 }
 
@@ -107,7 +172,8 @@
 // }
 
 .time {
-  font-size: 85%;
+  // font-size: 80%;
+  font-size: 0.85rem;
   font-weight: $medium-weight;
   color: #1b1b1b;
   text-align: left;
@@ -121,6 +187,11 @@
     margin-right: 5px;
     margin-bottom: 7px;
   }
+}
+
+.time-row {
+  position: absolute;
+  bottom: 0px;
 }
 
 .featured-content-button-border {
@@ -146,23 +217,42 @@
 }
 
 .ticket {
-  // position: absolute;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   // bottom: 0px;
-  width: 50%;
 }
+
 
 .poster-tag {
   position: absolute;
   text-align: left;
   width: 5%;
-  margin-left: 10px;
+  margin-left: 15px;
   margin-top: 15px;
   @include respond-to("small") {
-    margin-left: 5px;
+    margin-left: 4px;
     margin-top: 10px;
   }
 }
 
+.genre-tag {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  background-color: #303096;
+  // background-color: black;
+  font-size: 100%;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  right: 10px;
+  top : 15px;
+  padding: 0px 5px 0px 5px;
+  @include respond-to("small") {
+    top: 10px;
+    right: 5px;
+  }
+}
 .poster-text {
   color: white;
   text-align: center;
@@ -254,18 +344,19 @@ a.nav-page-white {
 }
 
 .concert-form {
-  background-color: whitesmoke;
-  // border: 1px solid #30309663;
+  background-color: white;
   width: 70vw;
-  height: 70vh;
-  padding: 10px 20px 10px 20px;
+  height: 80vh;
+  padding: 2vh 2vw 2vh 2vw;
   border: none;
-  border-radius: 5px;
-  box-shadow: 0px 3px 5px rgb(238, 237, 237);
+  // border-radius: 5px;
+  // box-shadow: 0px 3px 5px rgb(238, 237, 237);
   overflow: auto;
   @include respond-to("small") {
-    width: 93vw;
-    padding: 0;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    padding: 2vh 2vw 2vh 2vw;
   }
 }
 
@@ -275,27 +366,41 @@ a.nav-page-white {
   width: 100%;
   height: 100%;
   top: 0;
-  padding-top: 20vh;
-  z-index: 10;
+  padding-top: 10vh;
+  z-index: 9999;
   margin: auto;
   background-color: rgba(0, 0, 0, 0.5);
+  @include respond-to("small") {
+    padding-top: 0vh;    
+  }
 }
 
 .popup-info-close {
-  padding: 3%;
+  // padding: 3%;
   float: right;
+  position: relative;
+  z-index: 1;
   filter: invert(75%);
   &:hover {
     cursor: pointer;
   }
+
+  @include respond-to("small") {
+    filter: invert(0%);  
+    font-size: 25px; 
+    margin-right: 15px;
+  }
+
 }
 
 .popup-info-content {
-  margin-top: 3%;
+  // margin-top: 1.5%;
   width: 100%;
-  padding: 10px 40px 10px 40px;
+  height: 76vh;
+  position: relative;
+  padding: 4vh 4vw 4vh 4vw;
   @include respond-to("small") {
-    padding: 10px 30px 10px 30px;
+    padding: 4vh 4vw 4vh 4vw;
   }
 }
 
@@ -303,4 +408,372 @@ a.nav-page-white {
   white-space: pre-wrap;
   // text-align: left;
   text-align: justify;
+}
+
+
+// MODAL STYLING 
+.modal-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.modal-description-container {
+  // width: 100%;
+  // height: 85%;
+  // margin-top: 5%;
+  position: absolute;
+  top: 110px;
+  bottom: 0;
+  right: 2vw;
+}
+
+.modal-date {
+  font-size: 0.7rem;
+  width: auto;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding: 2px 10px 2px 10px;
+
+  @include respond-to("small") {
+    background-color: white;
+    color: black;
+  }
+}
+
+.modal-description-col {
+  padding-right: 4vw;
+  position: relative;
+}
+
+.modal-bio-title {
+  width: auto;
+  padding-top: 2vh;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 100%;
+  color: #000000;
+  text-align: left;
+
+  @include respond-to("small") {
+    color: white;
+  }
+}
+
+.modal-bio-description {
+  height: 100%;
+  padding-right: 8px;
+  overflow: auto;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.8rem;
+  color: #000000;
+  text-align: justify;
+  white-space: pre-wrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(209, 209, 209, 0.596); 
+    border-radius: 20px;
+  }
+}
+
+.mobile-modal-bio-description {
+  margin-top: 2vh;
+  margin-bottom: 18vh;
+  right: 4vw;
+  height: auto;
+  padding-right: 8px;
+  overflow: auto;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.8rem;
+  color: white;
+  text-align: justify;
+  white-space: pre-wrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(209, 209, 209, 0.596); 
+    border-radius: 20px;
+  }
+}
+
+.modal-info-col {
+  width: 100%; // 22vw
+  height: 100%;
+  position: relative;
+}
+
+.modal-image-container {
+  width: 100%;
+  height: 26vh;
+  position: relative;
+}
+
+.modal-bio-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  @include respond-to("small") {
+    position: relative;
+  }
+}
+
+.modal-info-row {
+  height: 40px;
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid #E3E3E3;
+}
+
+.modal-info {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #000000;
+  text-align: left;
+  @include respond-to("small") {
+    font-size: 0.4rem;
+  }
+}
+
+.first-row {
+  margin-top: 4.2vh;
+}
+
+.last-row {
+  border-bottom: none;
+}
+
+.modal-ticket {
+  position: absolute;
+  bottom: 0;
+  // width: 19vw;
+  width: 100%;
+  // @include respond-to ("small") {
+  //   width: 102px;
+  // }
+}
+
+.modal-ticket-button {
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.modal-free-button{
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.85rem;
+  padding-top: 15px;
+  height: 48px;
+  // &:hover{
+  //   cursor: pointer;
+  //   border: 1px solid white;
+  // }
+}
+
+// FESTIVAL SECTION 
+
+.festival-image {
+  width: 10vw;
+  height: 10vw;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 50%;
+  @include respond-to("small") {
+    width: 11.5vh;
+    height: 11.5vh;
+  }
+}
+
+.festival-bio-description {
+  height: 100%;
+  padding-right: 8px;
+  overflow: auto;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.7rem;
+  color: #000000;
+  text-align: justify;
+  white-space: pre-wrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(209, 209, 209, 0.596); 
+    border-radius: 20px;
+  }
+}
+
+.festival-row {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.festival-bio-col {
+  padding-left: 10px;
+}
+
+.festival-bio-name {
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #000000;
+  text-align: left;
+   @include respond-to("small") {
+    color: white;
+  }
+}
+
+.festival-bio {
+  height: 7vw;
+  overflow: hidden;
+  padding-right: 4px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 188, 183, 0.424); 
+    border-radius: 20px;
+  }
+
+  @include respond-to("small") {
+    width: 100%;
+    height: 10vh;
+    color: white;
+  }
+}
+
+.festival-read-more {
+  color: #007bff;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.disclaimer {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.8rem;
+  color: #000000;
+  text-align: justify;
+  white-space: pre-wrap;
+
+  @include respond-to("small") {
+    color: white;
+  }
+}
+
+.line-up {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #000000;
+  text-align: left;
+  white-space: pre-wrap;
+  margin-bottom: -10px;
+
+  @include respond-to("small") {
+    color: white;
+  }
+}
+
+.mobile {
+  width: 100%;
+  padding-right: 0px;
+  
+}
+
+.mobile-modal-row {
+  margin-top: 7vh;
+}
+
+.mobile-modal-image-container {
+  width: auto;
+  height: 27vh;
+  margin-top: 1vh;
+  margin-bottom: 3vh;
+  // margin-right: 10px;
+  // position: relative;
+}
+
+.mobile-modal-info {
+  width: 100%;
+  // padding-top: 10px;
+  // padding-bottom: 10px;
+  height: 3vh;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: white;
+  text-align: left;
+}
+
+.mobile-modal-ticket-button {
+  width: 100%;
+  height: 3vh;
+  background-color: black;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.6rem;
+}
+
+.mobile-modal-free-button{
+  width: 100%;
+  height: 3vh;
+  background-color: black;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.6rem;
+  padding: 0px;
+  &:hover{
+    cursor: initial;
+  }
 }
