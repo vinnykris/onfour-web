@@ -44,3 +44,20 @@
   font-size: 14px;
   line-height: 17px;
 }
+
+.mute-others-icon {
+  font-size: 15px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: white;
+  z-index: 2;
+}
+
+.mute-others-icon:hover {
+    cursor: pointer;
+}
+
+.mute-others-icon:active {
+  color: red;
+}

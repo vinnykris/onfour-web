@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Tile.css";
 
 /**
@@ -12,6 +12,10 @@ import "./Tile.css";
 export default function Tile(props) {
   const videoEl = useRef(null);
   const audioEl = useRef(null);
+
+  const [audioMute, setAudioMute] = useState(false);
+  const random_id = Math.random();
+  const audio_component_id = "audio" + random_id.toString();
 
   /**
    * When video track changes, update video srcObject
@@ -42,7 +46,7 @@ export default function Tile(props) {
   function getAudioComponent() {
     return (
       !props.isLocalPerson &&
-      props.audioTrack && <audio autoPlay playsInline ref={audioEl} />
+      props.audioTrack && <audio id={audio_component_id} autoPlay muted={audioMute} playsInline ref={audioEl} />
     );
   }
 
@@ -53,9 +57,27 @@ export default function Tile(props) {
     return classNames;
   }
 
+
+  function toggle_audio_mute() {
+    if (document.getElementById(random_id)) {
+      if (document.getElementById(random_id).style.color === "red") {
+        document.getElementById(random_id).style.color = "white";
+        setAudioMute(false);
+      }
+      else {
+        document.getElementById(random_id).style.color = "red";
+        setAudioMute(true);
+      }
+    }
+  }
+
+
   return (
     <div className={getClassNames()}>
       <div className="background" />
+      {!props.isLocalPerson ? (
+        <i className="fa fa-microphone-slash mute-others-icon" id={random_id} onClick={toggle_audio_mute}></i>
+      ):null}
       {getLoadingComponent()}
       {getVideoComponent()}
       {getAudioComponent()}
