@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Tile.css";
+import RangeSlider from 'react-bootstrap-range-slider';
+import "./range_slider.css";
 
 /**
  * Props
@@ -50,6 +52,13 @@ export default function Tile(props) {
     );
   }
 
+  function changeVolume(volume_value) {
+    console.log(volume_value);
+    if (document.getElementById(audio_component_id)) {
+      document.getElementById(audio_component_id).volume = volume_value / 100;
+    }
+  }
+
   function getClassNames() {
     let classNames = "tile";
     classNames += props.isLarge ? " large" : " small";
@@ -71,12 +80,25 @@ export default function Tile(props) {
     }
   }
 
+  const [volume_value, setVolumeValue] = useState(0); 
+
 
   return (
     <div className={getClassNames()}>
       <div className="background" />
       {!props.isLocalPerson ? (
-        <i className="fa fa-microphone-slash mute-others-icon" id={random_id} onClick={toggle_audio_mute}></i>
+        <div>
+          <i className="fa fa-microphone-slash mute-others-icon" id={random_id} onClick={toggle_audio_mute}></i>
+          <div className="range-slider-container">
+            <RangeSlider
+              value={volume_value}
+              onChange={changeEvent => {
+                setVolumeValue(changeEvent.target.value);
+                changeVolume(changeEvent.target.value);
+              }}
+            />
+          </div>
+        </div>
       ):null}
       {getLoadingComponent()}
       {getVideoComponent()}
