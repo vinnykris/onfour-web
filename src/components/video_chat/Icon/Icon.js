@@ -12,7 +12,7 @@ const TYPE_LEAVE = "leave";
  */
 export default function Icon(props) {
   function getFillColor() {
-    return props.highlighted ? "#fb5554" : "#000000";
+    return props.highlighted ? "#fb5554" : "white";
   }
 
   function getPath() {

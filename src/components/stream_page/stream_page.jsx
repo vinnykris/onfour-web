@@ -102,13 +102,13 @@ const StreamPage = () => {
           if (!scrollCheck_top) {
             // if the scroll is not larger than threshold to increase height
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + "px";
+              (width / 100) * 41 - 25 + "px";
           } else if (scrollCheck_bottom) {
             // is scroll is larger than lower threshold but less than higher threshold
             document.getElementById("chat_main").style.height =
-              window.scrollY - 176 + height + "px";
+              window.scrollY - 176 + height - 25 + "px";
           } else {
-            document.getElementById("chat_main").style.height = height + "px";
+            document.getElementById("chat_main").style.height = height - 25 + "px";
           }
         }
       } else {
@@ -117,12 +117,12 @@ const StreamPage = () => {
           const scrollCheck_bottom = window.scrollY < 176;
           if (scrollCheck_top) {
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + "px";
+              (width / 100) * 41 - 25 + "px";
           } else if (scrollCheck_bottom) {
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + window.scrollY + "px";
+              (width / 100) * 41 - 25 + window.scrollY + "px";
           } else {
-            document.getElementById("chat_main").style.height = height + "px";
+            document.getElementById("chat_main").style.height = height - 25 + "px";
           }
         }
       }
@@ -277,6 +277,20 @@ const StreamPage = () => {
     setShowPopup(false);
   };
 
+  // TOGGLE BETWEEN CHAT AND VIDEO CHAT SECTION
+  const turnOnVideoChat = () => {
+    if (document.getElementById("chat-main")) {
+      document.getElementById("chat-main").style.display = "none"
+      document.getElementById("video-chat-main").style.display = "block";
+    }
+  };
+  const turnOnChat = () => {
+    if (document.getElementById("video-chat-main")) {
+      document.getElementById("chat-main").style.display = "inline"
+      document.getElementById("video-chat-main").style.display = "none";
+    }
+  };
+
   // RENDERING SECTION
   return (
     <div className="stream-container">
@@ -421,7 +435,6 @@ const StreamPage = () => {
                         <img className="artist-image" src={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/achille.png"}></img>
                       </Col> */}
                     </div>
-                    <VideoChat></VideoChat>
                   </Row>
 
                   {/* DONATE ROW */}
@@ -613,7 +626,6 @@ const StreamPage = () => {
                     <Col size={0.5}></Col>
                   </Row>
                 </Col>
-
                 <Col
                   size={2.5}
                   id="chat_container"
@@ -638,9 +650,17 @@ const StreamPage = () => {
                         chatStatus={chatStatus}
                         setViewers={getViewers}
                       />
+                      <VideoChat></VideoChat>
+                      <Row className="chat-video-row">
+                        <Col size="1">
+                          <i className="fa fa-circle chat-video-toggle" onClick={turnOnChat}></i>
+                          <i className="fa fa-circle chat-video-toggle" onClick={turnOnVideoChat}></i>
+                        </Col>
+                      </Row>
                     </div>
                   </div>
                 </Col>
+                
                 {/* <Col size={0.5}></Col> */}
               </Row>
               {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}

@@ -123,9 +123,10 @@ export default function Call() {
     let largeTiles = [];
     let smallTiles = [];
     Object.entries(callState.callItems).forEach(([id, callItem]) => {
-      const isLarge =
-        isScreenShare(id) ||
-        (!isLocal(id) && !containsScreenShare(callState.callItems));
+      // const isLarge =
+      //   isScreenShare(id) ||
+      //   (!isLocal(id) && !containsScreenShare(callState.callItems));
+      const isLarge = false;
       const tile = (
         <Tile
           key={id}
@@ -149,11 +150,6 @@ export default function Call() {
   const message = getMessage(callState);
   return (
     <div className="call">
-      <div className="large-tiles">
-        {!message
-          ? largeTiles
-          : null /* Avoid showing large tiles to make room for the message */}
-      </div>
       <div className="small-tiles">{smallTiles}</div>
       {message && (
         <CallMessage
@@ -162,6 +158,11 @@ export default function Call() {
           isError={message.isError}
         />
       )}
+      <div className="small-tiles">
+        {!message
+          ? largeTiles
+          : null /* Avoid showing large tiles to make room for the message */}
+      </div>
     </div>
   );
 }

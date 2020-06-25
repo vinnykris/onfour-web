@@ -68,7 +68,7 @@
 // CHAT STYLING
 .chat-main {
   // height: 37vw;
-  height: 41vw;
+  height: calc(41vw - 25px);
   // height: 100vh;
   width: 100%;
   // position: relative;
@@ -700,3 +700,23 @@
 // .modal-backdrop {
 //   z-index: -1;
 // }
+
+.chat-video-toggle {
+  font-size: 10px;
+  margin: 5px;
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
+
+.chat-video-row {
+  background-color: #17171b;
+  height: 25px;
+  // position: relative;
+  display: flex;
+}
+
+.video-chat-main {
+  display: none;
+}

@@ -1,6 +1,7 @@
 .call {
   position: relative; /* To make it a "positioned" container so children layout works */
   height: calc(100% - 60px); /* Space for the tray */
+  display: flex;
 }
 
 .large-tiles {
@@ -17,6 +18,9 @@
 
 .small-tiles {
   height: 132.5px; /* Video height + 10px padding either side */
-  display: flex;
+  /* display: flex; */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   align-items: center;
 }

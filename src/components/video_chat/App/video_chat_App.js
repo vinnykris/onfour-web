@@ -175,7 +175,7 @@ export default function VideoChatApp() {
   const enableStartButton = appState === STATE_IDLE;
 
   return (
-    <div className="app">
+    <div className="app" id="video-chat-main">
       {showCall ? (
         // NOTE: for an app this size, it's not obvious that using a Context
         // is the best choice. But for larger apps with deeply-nested components

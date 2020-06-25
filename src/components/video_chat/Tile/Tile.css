@@ -1,6 +1,6 @@
 .tile.small {
   width: 200px;
-  margin: 0 10px;
+  margin: 10px 10px;
   position: relative;
 }
 
@@ -13,6 +13,7 @@
   width: 100%;
   position: absolute;
   top: 0px;
+  left: 0px;
 }
 
 .tile .background {
