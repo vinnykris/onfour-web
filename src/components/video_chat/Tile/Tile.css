@@ -61,3 +61,11 @@
 .mute-others-icon:active {
   color: red;
 }
+
+.range-slider-container {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 190px;
+  z-index: 2;
+}
