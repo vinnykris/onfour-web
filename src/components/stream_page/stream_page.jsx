@@ -108,7 +108,8 @@ const StreamPage = () => {
             document.getElementById("chat_main").style.height =
               window.scrollY - 176 + height - 25 + "px";
           } else {
-            document.getElementById("chat_main").style.height = height - 25 + "px";
+            document.getElementById("chat_main").style.height =
+              height - 25 + "px";
           }
         }
       } else {
@@ -122,7 +123,8 @@ const StreamPage = () => {
             document.getElementById("chat_main").style.height =
               (width / 100) * 41 - 25 + window.scrollY + "px";
           } else {
-            document.getElementById("chat_main").style.height = height - 25 + "px";
+            document.getElementById("chat_main").style.height =
+              height - 25 + "px";
           }
         }
       }
@@ -280,14 +282,22 @@ const StreamPage = () => {
   // TOGGLE BETWEEN CHAT AND VIDEO CHAT SECTION
   const turnOnVideoChat = () => {
     if (document.getElementById("chat-main")) {
-      document.getElementById("chat-main").style.display = "none"
+      document.getElementById("chat-main").style.display = "none";
       document.getElementById("video-chat-main").style.display = "block";
+      document
+        .getElementById("chat-circle")
+        .classList.remove("selected-circle");
+      document.getElementById("video-circle").classList.add("selected-circle");
     }
   };
   const turnOnChat = () => {
     if (document.getElementById("video-chat-main")) {
-      document.getElementById("chat-main").style.display = "inline"
+      document.getElementById("chat-main").style.display = "inline";
       document.getElementById("video-chat-main").style.display = "none";
+      document
+        .getElementById("video-circle")
+        .classList.remove("selected-circle");
+      document.getElementById("chat-circle").classList.add("selected-circle");
     }
   };
 
@@ -653,14 +663,22 @@ const StreamPage = () => {
                       <VideoChat></VideoChat>
                       <Row className="chat-video-row">
                         <Col size="1">
-                          <i className="fa fa-circle chat-video-toggle" onClick={turnOnChat}></i>
-                          <i className="fa fa-circle chat-video-toggle" onClick={turnOnVideoChat}></i>
+                          <i
+                            id="chat-circle"
+                            className="fa fa-circle chat-video-toggle selected-circle"
+                            onClick={turnOnChat}
+                          ></i>
+                          <i
+                            id="video-circle"
+                            className="fa fa-circle chat-video-toggle"
+                            onClick={turnOnVideoChat}
+                          ></i>
                         </Col>
                       </Row>
                     </div>
                   </div>
                 </Col>
-                
+
                 {/* <Col size={0.5}></Col> */}
               </Row>
               {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
