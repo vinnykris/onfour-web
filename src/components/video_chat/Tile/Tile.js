@@ -52,12 +52,6 @@ export default function Tile(props) {
     );
   }
 
-  function changeVolume(volume_value) {
-    console.log(volume_value);
-    if (document.getElementById(audio_component_id)) {
-      document.getElementById(audio_component_id).volume = volume_value / 100;
-    }
-  }
 
   function getClassNames() {
     let classNames = "tile";
@@ -80,7 +74,13 @@ export default function Tile(props) {
     }
   }
 
-  const [volume_value, setVolumeValue] = useState(0); 
+  const [volume_value, setVolumeValue] = useState(100); 
+
+  function changeVolume() {
+    if (document.getElementById(audio_component_id)) {
+      document.getElementById(audio_component_id).volume = volume_value / 100;
+    }
+  }
 
 
   return (

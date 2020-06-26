@@ -114,7 +114,7 @@ input[type=range].range-slider.disabled::-ms-track {
   cursor: not-allowed;
 }
 input[type=range].range-slider.range-slider--primary::-webkit-slider-thumb {
-  background: #007bff;
+  background: #6b6d70;
 }
 input[type=range].range-slider.range-slider--secondary::-webkit-slider-thumb {
   background: #6c757d;
@@ -190,7 +190,7 @@ input[type=range].range-slider::-webkit-slider-thumb {
   box-sizing: border-box;
   border: none;
   border-radius: 50%;
-  background: #007bff;
+  background: #6b6d70;
   height: 20px;
   width: 20px;
   cursor: pointer;
@@ -202,7 +202,7 @@ input[type=range].range-slider::-moz-range-thumb {
   box-sizing: border-box;
   border: none;
   border-radius: 50%;
-  background: #007bff;
+  background: #6b6d70;
   height: 20px;
   width: 20px;
   cursor: pointer;
@@ -213,7 +213,7 @@ input[type=range].range-slider::-ms-thumb {
   box-sizing: border-box;
   border: none;
   border-radius: 50%;
-  background: #007bff;
+  background: #6b6d70;
   height: 20px;
   width: 20px;
   cursor: pointer;
@@ -249,22 +249,22 @@ input[type=range].range-slider.range-slider--lg::-ms-thumb {
   margin-top: 0;
 }
 input[type=range].range-slider:not(.disabled):focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 0.2rem #007bff40;
+  box-shadow: 0 0 0 0.2rem #3e3f3f40;
 }
 input[type=range].range-slider:not(.disabled):focus::-moz-range-thumb {
-  box-shadow: 0 0 0 0.2rem #007bff40;
+  box-shadow: 0 0 0 0.2rem #3e3f3f40;
 }
 input[type=range].range-slider:not(.disabled):focus::-ms-thumb {
-  box-shadow: 0 0 0 0.2rem #007bff40;
+  box-shadow: 0 0 0 0.2rem #3e3f3f40;
 }
 input[type=range].range-slider:not(.disabled):active::-webkit-slider-thumb {
-  box-shadow: 0 0 0 0.35rem #007bff40;
+  box-shadow: 0 0 0 0.35rem #3e3f3f40;
 }
 input[type=range].range-slider:not(.disabled):active::-moz-range-thumb {
-  box-shadow: 0 0 0 0.35rem #007bff40;
+  box-shadow: 0 0 0 0.35rem #3e3f3f40;
 }
 input[type=range].range-slider:not(.disabled):active::-ms-thumb {
-  box-shadow: 0 0 0 0.35rem #007bff40;
+  box-shadow: 0 0 0 0.35rem #3e3f3f40;
 }
 input[type=range].range-slider.disabled::-webkit-slider-thumb {
   background: #e9e9e9;
