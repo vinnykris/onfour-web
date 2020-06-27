@@ -41,7 +41,7 @@ const StreamPage = () => {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   // DONATION SECTION
-  const tip_based = true; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
+  const tip_based = false; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
 
   // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
