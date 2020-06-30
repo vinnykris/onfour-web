@@ -41,7 +41,7 @@ const StreamPage = () => {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   // DONATION SECTION
-  const tip_based = false; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
+  const tip_based = true; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
 
   // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
@@ -428,7 +428,7 @@ const StreamPage = () => {
                       <p className="donate-description">Credit Card</p>
                       {tip_based ? (
                         <p className="donate-subdescription">
-                          Tip the artist via credit card. Your card information
+                          Tip {artist_name} via credit card. Your card information
                           will not be stored anywhere.
                         </p>
                       ) : (
@@ -443,7 +443,7 @@ const StreamPage = () => {
                       <p className="donate-description">PayPal</p>
                       {tip_based ? (
                         <p className="donate-subdescription">
-                          onfour will ensure your tip is sent to the artist.
+                          onfour will ensure your tip is sent to {artist_name}.
                         </p>
                       ) : (
                         <p className="donate-subdescription">
@@ -457,7 +457,7 @@ const StreamPage = () => {
                       {tip_based ? (
                         <p className="donate-subdescription">
                           @SpencerAmer from onfour will ensure your tip is sent
-                          to the artist.
+                          to {artist_name}.
                         </p>
                       ) : (
                         <p className="donate-subdescription">
@@ -668,7 +668,7 @@ const StreamPage = () => {
                       data-toggle="modal"
                       data-target="#paymentModal"
                     >
-                      Tip the Artist
+                      Tip {artist_name}
                     </button>
                   ) : (
                     <button
