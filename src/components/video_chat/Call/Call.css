@@ -18,7 +18,8 @@
 }
 
 .small-tiles {
-  height: 132.5px; /* Video height + 10px padding either side */
+  height: auto; /* Video height + 10px padding either side */
+  width: 80%;
   /* display: flex; */
   position: absolute;
   left: 50%;

@@ -102,14 +102,14 @@ const StreamPage = () => {
           if (!scrollCheck_top) {
             // if the scroll is not larger than threshold to increase height
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 - 25 + "px";
+              (width / 100) * 41 - 50 + "px";
           } else if (scrollCheck_bottom) {
             // is scroll is larger than lower threshold but less than higher threshold
             document.getElementById("chat_main").style.height =
-              window.scrollY - 176 + height - 25 + "px";
+              window.scrollY - 176 + height - 50 + "px";
           } else {
             document.getElementById("chat_main").style.height =
-              height - 25 + "px";
+              height - 50 + "px";
           }
         }
       } else {
@@ -118,13 +118,13 @@ const StreamPage = () => {
           const scrollCheck_bottom = window.scrollY < 176;
           if (scrollCheck_top) {
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 - 25 + "px";
+              (width / 100) * 41 - 50 + "px";
           } else if (scrollCheck_bottom) {
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 - 25 + window.scrollY + "px";
+              (width / 100) * 41 - 50 + window.scrollY + "px";
           } else {
             document.getElementById("chat_main").style.height =
-              height - 25 + "px";
+              height - 50 + "px";
           }
         }
       }
@@ -662,17 +662,43 @@ const StreamPage = () => {
                         setViewers={getViewers}
                       />
                       <VideoChat></VideoChat>
-                      <Row className="chat-video-row">
-                        <Col size="1">
+                      <Row className="controll-toolbar-row">
+                        <Col size="1" className="controll-toolbar-button-container">
                           <i
                             id="chat-circle"
-                            className="fa fa-circle chat-video-toggle selected-circle"
+                            className="fa fa-commenting-o controll-toolbar-button selected-circle"
                             onClick={turnOnChat}
                           ></i>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-button-container">
                           <i
                             id="video-circle"
-                            className="fa fa-circle chat-video-toggle"
+                            className="fa fa-video-camera controll-toolbar-button"
                             onClick={turnOnVideoChat}
+                          ></i>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-button-container">
+                          <i
+                            id="placeholder1"
+                            className="fa fa-glass controll-toolbar-button"
+                          ></i>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-button-container">
+                          <i
+                            id="placeholder2"
+                            className="fa fa-smile-o controll-toolbar-button"
+                          ></i>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-button-container">
+                          <i
+                            id="placeholder3"
+                            className="fa fa-hand-rock-o controll-toolbar-button"
+                          ></i>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-button-container">
+                          <i
+                            id="placeholder4"
+                            className="fa fa-heart controll-toolbar-button"
                           ></i>
                         </Col>
                       </Row>

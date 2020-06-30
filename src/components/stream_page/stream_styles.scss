@@ -701,24 +701,58 @@
 //   z-index: -1;
 // }
 
-.chat-video-toggle {
-  font-size: 10px;
-  margin: 5px;
+.controll-toolbar-button {
+  font-size: 1.5rem;
+    padding: 10px;
+    position: absolute;
+    left: 50%;
+    border-radius: 5px;
+    top: 50%;
+    transform: translate(-50%, -50%);
   &:hover {
     cursor: pointer;
     color: white;
   }
 }
 
+.fa-video-camera {
+  background-color: #5D5AD4;
+}
+
+.fa-commenting-o {
+  background-color: #9240B9;
+}
+
+.fa-glass {
+  background-color: #47C8C0;
+}
+
+.fa-heart {
+  background-color: #7BC6DE;
+}
+
+.fa-hand-rock-o {
+  background-color: #B14092;
+}
+
+.fa-smile-o {
+  background-color: #609FDA;
+}
+
 .selected-circle {
   color: white;
 }
 
-.chat-video-row {
+.controll-toolbar-row {
   background-color: #17171b;
-  height: 25px;
-  // position: relative;
+  border-top: 1px solid #3C3C3C;
+  height: 50px;
+  position: relative;
   display: flex;
+}
+
+.controll-toolbar-button-container {
+  position: relative;
 }
 
 .video-chat-main {
