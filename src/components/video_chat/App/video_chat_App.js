@@ -62,6 +62,16 @@ export default function VideoChatApp() {
     callObject.leave();
   }, [callObject]);
 
+  const completelyLeaveVideoChat = useCallback(async() => {
+    if (!callObject) return;
+    setAppState(STATE_LEAVING);
+    await callObject.leave();
+    callObject.destroy().then(() => {
+      setRoomUrl(null);
+      setCallObject(null);
+      setAppState(STATE_IDLE);
+    });
+  }, [callObject]);
   /**
    * If a room's already specified in the page's URL when the component mounts,
    * join the room.
@@ -182,6 +192,13 @@ export default function VideoChatApp() {
         // that want to access call object state and bind event listeners to the
         // call object, this can be a helpful pattern.
         <CallObjectContext.Provider value={callObject}>
+          <button 
+            id="leave-call-button" 
+            className="transparent-completely-leave-video-chat-button" 
+            onClick={completelyLeaveVideoChat}
+          >
+            leave
+          </button>
           <Call roomUrl={roomUrl} />
           <Tray
             disabled={!enableCallButtons}

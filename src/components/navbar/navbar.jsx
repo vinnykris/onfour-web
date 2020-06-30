@@ -120,6 +120,15 @@ const NavBar = () => {
     closeMenu("nav-signout");
   };
 
+  // Function to leave video chat for desktop version
+  const leaveVideoChat = () => {
+    if (document.getElementById("leave-call-button")){
+      document.getElementById("leave-call-button").click();
+      console.log("clicked the leave chat button");
+    }
+  };
+  
+
   return (
     <div className={navbar_custom}>
       {width <= 600 ? (
@@ -313,22 +322,22 @@ const NavBar = () => {
           <Grid className="desktop-grid">
             <Row className="desktop-row">
               <Col size={1}>
-                <NavLink to="/archive" className={style}>
+                <NavLink to="/archive" className={style} onClick={leaveVideoChat}>
                   PAST SHOWS
                 </NavLink>
               </Col>
               <Col size={1}>
-                <NavLink to="/artists" className={style}>
+                <NavLink to="/artists" className={style} onClick={leaveVideoChat}>
                   FOR ARTISTS
                 </NavLink>
               </Col>
               <Col size={1}>
-                <NavLink exact to="/" className={style}>
+                <NavLink exact to="/" className={style} onClick={leaveVideoChat}>
                   ABOUT US
                 </NavLink>
               </Col>
               <Col size={1}>
-                <NavLink exact to="/">
+                <NavLink exact to="/" onClick={leaveVideoChat}>
                   {" "}
                   <img
                     className="onfour-logo-desktop"
@@ -339,12 +348,12 @@ const NavBar = () => {
                 </NavLink>
               </Col>
               <Col size={1}>
-                <NavLink to="/stream" className={style}>
+                <NavLink to="/stream" className={style} onClick={leaveVideoChat}>
                   STREAM
                 </NavLink>
               </Col>
               <Col size={1}>
-                <NavLink to="/upcoming" className={style}>
+                <NavLink to="/upcoming" className={style}onClick={leaveVideoChat}>
                   UPCOMING
                 </NavLink>
               </Col>
@@ -357,6 +366,7 @@ const NavBar = () => {
                         className={style}
                         data-toggle="modal"
                         data-target="#sign_in_Modal"
+                        onClick={leaveVideoChat}
                       >
                         LOGIN
                       </NavLink>

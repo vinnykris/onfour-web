@@ -6,3 +6,7 @@
   width: 100%;
   display: none;
 }
+
+.transparent-completely-leave-video-chat-button {
+  display: none;
+}
