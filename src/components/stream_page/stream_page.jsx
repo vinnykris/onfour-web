@@ -26,6 +26,7 @@ import { Grid, Row, Col } from "../grid";
 import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
+import VideoChat from "../video_chat/App/video_chat_App";
 
 // Styles Imports
 import "./stream_styles.scss";
@@ -101,13 +102,14 @@ const StreamPage = () => {
           if (!scrollCheck_top) {
             // if the scroll is not larger than threshold to increase height
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + "px";
+              (width / 100) * 41 - 50 + "px";
           } else if (scrollCheck_bottom) {
             // is scroll is larger than lower threshold but less than higher threshold
             document.getElementById("chat_main").style.height =
-              window.scrollY - 176 + height + "px";
+              window.scrollY - 176 + height - 50 + "px";
           } else {
-            document.getElementById("chat_main").style.height = height + "px";
+            document.getElementById("chat_main").style.height =
+              height - 50 + "px";
           }
         }
       } else {
@@ -116,12 +118,13 @@ const StreamPage = () => {
           const scrollCheck_bottom = window.scrollY < 176;
           if (scrollCheck_top) {
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + "px";
+              (width / 100) * 41 - 50 + "px";
           } else if (scrollCheck_bottom) {
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + window.scrollY + "px";
+              (width / 100) * 41 - 50 + window.scrollY + "px";
           } else {
-            document.getElementById("chat_main").style.height = height + "px";
+            document.getElementById("chat_main").style.height =
+              height - 50 + "px";
           }
         }
       }
@@ -276,6 +279,29 @@ const StreamPage = () => {
     setShowPopup(false);
   };
 
+  // TOGGLE BETWEEN CHAT AND VIDEO CHAT SECTION
+  const turnOnVideoChat = () => {
+    if (document.getElementById("chat-main")) {
+      document.getElementById("chat-main").style.display = "none";
+      document.getElementById("video-chat-main").style.display = "block";
+      document
+        .getElementById("chat-circle")
+        .classList.remove("selected-circle");
+      document.getElementById("video-circle").classList.add("selected-circle");
+    }
+  };
+  const turnOnChat = () => {
+    if (document.getElementById("video-chat-main")) {
+      document.getElementById("chat-main").style.display = "inline";
+      document.getElementById("video-chat-main").style.display = "none";
+      document
+        .getElementById("video-circle")
+        .classList.remove("selected-circle");
+      document.getElementById("chat-circle").classList.add("selected-circle");
+    }
+  };
+
+
   // RENDERING SECTION
   return (
     <div className="stream-container">
@@ -328,7 +354,7 @@ const StreamPage = () => {
                 {/* <Col size={0.5}></Col> */}
                 <Col size={7} id="stream_col">
                   <div className="stream-main">
-                    <div className="stream-wrapper">
+                    <div className="stream-wrapper" id="video_player">
                       <VideoPlayer
                         url={
                           "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
@@ -611,7 +637,6 @@ const StreamPage = () => {
                     <Col size={0.5}></Col>
                   </Row>
                 </Col>
-
                 <Col
                   size={2.5}
                   id="chat_container"
@@ -636,9 +661,51 @@ const StreamPage = () => {
                         chatStatus={chatStatus}
                         setViewers={getViewers}
                       />
+                      <VideoChat></VideoChat>
+                      <Row className="controll-toolbar-row">
+                        <Col size="1" className="controll-toolbar-button-container">
+                          <i
+                            id="chat-circle"
+                            className="fa fa-commenting-o controll-toolbar-button selected-circle"
+                            onClick={turnOnChat}
+                          ></i>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-button-container">
+                          <i
+                            id="video-circle"
+                            className="fa fa-video-camera controll-toolbar-button"
+                            onClick={turnOnVideoChat}
+                          ></i>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-button-container">
+                          <i
+                            id="placeholder1"
+                            className="fa fa-glass controll-toolbar-button"
+                          ></i>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-button-container">
+                          <i
+                            id="placeholder2"
+                            className="fa fa-smile-o controll-toolbar-button"
+                          ></i>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-button-container">
+                          <i
+                            id="placeholder3"
+                            className="fa fa-hand-rock-o controll-toolbar-button"
+                          ></i>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-button-container">
+                          <i
+                            id="placeholder4"
+                            className="fa fa-heart controll-toolbar-button"
+                          ></i>
+                        </Col>
+                      </Row>
                     </div>
                   </div>
                 </Col>
+
                 {/* <Col size={0.5}></Col> */}
               </Row>
               {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}

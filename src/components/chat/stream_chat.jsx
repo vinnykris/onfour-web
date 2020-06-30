@@ -107,7 +107,7 @@ const Chat = ({ chat_name, chatStatus, setViewers }) => {
   useEffect(() => () => closeChat(), []);
 
   return (
-    <div className="chat-outer-container">
+    <div className="chat-outer-container" id="chat-main">
       <div className="chat-container">
         <InfoBar room={room} users={users} />
         <Messages messages={messages} name={name} />

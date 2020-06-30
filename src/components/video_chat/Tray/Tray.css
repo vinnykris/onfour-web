@@ -1,0 +1,8 @@
+.tray {
+  flex: none;
+  height: 60px;
+  background-color: #17171b;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+}

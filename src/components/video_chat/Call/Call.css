@@ -1,0 +1,28 @@
+.call {
+  position: relative; /* To make it a "positioned" container so children layout works */
+  height: calc(100% - 100px); /* Space for the tray */
+  display: flex;
+  overflow: auto;
+}
+
+.large-tiles {
+  height: calc(100% - 132.5px);
+  width: 80%;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.small-tiles {
+  height: auto; /* Video height + 10px padding either side */
+  width: 80%;
+  /* display: flex; */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}

@@ -1,0 +1,51 @@
+.app {
+  background-color: #17171b;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+.transparent-completely-leave-video-chat-button {
+  display: none;
+}
+
+.room-name-row {
+  height: 40px;
+  width: 100%;
+  position: relative;
+  background-color: #1C1C1C;
+  border-top: 1px solid #3C3C3C;
+  border-bottom: 1px solid #3C3C3C;
+}
+
+.public-room {
+  height: auto;
+  width: 50%;
+  position: absolute;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.8rem;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+}
+
+.private-room {
+  height: auto;
+  width: 50%;
+  font-size: 0.8rem;
+  position: absolute;
+  text-align: center;
+  font-weight: 500;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(173, 173, 173);
+}
+
+.click-active:hover {
+    cursor: pointer;
+}
