@@ -9,13 +9,18 @@
  * See https://docs.daily.co/reference#create-room for more information on how
  * to use the Daily.co REST API to create rooms.
  */
-async function createRoom() {
+async function createRoom(is_public) {
     // let response = await fetch(newRoomEndpoint),
     //     room = await response.json();
     // return room;
 
     // Comment out the above and uncomment the below, using your own URL
-    return { url: "https://onfour_test.daily.co/hello" };
+    if (is_public) {
+        return { url: "https://onfour_test.daily.co/hello" };
+    } else {
+        return { url: "https://onfour_test.daily.co/private" };
+    }
+    
 }
 
 export default { createRoom };

@@ -20,14 +20,27 @@ export default function VideoChatApp() {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
+  const [isPublic, setIsPublic] = useState(true);
 
   /**
    * Creates a new call room.
    */
-  const createCall = useCallback(() => {
+  const createPublicCall = useCallback(() => {
     setAppState(STATE_CREATING);
     return api
-      .createRoom()
+      .createRoom(true)
+      .then(room => room.url)
+      .catch(error => {
+        console.log("Error creating room", error);
+        setRoomUrl(null);
+        setAppState(STATE_IDLE);
+      });
+  }, []);
+
+  const createPrivateCall = useCallback(() => {
+    setAppState(STATE_CREATING);
+    return api
+      .createRoom(false)
       .then(room => room.url)
       .catch(error => {
         console.log("Error creating room", error);
@@ -184,8 +197,34 @@ export default function VideoChatApp() {
    */
   const enableStartButton = appState === STATE_IDLE;
 
+  const switchToPublicVideoChat = () => {
+    if (document.getElementById("public-room")) {
+      document.getElementById("public-room").style.color = "white";
+      document.getElementById("private-room").style.color = "rgb(173, 173, 173)";
+      setIsPublic(true);
+      startLeavingCall();
+    }
+  };
+
+  const switchToPrivateVideoChat = () => {
+    if (document.getElementById("public-room")) {
+      document.getElementById("public-room").style.color = "rgb(173, 173, 173)";
+      document.getElementById("private-room").style.color = "white";
+      setIsPublic(false);
+      startLeavingCall();
+    }
+  };
+
   return (
     <div className="app" id="video-chat-main">
+      <div className="room-name-row">
+        <div className="public-room click-active" id="public-room" onClick={switchToPublicVideoChat}>
+          PUBLIC
+        </div>
+        <div className="private-room click-active" id="private-room" onClick={switchToPrivateVideoChat}>
+          PRIVATE
+        </div>
+      </div>
       {showCall ? (
         // NOTE: for an app this size, it's not obvious that using a Context
         // is the best choice. But for larger apps with deeply-nested components
@@ -206,12 +245,23 @@ export default function VideoChatApp() {
           />
         </CallObjectContext.Provider>
       ) : (
-        <StartButton
-          disabled={!enableStartButton}
-          onClick={() => {
-            createCall().then(url => startJoiningCall(url));
-          }}
-        />
+        <div>
+          {isPublic ? (
+            <StartButton
+              disabled={!enableStartButton}
+              onClick={() => {
+                createPublicCall().then(url => startJoiningCall(url));
+              }}
+            />
+          ) : (
+            <StartButton
+              disabled={!enableStartButton}
+              onClick={() => {
+                createPrivateCall().then(url => startJoiningCall(url));
+              }}
+            />
+          )}
+        </div>
       )}
     </div>
   );

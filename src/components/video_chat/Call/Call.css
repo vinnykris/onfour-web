@@ -1,7 +1,8 @@
 .call {
   position: relative; /* To make it a "positioned" container so children layout works */
-  height: calc(100% - 60px); /* Space for the tray */
+  height: calc(100% - 100px); /* Space for the tray */
   display: flex;
+  overflow: auto;
 }
 
 .large-tiles {

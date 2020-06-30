@@ -1,5 +1,6 @@
 import React from "react";
 import "./CallMessage.css";
+import { Grid, Row, Col } from "../../grid";
 
 /**
  * Props:
@@ -9,9 +10,17 @@ import "./CallMessage.css";
  */
 export default function CallMessage(props) {
   return (
-    <div className={"call-message" + (props.isError ? " error" : "")}>
-      <p className="call-message-header">{props.header}</p>
-      <p>{props.detail}</p>
-    </div>
+    <Grid className={"call-message" + (props.isError ? " error" : "")}>
+      <Row className="call-message-container">
+        <Col className="call-message-container">
+          <Row>
+            <div className="call-message-header">{props.header}</div>
+          </Row>
+          <Row>
+            <div className="call-message-content">{props.detail}</div>
+          </Row>
+        </Col>
+      </Row>
+    </Grid>
   );
 }
