@@ -94,7 +94,7 @@ export const getUpcomingShows = async (width, username) => {
 };
 
 // Asynchronous function to get list of videos from database
-export const getArchiveInfo = async () => {
+export const getMemories = async (username) => {
   var archive_videos = [];
   // Calling the API, using async and await is necessary
   const info = await API.graphql(graphqlOperation(queries.list_past_concerts));
