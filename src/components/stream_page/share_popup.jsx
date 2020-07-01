@@ -4,6 +4,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 import "./popup_styles.scss";
 
+import { Analytics } from "aws-amplify";
+
 const SharePopup = ({ show }) => {
   const [tooltip_text, setTooltipText] = useState("");
 
@@ -13,7 +15,9 @@ const SharePopup = ({ show }) => {
   }, [show]);
 
   // If copy to clipboard button is clicked, change tooltip text and copy stream page link
+  // Record analytics for click as well
   const copyToClipboard = () => {
+    Analytics.record({ name: "copyClipboardShareClicked" });
     navigator.clipboard.writeText("https://onfour.live/stream");
     setTooltipText("Copied!");
   };
@@ -25,6 +29,7 @@ const SharePopup = ({ show }) => {
           <ul className="social-list">
             <li>
               <a
+                onClick={Analytics.record({ name: "facebookShareClicked" })}
                 href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.onfour.live%2Fstream&amp;src=sdkpreparse"
                 className="fa fa-facebook-official fb-xfbml-parse-ignore"
                 target="_blank"
@@ -35,6 +40,7 @@ const SharePopup = ({ show }) => {
             </li>
             <li>
               <a
+                onClick={Analytics.record({ name: "twitterShareClicked" })}
                 className="fa fa-twitter twitter-share-button"
                 target="_blank"
                 rel="noopener noreferrer"
