@@ -104,14 +104,14 @@ export default function Tray(props) {
         highlighted={isMicMuted}
         onClick={toggleMic}
       />
-      {DailyIframe.supportedBrowser().supportsScreenShare && (
+      {/* {DailyIframe.supportedBrowser().supportsScreenShare && (
         <TrayButton
           type={TYPE_SCREEN}
           disabled={props.disabled}
           highlighted={isSharingScreen}
           onClick={toggleSharingScreen}
         />
-      )}
+      )} */}
       <TrayButton
         type={TYPE_LEAVE}
         disabled={props.disabled}

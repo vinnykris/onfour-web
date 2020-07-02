@@ -703,12 +703,13 @@
 
 .controll-toolbar-button {
   font-size: 1.5rem;
-    padding: 10px;
-    position: absolute;
-    left: 50%;
-    border-radius: 5px;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  color: white;
+  padding: 10px;
+  position: absolute;
+  left: 50%;
+  border-radius: 5px;
+  top: 50%;
+  transform: translate(-50%, -50%);
   &:hover {
     cursor: pointer;
     color: white;

@@ -18,7 +18,7 @@ async function createRoom(is_public) {
     if (is_public) {
         return { url: "https://onfour_test.daily.co/hello" };
     } else {
-        return { url: "https://onfour_test.daily.co/private" };
+        return { url: "https://onfour_test.daily.co/bar" };
     }
     
 }
