@@ -32,6 +32,8 @@ const RegisterMobile = ({ toggleLogin }) => {
   const [name, setName] = useState(""); // Tracks user's first name after successful registration
   const [checked, setChecked] = useState(true); // Tracks whether the subscribe to email list serve box is checked
   const [is_processing, setProcessing] = useState(false); // Tracks whether user clicked register or not
+  const [pin, setPin] = useState(""); // Tracks user's verification code
+  const [auto_signup, setAutoSignUp] = useState(false); // Tracks if user is being auto logged in
 
   // Function that occurs after the user clicks the submit button to sign up
   const registerSubmit = (event) => {
@@ -77,14 +79,12 @@ const RegisterMobile = ({ toggleLogin }) => {
       } else {
         Auth.signUp(signup_payload)
           .then((data) => registerUser())
-          .catch(
-            (err) => {
-              setProcessing(false);
-              setError(err.message);
-              setPassword("");
-              setRepeatPassword("");
-            }
-          );
+          .catch((err) => {
+            setProcessing(false);
+            setError(err.message);
+            setPassword("");
+            setRepeatPassword("");
+          });
       }
     }
     // If the password is not long enough, display a message for the user
@@ -107,7 +107,6 @@ const RegisterMobile = ({ toggleLogin }) => {
         } else {
           setProcessing(false);
           setError("Email already exists.");
-          // cleanupForm();
         }
       });
     };
@@ -130,20 +129,9 @@ const RegisterMobile = ({ toggleLogin }) => {
     // Function that is called when the mutation is run successfully
     const successfulSignUp = () => {
       subscribeUser();
-      cleanupForm();
+      setName(first);
       setSuccess(true);
       setError("");
-    };
-
-    // Function that cleans up all of the fields in the form
-    const cleanupForm = () => {
-      setName(first);
-      setFirst("");
-      setLast("");
-      setEmail("");
-      setUsername("");
-      setPassword("");
-      setRepeatPassword("");
     };
 
     // Function that store's the user's email in an email list database if the user
@@ -157,6 +145,31 @@ const RegisterMobile = ({ toggleLogin }) => {
         );
       }
     };
+  };
+
+  // Function that cleans up all of the fields in the form
+  const cleanupForm = () => {
+    setAutoSignUp(true);
+    setFirst("");
+    setLast("");
+    setEmail("");
+    setUsername("");
+    setPassword("");
+    setRepeatPassword("");
+    window.location.reload();
+  };
+
+  const registerSubmitPin = (event) => {
+    event.preventDefault();
+    Auth.confirmSignUp(username, pin)
+      .then((data) => autoSignIn())
+      .catch((err) => setError(err.message));
+  };
+
+  const autoSignIn = () => {
+    Auth.signIn(username, password)
+      .then((data) => cleanupForm())
+      .catch((err) => setError(err.message));
   };
 
   return (
@@ -177,10 +190,59 @@ const RegisterMobile = ({ toggleLogin }) => {
             {(() => {
               if (success) {
                 return (
-                  <h4 className="sign-up-message">
-                    Welcome {name}. <br></br>Please confirm your email before
-                    signing in!
-                  </h4>
+                  <div>
+                    {auto_signup ? (
+                      <div className="login-loader-container">
+                        <PulseLoader
+                          sizeUnit={"px"}
+                          size={15}
+                          color={"#7b6dac"}
+                          loading={auto_signup}
+                        />
+                      </div>
+                    ) : (
+                      <div>
+                        <h5 className="sign-up-message">
+                          Welcome {name}. Please provide the verification code
+                          sent to your email to complete registration!
+                        </h5>
+                        <form
+                          className="register-form"
+                          action="/"
+                          id="register-pin"
+                          onSubmit={registerSubmitPin}
+                        >
+                          <Row>
+                            <label className="label-text" for="email_slot">
+                              Verification Code*
+                            </label>
+                          </Row>
+                          <Row>
+                            <input
+                              className="register-input"
+                              type="pin"
+                              name="pin"
+                              value={pin}
+                              id="pin_slot"
+                              onChange={(event) => setPin(event.target.value)}
+                              required
+                            />
+                          </Row>
+                          <br></br>
+                          <div style={{ color: "red" }}>{error}</div>
+                          <br></br>
+                          <button
+                            className="register-verification-submit-button"
+                            type="submit"
+                            form="register-pin"
+                            value="Submit"
+                          >
+                            COMPLETE REGISTRATION
+                          </button>
+                        </form>
+                      </div>
+                    )}
+                  </div>
                 );
               } else {
                 return (
@@ -195,182 +257,195 @@ const RegisterMobile = ({ toggleLogin }) => {
                         />
                       </div>
                     ) : (
-                    <form
-                      className="register-form"
-                      action="/"
-                      id="register"
-                      onSubmit={registerSubmit}
-                    >
-                      <Row>
-                        <Col size={1}>
-                          <label className="label-text-left" for="first_slot">
-                            First Name*
-                          </label>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col size={1}>
+                      <form
+                        className="register-form"
+                        action="/"
+                        id="register"
+                        onSubmit={registerSubmit}
+                      >
+                        <Row>
+                          <Col size={1}>
+                            <label className="label-text-left" for="first_slot">
+                              First Name*
+                            </label>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col size={1}>
+                            <input
+                              className="register-input"
+                              name="first"
+                              required
+                              id="first_slot"
+                              value={first}
+                              onChange={(event) => setFirst(event.target.value)}
+                            />
+                          </Col>
+                        </Row>
+                        <br></br>
+                        <Row>
+                          <Col size={1}>
+                            <label className="label-text-left" for="last_slot">
+                              Last Name*
+                            </label>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col size={1}>
+                            <input
+                              className="register-input"
+                              id="last_slot"
+                              name="last"
+                              value={last}
+                              onChange={(event) => setLast(event.target.value)}
+                              required
+                            />
+                          </Col>
+                        </Row>
+                        <br></br>
+                        <Row>
+                          <Col size={1}>
+                            <label
+                              className="label-text-left"
+                              for="username_slot"
+                            >
+                              Username*
+                            </label>
+                          </Col>
+                        </Row>
+                        <Row>
                           <input
                             className="register-input"
-                            name="first"
-                            required
-                            id="first_slot"
-                            value={first}
-                            onChange={(event) => setFirst(event.target.value)}
-                          />
-                        </Col>
-                      </Row>
-                      <br></br>
-                      <Row>
-                        <Col size={1}>
-                          <label className="label-text-left" for="last_slot">
-                            Last Name*
-                          </label>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col size={1}>
-                          <input
-                            className="register-input"
-                            id="last_slot"
-                            name="last"
-                            value={last}
-                            onChange={(event) => setLast(event.target.value)}
-                            required
-                          />
-                        </Col>
-                      </Row>
-                      <br></br>
-                      <Row>
-                        <Col size={1}>
-                          <label className="label-text-left" for="username_slot">
-                            Username*
-                          </label>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <input
-                          className="register-input"
-                          type="username"
-                          name="username"
-                          value={username}
-                          id="username_slot"
-                          onChange={(event) => setUsername(event.target.value)}
-                          required
-                        />
-                      </Row>
-                      <br></br>
-                      <Row>
-                        <Col size={1}>
-                          <label className="label-text-left" for="email_slot">
-                            Email*
-                          </label>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <input
-                          className="register-input"
-                          type="email"
-                          name="email"
-                          value={email}
-                          id="email_slot"
-                          onChange={(event) => setEmail(event.target.value)}
-                          required
-                        />
-                      </Row>
-                      <br></br>
-                      <Row>
-                        <Col size={1}>
-                          <label className="label-text-left" for="password_slot">
-                            Password*
-                          </label>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col size={1}>
-                          <input
-                            className="register-input"
-                            type="password"
-                            name="password"
-                            value={password}
-                            id="password_slot"
-                            onChange={(event) => setPassword(event.target.value)}
-                            required
-                          />
-                        </Col>
-                      </Row>
-                      <PasswordStrengthBar password={password} minLength={8} />
-                      <Row>
-                        <Col size={1}>
-                          <label
-                            className="label-text-left"
-                            for="password_r_slot"
-                          >
-                            Repeat Password*
-                          </label>
-                        </Col>
-                      </Row>
-
-                      <Row>
-                        <Col size={1}>
-                          <input
-                            className="register-input"
-                            type="password"
-                            name="password"
-                            value={repeat_password}
-                            id="password_r_slot"
+                            type="username"
+                            name="username"
+                            value={username}
+                            id="username_slot"
                             onChange={(event) =>
-                              setRepeatPassword(event.target.value)
+                              setUsername(event.target.value)
                             }
                             required
                           />
-                        </Col>
-                      </Row>
-                      <br></br>
-                      <Row>
-                        <Col size={0.5}>
+                        </Row>
+                        <br></br>
+                        <Row>
+                          <Col size={1}>
+                            <label className="label-text-left" for="email_slot">
+                              Email*
+                            </label>
+                          </Col>
+                        </Row>
+                        <Row>
                           <input
-                            className="email-unsubscribe-checkbox"
-                            name="isGoing"
-                            type="checkbox"
-                            checked={checked}
-                            onChange={(event) => setChecked(!checked)}
+                            className="register-input"
+                            type="email"
+                            name="email"
+                            value={email}
+                            id="email_slot"
+                            onChange={(event) => setEmail(event.target.value)}
+                            required
                           />
-                        </Col>
-                        <Col size={10}>
-                          <label className="email-unsubscribe-text">
-                            I want to receive email updates about future Onfour
-                            shows.
-                          </label>
-                        </Col>
-                      </Row>
-                      <br></br>
-                      <div style={{ color: "red" }}>{error}</div>
-                      <br></br>
-                      <button
-                        className="register-submit-button"
-                        type="submit"
-                        form="register"
-                        value="Submit"
-                      >
-                        SIGN UP
-                      </button>
-                      <br></br>
-                      <Row>
-                        <Col size={1}>
-                          <p className="label-text login-prompt">
-                            Already have an account? Click{" "}
-                            <span
-                              className="register-prompt"
-                              onClick={toggleLogin}
+                        </Row>
+                        <br></br>
+                        <Row>
+                          <Col size={1}>
+                            <label
+                              className="label-text-left"
+                              for="password_slot"
                             >
-                              here
-                            </span>{" "}
-                            to log in.
-                          </p>
-                        </Col>
-                      </Row>
-                    </form>
+                              Password*
+                            </label>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col size={1}>
+                            <input
+                              className="register-input"
+                              type="password"
+                              name="password"
+                              value={password}
+                              id="password_slot"
+                              onChange={(event) =>
+                                setPassword(event.target.value)
+                              }
+                              required
+                            />
+                          </Col>
+                        </Row>
+                        <PasswordStrengthBar
+                          password={password}
+                          minLength={8}
+                        />
+                        <Row>
+                          <Col size={1}>
+                            <label
+                              className="label-text-left"
+                              for="password_r_slot"
+                            >
+                              Repeat Password*
+                            </label>
+                          </Col>
+                        </Row>
+
+                        <Row>
+                          <Col size={1}>
+                            <input
+                              className="register-input"
+                              type="password"
+                              name="password"
+                              value={repeat_password}
+                              id="password_r_slot"
+                              onChange={(event) =>
+                                setRepeatPassword(event.target.value)
+                              }
+                              required
+                            />
+                          </Col>
+                        </Row>
+                        <br></br>
+                        <Row>
+                          <Col size={0.5}>
+                            <input
+                              className="email-unsubscribe-checkbox"
+                              name="isGoing"
+                              type="checkbox"
+                              checked={checked}
+                              onChange={(event) => setChecked(!checked)}
+                            />
+                          </Col>
+                          <Col size={10}>
+                            <label className="email-unsubscribe-text">
+                              I want to receive email updates about future
+                              Onfour shows.
+                            </label>
+                          </Col>
+                        </Row>
+                        <br></br>
+                        <div style={{ color: "red" }}>{error}</div>
+                        <br></br>
+                        <button
+                          className="register-submit-button"
+                          type="submit"
+                          form="register"
+                          value="Submit"
+                        >
+                          SIGN UP
+                        </button>
+                        <br></br>
+                        <Row>
+                          <Col size={1}>
+                            <p className="label-text login-prompt">
+                              Already have an account? Click{" "}
+                              <span
+                                className="register-prompt"
+                                onClick={toggleLogin}
+                              >
+                                here
+                              </span>{" "}
+                              to log in.
+                            </p>
+                          </Col>
+                        </Row>
+                      </form>
                     )}
                   </div>
                 );
