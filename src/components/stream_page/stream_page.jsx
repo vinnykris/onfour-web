@@ -104,14 +104,14 @@ const StreamPage = () => {
           if (!scrollCheck_top) {
             // if the scroll is not larger than threshold to increase height
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 - 50 + "px";
+              (width / 100) * 41  + "px";
           } else if (scrollCheck_bottom) {
             // is scroll is larger than lower threshold but less than higher threshold
             document.getElementById("chat_main").style.height =
-              window.scrollY - 176 + height - 50 + "px";
+              window.scrollY - 176 + height + "px";
           } else {
             document.getElementById("chat_main").style.height =
-              height - 50 + "px";
+              height + "px";
           }
         }
       } else {
@@ -120,13 +120,13 @@ const StreamPage = () => {
           const scrollCheck_bottom = window.scrollY < 176;
           if (scrollCheck_top) {
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 - 50 + "px";
+              (width / 100) * 41 + "px";
           } else if (scrollCheck_bottom) {
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 - 50 + window.scrollY + "px";
+              (width / 100) * 41 + window.scrollY + "px";
           } else {
             document.getElementById("chat_main").style.height =
-              height - 50 + "px";
+              height + "px";
           }
         }
       }
@@ -667,7 +667,7 @@ const StreamPage = () => {
                         chatStatus={chatStatus}
                         setViewers={getViewers}
                       />
-                      <VideoChat></VideoChat>
+                      <VideoChat user_name={username ? username : "GUEST"}></VideoChat>
                       <Row className="controll-toolbar-row">
                         <Col size="1" className="controll-toolbar-col">
                           <div className="controll-toolbar-button-container button-commenting-o" onClick={turnOnChat}>

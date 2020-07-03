@@ -744,8 +744,10 @@
   background-color: #17171b;
   border-top: 1px solid #3C3C3C;
   height: 50px;
-  position: relative;
-  display: flex;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  /* display: flex; */
   padding: 0px 5px 0px 5px;
 }
 

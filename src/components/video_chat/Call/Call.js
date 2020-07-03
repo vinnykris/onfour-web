@@ -39,6 +39,7 @@ export default function Call() {
         type: PARTICIPANTS_CHANGE,
         participants: callObject.participants()
       });
+      console.log(callObject.participants());
     }
 
     // Use initial state

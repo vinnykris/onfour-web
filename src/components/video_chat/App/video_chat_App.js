@@ -8,6 +8,7 @@ import CallObjectContext from "../CallObjectContext";
 import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from "../urlUtils";
 import DailyIframe from "@daily-co/daily-js";
 import { logDailyEvent } from "../logUtils";
+import getToken from "../getToken";
 
 const STATE_IDLE = "STATE_IDLE";
 const STATE_CREATING = "STATE_CREATING";
@@ -15,8 +16,9 @@ const STATE_JOINING = "STATE_JOINING";
 const STATE_JOINED = "STATE_JOINED";
 const STATE_LEAVING = "STATE_LEAVING";
 const STATE_ERROR = "STATE_ERROR";
+const owner_name = ["takoyuxin", "onfour-spencer", "onfour-vinod", "alilyen", "onfour-bar"];
 
-export default function VideoChatApp() {
+export default function VideoChatApp({user_name}) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
@@ -58,12 +60,37 @@ export default function VideoChatApp() {
    * be done with the call object for a while and you're no longer listening to its
    * events.
    */
-  const startJoiningCall = useCallback(url => {
-    const newCallObject = DailyIframe.createCallObject();
+  const startJoiningPublicCall = useCallback(url => {
+    const newCallObject = DailyIframe.createCallObject({
+      userName: user_name
+    });
     setRoomUrl(url);
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
     newCallObject.join({ url });
+  }, []);
+
+  const startJoiningPrivateCall = useCallback(async url => {
+    if (owner_name.indexOf(user_name) >=0 ) {
+      const newToken = await getToken(user_name);
+      console.log(newToken);
+      const newCallObject = DailyIframe.createCallObject({
+        userName: user_name,
+        token: newToken
+      });
+      setRoomUrl(url);
+      setCallObject(newCallObject);
+      setAppState(STATE_JOINING);
+      newCallObject.join({ url });
+    } else {
+      const newCallObject = DailyIframe.createCallObject({
+        userName: user_name
+      });
+      setRoomUrl(url);
+      setCallObject(newCallObject);
+      setAppState(STATE_JOINING);
+      newCallObject.join({ url });
+    }
   }, []);
 
   /**
@@ -91,8 +118,13 @@ export default function VideoChatApp() {
    */
   useEffect(() => {
     const url = roomUrlFromPageUrl();
-    url && startJoiningCall(url);
-  }, [startJoiningCall]);
+    url && startJoiningPublicCall(url);
+  }, [startJoiningPublicCall]);
+
+  useEffect(() => {
+    const url = roomUrlFromPageUrl();
+    url && startJoiningPrivateCall(url);
+  }, [startJoiningPrivateCall]);
 
   /**
    * Update the page's URL to reflect the active call when roomUrl changes.
@@ -250,14 +282,14 @@ export default function VideoChatApp() {
             <StartButton
               disabled={!enableStartButton}
               onClick={() => {
-                createPublicCall().then(url => startJoiningCall(url));
+                createPublicCall().then(url => startJoiningPublicCall(url));
               }}
             />
           ) : (
             <StartButton
               disabled={!enableStartButton}
               onClick={() => {
-                createPrivateCall().then(url => startJoiningCall(url));
+                createPrivateCall().then(url => startJoiningPrivateCall(url));
               }}
             />
           )}
