@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import moment from 'moment';
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -25,7 +26,7 @@ export const getConcertInfo = async (width) => {
   );
 
   const info_list = info.data.listFutureConcerts.items; // Stores the items in database
-  info_list.sort((a, b) => a.timePassed - b.timePassed);
+  info_list.sort((a, b) => moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time)));
   // console.log(info_list);
   const month_map = {
     "01": "JAN",
@@ -41,22 +42,10 @@ export const getConcertInfo = async (width) => {
     "11": "NOV",
     "12": "DEC",
   };
-  const day_map = {
-    Sat: "Sunday",
-    Sun: "Monday",
-    Mon: "Tuesday",
-    Tue: "Wednesday",
-    Wed: "Thursday",
-    Thu: "Friday",
-    Fri: "Saturday",
-  };
 
   // Iterate through each element in the list and add the created
   // FeaturedContent to concerts
   info_list.forEach((data) => {
-    const day_in_week = new Date(data.date).toString();
-    const hour = parseInt(data.time.slice(0, 2));
-    const minutes = data.time.slice(2, 5);
     const time_left = +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
     const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
 
@@ -65,23 +54,18 @@ export const getConcertInfo = async (width) => {
         img={data.url}
         name={data.artist}
         concert_name={data.concertName}
-        week_day={day_map[day_in_week.slice(0, 3)]}
+        week_day={moment(data.date).format('dddd')}
         date={
           data.date.slice(8, 10) +
           " " +
           month_map[data.date.slice(5, 7)] +
           " " +
           data.date.slice(0, 4)
+          // moment(data.date).format('LL')
         }
         month={month_map[data.date.slice(5, 7)]}
         day={data.date.slice(8, 10)}
-        time={
-          hour > 12
-            ? (hour - 12).toString() + minutes + "PM"
-            : hour < 12
-            ? data.time.slice(0, 5) + "AM"
-            : data.time.slice(0, 5) + "PM"
-        }
+        time={moment(data.time, "HH:mm:ss").format("h:mm A")}
         price={data.price}
         description={data.description.toString()}
         days_left={days_left}

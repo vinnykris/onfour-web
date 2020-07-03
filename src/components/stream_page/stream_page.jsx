@@ -70,6 +70,8 @@ const StreamPage = () => {
   const emailSubmit = (event) => {
     event.preventDefault();
 
+    Analytics.record({ name: "emailSubscribeClicked" });
+
     const payload = {
       email: email,
       paid: false,
@@ -269,8 +271,9 @@ const StreamPage = () => {
   // Social media sharing
   const [show_popup, setShowPopup] = useState(false); // If popup should be shown
 
-  // Opens custom popup
+  // Opens custom popup and records analytics for share button being clicked
   const openPopup = () => {
+    Analytics.record({ name: "shareButtonClicked" });
     setShowPopup(true);
   };
 
@@ -386,6 +389,9 @@ const StreamPage = () => {
                           <Row className="stream-share-row">
                             <div className="feedback-container">
                               <a
+                                onClick={Analytics.record({
+                                  name: "sendFeedbackClicked",
+                                })}
                                 href="https://forms.gle/5rP8nXznckGCuRE77"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -454,8 +460,8 @@ const StreamPage = () => {
                       <p className="donate-description">Credit Card</p>
                       {tip_based ? (
                         <p className="donate-subdescription">
-                          Tip {artist_name} via credit card. Your card information
-                          will not be stored anywhere.
+                          Tip {artist_name} via credit card. Your card
+                          information will not be stored anywhere.
                         </p>
                       ) : (
                         <p className="donate-subdescription">
@@ -482,8 +488,8 @@ const StreamPage = () => {
                       <p className="donate-description">Venmo</p>
                       {tip_based ? (
                         <p className="donate-subdescription">
-                          @SpencerAmer from onfour will ensure your tip is sent
-                          to {artist_name}.
+                          onfour (@SpencerAmer) will ensure your tip is sent to{" "}
+                          {artist_name}.
                         </p>
                       ) : (
                         <p className="donate-subdescription">
@@ -663,43 +669,53 @@ const StreamPage = () => {
                       />
                       <VideoChat></VideoChat>
                       <Row className="controll-toolbar-row">
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="chat-circle"
-                            className="fa fa-commenting-o controll-toolbar-button selected-circle"
-                            onClick={turnOnChat}
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-commenting-o" onClick={turnOnChat}>
+                            <i
+                              id="chat-circle"
+                              className="fa fa-commenting-o controll-toolbar-button selected-circle"
+                            ></i>
+                          </div>
                         </Col>
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="video-circle"
-                            className="fa fa-video-camera controll-toolbar-button"
-                            onClick={turnOnVideoChat}
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-video-camera" onClick={turnOnVideoChat}>
+                            <i
+                              id="video-circle"
+                              className="fa fa-video-camera controll-toolbar-button"
+                            ></i>
+                          </div>
                         </Col>
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="placeholder1"
-                            className="fa fa-glass controll-toolbar-button"
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-glass">
+                            <i
+                              id="placeholder1"
+                              className="fa fa-glass controll-toolbar-button"
+                            ></i>
+                          </div>
                         </Col>
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="placeholder2"
-                            className="fa fa-smile-o controll-toolbar-button"
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-smile-o">
+                            <i
+                              id="placeholder2"
+                              className="fa fa-smile-o controll-toolbar-button"
+                            ></i>
+                          </div>
                         </Col>
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="placeholder3"
-                            className="fa fa-hand-rock-o controll-toolbar-button"
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-hand-rock-o">
+                            <i
+                              id="placeholder3"
+                              className="fa fa-hand-rock-o controll-toolbar-button"
+                            ></i>
+                          </div>
                         </Col>
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="placeholder4"
-                            className="fa fa-heart controll-toolbar-button"
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-heart">
+                            <i
+                              id="placeholder4"
+                              className="fa fa-heart controll-toolbar-button"
+                            ></i>
+                          </div>
                         </Col>
                       </Row>
                     </div>
