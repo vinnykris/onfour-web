@@ -1,6 +1,12 @@
 // React Imports
-import React, { useState } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  withRouter,
+} from "react-router-dom";
+// import { withRouter } from "react-router";
 
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
@@ -11,31 +17,38 @@ import { Analytics } from "aws-amplify";
 
 // Component Imports
 import BioModal from "./bio_modal";
+import Concert from "../concert_page/concert";
 
 // FeaturedContent is the unit element for an upcoming concert
-const FeaturedContent = ({
-  id,
-  img,
-  name,
-  concert_name,
-  week_day,
-  date,
-  month,
-  day,
-  time,
-  price,
-  description,
-  days_left,
-  width,
-  genre,
-}) => {
+const FeaturedContent = (
+  //   {
+  //   id,
+  //   img,
+  //   name,
+  //   concert_name,
+  //   week_day,
+  //   date,
+  //   month,
+  //   day,
+  //   time,
+  //   price,
+  //   description,
+  //   days_left,
+  //   width,
+  //   genre,
+  // }
+  props
+) => {
+  useEffect(() => {
+    console.log(props);
+  }, []);
   const [show_more_info, setClickedInfo] = useState(false); // Determines whether to show the popup for musician's bio or not
 
   // This function gets called when the MORE INFO button is clicked
   // and it sets the show_more_info to true
   const open_info = () => {
     setClickedInfo(true);
-    const event_name = (name + date).replace(/\s/g, ""); // unique identifier for event
+    const event_name = (props.name + props.date).replace(/\s/g, ""); // unique identifier for event
     Analytics.record({ name: event_name }); // record analytics for specific "MORE INFO" click
   };
 
@@ -78,11 +91,23 @@ const FeaturedContent = ({
           <p className="RSVP-text">MORE INFO</p>
         )}
       </Row> */}
-      <Link to={`/${concert_name}`}>
+
+      <Link
+        to={{
+          pathname: `/upcoming/${props.id}`,
+          state: {
+            concert_info: props,
+          },
+        }}
+      >
         <Grid className="featured-content" onClick={open_info}>
           <Row>
             <Col size={3} className="poster-container">
-              <img className="concert-poster" src={img} alt="content-img"></img>
+              <img
+                className="concert-poster"
+                src={props.img}
+                alt="content-img"
+              ></img>
               {/* <div className="poster-tag">
               <h4 className="poster-text">{month}</h4>
               <h1 className="poster-text">{day}</h1>
@@ -93,19 +118,19 @@ const FeaturedContent = ({
           <Row>
             <Col size={3} className="show-content-bar">
               <Row>
-                <div className="genre-box">{genre.toUpperCase()}</div>
+                <div className="genre-box">{props.genre.toUpperCase()}</div>
               </Row>
               <Row>
                 <Col size={3}>
                   <p className="artist-name">
-                    {name} - {concert_name}
+                    {props.name} - {props.concert_name}
                   </p>
                 </Col>
               </Row>
               <Row className="time-row">
                 <Col size={3}>
                   <p className="time">
-                    {week_day} | {date} | {time} EST{" "}
+                    {props.week_day} | {props.date} | {props.time} EST{" "}
                   </p>
                 </Col>
               </Row>
