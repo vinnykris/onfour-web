@@ -1,10 +1,12 @@
 .app {
-  background-color: #17171b;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
   display: none;
+  background-color: #17171b;
+  position: absolute;
+  overflow: hidden;
+  /* height: 100%; */
+  top: 0px;
+  bottom: 50px;
+  width: 100%;
 }
 
 .transparent-completely-leave-video-chat-button {

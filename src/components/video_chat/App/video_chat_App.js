@@ -16,7 +16,7 @@ const STATE_JOINING = "STATE_JOINING";
 const STATE_JOINED = "STATE_JOINED";
 const STATE_LEAVING = "STATE_LEAVING";
 const STATE_ERROR = "STATE_ERROR";
-const owner_name = ["takoyuxin", "onfour-spencer", "onfour-vinod", "alilyen", "onfour-bar"];
+const owner_name = ["takoyuxin", "onfour-yuxin", "onfour-spencer", "onfour-vinod", "alilyen", "onfour-bar"];
 
 export default function VideoChatApp({user_name}) {
   const [appState, setAppState] = useState(STATE_IDLE);
@@ -118,12 +118,18 @@ export default function VideoChatApp({user_name}) {
    */
   useEffect(() => {
     const url = roomUrlFromPageUrl();
-    url && startJoiningPublicCall(url);
+    if (url === "https://onfour_test.daily.co/hello") {
+      url && startJoiningPublicCall(url);
+      switchToPublicVideoChat();
+    }
   }, [startJoiningPublicCall]);
 
   useEffect(() => {
     const url = roomUrlFromPageUrl();
-    url && startJoiningPrivateCall(url);
+    if (url === "https://onfour_test.daily.co/bar") {
+      url && startJoiningPrivateCall(url);
+      switchToPrivateVideoChat();
+    }
   }, [startJoiningPrivateCall]);
 
   /**
