@@ -1,5 +1,6 @@
 // React Imports
 import React, { useState } from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
@@ -13,6 +14,7 @@ import BioModal from "./bio_modal";
 
 // FeaturedContent is the unit element for an upcoming concert
 const FeaturedContent = ({
+  id,
   img,
   name,
   concert_name,
@@ -45,7 +47,7 @@ const FeaturedContent = ({
 
   return (
     <div className="single-element">
-      {/* POP-UP FOR MUSICIAN'S BIO SECTION */}
+      {/* POP-UP FOR MUSICIAN'S BIO SECTION
       {show_more_info ? (
         <div className="popup-artist-info">
           <form className="concert-form">
@@ -75,40 +77,42 @@ const FeaturedContent = ({
         ) : (
           <p className="RSVP-text">MORE INFO</p>
         )}
-      </Row>
-      <Grid className="featured-content" onClick={open_info}>
-        <Row>
-          <Col size={3} className="poster-container">
-            <img className="concert-poster" src={img} alt="content-img"></img>
-            {/* <div className="poster-tag">
+      </Row> */}
+      <Link to={`/${concert_name}`}>
+        <Grid className="featured-content" onClick={open_info}>
+          <Row>
+            <Col size={3} className="poster-container">
+              <img className="concert-poster" src={img} alt="content-img"></img>
+              {/* <div className="poster-tag">
               <h4 className="poster-text">{month}</h4>
               <h1 className="poster-text">{day}</h1>
             </div> */}
-            {/* <div className="genre-tag">{genre}</div> */}
-          </Col>
-        </Row>
-        <Row>
-          <Col size={3} className="show-content-bar">
-            <Row>
-              <div className="genre-box">{genre.toUpperCase()}</div>
-            </Row>
-            <Row>
-              <Col size={3}>
-                <p className="artist-name">
-                  {name} - {concert_name}
-                </p>
-              </Col>
-            </Row>
-            <Row className="time-row">
-              <Col size={3}>
-                <p className="time">
-                  {week_day} | {date} | {time} EST{" "}
-                </p>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Grid>
+              {/* <div className="genre-tag">{genre}</div> */}
+            </Col>
+          </Row>
+          <Row>
+            <Col size={3} className="show-content-bar">
+              <Row>
+                <div className="genre-box">{genre.toUpperCase()}</div>
+              </Row>
+              <Row>
+                <Col size={3}>
+                  <p className="artist-name">
+                    {name} - {concert_name}
+                  </p>
+                </Col>
+              </Row>
+              <Row className="time-row">
+                <Col size={3}>
+                  <p className="time">
+                    {week_day} | {date} | {time} EST{" "}
+                  </p>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
+      </Link>
     </div>
   );
 };
