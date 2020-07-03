@@ -70,6 +70,8 @@ const StreamPage = () => {
   const emailSubmit = (event) => {
     event.preventDefault();
 
+    Analytics.record({ name: "emailSubscribeClicked" });
+
     const payload = {
       email: email,
       paid: false,
@@ -102,14 +104,14 @@ const StreamPage = () => {
           if (!scrollCheck_top) {
             // if the scroll is not larger than threshold to increase height
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 - 50 + "px";
+              (width / 100) * 41  + "px";
           } else if (scrollCheck_bottom) {
             // is scroll is larger than lower threshold but less than higher threshold
             document.getElementById("chat_main").style.height =
-              window.scrollY - 176 + height - 50 + "px";
+              window.scrollY - 176 + height + "px";
           } else {
             document.getElementById("chat_main").style.height =
-              height - 50 + "px";
+              height + "px";
           }
         }
       } else {
@@ -118,13 +120,13 @@ const StreamPage = () => {
           const scrollCheck_bottom = window.scrollY < 176;
           if (scrollCheck_top) {
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 - 50 + "px";
+              (width / 100) * 41 + "px";
           } else if (scrollCheck_bottom) {
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41 - 50 + window.scrollY + "px";
+              (width / 100) * 41 + window.scrollY + "px";
           } else {
             document.getElementById("chat_main").style.height =
-              height - 50 + "px";
+              height + "px";
           }
         }
       }
@@ -269,8 +271,9 @@ const StreamPage = () => {
   // Social media sharing
   const [show_popup, setShowPopup] = useState(false); // If popup should be shown
 
-  // Opens custom popup
+  // Opens custom popup and records analytics for share button being clicked
   const openPopup = () => {
+    Analytics.record({ name: "shareButtonClicked" });
     setShowPopup(true);
   };
 
@@ -386,6 +389,9 @@ const StreamPage = () => {
                           <Row className="stream-share-row">
                             <div className="feedback-container">
                               <a
+                                onClick={Analytics.record({
+                                  name: "sendFeedbackClicked",
+                                })}
                                 href="https://forms.gle/5rP8nXznckGCuRE77"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -454,8 +460,10 @@ const StreamPage = () => {
                       <p className="donate-description">Credit Card</p>
                       {tip_based ? (
                         <p className="donate-subdescription">
+                          
                           Tip {artist_name} via credit card. Your card information
                           will not be stored anywhere.
+
                         </p>
                       ) : (
                         <p className="donate-subdescription">
@@ -482,8 +490,10 @@ const StreamPage = () => {
                       <p className="donate-description">Venmo</p>
                       {tip_based ? (
                         <p className="donate-subdescription">
+                          
                           @SpencerAmer from onfour will ensure your tip is sent
                           to {artist_name}.
+                          
                         </p>
                       ) : (
                         <p className="donate-subdescription">
@@ -661,45 +671,55 @@ const StreamPage = () => {
                         chatStatus={chatStatus}
                         setViewers={getViewers}
                       />
-                      <VideoChat></VideoChat>
+                      <VideoChat user_name={username ? username : "GUEST"}></VideoChat>
                       <Row className="controll-toolbar-row">
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="chat-circle"
-                            className="fa fa-commenting-o controll-toolbar-button selected-circle"
-                            onClick={turnOnChat}
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-commenting-o" onClick={turnOnChat}>
+                            <i
+                              id="chat-circle"
+                              className="fa fa-commenting-o controll-toolbar-button selected-circle"
+                            ></i>
+                          </div>
                         </Col>
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="video-circle"
-                            className="fa fa-video-camera controll-toolbar-button"
-                            onClick={turnOnVideoChat}
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-video-camera" onClick={turnOnVideoChat}>
+                            <i
+                              id="video-circle"
+                              className="fa fa-video-camera controll-toolbar-button"
+                            ></i>
+                          </div>
                         </Col>
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="placeholder1"
-                            className="fa fa-glass controll-toolbar-button"
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-glass">
+                            <i
+                              id="placeholder1"
+                              className="fa fa-glass controll-toolbar-button"
+                            ></i>
+                          </div>
                         </Col>
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="placeholder2"
-                            className="fa fa-smile-o controll-toolbar-button"
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-smile-o">
+                            <i
+                              id="placeholder2"
+                              className="fa fa-smile-o controll-toolbar-button"
+                            ></i>
+                          </div>
                         </Col>
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="placeholder3"
-                            className="fa fa-hand-rock-o controll-toolbar-button"
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-hand-rock-o">
+                            <i
+                              id="placeholder3"
+                              className="fa fa-hand-rock-o controll-toolbar-button"
+                            ></i>
+                          </div>
                         </Col>
-                        <Col size="1" className="controll-toolbar-button-container">
-                          <i
-                            id="placeholder4"
-                            className="fa fa-heart controll-toolbar-button"
-                          ></i>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-heart">
+                            <i
+                              id="placeholder4"
+                              className="fa fa-heart controll-toolbar-button"
+                            ></i>
+                          </div>
                         </Col>
                       </Row>
                     </div>

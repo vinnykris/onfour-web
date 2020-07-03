@@ -42,6 +42,7 @@ export default function Tray(props) {
   const [isCameraMuted, setCameraMuted] = useState(false);
   const [isMicMuted, setMicMuted] = useState(false);
   const [isSharingScreen, setSharingScreen] = useState(false);
+  const [isEnabledActiveSpeaker, setEnableActiveSpeaker] = useState(false);
 
   function toggleCamera() {
     callObject.setLocalVideo(isCameraMuted);
@@ -55,6 +56,12 @@ export default function Tray(props) {
     isSharingScreen
       ? callObject.stopScreenShare()
       : callObject.startScreenShare();
+  }
+
+  function toggleActiveSpeaker() {
+    const negate_value = !isEnabledActiveSpeaker;
+    callObject.setActiveSpeakerMode(negate_value);
+    setEnableActiveSpeaker(negate_value);
   }
 
   function leaveCall() {
@@ -104,14 +111,20 @@ export default function Tray(props) {
         highlighted={isMicMuted}
         onClick={toggleMic}
       />
-      {DailyIframe.supportedBrowser().supportsScreenShare && (
+      <TrayButton
+        type={TYPE_SCREEN}
+        disabled={props.disabled}
+        highlighted={isEnabledActiveSpeaker}
+        onClick={toggleActiveSpeaker}
+      />
+      {/* {DailyIframe.supportedBrowser().supportsScreenShare && (
         <TrayButton
           type={TYPE_SCREEN}
           disabled={props.disabled}
           highlighted={isSharingScreen}
           onClick={toggleSharingScreen}
         />
-      )}
+      )} */}
       <TrayButton
         type={TYPE_LEAVE}
         disabled={props.disabled}

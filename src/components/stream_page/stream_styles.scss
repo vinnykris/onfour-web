@@ -703,39 +703,36 @@
 
 .controll-toolbar-button {
   font-size: 1.5rem;
-    padding: 10px;
-    position: absolute;
-    left: 50%;
-    border-radius: 5px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  &:hover {
-    cursor: pointer;
-    color: white;
-  }
+  color: white;
+  // padding: 10px;
+  position: absolute;
+  left: 50%;
+  // border-radius: 3px;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.fa-video-camera {
-  background-color: #5D5AD4;
-}
-
-.fa-commenting-o {
-  background-color: #9240B9;
-}
-
-.fa-glass {
+.button-video-camera {
   background-color: #47C8C0;
 }
 
-.fa-heart {
+.button-commenting-o {
+  background-color: #9240B9;
+}
+
+.button-glass {
+  background-color: #5D5AD4;
+}
+
+.button-heart {
   background-color: #7BC6DE;
 }
 
-.fa-hand-rock-o {
+.button-hand-rock-o {
   background-color: #B14092;
 }
 
-.fa-smile-o {
+.button-smile-o {
   background-color: #609FDA;
 }
 
@@ -747,12 +744,27 @@
   background-color: #17171b;
   border-top: 1px solid #3C3C3C;
   height: 50px;
-  position: relative;
-  display: flex;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  /* display: flex; */
+  padding: 0px 5px 0px 5px;
+}
+
+.controll-toolbar-col {
+  margin: 3px;
 }
 
 .controll-toolbar-button-container {
   position: relative;
+  padding-top: 100%;
+  border-radius: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
 }
 
 .video-chat-main {
