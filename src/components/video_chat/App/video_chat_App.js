@@ -297,6 +297,7 @@ export default function VideoChatApp({user_name}) {
               onClick={() => {
                 createPrivateCall().then(url => startJoiningPrivateCall(url));
               }}
+              in_crew={owner_name.indexOf(user_name) >=0}
             />
           )}
         </div>
