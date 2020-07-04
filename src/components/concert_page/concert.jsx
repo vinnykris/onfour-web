@@ -12,6 +12,7 @@ import { Analytics } from "aws-amplify";
 import { useEffect } from "react";
 
 // Component Imports
+import CountdownTimer from "../countdown_timer/countdown_timer";
 
 // FeaturedContent is the unit element for an upcoming concert
 const Concert = (props) => {
@@ -33,7 +34,7 @@ const Concert = (props) => {
             </div>
             <div className="concert-logistics">
               <Row>
-                <span>{concert_info.date}</span>
+                <span>{concert_info.formatted_date}</span>
               </Row>
               <Row>
                 <span>{concert_info.time}</span>
@@ -43,11 +44,15 @@ const Concert = (props) => {
               </Row>
             </div>
           </Col>
-          <Col size={2} className="concert-info-col">
+          <Col size={2} className="concert-info-col main-info-col">
             <Row>
               <Col size={1}>
                 <div className="countdown-timer">
-                  <span className="countdown">COUNTDOWN TIMER</span>
+                  {/* <span className="countdown">COUNTDOWN TIMER</span> */}
+                  <CountdownTimer
+                    start_date={concert_info.date}
+                    start_time={concert_info.time}
+                  />
                 </div>
               </Col>
               <Col size={1}>

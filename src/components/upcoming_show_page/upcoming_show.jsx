@@ -10,6 +10,7 @@ import { useWindowDimensions } from "../custom_hooks";
 import { createChunks, formatUpcomingShows } from "../util";
 // Component imports
 import { Grid, Row, Col } from "../grid";
+import CountdownTimer from "../countdown_timer/countdown_timer";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -41,6 +42,7 @@ const UpcomingShowPage = () => {
     const fetchData = async () => {
       // Upcoming shows
       const upcoming_result = await getConcertInfo();
+      console.log(upcoming_result);
       setFormattedConcerts(formatUpcomingShows(upcoming_result, width));
       // setConcertInfo(upcoming_result);
       // setConcerts(createChunks(upcoming_result, 4));

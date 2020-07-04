@@ -14,8 +14,8 @@
 }
 
 .concert-text-container {
-  margin-left: 2%;
-  padding: 6%;
+  //   margin-left: 2%;
+  //   padding: 6%;
 }
 
 .titles {
@@ -27,4 +27,12 @@
   text-align: left;
   color: white;
   white-space: pre-line;
+}
+
+.main-info-col {
+  padding: 0% 5%;
+}
+
+.countdown-timer {
+  float: left;
 }

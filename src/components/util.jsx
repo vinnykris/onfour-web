@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 // Component Imports
 import FeaturedContent from "../components/upcoming_show_page/featured_content";
 import ArchiveVideo from "../components/archive_page/archive_video";
@@ -40,25 +41,23 @@ export const formatUpcomingShows = (concerts, width) => {
     "11": "NOV",
     "12": "DEC",
   };
-  const day_map = {
-    Sat: "Sunday",
-    Sun: "Monday",
-    Mon: "Tuesday",
-    Tue: "Wednesday",
-    Wed: "Thursday",
-    Thu: "Friday",
-    Fri: "Saturday",
-  };
+  // const day_map = {
+  //   Sat: "Sunday",
+  //   Sun: "Monday",
+  //   Mon: "Tuesday",
+  //   Tue: "Wednesday",
+  //   Wed: "Thursday",
+  //   Thu: "Friday",
+  //   Fri: "Saturday",
+  // };
 
   // Iterate through each element in the list and add the created
   // FeaturedContent to concerts
   concerts.forEach((data) => {
-    const day_in_week = new Date(data.date).toString();
-    const hour = parseInt(data.time.slice(0, 2));
-    const minutes = data.time.slice(2, 5);
     const time_left =
       +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
     const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
+    // console.log(data.time);
 
     upcoming_concerts.push(
       <FeaturedContent
@@ -66,23 +65,20 @@ export const formatUpcomingShows = (concerts, width) => {
         img={data.url}
         name={data.artist}
         concert_name={data.concertName}
-        week_day={day_map[day_in_week.slice(0, 3)]}
-        date={
+        week_day={moment(data.date).format("dddd")}
+        date={data.date}
+        formatted_date={
           data.date.slice(8, 10) +
           " " +
           month_map[data.date.slice(5, 7)] +
           " " +
           data.date.slice(0, 4)
+          // moment(data.date).format('LL')
         }
+        time={data.time}
+        formatted_time={moment(data.time, "HH:mm:ss").format("h:mm A")}
         month={month_map[data.date.slice(5, 7)]}
         day={data.date.slice(8, 10)}
-        time={
-          hour > 12
-            ? (hour - 12).toString() + minutes + "PM"
-            : hour < 12
-            ? data.time.slice(0, 5) + "AM"
-            : data.time.slice(0, 5) + "PM"
-        }
         price={data.price}
         description={data.description.toString()}
         days_left={days_left}
