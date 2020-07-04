@@ -33,10 +33,10 @@ const Concert = (props) => {
             </div>
             <div className="concert-logistics">
               <Row>
-                <span>{props.day}</span>
+                <span>{concert_info.date}</span>
               </Row>
               <Row>
-                <span>{props.time}</span>
+                <span>{concert_info.time}</span>
               </Row>
               <Row>
                 <span>LOCATION</span>
@@ -55,6 +55,23 @@ const Concert = (props) => {
                   <button>Buy Ticket</button>
                 </div>
               </Col>
+            </Row>
+            <Row>
+              <div className="concert-text-container">
+                <Col size={1}>
+                  <div>
+                    <h3 className="titles">
+                      {concert_info.name.toUpperCase()} –{" "}
+                      {concert_info.concert_name.toUpperCase()}
+                    </h3>
+                  </div>
+                  <div>
+                    <p className="artist-description-text">
+                      {concert_info.description}
+                    </p>
+                  </div>
+                </Col>
+              </div>
             </Row>
           </Col>
         </Row>
