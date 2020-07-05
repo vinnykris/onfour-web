@@ -35,6 +35,10 @@
   color: white;
 }
 
+.only-public {
+  left: 25%;
+}
+
 .private-room {
   height: auto;
   width: 50%;
