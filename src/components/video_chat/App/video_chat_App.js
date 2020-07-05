@@ -19,7 +19,7 @@ const STATE_ERROR = "STATE_ERROR";
 const owner_name = ["takoyuxin", "onfour-yuxin", "onfour-spencer", "spencer", "onfour-vinod", "vinnykris", "alilyen", "onfour-bar","barkadosh"];
 const crew_name = "onfour Crew"
 
-export default function VideoChatApp({user_name}) {
+export default function VideoChatApp({ user_name, artistView, colNum}) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
@@ -269,25 +269,29 @@ export default function VideoChatApp({user_name}) {
   };
 
   return (
-    <div className="app" id="video-chat-main">
-      
-        {!isInCrew ? (
-          <div className="room-name-row">
-            <div className="public-room only-public" id="public-room">
-              PUBLIC
+    <div className={(artistView? "artist-": "")+ "app"} id="video-chat-main">
+      {artistView? (
+        null
+      ): (
+        <div>
+          {!isInCrew ? (
+            <div className="room-name-row">
+              <div className="public-room only-public" id="public-room">
+                PUBLIC
+              </div>
             </div>
-          </div>
-        ): (
-          <div className="room-name-row">
-            <div className="public-room click-active" id="public-room" onClick={switchToPublicVideoChat}>
-              PUBLIC
+          ): (
+            <div className="room-name-row">
+              <div className="public-room click-active" id="public-room" onClick={switchToPublicVideoChat}>
+                PUBLIC
+              </div>
+              <div className = "private-room click-active" id = "private-room" onClick = { switchToPrivateVideoChat }>
+                {crew_name}
+              </div>
             </div>
-            <div className = "private-room click-active" id = "private-room" onClick = { switchToPrivateVideoChat }>
-              {crew_name}
-            </div>
-          </div>
-        )}
-      
+          )}
+        </div>
+      )}
       {showCall ? (
         // NOTE: for an app this size, it's not obvious that using a Context
         // is the best choice. But for larger apps with deeply-nested components
@@ -301,10 +305,11 @@ export default function VideoChatApp({user_name}) {
           >
             leave
           </button>
-          <Call roomUrl={roomUrl} isPublic={isPublic}/>
+          <Call roomUrl={roomUrl} isPublic={isPublic} artistView={artistView} colNum={colNum}/>
           <Tray
             disabled={!enableCallButtons}
             onClickLeaveCall={startLeavingCall}
+            artistView={artistView}
           />
         </CallObjectContext.Provider>
       ) : (

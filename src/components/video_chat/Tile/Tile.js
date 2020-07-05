@@ -57,6 +57,7 @@ export default function Tile(props) {
     let classNames = "tile";
     classNames += props.isLarge ? " large" : " small";
     props.isLocalPerson && (classNames += " local");
+    classNames += props.artistView ? " artist" : "";
     return classNames;
   }
 
@@ -73,6 +74,12 @@ export default function Tile(props) {
       }
     }
   }
+
+  useEffect(() => {
+    if (props.artistView) {
+      toggle_audio_mute();
+    }
+  }, [])
 
   const [volume_value, setVolumeValue] = useState(100); 
 

@@ -18,7 +18,7 @@ import "./chat.scss";
 let socket; // Socket declaration
 
 // Main chat component
-const Chat = ({ chat_name, chatStatus, setViewers }) => {
+const Chat = ({ chat_name, chatStatus, setViewers, artistView }) => {
   const [name, setName] = useState(chat_name); // User's chat name
   const [room, setRoom] = useState("CHAT"); // Title of chat and room all users are in
   const [users, setUsers] = useState(""); // List of users in chat room
@@ -107,7 +107,7 @@ const Chat = ({ chat_name, chatStatus, setViewers }) => {
   useEffect(() => () => closeChat(), []);
 
   return (
-    <div className="chat-outer-container" id="chat-main">
+    <div className={"chat-outer-container" + (artistView ? " artist-view" : "")} id="chat-main">
       <div className="chat-container">
         <InfoBar room={room} users={users} />
         <Messages messages={messages} name={name} />

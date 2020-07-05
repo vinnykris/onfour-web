@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useReducer } from "react";
+import React, { useState, useEffect, useContext, useReducer } from "react";
 import "./Call.css";
 import Tile from "../Tile/Tile";
 import CallObjectContext from "../CallObjectContext";
@@ -21,6 +21,7 @@ import { propTypes } from "react-bootstrap-range-slider";
 export default function Call(props) {
   const callObject = useContext(CallObjectContext);
   const [callState, dispatch] = useReducer(callReducer, initialCallState);
+
 
   /**
    * Start listening for participant changes, when the callObject is set.
@@ -137,6 +138,7 @@ export default function Call(props) {
           isLocalPerson={isLocal(id)}
           isLarge={isLarge}
           isLoading={callItem.isLoading}
+          artistView={props.artistView}
         />
       );
       if (isLarge) {
@@ -151,8 +153,8 @@ export default function Call(props) {
   const [largeTiles, smallTiles] = getTiles();
   const message = getMessage(callState, props.isPublic);
   return (
-    <div className="call">
-      <div className="small-tiles">{smallTiles}</div>
+    <div className={(props.artistView? "artist-" : "") + "call"}>
+      <div className={(props.artistView ? "artist-" : "") +"small-tiles" + (props.colNum===6? "-wide" : "")}>{smallTiles}</div>
       {message && (
         <CallMessage
           header={message.header}
@@ -160,11 +162,6 @@ export default function Call(props) {
           isError={message.isError}
         />
       )}
-      <div className="small-tiles">
-        {!message
-          ? largeTiles
-          : null /* Avoid showing large tiles to make room for the message */}
-      </div>
     </div>
   );
 }
