@@ -3,6 +3,10 @@
   position: relative;
 }
 
+.tile.artist {
+  margin: 0px;
+}
+
 .tile.large {
   position: relative;
   margin: 2px;
