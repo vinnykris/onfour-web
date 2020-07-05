@@ -19,7 +19,7 @@ const STATE_ERROR = "STATE_ERROR";
 const owner_name = ["takoyuxin", "onfour-yuxin", "onfour-spencer", "spencer", "onfour-vinod", "vinnykris", "alilyen", "onfour-bar","barkadosh"];
 const crew_name = "onfour Crew"
 
-export default function VideoChatApp({ user_name, artistView}) {
+export default function VideoChatApp({ user_name, artistView, colNum}) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
@@ -305,7 +305,7 @@ export default function VideoChatApp({ user_name, artistView}) {
           >
             leave
           </button>
-          <Call roomUrl={roomUrl} isPublic={isPublic} artistView={artistView}/>
+          <Call roomUrl={roomUrl} isPublic={isPublic} artistView={artistView} colNum={colNum}/>
           <Tray
             disabled={!enableCallButtons}
             onClickLeaveCall={startLeavingCall}

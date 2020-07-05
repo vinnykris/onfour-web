@@ -98,6 +98,7 @@ const StreamPage = () => {
   const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
+  const [video_col_num, setVideoColNum] = useState(2);
 
   // Analytics state variables
   //const [arrival, setArrival] = useState(true);
@@ -152,17 +153,18 @@ const StreamPage = () => {
 
 
   // TOGGLE CHAT SECTION
-  const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
+  const [button_icon, setButtonIcon] = useState("fa fa-chevron-left");
   const toggleChat = () => {
-    if (button_icon === "fa fa-chevron-right") {
-      setButtonIcon("fa fa-chevron-left");
-      document.getElementById("chat_container").style.display = "none";
-      // document.getElementById("chat_container").style.display = "none";
-      document.getElementById("stream_col").style.flex = "4";
-    } else {
+    if (button_icon === "fa fa-chevron-left") {
       setButtonIcon("fa fa-chevron-right");
+      document.getElementById("chat_container").style.display = "none";
+      document.getElementById("stream_col").style.display = "none";
+      setVideoColNum(6);
+    } else {
+      setButtonIcon("fa fa-chevron-left");
       document.getElementById("chat_container").style.display = "inline";
-      document.getElementById("stream_col").style.flex = "2";
+      document.getElementById("stream_col").style.display = "inline";
+      setVideoColNum(2);
     }
   };
 
@@ -190,14 +192,6 @@ const StreamPage = () => {
                         username={username}
                         concert_id={concert_id}
                       />
-                      <div className="toggle-chat">
-                        <button
-                          className="toggle-chat-button"
-                          onClick={toggleChat}
-                        >
-                          <i class={button_icon}></i>
-                        </button>
-                      </div>
                     </div>
                   </div>
                   <div className="artist-info-main">
@@ -237,7 +231,15 @@ const StreamPage = () => {
                         setViewers={getViewers}
                         artistView={true}
                       /> */}
-                      <VideoChat user_name={username ? username : "GUEST"} artistView={true}></VideoChat>
+                      <VideoChat user_name={username ? username : "GUEST"} artistView={true} colNum={video_col_num} isReady={show_start_time}></VideoChat>
+                      <div className="artist-toggle-chat">
+                        <button
+                          className="toggle-chat-button"
+                          onClick={toggleChat}
+                        >
+                          <i class={button_icon}></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </Col>

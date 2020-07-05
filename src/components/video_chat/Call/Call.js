@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useReducer } from "react";
+import React, { useState, useEffect, useContext, useReducer } from "react";
 import "./Call.css";
 import Tile from "../Tile/Tile";
 import CallObjectContext from "../CallObjectContext";
@@ -21,6 +21,7 @@ import { propTypes } from "react-bootstrap-range-slider";
 export default function Call(props) {
   const callObject = useContext(CallObjectContext);
   const [callState, dispatch] = useReducer(callReducer, initialCallState);
+
 
   /**
    * Start listening for participant changes, when the callObject is set.
@@ -153,7 +154,7 @@ export default function Call(props) {
   const message = getMessage(callState, props.isPublic);
   return (
     <div className={(props.artistView? "artist-" : "") + "call"}>
-      <div className={(props.artistView ? "artist-" : "") +"small-tiles"}>{smallTiles}</div>
+      <div className={(props.artistView ? "artist-" : "") +"small-tiles" + (props.colNum===6? "-wide" : "")}>{smallTiles}</div>
       {message && (
         <CallMessage
           header={message.header}
