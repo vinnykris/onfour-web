@@ -9,6 +9,16 @@
   width: 100%;
 }
 
+.artist-app {
+  display: block;
+  background-color: #17171b;
+  position: absolute;
+  overflow: hidden;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+}
+
 .transparent-completely-leave-video-chat-button {
   display: none;
 }

@@ -137,6 +137,7 @@ export default function Call(props) {
           isLocalPerson={isLocal(id)}
           isLarge={isLarge}
           isLoading={callItem.isLoading}
+          artistView={props.artistView}
         />
       );
       if (isLarge) {
@@ -151,8 +152,8 @@ export default function Call(props) {
   const [largeTiles, smallTiles] = getTiles();
   const message = getMessage(callState, props.isPublic);
   return (
-    <div className="call">
-      <div className="small-tiles">{smallTiles}</div>
+    <div className={(props.artistView? "artist-" : "") + "call"}>
+      <div className={(props.artistView ? "artist-" : "") +"small-tiles"}>{smallTiles}</div>
       {message && (
         <CallMessage
           header={message.header}
@@ -160,11 +161,6 @@ export default function Call(props) {
           isError={message.isError}
         />
       )}
-      <div className="small-tiles">
-        {!message
-          ? largeTiles
-          : null /* Avoid showing large tiles to make room for the message */}
-      </div>
     </div>
   );
 }

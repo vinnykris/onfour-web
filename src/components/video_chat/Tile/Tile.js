@@ -74,6 +74,12 @@ export default function Tile(props) {
     }
   }
 
+  useEffect(() => {
+    if (props.artistView) {
+      toggle_audio_mute();
+    }
+  }, [])
+
   const [volume_value, setVolumeValue] = useState(100); 
 
   function changeVolume() {

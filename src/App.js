@@ -15,6 +15,7 @@ import Footer from "./components/footer/footer";
 import Modal from "./components/sign_in_modal/sign_in_modal";
 import Forgot from "./components/forgot_page/forgot_page";
 import SoundCheck from "./components/soundcheck_page/soundcheck_page";
+import ArtistStreamPage from "./components/artist_stream_page/artist_stream_page";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -47,6 +48,7 @@ function App() {
           <Route path="/artists" component={ArtistsPage} />
           <Route path="/forgot" component={Forgot} />
           <Route path="/soundcheck" component={SoundCheck} />
+          <Route path="/artiststream" component={ArtistStreamPage} />
         </Switch>
         <Modal></Modal>
         <Footer />

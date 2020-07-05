@@ -3,6 +3,34 @@
   height: calc(100% - 100px); /* Space for the tray */
   display: flex;
   overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+
+.call::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
+  }
+.call::-webkit-scrollbar-thumb {
+  background: rgba(141, 141, 141, 0.596); 
+  border-radius: 20px;
+}
+
+.artist-call {
+  /* position: relative; */
+  height: calc(100% - 50px);
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+
+.artist-call::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
+  }
+.artist-call::-webkit-scrollbar-thumb {
+  background: rgba(141, 141, 141, 0.596); 
+  border-radius: 20px;
 }
 
 .large-tiles {
@@ -25,4 +53,13 @@
   left: 50%;
   transform: translateX(-50%);
   align-items: center;
+}
+
+.artist-small-tiles {
+  /* height: 100%; 
+  width: 100%;
+  align-items: center; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
 }
