@@ -16,8 +16,9 @@ import {
   getMessage
 } from "./callState";
 import { logDailyEvent } from "../logUtils";
+import { propTypes } from "react-bootstrap-range-slider";
 
-export default function Call() {
+export default function Call(props) {
   const callObject = useContext(CallObjectContext);
   const [callState, dispatch] = useReducer(callReducer, initialCallState);
 
@@ -148,7 +149,7 @@ export default function Call() {
   }
 
   const [largeTiles, smallTiles] = getTiles();
-  const message = getMessage(callState);
+  const message = getMessage(callState, props.isPublic);
   return (
     <div className="call">
       <div className="small-tiles">{smallTiles}</div>

@@ -117,7 +117,7 @@ function containsScreenShare(callItems) {
   return Object.keys(callItems).some(id => isScreenShare(id));
 }
 
-function getMessage(callState) {
+function getMessage(callState, isPublic) {
   function shouldShowClickAllow() {
     const localCallItem = getLocalCallItem(callState.callItems);
     const hasLoaded = localCallItem && !localCallItem.isLoading;
@@ -138,8 +138,14 @@ function getMessage(callState) {
   } else if (shouldShowClickAllow()) {
     header = 'Click "Allow" to enable camera and mic access';
   } else if (Object.keys(callState.callItems).length === 1) {
-    header = "Copy and share this page's URL to invite others";
-    detail = window.location.href;
+    if (isPublic) {
+      header = "Copy and share this page's URL to invite others";
+      detail = window.location.href;
+    } else {
+      header = "This is your private crew room!";
+      detail = "only your crew members have access to this room";
+    }
+    
   }
   return header || detail ? { header, detail, isError } : null;
 }

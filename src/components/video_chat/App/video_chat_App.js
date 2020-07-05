@@ -23,7 +23,7 @@ export default function VideoChatApp({user_name}) {
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
   const [isPublic, setIsPublic] = useState(true);
-
+  const isInCrew = (owner_name.indexOf(user_name) >= 0);
   /**
    * Creates a new call room.
    */
@@ -64,7 +64,8 @@ export default function VideoChatApp({user_name}) {
     const newCallObject = DailyIframe.createCallObject({
       userName: user_name
     });
-    setRoomUrl(url);
+    // setRoomUrl(url);
+    setRoomUrl("public");
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
     newCallObject.join({ url });
@@ -78,19 +79,22 @@ export default function VideoChatApp({user_name}) {
         userName: user_name,
         token: newToken
       });
-      setRoomUrl(url);
+      // setRoomUrl(url);
+      setRoomUrl("private");
       setCallObject(newCallObject);
       setAppState(STATE_JOINING);
       newCallObject.join({ url });
-    } else {
-      const newCallObject = DailyIframe.createCallObject({
-        userName: user_name
-      });
-      setRoomUrl(url);
-      setCallObject(newCallObject);
-      setAppState(STATE_JOINING);
-      newCallObject.join({ url });
-    }
+    } 
+    // else {
+    //   const newCallObject = DailyIframe.createCallObject({
+    //     userName: user_name
+    //   });
+    //   // setRoomUrl(url);
+    //   setRoomUrl("private");
+    //   setCallObject(newCallObject);
+    //   setAppState(STATE_JOINING);
+    //   newCallObject.join({ url });
+    // }
   }, []);
 
   /**
@@ -118,17 +122,27 @@ export default function VideoChatApp({user_name}) {
    */
   useEffect(() => {
     const url = roomUrlFromPageUrl();
-    if (url === "https://onfour_test.daily.co/hello") {
-      url && startJoiningPublicCall(url);
-      switchToPublicVideoChat();
+    if (url === "public") {
+      url && startJoiningPublicCall("https://onfour_test.daily.co/hello");
+      if (isInCrew) {
+        switchToPublicVideoChat();
+      } else {
+        setIsPublic(true);
+      }
+      
     }
   }, [startJoiningPublicCall]);
 
   useEffect(() => {
     const url = roomUrlFromPageUrl();
-    if (url === "https://onfour_test.daily.co/bar") {
-      url && startJoiningPrivateCall(url);
-      switchToPrivateVideoChat();
+    if (url === "private") {
+      if (isInCrew) {
+        url && startJoiningPrivateCall("https://onfour_test.daily.co/bar");
+        switchToPrivateVideoChat();
+      } else {
+        setRoomUrl(null);
+        setIsPublic(true);
+      }
     }
   }, [startJoiningPrivateCall]);
 
@@ -255,14 +269,24 @@ export default function VideoChatApp({user_name}) {
 
   return (
     <div className="app" id="video-chat-main">
-      <div className="room-name-row">
-        <div className="public-room click-active" id="public-room" onClick={switchToPublicVideoChat}>
-          PUBLIC
-        </div>
-        <div className="private-room click-active" id="private-room" onClick={switchToPrivateVideoChat}>
-          PRIVATE
-        </div>
-      </div>
+      
+        {!isInCrew ? (
+          <div className="room-name-row">
+            <div className="public-room only-public" id="public-room">
+              PUBLIC
+            </div>
+          </div>
+        ): (
+          <div className="room-name-row">
+            <div className="public-room click-active" id="public-room" onClick={switchToPublicVideoChat}>
+              PUBLIC
+            </div>
+            <div className = "private-room click-active" id = "private-room" onClick = { switchToPrivateVideoChat }>
+              PRIVATE
+            </div>
+          </div>
+        )}
+      
       {showCall ? (
         // NOTE: for an app this size, it's not obvious that using a Context
         // is the best choice. But for larger apps with deeply-nested components
@@ -276,7 +300,7 @@ export default function VideoChatApp({user_name}) {
           >
             leave
           </button>
-          <Call roomUrl={roomUrl} />
+          <Call roomUrl={roomUrl} isPublic={isPublic}/>
           <Tray
             disabled={!enableCallButtons}
             onClickLeaveCall={startLeavingCall}
@@ -297,7 +321,6 @@ export default function VideoChatApp({user_name}) {
               onClick={() => {
                 createPrivateCall().then(url => startJoiningPrivateCall(url));
               }}
-              in_crew={owner_name.indexOf(user_name) >=0}
             />
           )}
         </div>
