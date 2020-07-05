@@ -16,7 +16,8 @@ const STATE_JOINING = "STATE_JOINING";
 const STATE_JOINED = "STATE_JOINED";
 const STATE_LEAVING = "STATE_LEAVING";
 const STATE_ERROR = "STATE_ERROR";
-const owner_name = ["takoyuxin", "onfour-yuxin", "onfour-spencer", "onfour-vinod", "alilyen", "onfour-bar"];
+const owner_name = ["takoyuxin", "onfour-yuxin", "onfour-spencer", "spencer", "onfour-vinod", "vinnykris", "alilyen", "onfour-bar","barkadosh"];
+const crew_name = "onfour Crew"
 
 export default function VideoChatApp({user_name}) {
   const [appState, setAppState] = useState(STATE_IDLE);
@@ -282,7 +283,7 @@ export default function VideoChatApp({user_name}) {
               PUBLIC
             </div>
             <div className = "private-room click-active" id = "private-room" onClick = { switchToPrivateVideoChat }>
-              PRIVATE
+              {crew_name}
             </div>
           </div>
         )}
