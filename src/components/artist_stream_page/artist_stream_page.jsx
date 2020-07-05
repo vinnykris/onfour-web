@@ -87,9 +87,10 @@ const StreamPage = () => {
   // Auto-scrolls on first navigation
   const [scroll, setScroll] = useState(true); // Auto-scroll
   if (scroll) {
-    window.scrollTo({ top: "10px", behavior: "smooth" });
+    window.scrollTo({ top: "176px", behavior: "smooth" });
     setScroll(false);
   }
+
 
   // GETTING INFORMATION ABOUT MOST RECENT UPCOMING SHOW
   const [show_start_time, setStartTime] = useState(""); // Stores the upcoming show's start time
@@ -176,7 +177,7 @@ const StreamPage = () => {
               <Row>
                 {/* <Col size={0.5}></Col> */}
                 <Col size={2} id="stream_col">
-                  <div className="stream-main">
+                  <div className="artist-stream-main">
                     <div className="stream-wrapper" id="video_player">
                       <VideoPlayer
                         url={
@@ -199,10 +200,12 @@ const StreamPage = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="artist-viewers">
-                    <h5 className="viewer-count show-time">
-                      {viewers} watching now
-                    </h5>
+                  <div className="artist-info-main">
+                    <div className="artist-viewers">
+                      <h5 className="viewer-count show-time">
+                        {viewers} watching now
+                      </h5>
+                    </div>
                   </div>
                 </Col>
                 <Col
