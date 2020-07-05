@@ -19,6 +19,15 @@ const Concert = (props) => {
   const [concert_info, setConcertInfo] = useState(
     props.location.state.concert_info
   );
+
+  var weekday = new Array(7);
+  weekday[0] = "SUNDAY";
+  weekday[1] = "MONDAY";
+  weekday[2] = "TUESDAY";
+  weekday[3] = "WEDNESDAY";
+  weekday[4] = "THURSDAY";
+  weekday[5] = "FRIDAY";
+  weekday[6] = "SATURDAY";
   useEffect(() => {
     console.log("mounted");
     console.log(concert_info);
@@ -34,18 +43,31 @@ const Concert = (props) => {
             </div>
             <div className="concert-logistics">
               <Row>
-                <span>{concert_info.formatted_date}</span>
+                <div className="concert-genre-box">
+                  {concert_info.genre.toUpperCase()}
+                </div>
               </Row>
-              <Row>
-                <span>{concert_info.time}</span>
+              <Row className="logistics-row">
+                <span className="logistics-text">
+                  {weekday[new Date(concert_info.date).getDay()]},{" "}
+                  {concert_info.formatted_date}
+                </span>
               </Row>
-              <Row>
-                <span>LOCATION</span>
+              <hr class="solid" />
+              <Row className="logistics-row">
+                <span className="logistics-text">
+                  {concert_info.formatted_time} EST
+                </span>
               </Row>
+              <hr class="solid" />
+              <Row className="logistics-row">
+                <span className="logistics-text">STREAMED FROM NEW YORK</span>
+              </Row>
+              <hr class="solid" />
             </div>
           </Col>
           <Col size={2} className="concert-info-col main-info-col">
-            <Row>
+            <Row className="countdown-and-buttons">
               <Col size={1}>
                 <div className="countdown-timer">
                   {/* <span className="countdown">COUNTDOWN TIMER</span> */}
@@ -57,7 +79,7 @@ const Concert = (props) => {
               </Col>
               <Col size={1}>
                 <div className="buy-ticket">
-                  <button>Buy Ticket</button>
+                  <button className="buy-ticket-button">Buy Ticket</button>
                 </div>
               </Col>
             </Row>

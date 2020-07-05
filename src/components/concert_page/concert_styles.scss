@@ -5,17 +5,32 @@
 .concert-page {
   margin-top: -1px;
   background-color: black;
-  padding: 2%;
+  padding: 2.5%;
+}
+
+.concert-image-container {
+  width: 100%;
 }
 
 .concert-image {
-  width: 100%;
-  height: auto;
+  width: 50vh;
+  height: 50vh;
+  object-fit: cover;
 }
 
-.concert-text-container {
-  //   margin-left: 2%;
-  //   padding: 6%;
+.countdown-and-buttons {
+  margin-bottom: 8%;
+}
+
+.buy-ticket {
+  float: left;
+}
+
+.buy-ticket-button {
+  background-color: white;
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .titles {
@@ -35,4 +50,40 @@
 
 .countdown-timer {
   float: left;
+}
+
+hr.solid {
+  border: 1px solid #e3e3e3;
+}
+
+.concert-genre-box {
+  background-color: white;
+  color: black;
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 13px;
+  letter-spacing: 0.04em;
+  font-weight: bold;
+  font-family: "Heebo", sans-serif;
+  padding: 2% 4%;
+  @include respond-to("small") {
+    margin-left: 5px;
+    margin-top: 7px;
+  }
+}
+
+.concert-logistics {
+  margin-top: 5%;
+}
+
+.logistics-row {
+  margin-top: 5%;
+}
+
+.logistics-text {
+  color: white;
+  font-weight: normal;
+  line-height: 20px;
+  font-size: 17px;
+  letter-spacing: 0.04em;
 }

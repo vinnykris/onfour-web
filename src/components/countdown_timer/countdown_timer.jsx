@@ -18,7 +18,6 @@ function CountdownTimer({ start_date, start_time }) {
       +new Date(start_date + "T" + start_time + ".000-04:00") -
       +new Date() +
       1000000000;
-    console.log(difference);
 
     let time_left = {};
 
