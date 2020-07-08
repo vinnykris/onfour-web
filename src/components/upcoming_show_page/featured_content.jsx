@@ -1,12 +1,6 @@
 // React Imports
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  withRouter,
-} from "react-router-dom";
-// import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
@@ -17,31 +11,9 @@ import { Analytics } from "aws-amplify";
 
 // Component Imports
 import BioModal from "./bio_modal";
-import Concert from "../concert_page/concert";
 
 // FeaturedContent is the unit element for an upcoming concert
-const FeaturedContent = (
-  //   {
-  //   id,
-  //   img,
-  //   name,
-  //   concert_name,
-  //   week_day,
-  //   date,
-  //   month,
-  //   day,
-  //   time,
-  //   price,
-  //   description,
-  //   days_left,
-  //   width,
-  //   genre,
-  // }
-  props
-) => {
-  useEffect(() => {
-    console.log(props);
-  }, []);
+const FeaturedContent = (props) => {
   const [show_more_info, setClickedInfo] = useState(false); // Determines whether to show the popup for musician's bio or not
 
   // This function gets called when the MORE INFO button is clicked
@@ -91,12 +63,11 @@ const FeaturedContent = (
           <p className="RSVP-text">MORE INFO</p>
         )}
       </Row> */}
-
       <Link
         to={{
           pathname: `/upcoming/${props.id}`,
           state: {
-            concert_info: props,
+            info: props,
           },
         }}
       >

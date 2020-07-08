@@ -193,3 +193,14 @@ export const getMostRecentUpcomingInfo = async () => {
 
   return info_list[0];
 };
+
+export const getOneConcert = async (id) => {
+  // Calling the API, using async and await is necessary
+  const info = await API.graphql(
+    graphqlOperation(queries.get_specific_concert, {
+      filter: { id: { eq: id } },
+    })
+  );
+  const item = info.data.listFutureConcerts.items[0];
+  return item;
+};

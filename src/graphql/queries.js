@@ -58,3 +58,24 @@ export const list_upcoming_concerts = `query listFutureConcerts {
     }
   }
 }`;
+
+// Query to retrieve all upcoming shows
+export const get_specific_concert = `query listFutureConcerts(
+  $filter: TableFutureConcertsFilterInput
+) {
+  listFutureConcerts(filter: $filter, limit: 1000) {
+    items {
+      id
+      url
+      timePassed
+      date
+      time
+      artist
+      concertName
+      description
+      price
+      concertId
+      genre
+    }
+  }
+}`;

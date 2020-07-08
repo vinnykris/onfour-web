@@ -25,6 +25,51 @@ export const createChunks = (array, chunk_size) => {
   return chunk_array;
 };
 
+export const createUpcomingObject = (data) => {
+  const month_map = {
+    "01": "JAN",
+    "02": "FEB",
+    "03": "MAR",
+    "04": "APR",
+    "05": "MAY",
+    "06": "JUN",
+    "07": "JUL",
+    "08": "AUG",
+    "09": "SEP",
+    "10": "OCT",
+    "11": "NOV",
+    "12": "DEC",
+  };
+
+  const time_left =
+    +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
+  const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
+
+  return {
+    id: data.id,
+    img: data.url,
+    name: data.artist,
+    concert_name: data.concertName,
+    week_day: moment(data.date).format("dddd"),
+    date: data.date,
+    formatted_date:
+      data.date.slice(8, 10) +
+      " " +
+      month_map[data.date.slice(5, 7)] +
+      " " +
+      data.date.slice(0, 4),
+    // moment(data.date).format('LL')
+    time: data.time,
+    formatted_time: moment(data.time, "HH:mm:ss").format("h:mm A"),
+    month: month_map[data.date.slice(5, 7)],
+    day: data.date.slice(8, 10),
+    price: data.price,
+    description: data.description.toString(),
+    days_left: days_left,
+    genre: data.genre,
+  };
+};
+
 export const formatUpcomingShows = (concerts, width) => {
   var upcoming_concerts = [];
   const month_map = {

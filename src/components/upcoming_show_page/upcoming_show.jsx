@@ -1,6 +1,5 @@
 // React Imports
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
 
 // Component Imports
 import FeaturedContent from "./featured_content";
@@ -8,9 +7,6 @@ import SearchBar from "../search_bar/search_bar";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import { useWindowDimensions } from "../custom_hooks";
 import { createChunks, formatUpcomingShows } from "../util";
-// Component imports
-import { Grid, Row, Col } from "../grid";
-import CountdownTimer from "../countdown_timer/countdown_timer";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -44,8 +40,6 @@ const UpcomingShowPage = () => {
       const upcoming_result = await getConcertInfo();
       console.log(upcoming_result);
       setFormattedConcerts(formatUpcomingShows(upcoming_result, width));
-      // setConcertInfo(upcoming_result);
-      // setConcerts(createChunks(upcoming_result, 4));
     };
     fetchData();
   }, []);
@@ -70,49 +64,16 @@ const UpcomingShowPage = () => {
     <div className="upcoming-show-page-content">
       {width <= 600 ? (
         <div className="upcoming-show-grid">
-          {/* <Grid className="flex-grid">
-            {concerts.map((chunk_list, row_index) => (
-              <Row key={row_index} className="grid-row">
-                {chunk_list.map((element, col_index) => (
-                  <Col size={1} key={col_index} className="black-element">
-                    {element}
-                  </Col>
-                ))}
-              </Row>
-            ))}
-          </Grid> */}
           <FlexibleGrid content_list={formatted_concerts} num_cols={1} />
         </div>
       ) : (
         <div>
           {width <= 1024 ? (
             <div className="upcoming-show-grid">
-              {/* <Grid className="flex-grid">
-                {concerts.map((chunk_list, row_index) => (
-                  <Row key={row_index} className="grid-row">
-                    {chunk_list.map((element, col_index) => (
-                      <Col size={1} key={col_index} className="black-element">
-                        {element}
-                      </Col>
-                    ))}
-                  </Row>
-                ))}
-              </Grid> */}
               <FlexibleGrid content_list={formatted_concerts} num_cols={3} />
             </div>
           ) : (
             <div className="upcoming-show-grid">
-              {/* <Grid className="flex-grid">
-                {concerts.map((chunk_list, row_index) => (
-                  <Row key={row_index} className="grid-row">
-                    {chunk_list.map((element, col_index) => (
-                      <Col size={1} key={col_index} className="black-element">
-                        {element}
-                      </Col>
-                    ))}
-                  </Row>
-                ))}
-              </Grid> */}
               <FlexibleGrid content_list={formatted_concerts} num_cols={4} />
             </div>
           )}
