@@ -4,6 +4,21 @@ import moment from "moment";
 import FeaturedContent from "../components/upcoming_show_page/featured_content";
 import ArchiveVideo from "../components/archive_page/archive_video";
 
+const month_map = {
+  "01": "JAN",
+  "02": "FEB",
+  "03": "MAR",
+  "04": "APR",
+  "05": "MAY",
+  "06": "JUN",
+  "07": "JUL",
+  "08": "AUG",
+  "09": "SEP",
+  "10": "OCT",
+  "11": "NOV",
+  "12": "DEC",
+};
+
 // Splits the input array into smaller chunks of equal size
 export const createChunks = (array, chunk_size) => {
   let chunk_array = Array(Math.ceil(array.length / chunk_size))
@@ -26,21 +41,6 @@ export const createChunks = (array, chunk_size) => {
 };
 
 export const createUpcomingObject = (data) => {
-  const month_map = {
-    "01": "JAN",
-    "02": "FEB",
-    "03": "MAR",
-    "04": "APR",
-    "05": "MAY",
-    "06": "JUN",
-    "07": "JUL",
-    "08": "AUG",
-    "09": "SEP",
-    "10": "OCT",
-    "11": "NOV",
-    "12": "DEC",
-  };
-
   const time_left =
     +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
   const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
@@ -72,29 +72,6 @@ export const createUpcomingObject = (data) => {
 
 export const formatUpcomingShows = (concerts, width) => {
   var upcoming_concerts = [];
-  const month_map = {
-    "01": "JAN",
-    "02": "FEB",
-    "03": "MAR",
-    "04": "APR",
-    "05": "MAY",
-    "06": "JUN",
-    "07": "JUL",
-    "08": "AUG",
-    "09": "SEP",
-    "10": "OCT",
-    "11": "NOV",
-    "12": "DEC",
-  };
-  // const day_map = {
-  //   Sat: "Sunday",
-  //   Sun: "Monday",
-  //   Mon: "Tuesday",
-  //   Tue: "Wednesday",
-  //   Wed: "Thursday",
-  //   Thu: "Friday",
-  //   Fri: "Saturday",
-  // };
 
   // Iterate through each element in the list and add the created
   // FeaturedContent to concerts
