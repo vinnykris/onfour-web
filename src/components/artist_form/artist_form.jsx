@@ -5,6 +5,9 @@ import React, { useEffect, useState } from "react";
 import "./artist_form_styles.scss"
 
 const ArtistForm = () => {
+
+    
+
     return (
         <div className="artist-form-container">
             <form
