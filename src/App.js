@@ -17,6 +17,7 @@ import Forgot from "./components/forgot_page/forgot_page";
 import SoundCheck from "./components/soundcheck_page/soundcheck_page";
 import Register from "./components/register_page/register_page";
 import Login from "./components/login_page/login_page";
+import ArtistForm from "./components/artist_form/artist_form";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -51,6 +52,7 @@ function App() {
           <Route path="/soundcheck" component={SoundCheck} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
+          <Route path="/form" component={ArtistForm} />
         </Switch>
         <Modal></Modal>
         <Footer />
