@@ -9,13 +9,25 @@
 }
 
 .concert-image-container {
-  width: 100%;
+  // width: 100%;
+  overflow: hidden;
+  height: 0;
+  padding-top: 100%;
+  position: relative;
 }
 
 .concert-image {
-  width: 50vh;
-  height: 50vh;
+  // width: 50vh;
+  // height: 50vh;
+  // overflow: hidden;
+  // height: 0;
+  // padding-top: 100%;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   object-fit: cover;
+  position: absolute;
 }
 
 .countdown-and-buttons {
@@ -24,6 +36,7 @@
 
 .buy-ticket {
   float: left;
+  margin-left: 10%;
 }
 
 .buy-ticket-button {
@@ -75,6 +88,7 @@ hr.solid {
 
 .concert-logistics {
   margin-top: 5%;
+  width: 350px;
 }
 
 .logistics-row {

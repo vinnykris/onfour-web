@@ -22,7 +22,17 @@ const Concert = (props) => {
   const [concert_info, setConcertInfo] = useState(null); // Holds concert-specific info
   const [tooltip_text, setTooltipText] = useState("");
   const [facebook_link, setFacebookLink] = useState("");
-  // const [show, setShow] = useState(false);
+  const [twitter_link, setTwitterLink] = useState("");
+
+  // Social links
+  const instagram = "https://www.instagram.com/jonathan_dely/";
+  const spotify =
+    "https://open.spotify.com/artist/5wdmp3H2QC7tfMYAabtQN3?si=S-LQ7Z-LSL6xZac4a-yxhg";
+
+  const youtube = "https://www.youtube.com/channel/UCdh0zQFUEYKQsbTJI00Q2SA";
+
+  const facebook = "https://www.facebook.com/jonathandelymusic";
+  const twitter = "https://twitter.com/jonathan_dely";
 
   const concert_id = props.match.params.showID; // Passed from URL
   const state = props.location.state; // Props passed through link
@@ -45,6 +55,9 @@ const Concert = (props) => {
     setFacebookLink(
       `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.onfour.live%2Fupcoming%2F${concert_id}&amp;src=sdkpreparse`
     );
+    setTwitterLink(
+      `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
+    );
   }, []);
 
   // If copy to clipboard button is clicked, change tooltip text and copy stream page link
@@ -53,6 +66,10 @@ const Concert = (props) => {
     // Analytics.record({ name: "copyClipboardShareClicked" });
     navigator.clipboard.writeText(window.location.href);
     setTooltipText("Copied!");
+  };
+
+  const getTicket = () => {
+    console.log("button pressed");
   };
 
   return (
@@ -96,7 +113,13 @@ const Concert = (props) => {
                   <span className="logistics-text">STREAMED FROM NEW YORK</span>
                 </Row>
                 <hr class="solid" />
-                <SocialBar />
+                <SocialBar
+                  instagram={instagram}
+                  spotify={spotify}
+                  youtube={youtube}
+                  facebook={facebook}
+                  twitter={twitter}
+                />
               </div>
             </Col>
             <Col size={2} className="concert-info-col main-info-col">
@@ -109,10 +132,10 @@ const Concert = (props) => {
                       start_time={concert_info.time}
                     />
                   </div>
-                </Col>
-                <Col size={1}>
                   <div className="buy-ticket">
-                    <button className="buy-ticket-button">Buy Ticket</button>
+                    <button className="buy-ticket-button" onClick={getTicket}>
+                      RSVP
+                    </button>
                   </div>
                 </Col>
               </Row>
@@ -162,7 +185,7 @@ const Concert = (props) => {
                             className="fa fa-twitter twitter-share-button"
                             target="_blank"
                             rel="noopener noreferrer"
-                            href="https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fstream"
+                            href={twitter_link}
                             data-text="Come watch a concert with me!"
                             data-url={window.location.href}
                             data-lang="en"

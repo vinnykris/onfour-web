@@ -33,31 +33,6 @@ const ArchivePage = () => {
 
   const [videos, setVideos] = useState([]); // List of video objects with past show information
 
-  // // Asynchronous function to get list of videos from database
-  // const getArchiveInfo = async () => {
-  //   // Calling the API, using async and await is necessary
-  //   const info = await API.graphql(
-  //     graphqlOperation(queries.list_past_concerts)
-  //   );
-  //   const info_list = info.data.listPastShows.items; // Saves the items from database
-
-  //   // Iterate through each element in the sorted list and add the created ArchiveVideo to the list
-  //   info_list
-  //     .sort((a, b) => new Date(b.concert_date) - new Date(a.concert_date))
-  //     .forEach((data) => {
-  //       setVideos((videos) => [
-  //         ...videos,
-  //         <ArchiveVideo
-  //           artist_name={data.artist_name}
-  //           concert_name={data.concert_name}
-  //           concert_date={data.concert_date}
-  //           url={data.video_url}
-  //           length={data.video_length}
-  //         />,
-  //       ]);
-  //     });
-  // };
-
   // API call is done on mount
   // Add in Analytics that archive page was visited
   useEffect(() => {
