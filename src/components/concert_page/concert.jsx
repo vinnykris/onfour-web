@@ -96,6 +96,7 @@ const Concert = (props) => {
                   <span className="logistics-text">STREAMED FROM NEW YORK</span>
                 </Row>
                 <hr class="solid" />
+                <SocialBar />
               </div>
             </Col>
             <Col size={2} className="concert-info-col main-info-col">
@@ -136,7 +137,7 @@ const Concert = (props) => {
                 <div className="share-concert-container">
                   <Col size={1}>
                     <div>
-                      <h5 className="share-concert-text">Share with friends</h5>
+                      <h5 className="share-concert-text">Share With Friends</h5>
                     </div>
                     <div className="share-list-container">
                       <ul className="social-list">
