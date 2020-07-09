@@ -1,5 +1,5 @@
 // React imports
-import React, { useEffect } from "react";
+import React from "react";
 
 //Component imports
 import { useInputValue } from "../custom_hooks";
