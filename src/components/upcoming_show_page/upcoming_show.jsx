@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 // import SearchBar from "../search_bar/search_bar";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import { useWindowDimensions } from "../custom_hooks";
+import CountdownTimer from "../countdown_timer/countdown_timer";
 
 // AWS Imports
 // import { API, graphqlOperation } from "aws-amplify";

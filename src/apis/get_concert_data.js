@@ -18,7 +18,7 @@ Amplify.configure(awsmobile);
 // and create a list of FeaturedContent objects with the data returned
 // from the database.
 export const getConcertInfo = async (width) => {
-  
+
   var upcoming_concerts = [];
   // Calling the API, using async and await is necessary
   const info = await API.graphql(
