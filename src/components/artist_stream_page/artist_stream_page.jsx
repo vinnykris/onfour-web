@@ -26,6 +26,7 @@ import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/video_chat_App";
 
+
 // Styles Imports
 import "./artist_stream_styles.scss";
 
@@ -181,6 +182,7 @@ const StreamPage = () => {
                 <Col size={2} id="stream_col">
                   <div className="artist-stream-main">
                     <div className="stream-wrapper" id="video_player">
+                      <div className="artist-box-header">Stream Preview</div>
                       <VideoPlayer
                         url={
                           "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
@@ -194,47 +196,48 @@ const StreamPage = () => {
                       />
                     </div>
                   </div>
-                  <div className="artist-info-main">
-                    <div className="artist-viewers">
-                      <h5 className="viewer-count show-time">
-                        {viewers} watching now
-                      </h5>
-                    </div>
+                  <div className="artist-control-main">
+                    <div className="artist-box-header">Control</div>
+                    
                   </div>
                 </Col>
                 <Col
                   size={2}
                   id="chat_container"
-                  className="sticky-container"
                 >
-                  <div className="artist-chat-main" id="chat_main">
-                    <div className="artist-chat-wrapper">
-                      <Chat
-                        chat_name={username ? username : "GUEST"}
-                        chatStatus={chatStatus}
-                        setViewers={getViewers}
-                        artistView={true}
-                      />
+                  <Row className="full-width">
+                    <div className="artist-activity-main">
+                      <div className="artist-box-header">Activity Monitor</div>
+                      <h5 className="show-time">
+                        {viewers} watching now
+                      </h5>
                     </div>
-                  </div>
+                  </Row>
+                  <Row className="full-width">
+                    <div className="artist-chat-main" id="chat_main">
+                      <div className="artist-chat-wrapper">
+                        <Chat
+                          chat_name={username ? username : "GUEST"}
+                          chatStatus={chatStatus}
+                          setViewers={getViewers}
+                          artistView={true}
+                        />
+                      </div>
+                    </div>
+                  </Row>
                 </Col>
                 <Col
                   size={4}
                   id="chat_container"
                   className="sticky-container"
                 >
-                  <div className="artist-chat-main">
-                    <div className="artist-chat-wrapper">
-                      {/* <Chat
-                        chat_name={username ? username : "GUEST"}
-                        chatStatus={chatStatus}
-                        setViewers={getViewers}
-                        artistView={true}
-                      /> */}
+                  <div className="artist-video-main">
+                    <div className="artist-video-wrapper">
+                      <div className="artist-box-header video-chat-box-header">Video Roulette</div>
                       <VideoChat user_name={username ? username : "GUEST"} artistView={true} colNum={video_col_num} isReady={show_start_time}></VideoChat>
                       <div className="artist-toggle-chat">
                         <button
-                          className="toggle-chat-button"
+                          className="artist-toggle-chat-button"
                           onClick={toggleChat}
                         >
                           <i class={button_icon}></i>
