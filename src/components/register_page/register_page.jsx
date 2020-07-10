@@ -61,6 +61,8 @@ const Register = () => {
       first: first,
       last: last,
       concert: "0", // Currently a placeholder value
+      is_artist: false,
+      verified: false,
     };
 
     // Email and paid values to be passed into the emailing list through AppSync API
@@ -164,7 +166,8 @@ const Register = () => {
     setUsername("");
     setPassword("");
     setRepeatPassword("");
-    history.push("/stream");
+    if (is_artist) history.push("/form");
+    else history.push("/stream");
   };
 
   // Function for checking a user's submitted pin to confirm account
