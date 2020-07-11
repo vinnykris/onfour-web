@@ -55,6 +55,30 @@ export const list_upcoming_concerts = `query listFutureConcerts {
       price
       concertId
       genre
+      is_live
     }
   }
 }`;
+
+
+export const get_upcoming_concerts_with_concert_id_old_table = `query listFutureConcerts(
+    $filter: TableFutureConcertsFilterInput
+  ) {
+    listFutureConcerts(filter: $filter, limit: 1000) {
+      items {
+        is_live
+      }
+    }
+  }`;
+
+export const get_upcoming_concerts_with_concert_id = `query listConcerts(
+    $filter: TableConcertFilterInput
+  ) {
+    listConcerts(filter: $filter, limit: 1000) {
+      items {
+        date
+        time
+        is_live
+      }
+    }
+  }`;

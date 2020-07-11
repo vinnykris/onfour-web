@@ -89,11 +89,17 @@
 .artist-control-main {
   width: 100%;
   background-color: #17171b;
-  height: 100%;
+  height: 50%;
   justify-content: center;
   align-items: center;
   border-right: 3px solid black;
   border-left: 3px solid black;
+  border-top: 3px solid black;
+}
+
+.artist-timer-wrapper {
+  width: 100%;
+  height: 50px;
 }
 
 .artist-activity-main {
@@ -236,10 +242,12 @@
 
 .artist-stream-main {
   position: relative;
-  // height: 100%;
+  height: 50%;
   width: 100%;
+  background-color: #17171b;
   border-right: 3px solid black;
   border-left: 3px solid black;
+  border-bottom: 3px solid black;
 }
 
 .stream-main-mobile {
@@ -260,9 +268,16 @@
   //   height: auto;
   // }
 }
+
 .stream-wrapper-mobile {
   width: 100%;
   height: 55%;
+}
+
+.artist-stream-wrapper {
+  margin: auto;
+  width: 100%;
+  position: relative;
 }
 
 .player-wrapper {
@@ -438,6 +453,16 @@
 
 .show-time {
   font-size: 15px;
+  margin: 0px;
+  color: #e2e2e2;
+  letter-spacing: 0.5px;
+  float: left;
+  padding: 5px;
+  text-align: right;
+}
+
+.artist-show-time {
+  font-size: 0.8rem;
   margin: 0px;
   color: #e2e2e2;
   letter-spacing: 0.5px;
@@ -797,4 +822,39 @@
 
 .video-chat-box-header {
   padding-left: 30px;
+}
+
+.player-inner-container {
+  width: 100%;
+  height: 100%;
+}
+
+.is-live-tag {
+  position: absolute;
+  z-index: 2;
+  right: 5px;
+  top: 2px;
+  height: 30px;
+  width: auto;
+  color: #DDDDDD;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 17px;
+  letter-spacing: 0.045em;
+}
+
+.live-circle {
+  color: red;
+  padding-right: 5px;
+  line-height: 17px;
+}
+
+.artist-go-live-button {
+  margin-top: 10px;
+  font-size: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
 }

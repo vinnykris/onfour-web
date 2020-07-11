@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import "./countdown_timer_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
-function CountdownTimer({start_date, start_time}) {
+function CountdownTimer({start_date, start_time, time_up_message}) {
 
     // This function calculates the time difference between current time and show start time
     // and represent the difference in days, hours, minuts and seconds
@@ -52,10 +52,13 @@ function CountdownTimer({start_date, start_time}) {
                 <Col size={1} className="countdown-timer-block">
                     <Row>
                         <span className="countdown-timer-number">00</span>
+                        {interval ==="SECONDS"? null:(
+                            <div className="countdown-timer-number">:</div>
+                        )}
                     </Row>
-                    <Row>
+                    {/* <Row>
                         <span className="countdown-timer-label">{interval} </span>
-                    </Row>
+                    </Row> */}
                 </Col>
             );
         } else {
@@ -64,10 +67,13 @@ function CountdownTimer({start_date, start_time}) {
                     <Col size={1} className="countdown-timer-block">
                         <Row>
                             <span className="countdown-timer-number">{time_left[interval]}</span>
+                            {interval === "SECONDS" ? null : (
+                                <div className="countdown-timer-number">:</div>
+                            )}
                         </Row>
-                        <Row>
+                        {/* <Row>
                             <span className="countdown-timer-label">{interval} </span>
-                        </Row>
+                        </Row> */}
                     </Col>
                 );
             } else {
@@ -75,10 +81,13 @@ function CountdownTimer({start_date, start_time}) {
                     <Col size={1} className="countdown-timer-block">
                         <Row>
                             <span className="countdown-timer-number">0{time_left[interval]}</span>
+                            {interval === "SECONDS" ? null : (
+                                <div className="countdown-timer-number">:</div>
+                            )}
                         </Row>
-                        <Row>
+                        {/* <Row>
                             <span className="countdown-timer-label">{interval} </span>
-                        </Row>
+                        </Row> */}
                     </Col>
                 );
             }
@@ -86,10 +95,13 @@ function CountdownTimer({start_date, start_time}) {
                 <Col size={1} className="countdown-timer-block">
                     <Row>
                         <span className="countdown-timer-number">{time_left[interval]}</span>
+                        {interval === "SECONDS" ? null : (
+                            <div className="countdown-timer-number">:</div>
+                        )}
                     </Row>
-                    <Row>
+                    {/* <Row>
                         <span className="countdown-timer-label">{interval} </span>
-                    </Row>
+                    </Row> */}
                 </Col>
             );
         }
@@ -104,7 +116,11 @@ function CountdownTimer({start_date, start_time}) {
                         <Row>{timer_components}</Row>
                     </Grid>
                 </div>
-            ) : null}
+            ) : (
+                <div className="countdown-timer-component-wrapper">
+                   {time_up_message}
+                </div>
+            )}
         </div>
     );
 }

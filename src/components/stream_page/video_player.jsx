@@ -1,6 +1,7 @@
 // React Imports
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
+import MoonLoader from "react-spinners/MoonLoader";
 
 // Styling Imports
 import "./stream_styles.scss";
@@ -25,6 +26,7 @@ function VideoPlayer({
   auth,
   username,
   concert_id,
+  is_live
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
@@ -177,7 +179,7 @@ function VideoPlayer({
         </div>
       ) : (
         <div className="player-wrapper">
-          {width <= 600 ? (
+          {is_live ? (
             <ReactPlayer
               className="video-player"
               url={url}
@@ -185,17 +187,26 @@ function VideoPlayer({
               height="100%"
               playing
               controls
-              playsinline
+              playsinline={width <= 600}
             />
           ) : (
-            <ReactPlayer
-              className="video-player"
-              url={url}
-              width="100%"
-              height="100%"
-              playing
-              controls
-            />
+            <div className="waiting-for-artist-screen">
+              <div className="waiting-message-container">
+                <div className="not-live-loader">
+                  <MoonLoader
+                    sizeUnit={"px"}
+                    size={30}
+                    color={"white"}
+                    loading={!is_live}
+                  />
+                </div>
+                <br></br>
+                <h7 className="waiting-message2">Please give the artist a few minutes. </h7>
+                <h7 className="waiting-message2">
+                  We are sorry for your waiting.
+                </h7>
+              </div>
+            </div>
           )}
           {/* I try to call this function here and thought it would only be called only once when the user 
                 go to the stream page AND the show is starting. However, if you look at the console logs, 

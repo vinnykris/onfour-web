@@ -483,6 +483,22 @@
   }
 }
 
+.waiting-for-artist-screen {
+  width: 100%;
+  // height: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  background-color: #1b1b1b;
+  position: relative;
+  @include respond-to("small") {
+    height: 220px;
+  }
+}
+
+.not-live-loader {
+  width: 40px;
+  margin: 0 auto;
+}
+
 .artist-image {
   width: 5vw;
   height: 5vw;

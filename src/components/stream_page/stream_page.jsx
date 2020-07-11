@@ -146,6 +146,7 @@ const StreamPage = () => {
   const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
+  const [is_live, setIsLive] = useState(false);
 
   // Analytics state variables
   //const [arrival, setArrival] = useState(true);
@@ -161,7 +162,6 @@ const StreamPage = () => {
     const info = await API.graphql(
       graphqlOperation(queries.list_upcoming_concerts)
     );
-
     const info_list = info.data.listFutureConcerts.items; // Stores the items in database
     info_list.sort((a, b) => a.timePassed - b.timePassed);
 
@@ -181,6 +181,7 @@ const StreamPage = () => {
     setConcertName(info_list[0].concertName);
     setArtistName(info_list[0].artist);
     setConcertID(info_list[0].concertId);
+    setIsLive(info_list[0].is_live);
   };
 
   // GET USER'S REGISTRATION INFORMATION
@@ -304,6 +305,24 @@ const StreamPage = () => {
     }
   };
 
+  const getIsLive = async () => {
+    // Calling the API, using async and await is necessary
+      await API.graphql(
+        graphqlOperation(queries.get_upcoming_concerts_with_concert_id_old_table, {
+          filter: { concertId: { eq: concert_id } },
+        })
+      ).then((data) => {
+        if(data.data.listFutureConcerts.items[0]) {
+          setIsLive(data.data.listFutureConcerts.items[0].is_live);
+        }
+      });
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      getIsLive();
+    }, 1000);
+  });
 
   // RENDERING SECTION
   return (
@@ -368,6 +387,7 @@ const StreamPage = () => {
                         auth={auth}
                         username={username}
                         concert_id={concert_id}
+                        is_live={is_live}
                       />
                       <div className="toggle-chat">
                         <button
@@ -745,6 +765,7 @@ const StreamPage = () => {
                       auth={auth}
                       username={username}
                       concert_id={concert_id}
+                      is_live={is_live}
                     />
                   </div>
                 </div>

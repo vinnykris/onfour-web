@@ -7,7 +7,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 // import { Prompt } from "react-router";
 
 // AWS Imports
-import { API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation, input } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import * as queries from "../../graphql/queries";
 import Amplify, { Analytics } from "aws-amplify";
@@ -25,13 +25,10 @@ import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/video_chat_App";
-
+import CountdownTimer from "../countdown_timer/countdown_timer";
 
 // Styles Imports
 import "./artist_stream_styles.scss";
-
-// Image imports
-import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
 
 Amplify.configure(awsmobile);
 
@@ -62,27 +59,6 @@ const StreamPage = () => {
     setViewers(num_viewers);
   };
 
-  // EMAIL SUBSCRIBTION SECTION
-  const [email, setEmail] = useState(""); // User email input for subscription
-  const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
-  // Function when user submits email
-  const emailSubmit = (event) => {
-    event.preventDefault();
-
-    Analytics.record({ name: "emailSubscribeClicked" });
-
-    const payload = {
-      email: email,
-      paid: false,
-    };
-
-    API.graphql(
-      graphqlOperation(mutations.create_email_subscription, { input: payload })
-    );
-
-    setEmail("");
-    setEmailSubmitted(true);
-  };
 
   // AUTO-SCROLL SECTION
   // Auto-scrolls on first navigation
@@ -100,12 +76,14 @@ const StreamPage = () => {
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
   const [video_col_num, setVideoColNum] = useState(2);
-
+  const [start_time, setTimerStartTime] = useState("");
+  const [start_date, setStartDate] = useState("");
+  const [is_live, setIsLive] = useState(false);
+  const [go_live_message, setGoLiveMsg] = useState("GO LIVE");
   // Analytics state variables
   //const [arrival, setArrival] = useState(true);
 
   // Get the start time for countdown_timer
-  // Call stream page analtics
   useEffect(() => {
     getStartTime();
   }, []);
@@ -113,30 +91,44 @@ const StreamPage = () => {
   // Query upcoming show database
   const getStartTime = async () => {
     // Calling the API, using async and await is necessary
-    const info = await API.graphql(
-      graphqlOperation(queries.list_upcoming_concerts)
+    await API.graphql(
+      graphqlOperation(queries.get_upcoming_concerts_with_concert_id,{
+      filter: { concert_id: { eq: "why_need_conert_id_for_this" } },
+      })
+    ).then((data) => {
+        setStartTime(
+          data.data.listConcerts.items[0].time
+        )
+        setTimerStartTime(
+          data.data.listConcerts.items[0].time
+        );
+        setStartDate(
+          data.data.listConcerts.items[0].date
+        );
+      }
     );
-
-    const info_list = info.data.listFutureConcerts.items; // Stores the items in database
-    info_list.sort((a, b) => a.timePassed - b.timePassed);
-
-    const hour = parseInt(info_list[0].time.slice(0, 2));
-    const minutes = info_list[0].time.slice(2, 5);
-
-    setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
-    setShowTime(
-      info_list[0].date +
-        " " +
-        (hour > 12
-          ? (hour - 12).toString() + minutes + "PM"
-          : hour < 12
-          ? info_list[0].time.slice(0, 5) + "AM"
-          : info_list[0].time.slice(0, 5) + "PM")
-    );
-    setConcertName(info_list[0].concertName);
-    setArtistName(info_list[0].artist);
-    setConcertID(info_list[0].concertId);
   };
+
+  const getIsLive = async () => {
+    // Calling the API, using async and await is necessary
+    await API.graphql(
+      graphqlOperation(queries.get_upcoming_concerts_with_concert_id, {
+        filter: { concert_id: { eq: "why_need_conert_id_for_this" } },
+      })
+    ).then((data) => {
+      setIsLive(data.data.listConcerts.items[0].is_live);
+      setGoLiveMsg(data.data.listConcerts.items[0].is_live? "DISCONNECT" : "GO LIVE");
+    });
+  }
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     getIsLive();
+  //   }, 1000);
+  // });
+  useEffect(() => {
+    getIsLive();
+  },[]);
 
   // GET USER'S REGISTRATION INFORMATION
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
@@ -169,6 +161,35 @@ const StreamPage = () => {
     }
   };
 
+  const toggleGoLive = () => {
+    if (is_live) {
+      setIsLive(false);
+      setGoLiveMsg("GO LIVE");
+      const is_live_load = {
+        concert_id: "why_need_conert_id_for_this",
+        is_live: false
+      };
+      updateIsLive(is_live_load);
+    } else {
+      setIsLive(true);
+      setGoLiveMsg("DISCONNECT");
+      const is_live_load = {
+        concert_id: "why_need_conert_id_for_this",
+        is_live: true
+      };
+      updateIsLive(is_live_load);
+    }
+  };
+
+  const updateIsLive = async (is_live_load) => {
+    // Calling the API, using async and await is necessary
+    await API.graphql(
+      graphqlOperation(mutations.update_concert_is_live, {
+        input: is_live_load,
+      })
+    );
+  };
+
 
   // RENDERING SECTION
   return (
@@ -181,24 +202,28 @@ const StreamPage = () => {
                 {/* <Col size={0.5}></Col> */}
                 <Col size={2} id="stream_col">
                   <div className="artist-stream-main">
-                    <div className="stream-wrapper" id="video_player">
+                    <div className="artist-stream-wrapper" id="video_player">
                       <div className="artist-box-header">Stream Preview</div>
                       <VideoPlayer
                         url={
                           "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                         }
-                        start_time={show_start_time}
-                        artist_name={artist_name}
-                        concert_name={concert_name}
-                        auth={auth}
-                        username={username}
-                        concert_id={concert_id}
+                        is_live={is_live}
                       />
+                      <div className="artist-timer-wrapper">
+                        <CountdownTimer
+                          // start_date={start_date} 
+                          // start_time={start_time} 
+                          start_date={"2020-08-01"}
+                          start_time={"12:00:00"}
+                          time_up_message={"You Reached Your Scheduled Time!"}
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className="artist-control-main">
                     <div className="artist-box-header">Control</div>
-                    
+                    <button className="artist-go-live-button" onClick={toggleGoLive}>{go_live_message}</button>
                   </div>
                 </Col>
                 <Col
@@ -208,7 +233,7 @@ const StreamPage = () => {
                   <Row className="full-width">
                     <div className="artist-activity-main">
                       <div className="artist-box-header">Activity Monitor</div>
-                      <h5 className="show-time">
+                      <h5 className="artist-show-time">
                         {viewers} watching now
                       </h5>
                     </div>
@@ -260,12 +285,7 @@ const StreamPage = () => {
                       url={
                         "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                       }
-                      start_time={show_start_time}
-                      artist_name={artist_name}
-                      concert_name={concert_name}
-                      auth={auth}
-                      username={username}
-                      concert_id={concert_id}
+                      is_live={is_live}
                     />
                   </div>
                 </div>

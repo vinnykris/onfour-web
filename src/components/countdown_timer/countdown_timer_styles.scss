@@ -19,12 +19,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #e7281e;
+  // background: #e7281e;
+  color: white;
+  font-size: 0.8rem;
+  width: 80%;
 }
 
 .countdown-timer-block {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .countdown-timer-number {
@@ -35,6 +38,10 @@
   margin-right: auto;
   line-height: 24px;
   height: 25px;
+  font-family: Helvetica;
+  font-style: italic;
+  font-weight: bold;
+  letter-spacing: 0.045em;
 }
 
 .countdown-timer-label {
