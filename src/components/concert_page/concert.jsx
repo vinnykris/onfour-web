@@ -150,7 +150,7 @@ const Concert = (props) => {
                 <Col size={4} className="modal-left-col">
                   <div className="purchase-main">
                     <div className="modal-concert-info">
-                      <h3>
+                      <h3 className="concert-info-modal-header">
                         {concert_info.name}: {concert_info.concert_name}
                       </h3>
                       <p>
@@ -215,6 +215,7 @@ const Concert = (props) => {
                             {" "}
                             <ReactMultiEmail
                               placeholder="Separate emails with commas"
+                              style={{ background: "#EEEEEE" }}
                               emails={emails}
                               onChange={(_emails) => {
                                 setEmails(_emails);
@@ -247,34 +248,20 @@ const Concert = (props) => {
                 <Col size={3} className="modal-right-col">
                   <div className="purchase-review">
                     <div className="order-summary">
-                      <span className="summary-header">Order Summary</span>
                       <Row>
-                        <Col size={4}>
-                          <span className="item-name">
-                            1x General Admission
-                          </span>
-                        </Col>
-                        {price_map["general"] > 0 ? (
-                          <Col size={1}>
-                            <span className="item-price">
-                              ${price_map["general"]}
-                            </span>
-                          </Col>
-                        ) : (
-                          <Col size={1}>
-                            <span className="item-price">FREE</span>
-                          </Col>
-                        )}
+                        <span className="summary-header">Order Summary</span>
                       </Row>
-                      {backstage_pass ? (
+                      <div className="ticket-selections">
                         <Row>
                           <Col size={4}>
-                            <span className="item-name">1x Backstage Pass</span>
+                            <span className="item-name">
+                              1x General Admission
+                            </span>
                           </Col>
-                          {price_map["backstage"] > 0 ? (
+                          {price_map["general"] > 0 ? (
                             <Col size={1}>
                               <span className="item-price">
-                                ${price_map["backstage"]}
+                                ${price_map["general"]}
                               </span>
                             </Col>
                           ) : (
@@ -283,53 +270,77 @@ const Concert = (props) => {
                             </Col>
                           )}
                         </Row>
-                      ) : (
-                        <Row>
-                          <Col size={1}>
-                            <div className="backstage-hidden-text">
-                              NO BACKSTAGE PASS
-                            </div>
-                          </Col>
-                        </Row>
-                      )}
-                      <hr className="break-modal" />
-                      <div className="complete-purchase">
-                        <Row>
-                          <Col size={4}>
-                            <span className="item-name">Total</span>
-                          </Col>
-                          {total > 0 ? (
-                            <Col size={1}>
-                              <span className="item-price">${total}</span>
+                        {backstage_pass ? (
+                          <Row>
+                            <Col size={4}>
+                              <span className="item-name">
+                                1x Backstage Pass
+                              </span>
                             </Col>
-                          ) : (
+                            {price_map["backstage"] > 0 ? (
+                              <Col size={1}>
+                                <span className="item-price">
+                                  ${price_map["backstage"]}
+                                </span>
+                              </Col>
+                            ) : (
+                              <Col size={1}>
+                                <span className="item-price">FREE</span>
+                              </Col>
+                            )}
+                          </Row>
+                        ) : (
+                          <Row>
                             <Col size={1}>
-                              <span className="item-price">FREE</span>
+                              <div className="backstage-hidden-text">
+                                NO BACKSTAGE PASS
+                              </div>
                             </Col>
-                          )}
-                        </Row>
-                        <Row>
-                          <Col size={1}>
-                            <div>
-                              {total > 0 ? (
-                                <button
-                                  className="checkout-button"
-                                  onClick={goToCheckout}
-                                >
-                                  CHECKOUT
-                                </button>
-                              ) : (
-                                <button
-                                  className="checkout-button"
-                                  onClick={addTicket}
-                                >
-                                  GET TICKET
-                                </button>
-                              )}
-                            </div>
-                          </Col>
-                        </Row>
+                          </Row>
+                        )}
                       </div>
+                    </div>
+                    <hr className="break-modal right-col-break" />
+                    <div className="total-purchase">
+                      <Row>
+                        <Col size={4}>
+                          <span className="item-name total-item">Total</span>
+                        </Col>
+                        {total > 0 ? (
+                          <Col size={1}>
+                            <span className="item-price total-item">
+                              ${total}
+                            </span>
+                          </Col>
+                        ) : (
+                          <Col size={1}>
+                            <span className="item-price total-item">FREE</span>
+                          </Col>
+                        )}
+                      </Row>
+                    </div>
+                    <div className="checkout-button-container">
+                      <Row>
+                        <Col size={1}>
+                          <div>
+                            {total > 0 ? (
+                              <button
+                                className="checkout-button"
+                                onClick={goToCheckout}
+                              >
+                                CHECKOUT
+                              </button>
+                            ) : (
+                              <button
+                                className="checkout-button"
+                                onClick={addTicket}
+                              >
+                                GET TICKET
+                              </button>
+                            )}
+                          </div>
+                        </Col>
+                      </Row>
                     </div>
                   </div>
                 </Col>
