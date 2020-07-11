@@ -116,9 +116,13 @@ const Concert = (props) => {
     setOpenModal(false);
   };
 
-  // const handleBackstageSelection = () => {
-  //   setBackstagePass(!backstage_pass);
-  // };
+  const goToCheckout = () => {
+    console.log("go to checkout");
+  };
+
+  const addTicket = () => {
+    console.log("add ticket");
+  };
 
   return (
     <div className="concert-page">
@@ -246,23 +250,37 @@ const Concert = (props) => {
                       <span className="summary-header">Order Summary</span>
                       <Row>
                         <Col size={4}>
-                          <span>1x General Admission</span>
+                          <span className="item-name">
+                            1x General Admission
+                          </span>
                         </Col>
                         {price_map["general"] > 0 ? (
-                          <Col size={1}>${price_map["general"]}</Col>
+                          <Col size={1}>
+                            <span className="item-price">
+                              ${price_map["general"]}
+                            </span>
+                          </Col>
                         ) : (
-                          <Col size={1}>FREE</Col>
+                          <Col size={1}>
+                            <span className="item-price">FREE</span>
+                          </Col>
                         )}
                       </Row>
                       {backstage_pass ? (
                         <Row>
                           <Col size={4}>
-                            <span>1x Backstage Pass</span>
+                            <span className="item-name">1x Backstage Pass</span>
                           </Col>
                           {price_map["backstage"] > 0 ? (
-                            <Col size={1}>${price_map["backstage"]}</Col>
+                            <Col size={1}>
+                              <span className="item-price">
+                                ${price_map["backstage"]}
+                              </span>
+                            </Col>
                           ) : (
-                            <Col size={1}>FREE</Col>
+                            <Col size={1}>
+                              <span className="item-price">FREE</span>
+                            </Col>
                           )}
                         </Row>
                       ) : (
@@ -278,13 +296,38 @@ const Concert = (props) => {
                       <div className="complete-purchase">
                         <Row>
                           <Col size={4}>
-                            <span>Total</span>
+                            <span className="item-name">Total</span>
                           </Col>
                           {total > 0 ? (
-                            <Col size={1}>${total}</Col>
+                            <Col size={1}>
+                              <span className="item-price">${total}</span>
+                            </Col>
                           ) : (
-                            <Col size={1}>FREE</Col>
+                            <Col size={1}>
+                              <span className="item-price">FREE</span>
+                            </Col>
                           )}
+                        </Row>
+                        <Row>
+                          <Col size={1}>
+                            <div>
+                              {total > 0 ? (
+                                <button
+                                  className="checkout-button"
+                                  onClick={goToCheckout}
+                                >
+                                  CHECKOUT
+                                </button>
+                              ) : (
+                                <button
+                                  className="checkout-button"
+                                  onClick={addTicket}
+                                >
+                                  GET TICKET
+                                </button>
+                              )}
+                            </div>
+                          </Col>
                         </Row>
                       </div>
                     </div>
@@ -374,9 +417,11 @@ const Concert = (props) => {
                       <ul className="social-list">
                         <li>
                           <a
-                            onClick={Analytics.record({
-                              name: "facebookShareClicked",
-                            })}
+                            onClick={() =>
+                              Analytics.record({
+                                name: "facebookShareClicked",
+                              })
+                            }
                             href={facebook_link}
                             className="fa fa-facebook-official fb-xfbml-parse-ignore"
                             target="_blank"
@@ -387,9 +432,11 @@ const Concert = (props) => {
                         </li>
                         <li>
                           <a
-                            onClick={Analytics.record({
-                              name: "twitterShareClicked",
-                            })}
+                            onClick={() =>
+                              Analytics.record({
+                                name: "twitterShareClicked",
+                              })
+                            }
                             className="fa fa-twitter twitter-share-button"
                             target="_blank"
                             rel="noopener noreferrer"
