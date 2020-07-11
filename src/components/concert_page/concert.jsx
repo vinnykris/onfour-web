@@ -1,21 +1,30 @@
 // React Imports
 import React, { useState } from "react";
-import PulseLoader from "react-spinners/PulseLoader";
+import { useEffect } from "react";
 
-// Styling Imports
-import "./concert_styles.scss";
-import { Grid, Row, Col } from "../grid";
+// Function import
 import { createUpcomingObject } from "../util";
+import { getOneConcert } from "../../apis/get_concert_data";
+import { useInputValue } from "../custom_hooks";
 
 // AWS Imports
 import { Analytics } from "aws-amplify";
-import { useEffect } from "react";
 
 // Component Imports
 import CountdownTimer from "../countdown_timer/countdown_timer";
-import { getOneConcert } from "../../apis/get_concert_data";
 import SocialBar from "../social_bar/social_bar";
 import Tooltip from "@material-ui/core/Tooltip";
+import Rodal from "rodal";
+import { Grid, Row, Col } from "../grid";
+import PulseLoader from "react-spinners/PulseLoader";
+import { Checkbox, useCheckboxState } from "pretty-checkbox-react";
+import { useForm } from "react-hook-form";
+import { ReactMultiEmail, isEmail } from "react-multi-email";
+
+// Styling Imports
+import "./concert_styles.scss";
+import "rodal/lib/rodal.css";
+import "react-multi-email/style.css";
 
 // Concert is the unique concert page
 const Concert = (props) => {
@@ -23,6 +32,19 @@ const Concert = (props) => {
   const [tooltip_text, setTooltipText] = useState("");
   const [facebook_link, setFacebookLink] = useState("");
   const [twitter_link, setTwitterLink] = useState("");
+  const [open_modal, setOpenModal] = useState(false);
+  const [backstage_pass, setBackstagePass] = useState(false);
+  const [emails, setEmails] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  const price_map = {
+    general: 0,
+    backstage: 10,
+  };
+
+  // const {register, handleSubmit, watch, errors } = useForm();
+
+  const backstage_checkbox = useCheckboxState();
 
   // Social links
   const instagram = "https://www.instagram.com/jonathan_dely/";
@@ -34,6 +56,7 @@ const Concert = (props) => {
   const facebook = "https://www.facebook.com/jonathandelymusic";
   const twitter = "https://twitter.com/jonathan_dely";
 
+  // Concert-specific info
   const concert_id = props.match.params.showID; // Passed from URL
   const state = props.location.state; // Props passed through link
 
@@ -58,7 +81,23 @@ const Concert = (props) => {
     setTwitterLink(
       `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
     );
+    setTotal(price_map["general"]);
   }, []);
+
+  useEffect(() => {
+    if (backstage_checkbox.state) {
+      // WHAT HAPPENS IF BACKSTAGE CHECKBOX IS CHECKED
+      setTotal(price_map["general"] + price_map["backstage"]);
+      setBackstagePass(true);
+    } else {
+      setTotal(price_map["general"]);
+      setBackstagePass(false);
+    }
+  }, [backstage_checkbox.state]);
+
+  // const onSubmit = data => {
+
+  // }
 
   // If copy to clipboard button is clicked, change tooltip text and copy stream page link
   // Record analytics for click as well
@@ -70,7 +109,16 @@ const Concert = (props) => {
 
   const getTicket = () => {
     console.log("button pressed");
+    setOpenModal(true);
   };
+
+  const hideModal = () => {
+    setOpenModal(false);
+  };
+
+  // const handleBackstageSelection = () => {
+  //   setBackstagePass(!backstage_pass);
+  // };
 
   return (
     <div className="concert-page">
@@ -85,6 +133,166 @@ const Concert = (props) => {
         </div>
       ) : (
         <Grid>
+          <Rodal
+            visible={open_modal}
+            onClose={hideModal}
+            width={120}
+            height={70}
+            measure="vh"
+            customStyles={{ padding: 0 }}
+          >
+            <Grid className="modal-grid">
+              <Row className="modal-row">
+                <Col size={4} className="modal-left-col">
+                  <div className="purchase-main">
+                    <div className="modal-concert-info">
+                      <h3>
+                        {concert_info.name}: {concert_info.concert_name}
+                      </h3>
+                      <p>
+                        {concert_info.week_day} {concert_info.formatted_date}{" "}
+                        {concert_info.formatted_time} EST
+                      </p>
+                    </div>
+                    <hr className="break-modal" />
+                    <div className="ticket-types">
+                      <Row className="ticket-row">
+                        <Col size={1}></Col>
+                        <Col size={3}>
+                          <Checkbox
+                            state
+                            className="p-fill p-round ticket-box p-locked"
+                          >
+                            <span className="checkbox-text">
+                              General Admission
+                            </span>
+                          </Checkbox>
+                        </Col>
+                        <Col size={1}></Col>
+                      </Row>
+                      <Row className="ticket-row">
+                        <Col size={1}></Col>
+                        <Col size={3}>
+                          <Checkbox
+                            {...backstage_checkbox}
+                            shape="round"
+                            className="p-fill ticket-box"
+                            // disabled
+                          >
+                            <span className="checkbox-text">
+                              Backstage Pass
+                            </span>
+                          </Checkbox>
+                        </Col>
+                        <Col size={1}></Col>
+                      </Row>
+                    </div>
+
+                    <hr className="break-modal" />
+                    <div className="invite-friends">
+                      <Row>
+                        <Col size={1}>
+                          <span className="invite-prompt">
+                            <span className="fa-stack">
+                              <i className="fa fa-circle fa-stack-2x icon-background"></i>
+                              <i
+                                className="fa fa-stack-1x fa-user-plus add-user-icon"
+                                aria-hidden="true"
+                              ></i>
+                            </span>
+
+                            <p className="invite-text">Invite Your Friends</p>
+                          </span>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col size={1}>
+                          <div className="email-input-field">
+                            {" "}
+                            <ReactMultiEmail
+                              placeholder="Separate emails with commas"
+                              emails={emails}
+                              onChange={(_emails) => {
+                                setEmails(_emails);
+                              }}
+                              validateEmail={(email) => {
+                                return isEmail(email); // return boolean
+                              }}
+                              getLabel={(email, index, removeEmail) => {
+                                return (
+                                  <div data-tag key={index}>
+                                    {email}
+                                    <span
+                                      data-tag-handle
+                                      onClick={() => removeEmail(index)}
+                                    >
+                                      ×
+                                    </span>
+                                  </div>
+                                );
+                              }}
+                            />
+                          </div>
+
+                          {/* <p>{emails.join(", ") || "empty"}</p> */}
+                        </Col>
+                      </Row>
+                    </div>
+                  </div>
+                </Col>
+                <Col size={3} className="modal-right-col">
+                  <div className="purchase-review">
+                    <div className="order-summary">
+                      <span className="summary-header">Order Summary</span>
+                      <Row>
+                        <Col size={4}>
+                          <span>1x General Admission</span>
+                        </Col>
+                        {price_map["general"] > 0 ? (
+                          <Col size={1}>${price_map["general"]}</Col>
+                        ) : (
+                          <Col size={1}>FREE</Col>
+                        )}
+                      </Row>
+                      {backstage_pass ? (
+                        <Row>
+                          <Col size={4}>
+                            <span>1x Backstage Pass</span>
+                          </Col>
+                          {price_map["backstage"] > 0 ? (
+                            <Col size={1}>${price_map["backstage"]}</Col>
+                          ) : (
+                            <Col size={1}>FREE</Col>
+                          )}
+                        </Row>
+                      ) : (
+                        <Row>
+                          <Col size={1}>
+                            <div className="backstage-hidden-text">
+                              NO BACKSTAGE PASS
+                            </div>
+                          </Col>
+                        </Row>
+                      )}
+                      <hr className="break-modal" />
+                      <div className="complete-purchase">
+                        <Row>
+                          <Col size={4}>
+                            <span>Total</span>
+                          </Col>
+                          {total > 0 ? (
+                            <Col size={1}>${total}</Col>
+                          ) : (
+                            <Col size={1}>FREE</Col>
+                          )}
+                        </Row>
+                      </div>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </Grid>
+          </Rodal>
           <Row className="info-row">
             <Col size={1} className="concert-info-col">
               <div className="concert-image-container">
@@ -215,7 +423,7 @@ const Concert = (props) => {
               </Row>
             </Col>
           </Row>
-          <Row className="suggested-shows"></Row>
+          {/* <Row className="suggested-shows"></Row> */}
         </Grid>
       )}
     </div>

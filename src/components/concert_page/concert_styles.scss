@@ -1,6 +1,7 @@
 // CONCERT COMPONENT STYLING
 
 @import "../../styles";
+// @import "pretty-checkbox.scss";
 
 .concert-page {
   margin-top: -1px;
@@ -118,4 +119,111 @@ hr.solid {
   margin: 0;
   padding-right: 30px;
   font-size: 3rem;
+}
+
+.modal-grid {
+  height: 100%;
+  width: 100%;
+}
+
+.modal-row {
+  height: 100%;
+  width: 100%;
+}
+
+.purchase-main {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+}
+
+.purchase-review {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  background-color: #f5f6f7;
+}
+
+hr.break-modal {
+  border: 1px solid #cbcbcb;
+}
+
+.ticket-type {
+  padding: 5%;
+}
+
+.select-ticket {
+  width: 100%;
+}
+
+.ticket-box {
+  // float: left;
+  display: flex;
+  // width: 30px;
+  // height: 30px;
+}
+
+.ticket-row {
+  margin: 13% 15%;
+}
+
+.pretty .state label {
+  height: 30px;
+  color: black;
+}
+
+.pretty .state label::before {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  top: 0;
+}
+
+.pretty .state label::after {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  top: 0;
+}
+
+.checkbox-text {
+  font-size: 17px;
+  line-height: 30px;
+  margin-left: 30px;
+}
+
+.pretty.p-default input:checked ~ .state label:after {
+  background-color: black !important;
+}
+
+.invite-friends {
+  margin: 6%;
+}
+
+.invite-prompt {
+  display: flex;
+  float: left;
+}
+
+.invite-text {
+  margin: auto;
+  margin-left: 10px;
+  font-size: 15px;
+  line-height: 17px;
+}
+
+.add-user-icon {
+  color: white;
+}
+
+.icon-background {
+  color: black;
+}
+
+.email-input-field {
+  margin-top: 17px;
+}
+
+.backstage-hidden-text {
+  visibility: hidden;
 }
