@@ -21,6 +21,12 @@ import { Checkbox, useCheckboxState } from "pretty-checkbox-react";
 import { useForm } from "react-hook-form";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
 
+// Image imports
+import add_group_icon from "../../images/icons/add_group.png";
+import modal_button_outline from "../../images/icons/modal_button_outline.png";
+import checkmark_icon from "../../images/icons/selected.png";
+import checkmark_icon_2 from "../../images/icons/check-mark-240.png";
+
 // Styling Imports
 import "./concert_styles.scss";
 import "rodal/lib/rodal.css";
@@ -59,6 +65,31 @@ const Concert = (props) => {
   // Concert-specific info
   const concert_id = props.match.params.showID; // Passed from URL
   const state = props.location.state; // Props passed through link
+
+  // const add_group_modal = (
+  //   <div className="modal-button-parent">
+  //     <img className="icon-base" src={modal_button_outline} />
+  //     <img className="icon-main" src={add_group_icon} />
+  //   </div>
+  // );
+
+  // const checkmark_modal = (
+  //   <div className="modal-button-parent">
+  //     <img className="icon-base" src={modal_button_outline} />
+  //     <img className="icon-main" src={checkmark_icon} />
+  //   </div>
+  // );
+
+  // const checkmark_icon_3 = (
+  //   <svg
+  //     xmlns="http://www.w3.org/2000/svg"
+  //     width="24"
+  //     height="24"
+  //     viewBox="0 0 24 24"
+  //   >
+  //     <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 16.518l-4.5-4.319 1.396-1.435 3.078 2.937 6.105-6.218 1.421 1.409-7.5 7.626z" />
+  //   </svg>
+  // );
 
   // Runs on mount
   useEffect(() => {
@@ -122,6 +153,8 @@ const Concert = (props) => {
 
   const addTicket = () => {
     console.log("add ticket");
+    console.log(total);
+    console.log(emails);
   };
 
   return (
@@ -166,6 +199,23 @@ const Concert = (props) => {
                           <Checkbox
                             state
                             className="p-fill p-round ticket-box p-locked"
+                            icon={
+                              <i
+                                className="fa fa-check-circle"
+                                aria-hidden="true"
+                              ></i>
+                            }
+
+                            // svg={
+                            //   <svg
+                            //     xmlns="http://www.w3.org/2000/svg"
+                            //     width="24"
+                            //     height="24"
+                            //     viewBox="0 0 24 24"
+                            //   >
+                            //     <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 16.518l-4.5-4.319 1.396-1.435 3.078 2.937 6.105-6.218 1.421 1.409-7.5 7.626z" />
+                            //   </svg>
+                            // }
                           >
                             <span className="checkbox-text">
                               General Admission
@@ -181,6 +231,12 @@ const Concert = (props) => {
                             {...backstage_checkbox}
                             shape="round"
                             className="p-fill ticket-box"
+                            icon={
+                              <i
+                                className="fa fa-check-circle"
+                                aria-hidden="true"
+                              ></i>
+                            }
                             // disabled
                           >
                             <span className="checkbox-text">
