@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from "react";
 
 // Component Imports
-import FeaturedContent from "./featured_content";
-import SearchBar from "../search_bar/search_bar";
+// import FeaturedContent from "./featured_content";
+// import SearchBar from "../search_bar/search_bar";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import { useWindowDimensions } from "../custom_hooks";
 
 // AWS Imports
-import { API, graphqlOperation } from "aws-amplify";
-import * as queries from "../../graphql/queries";
+// import { API, graphqlOperation } from "aws-amplify";
+// import * as queries from "../../graphql/queries";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";

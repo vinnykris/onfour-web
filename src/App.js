@@ -17,6 +17,8 @@ import SoundCheck from "./components/soundcheck_page/soundcheck_page";
 import Register from "./components/register_page/register_page";
 import Login from "./components/login_page/login_page";
 import ArtistForm from "./components/artist_form/artist_form";
+import ArtistStreamPage from "./components/artist_stream_page/artist_stream_page";
+
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -52,6 +54,7 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/form" component={ArtistForm} />
+          <Route path="/artiststream" component={ArtistStreamPage} />
         </Switch>
         <Footer />
       </Router>

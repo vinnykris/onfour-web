@@ -353,7 +353,7 @@ const Register = () => {
                             id="password_r_slot"
                             placeholder="Repeat Password"
                             onChange={(event) =>
-                              setRepeatPassword(event.target.value)
+                              setUsername(event.target.value)
                             }
                             required
                           />
