@@ -12,7 +12,6 @@ import Ticket from "./components/payment/payment_box";
 import ArchivePage from "./components/archive_page/archive_page";
 import ArtistsPage from "./components/artist_page/artist_page";
 import Footer from "./components/footer/footer";
-import Modal from "./components/sign_in_modal/sign_in_modal";
 import Forgot from "./components/forgot_page/forgot_page";
 import SoundCheck from "./components/soundcheck_page/soundcheck_page";
 import Register from "./components/register_page/register_page";
@@ -54,7 +53,6 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/form" component={ArtistForm} />
         </Switch>
-        <Modal></Modal>
         <Footer />
       </Router>
     </div>
