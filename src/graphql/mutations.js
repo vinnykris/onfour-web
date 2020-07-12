@@ -50,3 +50,10 @@ export const update_registration_concert = `mutation updateCreateOnfourRegistrat
   }
 }
 `;
+
+export const update_artist_form = `mutation updateCreateOnfourRegistration($input: UpdateCreateOnfourRegistrationInput!) {
+  updateCreateOnfourRegistration(input: $input) {
+    username
+  }
+}
+`;

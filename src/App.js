@@ -12,10 +12,13 @@ import Ticket from "./components/payment/payment_box";
 import ArchivePage from "./components/archive_page/archive_page";
 import ArtistsPage from "./components/artist_page/artist_page";
 import Footer from "./components/footer/footer";
-import Modal from "./components/sign_in_modal/sign_in_modal";
 import Forgot from "./components/forgot_page/forgot_page";
 import SoundCheck from "./components/soundcheck_page/soundcheck_page";
+import Register from "./components/register_page/register_page";
+import Login from "./components/login_page/login_page";
+import ArtistForm from "./components/artist_form/artist_form";
 import ArtistStreamPage from "./components/artist_stream_page/artist_stream_page";
+
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -26,8 +29,8 @@ import "./App.css";
 import "./styles.scss";
 
 // Amplify imports
-import Amplify from 'aws-amplify';
-import awsconfig from './apis/aws-exports';
+import Amplify from "aws-amplify";
+import awsconfig from "./apis/aws-exports";
 
 require("dotenv").config();
 Amplify.configure(awsconfig);
@@ -48,9 +51,11 @@ function App() {
           <Route path="/artists" component={ArtistsPage} />
           <Route path="/forgot" component={Forgot} />
           <Route path="/soundcheck" component={SoundCheck} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route path="/form" component={ArtistForm} />
           <Route path="/artiststream" component={ArtistStreamPage} />
         </Switch>
-        <Modal></Modal>
         <Footer />
       </Router>
     </div>

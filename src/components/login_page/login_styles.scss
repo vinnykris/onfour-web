@@ -8,10 +8,14 @@
   width: 100%;
 }
 
-.login-form {
-  margin-top: 7%;
-  width: 90%;
-  padding-bottom: 7%;
+.signin-form {
+  margin-top: 2.5%;
+  width: 29%;
+  padding-bottom: 2%;
+}
+
+.form-section {
+  width: 100%;
 }
 
 .login-fields-section {
@@ -26,19 +30,20 @@
   width: 100%;
 }
 
-.login-purple-scheme {
-  background-color: #979bbb;
-}
-
 .label-text {
   color: white;
 }
 
-.login-submit-button {
-  width: 38%;
+.login-input-row {
+  padding-bottom: 2.5%;
+}
+
+.signin-submit-button {
+  width: 100%;
   color: white;
   font-size: 14px;
   font-weight: 420;
+  background-color: #7c1fb5;
 }
 
 .processing-message {
@@ -50,15 +55,31 @@
 .login-loader-container {
   width: 60px;
   margin: 0 auto;
-  margin-top: 27%;
+  margin-top: 15%;
   margin-bottom: 27%;
 }
-.forgot-password-box {
-  padding-top: 7%;
-  padding-bottom: 1%;
-  color: white;
+
+.signin-header {
+  padding-bottom: 3%;
+  text-align: center;
 }
 
-.forgot-link {
+.signin-header-text {
   color: white;
+  width: 100%;
+}
+
+.signup-link {
+  color: #7c1fb5;
+  text-decoration: underline;
+}
+
+.signin-footer {
+  color: white;
+  padding-bottom: 0.5%;
+}
+
+.forgot-footer {
+  color: white;
+  padding-bottom: 5%;
 }

@@ -1,3 +1,6 @@
+// Main Imports
+import history from "../../history";
+
 // React
 import React, { useState } from "react";
 
@@ -22,9 +25,9 @@ const Forgot = () => {
   const [error_color, setErrorColor] = useState("red"); // Tracking/setting error message when changing password
   const [success, setSuccess] = useState(true); //Track if the reset password is seccessful
 
-  // Function to redirect to stream page
+  // Function to redirect to login page
   const redirect = () => {
-    window.location.href = "http://onfour.live/stream";
+    history.push("/login");
   };
 
   // After a successfull password change, clear the input fields, display a success
@@ -38,7 +41,6 @@ const Forgot = () => {
     setPassword("");
     setConfirmPassword("");
     window.setTimeout(redirect, 2800);
-    
   };
 
   // Function to send a verification code to the input email
@@ -85,31 +87,34 @@ const Forgot = () => {
             {stage === "first" && (
               <div>
                 <form onSubmit={sendCode} className="forgot-form" id="forgot">
-                  <Row>
-                    <label className="label-text" for="email_slot">
-                      Email Address or Username*
-                    </label>
+                  <Row className="forgot-header">
+                    <h6 className="forgot-header-text">
+                      Please enter your email or username below to receive a
+                      verification email!
+                    </h6>
                   </Row>
-                  <Row>
+                  <Row className="forgot-input-row">
                     <input
                       className="forgot-input"
                       name="email"
                       id="email_slot"
                       value={email}
+                      placeholder="Email Address or Username"
                       onChange={(event) => setEmail(event.target.value)}
                       required
                     />
                   </Row>
                   <br></br>
-                  <br></br>
-                  <button
-                    className="forgot-submit-button"
-                    type="submit"
-                    form="forgot"
-                    value="Submit"
-                  >
-                    SEND VERIFICATION CODE
-                  </button>
+                  <Row className="forgot-verification-footer">
+                    <button
+                      className="forgot-submit-button"
+                      type="submit"
+                      form="forgot"
+                      value="Submit"
+                    >
+                      SEND VERIFICATION CODE
+                    </button>
+                  </Row>
                 </form>
               </div>
             )}
@@ -121,12 +126,12 @@ const Forgot = () => {
                   className="forgot-form"
                   id="forgot"
                 >
-                  <Row>
-                    <label className="label-text" for="email_slot">
-                      Email Address or Username*
-                    </label>
+                  <Row className="forgot-header">
+                    <h6 className="forgot-header-text">
+                      Please enter your verification and new password below!
+                    </h6>
                   </Row>
-                  <Row>
+                  <Row className="forgot-input-row">
                     <input
                       className="forgot-input"
                       name="email"
@@ -137,75 +142,65 @@ const Forgot = () => {
                       required
                     />
                   </Row>
-                  <br></br>
-                  <Row>
-                    <label className="label-text" for="verification_code">
-                      Verification Code*
-                    </label>
-                  </Row>
-                  <Row>
+                  <Row className="forgot-input-row">
                     <input
                       className="forgot-input"
                       name="code"
                       id="verification_code"
                       value={code}
+                      placeholder="Verification Code"
                       onChange={(event) => setCode(event.target.value)}
                       required
                     />
                   </Row>
-                  <br></br>
-                  <Row>
-                    <label className="label-text" for="password_slot">
-                      New Password*
-                    </label>
-                  </Row>
-                  <Row>
+                  <Row className="forgot-input-row">
                     <input
                       className="forgot-input"
                       type="password"
                       name="password"
                       id="password_slot"
                       value={password}
+                      placeholder="New Password"
                       onChange={(event) => setPassword(event.target.value)}
                       required
                     />
                   </Row>
-                  <br></br>
-                  <Row>
-                    <label className="label-text" for="new_password_slot">
-                      Repeat New Password*
-                    </label>
-                  </Row>
-                  <Row>
+                  <Row className="forgot-input-row">
                     <input
                       className="forgot-input"
                       type="password"
                       name="new_password"
                       id="new_password_slot"
                       value={confirm_password}
+                      placeholder="Repeat New Password"
                       onChange={(event) =>
                         setConfirmPassword(event.target.value)
                       }
                       required
                     />
                   </Row>
-                  <br></br>
                   <div style={{ color: error_color }}>{error}</div>
                   <br></br>
-                  <button
-                    className="forgot-submit-button"
-                    type="submit"
-                    form="forgot"
-                    value="Submit"
-                  >
-                    CHANGE PASSWORD
-                  </button>
+                  <Row className="forgot-verification-footer">
+                    <button
+                      className="forgot-submit-button"
+                      type="submit"
+                      form="forgot"
+                      value="Submit"
+                    >
+                      CHANGE PASSWORD
+                    </button>
+                  </Row>
                 </form>
               </div>
             )}
             {stage === "third" && (
               <div className="success-container">
-                <p className="success-message-forgot">{"Password successfully changed!\n Please wait for the page to be reloaded"}</p>
+                <p className="success-message-forgot">
+                  {
+                    "Password successfully changed!\n Please wait for the page to be reloaded"
+                  }
+                </p>
                 <div className="loader-container">
                   <PulseLoader
                     sizeUnit={"px"}
