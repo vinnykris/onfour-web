@@ -85,50 +85,25 @@ const StreamPage = () => {
 
   // Get the start time for countdown_timer
   useEffect(() => {
-    getStartTime();
+    getStartTimeAndIsLive();
   }, []);
 
   // Query upcoming show database
-  const getStartTime = async () => {
+  const getStartTimeAndIsLive = async () => {
     // Calling the API, using async and await is necessary
     await API.graphql(
       graphqlOperation(queries.get_upcoming_concerts_with_concert_id,{
-      filter: { concert_id: { eq: "why_need_conert_id_for_this" } },
+      concert_id: "why_need_conert_id_for_this",
       })
     ).then((data) => {
-        setStartTime(
-          data.data.listConcerts.items[0].time
-        )
-        setTimerStartTime(
-          data.data.listConcerts.items[0].time
-        );
-        setStartDate(
-          data.data.listConcerts.items[0].date
-        );
+      setStartTime(data.data.getConcert.time)
+      setTimerStartTime(data.data.getConcert.time);
+      setStartDate(data.data.getConcert.date);
+      setIsLive(data.data.getConcert.is_live);
+      setGoLiveMsg(data.data.getConcert.is_live ? "DISCONNECT" : "GO LIVE");
       }
     );
   };
-
-  const getIsLive = async () => {
-    // Calling the API, using async and await is necessary
-    await API.graphql(
-      graphqlOperation(queries.get_upcoming_concerts_with_concert_id, {
-        filter: { concert_id: { eq: "why_need_conert_id_for_this" } },
-      })
-    ).then((data) => {
-      setIsLive(data.data.listConcerts.items[0].is_live);
-      setGoLiveMsg(data.data.listConcerts.items[0].is_live? "DISCONNECT" : "GO LIVE");
-    });
-  }
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     getIsLive();
-  //   }, 1000);
-  // });
-  useEffect(() => {
-    getIsLive();
-  },[]);
 
   // GET USER'S REGISTRATION INFORMATION
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session

@@ -180,7 +180,7 @@ const StreamPage = () => {
     );
     setConcertName(info_list[0].concertName);
     setArtistName(info_list[0].artist);
-    setConcertID(info_list[0].concertId);
+    setConcertID(info_list[0].id);
     setIsLive(info_list[0].is_live);
   };
 
@@ -307,21 +307,25 @@ const StreamPage = () => {
 
   const getIsLive = async () => {
     // Calling the API, using async and await is necessary
+    if (concert_id) {
+      console.log("calling api");
       await API.graphql(
-        graphqlOperation(queries.get_upcoming_concerts_with_concert_id_old_table, {
-          filter: { concertId: { eq: concert_id } },
+        graphqlOperation(queries.get_upcoming_concerts_with_id_old_table, {
+          id: concert_id, timePassed: 0,
         })
       ).then((data) => {
-        if(data.data.listFutureConcerts.items[0]) {
-          setIsLive(data.data.listFutureConcerts.items[0].is_live);
+        if (data.data.getFutureConcerts.is_live) {
+          setIsLive(data.data.getFutureConcerts.is_live);
         }
       });
+    }
+      
   }
 
   useEffect(() => {
     setTimeout(() => {
       getIsLive();
-    }, 1000);
+    }, 5000);
   });
 
   // RENDERING SECTION
@@ -381,7 +385,8 @@ const StreamPage = () => {
                         url={
                           "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                         }
-                        start_time={show_start_time}
+                        // start_time={show_start_time}
+                        start_time="2020-07-11T11:30:00.000-04:00"
                         artist_name={artist_name}
                         concert_name={concert_name}
                         auth={auth}

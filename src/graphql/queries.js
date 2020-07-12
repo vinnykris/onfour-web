@@ -61,24 +61,20 @@ export const list_upcoming_concerts = `query listFutureConcerts {
 }`;
 
 
-export const get_upcoming_concerts_with_concert_id_old_table = `query listFutureConcerts(
-    $filter: TableFutureConcertsFilterInput
+export const get_upcoming_concerts_with_id_old_table = `query getFutureConcerts(
+    $id: ID!, $timePassed: Int!
   ) {
-    listFutureConcerts(filter: $filter, limit: 1000) {
-      items {
+    getFutureConcerts(id: $id, timePassed: $timePassed) {
         is_live
-      }
     }
   }`;
 
-export const get_upcoming_concerts_with_concert_id = `query listConcerts(
-    $filter: TableConcertFilterInput
+export const get_upcoming_concerts_with_concert_id = `query getConcert(
+    $concert_id: ID!
   ) {
-    listConcerts(filter: $filter, limit: 1000) {
-      items {
-        date
-        time
-        is_live
-      }
+    getConcert(concert_id: $concert_id) {
+      date
+      time
+      is_live
     }
   }`;

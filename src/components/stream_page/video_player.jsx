@@ -128,7 +128,6 @@ function VideoPlayer({
 
   const [registered_concert, setRegisteredConcert] = useState(false);
   const registerConcert = async (concert_reg_load) => {
-    console.log(concert_reg_load.concert);
     // Calling the API, using async and await is necessary
     await API.graphql(
       graphqlOperation(mutations.update_registration_concert, {
