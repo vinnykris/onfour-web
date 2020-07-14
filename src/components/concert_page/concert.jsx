@@ -9,6 +9,7 @@ import { useInputValue } from "../custom_hooks";
 
 // AWS Imports
 import { Analytics } from "aws-amplify";
+import Auth from "../../apis/UserPool";
 
 // Component Imports
 import CountdownTimer from "../countdown_timer/countdown_timer";
@@ -42,6 +43,8 @@ const Concert = (props) => {
   const [backstage_pass, setBackstagePass] = useState(false);
   const [emails, setEmails] = useState([]);
   const [total, setTotal] = useState(0);
+  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
+  const [username, setUsername] = useState("");
 
   const price_map = {
     general: 0,
@@ -66,19 +69,15 @@ const Concert = (props) => {
   const concert_id = props.match.params.showID; // Passed from URL
   const state = props.location.state; // Props passed through link
 
-  // const add_group_modal = (
-  //   <div className="modal-button-parent">
-  //     <img className="icon-base" src={modal_button_outline} />
-  //     <img className="icon-main" src={add_group_icon} />
-  //   </div>
-  // );
-
-  // const checkmark_modal = (
-  //   <div className="modal-button-parent">
-  //     <img className="icon-base" src={modal_button_outline} />
-  //     <img className="icon-main" src={checkmark_icon} />
-  //   </div>
-  // );
+  Auth.currentAuthenticatedUser({})
+    .then((user) => {
+      setAuth(true);
+      setUsername(user.username);
+    })
+    // .then((user) => setUsername(user.username))
+    // .then((user) => setAuth(true))
+    // .then((user) => closeMenu())
+    .catch((err) => setAuth(false));
 
   // const checkmark_icon_3 = (
   //   <svg
@@ -155,6 +154,7 @@ const Concert = (props) => {
     console.log("add ticket");
     console.log(total);
     console.log(emails);
+    console.log(username);
   };
 
   return (

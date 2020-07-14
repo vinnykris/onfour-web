@@ -15,9 +15,7 @@ function CountdownTimer({ start_date, start_time }) {
   // and represent the difference in days, hours, minuts and seconds
   const calculateTimeLeft = () => {
     const difference =
-      +new Date(start_date + "T" + start_time + ".000-04:00") -
-      +new Date() +
-      1000000000;
+      +new Date(start_date + "T" + start_time + ".000-04:00") - +new Date();
 
     let time_left = {};
 
