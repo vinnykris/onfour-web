@@ -339,6 +339,16 @@ hr.break-modal {
   width: 100%;
 }
 
+.checkout-button-disabled {
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: 0.055em;
+  color: rgb(133, 133, 133);
+  width: 100%;
+  background-color: #b4b3b3;
+}
+
 .react-multi-email > input {
   background-color: #eeeeee;
 }

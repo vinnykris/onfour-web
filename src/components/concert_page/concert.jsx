@@ -379,20 +379,42 @@ const Concert = (props) => {
                       <Row>
                         <Col size={1}>
                           <div>
-                            {total > 0 ? (
-                              <button
-                                className="checkout-button"
-                                onClick={goToCheckout}
-                              >
-                                CHECKOUT
-                              </button>
+                            {username ? (
+                              <div>
+                                {total > 0 ? (
+                                  <button
+                                    className="checkout-button"
+                                    onClick={goToCheckout}
+                                    disabled={!username}
+                                  >
+                                    CHECKOUT
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="checkout-button"
+                                    onClick={addTicket}
+                                    disabled={!username}
+                                  >
+                                    GET TICKET
+                                  </button>
+                                )}
+                              </div>
                             ) : (
-                              <button
-                                className="checkout-button"
-                                onClick={addTicket}
-                              >
-                                GET TICKET
-                              </button>
+                              <div>
+                                {total > 0 ? (
+                                  <Tooltip title="Please log in to purchase your ticket">
+                                    <button className="checkout-button-disabled">
+                                      CHECKOUT
+                                    </button>
+                                  </Tooltip>
+                                ) : (
+                                  <Tooltip title="Please log in to get your ticket">
+                                    <button className="checkout-button-disabled">
+                                      GET TICKET
+                                    </button>
+                                  </Tooltip>
+                                )}
+                              </div>
                             )}
                           </div>
                         </Col>
