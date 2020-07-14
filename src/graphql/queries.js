@@ -70,9 +70,9 @@ export const get_upcoming_concerts_with_id_old_table = `query getFutureConcerts(
   }`;
 
 export const get_upcoming_concerts_with_concert_id = `query getConcert(
-    $concert_id: ID!
+    $id: ID!
   ) {
-    getConcert(concert_id: $concert_id) {
+    getConcert(id: $id) {
       date
       time
       is_live

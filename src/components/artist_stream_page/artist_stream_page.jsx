@@ -93,7 +93,7 @@ const StreamPage = () => {
     // Calling the API, using async and await is necessary
     await API.graphql(
       graphqlOperation(queries.get_upcoming_concerts_with_concert_id,{
-      concert_id: "why_need_conert_id_for_this",
+        id: "1b1a5c11-f590-404d-86c4-b5a7cf057069",
       })
     ).then((data) => {
       setStartTime(data.data.getConcert.time)
@@ -141,7 +141,7 @@ const StreamPage = () => {
       setIsLive(false);
       setGoLiveMsg("GO LIVE");
       const is_live_load = {
-        concert_id: "why_need_conert_id_for_this",
+        id: "1b1a5c11-f590-404d-86c4-b5a7cf057069",
         is_live: false
       };
       updateIsLive(is_live_load);
@@ -149,7 +149,7 @@ const StreamPage = () => {
       setIsLive(true);
       setGoLiveMsg("DISCONNECT");
       const is_live_load = {
-        concert_id: "why_need_conert_id_for_this",
+        id: "1b1a5c11-f590-404d-86c4-b5a7cf057069",
         is_live: true
       };
       updateIsLive(is_live_load);

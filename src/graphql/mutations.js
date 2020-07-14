@@ -54,7 +54,7 @@ export const update_registration_concert = `mutation updateCreateOnfourRegistrat
 // Mutation to update the is_live value for a concert in concert DB
 export const update_concert_is_live = `mutation updateConcert($input: UpdateConcertInput!) {
   updateConcert(input: $input) {
-    concert_id
+    id
     is_live
   }
 }
