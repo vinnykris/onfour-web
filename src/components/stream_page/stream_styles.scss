@@ -702,7 +702,7 @@
 // }
 
 .controll-toolbar-button {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: white;
   // padding: 10px;
   position: absolute;
@@ -722,18 +722,22 @@
 
 .button-glass {
   background-color: #5D5AD4;
+  display: none;
 }
 
 .button-heart {
   background-color: #7BC6DE;
+  display: none;
 }
 
 .button-hand-rock-o {
   background-color: #B14092;
+  display: none;
 }
 
 .button-smile-o {
   background-color: #609FDA;
+  display: none;
 }
 
 .selected-circle {
@@ -752,7 +756,7 @@
 }
 
 .controll-toolbar-col {
-  margin: 3px;
+  padding: 0px 0.1vw;
 }
 
 .controll-toolbar-button-container {

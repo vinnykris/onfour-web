@@ -674,22 +674,6 @@ const StreamPage = () => {
                       <VideoChat user_name={username ? username : "GUEST"}></VideoChat>
                       <Row className="controll-toolbar-row">
                         <Col size="1" className="controll-toolbar-col">
-                          <div className="controll-toolbar-button-container button-commenting-o" onClick={turnOnChat}>
-                            <i
-                              id="chat-circle"
-                              className="fa fa-commenting-o controll-toolbar-button selected-circle"
-                            ></i>
-                          </div>
-                        </Col>
-                        <Col size="1" className="controll-toolbar-col">
-                          <div className="controll-toolbar-button-container button-video-camera" onClick={turnOnVideoChat}>
-                            <i
-                              id="video-circle"
-                              className="fa fa-video-camera controll-toolbar-button"
-                            ></i>
-                          </div>
-                        </Col>
-                        <Col size="1" className="controll-toolbar-col">
                           <div className="controll-toolbar-button-container button-glass">
                             <i
                               id="placeholder1"
@@ -702,6 +686,22 @@ const StreamPage = () => {
                             <i
                               id="placeholder2"
                               className="fa fa-smile-o controll-toolbar-button"
+                            ></i>
+                          </div>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-col">
+                            <div className="controll-toolbar-button-container button-commenting-o" onClick={turnOnChat}>
+                              <i
+                                id="chat-circle"
+                                className="fa fa-commenting-o controll-toolbar-button selected-circle"
+                              ></i>
+                            </div>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-video-camera" onClick={turnOnVideoChat}>
+                            <i
+                              id="video-circle"
+                              className="fa fa-video-camera controll-toolbar-button"
                             ></i>
                           </div>
                         </Col>

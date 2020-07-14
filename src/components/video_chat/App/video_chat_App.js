@@ -315,12 +315,17 @@ export default function VideoChatApp({ user_name, artistView, colNum}) {
       ) : (
         <div>
           {isPublic ? (
-            <StartButton
-              disabled={!enableStartButton}
-              onClick={() => {
-                createPublicCall().then(url => startJoiningPublicCall(url));
-              }}
-            />
+            <div>
+              <StartButton
+                disabled={!enableStartButton}
+                onClick={() => {
+                  createPublicCall().then(url => startJoiningPublicCall(url));
+                }}
+              />
+              <div className="public-video-notice">
+                By joining this public video call, you will be seen by the artist as well as other people in the public room! The artist may not hear you by default but remember to make some noise when asked by the artist!
+              </div>
+            </div>
           ) : (
             <StartButton
               disabled={!enableStartButton}

@@ -65,3 +65,13 @@
 .click-active:hover {
     cursor: pointer;
 }
+
+.public-video-notice {
+  margin: 0px 5%;
+  white-space: pre-wrap;
+  top: 60%;
+  font-size: 0.8rem;
+  text-align: center;
+  color: rgb(173, 173, 173);
+  position: absolute;
+}
