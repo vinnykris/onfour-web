@@ -27,6 +27,7 @@ import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/video_chat_App";
+import moment from 'moment';
 
 // Styles Imports
 import "./stream_styles.scss";
@@ -160,10 +161,12 @@ const StreamPage = () => {
   const getStartTime = async () => {
     // Calling the API, using async and await is necessary
     const info = await API.graphql(
-      graphqlOperation(queries.list_upcoming_concerts)
+      graphqlOperation(queries.list_upcoming_concerts, {
+        filter: { is_future: { eq: true }, is_confirmed: { eq: true} },
+      })
     );
-    const info_list = info.data.listFutureConcerts.items; // Stores the items in database
-    info_list.sort((a, b) => a.timePassed - b.timePassed);
+    const info_list = info.data.listConcerts.items; // Stores the items in database
+    info_list.sort((a, b) => moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time)));
 
     const hour = parseInt(info_list[0].time.slice(0, 2));
     const minutes = info_list[0].time.slice(2, 5);
@@ -178,10 +181,21 @@ const StreamPage = () => {
           ? info_list[0].time.slice(0, 5) + "AM"
           : info_list[0].time.slice(0, 5) + "PM")
     );
-    setConcertName(info_list[0].concertName);
-    setArtistName(info_list[0].artist);
+    setConcertName(info_list[0].concert_name);
+    getArtistInfo(info_list[0].artist_id);
     setConcertID(info_list[0].id);
     setIsLive(info_list[0].is_live);
+  };
+
+  const getArtistInfo = async (artist_id) => {
+    const artist_info = await API.graphql(
+      graphqlOperation(queries.get_artist_info, {
+        username: artist_id
+      })
+    );
+    const artist_info_list = artist_info.data.getCreateOnfourRegistration;
+    setArtistName(artist_info_list.artist_name);
+
   };
 
   // GET USER'S REGISTRATION INFORMATION
@@ -310,12 +324,12 @@ const StreamPage = () => {
     if (concert_id) {
       console.log("calling api");
       await API.graphql(
-        graphqlOperation(queries.get_upcoming_concerts_with_id_old_table, {
-          id: concert_id, timePassed: 0,
+        graphqlOperation(queries.get_concert_is_live, {
+          id: concert_id,
         })
       ).then((data) => {
-        if (data.data.getFutureConcerts.is_live) {
-          setIsLive(data.data.getFutureConcerts.is_live);
+        if (data.data.getConcert.is_live) {
+          setIsLive(data.data.getConcert.is_live);
         }
       });
     }
@@ -331,7 +345,7 @@ const StreamPage = () => {
   // RENDERING SECTION
   return (
     <div className="stream-container">
-      {show_start_time ? (
+      {artist_name ? (
         <div className="stream-page-content">
           {/* {show_alert ? (
           <div>
@@ -814,7 +828,7 @@ const StreamPage = () => {
             sizeUnit={"px"}
             size={18}
             color={"#7b6dac"}
-            loading={!show_start_time}
+            loading={!artist_name}
           />
         </div>
         // </div>

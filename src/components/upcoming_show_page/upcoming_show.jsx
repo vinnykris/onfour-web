@@ -42,6 +42,7 @@ const UpcomingShowPage = () => {
       // Upcoming shows
       const upcoming_result = await getConcertInfo(width);
       setConcerts(upcoming_result);
+      console.log(upcoming_result);
     };
     fetchData();
   }, []);

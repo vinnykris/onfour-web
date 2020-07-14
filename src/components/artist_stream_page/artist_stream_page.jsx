@@ -92,7 +92,7 @@ const StreamPage = () => {
   const getStartTimeAndIsLive = async () => {
     // Calling the API, using async and await is necessary
     await API.graphql(
-      graphqlOperation(queries.get_upcoming_concerts_with_concert_id,{
+      graphqlOperation(queries.get_concert_date_time_is_live,{
         id: "1b1a5c11-f590-404d-86c4-b5a7cf057069",
       })
     ).then((data) => {

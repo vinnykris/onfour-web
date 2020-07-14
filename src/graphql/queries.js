@@ -41,35 +41,44 @@ export const list_past_concerts = `query listPastShows {
   }`;
 
 // Query to retrieve all upcoming shows
-export const list_upcoming_concerts = `query listFutureConcerts {
-  listFutureConcerts(limit: 1000) {
+export const list_upcoming_concerts = `query listConcerts(
+    $filter: TableConcertFilterInput
+  ) {
+  listConcerts(filter: $filter, limit: 1000) {
     items {
       id
-      url
-      timePassed
+      artist_id
       date
       time
-      artist
-      concertName
-      description
-      price
-      concertId
-      genre
+      poster_url
+      concert_name
+      general_price
       is_live
     }
   }
 }`;
 
-
-export const get_upcoming_concerts_with_id_old_table = `query getFutureConcerts(
-    $id: ID!, $timePassed: Int!
+export const get_artist_info = `query getCreateOnfourRegistration(
+    $username: String!
   ) {
-    getFutureConcerts(id: $id, timePassed: $timePassed) {
+    getCreateOnfourRegistration(username: $username) {
+        artist_name
+        artist_bio
+        genre
+    }
+  }`;
+
+
+
+export const get_concert_is_live = `query getConcert(
+    $id: ID!
+  ) {
+    getConcert(id: $id) {
         is_live
     }
   }`;
 
-export const get_upcoming_concerts_with_concert_id = `query getConcert(
+export const get_concert_date_time_is_live = `query getConcert(
     $id: ID!
   ) {
     getConcert(id: $id) {

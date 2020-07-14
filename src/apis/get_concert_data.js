@@ -22,10 +22,12 @@ export const getConcertInfo = async (width) => {
   var upcoming_concerts = [];
   // Calling the API, using async and await is necessary
   const info = await API.graphql(
-    graphqlOperation(queries.list_upcoming_concerts)
+    graphqlOperation(queries.list_upcoming_concerts, {
+      filter: { is_future: { eq: true }, is_confirmed: { eq: true } },
+    })
   );
 
-  const info_list = info.data.listFutureConcerts.items; // Stores the items in database
+  const info_list = info.data.listConcerts.items; // Stores the items in database
   info_list.sort((a, b) => moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time)));
   // console.log(info_list);
   const month_map = {
@@ -43,17 +45,30 @@ export const getConcertInfo = async (width) => {
     "12": "DEC",
   };
 
+  const getArtistInfo = async (artist_id) => {
+    const artist_info = await API.graphql(
+      graphqlOperation(queries.get_artist_info, {
+        username: artist_id
+      })
+    );
+    const artist_info_list = artist_info.data.getCreateOnfourRegistration;
+    return artist_info_list;
+  };
+
   // Iterate through each element in the list and add the created
   // FeaturedContent to concerts
-  info_list.forEach((data) => {
+  info_list.forEach(async (data) => {
     const time_left = +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
     const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
 
+    const artist_info_list = await getArtistInfo(data.artist_id);
+    console.log(artist_info_list);
+
     upcoming_concerts.push(
       <FeaturedContent
-        img={data.url}
-        name={data.artist}
-        concert_name={data.concertName}
+        img={data.poster_url}
+        name={artist_info_list.artist_name}
+        concert_name={data.concert_name}
         week_day={moment(data.date).format('dddd')}
         date={
           data.date.slice(8, 10) +
@@ -66,11 +81,11 @@ export const getConcertInfo = async (width) => {
         month={month_map[data.date.slice(5, 7)]}
         day={data.date.slice(8, 10)}
         time={moment(data.time, "HH:mm:ss").format("h:mm A")}
-        price={data.price}
-        description={data.description.toString()}
+        price={data.general_price}
+        description={artist_info_list.artist_bio.toString()}
         days_left={days_left}
         width={width}
-        genre={data.genre}
+        genre={artist_info_list.genre}
       />
     );
   });
@@ -114,11 +129,13 @@ export const getArchiveInfo = async () => {
 export const getMostRecentUpcomingInfo = async () => {
   // Calling the API, using async and await is necessary
   const info = await API.graphql(
-    graphqlOperation(queries.list_upcoming_concerts)
+    graphqlOperation(queries.list_upcoming_concerts, {
+      filter: { is_future: { eq: true }, is_confirmed: { eq: true } },
+    })
   );
 
-  const info_list = info.data.listFutureConcerts.items; // Stores the items in database
-  info_list.sort((a, b) => a.timePassed - b.timePassed);
+  const info_list = info.data.listConcerts.items; // Stores the items in database
+  info_list.sort((a, b) => moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time)));
 
   return info_list[0];
 };
