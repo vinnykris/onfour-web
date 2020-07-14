@@ -8,6 +8,7 @@ import { NavLink, useLocation } from "react-router-dom";
 // AWS Imports
 import { API, graphqlOperation, loadingBar } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
+import * as queries from "../../graphql/queries";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";
@@ -51,6 +52,7 @@ const AboutPage = () => {
   // concerts is a list of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([]);
   const [most_recent_concert, setMostRecentConcert] = useState("");
+  const [most_recent_concert_artist, setMostRecentConcertArtist] = useState("");
   const [videos, setVideos] = useState([]); // List of video objects with past show information
 
   // Add in Analytics that about page was visited
@@ -119,9 +121,20 @@ const AboutPage = () => {
 
       const recent_concert = await getMostRecentUpcomingInfo();
       setMostRecentConcert(recent_concert);
+      getArtistInfo(recent_concert.artist_id);
     };
     fetchData();
   }, []);
+
+  const getArtistInfo = async (artist_id) => {
+    const artist_info = await API.graphql(
+      graphqlOperation(queries.get_artist_info, {
+        username: artist_id
+      })
+    );
+    const artist_info_list = artist_info.data.getCreateOnfourRegistration;
+    setMostRecentConcertArtist(artist_info_list.artist_name);
+  };
 
   // ADD ANIMATION TO CSS BASED ON SCROLL AMOUNT
   useEffect(() => {
@@ -213,10 +226,10 @@ const AboutPage = () => {
                   </Row>
                   <Row>
                     <div className="upcoming-description">
-                      {most_recent_concert
-                        ? most_recent_concert.artist.toUpperCase() +
+                      {most_recent_concert_artist
+                        ? most_recent_concert_artist.toUpperCase() +
                           " - " +
-                          most_recent_concert.concertName.toUpperCase()
+                          most_recent_concert.concert_name.toUpperCase()
                         : "loading..."}
                     </div>
                   </Row>
