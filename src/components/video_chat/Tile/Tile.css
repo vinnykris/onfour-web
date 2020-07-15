@@ -72,3 +72,12 @@
   width: 190px;
   z-index: 2;
 }
+
+.video-call-participant-name {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 1rem;
+  color: white;
+  z-index: 2;
+}
