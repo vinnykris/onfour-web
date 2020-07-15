@@ -79,3 +79,10 @@ export const get_specific_concert = `query listFutureConcerts(
     }
   }
 }`;
+
+export const get_user_data = `query getCreateOnfourRegistration ($input: String!){
+  getCreateOnfourRegistration(username: $input) {
+    username
+    concert
+  }
+}`;

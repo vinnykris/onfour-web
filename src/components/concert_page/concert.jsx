@@ -7,9 +7,16 @@ import { createUpcomingObject } from "../util";
 import { getOneConcert } from "../../apis/get_concert_data";
 import { useInputValue } from "../custom_hooks";
 
+// Graphql Imports
+import * as queries from "../../graphql/queries";
+import * as mutations from "../../graphql/mutations";
+
 // AWS Imports
 import { Analytics } from "aws-amplify";
 import Auth from "../../apis/UserPool";
+import awsmobile from "../../apis/AppSync";
+import Amplify from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 
 // Component Imports
 import CountdownTimer from "../countdown_timer/countdown_timer";
@@ -32,6 +39,8 @@ import checkmark_icon_2 from "../../images/icons/check-mark-240.png";
 import "./concert_styles.scss";
 import "rodal/lib/rodal.css";
 import "react-multi-email/style.css";
+
+Amplify.configure(awsmobile); // Configuring AppSync API
 
 // Concert is the unique concert page
 const Concert = (props) => {
@@ -150,11 +159,39 @@ const Concert = (props) => {
     console.log("go to checkout");
   };
 
-  const addTicket = () => {
+  const addTicket = async () => {
     console.log("add ticket");
     console.log(total);
     console.log(emails);
     console.log(username);
+
+    const user_data = await API.graphql(
+      graphqlOperation(queries.get_user_data, {
+        input: username,
+      })
+    );
+
+    const current_concert_data =
+      user_data.data.getCreateOnfourRegistration.concert;
+
+    if (!current_concert_data || !isNaN(parseInt(current_concert_data))) {
+      var concert_data = {};
+    } else {
+      var concert_data = JSON.parse(current_concert_data);
+    }
+
+    concert_data[concert_id] = true;
+
+    const payload = {
+      username,
+      concert: JSON.stringify(concert_data),
+    };
+
+    API.graphql(
+      graphqlOperation(mutations.update_user, {
+        input: payload,
+      })
+    );
   };
 
   return (
