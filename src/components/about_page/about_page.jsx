@@ -24,6 +24,8 @@ import {
   getMostRecentUpcomingInfo,
 } from "../../apis/get_concert_data";
 
+import { formatArchiveVideos, formatUpcomingShows } from "../util";
+
 // Image Imports
 // import gradient_header from "../../images/mobile_gradient.png";
 
@@ -103,19 +105,12 @@ const AboutPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       // Upcoming shows
-      const upcoming_result = await getConcertInfo(width);
-      setConcerts(upcoming_result.slice(0, 4));
+      const upcoming_result = await getConcertInfo();
+      setConcerts(formatUpcomingShows(upcoming_result.slice(0, 4), width));
 
       // Archive videos (sorting from most recent -> oldest)
       const archive_result = await getArchiveInfo();
-      setVideos(
-        archive_result
-          .sort(
-            (a, b) =>
-              new Date(b.props.concert_date) - new Date(a.props.concert_date)
-          )
-          .slice(0, 4)
-      );
+      setVideos(formatArchiveVideos(archive_result.slice(0, 4)));
 
       const recent_concert = await getMostRecentUpcomingInfo();
       setMostRecentConcert(recent_concert);

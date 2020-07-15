@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 // import SearchBar from "../search_bar/search_bar";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import { useWindowDimensions } from "../custom_hooks";
+import { createChunks, formatUpcomingShows } from "../util";
 
 // AWS Imports
 // import { API, graphqlOperation } from "aws-amplify";
@@ -25,7 +26,7 @@ Amplify.configure(awsmobile);
 // The Upcoming Show Page component
 const UpcomingShowPage = () => {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
-
+  const [formatted_concerts, setFormattedConcerts] = useState([]);
   const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
   // Auto scroll to the top on page load
   if (scroll) {
@@ -33,14 +34,13 @@ const UpcomingShowPage = () => {
     setScroll(false);
   }
 
-  // concerts is a list of FeaturedContent objects with upcoming show information
-  const [concerts, setConcerts] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       // Upcoming shows
-      const upcoming_result = await getConcertInfo(width);
-      setConcerts(upcoming_result);
+      const upcoming_result = await getConcertInfo();
+      console.log(upcoming_result);
+
+      setFormattedConcerts(formatUpcomingShows(upcoming_result, width));
     };
     fetchData();
   }, []);
@@ -63,20 +63,19 @@ const UpcomingShowPage = () => {
 
   return (
     <div className="upcoming-show-page-content">
-      {/* <SearchBar></SearchBar> */}
       {width <= 600 ? (
         <div className="upcoming-show-grid">
-          <FlexibleGrid content_list={concerts} num_cols={1} />
+          <FlexibleGrid content_list={formatted_concerts} num_cols={1} />
         </div>
       ) : (
         <div>
           {width <= 1024 ? (
             <div className="upcoming-show-grid">
-              <FlexibleGrid content_list={concerts} num_cols={3} />
+              <FlexibleGrid content_list={formatted_concerts} num_cols={3} />
             </div>
           ) : (
             <div className="upcoming-show-grid">
-              <FlexibleGrid content_list={concerts} num_cols={4} />
+              <FlexibleGrid content_list={formatted_concerts} num_cols={4} />
             </div>
           )}
         </div>

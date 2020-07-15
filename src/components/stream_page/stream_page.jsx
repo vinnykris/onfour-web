@@ -640,7 +640,18 @@ const StreamPage = () => {
                         </Col>
                         <Col size={1}></Col>
                         <Col size={3}>
-                          <SocialBar></SocialBar>
+                          <SocialBar
+                            show_text={true}
+                            instagram={"https://www.instagram.com/_onfour"}
+                            spotify={
+                              "https://open.spotify.com/playlist/3KbuKf1zti8EtbJ4Ot7Iq4"
+                            }
+                            youtube={
+                              "https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ"
+                            }
+                            facebook={"https://www.facebook.com/onfour"}
+                            twitter={"https://twitter.com/_Onfour"}
+                          ></SocialBar>
                         </Col>
                       </Row>
                     </Col>

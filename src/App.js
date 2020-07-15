@@ -1,6 +1,6 @@
 // React imports
 import React from "react";
-import { Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route, withRouter } from "react-router-dom";
 import history from "./history";
 
 // Component imports
@@ -19,6 +19,7 @@ import Login from "./components/login_page/login_page";
 import ArtistForm from "./components/artist_form/artist_form";
 import ArtistStreamPage from "./components/artist_stream_page/artist_stream_page";
 
+import Concert from "./components/concert_page/concert";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -41,16 +42,16 @@ function App() {
     <div className="App custom-app">
       <Router history={history}>
         <NavBar />
-
         <Switch>
           <Route exact path="/" component={About} />
-          <Route path="/archive" component={ArchivePage} />
-          <Route path="/stream" component={StreamPage} />
-          <Route path="/upcoming" component={UpcomingShowPage} />
-          <Route path="/ticket" component={Ticket} />
-          <Route path="/artists" component={ArtistsPage} />
-          <Route path="/forgot" component={Forgot} />
-          <Route path="/soundcheck" component={SoundCheck} />
+          <Route exact path="/archive" component={ArchivePage} />
+          <Route exact path="/stream" component={StreamPage} />
+          <Route exact path="/upcoming" component={UpcomingShowPage} />
+          <Route exact path={`/upcoming/:showID`} component={Concert} />
+          <Route exact path="/ticket" component={Ticket} />
+          <Route exact path="/artists" component={ArtistsPage} />
+          <Route exact path="/forgot" component={Forgot} />
+          <Route exact path="/soundcheck" component={SoundCheck} />
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/form" component={ArtistForm} />

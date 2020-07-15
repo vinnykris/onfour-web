@@ -71,7 +71,7 @@ const ArtistForm = () => {
 
     if (auth) {
       API.graphql(
-        graphqlOperation(mutations.update_artist_form, {
+        graphqlOperation(mutations.update_user, {
           input: artist_form_payload,
         })
       )
