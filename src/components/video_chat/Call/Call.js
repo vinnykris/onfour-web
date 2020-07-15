@@ -41,7 +41,7 @@ export default function Call(props) {
         type: PARTICIPANTS_CHANGE,
         participants: callObject.participants()
       });
-      console.log(callObject.participants());
+      // console.log(callObject.participants());
     }
 
     // Use initial state
@@ -129,6 +129,7 @@ export default function Call(props) {
       // const isLarge =
       //   isScreenShare(id) ||
       //   (!isLocal(id) && !containsScreenShare(callState.callItems));
+      console.log(id, callItem);
       const isLarge = false;
       const tile = (
         <Tile
@@ -140,6 +141,7 @@ export default function Call(props) {
           isLoading={callItem.isLoading}
           artistView={props.artistView}
           mute_all = {props.mute_all}
+          username = {callItem.username}
         />
       );
       if (isLarge) {

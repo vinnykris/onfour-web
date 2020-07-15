@@ -3,7 +3,7 @@ import "./Tray.css";
 import TrayButton, {
   TYPE_MUTE_CAMERA,
   TYPE_MUTE_MIC,
-  TYPE_SCREEN,
+  // TYPE_SCREEN,
   TYPE_LEAVE
 } from "../TrayButton/TrayButton";
 import CallObjectContext from "../CallObjectContext";
@@ -52,17 +52,17 @@ export default function Tray(props) {
     callObject.setLocalAudio(isMicMuted);
   }
 
-  function toggleSharingScreen() {
-    isSharingScreen
-      ? callObject.stopScreenShare()
-      : callObject.startScreenShare();
-  }
+  // function toggleSharingScreen() {
+  //   isSharingScreen
+  //     ? callObject.stopScreenShare()
+  //     : callObject.startScreenShare();
+  // }
 
-  function toggleActiveSpeaker() {
-    const negate_value = !isEnabledActiveSpeaker;
-    callObject.setActiveSpeakerMode(negate_value);
-    setEnableActiveSpeaker(negate_value);
-  }
+  // function toggleActiveSpeaker() {
+  //   const negate_value = !isEnabledActiveSpeaker;
+  //   callObject.setActiveSpeakerMode(negate_value);
+  //   setEnableActiveSpeaker(negate_value);
+  // }
 
   function leaveCall() {
     props.onClickLeaveCall && props.onClickLeaveCall();
@@ -111,12 +111,12 @@ export default function Tray(props) {
         highlighted={isMicMuted}
         onClick={toggleMic}
       />
-      <TrayButton
+      {/* <TrayButton
         type={TYPE_SCREEN}
         disabled={props.disabled}
         highlighted={isEnabledActiveSpeaker}
         onClick={toggleActiveSpeaker}
-      />
+      /> */}
       {props.artistView ? (
         <button
           type="unmute-all"

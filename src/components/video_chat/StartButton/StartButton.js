@@ -13,7 +13,7 @@ export default function StartButton(props) {
       disabled={props.disabled}
       onClick={props.onClick}
     >
-      Join Video Call
+      {props.artistView? "See And Hear The Fans" :"Join Video Call"}
     </button>
   );
 }

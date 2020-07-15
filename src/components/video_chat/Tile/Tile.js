@@ -113,6 +113,9 @@ export default function Tile(props) {
           </div>
         </div>
       ):null}
+      <div className="video-call-participant-name">
+        {props.username}
+      </div>
       {getLoadingComponent()}
       {getVideoComponent()}
       {getAudioComponent()}

@@ -90,7 +90,8 @@ function getCallItems(participants, prevCallItems) {
     callItems[id] = {
       isLoading: !hasLoaded && missingTracks,
       audioTrack: participant.audioTrack,
-      videoTrack: participant.videoTrack
+      videoTrack: participant.videoTrack,
+      username: participant.user_name
     };
     if (participant.screenVideoTrack) {
       callItems[id + "-screen"] = {
