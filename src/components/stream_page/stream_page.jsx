@@ -7,6 +7,7 @@ import SharePopup from "./share_popup";
 import styled from "styled-components";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 // import { Prompt } from "react-router";
+import moment from "moment";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -104,14 +105,13 @@ const StreamPage = () => {
           if (!scrollCheck_top) {
             // if the scroll is not larger than threshold to increase height
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41  + "px";
+              (width / 100) * 41 + "px";
           } else if (scrollCheck_bottom) {
             // is scroll is larger than lower threshold but less than higher threshold
             document.getElementById("chat_main").style.height =
               window.scrollY - 176 + height + "px";
           } else {
-            document.getElementById("chat_main").style.height =
-              height + "px";
+            document.getElementById("chat_main").style.height = height + "px";
           }
         }
       } else {
@@ -125,8 +125,7 @@ const StreamPage = () => {
             document.getElementById("chat_main").style.height =
               (width / 100) * 41 + window.scrollY + "px";
           } else {
-            document.getElementById("chat_main").style.height =
-              height + "px";
+            document.getElementById("chat_main").style.height = height + "px";
           }
         }
       }
@@ -146,6 +145,7 @@ const StreamPage = () => {
   const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
+  const [is_live, setIsLive] = useState(false);
 
   // Analytics state variables
   //const [arrival, setArrival] = useState(true);
@@ -159,11 +159,14 @@ const StreamPage = () => {
   const getStartTime = async () => {
     // Calling the API, using async and await is necessary
     const info = await API.graphql(
-      graphqlOperation(queries.list_upcoming_concerts)
+      graphqlOperation(queries.list_concerts, {
+        filter: { is_future: { eq: true }, is_confirmed: { eq: true } },
+      })
     );
-
-    const info_list = info.data.listFutureConcerts.items; // Stores the items in database
-    info_list.sort((a, b) => a.timePassed - b.timePassed);
+    const info_list = info.data.listConcerts.items; // Stores the items in database
+    info_list.sort((a, b) =>
+      moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time))
+    );
 
     const hour = parseInt(info_list[0].time.slice(0, 2));
     const minutes = info_list[0].time.slice(2, 5);
@@ -178,9 +181,20 @@ const StreamPage = () => {
           ? info_list[0].time.slice(0, 5) + "AM"
           : info_list[0].time.slice(0, 5) + "PM")
     );
-    setConcertName(info_list[0].concertName);
-    setArtistName(info_list[0].artist);
-    setConcertID(info_list[0].concertId);
+    setConcertName(info_list[0].concert_name);
+    getArtistInfo(info_list[0].artist_id);
+    setConcertID(info_list[0].id);
+    setIsLive(info_list[0].is_live);
+  };
+
+  const getArtistInfo = async (artist_id) => {
+    const artist_info = await API.graphql(
+      graphqlOperation(queries.get_artist_info, {
+        username: artist_id,
+      })
+    );
+    const artist_info_list = artist_info.data.getCreateOnfourRegistration;
+    setArtistName(artist_info_list.artist_name);
   };
 
   // GET USER'S REGISTRATION INFORMATION
@@ -304,11 +318,10 @@ const StreamPage = () => {
     }
   };
 
-
   // RENDERING SECTION
   return (
     <div className="stream-container">
-      {show_start_time ? (
+      {artist_name ? (
         <div className="stream-page-content">
           {/* {show_alert ? (
           <div>
@@ -460,10 +473,8 @@ const StreamPage = () => {
                       <p className="donate-description">Credit Card</p>
                       {tip_based ? (
                         <p className="donate-subdescription">
-                          
-                          Tip {artist_name} via credit card. Your card information
-                          will not be stored anywhere.
-
+                          Tip {artist_name} via credit card. Your card
+                          information will not be stored anywhere.
                         </p>
                       ) : (
                         <p className="donate-subdescription">
@@ -490,10 +501,8 @@ const StreamPage = () => {
                       <p className="donate-description">Venmo</p>
                       {tip_based ? (
                         <p className="donate-subdescription">
-                          
                           @SpencerAmer from onfour will ensure your tip is sent
                           to {artist_name}.
-                          
                         </p>
                       ) : (
                         <p className="donate-subdescription">
@@ -682,7 +691,9 @@ const StreamPage = () => {
                         chatStatus={chatStatus}
                         setViewers={getViewers}
                       />
-                      <VideoChat user_name={username ? username : "GUEST"}></VideoChat>
+                      <VideoChat
+                        user_name={username ? username : "GUEST"}
+                      ></VideoChat>
                       <Row className="controll-toolbar-row">
                         <Col size="1" className="controll-toolbar-col">
                           <div className="controll-toolbar-button-container button-glass">
@@ -701,15 +712,21 @@ const StreamPage = () => {
                           </div>
                         </Col>
                         <Col size="1" className="controll-toolbar-col">
-                            <div className="controll-toolbar-button-container button-commenting-o" onClick={turnOnChat}>
-                              <i
-                                id="chat-circle"
-                                className="fa fa-commenting-o controll-toolbar-button selected-circle"
-                              ></i>
-                            </div>
+                          <div
+                            className="controll-toolbar-button-container button-commenting-o"
+                            onClick={turnOnChat}
+                          >
+                            <i
+                              id="chat-circle"
+                              className="fa fa-commenting-o controll-toolbar-button selected-circle"
+                            ></i>
+                          </div>
                         </Col>
                         <Col size="1" className="controll-toolbar-col">
-                          <div className="controll-toolbar-button-container button-video-camera" onClick={turnOnVideoChat}>
+                          <div
+                            className="controll-toolbar-button-container button-video-camera"
+                            onClick={turnOnVideoChat}
+                          >
                             <i
                               id="video-circle"
                               className="fa fa-video-camera controll-toolbar-button"
@@ -799,7 +816,7 @@ const StreamPage = () => {
             sizeUnit={"px"}
             size={18}
             color={"#7b6dac"}
-            loading={!show_start_time}
+            loading={!artist_name}
           />
         </div>
         // </div>

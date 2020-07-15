@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 // Function import
 import { createUpcomingObject } from "../util";
-import { getOneConcert } from "../../apis/get_concert_data";
+import { getOneConcert, getArtistInfo } from "../../apis/get_concert_data";
 import { useInputValue } from "../custom_hooks";
 
 // Graphql Imports
@@ -101,6 +101,14 @@ const Concert = (props) => {
     // .then((user) => closeMenu())
     .catch((err) => setAuth(false));
 
+  // AUTO-SCROLL SECTION
+  // Auto-scrolls on first navigation
+  const [scroll, setScroll] = useState(true); // Auto-scroll
+  if (scroll) {
+    window.scrollTo({ top: "10px", behavior: "smooth" });
+    setScroll(false);
+  }
+
   const checkmark_icon_3 = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -127,12 +135,15 @@ const Concert = (props) => {
     if (state) {
       // If data is coming from upcoming show page
       setConcertInfo(state.info);
+      console.log(state.info);
     } else {
       // If data needs to be loaded from ID in URL
       // Only reached if user does not come from upcoming page
       const fetchConcert = async (id) => {
         const data = await getOneConcert(id);
-        setConcertInfo(createUpcomingObject(data));
+        const artist_data = await getArtistInfo(data.artist_id);
+        // console.log()
+        setConcertInfo(createUpcomingObject(data, artist_data));
       };
       fetchConcert(concert_id);
     }
@@ -284,7 +295,7 @@ const Concert = (props) => {
                   <div className="purchase-main">
                     <div className="modal-concert-info">
                       <h3 className="concert-info-modal-header">
-                        {concert_info.name}: {concert_info.concert_name}
+                        {concert_info.artist_name}: {concert_info.concert_name}
                       </h3>
                       <p>
                         {concert_info.week_day} {concert_info.formatted_date}{" "}
@@ -585,7 +596,7 @@ const Concert = (props) => {
                   <Col size={1}>
                     <div>
                       <h3 className="titles">
-                        {concert_info.name.toUpperCase()} –{" "}
+                        {concert_info.artist_name.toUpperCase()} –{" "}
                         {concert_info.concert_name.toUpperCase()}
                       </h3>
                     </div>

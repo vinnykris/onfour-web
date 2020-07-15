@@ -86,3 +86,45 @@ export const get_user_data = `query getCreateOnfourRegistration ($input: String!
     concert
   }
 }`;
+
+// Query to retrieve all upcoming shows
+export const list_concerts = `query listConcerts(
+  $filter: TableConcertFilterInput
+) {
+listConcerts(filter: $filter, limit: 1000) {
+  items {
+    id
+    artist_id
+    date
+    time
+    poster_url
+    concert_name
+    general_price
+    is_live
+  }
+}
+}`;
+
+export const get_artist_info = `query getCreateOnfourRegistration(
+  $username: String!
+) {
+  getCreateOnfourRegistration(username: $username) {
+      artist_name
+      artist_bio
+      genre
+  }
+}`;
+
+export const get_one_concert = `query getConcert(
+  $id: ID!
+) {
+  getConcert(id: $id) {
+    poster_url
+    date
+    time
+    is_live
+    artist_id
+    concert_name
+    general_price
+  }
+}`;

@@ -19,12 +19,13 @@ import PulseLoader from "react-spinners/PulseLoader";
 
 // API Imports
 import {
-  getConcertInfo,
+  getConcertInfoNew,
   getArchiveInfo,
   getMostRecentUpcomingInfo,
+  getArtistInfo,
 } from "../../apis/get_concert_data";
 
-import { formatArchiveVideos, formatUpcomingShows } from "../util";
+import { formatArchiveVideos, formatUpcomingShow } from "../util";
 
 // Image Imports
 // import gradient_header from "../../images/mobile_gradient.png";
@@ -53,6 +54,7 @@ const AboutPage = () => {
   // concerts is a list of FeaturedContent objects with upcoming show information
   const [concerts, setConcerts] = useState([]);
   const [most_recent_concert, setMostRecentConcert] = useState("");
+  const [most_recent_concert_artist, setMostRecentConcertArtist] = useState("");
   const [videos, setVideos] = useState([]); // List of video objects with past show information
 
   // Add in Analytics that about page was visited
@@ -102,18 +104,49 @@ const AboutPage = () => {
   //   set await getConcertInfo();
   // }
 
+  const getUpcomingFull = async (data) => {
+    // console.log("here");
+    // var full_concerts = [];
+    const artist_id = data.artist_id;
+    const artist_info = await getArtistInfo(artist_id);
+    //console.log(artist_info);
+    let merged = { ...data, ...artist_info };
+    //console.log(merged);
+    return merged;
+    // full_concerts.push(merged);
+    // await upcoming_result.forEach(async (data) => {
+    //   const artist_id = data.artist_id;
+    //   const artist_info = await getArtistInfo(artist_id);
+    //   console.log(artist_info);
+    //   let merged = { ...data, ...artist_info };
+    //   console.log(merged);
+    //   full_concerts.push(merged);
+    // });
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       // Upcoming shows
-      const upcoming_result = await getConcertInfo();
-      setConcerts(formatUpcomingShows(upcoming_result.slice(0, 4), width));
+      // const upcoming_result = await getConcertInfo();
+      // setConcerts(formatUpcomingShows(upcoming_result.slice(0, 4), width));
+      var full_concerts = [];
+      const upcoming_result = await getConcertInfoNew();
+      for await (const data of upcoming_result.slice(0, 4)) {
+        full_concerts.push(formatUpcomingShow(await getUpcomingFull(data)));
+      }
+      setConcerts(full_concerts);
 
       // Archive videos (sorting from most recent -> oldest)
       const archive_result = await getArchiveInfo();
       setVideos(formatArchiveVideos(archive_result.slice(0, 4)));
 
       const recent_concert = await getMostRecentUpcomingInfo();
+      console.log(recent_concert);
       setMostRecentConcert(recent_concert);
+
+      const artist_info = await getArtistInfo(recent_concert.artist_id);
+      console.log(artist_info);
+      setMostRecentConcertArtist(artist_info);
     };
     fetchData();
   }, []);
@@ -208,10 +241,10 @@ const AboutPage = () => {
                   </Row>
                   <Row>
                     <div className="upcoming-description">
-                      {most_recent_concert
-                        ? most_recent_concert.artist.toUpperCase() +
+                      {most_recent_concert_artist
+                        ? most_recent_concert_artist.artist_name.toUpperCase() +
                           " - " +
-                          most_recent_concert.concertName.toUpperCase()
+                          most_recent_concert.concert_name.toUpperCase()
                         : "loading..."}
                     </div>
                   </Row>

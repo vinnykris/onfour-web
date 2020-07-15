@@ -30,6 +30,22 @@ export const getConcertInfo = async () => {
   return info_list;
 };
 
+export const getConcertInfoNew = async () => {
+  // Calling the API, using async and await is necessary
+  const info = await API.graphql(
+    graphqlOperation(queries.list_concerts, {
+      filter: { is_future: { eq: true }, is_confirmed: { eq: true } },
+    })
+  );
+
+  const info_list = info.data.listConcerts.items; // Stores the items in database
+  info_list.sort((a, b) =>
+    moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time))
+  );
+
+  return info_list;
+};
+
 // Asynchronous function to get list of videos from database
 export const getArchiveInfo = async () => {
   var archive_videos = [];
@@ -68,22 +84,45 @@ export const getArchiveInfo = async () => {
 export const getMostRecentUpcomingInfo = async () => {
   // Calling the API, using async and await is necessary
   const info = await API.graphql(
-    graphqlOperation(queries.list_upcoming_concerts)
+    graphqlOperation(queries.list_concerts, {
+      filter: { is_future: { eq: true }, is_confirmed: { eq: true } },
+    })
   );
 
-  const info_list = info.data.listFutureConcerts.items; // Stores the items in database
-  info_list.sort((a, b) => a.timePassed - b.timePassed);
+  // console.log;
+
+  const info_list = info.data.listConcerts.items; // Stores the items in database
+  info_list.sort((a, b) =>
+    moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time))
+  );
 
   return info_list[0];
 };
 
 export const getOneConcert = async (id) => {
   // Calling the API, using async and await is necessary
+  // const info = await API.graphql(
+  //   graphqlOperation(queries.get_specific_concert, {
+  //     filter: { id: { eq: id } },
+  //   })
+  // );
+
   const info = await API.graphql(
-    graphqlOperation(queries.get_specific_concert, {
-      filter: { id: { eq: id } },
+    graphqlOperation(queries.get_one_concert, {
+      id: id,
+      // { id: { eq: id } },
     })
   );
-  const item = info.data.listFutureConcerts.items[0];
+  const item = info.data.getConcert;
   return item;
+};
+
+export const getArtistInfo = async (artist_id) => {
+  const artist_info = await API.graphql(
+    graphqlOperation(queries.get_artist_info, {
+      username: artist_id,
+    })
+  );
+  const artist_info_list = artist_info.data.getCreateOnfourRegistration;
+  return artist_info_list;
 };

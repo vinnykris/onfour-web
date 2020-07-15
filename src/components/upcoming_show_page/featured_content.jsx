@@ -15,12 +15,13 @@ import BioModal from "./bio_modal";
 // FeaturedContent is the unit element for an upcoming concert
 const FeaturedContent = (props) => {
   const [show_more_info, setClickedInfo] = useState(false); // Determines whether to show the popup for musician's bio or not
+  //console.log(props);
 
   // This function gets called when the MORE INFO button is clicked
   // and it sets the show_more_info to true
   const open_info = () => {
     setClickedInfo(true);
-    const event_name = (props.name + props.date).replace(/\s/g, ""); // unique identifier for event
+    const event_name = (props.artist_name + props.date).replace(/\s/g, ""); // unique identifier for event
     Analytics.record({ name: event_name }); // record analytics for specific "MORE INFO" click
   };
 
@@ -94,7 +95,7 @@ const FeaturedContent = (props) => {
               <Row>
                 <Col size={3}>
                   <p className="artist-name">
-                    {props.name} - {props.concert_name}
+                    {props.artist_name} - {props.concert_name}
                   </p>
                 </Col>
               </Row>
