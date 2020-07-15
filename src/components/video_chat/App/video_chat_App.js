@@ -24,6 +24,8 @@ export default function VideoChatApp({ user_name, artistView, colNum}) {
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
   const [isPublic, setIsPublic] = useState(true);
+  const [mute_all, setMuteAll] = useState(true);
+  const [mute_button_msg, setMuteButtonMsg] = useState("UNMUTE ALL");
   const isInCrew = (owner_name.indexOf(user_name) >= 0);
   /**
    * Creates a new call room.
@@ -268,6 +270,16 @@ export default function VideoChatApp({ user_name, artistView, colNum}) {
     }
   };
 
+  const toggle_mute_unmute_all = () => {
+    if (mute_all){
+      setMuteAll(false);
+      setMuteButtonMsg("MUTE ALL");
+    } else {
+      setMuteAll(true);
+      setMuteButtonMsg("UNMUTE ALL");
+    }
+  }
+
   return (
     <div className={(artistView? "artist-": "")+ "app"} id="video-chat-main">
       {artistView? (
@@ -305,11 +317,13 @@ export default function VideoChatApp({ user_name, artistView, colNum}) {
           >
             leave
           </button>
-          <Call roomUrl={roomUrl} isPublic={isPublic} artistView={artistView} colNum={colNum}/>
+          <Call roomUrl={roomUrl} isPublic={isPublic} artistView={artistView} colNum={colNum} mute_all={mute_all}/>
           <Tray
             disabled={!enableCallButtons}
             onClickLeaveCall={startLeavingCall}
             artistView={artistView}
+            mute_function={toggle_mute_unmute_all}
+            button_message={mute_button_msg}
           />
         </CallObjectContext.Provider>
       ) : (
