@@ -129,7 +129,7 @@ export default function Call(props) {
       // const isLarge =
       //   isScreenShare(id) ||
       //   (!isLocal(id) && !containsScreenShare(callState.callItems));
-      console.log(id, callItem);
+      // console.log(id, callItem);
       const isLarge = false;
       const tile = (
         <Tile
