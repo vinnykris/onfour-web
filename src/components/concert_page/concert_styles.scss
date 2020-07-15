@@ -339,10 +339,73 @@ hr.break-modal {
   width: 100%;
 }
 
+.checkout-button-disabled {
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: 0.055em;
+  color: rgb(133, 133, 133);
+  width: 100%;
+  background-color: #b4b3b3;
+}
+
 .react-multi-email > input {
   background-color: #eeeeee;
 }
 
 .react-multi-email [data-tag] {
   background-color: rgb(250, 250, 250) !important;
+}
+
+// TICKET STUB
+.stub-background {
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba($color: #000000, $alpha: 0.85);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  display: flex;
+}
+
+.stub-svg {
+  z-index: 1001;
+}
+
+.stub-container {
+  width: 100%;
+  height: 100%;
+}
+
+.centered-stub-container {
+  width: auto;
+  height: auto;
+  margin: auto;
+}
+
+.stub-container-svg {
+  width: 100%;
+  height: 100%;
+  // display: grid;
+  position: relative;
+  // justify-content: center;
+  // align-items: center;
+}
+
+.animated-stub {
+  width: 100%;
+  height: 40%;
+  margin: auto;
+  position: absolute;
+  // x: 25%;
+  y: 20%;
+  // left: 50%;
+  // overflow: auto;
+  // position: absolute;
+  // border-top: none;
+  // text-align: left;
 }
