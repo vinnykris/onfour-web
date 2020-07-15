@@ -22,6 +22,14 @@ import { Checkbox, useCheckboxState } from "pretty-checkbox-react";
 import { useForm } from "react-hook-form";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
 
+// // GSAP
+// import { gsap } from "gsap";
+// // import "cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/plugins/TextPlugin.min.js";
+
+import { motion } from "framer-motion";
+// Module imports
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+
 // Image imports
 import add_group_icon from "../../images/icons/add_group.png";
 import modal_button_outline from "../../images/icons/modal_button_outline.png";
@@ -45,6 +53,11 @@ const Concert = (props) => {
   const [total, setTotal] = useState(0);
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState("");
+  const [show_stub, setShowStub] = useState(false);
+
+  // gsap.registerPlugin(TextPlugin);
+
+  // const timeline = gsap.timeline();
 
   const price_map = {
     general: 0,
@@ -79,16 +92,26 @@ const Concert = (props) => {
     // .then((user) => closeMenu())
     .catch((err) => setAuth(false));
 
-  // const checkmark_icon_3 = (
-  //   <svg
-  //     xmlns="http://www.w3.org/2000/svg"
-  //     width="24"
-  //     height="24"
-  //     viewBox="0 0 24 24"
-  //   >
-  //     <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 16.518l-4.5-4.319 1.396-1.435 3.078 2.937 6.105-6.218 1.421 1.409-7.5 7.626z" />
-  //   </svg>
-  // );
+  const checkmark_icon_3 = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="100"
+      height="100"
+      viewBox="0 0 100 100"
+      className="stub-svg"
+    >
+      <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 16.518l-4.5-4.319 1.396-1.435 3.078 2.937 6.105-6.218 1.421 1.409-7.5 7.626z" />
+    </svg>
+  );
+
+  const showTicketStub = () => {
+    setShowStub(true);
+    // timeline.to("#ticket-stub", {
+    //   scale: 0.5,
+    //   rotation: 360,
+    //   transformOrigin: "50% 50%",
+    // });
+  };
 
   // Runs on mount
   useEffect(() => {
@@ -112,6 +135,8 @@ const Concert = (props) => {
       `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
     );
     setTotal(price_map["general"]);
+    // showTicketStub();
+    // setShowStub(true);
   }, []);
 
   useEffect(() => {
@@ -155,10 +180,48 @@ const Concert = (props) => {
     console.log(total);
     console.log(emails);
     console.log(username);
+    hideModal();
+    setShowStub(true);
   };
 
   return (
     <div className="concert-page">
+      {show_stub ? (
+        <div className="stub-background">
+          {/* <div
+            className="stub-container"
+            initial={{ scale: 0.5, opacity: 0.5 }}
+            animate={{ scale: 1, rotate: 720, opacity: 1 }}
+            transition={{ duration: 2, ease: "easeIn" }}
+          > */}
+          <ClickAwayListener onClickAway={() => setShowStub(false)}>
+            <div className="centered-stub-container">
+              <motion.svg
+                version="1.1"
+                id="svg"
+                className="stub-container-svg"
+                // width="260"
+                // height="200"
+                xmlns="http://www.w3.org/2000/svg"
+                // xmlns:xlink="http://www.w3.org/1999/xlink"
+                // viewBox="0 0 260 200"
+                // xml:space="preserve"
+                initial={{ scale: 0.1, opacity: 0.5 }}
+                animate={{ scale: 1, rotate: 360, opacity: 1 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                <rect
+                  id="ticket-stub"
+                  className="animated-stub"
+                  fill="#eeffee"
+                />
+              </motion.svg>
+            </div>
+
+            {/* </motion.div> */}
+          </ClickAwayListener>
+        </div>
+      ) : null}
       {!concert_info ? (
         <div className="overlay-box">
           <PulseLoader
@@ -425,6 +488,7 @@ const Concert = (props) => {
               </Row>
             </Grid>
           </Rodal>
+
           <Row className="info-row">
             <Col size={1} className="concert-info-col">
               <div className="concert-image-container">
