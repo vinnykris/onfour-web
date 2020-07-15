@@ -19,7 +19,9 @@ Amplify.configure(awsmobile);
 export const getConcertInfo = async () => {
   // Calling the API, using async and await is necessary
   const info = await API.graphql(
-    graphqlOperation(queries.list_upcoming_concerts)
+    graphqlOperation(queries.list_upcoming_concerts, {
+      filter: { is_future: { eq: true }, is_confirmed: { eq: true } },
+    })
   );
 
   const info_list = info.data.listFutureConcerts.items; // Stores the items in database

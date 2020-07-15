@@ -48,7 +48,7 @@ export default function Tile(props) {
   function getAudioComponent() {
     return (
       !props.isLocalPerson &&
-      props.audioTrack && <audio id={audio_component_id} autoPlay muted={audioMute} playsInline ref={audioEl} />
+      props.audioTrack && <audio className="audio-all" id={audio_component_id} autoPlay muted={audioMute} playsInline ref={audioEl} />
     );
   }
 
@@ -75,11 +75,17 @@ export default function Tile(props) {
     }
   }
 
+  // useEffect(() => {
+  //   if (props.artistView) {
+  //     toggle_audio_mute();
+  //   }
+  // }, [])
+
   useEffect(() => {
-    if (props.artistView) {
-      toggle_audio_mute();
+    if(props.artistView) {
+      toggle_audio_mute()
     }
-  }, [])
+  }, [props.mute_all])
 
   const [volume_value, setVolumeValue] = useState(100); 
 

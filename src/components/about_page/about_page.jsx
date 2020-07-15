@@ -8,6 +8,7 @@ import { NavLink, useLocation } from "react-router-dom";
 // AWS Imports
 import { API, graphqlOperation, loadingBar } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
+import * as queries from "../../graphql/queries";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";

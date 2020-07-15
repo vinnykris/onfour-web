@@ -6,3 +6,11 @@
   display: flex;
   align-items: center;
 }
+
+
+.artist-mute-all-button {
+  font-size: 0.7rem;
+  margin-left: 20px;
+  border-radius: 2px;
+  background-color: #3a3a3d;
+}

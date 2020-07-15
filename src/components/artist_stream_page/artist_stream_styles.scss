@@ -2,16 +2,6 @@
 
 @import "../../styles";
 
-// .desktop-grid-stream {
-//   @include respond-to("small") {
-//     display: none;
-//   }
-// }
-
-// html,
-// body {
-//   height: 100%;
-// }
 
 .stream-container {
   @include respond-to("small") {
@@ -67,6 +57,21 @@
 
 // CHAT STYLING
 .artist-chat-main {
+  height: 50vh;
+  // height: 100vh;
+  width: 100%;
+  // position: -webkit-sticky;
+  // position: sticky;
+  position: relative;
+  top: 0px;
+  justify-content: center;
+  align-items: center;
+  border-top: 3px solid black;
+  border-right: 3px solid black;
+  border-left: 3px solid black;
+}
+
+.artist-video-main {
   // height: 37vw;
   height: 100vh;
   // height: 100vh;
@@ -81,19 +86,36 @@
   border-left: 3px solid black;
 }
 
-.artist-info-main {
-  // height: 100%;
-  // height: 100vh;
+.artist-control-main {
   width: 100%;
-  // position: relative;
-  // position: -webkit-sticky;
-  // position: sticky;
+  background-color: #17171b;
+  height: 50%;
+  justify-content: center;
+  align-items: center;
+  border-right: 3px solid black;
+  border-left: 3px solid black;
+  border-top: 3px solid black;
+}
+
+.artist-timer-wrapper {
+  width: 100%;
+  height: 50px;
+}
+
+.artist-activity-main {
+  width: 100%;
   background-color: #17171b;
   height: 100%;
   justify-content: center;
   align-items: center;
   border-right: 3px solid black;
   border-left: 3px solid black;
+  border-bottom: 3px solid black;
+}
+
+.full-width{
+  width: 100%;
+  height: 50%;
 }
 
 .main-column {
@@ -153,11 +175,19 @@
 .artist-toggle-chat {
   position: absolute;
   left: 0px;
+  top: 0px;
 }
 
 .toggle-chat-button {
   border-radius: 5px 0px 0px 5px;
   background-color: #17171b;
+  padding: 5px;
+  font-weight: bolder;
+}
+
+.artist-toggle-chat-button {
+  border-radius: 5px 0px 0px 5px;
+  background-color: transparent;
   padding: 5px;
   font-weight: bolder;
 }
@@ -183,8 +213,14 @@
   position: relative;
   width: 100%;
   height: 100%;
-  // padding-left: 3%;
-  // margin: auto;
+}
+
+
+.artist-video-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .chat-wrapper-mobile {
@@ -206,10 +242,12 @@
 
 .artist-stream-main {
   position: relative;
-  // height: 100%;
+  height: 50%;
   width: 100%;
+  background-color: #17171b;
   border-right: 3px solid black;
   border-left: 3px solid black;
+  border-bottom: 3px solid black;
 }
 
 .stream-main-mobile {
@@ -230,9 +268,16 @@
   //   height: auto;
   // }
 }
+
 .stream-wrapper-mobile {
   width: 100%;
   height: 55%;
+}
+
+.artist-stream-wrapper {
+  margin: auto;
+  width: 100%;
+  position: relative;
 }
 
 .player-wrapper {
@@ -347,14 +392,6 @@
   position: absolute;
   right: 0;
 }
-.artist-viewers {
-  display: flex;
-  width: auto;
-  height: 100%;
-  float: left;
-  margin-right: 5px;
-  margin-top: 5px;
-}
 
 .viewer-count {
   width: 150px;
@@ -416,6 +453,16 @@
 
 .show-time {
   font-size: 15px;
+  margin: 0px;
+  color: #e2e2e2;
+  letter-spacing: 0.5px;
+  float: left;
+  padding: 5px;
+  text-align: right;
+}
+
+.artist-show-time {
+  font-size: 0.8rem;
   margin: 0px;
   color: #e2e2e2;
   letter-spacing: 0.5px;
@@ -755,4 +802,59 @@
 
 .video-chat-main {
   display: none;
+}
+
+.artist-box-header {
+  height: 30px;
+  width: 100%;
+  background-color: #17171b;
+  color: #DDDDDD;
+  text-align: left;
+  line-height: 30px;
+  border-bottom: 1px solid #454242;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.85rem;
+  letter-spacing: 0.045em;
+  padding-left: 10px;
+}
+
+.video-chat-box-header {
+  padding-left: 30px;
+}
+
+.player-inner-container {
+  width: 100%;
+  height: 100%;
+}
+
+.is-live-tag {
+  position: absolute;
+  z-index: 2;
+  right: 5px;
+  top: 2px;
+  height: 30px;
+  width: auto;
+  color: #DDDDDD;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 17px;
+  letter-spacing: 0.045em;
+}
+
+.live-circle {
+  color: red;
+  padding-right: 5px;
+  line-height: 17px;
+}
+
+.artist-go-live-button {
+  margin-top: 10px;
+  font-size: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
 }

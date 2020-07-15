@@ -777,3 +777,13 @@ a.nav-page-white {
     cursor: initial;
   }
 }
+
+.overlay-box {
+  background: black;
+  padding-top: 20vh;
+  height: 71vh;
+  width: 100%;
+  @include respond-to("small") {
+    height: 100vh;
+  }
+}

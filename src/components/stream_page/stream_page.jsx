@@ -318,6 +318,29 @@ const StreamPage = () => {
     }
   };
 
+  const getIsLive = async () => {
+    // Calling the API, using async and await is necessary
+    if (concert_id) {
+      console.log("calling api");
+      await API.graphql(
+        graphqlOperation(queries.get_concert_is_live, {
+          id: concert_id,
+        })
+      ).then((data) => {
+        if (data.data.getConcert.is_live) {
+          setIsLive(data.data.getConcert.is_live);
+        }
+      });
+    }
+      
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      getIsLive();
+    }, 5000);
+  });
+
   // RENDERING SECTION
   return (
     <div className="stream-container">
@@ -381,6 +404,7 @@ const StreamPage = () => {
                         auth={auth}
                         username={username}
                         concert_id={concert_id}
+                        is_live={is_live}
                       />
                       <div className="toggle-chat">
                         <button
@@ -773,6 +797,7 @@ const StreamPage = () => {
                       auth={auth}
                       username={username}
                       concert_id={concert_id}
+                      is_live={is_live}
                     />
                   </div>
                 </div>

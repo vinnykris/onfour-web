@@ -1,5 +1,6 @@
 // React Imports
 import React, { useState, useEffect } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 
 // Component Imports
 // import FeaturedContent from "./featured_content";
@@ -32,6 +33,7 @@ const UpcomingShowPage = () => {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   const [formatted_concerts, setFormattedConcerts] = useState([]);
   const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
+  const [is_loaded, setIsLoaded] = useState(false);
   // Auto scroll to the top on page load
   if (scroll) {
     window.scrollTo({ top: 0 });
@@ -77,6 +79,7 @@ const UpcomingShowPage = () => {
       console.log(full_concerts);
 
       setFormattedConcerts(full_concerts);
+      setIsLoaded(true);
     };
     fetchData();
   }, []);
@@ -99,23 +102,37 @@ const UpcomingShowPage = () => {
 
   return (
     <div className="upcoming-show-page-content">
-      {width <= 600 ? (
-        <div className="upcoming-show-grid">
-          <FlexibleGrid content_list={formatted_concerts} num_cols={1} />
-        </div>
-      ) : (
+      {is_loaded ? (
         <div>
-          {width <= 1024 ? (
+          {width <= 600 ? (
             <div className="upcoming-show-grid">
-              <FlexibleGrid content_list={formatted_concerts} num_cols={3} />
+              <FlexibleGrid content_list={formatted_concerts} num_cols={1} />
             </div>
           ) : (
-            <div className="upcoming-show-grid">
-              <FlexibleGrid content_list={formatted_concerts} num_cols={4} />
+            <div>
+              {width <= 1024 ? (
+                <div className="upcoming-show-grid">
+                  <FlexibleGrid content_list={formatted_concerts} num_cols={3} />
+                </div>
+              ) : (
+                <div className="upcoming-show-grid">
+                  <FlexibleGrid content_list={formatted_concerts} num_cols={4} />
+                </div>
+              )}
             </div>
           )}
         </div>
-      )}
+      ) : (
+        <div className="overlay-box">
+          <PulseLoader
+            sizeUnit={"px"}
+            size={18}
+            color={"#7b6dac"}
+            loading={!is_loaded}
+          />
+        </div>
+      )
+    }
     </div>
   );
 };
