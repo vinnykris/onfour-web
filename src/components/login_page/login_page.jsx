@@ -1,3 +1,6 @@
+// Main Imports
+import history from "../../history";
+
 // React
 import React, { useState } from "react";
 
@@ -22,7 +25,7 @@ const Login = () => {
   const [error, setError] = useState(""); // Tracks error messages when trying to log in
 
   // Function for when the user clicks the submit button to log in
-  // Reloads the window if successful, otherwise provides error message to user
+  // Reloads the window to stream page if successful, otherwise provides error message to user
   const loginSubmit = (event) => {
     event.preventDefault();
     setProcessing(true);
@@ -30,7 +33,7 @@ const Login = () => {
       .then((data) => setEmail(""))
       .then((data) => setPassword(""))
       .then((data) => setError(""))
-      .then((data) => window.location.reload())
+      .then((data) => history.push("/stream"))
       .catch((err) => showError(err));
   };
 
@@ -45,81 +48,78 @@ const Login = () => {
     <div className="login-page-content">
       <Grid className="login-grid">
         <Row className="login-fields-section">
-          <Col className="login-purple-scheme" size={0.5}></Col>
-          <Col size={6}>
-            {is_processing ? (
-              <div className="login-loader-container">
-                <PulseLoader
-                  sizeUnit={"px"}
-                  size={15}
-                  color={"#7b6dac"}
-                  loading={is_processing}
-                />
-              </div>
-              // <p className="processing-message">Loading...</p>
-            ) : (
+          {is_processing ? (
+            <div className="login-loader-container">
+              <PulseLoader
+                sizeUnit={"px"}
+                size={15}
+                color={"#7b6dac"}
+                loading={is_processing}
+              />
+            </div>
+          ) : (
+            // <p className="processing-message">Loading...</p>
+            <div className="form-section">
               <form
-                className="login-form"
+                className="signin-form"
                 action="/"
                 id="login"
                 onSubmit={loginSubmit}
               >
-                <Row>
-                  <label className="label-text" for="email_slot">
-                    Email Address or Username*
-                  </label>
+                <Row className="signin-header">
+                  <h6 className="signin-header-text">
+                    Sign in with your email or username below!
+                  </h6>
                 </Row>
-                <Row>
+                <Row className="login-input-row">
                   <input
                     className="login-input"
                     // type="email"
                     name="email"
                     id="email_slot"
                     value={email}
+                    placeholder="Email Address or Username"
                     onChange={(event) => setEmail(event.target.value)}
                     required
                   />
                 </Row>
-                <br></br>
-                <Row>
-                  <label className="label-text" for="password_slot">
-                    Password*
-                  </label>
-                </Row>
-                <Row>
+                <Row className="login-input-row">
                   <input
                     className="login-input"
                     type="password"
                     name="password"
                     id="password_slot"
                     value={password}
+                    placeholder="Password"
                     onChange={(event) => setPassword(event.target.value)}
                     required
                   />
                 </Row>
                 <div style={{ color: "red" }}>{error}</div>
-
-                <br></br>
                 <br></br>
                 <button
-                  className="login-submit-button"
+                  className="signin-submit-button"
                   type="submit"
                   form="login"
                   value="Submit"
                 >
                   SIGN IN
                 </button>
-                <Row>
-                  <Col size={6} className="forgot-password-box">
-                    <a href="/forgot" className="forgot-link">
-                      Forgot Password?
-                    </a>
-                  </Col>
-                </Row>
               </form>
-            )}
-          </Col>
-          <Col className="login-purple-scheme" size={0.5}></Col>
+              <p className="forgot-footer">
+                <a href="/forgot" className="signup-link">
+                  Forgot Password?
+                </a>
+              </p>
+              <p className="signin-footer">
+                Don't have an account?{" "}
+                <a href="/register" className="signup-link">
+                  Sign up
+                </a>
+                .
+              </p>
+            </div>
+          )}
         </Row>
       </Grid>
     </div>

@@ -7,6 +7,7 @@ import SharePopup from "./share_popup";
 import styled from "styled-components";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 // import { Prompt } from "react-router";
+import moment from "moment";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -27,7 +28,6 @@ import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/video_chat_App";
-import moment from 'moment';
 
 // Styles Imports
 import "./stream_styles.scss";
@@ -105,14 +105,13 @@ const StreamPage = () => {
           if (!scrollCheck_top) {
             // if the scroll is not larger than threshold to increase height
             document.getElementById("chat_main").style.height =
-              (width / 100) * 41  + "px";
+              (width / 100) * 41 + "px";
           } else if (scrollCheck_bottom) {
             // is scroll is larger than lower threshold but less than higher threshold
             document.getElementById("chat_main").style.height =
               window.scrollY - 176 + height + "px";
           } else {
-            document.getElementById("chat_main").style.height =
-              height + "px";
+            document.getElementById("chat_main").style.height = height + "px";
           }
         }
       } else {
@@ -126,8 +125,7 @@ const StreamPage = () => {
             document.getElementById("chat_main").style.height =
               (width / 100) * 41 + window.scrollY + "px";
           } else {
-            document.getElementById("chat_main").style.height =
-              height + "px";
+            document.getElementById("chat_main").style.height = height + "px";
           }
         }
       }
@@ -161,12 +159,14 @@ const StreamPage = () => {
   const getStartTime = async () => {
     // Calling the API, using async and await is necessary
     const info = await API.graphql(
-      graphqlOperation(queries.list_upcoming_concerts, {
-        filter: { is_future: { eq: true }, is_confirmed: { eq: true} },
+      graphqlOperation(queries.list_concerts, {
+        filter: { is_future: { eq: true }, is_confirmed: { eq: true } },
       })
     );
     const info_list = info.data.listConcerts.items; // Stores the items in database
-    info_list.sort((a, b) => moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time)));
+    info_list.sort((a, b) =>
+      moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time))
+    );
 
     const hour = parseInt(info_list[0].time.slice(0, 2));
     const minutes = info_list[0].time.slice(2, 5);
@@ -190,12 +190,11 @@ const StreamPage = () => {
   const getArtistInfo = async (artist_id) => {
     const artist_info = await API.graphql(
       graphqlOperation(queries.get_artist_info, {
-        username: artist_id
+        username: artist_id,
       })
     );
     const artist_info_list = artist_info.data.getCreateOnfourRegistration;
     setArtistName(artist_info_list.artist_name);
-
   };
 
   // GET USER'S REGISTRATION INFORMATION
@@ -399,8 +398,7 @@ const StreamPage = () => {
                         url={
                           "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                         }
-                        // start_time={show_start_time}
-                        start_time="2020-07-11T11:30:00.000-04:00"
+                        start_time={show_start_time}
                         artist_name={artist_name}
                         concert_name={concert_name}
                         auth={auth}
@@ -499,10 +497,8 @@ const StreamPage = () => {
                       <p className="donate-description">Credit Card</p>
                       {tip_based ? (
                         <p className="donate-subdescription">
-                          
-                          Tip {artist_name} via credit card. Your card information
-                          will not be stored anywhere.
-
+                          Tip {artist_name} via credit card. Your card
+                          information will not be stored anywhere.
                         </p>
                       ) : (
                         <p className="donate-subdescription">
@@ -529,10 +525,8 @@ const StreamPage = () => {
                       <p className="donate-description">Venmo</p>
                       {tip_based ? (
                         <p className="donate-subdescription">
-                          
                           @SpencerAmer from onfour will ensure your tip is sent
                           to {artist_name}.
-                          
                         </p>
                       ) : (
                         <p className="donate-subdescription">
@@ -679,7 +673,18 @@ const StreamPage = () => {
                         </Col>
                         <Col size={1}></Col>
                         <Col size={3}>
-                          <SocialBar></SocialBar>
+                          <SocialBar
+                            show_text={true}
+                            instagram={"https://www.instagram.com/_onfour"}
+                            spotify={
+                              "https://open.spotify.com/playlist/3KbuKf1zti8EtbJ4Ot7Iq4"
+                            }
+                            youtube={
+                              "https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ"
+                            }
+                            facebook={"https://www.facebook.com/onfour"}
+                            twitter={"https://twitter.com/_Onfour"}
+                          ></SocialBar>
                         </Col>
                       </Row>
                     </Col>
@@ -710,24 +715,10 @@ const StreamPage = () => {
                         chatStatus={chatStatus}
                         setViewers={getViewers}
                       />
-                      <VideoChat user_name={username ? username : "GUEST"}></VideoChat>
+                      <VideoChat
+                        user_name={username ? username : "GUEST"}
+                      ></VideoChat>
                       <Row className="controll-toolbar-row">
-                        <Col size="1" className="controll-toolbar-col">
-                          <div className="controll-toolbar-button-container button-commenting-o" onClick={turnOnChat}>
-                            <i
-                              id="chat-circle"
-                              className="fa fa-commenting-o controll-toolbar-button selected-circle"
-                            ></i>
-                          </div>
-                        </Col>
-                        <Col size="1" className="controll-toolbar-col">
-                          <div className="controll-toolbar-button-container button-video-camera" onClick={turnOnVideoChat}>
-                            <i
-                              id="video-circle"
-                              className="fa fa-video-camera controll-toolbar-button"
-                            ></i>
-                          </div>
-                        </Col>
                         <Col size="1" className="controll-toolbar-col">
                           <div className="controll-toolbar-button-container button-glass">
                             <i
@@ -741,6 +732,28 @@ const StreamPage = () => {
                             <i
                               id="placeholder2"
                               className="fa fa-smile-o controll-toolbar-button"
+                            ></i>
+                          </div>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div
+                            className="controll-toolbar-button-container button-commenting-o"
+                            onClick={turnOnChat}
+                          >
+                            <i
+                              id="chat-circle"
+                              className="fa fa-commenting-o controll-toolbar-button selected-circle"
+                            ></i>
+                          </div>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div
+                            className="controll-toolbar-button-container button-video-camera"
+                            onClick={turnOnVideoChat}
+                          >
+                            <i
+                              id="video-circle"
+                              className="fa fa-video-camera controll-toolbar-button"
                             ></i>
                           </div>
                         </Col>

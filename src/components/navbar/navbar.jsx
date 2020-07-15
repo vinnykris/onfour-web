@@ -362,10 +362,8 @@ const NavBar = () => {
                   if (!auth) {
                     return (
                       <NavLink
-                        to=""
+                        to="/login"
                         className={style}
-                        data-toggle="modal"
-                        data-target="#sign_in_Modal"
                         onClick={leaveVideoChat}
                       >
                         LOGIN

@@ -59,3 +59,9 @@ export const update_concert_is_live = `mutation updateConcert($input: UpdateConc
   }
 }
 `;
+export const update_user = `mutation updateCreateOnfourRegistration($input: UpdateCreateOnfourRegistrationInput!) {
+  updateCreateOnfourRegistration(input: $input) {
+    username
+  }
+}
+`;

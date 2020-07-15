@@ -1,0 +1,411 @@
+// CONCERT COMPONENT STYLING
+
+@import "../../styles";
+// @import "pretty-checkbox.scss";
+
+.concert-page {
+  margin-top: -1px;
+  background-color: black;
+  padding: 2.5%;
+}
+
+.concert-image-container {
+  // width: 100%;
+  overflow: hidden;
+  height: 0;
+  padding-top: 100%;
+  position: relative;
+}
+
+.concert-image {
+  // width: 50vh;
+  // height: 50vh;
+  // overflow: hidden;
+  // height: 0;
+  // padding-top: 100%;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+}
+
+.countdown-and-buttons {
+  margin-bottom: 8%;
+}
+
+.buy-ticket {
+  float: left;
+  margin-left: 10%;
+}
+
+.buy-ticket-button {
+  background-color: white;
+  color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.045em;
+  :hover {
+    background-color: orange;
+  }
+  :focus {
+    background-color: orangered;
+  }
+}
+
+.buy-ticket-button:hover {
+  background-color: #2c28f8;
+  color: white;
+}
+
+.buy-ticket-button:focus {
+  background-color: purple;
+  color: white;
+}
+
+.titles {
+  text-align: left;
+  color: white;
+}
+
+.artist-description-text {
+  text-align: left;
+  color: white;
+  white-space: pre-line;
+}
+
+.main-info-col {
+  padding: 0% 5%;
+}
+
+.countdown-timer {
+  float: left;
+}
+
+hr.solid {
+  border: 1px solid #e3e3e3;
+}
+
+.concert-genre-box {
+  background-color: white;
+  color: black;
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 13px;
+  letter-spacing: 0.04em;
+  font-weight: bold;
+  font-family: "Heebo", sans-serif;
+  padding: 2% 4%;
+  @include respond-to("small") {
+    margin-left: 5px;
+    margin-top: 7px;
+  }
+}
+
+.concert-logistics {
+  margin-top: 5%;
+  width: 350px;
+}
+
+.logistics-row {
+  margin-top: 5%;
+}
+
+.logistics-text {
+  color: white;
+  font-weight: normal;
+  line-height: 20px;
+  font-size: 17px;
+  letter-spacing: 0.04em;
+}
+
+.share-concert-text {
+  font-size: 16px;
+  margin-top: 20px;
+  color: white;
+  letter-spacing: 0.04em;
+  font-weight: bold;
+  line-height: 118.49%;
+  text-align: left;
+  padding: 0;
+}
+
+.share-list-container ul li {
+  margin: 0;
+  padding-right: 30px;
+  font-size: 3rem;
+}
+
+.modal-grid {
+  height: 100%;
+  width: 100%;
+}
+
+.modal-row {
+  height: 100%;
+  width: 100%;
+}
+
+.purchase-main {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+}
+
+.purchase-review {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  background-color: #f5f6f7;
+}
+
+.order-summary {
+  padding: 5%;
+}
+
+.summary-header {
+  margin-top: 5%;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: 0.04em;
+  float: left;
+}
+
+.ticket-selections {
+  width: 100%;
+  margin-top: 15%;
+}
+
+.total-purchase {
+  padding: 5%;
+}
+
+.total-purchase {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 23px;
+  letter-spacing: 0.04em;
+}
+
+hr.break-modal {
+  border: 1px solid #cbcbcb;
+}
+
+.right-col-break {
+  margin-top: 45%;
+}
+
+.checkout-button-container {
+  margin-top: 10%;
+}
+
+.ticket-type {
+  padding: 5%;
+}
+
+.select-ticket {
+  width: 100%;
+}
+
+.ticket-box {
+  // float: left;
+  display: flex;
+  // width: 30px;
+  // height: 30px;
+}
+
+.ticket-row {
+  margin: 13% 15%;
+}
+
+.pretty .state label {
+  height: 30px;
+  color: black;
+}
+
+.pretty .state label::before {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  top: 0;
+}
+
+.pretty .state label::after {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  top: 0;
+}
+
+.checkbox-text {
+  font-size: 17px;
+  line-height: 30px;
+  margin-left: 30px;
+}
+
+.pretty {
+  margin-right: 0 !important;
+}
+
+.pretty.p-default input:checked ~ .state label:after {
+  // background: rgb(60, 54, 173);
+  // background: radial-gradient(
+  //   circle,
+  //   rgba(218, 27, 221, 1) 0%,
+  //   rgba(60, 54, 173, 1) 75%
+  // );
+  background-color: black;
+}
+
+.pretty.p-icon input:checked ~ .state .icon {
+  opacity: 1;
+  font-size: 45px;
+  line-height: 30px;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  top: 0;
+}
+
+.modal-button-parent {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.icon-base {
+  position: relative;
+  top: 0;
+  left: 0;
+  border: 1px red solid;
+}
+
+.icon-main {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  border: 1px green solid;
+}
+
+.invite-friends {
+  margin: 6%;
+}
+
+.invite-prompt {
+  display: flex;
+  float: left;
+}
+
+.invite-text {
+  margin: auto;
+  margin-left: 10px;
+  font-size: 15px;
+  line-height: 17px;
+}
+
+.add-user-icon {
+  color: white;
+}
+
+.icon-background {
+  color: black;
+}
+
+.email-input-field {
+  margin-top: 17px;
+}
+
+.backstage-hidden-text {
+  visibility: hidden;
+}
+
+.item-name {
+  float: left;
+}
+
+.item-price {
+  float: right;
+}
+
+.checkout-button {
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: 0.055em;
+  color: white;
+  background-color: #2c28f8;
+  width: 100%;
+}
+
+.checkout-button-disabled {
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: 0.055em;
+  color: rgb(133, 133, 133);
+  width: 100%;
+  background-color: #b4b3b3;
+}
+
+.react-multi-email > input {
+  background-color: #eeeeee;
+}
+
+.react-multi-email [data-tag] {
+  background-color: rgb(250, 250, 250) !important;
+}
+
+// TICKET STUB
+.stub-background {
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba($color: #000000, $alpha: 0.85);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  display: flex;
+}
+
+.stub-svg {
+  z-index: 1001;
+}
+
+.stub-container {
+  width: 100%;
+  height: 100%;
+}
+
+.centered-stub-container {
+  width: auto;
+  height: auto;
+  margin: auto;
+}
+
+.stub-container-svg {
+  width: 100%;
+  height: 100%;
+  // display: grid;
+  position: relative;
+  // justify-content: center;
+  // align-items: center;
+}
+
+.animated-stub {
+  width: 100%;
+  height: 40%;
+  margin: auto;
+  position: absolute;
+  // x: 25%;
+  y: 20%;
+  // left: 50%;
+  // overflow: auto;
+  // position: absolute;
+  // border-top: none;
+  // text-align: left;
+}

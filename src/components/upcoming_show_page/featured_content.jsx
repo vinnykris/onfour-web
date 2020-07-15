@@ -1,5 +1,6 @@
 // React Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
@@ -12,28 +13,15 @@ import { Analytics } from "aws-amplify";
 import BioModal from "./bio_modal";
 
 // FeaturedContent is the unit element for an upcoming concert
-const FeaturedContent = ({
-  img,
-  name,
-  concert_name,
-  week_day,
-  date,
-  month,
-  day,
-  time,
-  price,
-  description,
-  days_left,
-  width,
-  genre,
-}) => {
+const FeaturedContent = (props) => {
   const [show_more_info, setClickedInfo] = useState(false); // Determines whether to show the popup for musician's bio or not
+  //console.log(props);
 
   // This function gets called when the MORE INFO button is clicked
   // and it sets the show_more_info to true
   const open_info = () => {
     setClickedInfo(true);
-    const event_name = (name + date).replace(/\s/g, ""); // unique identifier for event
+    const event_name = (props.artist_name + props.date).replace(/\s/g, ""); // unique identifier for event
     Analytics.record({ name: event_name }); // record analytics for specific "MORE INFO" click
   };
 
@@ -45,7 +33,7 @@ const FeaturedContent = ({
 
   return (
     <div className="single-element">
-      {/* POP-UP FOR MUSICIAN'S BIO SECTION */}
+      {/* POP-UP FOR MUSICIAN'S BIO SECTION
       {show_more_info ? (
         <div className="popup-artist-info">
           <form className="concert-form">
@@ -75,40 +63,53 @@ const FeaturedContent = ({
         ) : (
           <p className="RSVP-text">MORE INFO</p>
         )}
-      </Row>
-      <Grid className="featured-content" onClick={open_info}>
-        <Row>
-          <Col size={3} className="poster-container">
-            <img className="concert-poster" src={img} alt="content-img"></img>
-            {/* <div className="poster-tag">
+      </Row> */}
+      <Link
+        to={{
+          pathname: `/upcoming/${props.id}`,
+          state: {
+            info: props,
+          },
+        }}
+      >
+        <Grid className="featured-content" onClick={open_info}>
+          <Row>
+            <Col size={3} className="poster-container">
+              <img
+                className="concert-poster"
+                src={props.img}
+                alt="content-img"
+              ></img>
+              {/* <div className="poster-tag">
               <h4 className="poster-text">{month}</h4>
               <h1 className="poster-text">{day}</h1>
             </div> */}
-            {/* <div className="genre-tag">{genre}</div> */}
-          </Col>
-        </Row>
-        <Row>
-          <Col size={3} className="show-content-bar">
-            <Row>
-              <div className="genre-box">{genre.toUpperCase()}</div>
-            </Row>
-            <Row>
-              <Col size={3}>
-                <p className="artist-name">
-                  {name} - {concert_name}
-                </p>
-              </Col>
-            </Row>
-            <Row className="time-row">
-              <Col size={3}>
-                <p className="time">
-                  {week_day} | {date} | {time} EST{" "}
-                </p>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Grid>
+              {/* <div className="genre-tag">{genre}</div> */}
+            </Col>
+          </Row>
+          <Row>
+            <Col size={3} className="show-content-bar">
+              <Row>
+                <div className="genre-box">{props.genre.toUpperCase()}</div>
+              </Row>
+              <Row>
+                <Col size={3}>
+                  <p className="artist-name">
+                    {props.artist_name} - {props.concert_name}
+                  </p>
+                </Col>
+              </Row>
+              <Row className="time-row">
+                <Col size={3}>
+                  <p className="time">
+                    {props.week_day} | {props.date} | {props.time} EST{" "}
+                  </p>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
+      </Link>
     </div>
   );
 };
