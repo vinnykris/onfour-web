@@ -1,5 +1,5 @@
 // React imports
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
   Dropdown,
@@ -8,14 +8,11 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-// GraphQL
-import * as queries from "../../graphql/queries";
-
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";
 import Amplify from "aws-amplify";
-import { API, graphqlOperation } from "aws-amplify";
+// import { API, graphqlOperation } from "aws-amplify";
 
 // Component imports
 import { Grid, Row, Col } from "../grid";
@@ -44,8 +41,6 @@ const NavBar = () => {
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
   const [username, setUsername] = useState(""); // Tracks user's email after signing in
-  const [first, setFirst] = useState(""); // Tracks first name of signed in user
-  const [last, setLast] = useState(""); // Tracks first name of signed in user
 
   const [show_mobile_login, setShowMobileLogin] = useState(false); // Tracks whether user clicked sign-in or not on mobile
 
@@ -61,28 +56,7 @@ const NavBar = () => {
       setAuth(true);
       setUsername(user.username);
     })
-    // .then((user) => setUsername(user.username))
-    // .then((user) => setAuth(true))
-    // .then((user) => closeMenu())
     .catch((err) => setAuth(false));
-
-  // If the first and last name for the logged in user's email has not been retrieved yet,
-  // query the registration database's table to retrieve the first and last name filtered
-  // for the specific email and assign that value to first and last
-  // if (first === "" && last === "" && user_email !== "") {
-  //   API.graphql(
-  //     graphqlOperation(queries.query_name, {
-  //       filter: { email: { eq: user_email } },
-  //     })
-  //   ).then((data) => {
-  //     setFirst(
-  //       data.data.listCreateOnfourRegistrations.items[0].first.toUpperCase()
-  //     );
-  //     setLast(
-  //       data.data.listCreateOnfourRegistrations.items[0].last.toUpperCase()
-  //     );
-  //   });
-  // }
 
   // Change styles if on about page
   if (location.pathname === "/") {
@@ -122,12 +96,10 @@ const NavBar = () => {
 
   // Function to leave video chat for desktop version
   const leaveVideoChat = () => {
-    if (document.getElementById("leave-call-button")){
+    if (document.getElementById("leave-call-button")) {
       document.getElementById("leave-call-button").click();
-      console.log("clicked the leave chat button");
     }
   };
-  
 
   return (
     <div className={navbar_custom}>
@@ -322,17 +294,30 @@ const NavBar = () => {
           <Grid className="desktop-grid">
             <Row className="desktop-row">
               <Col size={1}>
-                <NavLink to="/archive" className={style} onClick={leaveVideoChat}>
+                <NavLink
+                  to="/archive"
+                  className={style}
+                  onClick={leaveVideoChat}
+                >
                   PAST SHOWS
                 </NavLink>
               </Col>
               <Col size={1}>
-                <NavLink to="/artists" className={style} onClick={leaveVideoChat}>
+                <NavLink
+                  to="/artists"
+                  className={style}
+                  onClick={leaveVideoChat}
+                >
                   FOR ARTISTS
                 </NavLink>
               </Col>
               <Col size={1}>
-                <NavLink exact to="/" className={style} onClick={leaveVideoChat}>
+                <NavLink
+                  exact
+                  to="/"
+                  className={style}
+                  onClick={leaveVideoChat}
+                >
                   ABOUT US
                 </NavLink>
               </Col>
@@ -348,12 +333,20 @@ const NavBar = () => {
                 </NavLink>
               </Col>
               <Col size={1}>
-                <NavLink to="/stream" className={style} onClick={leaveVideoChat}>
+                <NavLink
+                  to="/stream"
+                  className={style}
+                  onClick={leaveVideoChat}
+                >
                   STREAM
                 </NavLink>
               </Col>
               <Col size={1}>
-                <NavLink to="/upcoming" className={style}onClick={leaveVideoChat}>
+                <NavLink
+                  to="/upcoming"
+                  className={style}
+                  onClick={leaveVideoChat}
+                >
                   UPCOMING
                 </NavLink>
               </Col>

@@ -10,7 +10,7 @@ import Input from "./input";
 import Messages from "./messages";
 
 // AWS imports
-import Amplify, { Analytics } from "aws-amplify";
+import { Analytics } from "aws-amplify";
 
 // Styles imports
 import "./chat.scss";
@@ -107,7 +107,10 @@ const Chat = ({ chat_name, chatStatus, setViewers, artistView }) => {
   useEffect(() => () => closeChat(), []);
 
   return (
-    <div className={"chat-outer-container" + (artistView ? " artist-view" : "")} id="chat-main">
+    <div
+      className={"chat-outer-container" + (artistView ? " artist-view" : "")}
+      id="chat-main"
+    >
       <div className="chat-container">
         <InfoBar room={room} users={users} />
         <Messages messages={messages} name={name} />

@@ -1,14 +1,10 @@
 // React imports
 import React, { useState } from "react";
 
-// Component imports
-import ChatTooltip from "./chat_tooltip";
-
 // Styles imports
 import "./chat.scss";
 
 // AWS imports
-import Amplify, { Analytics } from "aws-amplify";
 import Auth from "../../apis/UserPool";
 
 // Component for input field for chat

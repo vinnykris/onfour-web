@@ -6,7 +6,6 @@ import ReactEmoji from "react-emoji";
 
 // Styles imports
 import "./chat.scss";
-import { useReducer } from "react";
 
 // Component that styles the message according to the sender
 const Message = ({ message: { user, text }, name }) => {

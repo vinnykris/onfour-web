@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
-import Popup from "reactjs-popup";
 import SharePopup from "./share_popup";
-import styled from "styled-components";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 // import { Prompt } from "react-router";
 import moment from "moment";
@@ -332,8 +330,7 @@ const StreamPage = () => {
         }
       });
     }
-      
-  }
+  };
 
   useEffect(() => {
     setTimeout(() => {

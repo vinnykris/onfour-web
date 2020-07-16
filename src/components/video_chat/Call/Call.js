@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useReducer } from "react";
+import React, { useEffect, useContext, useReducer } from "react";
 import "./Call.css";
 import Tile from "../Tile/Tile";
 import CallObjectContext from "../CallObjectContext";
@@ -11,17 +11,16 @@ import {
   FATAL_ERROR,
   callReducer,
   isLocal,
-  isScreenShare,
-  containsScreenShare,
-  getMessage
+  //isScreenShare,
+  //containsScreenShare,
+  getMessage,
 } from "./callState";
 import { logDailyEvent } from "../logUtils";
-import { propTypes } from "react-bootstrap-range-slider";
+// import { propTypes } from "react-bootstrap-range-slider";
 
 export default function Call(props) {
   const callObject = useContext(CallObjectContext);
   const [callState, dispatch] = useReducer(callReducer, initialCallState);
-
 
   /**
    * Start listening for participant changes, when the callObject is set.
@@ -32,14 +31,14 @@ export default function Call(props) {
     const events = [
       "participant-joined",
       "participant-updated",
-      "participant-left"
+      "participant-left",
     ];
 
     function handleNewParticipantsState(event) {
       event && logDailyEvent(event);
       dispatch({
         type: PARTICIPANTS_CHANGE,
-        participants: callObject.participants()
+        participants: callObject.participants(),
       });
       // console.log(callObject.participants());
     }
@@ -71,7 +70,7 @@ export default function Call(props) {
       dispatch({
         type: CAM_OR_MIC_ERROR,
         message:
-          (event && event.errorMsg && event.errorMsg.errorMsg) || "Unknown"
+          (event && event.errorMsg && event.errorMsg.errorMsg) || "Unknown",
       });
     }
 
@@ -95,7 +94,7 @@ export default function Call(props) {
       logDailyEvent(e);
       dispatch({
         type: FATAL_ERROR,
-        message: (e && e.errorMsg) || "Unknown"
+        message: (e && e.errorMsg) || "Unknown",
       });
     }
 
@@ -140,8 +139,8 @@ export default function Call(props) {
           isLarge={isLarge}
           isLoading={callItem.isLoading}
           artistView={props.artistView}
-          mute_all = {props.mute_all}
-          username = {callItem.username}
+          mute_all={props.mute_all}
+          username={callItem.username}
         />
       );
       if (isLarge) {
@@ -156,8 +155,16 @@ export default function Call(props) {
   const [largeTiles, smallTiles] = getTiles();
   const message = getMessage(callState, props.isPublic);
   return (
-    <div className={(props.artistView? "artist-" : "") + "call"}>
-      <div className={(props.artistView ? "artist-" : "") +"small-tiles" + (props.colNum===6? "-wide" : "")}>{smallTiles}</div>
+    <div className={(props.artistView ? "artist-" : "") + "call"}>
+      <div
+        className={
+          (props.artistView ? "artist-" : "") +
+          "small-tiles" +
+          (props.colNum === 6 ? "-wide" : "")
+        }
+      >
+        {smallTiles}
+      </div>
       {message && (
         <CallMessage
           header={message.header}

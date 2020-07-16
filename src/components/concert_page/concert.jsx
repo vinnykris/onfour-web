@@ -5,7 +5,6 @@ import { useEffect } from "react";
 // Function import
 import { createUpcomingObject } from "../util";
 import { getOneConcert, getArtistInfo } from "../../apis/get_concert_data";
-import { useInputValue } from "../custom_hooks";
 
 // Graphql Imports
 import * as queries from "../../graphql/queries";
@@ -26,22 +25,11 @@ import Rodal from "rodal";
 import { Grid, Row, Col } from "../grid";
 import PulseLoader from "react-spinners/PulseLoader";
 import { Checkbox, useCheckboxState } from "pretty-checkbox-react";
-import { useForm } from "react-hook-form";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
 
-// // GSAP
-// import { gsap } from "gsap";
-// // import "cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/plugins/TextPlugin.min.js";
-
-import { motion } from "framer-motion";
 // Module imports
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-
-// Image imports
-import add_group_icon from "../../images/icons/add_group.png";
-import modal_button_outline from "../../images/icons/modal_button_outline.png";
-import checkmark_icon from "../../images/icons/selected.png";
-import checkmark_icon_2 from "../../images/icons/check-mark-240.png";
+import { motion } from "framer-motion";
 
 // Styling Imports
 import "./concert_styles.scss";
@@ -64,16 +52,10 @@ const Concert = (props) => {
   const [username, setUsername] = useState("");
   const [show_stub, setShowStub] = useState(false);
 
-  // gsap.registerPlugin(TextPlugin);
-
-  // const timeline = gsap.timeline();
-
   const price_map = {
     general: 0,
     backstage: 10,
   };
-
-  // const {register, handleSubmit, watch, errors } = useForm();
 
   const backstage_checkbox = useCheckboxState();
 
@@ -96,9 +78,6 @@ const Concert = (props) => {
       setAuth(true);
       setUsername(user.username);
     })
-    // .then((user) => setUsername(user.username))
-    // .then((user) => setAuth(true))
-    // .then((user) => closeMenu())
     .catch((err) => setAuth(false));
 
   // AUTO-SCROLL SECTION
@@ -109,25 +88,8 @@ const Concert = (props) => {
     setScroll(false);
   }
 
-  const checkmark_icon_3 = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="100"
-      height="100"
-      viewBox="0 0 100 100"
-      className="stub-svg"
-    >
-      <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 16.518l-4.5-4.319 1.396-1.435 3.078 2.937 6.105-6.218 1.421 1.409-7.5 7.626z" />
-    </svg>
-  );
-
   const showTicketStub = () => {
     setShowStub(true);
-    // timeline.to("#ticket-stub", {
-    //   scale: 0.5,
-    //   rotation: 360,
-    //   transformOrigin: "50% 50%",
-    // });
   };
 
   // Runs on mount
@@ -142,7 +104,6 @@ const Concert = (props) => {
       const fetchConcert = async (id) => {
         const data = await getOneConcert(id);
         const artist_data = await getArtistInfo(data.artist_id);
-        // console.log()
         setConcertInfo(createUpcomingObject(data, artist_data));
       };
       fetchConcert(concert_id);
@@ -155,7 +116,6 @@ const Concert = (props) => {
       `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
     );
     setTotal(price_map["general"]);
-    // showTicketStub();
     // setShowStub(true);
   }, []);
 
@@ -169,10 +129,6 @@ const Concert = (props) => {
       setBackstagePass(false);
     }
   }, [backstage_checkbox.state]);
-
-  // const onSubmit = data => {
-
-  // }
 
   // If copy to clipboard button is clicked, change tooltip text and copy stream page link
   // Record analytics for click as well
@@ -196,11 +152,6 @@ const Concert = (props) => {
   };
 
   const addTicket = async () => {
-    console.log("add ticket");
-    console.log(total);
-    console.log(emails);
-    console.log(username);
-
     const user_data = await API.graphql(
       graphqlOperation(queries.get_user_data, {
         input: username,
@@ -236,12 +187,6 @@ const Concert = (props) => {
     <div className="concert-page">
       {show_stub ? (
         <div className="stub-background">
-          {/* <div
-            className="stub-container"
-            initial={{ scale: 0.5, opacity: 0.5 }}
-            animate={{ scale: 1, rotate: 720, opacity: 1 }}
-            transition={{ duration: 2, ease: "easeIn" }}
-          > */}
           <ClickAwayListener onClickAway={() => setShowStub(false)}>
             <div className="centered-stub-container">
               <motion.svg
@@ -265,8 +210,6 @@ const Concert = (props) => {
                 />
               </motion.svg>
             </div>
-
-            {/* </motion.div> */}
           </ClickAwayListener>
         </div>
       ) : null}
@@ -540,7 +483,11 @@ const Concert = (props) => {
           <Row className="info-row">
             <Col size={1} className="concert-info-col">
               <div className="concert-image-container">
-                <img className="concert-image" src={concert_info.img}></img>
+                <img
+                  className="concert-image"
+                  src={concert_info.img}
+                  alt="concert-poster"
+                ></img>
               </div>
               <div className="concert-logistics">
                 <Row>

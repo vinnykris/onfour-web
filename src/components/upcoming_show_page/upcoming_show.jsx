@@ -7,7 +7,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 // import SearchBar from "../search_bar/search_bar";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import { useWindowDimensions } from "../custom_hooks";
-import { createChunks, formatUpcomingShows, formatUpcomingShow } from "../util";
+import { formatUpcomingShow } from "../util";
 
 // AWS Imports
 // import { API, graphqlOperation } from "aws-amplify";
@@ -17,11 +17,7 @@ import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";
 
 // API Imports
-import {
-  getConcertInfo,
-  getArtistInfo,
-  getConcertInfoNew,
-} from "../../apis/get_concert_data";
+import { getArtistInfo, getConcertInfo } from "../../apis/get_concert_data";
 
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
@@ -41,43 +37,20 @@ const UpcomingShowPage = () => {
   }
 
   const getUpcomingFull = async (data) => {
-    // console.log("here");
-    // var full_concerts = [];
     const artist_id = data.artist_id;
     const artist_info = await getArtistInfo(artist_id);
-    console.log(artist_info);
     let merged = { ...data, ...artist_info };
-    console.log(merged);
     return merged;
-    // full_concerts.push(merged);
-    // await upcoming_result.forEach(async (data) => {
-    //   const artist_id = data.artist_id;
-    //   const artist_info = await getArtistInfo(artist_id);
-    //   console.log(artist_info);
-    //   let merged = { ...data, ...artist_info };
-    //   console.log(merged);
-    //   full_concerts.push(merged);
-    // });
   };
 
   useEffect(() => {
     const fetchData = async () => {
       var full_concerts = [];
       // Upcoming shows
-      const upcoming_result = await getConcertInfoNew();
+      const upcoming_result = await getConcertInfo();
       for await (const data of upcoming_result) {
         full_concerts.push(formatUpcomingShow(await getUpcomingFull(data)));
       }
-      // await upcoming_result.forEach(async (data) => {
-      //   full_concerts.push(formatUpcomingShow(await getUpcomingFull(data)));
-      //   // setFormattedConcerts(
-      //   //   ...formatted_concerts,
-      //   //   formatUpcomingShow(await getUpcomingFull(data))
-      //   // );
-      // });
-      // const upcoming_full = await getUpcomingFull(upcoming_result);
-      console.log(full_concerts);
-
       setFormattedConcerts(full_concerts);
       setIsLoaded(true);
     };
@@ -112,11 +85,17 @@ const UpcomingShowPage = () => {
             <div>
               {width <= 1024 ? (
                 <div className="upcoming-show-grid">
-                  <FlexibleGrid content_list={formatted_concerts} num_cols={3} />
+                  <FlexibleGrid
+                    content_list={formatted_concerts}
+                    num_cols={3}
+                  />
                 </div>
               ) : (
                 <div className="upcoming-show-grid">
-                  <FlexibleGrid content_list={formatted_concerts} num_cols={4} />
+                  <FlexibleGrid
+                    content_list={formatted_concerts}
+                    num_cols={4}
+                  />
                 </div>
               )}
             </div>
@@ -131,8 +110,7 @@ const UpcomingShowPage = () => {
             loading={!is_loaded}
           />
         </div>
-      )
-    }
+      )}
     </div>
   );
 };

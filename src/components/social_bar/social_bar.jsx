@@ -17,7 +17,6 @@ const SocialBar = ({
   facebook,
   twitter,
 }) => {
-  var media_list = [];
   return (
     <div className="social-media">
       {show_text ? (
