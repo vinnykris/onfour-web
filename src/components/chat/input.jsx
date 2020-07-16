@@ -36,7 +36,7 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
             className="send-button"
             onClick={(event) => sendMessage(event)}
           >
-            <i class="fa fa-send"></i>
+            <i className="fa fa-send"></i>
           </button>
           {/* </ChatTooltip> */}
         </form>
@@ -53,7 +53,7 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
             disabled={!message}
             onClick={(event) => sendMessage(event)}
           >
-            <i class="fa fa-send"></i>
+            <i className="fa fa-send"></i>
           </button>
         </form>
       )}

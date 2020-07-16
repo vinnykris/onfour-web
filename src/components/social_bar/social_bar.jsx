@@ -29,9 +29,9 @@ const SocialBar = ({
         {instagram ? (
           <li>
             <a
-              onClick={Analytics.record({ name: "socialBarInsta" })}
+              onClick={() => Analytics.record({ name: "socialBarInsta" })}
               href={instagram}
-              class="fa fa-instagram"
+              className="fa fa-instagram"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -43,9 +43,9 @@ const SocialBar = ({
         {spotify ? (
           <li>
             <a
-              onClick={Analytics.record({ name: "socialBarSpotify" })}
+              onClick={() => Analytics.record({ name: "socialBarSpotify" })}
               href={spotify}
-              class="fa fa-spotify"
+              className="fa fa-spotify"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -57,9 +57,9 @@ const SocialBar = ({
         {youtube ? (
           <li>
             <a
-              onClick={Analytics.record({ name: "socialBarYoutube" })}
+              onClick={() => Analytics.record({ name: "socialBarYoutube" })}
               href={youtube}
-              class="fa fa-youtube"
+              className="fa fa-youtube"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -71,9 +71,9 @@ const SocialBar = ({
         {facebook ? (
           <li>
             <a
-              onClick={Analytics.record({ name: "socialBarFacebook" })}
+              onClick={() => Analytics.record({ name: "socialBarFacebook" })}
               href={facebook}
-              class="fa fa-facebook"
+              className="fa fa-facebook"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -85,9 +85,9 @@ const SocialBar = ({
         {twitter ? (
           <li>
             <a
-              onClick={Analytics.record({ name: "socialBarTwitter" })}
+              onClick={() => Analytics.record({ name: "socialBarTwitter" })}
               href={twitter}
-              class="fa fa-twitter"
+              className="fa fa-twitter"
               target="_blank"
               rel="noopener noreferrer"
             >

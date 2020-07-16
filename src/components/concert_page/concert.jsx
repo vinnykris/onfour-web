@@ -253,23 +253,13 @@ const Concert = (props) => {
                           <Checkbox
                             state
                             className="p-fill p-round ticket-box p-locked"
+                            readOnly
                             icon={
                               <i
                                 className="fa fa-check-circle"
                                 aria-hidden="true"
                               ></i>
                             }
-
-                            // svg={
-                            //   <svg
-                            //     xmlns="http://www.w3.org/2000/svg"
-                            //     width="24"
-                            //     height="24"
-                            //     viewBox="0 0 24 24"
-                            //   >
-                            //     <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 16.518l-4.5-4.319 1.396-1.435 3.078 2.937 6.105-6.218 1.421 1.409-7.5 7.626z" />
-                            //   </svg>
-                            // }
                           >
                             <span className="checkbox-text">
                               General Admission
@@ -291,7 +281,7 @@ const Concert = (props) => {
                                 aria-hidden="true"
                               ></i>
                             }
-                            // disabled
+                            disabled
                           >
                             <span className="checkbox-text">
                               Backstage Pass
@@ -501,17 +491,17 @@ const Concert = (props) => {
                     {concert_info.formatted_date}
                   </span>
                 </Row>
-                <hr class="solid" />
+                <hr className="solid" />
                 <Row className="logistics-row">
                   <span className="logistics-text">
                     {concert_info.formatted_time} EST
                   </span>
                 </Row>
-                <hr class="solid" />
+                <hr className="solid" />
                 <Row className="logistics-row">
                   <span className="logistics-text">STREAMED FROM NEW YORK</span>
                 </Row>
-                <hr class="solid" />
+                <hr className="solid" />
                 <SocialBar
                   instagram={instagram}
                   spotify={spotify}
@@ -599,7 +589,7 @@ const Concert = (props) => {
                           <script
                             async
                             src="https://platform.twitter.com/widgets.js"
-                            charset="utf-8"
+                            charSet="utf-8"
                           ></script>
                         </li>
                         <li>

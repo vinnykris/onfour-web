@@ -3,7 +3,7 @@ import "./BrowserUnsupported.css";
 
 export default function BrowserUnsupported() {
   return (
-    <p class="browser-unsupported">
+    <p classclassName="browser-unsupported">
       Looks like you need to upgrade your browser to make Daily.co video calls.
       <br />
       See&nbsp;

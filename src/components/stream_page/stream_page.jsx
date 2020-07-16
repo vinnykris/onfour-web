@@ -408,7 +408,7 @@ const StreamPage = () => {
                           className="toggle-chat-button"
                           onClick={toggleChat}
                         >
-                          <i class={button_icon}></i>
+                          <i className={button_icon}></i>
                         </button>
                       </div>
                     </div>
@@ -423,9 +423,11 @@ const StreamPage = () => {
                           <Row className="stream-share-row">
                             <div className="feedback-container">
                               <a
-                                onClick={Analytics.record({
-                                  name: "sendFeedbackClicked",
-                                })}
+                                onClick={() =>
+                                  Analytics.record({
+                                    name: "sendFeedbackClicked",
+                                  })
+                                }
                                 href="https://forms.gle/5rP8nXznckGCuRE77"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -443,7 +445,7 @@ const StreamPage = () => {
                                   onClick={openPopup}
                                 >
                                   <i
-                                    class="fa fa-share show-time"
+                                    className="fa fa-share show-time"
                                     aria-hidden="true"
                                   ></i>
                                   <h5 className="show-time share-text">
@@ -637,7 +639,7 @@ const StreamPage = () => {
                             } else {
                               return (
                                 <form
-                                  class="stream-email-form"
+                                  className="stream-email-form"
                                   action="/"
                                   id="newsletter"
                                   onSubmit={emailSubmit}

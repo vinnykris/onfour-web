@@ -219,7 +219,7 @@ const StreamPage = () => {
                           className="toggle-chat-button"
                           onClick={toggleChat}
                         >
-                          <i class={button_icon}></i>
+                          <i className={button_icon}></i>
                         </button>
                       </div>
                     </div>
@@ -323,7 +323,7 @@ const StreamPage = () => {
                         } else {
                           return (
                             <form
-                              class="stream-email-form"
+                              classclassName="stream-email-form"
                               action="/"
                               id="newsletter"
                               onSubmit={emailSubmit}

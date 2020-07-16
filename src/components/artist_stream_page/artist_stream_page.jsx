@@ -237,7 +237,7 @@ const StreamPage = () => {
                           className="artist-toggle-chat-button"
                           onClick={toggleChat}
                         >
-                          <i class={button_icon}></i>
+                          <i className={button_icon}></i>
                         </button>
                       </div>
                     </div>

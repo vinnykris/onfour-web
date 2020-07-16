@@ -51,7 +51,7 @@ function VideoPlayer({ url, is_live }) {
           />
           {is_live ? (
             <div className="is-live-tag">
-              <i class="fa fa-circle live-circle"></i>
+              <i className="fa fa-circle live-circle"></i>
               LIVE
             </div>
           ) : (
