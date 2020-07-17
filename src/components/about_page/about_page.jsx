@@ -1,12 +1,11 @@
 // Main Imports
 import React, { useState, useEffect } from "react";
-import ReactPlayer from "react-player";
 import { Grid, Row, Col } from "../grid";
 import history from "../../history";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 // AWS Imports
-import { API, graphqlOperation, loadingBar } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
@@ -22,9 +21,10 @@ import {
   getConcertInfo,
   getArchiveInfo,
   getMostRecentUpcomingInfo,
+  getArtistInfo,
 } from "../../apis/get_concert_data";
 
-import { formatArchiveVideos, formatUpcomingShows } from "../util";
+import { formatArchiveVideos, formatUpcomingShow } from "../util";
 
 // Image Imports
 // import gradient_header from "../../images/mobile_gradient.png";
@@ -36,11 +36,16 @@ Amplify.configure(awsmobile);
 
 // AboutPage component that contains all the about page layout
 const AboutPage = () => {
-  // DETERMINE MOBILE VERSION OR NOT
-  const { height, width } = useWindowDimensions(); // Dimensions of screen
-
   const [email, setEmail] = useState(""); // Variable to store input emails for subscribtion form
   const [clicked, setClicked] = useState(false); // Variable to show hide the subscribtion form
+  // concerts is a list of FeaturedContent objects with upcoming show information
+  const [concerts, setConcerts] = useState([]);
+  const [most_recent_concert, setMostRecentConcert] = useState("");
+  const [most_recent_concert_artist, setMostRecentConcertArtist] = useState("");
+  const [videos, setVideos] = useState([]); // List of video objects with past show information
+
+  // DETERMINE MOBILE VERSION OR NOT
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   // AUTO-SCROLL SECTION
   // Auto-scrolls on first navigation
@@ -49,11 +54,6 @@ const AboutPage = () => {
     window.scrollTo({ top: "10px", behavior: "smooth" });
     setScroll(false);
   }
-
-  // concerts is a list of FeaturedContent objects with upcoming show information
-  const [concerts, setConcerts] = useState([]);
-  const [most_recent_concert, setMostRecentConcert] = useState("");
-  const [videos, setVideos] = useState([]); // List of video objects with past show information
 
   // Add in Analytics that about page was visited
   useEffect(() => {
@@ -69,9 +69,6 @@ const AboutPage = () => {
   const authenticatedAboutPageVisit = () => {
     Analytics.record({ name: "totalAuthenticatedAboutPageVisits" });
   };
-
-  const header_image_url =
-    "https://d1gbu7v6fgabn0.cloudfront.net/banner_background_blur.jpg";
 
   // This function gets called when the email subscribtion form is submitted
   // It calls the appsync API to send the input email to backend database
@@ -98,15 +95,22 @@ const AboutPage = () => {
     window.open(url, "_blank");
   };
 
-  // const getConcertData = async () => {
-  //   set await getConcertInfo();
-  // }
+  const getUpcomingFull = async (data) => {
+    const artist_id = data.artist_id;
+    const artist_info = await getArtistInfo(artist_id);
+    let merged = { ...data, ...artist_info };
+    return merged;
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       // Upcoming shows
+      var full_concerts = [];
       const upcoming_result = await getConcertInfo();
-      setConcerts(formatUpcomingShows(upcoming_result.slice(0, 4), width));
+      for await (const data of upcoming_result.slice(0, 4)) {
+        full_concerts.push(formatUpcomingShow(await getUpcomingFull(data)));
+      }
+      setConcerts(full_concerts);
 
       // Archive videos (sorting from most recent -> oldest)
       const archive_result = await getArchiveInfo();
@@ -114,6 +118,9 @@ const AboutPage = () => {
 
       const recent_concert = await getMostRecentUpcomingInfo();
       setMostRecentConcert(recent_concert);
+
+      const artist_info = await getArtistInfo(recent_concert.artist_id);
+      setMostRecentConcertArtist(artist_info);
     };
     fetchData();
   }, []);
@@ -208,10 +215,10 @@ const AboutPage = () => {
                   </Row>
                   <Row>
                     <div className="upcoming-description">
-                      {most_recent_concert
-                        ? most_recent_concert.artist.toUpperCase() +
+                      {most_recent_concert_artist
+                        ? most_recent_concert_artist.artist_name.toUpperCase() +
                           " - " +
-                          most_recent_concert.concertName.toUpperCase()
+                          most_recent_concert.concert_name.toUpperCase()
                         : "loading..."}
                     </div>
                   </Row>
@@ -290,7 +297,7 @@ const AboutPage = () => {
               <img
                 className="why-perform-image"
                 src={"https://onfour-media.s3.amazonaws.com/singing+photo.jpg"}
-                alt="singer-image"
+                alt="singer"
               ></img>
             </Row>
           </Row>
