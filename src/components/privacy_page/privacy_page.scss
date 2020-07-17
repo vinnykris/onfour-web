@@ -1,0 +1,40 @@
+// PRIVACY PAGE STYLING
+
+@import "../../styles";
+
+.privacy-page{
+    width: 100vw;
+    background-color: black;
+    color: white;
+}
+
+.privacy-container {
+    // position: absolute;
+    width: 60vw;
+    margin: 0 auto;
+    text-align: justify;
+
+    li {
+    color: white;
+    }
+    h2 {
+    color: white;
+    }
+    h3 {
+    color: white;
+    }
+    ol {
+    color: white;
+    }
+    p {
+    color: white;
+    }
+}
+
+.privacy-header {
+    color: white;
+    text-align: center;
+    margin: 20px;
+    padding-bottom: 20px;
+}
+
