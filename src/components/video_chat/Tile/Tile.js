@@ -76,15 +76,15 @@ export default function Tile(props) {
   }
 
   // useEffect(() => {
-  //   if (props.artistView) {
+  //   if (!props.artistView) {
   //     toggle_audio_mute();
   //   }
   // }, [])
 
   useEffect(() => {
-    if(props.artistView) {
+    // if(props.artistView) {
       toggle_audio_mute()
-    }
+    // }
   }, [props.mute_all])
 
   const [volume_value, setVolumeValue] = useState(100); 
