@@ -36,7 +36,7 @@ function VideoPlayer({
             playing
             controls
             playsinline
-            muted={!is_live}
+            muted={is_live}
           />
           {is_live? (
             <div className="is-live-tag">LIVE</div>
@@ -54,7 +54,7 @@ function VideoPlayer({
             height="100%"
             playing
             controls
-            muted={!is_live}
+            muted={is_live}
           />
           {is_live? (
             <div className="is-live-tag">
