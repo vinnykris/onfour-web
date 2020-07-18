@@ -15,7 +15,8 @@ import Footer from "./components/footer/footer";
 import Modal from "./components/sign_in_modal/sign_in_modal";
 import Forgot from "./components/forgot_page/forgot_page";
 import SoundCheck from "./components/soundcheck_page/soundcheck_page";
-import PrivacyPage from "./components/privacy_page/privacy_page";
+import PrivacyPage from "./components/policies/privacy_page";
+import TermsOfService from "./components/policies/terms_of_service";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -26,8 +27,8 @@ import "./App.css";
 import "./styles.scss";
 
 // Amplify imports
-import Amplify from 'aws-amplify';
-import awsconfig from './apis/aws-exports';
+import Amplify from "aws-amplify";
+import awsconfig from "./apis/aws-exports";
 
 require("dotenv").config();
 Amplify.configure(awsconfig);
@@ -49,6 +50,7 @@ function App() {
           <Route path="/forgot" component={Forgot} />
           <Route path="/soundcheck" component={SoundCheck} />
           <Route path="/privacy-policy" component={PrivacyPage} />
+          <Route path="/terms-of-service" component={TermsOfService} />
         </Switch>
         <Modal></Modal>
         <Footer />
