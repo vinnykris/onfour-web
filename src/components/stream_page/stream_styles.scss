@@ -271,6 +271,10 @@
   left: 0;
 }
 
+.payment-container {
+  display: contents;
+}
+
 .donate-title {
   font-size: 25px;
   font-weight: $medium-weight;
@@ -380,6 +384,11 @@
   cursor: pointer;
 }
 
+// .share-text:hover {
+//   text-decoration: underline;
+//   // text-decoration-color: #e2e2e2;
+// }
+
 .share-popup {
   top: 0;
   margin-top: 0;
@@ -399,7 +408,18 @@
 .stream-share-row {
   position: relative;
   height: 100%;
-  margin-left: 50%;
+  // margin-left: 20%;
+}
+
+.feedback-container {
+  width: auto;
+  position: absolute;
+  right: 260px;
+  margin-top: 5px;
+}
+
+.feedback-link:hover {
+  text-decoration: underline;
 }
 
 .share-container {

@@ -146,6 +146,18 @@ const AboutPage = () => {
     });
   });
 
+  // Analytics and redirect for clicking "go to venue" button
+  const goToVenue = (event) => {
+    Analytics.record({ name: "goToVenue" });
+    history.push("/stream");
+  };
+
+  // Analytics and redirect for clicking "learn more" button
+  const learnMore = (event) => {
+    Analytics.record({ name: "learnMoreClicked" });
+    history.push("/artists");
+  };
+
   return (
     <div className="about-page-content">
       {/* {!most_recent_concert ? (
@@ -209,10 +221,7 @@ const AboutPage = () => {
                     </div>
                   </Row>
                   <Row className="upcoming-button-container">
-                    <button
-                      className="upcoming-button"
-                      onClick={() => history.push("/stream")}
-                    >
+                    <button className="upcoming-button" onClick={goToVenue}>
                       GO TO VENUE
                     </button>
                   </Row>
@@ -277,7 +286,7 @@ const AboutPage = () => {
             <Row className="why-perform-learn-more-row">
               <button
                 className="why-perform-learn-more-button"
-                onClick={() => history.push("/artists")}
+                onClick={learnMore}
               >
                 LEARN MORE
               </button>

@@ -12,6 +12,9 @@ import "./footer_styles.scss";
 // Images
 import white_logo from "../../images/logos/logo_blackbackground.png";
 
+//AWS
+import { Analytics } from "aws-amplify";
+
 // Exports Footer components, containing logo, contact email, copyright information,
 // and social media links
 const Footer = () => {
@@ -51,6 +54,7 @@ const Footer = () => {
                   <ul>
                     <li>
                       <a
+                        onClick={Analytics.record({ name: "contactUsFooter" })}
                         href="mailto:onfour.box@gmail.com"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -75,6 +79,7 @@ const Footer = () => {
                   <ul>
                     <li>
                       <a
+                        onClick={Analytics.record({ name: "instaFooter" })}
                         href="https://www.instagram.com/_onfour/"
                         target="_blank"
                         className="fa fa-instagram"
@@ -85,6 +90,7 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
+                        onClick={Analytics.record({ name: "youtubeFooter" })}
                         href="https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ/featured"
                         target="_blank"
                         className="fa fa-youtube"
@@ -95,6 +101,7 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
+                        onClick={Analytics.record({ name: "twitterFooter" })}
                         href="https://twitter.com/_Onfour"
                         target="_blank"
                         className="fa fa-twitter"
