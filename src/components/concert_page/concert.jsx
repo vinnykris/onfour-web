@@ -11,7 +11,7 @@ import * as queries from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
 
 // AWS Imports
-import { Analytics } from "aws-amplify";
+import { Analytics, sectionFooterSecondaryContent } from "aws-amplify";
 import Auth from "../../apis/UserPool";
 import awsmobile from "../../apis/AppSync";
 import Amplify from "aws-amplify";
@@ -26,6 +26,10 @@ import { Grid, Row, Col } from "../grid";
 import PulseLoader from "react-spinners/PulseLoader";
 import { Checkbox, useCheckboxState } from "pretty-checkbox-react";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
+
+// EmailJS Import
+import emailjs from "emailjs-com";
+import { service_id, template_id, user_id } from "../../apis/email_js";
 
 // Module imports
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -151,6 +155,29 @@ const Concert = (props) => {
     console.log("go to checkout");
   };
 
+  const sendEmailInvites = (user_name) => {
+    for (let i = 0; i < emails.length; i++) {
+      const template_params = {
+        email_receipient: emails[i],
+        reply_to: "onfour.box@gmail.com",
+        friend_name: user_name,
+        musician: concert_info.artist_name,
+        date: concert_info.week_day.concat(
+          ", ",
+          concert_info.formatted_date,
+          " @ ",
+          concert_info.formatted_time,
+          " EST"
+        ),
+        buy_or_rsvp: "RSVP",
+        concert_link: "https://www.onfour.live/upcoming/".concat(concert_id),
+      };
+      setTimeout(() => {
+        emailjs.send(service_id, template_id, template_params, user_id);
+      }, 1000);
+    }
+  };
+
   const addTicket = async () => {
     const user_data = await API.graphql(
       graphqlOperation(queries.get_user_data, {
@@ -160,6 +187,8 @@ const Concert = (props) => {
 
     const current_concert_data =
       user_data.data.getCreateOnfourRegistration.concert;
+
+    const user_name = user_data.data.getCreateOnfourRegistration.first;
 
     if (!current_concert_data || !isNaN(parseInt(current_concert_data))) {
       var concert_data = {};
@@ -181,6 +210,7 @@ const Concert = (props) => {
     );
     hideModal();
     setShowStub(true);
+    sendEmailInvites(user_name);
   };
 
   return (
