@@ -31,6 +31,10 @@ import { ReactMultiEmail, isEmail } from "react-multi-email";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { motion } from "framer-motion";
 
+// EmailJS Import
+import emailjs from "emailjs-com";
+import { service_id, template_id, user_id } from "../../apis/email_js";
+
 // Styling Imports
 import "./concert_styles.scss";
 import "rodal/lib/rodal.css";
@@ -151,6 +155,29 @@ const Concert = (props) => {
     console.log("go to checkout");
   };
 
+  const sendEmailInvites = (user_name) => {
+    for (let i = 0; i < emails.length; i++) {
+      const template_params = {
+        email_receipient: emails[i],
+        reply_to: "onfour.box@gmail.com",
+        friend_name: user_name,
+        musician: concert_info.artist_name,
+        date: concert_info.week_day.concat(
+          ", ",
+          concert_info.formatted_date,
+          " @ ",
+          concert_info.formatted_time,
+          " EST"
+        ),
+        buy_or_rsvp: "RSVP",
+        concert_link: "https://www.onfour.live/upcoming/".concat(concert_id),
+      };
+      setTimeout(() => {
+        emailjs.send(service_id, template_id, template_params, user_id);
+      }, 1000);
+    }
+  };
+
   const addTicket = async () => {
     const user_data = await API.graphql(
       graphqlOperation(queries.get_user_data, {
@@ -160,6 +187,8 @@ const Concert = (props) => {
 
     const current_concert_data =
       user_data.data.getCreateOnfourRegistration.concert;
+
+    const user_name = user_data.data.getCreateOnfourRegistration.first;
 
     if (!current_concert_data || !isNaN(parseInt(current_concert_data))) {
       var concert_data = {};
@@ -181,6 +210,7 @@ const Concert = (props) => {
     );
     hideModal();
     setShowStub(true);
+    sendEmailInvites(user_name);
   };
 
   return (

@@ -68,8 +68,6 @@ export const get_artist_info = `query getCreateOnfourRegistration(
     }
 }`;
 
-
-
 export const get_concert_is_live = `query getConcert(
     $id: ID!
   ) {
@@ -112,6 +110,7 @@ export const get_specific_concert = `query listFutureConcerts(
 export const get_user_data = `query getCreateOnfourRegistration ($input: String!){
   getCreateOnfourRegistration(username: $input) {
     username
+    first
     concert
   }
 }`;
@@ -133,7 +132,6 @@ export const list_concerts = `query listConcerts(
     }
   }
 }`;
-
 
 export const get_one_concert = `query getConcert(
   $id: ID!
