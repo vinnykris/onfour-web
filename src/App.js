@@ -1,6 +1,6 @@
 // React imports
 import React from "react";
-import { Router, Switch, Route, withRouter } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import history from "./history";
 
 // Component imports

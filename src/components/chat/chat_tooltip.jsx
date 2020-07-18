@@ -5,7 +5,7 @@ import React from "react";
 
 // Module imports
 import Tooltip from "@material-ui/core/Tooltip";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 // Styles imports
 import "./chat.scss";

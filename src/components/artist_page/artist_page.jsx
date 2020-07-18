@@ -10,7 +10,7 @@ import onboarding_4 from "../../images/icons/onboarding_artist_4.png";
 import onboarding_5 from "../../images/icons/onboarding_artist_5.png";
 
 //AWS Imports
-import Amplify, { Analytics } from "aws-amplify";
+import { Analytics } from "aws-amplify";
 import Auth from "../../apis/UserPool";
 
 // Styling Imports

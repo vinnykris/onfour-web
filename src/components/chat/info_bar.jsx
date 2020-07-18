@@ -1,5 +1,5 @@
 // React imports
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 // Component imports
 import ChatTooltip from "./chat_tooltip";
