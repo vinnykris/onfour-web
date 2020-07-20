@@ -39,6 +39,17 @@ const PrivacyPage = () => {
         </p>
         <br></br>
         <p>
+          When you visit our website, we access your IP address and standard web
+          log information, such as your browser type and the pages you accessed
+          on our website. We also may collect certain geo-location information.
+          In addition, when obtaining a ticket to an event hosted on our site,
+          we provide the option to add the event to your Google Calendar. This
+          requires you to authorize us to access your Google account. We do not
+          access any private information, nor do we store any of your private
+          information.
+        </p>
+        <br></br>
+        <p>
           We don’t share any personally identifying information publicly or with
           third-parties, except when required to by law.
         </p>
