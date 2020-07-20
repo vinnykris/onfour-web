@@ -7,23 +7,24 @@ import { Grid, Row, Col } from "../grid";
 
 // Component Imports 
 import FestivalBio from "./festival_bio";
-import ApiCalendar from 'react-google-calendar-api';
+import ApiCalendar from '../google_calender/google_calendar_api';
 
 
 const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, date, time, description, width, formated_date }) => {
+
     const toBeImplemented = async() => {
-        const result = await ApiCalendar.handleAuthClick()
-            
-        console.log(result);
-        if (result) {
-            addEvent();
+        // ApiCalendar.handleSignoutClick();
+        if (ApiCalendar.sign) {
+            await addEvent()
+        } else {
+            await ApiCalendar.handleAuthClick()
         }
     };
 
     const addEvent = () => {
 
         const eventLoad = {
-            summary: artist_name + "-" + concert_name,
+            summary: artist_name + " - " + concert_name,
             description: "onfour concert!",
             start: {
                 dateTime: new Date(formated_date).toISOString()

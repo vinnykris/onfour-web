@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import ApiCalendar from "react-google-calendar-api";
+import ApiCalendar from "./google_calendar_api";
 
 
 function sign_in_google() {
