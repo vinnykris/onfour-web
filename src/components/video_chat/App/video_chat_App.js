@@ -72,6 +72,10 @@ export default function VideoChatApp({ user_name, artistView, colNum}) {
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
     newCallObject.join({ url });
+    newCallObject.setBandwidth({
+      kbs: 20,
+      trackConstraints: { width: 64, height: 64, frameRate: 3 }
+    });
   }, []);
 
   const startJoiningPrivateCall = useCallback(async url => {
