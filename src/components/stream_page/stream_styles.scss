@@ -589,6 +589,7 @@
 .waiting-message2 {
   color: white;
   font-weight: lighter;
+  font-size: 0.8rem;
   letter-spacing: 0.5px;
   @include respond-to("small") {
     font-size: 13px;

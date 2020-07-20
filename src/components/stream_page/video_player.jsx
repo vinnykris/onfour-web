@@ -200,9 +200,10 @@ function VideoPlayer({
                   />
                 </div>
                 <br></br>
-                <h7 className="waiting-message2">Please give the artist a few minutes. </h7>
+                <h7 className="waiting-message2">The artist is still backstage, the performance should begin soon.</h7>
+                <br></br>
                 <h7 className="waiting-message2">
-                  We are sorry for your waiting.
+                    If you are unable to see the stream well, please try refreshing your browser.
                 </h7>
               </div>
             </div>
