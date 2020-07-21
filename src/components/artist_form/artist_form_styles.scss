@@ -3,55 +3,97 @@
 @import "../../styles";
 
 .artist-form-container {
-  width: 100%;
-  height: 100%;
-  background-color: #181818;
+    width: 100%;
+    height: 100%;
+    background-color: black;
 }
 
 .artist-form {
-  width: 50%;
+    width: 50%;
+}
+.artist-form-message {
+    color: white;
+    text-align: justify;
+    font-size: 0.8rem;
+    float: left;
 }
 
 .artist-form-header {
-  font-family: Helvetica;
-  font-style: normal;
-  font-weight: bold;
-  text-align: center;
-  letter-spacing: 0.045em;
-  color: white;
-  margin: 50px 0px;
-  font-size: 1.3rem;
+    font-family: Helvetica;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.045em;
+    color: white;
+    margin: 40px 0px 40px 0px;
+    font-size: 1.3rem;
 }
 
 .artist-label-text {
-  text-align: left;
-  float: left;
-  font-family: Helvetica;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 0.9rem;
-  letter-spacing: 0.045em;
-  color: white;
-  margin-top: 5%;
-  margin-bottom: 5px;
+    text-align: left;
+    float: left;
+    font-family: Helvetica;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 0.045em;
+    color: white;
+    margin-top: 5%;
+    margin-bottom: 5px;
 }
 
 .artist-form-input {
-  background-color: #181818;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid #b7b7b7;
+    background-color: black;
+    // border-top: none;
+    // border-left: none;
+    // border-right: none;
+    border: 1px solid #b7b7b7;
+    color: white;
+    font-size: 0.9rem;
 }
 
+.artist-form-input::placeholder {
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    top: 0px;
+}
+
+.artist-bio {
+    height: 30vh;
+    width: 100%;
+    padding: 10px 20px;
+    outline: none;
+    transition: 0.3s;
+  &:focus {
+        border: 2px solid #303096;
+    }
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+  &::-webkit-scrollbar {
+        width: 10px;
+        background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
+    }
+  &::-webkit-scrollbar-thumb {
+        background: rgba(209, 209, 209, 0.596);
+        border-radius: 20px;
+    }
+    // white-space: pre-wrap;
+}
+
+.artist-bio::placeholder {
+    white-space: pre-wrap;
+}
+
+
+
 .artist-form-submit-button {
-  background-color: #322fdd;
-  color: white;
-  width: 100%;
-  margin: 50px 0px;
+    background-color: #322fdd;
+    color: white;
+    width: 100%;
+    margin: 50px 0px;
 }
 
 .error-message {
-  color: red;
-  padding-top: 2%;
+    color: red;
+    padding-top: 2%;
 }

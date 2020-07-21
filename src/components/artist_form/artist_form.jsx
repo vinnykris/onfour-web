@@ -31,6 +31,8 @@ const ArtistForm = () => {
   const artist_twitter = useInputValue("");
   const artist_facebook = useInputValue("");
   const artist_soundcloud = useInputValue("");
+  const artist_phone = useInputValue("");
+  const refer_info = useInputValue("");
 
   // Error tracks the error message, username tracks the username of an
   // authenticated user, and auth tracks if a user is authenticated
@@ -67,11 +69,13 @@ const ArtistForm = () => {
       facebook: artist_facebook.value,
       soundcloud: artist_soundcloud.value,
       is_artist: true,
+      phone: artist_phone.value,
+      refer_note: refer_info.value,
     };
 
     if (auth) {
       API.graphql(
-        graphqlOperation(mutations.update_artist_form, {
+        graphqlOperation(mutations.update_user, {
           input: artist_form_payload,
         })
       )
@@ -95,8 +99,12 @@ const ArtistForm = () => {
         onSubmit={handleSubmit}
       >
         <h4 className="artist-form-header">Apply to Perform</h4>
+        <h7 className="artist-form-message">
+          Thanks for your interest in performing on onfour! We deeply care about artists and recognize that your music and comfort come first. Please fill out and submit the form below to gain approval to perform. You should hear from our team within 1 or 2 business days.
+        </h7>
+        <br></br>
         <label className="artist-label-text" for="artist_name_slot">
-          Your Artist Name*
+          Artist Name*
         </label>
         <input
           className="artist-form-input"
@@ -108,15 +116,26 @@ const ArtistForm = () => {
         <label className="artist-label-text" for="artist_bio_slot">
           Artist Bio*
         </label>
-        <input
-          className="artist-form-input"
+        <textarea
+          className="artist-form-input artist-bio"
+          name="artist_bio"
+          form="artist-signup"
+          // rows="4" 
+          // cols="10" 
+          wrap="soft"
+          placeholder="Please include your full artist bio here. This will be populated for your concert descriptions that fans see."
+          {...artist_bio}
+        />
+        {/* <input
+          className="artist-form-input artist-bio"
           name="artist_bio"
           id="artist_bio"
           required
+          placeholder="Please include your full artist bio here. This will be populated for your concert descriptions that fans see."
           {...artist_bio}
-        />
+        /> */}
         <label className="artist-label-text" for="genre_slot">
-          Your Genre*
+          Genre*
         </label>
         <input
           className="artist-form-input"
@@ -125,8 +144,17 @@ const ArtistForm = () => {
           required
           {...artist_genre}
         />
+        <label className="artist-label-text" for="phone_number_slot">
+          Phone Number*
+        </label>
+        <input
+          className="artist-form-input"
+          name="phone_number"
+          id="phone_number"
+          {...artist_phone}
+        />
         <label className="artist-label-text" for="ins_url_slot">
-          Instagram URL*
+          Instagram Handle / URL*
         </label>
         <input
           className="artist-form-input"
@@ -144,7 +172,7 @@ const ArtistForm = () => {
           {...artist_spotify}
         />
         <label className="artist-label-text" for="twitter_url_slot">
-          Twitter URL
+          Twitter Handle / URL
         </label>
         <input
           className="artist-form-input"
@@ -169,6 +197,15 @@ const ArtistForm = () => {
           name="soundcloud_url"
           id="soundcloud_url"
           {...artist_soundcloud}
+        />
+        <label className="artist-label-text" for="refer_info_slot">
+          How did you hear about onfour / who referred you?
+        </label>
+        <input
+          className="artist-form-input"
+          name="refer_info"
+          id="refer_info"
+          {...refer_info}
         />
         <div className="error-message">{error}</div>
         <button
