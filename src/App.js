@@ -17,6 +17,8 @@ import SoundCheck from "./components/soundcheck_page/soundcheck_page";
 import Register from "./components/register_page/register_page";
 import Login from "./components/login_page/login_page";
 import ArtistForm from "./components/artist_form/artist_form";
+import PrivacyPage from "./components/policies/privacy_page";
+import TermsOfService from "./components/policies/terms_of_service";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -52,6 +54,8 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/form" component={ArtistForm} />
+          <Route path="/privacy-policy" component={PrivacyPage} />
+          <Route path="/terms-of-service" component={TermsOfService} />
         </Switch>
         <Footer />
       </Router>
