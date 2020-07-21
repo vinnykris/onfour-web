@@ -391,7 +391,7 @@ const StreamPage = () => {
             <Grid>
               <Row>
                 {/* <Col size={0.5}></Col> */}
-                <Col size={7} id="stream_col">
+                <Col size={6} id="stream_col">
                   <div className="stream-main">
                     <div className="stream-wrapper" id="video_player">
                       <VideoPlayer
@@ -692,7 +692,7 @@ const StreamPage = () => {
                   </Row>
                 </Col>
                 <Col
-                  size={2.5}
+                  size={3}
                   id="chat_container"
                   className="sticky-container"
                 >

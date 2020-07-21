@@ -140,7 +140,7 @@ export default function Call(props) {
           isLarge={isLarge}
           isLoading={callItem.isLoading}
           artistView={props.artistView}
-          mute_all = {props.mute_all}
+          // mute_all = {props.mute_all}
           username = {callItem.username}
         />
       );
