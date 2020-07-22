@@ -117,7 +117,7 @@ export default function Tray(props) {
         highlighted={isEnabledActiveSpeaker}
         onClick={toggleActiveSpeaker}
       /> */}
-      {/* {props.artistView ? ( */}
+      {props.artistView ? (
         <button
           type="unmute-all"
           className="artist-mute-all-button"
@@ -127,7 +127,7 @@ export default function Tray(props) {
         >
           {props.button_message}
         </button>
-      {/* ): null} */}
+      ): null}
       
       {/* {DailyIframe.supportedBrowser().supportsScreenShare && (
         <TrayButton

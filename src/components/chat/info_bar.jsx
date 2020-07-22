@@ -58,7 +58,7 @@ const InfoBar = ({ room, users }) => {
             </div>
           </ClickAwayListener>
           {width <= 600 ? (
-            <p className="number-of-users">{users.length}</p>
+            <p className="onfour-title">{users.length}</p>
           ) : null}
         </div>
       </div>

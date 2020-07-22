@@ -97,7 +97,7 @@ button:focus {
   /* height: 100%; */
   position: absolute;
   width: 100%;
-  bottom: 70px;
+  bottom: 0px;
   top: 0px;
   left: 0px;
   background-color: #757575;
@@ -128,16 +128,33 @@ button:focus {
   // background: #757575;
   background: #17171b;
   border-radius: 4px 4px 0 0;
-  height: 40px;
+  border-bottom: 1px solid #454242;
+  height: 30px;
   width: 100%;
 }
 
 .onfour-title {
-  color: #f3f3f3;
-  font-size: 1rem;
-  padding: 5px;
-  margin-top: 25px;
-  font-weight: $medium-weight;
+  height: 29px;
+  width: 100%;
+  background-color: #17171b;
+  color: #DDDDDD;
+  text-align: left;
+  line-height: 30px;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding-left: 10px;
+  letter-spacing: 0.045em;
+  @include respond-to("small") {
+    padding-left: 5px;
+    font-size: 1rem;
+  }
+  // color: #f3f3f3;
+  // font-size: 0.8rem;
+  // padding: 5px;
+  // margin-top: 25px;
+  // font-weight: $medium-weight;
   &:hover {
     cursor: pointer;
     color: rgb(163, 163, 163);
@@ -161,7 +178,9 @@ button:focus {
   height: 100%;
   flex-flow: row;
   color: white;
-  margin: auto;
+  @include respond-to("small") {
+    margin: auto;
+  }
 }
 
 .chat-header-text {
@@ -170,9 +189,9 @@ button:focus {
   width: 100%;
 
   p {
-    padding: 0px 5px;
-    margin-bottom: 0;
-    margin-top: 10px;
+    // padding: 0px 5px;
+    margin-bottom: 0px;
+    margin-top: 0px;
   }
 }
 
@@ -192,6 +211,7 @@ button:focus {
 .form {
   display: flex;
   border-radius: 10px;
+  height: 37px;
   @include respond-to("small") {
     min-height: 50px;
   }
@@ -205,10 +225,10 @@ button:focus {
   font-size: 1.2em;
   color: white;
   @include respond-to("x-large") {
-    font-size: 1em;
+    font-size: 0.9em;
   }
   @include respond-to("large") {
-    font-size: 0.8em;
+    font-size: 0.75em;
   }
   @include respond-to("small") {
     font-size: 1em;
@@ -332,10 +352,10 @@ button:focus {
   font-size: 1.1em;
   margin-bottom: 0;
   @include respond-to("x-large") {
-    font-size: 0.9em;
+    font-size: 0.7em;
   }
   @include respond-to("large") {
-    font-size: 0.7em;
+    font-size: 0.55em;
   }
   @include respond-to("small") {
     font-size: 1em;
@@ -361,10 +381,10 @@ button:focus {
   letter-spacing: 0.3px;
   margin-bottom: 0;
   @include respond-to("x-large") {
-    font-size: 0.8em;
+    font-size: 0.7em;
   }
   @include respond-to("large") {
-    font-size: 0.6em;
+    font-size: 0.55em;
   }
   @include respond-to("small") {
     font-size: 1em;

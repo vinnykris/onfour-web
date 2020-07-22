@@ -391,7 +391,7 @@ const StreamPage = () => {
             <Grid>
               <Row>
                 {/* <Col size={0.5}></Col> */}
-                <Col size={6} id="stream_col">
+                <Col size={5.5} id="stream_col">
                   <div className="stream-main">
                     <div className="stream-wrapper" id="video_player">
                       <VideoPlayer
@@ -710,15 +710,19 @@ const StreamPage = () => {
                       )
                       } */}
                       {/* {console.log(username)} */}
-                      <Chat
-                        chat_name={username ? username : "GUEST"}
-                        chatStatus={chatStatus}
-                        setViewers={getViewers}
-                      />
-                      <VideoChat
-                        user_name={username ? username : "GUEST"}
-                      ></VideoChat>
-                      <Row className="controll-toolbar-row">
+                      <Row className="video-chat-row">
+                        <VideoChat
+                          user_name={username ? username : "GUEST"}
+                        ></VideoChat>
+                      </Row>
+                      <Row className="chat-row">
+                        <Chat
+                          chat_name={username ? username : "GUEST"}
+                          chatStatus={chatStatus}
+                          setViewers={getViewers}
+                        />
+                      </Row>
+                      {/* <Row className="controll-toolbar-row">
                         <Col size="1" className="controll-toolbar-col">
                           <div className="controll-toolbar-button-container button-glass">
                             <i
@@ -773,7 +777,7 @@ const StreamPage = () => {
                             ></i>
                           </div>
                         </Col>
-                      </Row>
+                      </Row> */}
                     </div>
                   </div>
                 </Col>

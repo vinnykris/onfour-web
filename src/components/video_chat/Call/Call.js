@@ -20,6 +20,10 @@ import { propTypes } from "react-bootstrap-range-slider";
 
 export default function Call(props) {
   const callObject = useContext(CallObjectContext);
+  callObject.setBandwidth({
+    kbs: 20,
+    trackConstraints: { width: 160, height: 90, frameRate: 5 }
+  });
   const [callState, dispatch] = useReducer(callReducer, initialCallState);
 
 

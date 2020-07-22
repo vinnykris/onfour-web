@@ -71,11 +71,12 @@ export default function VideoChatApp({ user_name, artistView, colNum}) {
     setRoomUrl("public");
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
-    newCallObject.join({ url });
     newCallObject.setBandwidth({
       kbs: 20,
-      trackConstraints: { width: 64, height: 64, frameRate: 3 }
+      trackConstraints: { width: 160, height: 90, frameRate: 5 }
     });
+    newCallObject.join({ url });
+    
   }, []);
 
   const startJoiningPrivateCall = useCallback(async url => {
@@ -90,6 +91,10 @@ export default function VideoChatApp({ user_name, artistView, colNum}) {
       setRoomUrl("private");
       setCallObject(newCallObject);
       setAppState(STATE_JOINING);
+      newCallObject.setBandwidth({
+        kbs: 20,
+        trackConstraints: { width: 160, height: 90, frameRate: 5 }
+      });
       newCallObject.join({ url });
     } 
     // else {
@@ -343,7 +348,7 @@ export default function VideoChatApp({ user_name, artistView, colNum}) {
               />
               {!artistView? (
                 <div className="public-video-notice">
-                  By joining this public video call, you will be seen by the artist as well as other people in the public room! The artist may not hear you by default but remember to make some noise when asked by the artist!
+                  By joining this video call, you will be seen by the artist as well as your crew members!
                 </div>
               ): null}
             </div>
