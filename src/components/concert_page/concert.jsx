@@ -269,7 +269,8 @@ const Concert = (props) => {
             width={120}
             height={70}
             measure="vh"
-            customStyles={{ padding: 0 }}
+            customStyles={{ padding: 0, overflow: scroll }}
+            className="rodal-custom"
           >
             <Grid className="modal-grid">
               <Row className="modal-row">
@@ -279,7 +280,7 @@ const Concert = (props) => {
                       <h3 className="concert-info-modal-header">
                         {concert_info.artist_name}: {concert_info.concert_name}
                       </h3>
-                      <p>
+                      <p className="concert-date-info">
                         {concert_info.week_day} {concert_info.formatted_date}{" "}
                         {concert_info.formatted_time} EST
                       </p>
@@ -353,14 +354,14 @@ const Concert = (props) => {
                           <div className="email-input-field">
                             {" "}
                             <ReactMultiEmail
-                              placeholder="Separate emails with commas"
+                              placeholder="Please separate emails with commas"
                               style={{ background: "#EEEEEE" }}
                               emails={emails}
                               onChange={(_emails) => {
                                 setEmails(_emails);
                               }}
                               validateEmail={(email) => {
-                                return isEmail(email); // return boolean
+                                return isEmail(email) && emails.length < 10; // return boolean
                               }}
                               getLabel={(email, index, removeEmail) => {
                                 return (
@@ -377,8 +378,17 @@ const Concert = (props) => {
                               }}
                             />
                           </div>
-
-                          {/* <p>{emails.join(", ") || "empty"}</p> */}
+                          <div>
+                            {emails.length >= 10 ? (
+                              <p className="emails-warning">
+                                You have reached the maximum number of invites!
+                              </p>
+                            ) : (
+                              <p className="emails-warning backstage-hidden-text">
+                                Input validated
+                              </p>
+                            )}
+                          </div>
                         </Col>
                       </Row>
                     </div>

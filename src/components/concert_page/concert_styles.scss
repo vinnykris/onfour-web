@@ -103,6 +103,24 @@ hr.solid {
   }
 }
 
+.concert-info-modal-header {
+  @include respond-to("xx-large") {
+    font-size: 1.2rem;
+  }
+  @include respond-to("x-large") {
+    font-size: 1rem;
+  }
+}
+
+.concert-date-info {
+  @include respond-to("xx-large") {
+    font-size: 0.8rem;
+  }
+  @include respond-to("x-large") {
+    font-size: 0.6rem;
+  }
+}
+
 .concert-logistics {
   margin-top: 5%;
   width: 350px;
@@ -135,6 +153,14 @@ hr.solid {
   margin: 0;
   padding-right: 30px;
   font-size: 3rem;
+}
+
+.rodal-dialog {
+  min-height: 70vh;
+  max-height: 80vh;
+  @include respond-to("xx-large") {
+    min-height: 90vh !important;
+  }
 }
 
 .modal-grid {
@@ -243,6 +269,9 @@ hr.break-modal {
   font-size: 17px;
   line-height: 30px;
   margin-left: 30px;
+  @include respond-to("xx-large") {
+    font-size: 15px;
+  }
 }
 
 .pretty {
@@ -315,6 +344,14 @@ hr.break-modal {
 
 .email-input-field {
   margin-top: 17px;
+}
+
+.emails-warning {
+  color: red;
+}
+
+.emails-warning .hidden {
+  visibility: hidden;
 }
 
 .backstage-hidden-text {
