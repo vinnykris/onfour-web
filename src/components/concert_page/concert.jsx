@@ -36,6 +36,9 @@ import "./concert_styles.scss";
 import "rodal/lib/rodal.css";
 import "react-multi-email/style.css";
 
+// Image imports
+import samar_mehdi_ticket from "../../images/tickets/samar_mehdi_ticket.png";
+
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 // Concert is the unique concert page
@@ -189,7 +192,7 @@ const Concert = (props) => {
         <div className="stub-background">
           <ClickAwayListener onClickAway={() => setShowStub(false)}>
             <div className="centered-stub-container">
-              <motion.svg
+              {/* <motion.svg
                 version="1.1"
                 id="svg"
                 className="stub-container-svg"
@@ -208,7 +211,13 @@ const Concert = (props) => {
                   className="animated-stub"
                   fill="#eeffee"
                 />
-              </motion.svg>
+              </motion.svg> */}
+              <motion.img
+                src={samar_mehdi_ticket}
+                initial={{ scale: 0.1, opacity: 0.5 }}
+                animate={{ scale: 1, rotate: 360, opacity: 1 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              />
             </div>
           </ClickAwayListener>
         </div>
