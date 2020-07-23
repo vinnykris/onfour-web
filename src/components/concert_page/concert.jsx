@@ -119,6 +119,7 @@ const Concert = (props) => {
     setShowStub(true);
   }, []);
 
+  //
   useEffect(() => {
     if (concert_info) {
       console.log(concert_info);
@@ -127,6 +128,7 @@ const Concert = (props) => {
     }
   }, [concert_info]);
 
+  // Hook called when price updates or when user selects backstage pass
   useEffect(() => {
     if (backstage_checkbox.state) {
       // WHAT HAPPENS IF BACKSTAGE CHECKBOX IS CHECKED
@@ -146,18 +148,22 @@ const Concert = (props) => {
     setTooltipText("Copied!");
   };
 
+  // Opens payment modal when user tries to get ticket from concert page
   const getTicket = () => {
     setOpenModal(true);
   };
 
+  // Hides payment modal
   const hideModal = () => {
     setOpenModal(false);
   };
 
+  // Go to checkout page for paid concert
   const goToCheckout = () => {
     console.log("go to checkout");
   };
 
+  // Sends emails to invited users
   const sendEmailInvites = (user_name) => {
     for (let i = 0; i < emails.length; i++) {
       const template_params = {
@@ -181,6 +187,10 @@ const Concert = (props) => {
     }
   };
 
+  // Function called when user purchases/obtains ticket from modal
+  // First adds ticket to user's profile in database
+  // Then hides the modal and shows the ticket stub
+  // Calls function that sends emails to invited users
   const addTicket = async () => {
     const user_data = await API.graphql(
       graphqlOperation(queries.get_user_data, {
@@ -216,13 +226,17 @@ const Concert = (props) => {
     sendEmailInvites(user_name);
   };
 
+  // Shows the calendar button
+  // Called after the animation is done
   const showCalendarButton = () => {
     document.getElementById("add-to-calendar").style.visibility = "visible";
+    // After 8 seconds, end the stub animation and go back to the concert page
     setTimeout(() => {
       if (!stub_animation_done) animationEnd();
     }, 8000);
   };
 
+  // Animated the ticket stub leaving the screen and hides the calendar button
   const animationEnd = () => {
     console.log("animation ended.");
     if (!stub_animation_done) {
@@ -230,12 +244,15 @@ const Concert = (props) => {
         document.getElementById("add-to-calendar").style.visibility = "hidden";
       }
       setStubAnimationDone(true);
+      // Go back to the concert page after half a second
       setTimeout(() => {
         setShowStub(false);
       }, 500);
     }
   };
 
+  // Function to add event element to calendar
+  // Ends animation
   const addToCalendar = () => {
     console.log("add to calendar");
     animationEnd();
