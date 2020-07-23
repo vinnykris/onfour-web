@@ -265,18 +265,16 @@ const Concert = (props) => {
   };
 
   const addEvent = async () => {
-
     const eventLoad = {
       summary: concert_info.artist_name + " - " + concert_info.concert_name,
       description: "onfour concert!",
       start: {
-        dateTime: new Date(concert_info.formatted_date).toISOString()
+        dateTime: new Date(concert_info.date + "T" + concert_info.time + ".000 - 04: 00").toISOString()
       },
       end: {
         dateTime: new Date(new Date(concert_info.formatted_date).getTime() + 90 * 60000).toISOString()
       }
     };
-
     await ApiCalendar.createEvent(eventLoad)
       .then((result) => {
         console.log(result);
