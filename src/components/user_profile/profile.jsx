@@ -6,7 +6,7 @@ import FlexibleGrid from "../flexible_grid/flexible_grid";
 
 // API Imports
 import {
-  getUpcomingShows,
+  getUpcomingPurchasedShows,
   getMemories,
   getMostRecentUpcomingInfo,
 } from "../../apis/get_user_data";
@@ -21,8 +21,11 @@ const Profile = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Upcoming shows
-      const upcoming_result = await getUpcomingShows(width, variables.username);
+      // RSVP'd Upcoming shows
+      const upcoming_result = await getUpcomingPurchasedShows(
+        width,
+        variables.username
+      );
       setUpcomingConcerts(upcoming_result.slice(0, 4));
 
       // Archive videos (sorting from most recent -> oldest)
