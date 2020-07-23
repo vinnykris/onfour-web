@@ -65,6 +65,11 @@ export const get_artist_info = `query getCreateOnfourRegistration(
       artist_name
       artist_bio
       genre
+      instagram
+      spotify
+      twitter
+      facebook
+      soundcloud
   }
 }`;
 
@@ -122,13 +127,15 @@ $filter: TableConcertFilterInput
 listConcerts(filter: $filter, limit: 1000) {
   items {
     id
-    artist_id
+    poster_url
+    stub_url
+    location
     date
     time
-    poster_url
+    is_live
+    artist_id
     concert_name
     general_price
-    is_live
   }
 }
 }`;
@@ -138,6 +145,8 @@ $id: ID!
 ) {
 getConcert(id: $id) {
   poster_url
+  stub_url
+  location
   date
   time
   is_live

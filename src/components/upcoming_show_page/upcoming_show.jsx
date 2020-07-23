@@ -39,6 +39,7 @@ const UpcomingShowPage = () => {
   const getUpcomingFull = async (data) => {
     const artist_id = data.artist_id;
     const artist_info = await getArtistInfo(artist_id);
+    console.log(artist_info);
     let merged = { ...data, ...artist_info };
     return merged;
   };
@@ -48,6 +49,7 @@ const UpcomingShowPage = () => {
       var full_concerts = [];
       // Upcoming shows
       const upcoming_result = await getConcertInfo();
+      console.log(upcoming_result);
       for await (const data of upcoming_result) {
         full_concerts.push(formatUpcomingShow(await getUpcomingFull(data)));
       }

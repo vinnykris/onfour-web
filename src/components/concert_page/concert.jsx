@@ -58,9 +58,11 @@ const Concert = (props) => {
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState("");
   const [show_stub, setShowStub] = useState(false);
+  const [general_price, setGeneralPrice] = useState(0);
+  const [backstage_price, setBackstagePrice] = useState(0);
 
-  const price_map = {
-    general: 0,
+  var price_map = {
+    general: 10,
     backstage: 10,
   };
 
@@ -122,20 +124,28 @@ const Concert = (props) => {
     setTwitterLink(
       `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
     );
-    setTotal(price_map["general"]);
+    setTotal(general_price + backstage_price);
     // setShowStub(true);
   }, []);
 
   useEffect(() => {
+    if (concert_info) {
+      console.log(concert_info);
+      price_map.general = concert_info.price;
+      setGeneralPrice(concert_info.price);
+    }
+  }, [concert_info]);
+
+  useEffect(() => {
     if (backstage_checkbox.state) {
       // WHAT HAPPENS IF BACKSTAGE CHECKBOX IS CHECKED
-      setTotal(price_map["general"] + price_map["backstage"]);
+      setTotal(general_price + backstage_price);
       setBackstagePass(true);
     } else {
-      setTotal(price_map["general"]);
+      setTotal(general_price);
       setBackstagePass(false);
     }
-  }, [backstage_checkbox.state]);
+  }, [general_price, backstage_price, backstage_checkbox.state]);
 
   // If copy to clipboard button is clicked, change tooltip text and copy stream page link
   // Record analytics for click as well
@@ -407,10 +417,10 @@ const Concert = (props) => {
                               1x General Admission
                             </span>
                           </Col>
-                          {price_map["general"] > 0 ? (
+                          {general_price > 0 ? (
                             <Col size={1}>
                               <span className="item-price">
-                                ${price_map["general"]}
+                                ${general_price}
                               </span>
                             </Col>
                           ) : (
@@ -426,10 +436,10 @@ const Concert = (props) => {
                                 1x Backstage Pass
                               </span>
                             </Col>
-                            {price_map["backstage"] > 0 ? (
+                            {backstage_price > 0 ? (
                               <Col size={1}>
                                 <span className="item-price">
-                                  ${price_map["backstage"]}
+                                  ${backstage_price}
                                 </span>
                               </Col>
                             ) : (
@@ -548,15 +558,17 @@ const Concert = (props) => {
                 </Row>
                 <hr className="solid" />
                 <Row className="logistics-row">
-                  <span className="logistics-text">STREAMED FROM NEW YORK</span>
+                  <span className="logistics-text">
+                    STREAMED FROM {concert_info.location.toUpperCase()}
+                  </span>
                 </Row>
                 <hr className="solid" />
                 <SocialBar
-                  instagram={instagram}
-                  spotify={spotify}
-                  youtube={youtube}
-                  facebook={facebook}
-                  twitter={twitter}
+                  instagram={concert_info.instagram}
+                  spotify={concert_info.spotify}
+                  youtube={concert_info.youtube}
+                  facebook={concert_info.facebook}
+                  twitter={concert_info.twitter}
                 />
               </div>
             </Col>

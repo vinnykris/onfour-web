@@ -47,6 +47,7 @@ export const createUpcomingObject = (data, artist_data) => {
   return {
     // id: data.id,
     img: data.poster_url,
+    stub_url: data.stub_url,
     artist_name: artist_data.artist_name,
     concert_name: data.concert_name,
     week_day: moment(data.date).format("dddd"),
@@ -66,6 +67,12 @@ export const createUpcomingObject = (data, artist_data) => {
     description: artist_data.artist_bio.toString(),
     days_left: days_left,
     genre: artist_data.genre,
+    instagram: artist_data.instagram,
+    facebook: artist_data.facebook,
+    twitter: artist_data.twitter,
+    spotify: artist_data.spotify,
+    soundcloud: artist_data.soundcloud,
+    location: data.location,
   };
 };
 
@@ -78,6 +85,7 @@ export const formatUpcomingShow = (data, width) => {
     <FeaturedContent
       id={data.id}
       img={data.poster_url}
+      stub_url={data.stub_url}
       artist_name={data.artist_name}
       concert_name={data.concert_name}
       week_day={moment(data.date).format("dddd")}
@@ -99,6 +107,12 @@ export const formatUpcomingShow = (data, width) => {
       days_left={days_left}
       width={width}
       genre={data.genre}
+      instagram={data.instagram}
+      facebook={data.facebook}
+      twitter={data.twitter}
+      spotify={data.spotify}
+      soundcloud={data.soundcloud}
+      location={data.location}
     />
   );
 };
