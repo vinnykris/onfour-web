@@ -143,6 +143,19 @@
   flex-flow: column;
 }
 
+.video-chat-row {
+  height: 60%;
+  width: 100%;
+  position: relative;
+  border-bottom: 3px solid black;
+}
+
+.chat-row {
+  height: 40%;
+  width: 100%;
+  position: relative;
+}
+
 .chat-main-mobile {
   height: calc(100vh - 411px);
   max-height: calc(100vh - 411px);
@@ -188,7 +201,7 @@
 .toggle-chat-button {
   border-radius: 5px 0px 0px 5px;
   background-color: #17171b;
-  padding: 5px;
+  padding: 3px;
   font-weight: bolder;
 }
 
@@ -589,6 +602,7 @@
 .waiting-message2 {
   color: white;
   font-weight: lighter;
+  font-size: 0.8rem;
   letter-spacing: 0.5px;
   @include respond-to("small") {
     font-size: 13px;

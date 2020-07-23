@@ -1,4 +1,5 @@
 import React from "react";
+import "./icon.css";
 
 const TYPE_MUTE_CAMERA = "camera";
 const TYPE_MUTE_MIC = "mute-mic";
@@ -95,7 +96,7 @@ export default function Icon(props) {
       width="24px"
       height="24px"
       viewBox="0 0 24 24"
-      className={props.className}
+      className={props.className + " button-icon"}
       xmlns="http://www.w3.org/2000/svg"
     >
       {getPath()}

@@ -1,11 +1,11 @@
 .app {
-  display: none;
+  /* display: none; */
   background-color: #17171b;
-  position: absolute;
+  /* position: absolute; */
   overflow: hidden;
   /* height: 100%; */
-  top: 0px;
-  bottom: 70px;
+  /* top: 0px; */
+  bottom: 0px;
   width: 100%;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .room-name-row {
-  height: 40px;
+  height: 30px;
   width: 100%;
   position: relative;
   background-color: #1C1C1C;
@@ -67,10 +67,10 @@
 }
 
 .public-video-notice {
-  margin: 0px 5%;
+  margin: 0px 20%;
   white-space: pre-wrap;
   top: 60%;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   text-align: center;
   color: rgb(173, 173, 173);
   position: absolute;
