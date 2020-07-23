@@ -228,7 +228,7 @@ const Concert = (props) => {
 
   return (
     <div className="concert-page">
-      {show_stub ? (
+      {show_stub && concert_info ? (
         <div className="stub-background">
           <ClickAwayListener onClickAway={() => setShowStub(false)}>
             <div className="centered-stub-container">
@@ -253,7 +253,7 @@ const Concert = (props) => {
                 />
               </motion.svg> */}
               <motion.img
-                src={samar_mehdi_ticket}
+                src={concert_info.stub_url}
                 initial={{ scale: 0.1, opacity: 0.5 }}
                 animate={{ scale: 1, rotate: 360, opacity: 1 }}
                 transition={{ duration: 2, ease: "easeOut" }}
