@@ -116,7 +116,6 @@ const Concert = (props) => {
       `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
     );
     setTotal(general_price + backstage_price);
-    setShowStub(true);
   }, []);
 
   //
