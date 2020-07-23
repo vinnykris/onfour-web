@@ -1,6 +1,6 @@
 // React imports
 import React from "react";
-import { Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route, withRouter } from "react-router-dom";
 import history from "./history";
 
 // Component imports
@@ -15,7 +15,8 @@ import Footer from "./components/footer/footer";
 import Modal from "./components/sign_in_modal/sign_in_modal";
 import Forgot from "./components/forgot_page/forgot_page";
 import SoundCheck from "./components/soundcheck_page/soundcheck_page";
-import PrivacyPage from "./components/privacy_page/privacy_page";
+import Concert from "./components/concert_page/concert";
+import Profile from "./components/user_profile/profile";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -26,8 +27,8 @@ import "./App.css";
 import "./styles.scss";
 
 // Amplify imports
-import Amplify from 'aws-amplify';
-import awsconfig from './apis/aws-exports';
+import Amplify from "aws-amplify";
+import awsconfig from "./apis/aws-exports";
 
 require("dotenv").config();
 Amplify.configure(awsconfig);
@@ -38,17 +39,17 @@ function App() {
     <div className="App custom-app">
       <Router history={history}>
         <NavBar />
-
         <Switch>
           <Route exact path="/" component={About} />
-          <Route path="/archive" component={ArchivePage} />
-          <Route path="/stream" component={StreamPage} />
-          <Route path="/upcoming" component={UpcomingShowPage} />
-          <Route path="/ticket" component={Ticket} />
-          <Route path="/artists" component={ArtistsPage} />
-          <Route path="/forgot" component={Forgot} />
-          <Route path="/soundcheck" component={SoundCheck} />
-          <Route path="/privacy-policy" component={PrivacyPage} />
+          <Route exact path="/archive" component={ArchivePage} />
+          <Route exact path="/stream" component={StreamPage} />
+          <Route exact path="/upcoming" component={UpcomingShowPage} />
+          <Route exact path={`/upcoming/:showID`} component={Concert} />
+          <Route exact path="/ticket" component={Ticket} />
+          <Route exact path="/artists" component={ArtistsPage} />
+          <Route exact path="/forgot" component={Forgot} />
+          <Route exact path="/soundcheck" component={SoundCheck} />
+          <Route path="/profile" component={Profile} />
         </Switch>
         <Modal></Modal>
         <Footer />
