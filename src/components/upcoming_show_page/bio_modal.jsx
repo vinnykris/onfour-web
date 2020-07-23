@@ -1,38 +1,43 @@
 // React Imports
-import React, { useState } from "react";
+import React from "react";
 
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
-// Component Imports 
+// Component Imports
 // import FestivalBio from "./festival_bio";
 
-
-const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, date, time, description, width }) => {
-    const toBeImplemented = () => {
-        console.log("clicked");
-    };
-
-    return (
-        <div className="modal-container">
-            {width > 600 ? (
-                <Grid className="modal-container">
-                    <Row className="modal-container">
-                        <Col size={4} className="modal-description-col">
-                            <Row>
-                                <div className="modal-date">IN {days_left} DAYS</div>
-                            </Row>
-                            <Row>
-                                <div className="modal-bio-title">{artist_name.toUpperCase()} - {concert_name.toUpperCase()}
-                                </div>
-                            </Row>
-                            <Row className="modal-description-container">
-                                <div className="modal-bio-description">
-                                    {description}
-                                </div>
-                                {/* FOR FESTIVAL BIO STYLE, USE THE FOLLOWING FORMAT */}
-                                {/* <div className="festival-bio-description">
+const bioModal = ({
+  days_left,
+  artist_name,
+  concert_name,
+  img,
+  price,
+  weekday,
+  date,
+  time,
+  description,
+  width,
+}) => {
+  return (
+    <div className="modal-container">
+      {width > 600 ? (
+        <Grid className="modal-container">
+          <Row className="modal-container">
+            <Col size={4} className="modal-description-col">
+              <Row>
+                <div className="modal-date">IN {days_left} DAYS</div>
+              </Row>
+              <Row>
+                <div className="modal-bio-title">
+                  {artist_name.toUpperCase()} - {concert_name.toUpperCase()}
+                </div>
+              </Row>
+              <Row className="modal-description-container">
+                <div className="modal-bio-description">{description}</div>
+                {/* FOR FESTIVAL BIO STYLE, USE THE FOLLOWING FORMAT */}
+                {/* <div className="festival-bio-description">
                                     <div className="disclaimer">
                                         {"ALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
                                     </div>
@@ -47,61 +52,76 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                         num={1}
                                     />
                                 </div> */}
-                            </Row>
-                        </Col>
-                        <Col size={2} className="modal-info-col">
-                            <Row>
-                                <div className="modal-image-container">
-                                    <img className="modal-bio-image" src={img} alt="artist-img"></img>
-                                </div>
-                            </Row>
-                            <Row className="modal-info-row first-row">
-                                <a className="modal-info" href="https://www.onfour.live/stream">
-                                    https://www.onfour.live/stream
-                                    </a>
-                            </Row>
-                            <Row className="modal-info-row">
-                                <div className="modal-info">{weekday.toUpperCase()}, {date}</div>
-                            </Row>
-                            <Row className="modal-info-row last-row">
-                                <div className="modal-info">{time} EST</div>
-                            </Row>
-                            <Row className="modal-ticket">
-                                {price ? (
-                                    <button className="modal-ticket-button" id="buy_ticket">BUY TICKET</button>
-                                ) : (
-                                    // <button className="modal-free-button" id="free" onClick={toBeImplemented}>FREE</button>
-                                    <div className="modal-free-button">FREE</div>
-                                    )}
-                            </Row>
-                        </Col>
-                    </Row>
-                </Grid>
-            ) : (
-                <Grid>
-                    <Row>
-                        <Col className="modal-description-col mobile">
-                            <Row>
-                                <div className="mobile-modal-image-container">
-                                    <img className="modal-bio-image" src={img} alt="artist-img"></img>
-                                </div>
-                            </Row>
-                            <Row>
-                                <div className="modal-date">IN {days_left} DAYS</div>
-                            </Row>
-                            <Row>
-                                <div className="modal-bio-title">{artist_name.toUpperCase()} - {concert_name.toUpperCase()}
-                                </div>
-                            </Row>
-                            <Row>
-                                <div className="mobile-modal-info">{weekday.toUpperCase()} | {date} | {time} EST</div>
-                            </Row>
-                            <Row>
-                                <div className="mobile-modal-bio-description">
-                                    {description}
-                                </div>
-                                {/* FOR FESTIVAL BIO STYLE, USE THE FOLLOWING FORMAT */}
-                                {/* <div className="mobile-modal-bio-description">
+              </Row>
+            </Col>
+            <Col size={2} className="modal-info-col">
+              <Row>
+                <div className="modal-image-container">
+                  <img
+                    className="modal-bio-image"
+                    src={img}
+                    alt="artist-img"
+                  ></img>
+                </div>
+              </Row>
+              <Row className="modal-info-row first-row">
+                <a className="modal-info" href="https://www.onfour.live/stream">
+                  https://www.onfour.live/stream
+                </a>
+              </Row>
+              <Row className="modal-info-row">
+                <div className="modal-info">
+                  {weekday.toUpperCase()}, {date}
+                </div>
+              </Row>
+              <Row className="modal-info-row last-row">
+                <div className="modal-info">{time} EST</div>
+              </Row>
+              <Row className="modal-ticket">
+                {price ? (
+                  <button className="modal-ticket-button" id="buy_ticket">
+                    BUY TICKET
+                  </button>
+                ) : (
+                  // <button className="modal-free-button" id="free" onClick={toBeImplemented}>FREE</button>
+                  <div className="modal-free-button">FREE</div>
+                )}
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
+      ) : (
+        <Grid>
+          <Row>
+            <Col className="modal-description-col mobile">
+              <Row>
+                <div className="mobile-modal-image-container">
+                  <img
+                    className="modal-bio-image"
+                    src={img}
+                    alt="artist-img"
+                  ></img>
+                </div>
+              </Row>
+              <Row>
+                <div className="modal-date">IN {days_left} DAYS</div>
+              </Row>
+              <Row>
+                <div className="modal-bio-title">
+                  {artist_name.toUpperCase()} - {concert_name.toUpperCase()}
+                </div>
+              </Row>
+              <Row>
+                <div className="mobile-modal-info">
+                  {weekday.toUpperCase()} | {date} | {time} EST
+                </div>
+              </Row>
+              <Row>
+                <div className="mobile-modal-bio-description">
+                  {description}
+                </div>
+                {/* FOR FESTIVAL BIO STYLE, USE THE FOLLOWING FORMAT */}
+                {/* <div className="mobile-modal-bio-description">
                                     <div className="disclaimer">
                                         {"\nALL PROCEEDS WILL BE SPLIT 50/50 BETWEEN THE FOR THE GWORLS & LGBTQ FREEDOM FUND "}
                                     </div>
@@ -116,14 +136,13 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                         num={1}
                                     />
                                 </div> */}
-                            </Row>
-                        </Col> 
-                    </Row>
-                </Grid>
-            )}
-        </div>
-    );
-}
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
+      )}
+    </div>
+  );
+};
 
 export default bioModal;
-

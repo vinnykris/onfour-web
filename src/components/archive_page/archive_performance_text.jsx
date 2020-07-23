@@ -33,7 +33,7 @@ const ArchivePerformanceText = ({
       let day = date.slice(8, 10);
       setFormattedDate(month + "." + day + "." + year);
     }
-  }, []);
+  }, [video_length, date]);
 
   return (
     <Grid>
