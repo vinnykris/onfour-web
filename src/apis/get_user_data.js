@@ -168,6 +168,7 @@ export const fetchUserConcerts = async () => {
       }
     }
   }
+  console.log(users_shows);
   return users_shows;
 };
 

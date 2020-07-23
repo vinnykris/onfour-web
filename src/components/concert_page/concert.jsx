@@ -29,7 +29,7 @@ import { ReactMultiEmail, isEmail } from "react-multi-email";
 
 // Module imports
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 // EmailJS Import
 import emailjs from "emailjs-com";
@@ -60,6 +60,7 @@ const Concert = (props) => {
   const [show_stub, setShowStub] = useState(false);
   const [general_price, setGeneralPrice] = useState(0);
   const [backstage_price, setBackstagePrice] = useState(0);
+  const [stub_animation_done, setStubAnimationDone] = useState(false);
 
   var price_map = {
     general: 10,
@@ -67,16 +68,6 @@ const Concert = (props) => {
   };
 
   const backstage_checkbox = useCheckboxState();
-
-  // Social links
-  const instagram = "https://www.instagram.com/jonathan_dely/";
-  const spotify =
-    "https://open.spotify.com/artist/5wdmp3H2QC7tfMYAabtQN3?si=S-LQ7Z-LSL6xZac4a-yxhg";
-
-  const youtube = "https://www.youtube.com/channel/UCdh0zQFUEYKQsbTJI00Q2SA";
-
-  const facebook = "https://www.facebook.com/jonathandelymusic";
-  const twitter = "https://twitter.com/jonathan_dely";
 
   // Concert-specific info
   const concert_id = props.match.params.showID; // Passed from URL
@@ -125,7 +116,7 @@ const Concert = (props) => {
       `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
     );
     setTotal(general_price + backstage_price);
-    // setShowStub(true);
+    setShowStub(true);
   }, []);
 
   useEffect(() => {
@@ -156,7 +147,6 @@ const Concert = (props) => {
   };
 
   const getTicket = () => {
-    console.log("button pressed");
     setOpenModal(true);
   };
 
@@ -226,41 +216,63 @@ const Concert = (props) => {
     sendEmailInvites(user_name);
   };
 
+  const showCalendarButton = () => {
+    document.getElementById("add-to-calendar").style.visibility = "visible";
+    setTimeout(() => {
+      if (!stub_animation_done) animationEnd();
+    }, 8000);
+  };
+
+  const animationEnd = () => {
+    console.log("animation ended.");
+    if (!stub_animation_done) {
+      if (document.getElementById("add-to-calendar")) {
+        document.getElementById("add-to-calendar").style.visibility = "hidden";
+      }
+      setStubAnimationDone(true);
+      setTimeout(() => {
+        setShowStub(false);
+      }, 500);
+    }
+  };
+
+  const addToCalendar = () => {
+    console.log("add to calendar");
+    animationEnd();
+  };
+
   return (
     <div className="concert-page">
       {show_stub && concert_info ? (
-        <div className="stub-background">
-          <ClickAwayListener onClickAway={() => setShowStub(false)}>
+        <span className="stub-background">
+          <ClickAwayListener onClickAway={animationEnd}>
             <div className="centered-stub-container">
-              {/* <motion.svg
-                version="1.1"
-                id="svg"
-                className="stub-container-svg"
-                // width="260"
-                // height="200"
-                xmlns="http://www.w3.org/2000/svg"
-                // xmlns:xlink="http://www.w3.org/1999/xlink"
-                // viewBox="0 0 260 200"
-                // xml:space="preserve"
-                initial={{ scale: 0.1, opacity: 0.5 }}
-                animate={{ scale: 1, rotate: 360, opacity: 1 }}
-                transition={{ duration: 2, ease: "easeOut" }}
-              >
-                <rect
-                  id="ticket-stub"
-                  className="animated-stub"
-                  fill="#eeffee"
-                />
-              </motion.svg> */}
-              <motion.img
-                src={concert_info.stub_url}
-                initial={{ scale: 0.1, opacity: 0.5 }}
-                animate={{ scale: 1, rotate: 360, opacity: 1 }}
-                transition={{ duration: 2, ease: "easeOut" }}
-              />
+              <AnimatePresence>
+                {!stub_animation_done ? (
+                  <div>
+                    <motion.img
+                      src={concert_info.stub_url}
+                      initial={{ y: 1000 }}
+                      animate={{ y: 0 }}
+                      exit={{ y: 1000 }}
+                      onAnimationComplete={showCalendarButton}
+                      className="ticket-stub-img"
+                    />
+                    <div className="calendar-button">
+                      <button
+                        id="add-to-calendar"
+                        className="buy-ticket-button calendar-button"
+                        onClick={addToCalendar}
+                      >
+                        Add to Calendar
+                      </button>
+                    </div>
+                  </div>
+                ) : null}
+              </AnimatePresence>
             </div>
           </ClickAwayListener>
-        </div>
+        </span>
       ) : null}
       {!concert_info ? (
         <div className="overlay-box">
