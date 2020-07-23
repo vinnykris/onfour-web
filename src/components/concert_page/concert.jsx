@@ -35,6 +35,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "emailjs-com";
 import { service_id, template_id, user_id } from "../../apis/email_js";
 
+// Google Calendar Import
+import ApiCalendar from '../google_calender/google_calendar_api';
+
 // Styling Imports
 import "./concert_styles.scss";
 import "rodal/lib/rodal.css";
@@ -252,10 +255,36 @@ const Concert = (props) => {
 
   // Function to add event element to calendar
   // Ends animation
-  const addToCalendar = () => {
+  const addToCalendar = async () => {
     console.log("add to calendar");
+    if (!ApiCalendar.sign) {
+      await ApiCalendar.handleAuthClick();
+    }
+    await addEvent();
     animationEnd();
   };
+
+  const addEvent = async () => {
+
+    const eventLoad = {
+      summary: concert_info.artist_name + " - " + concert_info.concert_name,
+      description: "onfour concert!",
+      start: {
+        dateTime: new Date(concert_info.formatted_date).toISOString()
+      },
+      end: {
+        dateTime: new Date(new Date(concert_info.formatted_date).getTime() + 90 * 60000).toISOString()
+      }
+    };
+
+    await ApiCalendar.createEvent(eventLoad)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <div className="concert-page">
