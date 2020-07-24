@@ -5,7 +5,7 @@ import history from "./history";
 import NoMatch from 'react-router-nomatch';
 
 // Component imports
-import notfoundpage from "./components/not_found_page/not_found_page"
+import NotFoundPage from "./components/not_found_page/not_found_page"
 import NavBar from "./components/navbar/navbar";
 import About from "./components/about_page/about_page";
 import StreamPage from "./components/stream_page/stream_page";
@@ -54,12 +54,12 @@ function App() {
           <Route exact path="/soundcheck" component={SoundCheck} />
           <Route exact path="/privacy-policy" component={PrivacyPage} />
           <Route exact path="/terms-of-service" component={TermsOfService} />
-          <Route path="*" component={notfoundpage}/>
+          <Route path="*" component={NotFoundPage}/>
           <Modal></Modal>
-        <Footer /> 
+         
         </Switch>
       
-        
+        <Footer />
         
       </Router>
     </div>
