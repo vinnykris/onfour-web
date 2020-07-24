@@ -50,16 +50,21 @@ const Profile = (props) => {
     <div className="profile-page">
       {is_loaded ? (
         <Grid>
-          <Row className="profile-section">
-            <Col className="profile-column" size={1}>
-              <h4 className="preview-content-header">Hello, {variables.name}!</h4>
-            </Col>
+          <Row className="profile-section header-section">
+            <div className="header-grid">
+              <div className="user-icon-container">
+                <img className="profile-user-icon" src="https://onfour-media.s3.amazonaws.com/website+component/account_circle_24pxicon.png"></img>
+                <h4 className="profile-preview-content-header username-header">Hello, {variables.name}!</h4>
+              </div>
+              <h4 className="profile-preview-content-header dashboard-header">Dashboard</h4>
+              {/* <h4 className="profile-preview-content-header perform-header">I want to perform</h4> */}
+            </div>
           </Row>
           <Row className="profile-section">
             <Col className="profile-column" size={1}>
               <Row>
                 <Col size={1}>
-                  <h4 className="preview-content-header">UPCOMING SHOWS</h4>
+                  <h4 className="profile-preview-content-header">UPCOMING SHOWS</h4>
                 </Col>
               </Row>
               <Row>
@@ -73,7 +78,7 @@ const Profile = (props) => {
             <Col className="profile-column" size={1}>
               <Row>
                 <Col size={1}>
-                  <h4 className="preview-content-header">MY MEMORIES</h4>
+                  <h4 className="profile-preview-content-header">MY MEMORIES</h4>
                 </Col>
               </Row>
               <Row>
@@ -85,7 +90,7 @@ const Profile = (props) => {
           </Row>
           <Row className="profile-section">
             <Col className="profile-column" size={1}>
-              <h4 className="preview-content-header">MY CREWS</h4>
+              <h4 className="profile-preview-content-header">MY CREWS</h4>
             </Col>
           </Row>
         </Grid>
