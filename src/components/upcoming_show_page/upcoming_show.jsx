@@ -85,7 +85,7 @@ const UpcomingShowPage = () => {
             </div>
           ) : (
             <div>
-              {width <= 1024 ? (
+              {width < 1280 ? (
                 <div>
                   {width <= 768? (
                     <div className="upcoming-show-grid">
