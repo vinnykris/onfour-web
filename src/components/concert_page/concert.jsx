@@ -256,32 +256,25 @@ const Concert = (props) => {
   // Function to add event element to calendar
   // Ends animation
   const addToCalendar = async () => {
-    console.log("add to calendar");
     if (!ApiCalendar.sign) {
       await ApiCalendar.handleAuthClick();
-    } else {
-      ApiCalendar.handleSignoutClick();
     }
+    console.log("about to add event");
     await addEvent();
-    animationEnd();
+    await animationEnd();
   };
-
-  // useEffect(async () => {
-  //   if (ApiCalendar.sign) {
-  //     await addEvent();
-  //   }
-  // }, [ApiCalendar.sign])
 
   const addEvent = async () => {
     const eventLoad = {
-      summary: concert_info.artist_name + " - " + concert_info.concert_name,
+      summary: concert_info.artist_name + " - " + concert_info.concert_name + "(concert)",
       description: "onfour concert!",
       start: {
         dateTime: new Date(concert_info.date + "T" + concert_info.time + ".000-04:00").toISOString()
       },
       end: {
         dateTime: new Date(new Date(concert_info.date + "T" + concert_info.time + ".000-04:00").getTime() + 90 * 60000).toISOString()
-      }
+      },
+      colorId: 5
     };
     await ApiCalendar.createEvent(eventLoad)
       .then((result) => {

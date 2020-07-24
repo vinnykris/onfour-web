@@ -91,17 +91,20 @@ var ApiCalendar = function () {
 
     }, {
         key: 'handleAuthClick',
-        value: function handleAuthClick() {
+        value: async function handleAuthClick() {
             if (this.gapi) {
-                this.gapi.auth2.getAuthInstance().signIn()
+                await this.gapi.auth2.getAuthInstance().signIn()
                 .then(() => {
                     console.log("Log in success!");
+                    return true
                 })
                 .catch(() => {
                     console.log("Log in failed!")
+                    return false
                 });
             } else {
                 console.log("Error: this.gapi not loaded");
+                return false
             }
         }
         /**
