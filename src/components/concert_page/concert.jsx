@@ -132,6 +132,7 @@ const Concert = (props) => {
       `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
     );
     setTotal(general_price + backstage_price);
+    setShowStub(true);
   }, []);
 
   //
@@ -297,6 +298,11 @@ const Concert = (props) => {
           concert_info.date + "T" + concert_info.time + ".000-04:00"
         ).toISOString(),
       },
+      reminders: {
+        overrides: {
+          minutes: 30,
+        },
+      },
       end: {
         dateTime: new Date(
           new Date(
@@ -320,6 +326,37 @@ const Concert = (props) => {
     <div className="concert-page">
       {width <= 600 ? (
         <div className="mobile-concert-page">
+          {show_stub && concert_info ? (
+            <span className="stub-background">
+              <ClickAwayListener onClickAway={animationEnd}>
+                <div className="centered-stub-container">
+                  <AnimatePresence>
+                    {!stub_animation_done ? (
+                      <div>
+                        <motion.img
+                          src={concert_info.stub_url}
+                          initial={{ y: 600 }}
+                          animate={{ y: 0 }}
+                          exit={{ y: 600 }}
+                          onAnimationComplete={showCalendarButton}
+                          className="ticket-stub-img"
+                        />
+                        <div className="calendar-button">
+                          <button
+                            id="add-to-calendar"
+                            className="buy-ticket-button calendar-button"
+                            onClick={addToCalendar}
+                          >
+                            Add to Calendar
+                          </button>
+                        </div>
+                      </div>
+                    ) : null}
+                  </AnimatePresence>
+                </div>
+              </ClickAwayListener>
+            </span>
+          ) : null}
           {!concert_info ? (
             <div className="overlay-box">
               <PulseLoader
