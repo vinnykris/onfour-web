@@ -2,8 +2,10 @@
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import history from "./history";
+import NoMatch from 'react-router-nomatch';
 
 // Component imports
+import notfoundpage from "./components/not_found_page/not_found_page"
 import NavBar from "./components/navbar/navbar";
 import About from "./components/about_page/about_page";
 import StreamPage from "./components/stream_page/stream_page";
@@ -38,22 +40,27 @@ function App() {
   return (
     <div className="App custom-app">
       <Router history={history}>
+      
         <NavBar />
 
         <Switch>
           <Route exact path="/" component={About} />
-          <Route path="/archive" component={ArchivePage} />
-          <Route path="/stream" component={StreamPage} />
-          <Route path="/upcoming" component={UpcomingShowPage} />
-          <Route path="/ticket" component={Ticket} />
-          <Route path="/artists" component={ArtistsPage} />
-          <Route path="/forgot" component={Forgot} />
-          <Route path="/soundcheck" component={SoundCheck} />
-          <Route path="/privacy-policy" component={PrivacyPage} />
-          <Route path="/terms-of-service" component={TermsOfService} />
+          <Route exact path="/archive" component={ArchivePage} />
+          <Route exact path="/stream" component={StreamPage} />
+          <Route exact path="/upcoming" component={UpcomingShowPage} />
+          <Route exact path="/ticket" component={Ticket} />
+          <Route exact path="/artists" component={ArtistsPage} />
+          <Route exact path="/forgot" component={Forgot} />
+          <Route exact path="/soundcheck" component={SoundCheck} />
+          <Route exact path="/privacy-policy" component={PrivacyPage} />
+          <Route exact path="/terms-of-service" component={TermsOfService} />
+          <Route path="*" component={notfoundpage}/>
+          <Modal></Modal>
+        <Footer /> 
         </Switch>
-        <Modal></Modal>
-        <Footer />
+      
+        
+        
       </Router>
     </div>
   );
