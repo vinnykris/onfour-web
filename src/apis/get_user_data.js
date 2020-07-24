@@ -11,6 +11,10 @@ import Auth from "./UserPool";
 import FeaturedContent from "../components/upcoming_show_page/featured_content";
 import ArchiveVideo from "../components/archive_page/archive_video";
 
+// API Imports
+import { getArtistInfo } from "./get_concert_data";
+import { formatUpcomingShow } from "../components/util";
+
 Amplify.configure(awsmobile);
 
 const month_map = {
@@ -168,7 +172,7 @@ export const fetchUserConcerts = async () => {
       }
     }
   }
-  console.log(users_shows);
+  // console.log(users_shows);
   return users_shows;
 };
 
@@ -177,47 +181,18 @@ export const fetchUserConcerts = async () => {
 export const getUpcomingPurchasedShows = async (width, username) => {
   const user_concerts = await fetchUserConcerts();
   var upcoming_concerts = [];
-  if (user_concerts !== []) {
-    user_concerts.forEach((data) => {
-      const data_object = data.data.getConcert;
-      const day_in_week = new Date(data_object.date).toString();
-      const hour = parseInt(data_object.time.slice(0, 2));
-      const minutes = data_object.time.slice(2, 5);
-      const time_left =
-        +new Date(data_object.date + "T" + "24:00:00" + ".000-04:00") -
-        +new Date();
-      const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
 
-      upcoming_concerts.push(
-        <FeaturedContent
-          img={data_object.poster_url}
-          name={"PLACHOLDER NAME"}
-          concert_name={data_object.concert_name}
-          week_day={day_map[day_in_week.slice(0, 3)]}
-          date={
-            data_object.date.slice(8, 10) +
-            " " +
-            month_map[data_object.date.slice(5, 7)] +
-            " " +
-            data_object.date.slice(0, 4)
-          }
-          month={month_map[data_object.date.slice(5, 7)]}
-          day={data_object.date.slice(8, 10)}
-          time={
-            hour > 12
-              ? (hour - 12).toString() + minutes + "PM"
-              : hour < 12
-              ? data_object.time.slice(0, 5) + "AM"
-              : data_object.time.slice(0, 5) + "PM"
-          }
-          price={data_object.general_price}
-          description="PLACEHOLDER DESCRIPTION"
-          //days_left={days_left}
-          width={width}
-          genre={data_object.location || "PLACEHOLDER LOCATION"}
-        />
-      );
-    });
+  const getUpcomingFull = async (data) => {
+    const artist_id = data.artist_id;
+    const artist_info = await getArtistInfo(artist_id);
+    let merged = { ...data, ...artist_info };
+    return merged;
+  };
+
+  if (user_concerts !== []) {
+    for await (const data of user_concerts) {
+      upcoming_concerts.push(formatUpcomingShow(await getUpcomingFull(data.data.getConcert)));
+    }
   }
   return upcoming_concerts;
 };

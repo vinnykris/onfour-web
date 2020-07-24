@@ -6,6 +6,7 @@ import Popup from "reactjs-popup";
 import SharePopup from "./share_popup";
 import styled from "styled-components";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import moment from "moment";
 // import { Prompt } from "react-router";
 
 // AWS Imports
@@ -143,6 +144,7 @@ const StreamPage = () => {
   const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
+  const [is_live, setIsLive] = useState(false);
 
   // Analytics state variables
   //const [arrival, setArrival] = useState(true);
@@ -156,11 +158,14 @@ const StreamPage = () => {
   const getStartTime = async () => {
     // Calling the API, using async and await is necessary
     const info = await API.graphql(
-      graphqlOperation(queries.list_upcoming_concerts)
+      graphqlOperation(queries.list_concerts, {
+        filter: { is_future: { eq: true }, is_confirmed: { eq: true } },
+      })
     );
-
-    const info_list = info.data.listFutureConcerts.items; // Stores the items in database
-    info_list.sort((a, b) => a.timePassed - b.timePassed);
+    const info_list = info.data.listConcerts.items; // Stores the items in database
+    info_list.sort((a, b) =>
+      moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time))
+    );
 
     const hour = parseInt(info_list[0].time.slice(0, 2));
     const minutes = info_list[0].time.slice(2, 5);
@@ -168,16 +173,27 @@ const StreamPage = () => {
     setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
     setShowTime(
       info_list[0].date +
-        " " +
-        (hour > 12
-          ? (hour - 12).toString() + minutes + "PM"
-          : hour < 12
+      " " +
+      (hour > 12
+        ? (hour - 12).toString() + minutes + "PM"
+        : hour < 12
           ? info_list[0].time.slice(0, 5) + "AM"
           : info_list[0].time.slice(0, 5) + "PM")
     );
-    setConcertName(info_list[0].concertName);
-    setArtistName(info_list[0].artist);
-    setConcertID(info_list[0].concertId);
+    setConcertName(info_list[0].concert_name);
+    getArtistInfo(info_list[0].artist_id);
+    setConcertID(info_list[0].id);
+    setIsLive(info_list[0].is_live);
+  };
+
+  const getArtistInfo = async (artist_id) => {
+    const artist_info = await API.graphql(
+      graphqlOperation(queries.get_artist_info, {
+        username: artist_id,
+      })
+    );
+    const artist_info_list = artist_info.data.getCreateOnfourRegistration;
+    setArtistName(artist_info_list.artist_name);
   };
 
   // GET USER'S REGISTRATION INFORMATION

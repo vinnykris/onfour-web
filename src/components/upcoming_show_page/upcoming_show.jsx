@@ -96,7 +96,7 @@ const UpcomingShowPage = () => {
                 <div className="upcoming-show-grid">
                   <FlexibleGrid
                     content_list={formatted_concerts}
-                    num_cols={4}
+                    num_cols={5}
                   />
                 </div>
               )}
