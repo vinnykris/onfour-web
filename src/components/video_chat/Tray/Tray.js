@@ -99,25 +99,22 @@ export default function Tray(props) {
 
   return (
     <div className="tray">
-      <TrayButton
-        type={TYPE_MUTE_CAMERA}
-        disabled={props.disabled}
-        highlighted={isCameraMuted}
-        onClick={toggleCamera}
-      />
-      <TrayButton
-        type={TYPE_MUTE_MIC}
-        disabled={props.disabled}
-        highlighted={isMicMuted}
-        onClick={toggleMic}
-      />
-      {/* <TrayButton
-        type={TYPE_SCREEN}
-        disabled={props.disabled}
-        highlighted={isEnabledActiveSpeaker}
-        onClick={toggleActiveSpeaker}
-      /> */}
-      {props.artistView ? (
+      {!props.artistView ? (
+        <div>
+          <TrayButton
+            type={TYPE_MUTE_CAMERA}
+            disabled={props.disabled}
+            highlighted={isCameraMuted}
+            onClick={toggleCamera}
+          />
+          <TrayButton
+            type={TYPE_MUTE_MIC}
+            disabled={props.disabled}
+            highlighted={isMicMuted}
+            onClick={toggleMic}
+          />
+        </div>
+      ) : (
         <button
           type="unmute-all"
           className="artist-mute-all-button"
@@ -127,7 +124,13 @@ export default function Tray(props) {
         >
           {props.button_message}
         </button>
-      ): null}
+      )}
+      {/* <TrayButton
+        type={TYPE_SCREEN}
+        disabled={props.disabled}
+        highlighted={isEnabledActiveSpeaker}
+        onClick={toggleActiveSpeaker}
+      /> */}
       
       {/* {DailyIframe.supportedBrowser().supportsScreenShare && (
         <TrayButton

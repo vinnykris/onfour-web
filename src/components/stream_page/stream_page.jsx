@@ -713,6 +713,7 @@ const StreamPage = () => {
                       <Row className="video-chat-row">
                         <VideoChat
                           user_name={username ? username : "GUEST"}
+                          artist_name="vinnykris"
                         ></VideoChat>
                       </Row>
                       <Row className="chat-row">

@@ -14,10 +14,10 @@ export default function CallMessage(props) {
       <Row className="call-message-container">
         <Col className="call-message-container">
           <Row>
-            <div className="call-message-header">{props.header}</div>
+            <div className="call-message-header">{props.artistView? ("Your fans will join soon!") : props.header}</div>
           </Row>
           <Row>
-            <div className="call-message-content">{props.detail}</div>
+            <div className="call-message-content">{props.artistView? null : props.detail}</div>
           </Row>
         </Col>
       </Row>

@@ -234,7 +234,13 @@ const StreamPage = () => {
                   <div className="artist-video-main">
                     <div className="artist-video-wrapper">
                       <div className="artist-box-header video-chat-box-header">Video Roulette</div>
-                      <VideoChat user_name={username ? username : "GUEST"} artistView={true} colNum={video_col_num} isReady={show_start_time}></VideoChat>
+                      <VideoChat 
+                        user_name={username ? username : "GUEST"} 
+                        artist_name="vinnykris"
+                        artistView={true} 
+                        colNum={video_col_num} 
+                        isReady={show_start_time}
+                      ></VideoChat>
                       <div className="artist-toggle-chat">
                         <button
                           className="artist-toggle-chat-button"
