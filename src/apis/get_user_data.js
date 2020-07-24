@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -180,6 +181,9 @@ export const fetchUserConcerts = async () => {
 // RSVP'd shows on a user's profile
 export const getUpcomingPurchasedShows = async (width, username) => {
   const user_concerts = await fetchUserConcerts();
+  user_concerts.sort((a, b) =>
+    moment(a.data.getConcert.date + "T" + a.data.getConcert.time).diff(moment(b.data.getConcert.date + "T" + b.data.getConcert.time))
+  );
   var upcoming_concerts = [];
 
   const getUpcomingFull = async (data) => {
