@@ -52,6 +52,10 @@
   :focus {
     background-color: orangered;
   }
+  @include respond-to("small") {
+    margin: 8% 0%;
+    width: 100%;
+  }
 }
 
 .calendar-button {
@@ -103,8 +107,9 @@ hr.solid {
   font-family: "Heebo", sans-serif;
   padding: 2% 4%;
   @include respond-to("small") {
-    margin-left: 5px;
     margin-top: 7px;
+    height: 24px;
+    line-height: 24px;
   }
 }
 
@@ -122,7 +127,7 @@ hr.solid {
     font-size: 0.8rem;
   }
   @include respond-to("x-large") {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
   }
 }
 
@@ -141,6 +146,9 @@ hr.solid {
   line-height: 20px;
   font-size: 17px;
   letter-spacing: 0.04em;
+  @include respond-to("small") {
+    letter-spacing: 4%;
+  }
 }
 
 .share-concert-text {
@@ -152,19 +160,48 @@ hr.solid {
   line-height: 118.49%;
   text-align: left;
   padding: 0;
+  @include respond-to("small") {
+    margin-top: 0;
+    float: left;
+    line-height: 100%;
+    margin-bottom: 0;
+    display: flex;
+    align-self: center;
+  }
+}
+
+.share-list-container {
+  @include respond-to("small") {
+    float: right;
+  }
 }
 
 .share-list-container ul li {
   margin: 0;
   padding-right: 30px;
   font-size: 3rem;
+  @include respond-to("small") {
+    font-size: 2rem;
+  }
 }
 
 .rodal-dialog {
-  min-height: 70vh;
+  // min-height: 70vh;
   max-height: 80vh;
-  @include respond-to("xx-large") {
-    min-height: 90vh !important;
+  max-width: 120vh;
+  // @include respond-to("xx-large") {
+  //   min-height: 90vh !important;
+  // }
+  @include respond-to("x-large") {
+    max-width: 100vh;
+    max-height: 65vh;
+  }
+  @include respond-to("large") {
+    max-width: 80vh;
+    // max-height: 50vh;
+  }
+  @include respond-to("small") {
+    max-height: 100vh;
   }
 }
 
@@ -182,6 +219,9 @@ hr.solid {
   width: 100%;
   height: 100%;
   padding: 5%;
+  @include respond-to("small") {
+    height: auto;
+  }
 }
 
 .purchase-review {
@@ -189,16 +229,22 @@ hr.solid {
   height: 100%;
   padding: 5%;
   background-color: #f5f6f7;
+  @include respond-to("small") {
+    padding-top: 0;
+  }
 }
 
 .order-summary {
   padding: 5%;
+  @include respond-to("small") {
+    padding-bottom: 0;
+  }
 }
 
 .summary-header {
   margin-top: 5%;
   font-weight: bold;
-  font-size: 17px;
+  font-size: 1rem;
   line-height: 20px;
   letter-spacing: 0.04em;
   float: left;
@@ -207,10 +253,17 @@ hr.solid {
 .ticket-selections {
   width: 100%;
   margin-top: 15%;
+  @include respond-to("small") {
+    margin-top: 5%;
+  }
 }
 
 .total-purchase {
   padding: 5%;
+  @include respond-to("small") {
+    padding-bottom: 0;
+    padding-top: 2%;
+  }
 }
 
 .total-purchase {
@@ -225,11 +278,11 @@ hr.break-modal {
 }
 
 .right-col-break {
-  margin-top: 45%;
+  margin-top: 25%;
 }
 
 .checkout-button-container {
-  margin-top: 10%;
+  margin-top: 8%;
 }
 
 .ticket-type {
@@ -248,7 +301,10 @@ hr.break-modal {
 }
 
 .ticket-row {
-  margin: 13% 15%;
+  margin: 6% 12%;
+  @include respond-to("small") {
+    margin: 0% 10%;
+  }
 }
 
 .pretty .state label {
@@ -277,6 +333,10 @@ hr.break-modal {
   @include respond-to("xx-large") {
     font-size: 15px;
   }
+}
+
+.MuiTypography-body1 {
+  font-size: 0.8rem !important;
 }
 
 .pretty {
@@ -325,6 +385,10 @@ hr.break-modal {
 
 .invite-friends {
   margin: 6%;
+  @include respond-to("small") {
+    margin: 0% 3%;
+    margin-top: 6%;
+  }
 }
 
 .invite-prompt {
@@ -335,8 +399,9 @@ hr.break-modal {
 .invite-text {
   margin: auto;
   margin-left: 10px;
-  font-size: 15px;
+  // font-size: 15px;
   line-height: 17px;
+  font-size: 0.8rem;
 }
 
 .add-user-icon {
@@ -348,11 +413,14 @@ hr.break-modal {
 }
 
 .email-input-field {
-  margin-top: 17px;
+  margin-top: 3%;
 }
 
 .emails-warning {
   color: red;
+  @include respond-to("small") {
+    margin-bottom: 0;
+  }
 }
 
 .emails-warning .hidden {
@@ -361,24 +429,28 @@ hr.break-modal {
 
 .backstage-hidden-text {
   visibility: hidden;
+  font-size: 0.8rem;
 }
 
 .item-name {
   float: left;
+  font-size: 0.8rem;
 }
 
 .item-price {
   float: right;
+  font-size: 0.8rem;
 }
 
 .checkout-button {
   font-weight: bold;
-  font-size: 17px;
+  // font-size: 17px;
   line-height: 20px;
   letter-spacing: 0.055em;
   color: white;
-  background-color: #2c28f8;
+  background-color: #794d94;
   width: 100%;
+  font-size: 0.9rem;
 }
 
 .checkout-button-disabled {
@@ -389,6 +461,25 @@ hr.break-modal {
   color: rgb(133, 133, 133);
   width: 100%;
   background-color: #b4b3b3;
+}
+
+.fa-stack {
+  line-height: 1.6rem !important;
+  height: 1.6rem !important;
+  width: 1.6rem !important;
+}
+
+.fa-stack-2x {
+  font-size: 1.6rem !important;
+}
+
+.fa-stack-1x {
+  font-size: 0.8rem !important;
+}
+
+.react-multi-email {
+  font-size: 0.7rem !important;
+  line-height: 1rem !important;
 }
 
 .react-multi-email > input {
@@ -457,4 +548,44 @@ hr.break-modal {
   // position: absolute;
   // border-top: none;
   // text-align: left;
+}
+
+// --------- MOBILE STYLING ---------------
+
+.mobile-concert-page {
+  padding: 5px;
+}
+
+.mobile-concert-image-wrapper {
+  width: 100%;
+}
+
+.mobile-concert-image {
+  width: 100%;
+}
+
+.concert-row-mobile {
+  margin-bottom: 6%;
+}
+
+.mobile-share-container {
+  float: left;
+  display: flex;
+  align-items: center;
+}
+
+.share-column-mobile {
+  justify-content: center;
+}
+
+.mobile-rodal {
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.mobile-backstage {
+  display: none !important;
 }
