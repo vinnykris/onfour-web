@@ -754,15 +754,16 @@ const Concert = (props) => {
               </Row>
               <Row>
                 <Col size={1}>
-                  {console.log(has_ticket)}
                   {has_ticket ? (
-                    <button
-                      className="buy-ticket-button"
-                      onClick={goToVenue}
-                      disabled={!enter_venue_status}
-                    >
-                      Enter Venue
-                    </button>
+                    <Tooltip title="Please try again 15 minutes before the show!">
+                      <button
+                        className="buy-ticket-button"
+                        onClick={goToVenue}
+                        disabled={!enter_venue_status}
+                      >
+                        Enter Venue
+                      </button>
+                    </Tooltip>
                   ) : (
                     <button className="buy-ticket-button" onClick={getTicket}>
                       RSVP
@@ -1127,15 +1128,30 @@ const Concert = (props) => {
                         />
                       </div>
                       <div className="buy-ticket">
-                        {console.log(has_ticket)}
                         {has_ticket ? (
-                          <button
-                            className="buy-ticket-button"
-                            onClick={goToVenue}
-                            disabled={!enter_venue_status}
-                          >
-                            Enter Venue
-                          </button>
+                          <div>
+                            {enter_venue_status ? (
+                              <button
+                                className="buy-ticket-button"
+                                onClick={goToVenue}
+                              >
+                                Enter Venue
+                              </button>
+                            ) : (
+                              <Tooltip
+                                title="Please try again 15 minutes before the show!"
+                                // placement="bottom"
+                              >
+                                <button
+                                  className="buy-ticket-button-disabled"
+                                  // onClick={goToVenue}
+                                  // disabled
+                                >
+                                  Enter Venue
+                                </button>
+                              </Tooltip>
+                            )}
+                          </div>
                         ) : (
                           <button
                             className="buy-ticket-button"

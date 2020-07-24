@@ -54,11 +54,22 @@
   padding-right: 30px;
 }
 
-.buy-ticket-button:disabled {
-  background-color: rgba($color: #a1a1a1, $alpha: 1);
-  color: white;
+.buy-ticket-button-disabled {
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 20px;
+  letter-spacing: 0.055em;
+  color: rgb(133, 133, 133);
+  width: 100%;
+  background-color: #b4b3b3;
   cursor: default;
 }
+
+// .buy-ticket-button:disabled {
+//   background-color: rgba($color: #a1a1a1, $alpha: 1);
+//   color: white;
+//   cursor: default;
+// }
 
 .calendar-button {
   margin: 2%;
