@@ -607,7 +607,7 @@ const Concert = (props) => {
                 </Grid>
               </Rodal>
               <Row className="concert-row-mobile">
-                <Col size={1}>
+                <Col size={1} className="no-stretch-column">
                   <div className="mobile-concert-image-wrapper">
                     <img
                       className="mobile-concert-image"
@@ -633,7 +633,7 @@ const Concert = (props) => {
                 </Col>
               </Row>
               <Row className="concert-row-mobile">
-                <Col size={1}>
+                <Col size={1} className="no-stretch-column">
                   <span className="logistics-text">
                     {concert_info.week_day} | {concert_info.formatted_date} |{" "}
                     {concert_info.formatted_time} EST
@@ -641,7 +641,7 @@ const Concert = (props) => {
                 </Col>
               </Row>
               <Row className="concert-row-mobile">
-                <Col size={1}>
+                <Col size={1} className="no-stretch-column">
                   <div>
                     <h3 className="titles">
                       {concert_info.artist_name.toUpperCase()} –{" "}

@@ -73,6 +73,11 @@
   color: white;
 }
 
+.no-stretch-column {
+  max-width: 100vh;
+  overflow-x: hidden;
+}
+
 .titles {
   text-align: left;
   color: white;
@@ -201,6 +206,7 @@ hr.solid {
   }
   @include respond-to("small") {
     max-height: 100vh;
+    max-width: 100vh;
   }
 }
 
