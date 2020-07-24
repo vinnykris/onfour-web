@@ -15,6 +15,7 @@ export default function Tile(props) {
   const videoEl = useRef(null);
   const audioEl = useRef(null);
 
+  const [audioMute, setAudioMute] = useState(false);
   const random_id = Math.random();
   const audio_component_id = "audio" + random_id.toString();
 
@@ -47,7 +48,7 @@ export default function Tile(props) {
   function getAudioComponent() {
     return (
       !props.isLocalPerson &&
-      props.audioTrack && <audio className="audio-all" id={audio_component_id} autoPlay playsInline ref={audioEl} />
+      props.audioTrack && <audio className="audio-all" id={audio_component_id} autoPlay muted={audioMute} playsInline ref={audioEl} />
     );
   }
 
@@ -69,30 +70,57 @@ export default function Tile(props) {
   //   }
   // }
 
+  function toggle_audio_mute() {
+    if (document.getElementById(random_id)) {
+      if (document.getElementById(random_id).style.color === "red") {
+        document.getElementById(random_id).style.color = "white";
+        setAudioMute(false);
+      }
+      else {
+        document.getElementById(random_id).style.color = "red";
+        setAudioMute(true);
+      }
+    }
+  }
+
+  useEffect(() => {
+    if(props.artistView) {
+    toggle_audio_mute()
+    }
+  }, [props.mute_all])
+
 
   return (
-    <div className={getClassNames()}>
-      <div className="background" />
-      {/* {!props.isLocalPerson ? (
-        <div>
-          <i className="fa fa-microphone-slash mute-others-icon" id={random_id} onClick={toggle_audio_mute}></i>
-          <div className="range-slider-container">
-            <RangeSlider
-              value={volume_value}
-              onChange={changeEvent => {
-                setVolumeValue(changeEvent.target.value);
-                changeVolume(changeEvent.target.value);
-              }}
-            />
+    !props.isArtist ? (
+      <div className={getClassNames()}>
+        <div className="background" />
+        {!props.isLocalPerson ? (
+          <div>
+            {props.artistView? (
+              <i 
+                className="fa fa-microphone-slash mute-others-icon" 
+                id={random_id} 
+                // onClick={toggle_audio_mute}
+              ></i>
+            ) : null}
+            {/* <div className="range-slider-container">
+              <RangeSlider
+                value={volume_value}
+                onChange={changeEvent => {
+                  setVolumeValue(changeEvent.target.value);
+                  changeVolume(changeEvent.target.value);
+                }}
+              />
+            </div> */}
           </div>
+        ):null}
+        <div className="video-call-participant-name">
+          {props.username}
         </div>
-      ):null} */}
-      <div className="video-call-participant-name">
-        {props.username}
+        {getLoadingComponent()}
+        {getVideoComponent()}
+        {getAudioComponent()}
       </div>
-      {getLoadingComponent()}
-      {getVideoComponent()}
-      {getAudioComponent()}
-    </div>
+    ) : null
   );
 }

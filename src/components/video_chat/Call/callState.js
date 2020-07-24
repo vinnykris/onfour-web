@@ -88,11 +88,15 @@ function getCallItems(participants, prevCallItems) {
     const hasLoaded = prevCallItems[id] && !prevCallItems[id].isLoading;
     const missingTracks = !(participant.audioTrack || participant.videoTrack);
     callItems[id] = {
-      isLoading: !hasLoaded && missingTracks,
+      isLoading: !hasLoaded,
       audioTrack: participant.audioTrack,
       videoTrack: participant.videoTrack,
       username: participant.user_name
     };
+    if (participant.user_name) {
+      callItems[id].isLoading = false;
+    }
+
     if (participant.screenVideoTrack) {
       callItems[id + "-screen"] = {
         isLoading: false,

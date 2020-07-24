@@ -44,7 +44,7 @@ export default function Call(props) {
         type: PARTICIPANTS_CHANGE,
         participants: callObject.participants(),
       });
-      // console.log(callObject.participants());
+      console.log(callObject.participants());
     }
 
     // Use initial state
@@ -143,8 +143,8 @@ export default function Call(props) {
           isLarge={isLarge}
           isLoading={callItem.isLoading}
           artistView={props.artistView}
-
-          // mute_all = {props.mute_all}
+          isArtist={props.artist_name === callItem.username}
+          mute_all = {props.mute_all}
           username = {callItem.username}
         />
       );
@@ -174,6 +174,7 @@ export default function Call(props) {
         <CallMessage
           header={message.header}
           detail={message.detail}
+          artistView={props.artistView}
           isError={message.isError}
         />
       )}

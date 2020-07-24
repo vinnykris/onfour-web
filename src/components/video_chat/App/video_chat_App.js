@@ -19,7 +19,7 @@ const STATE_ERROR = "STATE_ERROR";
 const owner_name = ["takoyuxin", "onfour-yuxin", "onfour-spencer", "spencer", "onfour-vinod", "vinnykris", "alilyen", "onfour-bar","barkadosh"];
 const crew_name = "onfour Crew"
 
-export default function VideoChatApp({ user_name, artistView, colNum}) {
+export default function VideoChatApp({ user_name, artist_name, artistView, colNum}) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
@@ -135,7 +135,7 @@ export default function VideoChatApp({ user_name, artistView, colNum}) {
   useEffect(() => {
     const url = roomUrlFromPageUrl();
     if (url === "public") {
-      url && startJoiningPublicCall("https://onfour_test.daily.co/hello");
+      url && startJoiningPublicCall("https://onfour_test.daily.co/test_default_video_off");
       if (isInCrew) {
         switchToPublicVideoChat();
       } else {
@@ -326,7 +326,7 @@ export default function VideoChatApp({ user_name, artistView, colNum}) {
           >
             leave
           </button>
-          <Call roomUrl={roomUrl} isPublic={isPublic} artistView={artistView} colNum={colNum} mute_all={mute_all}/>
+          <Call roomUrl={roomUrl} artist_name={artist_name} isPublic={isPublic} artistView={artistView} colNum={colNum} mute_all={mute_all}/>
           <Tray
             disabled={!enableCallButtons}
             onClickLeaveCall={startLeavingCall}
