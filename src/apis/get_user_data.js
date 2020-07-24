@@ -149,6 +149,39 @@ export const getMostRecentUpcomingInfo = async () => {
 // parses it and retrieves the concert_ids for each concert. It then
 // fetches the concert data associated with each id and returns a list
 // of that data
+export const fetchUserConcertIDs = async () => {
+  var users_shows = [];
+  const authenticated_user = await Auth.currentAuthenticatedUser();
+  if (authenticated_user) {
+    const user_data = await API.graphql(
+      graphqlOperation(queries.get_user_data, {
+        input: authenticated_user.username,
+      })
+    );
+    const concert_data = user_data.data.getCreateOnfourRegistration.concert;
+    if (concert_data && isNaN(parseInt(concert_data))) {
+      const parsed_concerts = JSON.parse(concert_data);
+      const concerts_ids = Object.keys(parsed_concerts);
+      return concerts_ids;
+
+      // for (let i = 0; i < concerts_ids.length; i++) {
+      //   const concert_info = await API.graphql(
+      //     graphqlOperation(queries.get_one_concert, {
+      //       id: concerts_ids[i],
+      //     })
+      //   );
+      //   users_shows.push(concert_info);
+      // }
+    }
+  }
+  // console.log(users_shows);
+  // return users_shows;
+};
+
+// Function fetches an authenticated user's concerts JSON. It then
+// parses it and retrieves the concert_ids for each concert. It then
+// fetches the concert data associated with each id and returns a list
+// of that data
 export const fetchUserConcerts = async () => {
   var users_shows = [];
   const authenticated_user = await Auth.currentAuthenticatedUser();
@@ -182,7 +215,9 @@ export const fetchUserConcerts = async () => {
 export const getUpcomingPurchasedShows = async (width, username) => {
   const user_concerts = await fetchUserConcerts();
   user_concerts.sort((a, b) =>
-    moment(a.data.getConcert.date + "T" + a.data.getConcert.time).diff(moment(b.data.getConcert.date + "T" + b.data.getConcert.time))
+    moment(a.data.getConcert.date + "T" + a.data.getConcert.time).diff(
+      moment(b.data.getConcert.date + "T" + b.data.getConcert.time)
+    )
   );
   var upcoming_concerts = [];
 
@@ -195,7 +230,9 @@ export const getUpcomingPurchasedShows = async (width, username) => {
 
   if (user_concerts !== []) {
     for await (const data of user_concerts) {
-      upcoming_concerts.push(formatUpcomingShow(await getUpcomingFull(data.data.getConcert)));
+      upcoming_concerts.push(
+        formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
+      );
     }
   }
   return upcoming_concerts;

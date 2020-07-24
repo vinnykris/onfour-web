@@ -5,6 +5,7 @@ import { useEffect } from "react";
 // Function import
 import { createUpcomingObject } from "../util";
 import { getOneConcert, getArtistInfo } from "../../apis/get_concert_data";
+import { fetchUserConcertIDs } from "../../apis/get_user_data";
 import { useWindowDimensions } from "../custom_hooks";
 
 // Graphql Imports
@@ -75,6 +76,7 @@ const Concert = (props) => {
   const [stub_animation_done, setStubAnimationDone] = useState(false);
   const [general_checked, setGeneralChecked] = useState(true);
   const [backstage_checked, setBackstageChecked] = useState(false);
+  const [has_ticket, setHasTicket] = useState(false);
 
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
@@ -132,6 +134,15 @@ const Concert = (props) => {
       `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
     );
     setTotal(general_price + backstage_price);
+    const fetchUserData = async () => {
+      console.log("fetching user data");
+      const user_concerts = await fetchUserConcertIDs();
+      setHasTicket(user_concerts.includes(concert_id));
+      if (user_concerts.includes(concert_id)) {
+        console.log("already rsvpd");
+      }
+    };
+    fetchUserData();
   }, []);
 
   // Hook run when concert_info is received
