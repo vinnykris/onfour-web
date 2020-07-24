@@ -132,13 +132,11 @@ const Concert = (props) => {
       `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
     );
     setTotal(general_price + backstage_price);
-    setShowStub(true);
   }, []);
 
-  //
+  // Hook run when concert_info is received
   useEffect(() => {
     if (concert_info) {
-      console.log(concert_info);
       price_map.general = concert_info.price;
       setGeneralPrice(concert_info.price);
     }
@@ -378,8 +376,6 @@ const Concert = (props) => {
                 className="rodal-custom"
               >
                 <Grid className="modal-grid">
-                  {/* <Row>
-                    <Col size={1}> */}
                   <div className="mobile-rodal">
                     <div className="purchase-main">
                       <div className="modal-concert-info">
@@ -392,7 +388,6 @@ const Concert = (props) => {
                           {concert_info.formatted_time} EST
                         </p>
                       </div>
-                      {/* <hr className="break-modal" /> */}
                       <div className="ticket-types">
                         <Row className="ticket-row">
                           <Col size={1}>
@@ -404,26 +399,10 @@ const Concert = (props) => {
                                   name="general-checked"
                                   checked={true}
                                   onChange={handleGeneralClicked}
-                                  // checked
                                 />
                               }
                               label="General Admission"
                             />
-                            {/* <Checkbox
-                              state
-                              className="p-fill p-round ticket-box p-locked"
-                              readOnly
-                              icon={
-                                <i
-                                  className="fa fa-check-circle"
-                                  aria-hidden="true"
-                                ></i>
-                              }
-                            >
-                              <span className="checkbox-text">
-                                General Admission
-                              </span>
-                            </Checkbox> */}
                           </Col>
                         </Row>
                         <Row className="ticket-row">
@@ -443,8 +422,6 @@ const Concert = (props) => {
                           </Col>
                         </Row>
                       </div>
-
-                      {/* <hr className="break-modal" /> */}
                       <div className="invite-friends">
                         <Row>
                           <Col size={1}>
@@ -506,10 +483,6 @@ const Concert = (props) => {
                         </Row>
                       </div>
                     </div>
-                    {/* </Col>
-                  </Row>
-                  <Row>
-                    <Col size={1} className="modal-right-col"> */}
                     <div className="purchase-review">
                       <div className="order-summary">
                         <Row>
@@ -564,7 +537,6 @@ const Concert = (props) => {
                           )}
                         </div>
                       </div>
-                      {/* <hr className="break-modal right-col-break" /> */}
                       <div className="total-purchase">
                         <Row>
                           <Col size={4}>
@@ -653,7 +625,6 @@ const Concert = (props) => {
                 </Col>
                 <Col size={4}>
                   <div className="countdown-timer">
-                    {/* <span className="countdown">COUNTDOWN TIMER</span> */}
                     <CountdownTimer
                       start_date={concert_info.date}
                       start_time={concert_info.time}
@@ -822,7 +793,6 @@ const Concert = (props) => {
                         <hr className="break-modal" />
                         <div className="ticket-types">
                           <Row className="ticket-row">
-                            {/* <Col size={1}></Col> */}
                             <Col size={3}>
                               <FormControlLabel
                                 control={
@@ -837,10 +807,8 @@ const Concert = (props) => {
                                 label="General Admission"
                               />
                             </Col>
-                            {/* <Col size={1}></Col> */}
                           </Row>
                           <Row className="ticket-row">
-                            {/* <Col size={1}></Col> */}
                             <Col size={3}>
                               <FormControlLabel
                                 control={
@@ -1102,7 +1070,6 @@ const Concert = (props) => {
                   <Row className="countdown-and-buttons">
                     <Col size={1}>
                       <div className="countdown-timer">
-                        {/* <span className="countdown">COUNTDOWN TIMER</span> */}
                         <CountdownTimer
                           start_date={concert_info.date}
                           start_time={concert_info.time}
@@ -1200,7 +1167,6 @@ const Concert = (props) => {
                   </Row>
                 </Col>
               </Row>
-              {/* <Row className="suggested-shows"></Row> */}
             </Grid>
           )}
         </div>
