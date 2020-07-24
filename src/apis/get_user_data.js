@@ -149,13 +149,14 @@ export const getMostRecentUpcomingInfo = async () => {
 // parses it and retrieves the concert_ids for each concert. It then
 // fetches the concert data associated with each id and returns a list
 // of that data
-export const fetchUserConcertIDs = async () => {
-  var users_shows = [];
-  const authenticated_user = await Auth.currentAuthenticatedUser();
-  if (authenticated_user) {
+export const fetchUserConcertIDs = async (username) => {
+  // const authenticated_user = await Auth.currentAuthenticatedUser();
+  console.log(username);
+  if (username) {
+    console.log(username);
     const user_data = await API.graphql(
       graphqlOperation(queries.get_user_data, {
-        input: authenticated_user.username,
+        input: username,
       })
     );
     const concert_data = user_data.data.getCreateOnfourRegistration.concert;
@@ -163,19 +164,8 @@ export const fetchUserConcertIDs = async () => {
       const parsed_concerts = JSON.parse(concert_data);
       const concerts_ids = Object.keys(parsed_concerts);
       return concerts_ids;
-
-      // for (let i = 0; i < concerts_ids.length; i++) {
-      //   const concert_info = await API.graphql(
-      //     graphqlOperation(queries.get_one_concert, {
-      //       id: concerts_ids[i],
-      //     })
-      //   );
-      //   users_shows.push(concert_info);
-      // }
     }
   }
-  // console.log(users_shows);
-  // return users_shows;
 };
 
 // Function fetches an authenticated user's concerts JSON. It then

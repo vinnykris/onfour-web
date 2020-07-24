@@ -77,6 +77,8 @@ const Concert = (props) => {
   const [general_checked, setGeneralChecked] = useState(true);
   const [backstage_checked, setBackstageChecked] = useState(false);
   const [has_ticket, setHasTicket] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [enter_venue_status, setEnterVenueStatus] = useState(false);
 
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
@@ -91,12 +93,13 @@ const Concert = (props) => {
   const concert_id = props.match.params.showID; // Passed from URL
   const state = props.location.state; // Props passed through link
 
-  Auth.currentAuthenticatedUser({})
-    .then((user) => {
-      setAuth(true);
-      setUsername(user.username);
-    })
-    .catch((err) => setAuth(false));
+  // Auth.currentAuthenticatedUser({})
+  //   .then((user) => {
+  //     setAuth(true);
+  //     setUsername(user.username);
+  //     console.log(user.username);
+  //   })
+  //   .catch((err) => setAuth(false));
 
   // AUTO-SCROLL SECTION
   // Auto-scrolls on first navigation
@@ -110,22 +113,53 @@ const Concert = (props) => {
     setShowStub(true);
   };
 
+  const fetchUserData = async (name) => {
+    console.log("fetching user data");
+    const user_concerts = await fetchUserConcertIDs(name);
+    if (user_concerts && user_concerts.includes(concert_id)) {
+      setHasTicket(true);
+      console.log("already rsvpd");
+    }
+  };
+
   // Runs on mount
   useEffect(() => {
-    if (state) {
-      // If data is coming from upcoming show page
-      setConcertInfo(state.info);
-      console.log(state.info);
-    } else {
-      // If data needs to be loaded from ID in URL
-      // Only reached if user does not come from upcoming page
-      const fetchConcert = async (id) => {
-        const data = await getOneConcert(id);
-        const artist_data = await getArtistInfo(data.artist_id);
-        setConcertInfo(createUpcomingObject(data, artist_data));
-      };
-      fetchConcert(concert_id);
-    }
+    // Check is user is logged in
+    // (async () => {
+    Auth.currentAuthenticatedUser({})
+      .then(async (user) => {
+        setAuth(true);
+        setUsername(user.username);
+        await fetchData(user.username);
+        setLoading(false);
+        console.log(concert_info);
+        console.log(has_ticket);
+      })
+      .catch((err) => setAuth(false));
+    // })();
+
+    const fetchData = async (name) => {
+      await fetchUserData(name);
+      console.log(name);
+      if (state) {
+        console.log("here 1");
+        // If data is coming from upcoming show page
+        setConcertInfo(state.info);
+      } else {
+        // If data needs to be loaded from ID in URL
+        // Only reached if user does not come from upcoming page
+        console.log("here 1");
+        const fetchConcert = async (id) => {
+          const data = await getOneConcert(id);
+          const artist_data = await getArtistInfo(data.artist_id);
+          setConcertInfo(createUpcomingObject(data, artist_data));
+        };
+        fetchConcert(concert_id);
+      }
+    };
+
+    // fetchData();
+
     setTooltipText("Copy to clipboard");
     setFacebookLink(
       `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.onfour.live%2Fupcoming%2F${concert_id}&amp;src=sdkpreparse`
@@ -134,15 +168,6 @@ const Concert = (props) => {
       `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
     );
     setTotal(general_price + backstage_price);
-    const fetchUserData = async () => {
-      console.log("fetching user data");
-      const user_concerts = await fetchUserConcertIDs();
-      setHasTicket(user_concerts.includes(concert_id));
-      if (user_concerts.includes(concert_id)) {
-        console.log("already rsvpd");
-      }
-    };
-    fetchUserData();
   }, []);
 
   // Hook run when concert_info is received
@@ -331,6 +356,10 @@ const Concert = (props) => {
       });
   };
 
+  const goToVenue = () => {
+    console.log("take me to the venue pls");
+  };
+
   return (
     <div className="concert-page">
       {width <= 600 ? (
@@ -366,13 +395,13 @@ const Concert = (props) => {
               </ClickAwayListener>
             </span>
           ) : null}
-          {!concert_info ? (
+          {loading ? (
             <div className="overlay-box">
               <PulseLoader
                 sizeUnit={"px"}
                 size={18}
                 color={"#7b6dac"}
-                loading={!concert_info}
+                loading={loading}
               />
             </div>
           ) : (
@@ -725,9 +754,20 @@ const Concert = (props) => {
               </Row>
               <Row>
                 <Col size={1}>
-                  <button className="buy-ticket-button" onClick={getTicket}>
-                    RSVP
-                  </button>
+                  {console.log(has_ticket)}
+                  {has_ticket ? (
+                    <button
+                      className="buy-ticket-button"
+                      onClick={goToVenue}
+                      disabled={!enter_venue_status}
+                    >
+                      Enter Venue
+                    </button>
+                  ) : (
+                    <button className="buy-ticket-button" onClick={getTicket}>
+                      RSVP
+                    </button>
+                  )}
                 </Col>
               </Row>
             </Grid>
@@ -1087,12 +1127,23 @@ const Concert = (props) => {
                         />
                       </div>
                       <div className="buy-ticket">
-                        <button
-                          className="buy-ticket-button"
-                          onClick={getTicket}
-                        >
-                          RSVP
-                        </button>
+                        {console.log(has_ticket)}
+                        {has_ticket ? (
+                          <button
+                            className="buy-ticket-button"
+                            onClick={goToVenue}
+                            disabled={!enter_venue_status}
+                          >
+                            Enter Venue
+                          </button>
+                        ) : (
+                          <button
+                            className="buy-ticket-button"
+                            onClick={getTicket}
+                          >
+                            RSVP
+                          </button>
+                        )}
                       </div>
                     </Col>
                   </Row>
