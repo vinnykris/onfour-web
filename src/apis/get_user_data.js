@@ -201,6 +201,7 @@ export const fetchUserConcerts = async () => {
             id: concerts_ids[i],
           })
         );
+        console.log(concert_info);
         users_shows.push(concert_info);
       }
     }
@@ -224,7 +225,9 @@ export const getUpcomingPurchasedShows = async (width, username) => {
 
   if (user_concerts !== []) {
     for await (const data of user_concerts) {
-      upcoming_concerts.push(formatUpcomingShow(await getUpcomingFull(data.data.getConcert)));
+      upcoming_concerts.push(
+        formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
+      );
     }
   }
   return upcoming_concerts;

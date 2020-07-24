@@ -144,6 +144,7 @@ export const get_one_concert = `query getConcert(
 $id: ID!
 ) {
 getConcert(id: $id) {
+  id
   poster_url
   stub_url
   location

@@ -135,6 +135,7 @@ const Concert = (props) => {
     );
     setTotal(general_price + backstage_price);
     const fetchUserData = async () => {
+      console.log("fetching user data");
       const user_concerts = await fetchUserConcertIDs();
       setHasTicket(user_concerts.includes(concert_id));
       if (user_concerts.includes(concert_id)) {
