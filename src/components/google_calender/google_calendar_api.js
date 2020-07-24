@@ -233,6 +233,8 @@ var ApiCalendar = function () {
 
             return this.gapi.client.calendar.events.insert({
                 'calendarId': calendarId,
+                'sendNotifications': true,
+                "sendUpdates": "all",
                 'resource': event
             });
         }
