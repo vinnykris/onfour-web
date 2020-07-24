@@ -44,6 +44,9 @@ import CircleUnchecked from "@material-ui/icons/RadioButtonUnchecked";
 import emailjs from "emailjs-com";
 import { service_id, template_id, user_id } from "../../apis/email_js";
 
+// Google Calendar Import
+import ApiCalendar from "../google_calender/google_calendar_api";
+
 // Styling Imports
 import "./concert_styles.scss";
 import "rodal/lib/rodal.css";
@@ -265,9 +268,13 @@ const Concert = (props) => {
 
   // Function to add event element to calendar
   // Ends animation
-  const addToCalendar = () => {
-    console.log("add to calendar");
-    animationEnd();
+  const addToCalendar = async () => {
+    if (!ApiCalendar.sign) {
+      await ApiCalendar.handleAuthClick();
+    }
+    console.log("about to add event");
+    await addEvent();
+    await animationEnd();
   };
 
   const handleGeneralClicked = () => {
@@ -276,6 +283,37 @@ const Concert = (props) => {
 
   const handleBackstageClicked = () => {
     setBackstageChecked(!backstage_checked);
+  };
+  const addEvent = async () => {
+    const eventLoad = {
+      summary:
+        concert_info.artist_name +
+        " - " +
+        concert_info.concert_name +
+        "(concert)",
+      description: "onfour concert!",
+      start: {
+        dateTime: new Date(
+          concert_info.date + "T" + concert_info.time + ".000-04:00"
+        ).toISOString(),
+      },
+      end: {
+        dateTime: new Date(
+          new Date(
+            concert_info.date + "T" + concert_info.time + ".000-04:00"
+          ).getTime() +
+            90 * 60000
+        ).toISOString(),
+      },
+      colorId: 5,
+    };
+    await ApiCalendar.createEvent(eventLoad)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

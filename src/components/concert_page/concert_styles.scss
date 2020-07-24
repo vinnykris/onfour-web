@@ -56,6 +56,14 @@
     margin: 8% 0%;
     width: 100%;
   }
+  padding-left: 30px;
+  padding-right: 30px;
+  // :hover {
+  //   background-color: orange;
+  // }
+  // :focus {
+  //   background-color: orangered;
+  // }
 }
 
 .calendar-button {
@@ -65,23 +73,28 @@
 
 .buy-ticket-button:hover {
   background-color: #2c28f8;
+  // border: 1px solid #2c28f8;
   color: white;
 }
 
 .buy-ticket-button:focus {
-  background-color: purple;
+  background-color: black;
+  border: 1px solid #2c28f8;
   color: white;
 }
 
 .titles {
   text-align: left;
   color: white;
+  font-size: 1.65rem;
+  padding-bottom: 25px;
 }
 
 .artist-description-text {
-  text-align: left;
+  text-align: justify;
   color: white;
   white-space: pre-line;
+  font-size: 0.8rem;
 }
 
 .main-info-col {
@@ -144,15 +157,15 @@ hr.solid {
   color: white;
   font-weight: normal;
   line-height: 20px;
-  font-size: 17px;
   letter-spacing: 0.04em;
   @include respond-to("small") {
     letter-spacing: 4%;
   }
+  font-size: 0.95rem;
 }
 
 .share-concert-text {
-  font-size: 16px;
+  font-size: 1rem;
   margin-top: 20px;
   color: white;
   letter-spacing: 0.04em;
@@ -179,10 +192,10 @@ hr.solid {
 .share-list-container ul li {
   margin: 0;
   padding-right: 30px;
-  font-size: 3rem;
   @include respond-to("small") {
     font-size: 2rem;
   }
+  font-size: 2.3rem;
 }
 
 .rodal-dialog {

@@ -63,8 +63,8 @@
 }
 
 .sign-up-message {
-  padding-top: 32%;
-  padding-bottom: 33%;
+  padding-top: 12%;
+  padding-bottom: 3%;
   padding-left: 4%;
   padding-right: 4%;
   color: white;
@@ -80,4 +80,11 @@
 .email-unsubscribe-checkbox {
   width: 16px;
   height: 16px;
+}
+
+.register-verification-submit-button {
+  width: 50%;
+  color: white;
+  font-size: 14px;
+  font-weight: 420;
 }
