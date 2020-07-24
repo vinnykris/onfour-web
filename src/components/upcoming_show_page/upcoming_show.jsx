@@ -86,11 +86,22 @@ const UpcomingShowPage = () => {
           ) : (
             <div>
               {width <= 1024 ? (
-                <div className="upcoming-show-grid">
-                  <FlexibleGrid
-                    content_list={formatted_concerts}
-                    num_cols={4}
-                  />
+                <div>
+                  {width <= 768? (
+                    <div className="upcoming-show-grid">
+                      <FlexibleGrid
+                        content_list={formatted_concerts}
+                        num_cols={3}
+                      />
+                    </div>
+                  ) : (
+                    <div className = "upcoming-show-grid">
+                      <FlexibleGrid
+                        content_list = {formatted_concerts}
+                        num_cols = {4}
+                      />
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="upcoming-show-grid">
