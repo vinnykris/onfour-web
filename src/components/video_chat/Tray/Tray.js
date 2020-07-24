@@ -4,11 +4,11 @@ import TrayButton, {
   TYPE_MUTE_CAMERA,
   TYPE_MUTE_MIC,
   // TYPE_SCREEN,
-  TYPE_LEAVE
+  TYPE_LEAVE,
 } from "../TrayButton/TrayButton";
 import CallObjectContext from "../CallObjectContext";
 import { logDailyEvent } from "../logUtils";
-import DailyIframe from "@daily-co/daily-js";
+//import DailyIframe from "@daily-co/daily-js";
 
 /**
  * Gets [isCameraMuted, isMicMuted, isSharingScreen].
@@ -119,7 +119,7 @@ export default function Tray(props) {
           type="unmute-all"
           className="artist-mute-all-button"
           disabled={props.disabled}
-          highlighted={(props.button_message === "MUTE ALL")}
+          highlighted={props.button_message === "MUTE ALL"}
           onClick={props.mute_function}
         >
           {props.button_message}

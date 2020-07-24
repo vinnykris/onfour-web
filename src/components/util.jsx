@@ -41,8 +41,7 @@ export const createChunks = (array, chunk_size) => {
 };
 
 export const createUpcomingObject = (data, artist_data) => {
-  const time_left =
-    +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
+  const time_left = +new Date(data.date + "T24:00:00.000-04:00") - +new Date();
   const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
 
   return {
@@ -70,60 +69,11 @@ export const createUpcomingObject = (data, artist_data) => {
   };
 };
 
-// export const formatUpcomingShows = (concerts, width) => {
-//   console.log("formatting the concert");
-//   var upcoming_concerts = [];
-
-//   // Iterate through each element in the list and add the created
-//   // FeaturedContent to concerts
-//   concerts.forEach((data) => {
-//     const time_left =
-//       +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
-//     const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
-//     // console.log(data.time);
-
-//     upcoming_concerts.push(
-//       <FeaturedContent
-//         id={data.id}
-//         img={data.poster_url}
-//         name={data.artist_name}
-//         concert_name={data.concert_name}
-//         week_day={moment(data.date).format("dddd")}
-//         date={data.date}
-//         formatted_date={
-//           data.date.slice(8, 10) +
-//           " " +
-//           month_map[data.date.slice(5, 7)] +
-//           " " +
-//           data.date.slice(0, 4)
-//           // moment(data.date).format('LL')
-//         }
-//         time={data.time}
-//         formatted_time={moment(data.time, "HH:mm:ss").format("h:mm A")}
-//         month={month_map[data.date.slice(5, 7)]}
-//         day={data.date.slice(8, 10)}
-//         price={data.general_price}
-//         description={data.artist_bio.toString()}
-//         days_left={days_left}
-//         width={width}
-//         genre={data.genre}
-//       />
-//     );
-//   });
-
-//   return upcoming_concerts;
-// };
-
 export const formatUpcomingShow = (data, width) => {
-  //console.log("formatting one concert");
-  // var upcoming_concerts = [];
-
   // Iterate through each element in the list and add the created
   // FeaturedContent to concerts
-  const time_left =
-    +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
+  const time_left = +new Date(data.date + "T24:00:00.000-04:00") - +new Date();
   const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
-  // console.log(data.time);
   return (
     <FeaturedContent
       id={data.id}

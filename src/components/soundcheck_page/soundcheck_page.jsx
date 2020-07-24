@@ -1,8 +1,6 @@
 // React Imports
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
-// import { Prompt } from "react-router";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -16,10 +14,7 @@ import Auth from "../../apis/UserPool";
 // Component Imports
 import VideoPlayer from "./soundcheck_video_player";
 import Chat from "../chat/stream_chat";
-// import Join from "../chat/join_chat";
-// import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
-// import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 
@@ -38,13 +33,8 @@ const StreamPage = () => {
 
   // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
-  const [chat_name, setChatName] = useState(""); // Sets user name for chat
   const [viewers, setViewers] = useState(0); // Sets number of live viewers on page
   // Function passed as prop to join chat
-  // const joinSubmit = (name, mode) => {
-  //   setChatName(name);
-  //   // setShowChat(mode);
-  // };
   // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
@@ -175,7 +165,6 @@ const StreamPage = () => {
   Auth.currentAuthenticatedUser({})
     .then((user) => {
       setUsername(user.username);
-      setShowChat(true);
       setAuth(true);
     })
     .catch((err) => setAuth(false));
@@ -207,47 +196,6 @@ const StreamPage = () => {
     <div className="stream-container">
       {show_start_time ? (
         <div className="stream-page-content">
-          {/* {show_alert ? (
-          <div>
-            <div className="popup-desktop">
-              <form className="waiting-msg-box">
-                <span className="popup-close" onClick={hidePopup}>
-                  <i className="fa fa-times fa-2x close-icon"></i>
-                </span>
-                <div className="popup-content">
-                  <h5 className="popup-header">The show hasn't started yet!</h5>
-                  <p className="waiting-msg">
-                    Feel free to look around! If you would like to see clips
-                    from our past shows, click the button below.
-                  </p>
-                  <br></br>
-                  <Link to="/archive">
-                    <button>Go to Past Shows</button>
-                  </Link>
-                </div>
-              </form>
-            </div>
-
-            <div className="popup-mobile">
-              <form className="waiting-msg-box">
-                <span className="popup-close" onClick={hidePopup}>
-                  <i className="fa fa-times close-icon"></i>
-                </span>
-                <div className="popup-content">
-                  <h5 className="popup-header">The show hasn't started yet!</h5>
-                  <p className="waiting-msg">
-                    Feel free to look around! If you would like to see clips
-                    from our past shows, click the button below.
-                  </p>
-                  <br></br>
-                  <Link to="/archive">
-                    <button>Go to Past Shows</button>
-                  </Link>
-                </div>
-              </form>
-            </div>
-          </div>
-        ) : null} */}
           {width > 600 ? (
             <Grid>
               <Row>
@@ -271,7 +219,7 @@ const StreamPage = () => {
                           className="toggle-chat-button"
                           onClick={toggleChat}
                         >
-                          <i class={button_icon}></i>
+                          <i className={button_icon}></i>
                         </button>
                       </div>
                     </div>
@@ -297,13 +245,7 @@ const StreamPage = () => {
                           up)
                         </h5>
                       </Row>
-                      {/* </Col> */}
-                      {/* <Col size={1} className="social-bar-center">
-                           <SocialBar />
-                      </Col> */}
                     </Col>
-                    {/* <Col size={2.5}></Col>
-                    <Col size={0.5}></Col> */}
                   </Row>
                   <Row>
                     <div className="short-term-spacer"></div>
@@ -314,22 +256,23 @@ const StreamPage = () => {
                     <Col size={1} className="donate-stripe donate-box">
                       <p className="donate-description">Credit Card</p>
                       <p className="donate-subdescription">
-                        Donate via credit card to For the GWORLS
-                        and LGBT Freedom Fund. Your card information will not be stored anywhere.
+                        Donate via credit card to For the GWORLS and LGBT
+                        Freedom Fund. Your card information will not be stored
+                        anywhere.
                       </p>
                     </Col>
                     <Col size={1} className="donate-paypal donate-box">
                       <p className="donate-description">PayPal</p>
                       <p className="donate-subdescription">
-                        onfour will ensure your donation is sent to For the GWORLS
-                        and LGBT Freedom Fund.
+                        onfour will ensure your donation is sent to For the
+                        GWORLS and LGBT Freedom Fund.
                       </p>
                     </Col>
                     <Col size={1} className="donate-venmo donate-box">
                       <p className="donate-description">Venmo</p>
                       <p className="donate-subdescription">
-                        @SpencerAmer from onfour will ensure your donation is sent to
-                        For the GWORLS and LGBT Freedom Fund.
+                        @SpencerAmer from onfour will ensure your donation is
+                        sent to For the GWORLS and LGBT Freedom Fund.
                       </p>
                     </Col>
                   </Row>
@@ -380,7 +323,7 @@ const StreamPage = () => {
                         } else {
                           return (
                             <form
-                              class="stream-email-form"
+                              classclassName="stream-email-form"
                               action="/"
                               id="newsletter"
                               onSubmit={emailSubmit}

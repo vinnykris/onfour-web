@@ -2,15 +2,13 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
-import styled from "styled-components";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 // import { Prompt } from "react-router";
 
 // AWS Imports
-import { API, graphqlOperation, input } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import * as queries from "../../graphql/queries";
-import Amplify, { Analytics } from "aws-amplify";
+import Amplify from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 // Amplify Imports
 import Auth from "../../apis/UserPool";
@@ -21,7 +19,6 @@ import Chat from "../chat/stream_chat";
 // import Join from "../chat/join_chat";
 // import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
-import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/video_chat_App";
@@ -59,7 +56,6 @@ const StreamPage = () => {
     setViewers(num_viewers);
   };
 
-
   // AUTO-SCROLL SECTION
   // Auto-scrolls on first navigation
   const [scroll, setScroll] = useState(true); // Auto-scroll
@@ -67,7 +63,6 @@ const StreamPage = () => {
     window.scrollTo({ top: "176px", behavior: "smooth" });
     setScroll(false);
   }
-
 
   // GETTING INFORMATION ABOUT MOST RECENT UPCOMING SHOW
   const [show_start_time, setStartTime] = useState(""); // Stores the upcoming show's start time
@@ -92,17 +87,16 @@ const StreamPage = () => {
   const getStartTimeAndIsLive = async () => {
     // Calling the API, using async and await is necessary
     await API.graphql(
-      graphqlOperation(queries.get_concert_date_time_is_live,{
+      graphqlOperation(queries.get_concert_date_time_is_live, {
         id: "1b1a5c11-f590-404d-86c4-b5a7cf057069",
       })
     ).then((data) => {
-      setStartTime(data.data.getConcert.time)
+      setStartTime(data.data.getConcert.time);
       setTimerStartTime(data.data.getConcert.time);
       setStartDate(data.data.getConcert.date);
       setIsLive(data.data.getConcert.is_live);
       setGoLiveMsg(data.data.getConcert.is_live ? "DISCONNECT" : "GO LIVE");
-      }
-    );
+    });
   };
 
   // GET USER'S REGISTRATION INFORMATION
@@ -118,7 +112,6 @@ const StreamPage = () => {
       setAuth(true);
     })
     .catch((err) => setAuth(false));
-
 
   // TOGGLE CHAT SECTION
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-left");
@@ -142,7 +135,7 @@ const StreamPage = () => {
       setGoLiveMsg("GO LIVE");
       const is_live_load = {
         id: "1b1a5c11-f590-404d-86c4-b5a7cf057069",
-        is_live: false
+        is_live: false,
       };
       updateIsLive(is_live_load);
     } else {
@@ -150,7 +143,7 @@ const StreamPage = () => {
       setGoLiveMsg("DISCONNECT");
       const is_live_load = {
         id: "1b1a5c11-f590-404d-86c4-b5a7cf057069",
-        is_live: true
+        is_live: true,
       };
       updateIsLive(is_live_load);
     }
@@ -164,7 +157,6 @@ const StreamPage = () => {
       })
     );
   };
-
 
   // RENDERING SECTION
   return (
@@ -187,8 +179,8 @@ const StreamPage = () => {
                       />
                       <div className="artist-timer-wrapper">
                         <CountdownTimer
-                          // start_date={start_date} 
-                          // start_time={start_time} 
+                          // start_date={start_date}
+                          // start_time={start_time}
                           start_date={"2020-08-01"}
                           start_time={"12:00:00"}
                           time_up_message={"You Reached Your Scheduled Time!"}
@@ -198,13 +190,15 @@ const StreamPage = () => {
                   </div>
                   <div className="artist-control-main">
                     <div className="artist-box-header">Control</div>
-                    <button className="artist-go-live-button" onClick={toggleGoLive}>{go_live_message}</button>
+                    <button
+                      className="artist-go-live-button"
+                      onClick={toggleGoLive}
+                    >
+                      {go_live_message}
+                    </button>
                   </div>
                 </Col>
-                <Col
-                  size={2}
-                  id="chat_container"
-                >
+                <Col size={2} id="chat_container">
                   <Row className="full-width">
                     <div className="artist-activity-main">
                       <div className="artist-box-header">Activity Monitor</div>
@@ -226,11 +220,7 @@ const StreamPage = () => {
                     </div>
                   </Row>
                 </Col>
-                <Col
-                  size={4}
-                  id="chat_container"
-                  className="sticky-container"
-                >
+                <Col size={4} id="chat_container" className="sticky-container">
                   <div className="artist-video-main">
                     <div className="artist-video-wrapper">
                       <div className="artist-box-header video-chat-box-header">Video Roulette</div>
@@ -246,7 +236,7 @@ const StreamPage = () => {
                           className="artist-toggle-chat-button"
                           onClick={toggleChat}
                         >
-                          <i class={button_icon}></i>
+                          <i className={button_icon}></i>
                         </button>
                       </div>
                     </div>
