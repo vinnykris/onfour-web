@@ -2,8 +2,10 @@
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import history from "./history";
+import NoMatch from 'react-router-nomatch';
 
 // Component imports
+import NotFoundPage from "./components/not_found_page/not_found_page"
 import NavBar from "./components/navbar/navbar";
 import About from "./components/about_page/about_page";
 import StreamPage from "./components/stream_page/stream_page";
@@ -40,10 +42,12 @@ function App() {
   return (
     <div className="App custom-app">
       <Router history={history}>
+      
         <NavBar />
 
         <Switch>
           <Route exact path="/" component={About} />
+
           <Route path="/archive" component={ArchivePage} />
           <Route path="/stream" component={StreamPage} />
           <Route path="/upcoming" component={UpcomingShowPage} />
@@ -56,8 +60,12 @@ function App() {
           <Route path="/form" component={ArtistForm} />
           <Route path="/privacy-policy" component={PrivacyPage} />
           <Route path="/terms-of-service" component={TermsOfService} />
+          <Route path="*" component={NotFoundPage}/>
         </Switch>
+
+      
         <Footer />
+        
       </Router>
     </div>
   );
