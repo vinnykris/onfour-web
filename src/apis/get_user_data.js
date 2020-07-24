@@ -202,7 +202,6 @@ export const fetchUserConcerts = async () => {
             id: concerts_ids[i],
           })
         );
-        console.log(concert_info);
         users_shows.push(concert_info);
       }
     }
@@ -216,7 +215,9 @@ export const fetchUserConcerts = async () => {
 export const getUpcomingPurchasedShows = async (width, username) => {
   const user_concerts = await fetchUserConcerts();
   user_concerts.sort((a, b) =>
-    moment(a.data.getConcert.date + "T" + a.data.getConcert.time).diff(moment(b.data.getConcert.date + "T" + b.data.getConcert.time))
+    moment(a.data.getConcert.date + "T" + a.data.getConcert.time).diff(
+      moment(b.data.getConcert.date + "T" + b.data.getConcert.time)
+    )
   );
   var upcoming_concerts = [];
 
