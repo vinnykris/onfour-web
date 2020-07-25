@@ -12,11 +12,15 @@ import Ticket from "./components/payment/payment_box";
 import ArchivePage from "./components/archive_page/archive_page";
 import ArtistsPage from "./components/artist_page/artist_page";
 import Footer from "./components/footer/footer";
-import Modal from "./components/sign_in_modal/sign_in_modal";
 import Forgot from "./components/forgot_page/forgot_page";
 import SoundCheck from "./components/soundcheck_page/soundcheck_page";
 import Concert from "./components/concert_page/concert";
 import Profile from "./components/user_profile/profile";
+import Register from "./components/register_page/register_page";
+import Login from "./components/login_page/login_page";
+import ArtistForm from "./components/artist_form/artist_form";
+import PrivacyPage from "./components/policies/privacy_page";
+import TermsOfService from "./components/policies/terms_of_service";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -50,8 +54,19 @@ function App() {
           <Route exact path="/forgot" component={Forgot} />
           <Route exact path="/soundcheck" component={SoundCheck} />
           <Route path="/profile" component={Profile} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/form" component={ArtistForm} />
+          <Route exact path="/privacy-policy" component={PrivacyPage} />
+          <Route exact path="/terms-of-service" component={TermsOfService} />
+          <Route path="/archive" component={ArchivePage} />
+          <Route path="/stream" component={StreamPage} />
+          <Route path="/upcoming" component={UpcomingShowPage} />
+          <Route path="/ticket" component={Ticket} />
+          <Route path="/artists" component={ArtistsPage} />
+          <Route path="/forgot" component={Forgot} />
+          <Route path="/soundcheck" component={SoundCheck} />
         </Switch>
-        <Modal></Modal>
         <Footer />
       </Router>
     </div>

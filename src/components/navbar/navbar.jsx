@@ -364,12 +364,7 @@ const NavBar = () => {
                 {(() => {
                   if (!auth) {
                     return (
-                      <NavLink
-                        to=""
-                        className={style}
-                        data-toggle="modal"
-                        data-target="#sign_in_Modal"
-                      >
+                      <NavLink to="/login" className={style}>
                         LOGIN
                       </NavLink>
                     );
