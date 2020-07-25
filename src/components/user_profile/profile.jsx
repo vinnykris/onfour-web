@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
+import { useHistory } from "react-router-dom";
 
 import { Grid, Row, Col } from "../grid";
 import { useWindowDimensions } from "../custom_hooks";
@@ -8,6 +9,8 @@ import FlexibleGrid from "../flexible_grid/flexible_grid";
 import ProfileStub from "./profile_stub";
 import Carousel from "react-multi-carousel";
 import StubSlider from "./stub_slider";
+
+import Auth from "../../apis/UserPool";
 
 // API Imports
 import {
@@ -26,11 +29,21 @@ const Profile = (props) => {
   const [memories, setMemories] = useState([]);
   const [stubs, setStubs] = useState([]);
   const [is_loaded, setIsLoaded] = useState(false);
+  const [auth, setAuth] = useState(false);
+  const history = useHistory();
+
+  Auth.currentAuthenticatedUser({})
+    .then((user) => {
+      setAuth(true);
+    })
+    .catch((err) => {
+      setAuth(false);
+      history.push("/");
+    });
 
   const getStubs = (concerts) => {
     var stub_urls = [];
     concerts.forEach((concert) => {
-      //console.log(concert.props.stub_url);
       stub_urls.push(
         <ProfileStub
           img={concert.props.stub_url}
@@ -42,6 +55,7 @@ const Profile = (props) => {
   };
 
   useEffect(() => {
+    console.log(variables);
     const fetchData = async () => {
       // RSVP'd Upcoming shows
       const upcoming_result = await getUpcomingPurchasedShows(
@@ -51,42 +65,42 @@ const Profile = (props) => {
       console.log(upcoming_result);
       setUpcomingConcerts(upcoming_result.slice(0, 5));
       // setStubs(getStubs);
-      setStubs(getStubs(upcoming_result));
+      //setStubs(getStubs(upcoming_result));
 
       // Archive videos (sorting from most recent -> oldest)
-      const memories_result = await getMemories(variables.username);
-      await setMemories(
-        memories_result
-          .sort(
-            (a, b) =>
-              new Date(b.props.concert_date) - new Date(a.props.concert_date)
-          )
-          .slice(0, 4)
-      );
-      await setIsLoaded(true);
+      // const memories_result = await getMemories(variables.username);
+      // await setMemories(
+      //   memories_result
+      //     .sort(
+      //       (a, b) =>
+      //         new Date(b.props.concert_date) - new Date(a.props.concert_date)
+      //     )
+      //     .slice(0, 4)
+      // );
+      setIsLoaded(true);
     };
     fetchData();
   }, []);
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 600 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 600, min: 0 },
-      items: 1,
-    },
-  };
+  // const responsive = {
+  //   superLargeDesktop: {
+  //     // the naming can be any, depends on you.
+  //     breakpoint: { max: 4000, min: 3000 },
+  //     items: 5,
+  //   },
+  //   desktop: {
+  //     breakpoint: { max: 3000, min: 1024 },
+  //     items: 3,
+  //   },
+  //   tablet: {
+  //     breakpoint: { max: 1024, min: 600 },
+  //     items: 2,
+  //   },
+  //   mobile: {
+  //     breakpoint: { max: 600, min: 0 },
+  //     items: 1,
+  //   },
+  // };
 
   return (
     <div className="profile-page">
@@ -125,7 +139,7 @@ const Profile = (props) => {
               </Row>
             </Col>
           </Row>
-          <Row className="profile-section">
+          {/* <Row className="profile-section">
             <Col className="profile-column" size={1}>
               <Row>
                 <Col size={1}>
@@ -136,7 +150,6 @@ const Profile = (props) => {
               </Row>
               <Row>
                 <Col size={1} className="stubs-column">
-                  {/* <FlexibleGrid content_list={stubs} num_cols={4} /> */}
                   <StubSlider stubs={stubs} />
                 </Col>
               </Row>
@@ -146,7 +159,7 @@ const Profile = (props) => {
             <Col className="profile-column" size={1}>
               <h4 className="profile-preview-content-header">MY CREWS</h4>
             </Col>
-          </Row>
+          </Row> */}
         </Grid>
       ) : (
         <div className="overlay-box">
