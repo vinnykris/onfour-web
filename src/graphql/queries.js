@@ -151,6 +151,7 @@ getConcert(id: $id) {
   date
   time
   is_live
+  is_future
   artist_id
   concert_name
   general_price

@@ -210,6 +210,10 @@ export const getUpcomingPurchasedShows = async (width, username) => {
     )
   );
   var upcoming_concerts = [];
+  // The past_concerts is not returned for this function 
+  // but later, both upcoming_concerts and past_concerts 
+  // can be returned by this one function
+  var past_concerts = []; 
 
   const getUpcomingFull = async (data) => {
     const artist_id = data.artist_id;
@@ -220,9 +224,15 @@ export const getUpcomingPurchasedShows = async (width, username) => {
 
   if (user_concerts !== []) {
     for await (const data of user_concerts) {
-      upcoming_concerts.push(
+      if (data.data.getConcert.is_future) {
+        upcoming_concerts.push(
         formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
-      );
+        );
+      } else {
+        past_concerts.push(
+          formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
+        );
+      }
     }
   }
   return upcoming_concerts;
