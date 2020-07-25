@@ -56,20 +56,19 @@
 
 .buy-ticket-button-disabled {
   font-weight: bold;
-  font-size: 17px;
-  line-height: 20px;
-  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.045em;
   color: rgb(133, 133, 133);
-  width: 100%;
   background-color: #b4b3b3;
   cursor: default;
+  padding-left: 30px;
+  padding-right: 30px;
+  @include respond-to("small") {
+    margin: 8% 0%;
+    width: 100%;
+  }
 }
-
-// .buy-ticket-button:disabled {
-//   background-color: rgba($color: #a1a1a1, $alpha: 1);
-//   color: white;
-//   cursor: default;
-// }
 
 .calendar-button {
   margin: 2%;

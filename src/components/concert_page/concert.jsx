@@ -1,6 +1,7 @@
 // React Imports
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 // Function import
 import { createUpcomingObject } from "../util";
@@ -80,6 +81,9 @@ const Concert = (props) => {
   const [loading, setLoading] = useState(true);
   const [enter_venue_status, setEnterVenueStatus] = useState(false);
 
+  var concert_date = null;
+  var concert_time = null;
+
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   var price_map = {
@@ -109,16 +113,13 @@ const Concert = (props) => {
     setScroll(false);
   }
 
-  const showTicketStub = () => {
-    setShowStub(true);
-  };
-
   const fetchUserData = async (name) => {
-    console.log("fetching user data");
+    console.log(name);
     const user_concerts = await fetchUserConcertIDs(name);
+    console.log("fetching user data");
+    console.log(user_concerts);
     if (user_concerts && user_concerts.includes(concert_id)) {
       setHasTicket(true);
-      console.log("already rsvpd");
     }
   };
 
@@ -126,29 +127,32 @@ const Concert = (props) => {
   useEffect(() => {
     // Check is user is logged in
     // (async () => {
+    console.log("mounting");
     Auth.currentAuthenticatedUser({})
       .then(async (user) => {
         setAuth(true);
         setUsername(user.username);
+        console.log(user.username);
         await fetchData(user.username);
         setLoading(false);
         console.log(concert_info);
         console.log(has_ticket);
       })
-      .catch((err) => setAuth(false));
+      .catch(async (err) => {
+        setAuth(false);
+        await fetchData(null);
+        setLoading(false);
+      });
     // })();
 
     const fetchData = async (name) => {
       await fetchUserData(name);
-      console.log(name);
       if (state) {
-        console.log("here 1");
         // If data is coming from upcoming show page
         setConcertInfo(state.info);
       } else {
         // If data needs to be loaded from ID in URL
         // Only reached if user does not come from upcoming page
-        console.log("here 1");
         const fetchConcert = async (id) => {
           const data = await getOneConcert(id);
           const artist_data = await getArtistInfo(data.artist_id);
@@ -156,6 +160,7 @@ const Concert = (props) => {
         };
         fetchConcert(concert_id);
       }
+      console.log("fetch data is done");
     };
 
     // fetchData();
@@ -175,6 +180,8 @@ const Concert = (props) => {
     if (concert_info) {
       price_map.general = concert_info.price;
       setGeneralPrice(concert_info.price);
+      concert_date = concert_info.date;
+      concert_time = concert_info.time;
     }
   }, [concert_info]);
 
@@ -189,6 +196,22 @@ const Concert = (props) => {
       setBackstagePass(false);
     }
   }, [general_price, backstage_price, backstage_checked]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (concert_info) {
+        const difference =
+          new Date(concert_info.date + "T" + concert_info.time + ".000-04:00") -
+          +new Date();
+        // If less than 30 minutes, user can enter venue!
+        if (difference < 1800000) {
+          setEnterVenueStatus(true);
+          clearInterval(interval);
+        }
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [concert_info]);
 
   // If copy to clipboard button is clicked, change tooltip text and copy stream page link
   // Record analytics for click as well
@@ -273,6 +296,7 @@ const Concert = (props) => {
     );
     hideModal();
     setShowStub(true);
+    setHasTicket(true);
     sendEmailInvites(user_name);
   };
 
@@ -280,6 +304,7 @@ const Concert = (props) => {
   // Called after the animation is done
   const showCalendarButton = () => {
     document.getElementById("add-to-calendar").style.visibility = "visible";
+
     // After 8 seconds, end the stub animation and go back to the concert page
     setTimeout(() => {
       if (!stub_animation_done) animationEnd();
@@ -288,7 +313,6 @@ const Concert = (props) => {
 
   // Animated the ticket stub leaving the screen and hides the calendar button
   const animationEnd = () => {
-    console.log("animation ended.");
     if (!stub_animation_done) {
       if (document.getElementById("add-to-calendar")) {
         document.getElementById("add-to-calendar").style.visibility = "hidden";
@@ -307,7 +331,6 @@ const Concert = (props) => {
     if (!ApiCalendar.sign) {
       await ApiCalendar.handleAuthClick();
     }
-    console.log("about to add event");
     await addEvent();
     await animationEnd();
   };
@@ -755,15 +778,25 @@ const Concert = (props) => {
               <Row>
                 <Col size={1}>
                   {has_ticket ? (
-                    <Tooltip title="Please try again 15 minutes before the show!">
-                      <button
-                        className="buy-ticket-button"
-                        onClick={goToVenue}
-                        disabled={!enter_venue_status}
-                      >
-                        Enter Venue
-                      </button>
-                    </Tooltip>
+                    <div>
+                      {enter_venue_status ? (
+                        <NavLink to="/stream">
+                          {" "}
+                          <button
+                            className="buy-ticket-button"
+                            // onClick={goToVenue}
+                          >
+                            Enter Venue
+                          </button>
+                        </NavLink>
+                      ) : (
+                        <Tooltip title="Please try again 30 minutes before the show!">
+                          <button className="buy-ticket-button-disabled">
+                            Enter Venue
+                          </button>
+                        </Tooltip>
+                      )}
+                    </div>
                   ) : (
                     <button className="buy-ticket-button" onClick={getTicket}>
                       RSVP
@@ -1131,22 +1164,18 @@ const Concert = (props) => {
                         {has_ticket ? (
                           <div>
                             {enter_venue_status ? (
-                              <button
-                                className="buy-ticket-button"
-                                onClick={goToVenue}
-                              >
-                                Enter Venue
-                              </button>
-                            ) : (
-                              <Tooltip
-                                title="Please try again 15 minutes before the show!"
-                                // placement="bottom"
-                              >
+                              <NavLink to="/stream">
+                                {" "}
                                 <button
-                                  className="buy-ticket-button-disabled"
+                                  className="buy-ticket-button"
                                   // onClick={goToVenue}
-                                  // disabled
                                 >
+                                  Enter Venue
+                                </button>
+                              </NavLink>
+                            ) : (
+                              <Tooltip title="Please try again 30 minutes before the show!">
+                                <button className="buy-ticket-button-disabled">
                                   Enter Venue
                                 </button>
                               </Tooltip>

@@ -151,7 +151,6 @@ export const getMostRecentUpcomingInfo = async () => {
 // of that data
 export const fetchUserConcertIDs = async (username) => {
   // const authenticated_user = await Auth.currentAuthenticatedUser();
-  console.log(username);
   if (username) {
     console.log(username);
     const user_data = await API.graphql(
@@ -159,6 +158,7 @@ export const fetchUserConcertIDs = async (username) => {
         input: username,
       })
     );
+    console.log(user_data);
     const concert_data = user_data.data.getCreateOnfourRegistration.concert;
     if (concert_data && isNaN(parseInt(concert_data))) {
       const parsed_concerts = JSON.parse(concert_data);

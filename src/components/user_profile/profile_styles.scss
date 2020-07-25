@@ -15,7 +15,7 @@
   height: 10vh;
   padding-bottom: 5%;
   background-color: black;
-  box-shadow: 0px 4px 4px #1D1D1D;
+  box-shadow: 0px 4px 4px #1d1d1d;
 }
 
 .header-grid {
@@ -63,13 +63,51 @@
   color: white;
   width: 11vw;
   height: 8vh;
-  border-bottom: 1px solid #C4C4C4;
+  border-bottom: 1px solid #c4c4c4;
 }
 
 .perform-header {
   font-size: 1rem;
-  color: #C4C4C4;
+  color: #c4c4c4;
   font-weight: normal;
   width: 11vw;
   height: 8vh;
+}
+
+.profile-stub-component {
+  transform: rotate(90deg);
+}
+
+.profile-stub-container {
+  width: 25%;
+  position: relative;
+}
+
+.profile-stub {
+  width: 100%;
+}
+
+.carousel-container {
+  max-width: 100%;
+  position: absolute;
+  overflow: hidden;
+}
+
+.profile-column {
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.stubs-column {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.slick-track {
+  width: 100% !important;
+}
+
+.slick-slide {
+  width: 100% !important;
 }
