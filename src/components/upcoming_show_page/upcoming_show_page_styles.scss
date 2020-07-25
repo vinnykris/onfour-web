@@ -158,6 +158,9 @@
     margin-left: 5px;
     margin-bottom: 30px;
   }
+  @include respond-to("large") {
+    margin-bottom: 50px;
+  }
 }
 
 // .date {
