@@ -331,6 +331,7 @@ const Concert = (props) => {
     if (!ApiCalendar.sign) {
       await ApiCalendar.handleAuthClick();
     }
+    // await ApiCalendar.handleSignoutClick();
     await addEvent();
     await animationEnd();
   };

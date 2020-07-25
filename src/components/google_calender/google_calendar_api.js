@@ -66,15 +66,16 @@ class ApiCalendar {
      */
     async handleAuthClick() {
         if (this.gapi) {
-            await this.gapi.auth2.getAuthInstance().signIn()
-                .then(() => {
-                    console.log("Log in success!");
-                    return true
-                })
-                .catch(() => {
-                    console.log("Log in failed!")
-                    return false
-                });
+            await this.gapi.auth2.getAuthInstance().signIn();
+            return true
+                // .then(() => {
+                //     console.log("Log in success!");
+                //     return true
+                // })
+                // .catch(() => {
+                //     console.log("Log in failed!")
+                //     return false
+                // });
         } else {
             console.log("Error: this.gapi not loaded");
             return false
