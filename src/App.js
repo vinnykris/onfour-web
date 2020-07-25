@@ -43,9 +43,11 @@ function App() {
     <div className="App custom-app">
       <Router history={history}>
       
-        <NavBar />
+        
 
         <Switch>
+          
+
           <Route exact path="/" component={About} />
 
           <Route path="/archive" component={ArchivePage} />
@@ -61,10 +63,11 @@ function App() {
           <Route path="/privacy-policy" component={PrivacyPage} />
           <Route path="/terms-of-service" component={TermsOfService} />
           <Route path="*" component={NotFoundPage}/>
+          <Footer />
         </Switch>
 
       
-        <Footer />
+        
         
       </Router>
     </div>
