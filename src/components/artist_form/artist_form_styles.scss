@@ -50,6 +50,9 @@
     border: 1px solid #b7b7b7;
     color: white;
     font-size: 0.9rem;
+    &:focus {
+        border: 2px solid #794D94;
+    }   
 }
 
 .artist-form-input::placeholder {
@@ -58,6 +61,8 @@
     top: 0px;
 }
 
+
+
 .artist-bio {
     height: 30vh;
     width: 100%;
@@ -65,7 +70,7 @@
     outline: none;
     transition: 0.3s;
   &:focus {
-        border: 2px solid #303096;
+        border: 2px solid #794D94;
     }
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* IE 10+ */
@@ -87,10 +92,11 @@
 
 
 .artist-form-submit-button {
-    background-color: #322fdd;
+    background-color: #794D94;
     color: white;
     width: 100%;
     margin: 50px 0px;
+    border-radius: 3px;
 }
 
 .error-message {
