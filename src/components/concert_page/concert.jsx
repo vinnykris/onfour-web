@@ -478,6 +478,7 @@ const Concert = (props) => {
                                   name="backstage-checked"
                                   checked={backstage_checked}
                                   onChange={handleBackstageClicked}
+                                  disabled
                                 />
                               }
                               label="Backstage Pass"
@@ -903,6 +904,7 @@ const Concert = (props) => {
                                     name="backstage-checked"
                                     checked={backstage_checked}
                                     onChange={handleBackstageClicked}
+                                    disabled
                                   />
                                 }
                                 label="Backstage Pass"
