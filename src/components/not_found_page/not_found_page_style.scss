@@ -1,0 +1,71 @@
+// Not Found Page STYLING
+
+
+.below-head{
+    height: 100%;
+    width: 100%;
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
+.head{
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+        }
+.text{
+    margin:0;
+
+    padding-top: 80px;
+    padding-left: 600px;
+}
+.img404{
+    margin:0;
+
+    float: left;
+    padding: 0 20px 20px 0;
+    
+}
+.error-text{
+    margin:0;
+
+    background-color: black;
+    font-family:'Roboto',sans-serif;
+    text-align: left;
+    color: white;
+
+}
+.oops-heading{
+    margin:0;
+
+    text-align: left;
+    color: white;
+}
+.go-back-button{
+    display:inline-block;
+    align-self: start;
+    padding: 0.3em 1.2em;
+    margin:2em 0.3em 0.3em ;
+    width: 440px;
+    height: 55px;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color:rgba(142, 68, 173, 1);
+    text-align:center;
+    font-size:x-large;
+    transition: all 0.2s;
+    float: left;
+    }
+    .go-back-button:hover{
+    background-color: rgba(190, 144, 212,1);
+    text-decoration: none;
+    }
+    @media all and (max-width:30em){
+     .go-back-button{
+        display: block;
+        margin: 0.2em auto;
+    }
+}
