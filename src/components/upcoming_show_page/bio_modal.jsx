@@ -7,12 +7,41 @@ import { Grid, Row, Col } from "../grid";
 
 // Component Imports 
 import FestivalBio from "./festival_bio";
+import ApiCalendar from '../google_calender/google_calendar_api';
 
 
-const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, date, time, description, width }) => {
-    const toBeImplemented = () => {
-        console.log("clicked");
+const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, date, time, description, width, formated_date }) => {
+
+    const toBeImplemented = async() => {
+        // ApiCalendar.handleSignoutClick();
+        if (ApiCalendar.sign) {
+            await addEvent()
+        } else {
+            await ApiCalendar.handleAuthClick()
+        }
     };
+
+    const addEvent = () => {
+
+        const eventLoad = {
+            summary: artist_name + " - " + concert_name,
+            description: "onfour concert!",
+            start: {
+                dateTime: new Date(formated_date).toISOString()
+            },
+            end: {
+                dateTime: new Date(new Date(formated_date).getTime() + 90 * 60000).toISOString()
+            }
+        };
+
+        ApiCalendar.createEvent(eventLoad)
+            .then((result) => {
+                console.log(result);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
     return (
         <div className="modal-container">
@@ -56,7 +85,7 @@ const bioModal = ({ days_left, artist_name, concert_name, img, price, weekday, d
                                         <button className="modal-ticket-button" id="buy_ticket">BUY TICKET</button>
                                     ) : (
                                         // <button className="modal-free-button" id="free" onClick={toBeImplemented}>FREE</button>
-                                        <div className="modal-free-button">FREE</div>
+                                        <div className="modal-free-button" onClick={toBeImplemented}>RSVP</div>
                                         )}
                                 </Row>
                             </Col>
