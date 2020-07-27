@@ -1,9 +1,80 @@
-// React imports
+
+// // Main App component
+// // function App() {
+// //   return (
+// //     <div className="App custom-app">
+// //       <Router history={history}>
+        
+// //         <NavBar />
+
+// //         <Switch>
+// //           <Route exact path="/" component={About} />
+// //           <Route path="/archive" component={ArchivePage} />
+// //           <Route path="/stream" component={StreamPage} />
+// //           <Route path="/upcoming" component={UpcomingShowPage} />
+// //           <Route path="/ticket" component={Ticket} />
+// //           <Route path="/artists" component={ArtistsPage} />
+// //           <Route path="/forgot" component={Forgot} />
+// //           <Route path="/soundcheck" component={SoundCheck} />
+// //           <Route path="/privacy-policy" component={PrivacyPage} />
+// //           <Route path="/terms-of-service" component={TermsOfService} />
+// //           <Route path="*" component={NotFoundPage}/>
+// //         </Switch>
+// //         <Modal></Modal>
+// //         <Footer />
+// //       </Router>
+// //     </div>
+// //   );
+// // }
+// class App extends React.Component {
+//   render() {
+//     const DefaultRoutes = () => {
+//       return (
+//         <div className="App custom-app">
+//           <Router history={history}>
+//           <NavBar />
+//           <Switch>
+//           <Route exact path="/" component={About} />
+//            <Route path="/archive" component={ArchivePage} />
+//            <Route path="/stream" component={StreamPage} />
+//            <Route path="/upcoming" component={UpcomingShowPage} />
+//            <Route path="/ticket" component={Ticket} />
+//            <Route path="/artists" component={ArtistsPage} />
+//            <Route path="/forgot" component={Forgot} />
+//            <Route path="/soundcheck" component={SoundCheck} />
+//            <Route path="/privacy-policy" component={PrivacyPage} />
+//            <Route path="/terms-of-service" component={TermsOfService} />
+//            <Route path="*" component={NotFound404}/>
+//           </Switch>
+//           <Footer />
+//           </Router>
+//         </div>
+//       );
+//     };
+
+//     return (
+//       <BrowserRouter>
+//         <Switch>
+//           <Route component={NotFoundPage} path="/notfound" />
+//           <Route component={DefaultRoutes} />
+//         </Switch>
+//       </BrowserRouter>
+//     );
+//   }
+// }
+
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);
+// export default App;
+
+
+
 import React from "react";
-import { Router, Switch, Route,BrowserRouter  } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import history from "./history";
-import ReactDOM from "react-dom";
+
 // Component imports
+import NotFound404 from "./components/not_found_page/not_found404";
 import NotFoundPage from "./components/not_found_page/not_found_page"
 import NavBar from "./components/navbar/navbar";
 import About from "./components/about_page/about_page";
@@ -13,12 +84,13 @@ import Ticket from "./components/payment/payment_box";
 import ArchivePage from "./components/archive_page/archive_page";
 import ArtistsPage from "./components/artist_page/artist_page";
 import Footer from "./components/footer/footer";
-import Modal from "./components/sign_in_modal/sign_in_modal";
 import Forgot from "./components/forgot_page/forgot_page";
 import SoundCheck from "./components/soundcheck_page/soundcheck_page";
+import Register from "./components/register_page/register_page";
+import Login from "./components/login_page/login_page";
+import ArtistForm from "./components/artist_form/artist_form";
 import PrivacyPage from "./components/policies/privacy_page";
 import TermsOfService from "./components/policies/terms_of_service";
-import NotFound404 from "./components/not_found_page/not_found404";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -36,69 +108,32 @@ require("dotenv").config();
 Amplify.configure(awsconfig);
 
 // Main App component
-// function App() {
-//   return (
-//     <div className="App custom-app">
-//       <Router history={history}>
-        
-//         <NavBar />
+function App() {
+  return (
+    <div className="App custom-app">
+      <Router history={history}>
+        <NavBar />
 
-//         <Switch>
-//           <Route exact path="/" component={About} />
-//           <Route path="/archive" component={ArchivePage} />
-//           <Route path="/stream" component={StreamPage} />
-//           <Route path="/upcoming" component={UpcomingShowPage} />
-//           <Route path="/ticket" component={Ticket} />
-//           <Route path="/artists" component={ArtistsPage} />
-//           <Route path="/forgot" component={Forgot} />
-//           <Route path="/soundcheck" component={SoundCheck} />
-//           <Route path="/privacy-policy" component={PrivacyPage} />
-//           <Route path="/terms-of-service" component={TermsOfService} />
-//           <Route path="*" component={NotFoundPage}/>
-//         </Switch>
-//         <Modal></Modal>
-//         <Footer />
-//       </Router>
-//     </div>
-//   );
-// }
-class App extends React.Component {
-  render() {
-    const DefaultRoutes = () => {
-      return (
-        <div className="App custom-app">
-          <Router history={history}>
-          <NavBar />
-          <Switch>
-          <Route exact path="/" component={About} />
-           <Route path="/archive" component={ArchivePage} />
-           <Route path="/stream" component={StreamPage} />
-           <Route path="/upcoming" component={UpcomingShowPage} />
-           <Route path="/ticket" component={Ticket} />
-           <Route path="/artists" component={ArtistsPage} />
-           <Route path="/forgot" component={Forgot} />
-           <Route path="/soundcheck" component={SoundCheck} />
-           <Route path="/privacy-policy" component={PrivacyPage} />
-           <Route path="/terms-of-service" component={TermsOfService} />
-           <Route path="*" component={NotFound404}/>
-          </Switch>
-          <Footer />
-          </Router>
-        </div>
-      );
-    };
-
-    return (
-      <BrowserRouter>
         <Switch>
-          <Route component={NotFoundPage} path="/notfound" />
-          <Route component={DefaultRoutes} />
+          <Route exact path="/" component={About} />
+          <Route path="/archive" component={ArchivePage} />
+          <Route path="/stream" component={StreamPage} />
+          <Route path="/upcoming" component={UpcomingShowPage} />
+          <Route path="/ticket" component={Ticket} />
+          <Route path="/artists" component={ArtistsPage} />
+          <Route path="/forgot" component={Forgot} />
+          <Route path="/soundcheck" component={SoundCheck} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route path="/form" component={ArtistForm} />
+          <Route path="/privacy-policy" component={PrivacyPage} />
+          <Route path="/terms-of-service" component={TermsOfService} />
+          <Route path="*" component={NotFoundPage}/>
         </Switch>
-      </BrowserRouter>
-    );
-  }
+        <Footer />
+      </Router>
+    </div>
+  );
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
 export default App;

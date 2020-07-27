@@ -7,6 +7,7 @@ var React = require('react');
 
 const NotFoundPage=({location})=>(
     <div className="head"  >
+        <div className="below-head">
         <img src={image404} className='img404' />
         <div className='text'>
         <h1 className='oops-heading'>
@@ -18,12 +19,9 @@ const NotFoundPage=({location})=>(
             <br/>that the URL you entered is correct
         </h3>
         <a href="/" className="go-back-button">Go Back</a>
-
         </div>
         
-        
-        
-
+        </div>
     </div>
 )
 export default NotFoundPage;
