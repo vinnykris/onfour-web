@@ -392,13 +392,14 @@ const NavBar = () => {
                             onClick={openProfile}
                           >
                             <NavLink
-                              to={{
-                                pathname: "/profile",
-                                search: `?name=${username}`,
-                                state: {
-                                  name: username,
-                                },
-                              }}
+                              // to={{
+                              //   pathname: "/profile",
+                              //   search: `?name=${username}`,
+                              //   state: {
+                              //     name: username,
+                              //   },
+                              // }}
+                              to="/profile"
                             >
                               MY PROFILE
                             </NavLink>

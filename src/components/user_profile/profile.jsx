@@ -30,11 +30,13 @@ const Profile = (props) => {
   const [stubs, setStubs] = useState([]);
   const [is_loaded, setIsLoaded] = useState(false);
   const [auth, setAuth] = useState(false);
+  const [username, setUsername] = useState("");
   const history = useHistory();
 
   Auth.currentAuthenticatedUser({})
     .then((user) => {
       setAuth(true);
+      setUsername(user.username);
     })
     .catch((err) => {
       setAuth(false);
@@ -58,10 +60,7 @@ const Profile = (props) => {
     console.log(variables);
     const fetchData = async () => {
       // RSVP'd Upcoming shows
-      const upcoming_result = await getUpcomingPurchasedShows(
-        width,
-        variables.username
-      );
+      const upcoming_result = await getUpcomingPurchasedShows(width, username);
       console.log(upcoming_result);
       setUpcomingConcerts(upcoming_result.slice(0, 5));
       // setStubs(getStubs);
@@ -114,7 +113,7 @@ const Profile = (props) => {
                   src="https://onfour-media.s3.amazonaws.com/website+component/account_circle_24pxicon.png"
                 ></img>
                 <h4 className="profile-preview-content-header username-header">
-                  Hello, {variables.name}!
+                  Hello, {username}!
                 </h4>
               </div>
               <h4 className="profile-preview-content-header dashboard-header">
