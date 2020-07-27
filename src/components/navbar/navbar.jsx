@@ -364,7 +364,13 @@ const NavBar = () => {
                 {(() => {
                   if (!auth) {
                     return (
-                      <NavLink to="/login" className={style}>
+                      <NavLink
+                        to={{
+                          pathname: "/login",
+                          state: { current: location },
+                        }}
+                        className={style}
+                      >
                         LOGIN
                       </NavLink>
                     );
