@@ -1,9 +1,5 @@
 @import "../../styles.scss";
 
-// * {
-//   box-sizing: border-box;
-// }
-
 // JOIN
 .join-outer-container {
   display: flex;
@@ -266,7 +262,7 @@ button:focus {
   //   background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
   // }
   // &::-webkit-scrollbar-thumb {
-  //   background: rgba(209, 209, 209, 0.596); 
+  //   background: rgba(209, 209, 209, 0.596);
   //   border-radius: 20px;
   // }
 }
@@ -281,7 +277,7 @@ button:focus {
     background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(141, 141, 141, 0.596); 
+    background: rgba(141, 141, 141, 0.596);
     border-radius: 20px;
   }
 }
@@ -438,6 +434,36 @@ button:focus {
 
 .text-container h1 {
   margin-bottom: 0px;
+}
+
+.emoji-button{
+  color: #fff !important;
+  text-transform: none;
+  text-decoration: none;
+  background: #3a3a3d;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 1px;
+  width: 18%;
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+.fa-smile-o {
+  color: #f1f1f3;
+
+}
+
+//emoji-mart custom styles (overridden from emoji-mart stylesheet)
+@import "../../../node_modules/emoji-mart/css/emoji-mart.css";
+.emoji-mart-preview{
+  display:none;
+}
+.emoji-mart {
+  position:absolute;
+  right:20px;
+  bottom:80px;
 }
 
 @media (min-width: 320px) and (max-width: 1200px) {
