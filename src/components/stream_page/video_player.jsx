@@ -124,29 +124,31 @@ function VideoPlayer({
     }
   });
 
-  const [registered_concert, setRegisteredConcert] = useState(false);
-  const registerConcert = async (concert_reg_load) => {
-    console.log(concert_reg_load.concert);
-    // Calling the API, using async and await is necessary
-    await API.graphql(
-      graphqlOperation(mutations.update_registration_concert, {
-        input: concert_reg_load,
-      })
-    );
-  };
+  // THIS SHOULD ALSO ADD THE CONCERT TO THE USER IN THE DATABASE
 
-  if (!timer_placeholder.length) {
-    if (auth && !registered_concert) {
-      if (concert_id) {
-        const concert_reg_load = {
-          username: username,
-          concert: concert_id,
-        };
-        registerConcert(concert_reg_load);
-        setRegisteredConcert(true);
-      }
-    }
-  }
+  // const [registered_concert, setRegisteredConcert] = useState(false);
+  // const registerConcert = async (concert_reg_load) => {
+  //   console.log(concert_reg_load.concert);
+  //   // Calling the API, using async and await is necessary
+  //   await API.graphql(
+  //     graphqlOperation(mutations.update_registration_concert, {
+  //       input: concert_reg_load,
+  //     })
+  //   );
+  // };
+
+  // if (!timer_placeholder.length) {
+  //   if (auth && !registered_concert) {
+  //     if (concert_id) {
+  //       const concert_reg_load = {
+  //         username: username,
+  //         concert: concert_id,
+  //       };
+  //       registerConcert(concert_reg_load);
+  //       setRegisteredConcert(true);
+  //     }
+  //   }
+  // }
 
   // this function asks Amplify analytics to record the streamVisit event
   const recordEvent = () => {
