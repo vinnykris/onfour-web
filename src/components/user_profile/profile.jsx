@@ -135,10 +135,17 @@ const Profile = (props) => {
                   </Row>
                   <Row>
                     <Col size={1}>
-                      <FlexibleGrid
-                        content_list={upcoming_concerts}
-                        num_cols={5}
-                      />
+                      {width <= 600 ? (
+                        <FlexibleGrid
+                          content_list={upcoming_concerts}
+                          num_cols={1}
+                        />
+                      ) : (
+                        <FlexibleGrid
+                          content_list={upcoming_concerts}
+                          num_cols={4}
+                        />
+                      )}
                     </Col>
                   </Row>
                 </div>
