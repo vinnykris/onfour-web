@@ -3,76 +3,95 @@
 @import "../../styles";
 
 .not-found-page {
-    background-color: black;
-    width: 100%;
-    height: 100vh;
+  background-color: black;
+  width: 100%;
+  min-height: 64vh;
+  margin-top: -1px;
+  position: relative;
 }
 
 .not-found-page-container {
-    height: 50vh;
-    width: 60%;
-    margin: 10vh auto;
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    @include respond-to("small") {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-    }
+  position: relative;
+  // height: 50vh;
+  width: 60%;
+  margin: 10vh auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr;
+  @include respond-to("medium") {
+    grid-template-columns: 1fr;
+    // grid-template-rows: 1fr 0.5fr;
+  }
 }
 
-.not-found-page-img404{
-    height: 250px;
-    @include respond-to("small") {
-        width: 100%;
-        height: auto;
-        padding-bottom: 50px;
-    }
+.not-found-page-img404 {
+  height: 250px;
+  @include respond-to("medium") {
+    width: 100%;
+    height: auto;
+    padding-bottom: 50px;
+  }
 }
 
 .not-found-page-text {
-    margin-left:2vw;
-    height: 250px;
-    width: 25vw;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    @include respond-to("small") {
-        width: 100%;
-        height: auto;
-    }
+  position: relative;
+  margin-left: 2vw;
+  height: 250px;
+  width: 25vw;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  @include respond-to("medium") {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: column;
+  }
 }
 
-.not-found-page-oops-heading{
-    font-size: 2rem;
-    text-align: left;
-    color: white;
+.not-found-page-oops-heading {
+  font-size: 2rem;
+  text-align: left;
+  color: white;
+  letter-spacing: 0.045em;
 }
 
-.not-found-page-oops-error-text{
-    font-family:'Roboto',sans-serif;
-    text-align: justify;
-    color: white;
-    font-size: 0.95rem;
+.not-found-page-oops-error-text {
+  font-family: "Roboto", sans-serif;
+  text-align: justify;
+  color: white;
+  font-size: 1rem;
+  letter-spacing: 0.045em;
 }
 
 .not-found-page-button-wrapper {
-    width: 100%;
-    height: 100%;
-    position: relative;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .not-found-page-go-back-button {
-    height: 50px;
-    width: 80%;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    color:#FFFFFF;
-    background-color:#794D94;
-    border-radius: 3px;
-    transition: all 0.2s;
-    &:hover{
-        background-color: rgba(190, 144, 212,1);
-    }
+  height: 50px;
+  width: 80%;
+  position: relative;
+  bottom: 0px;
+  left: 0px;
+  color: #ffffff;
+  background-color: #794d94;
+  border-radius: 3px;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.045em;
+  float: left;
+  margin-top: 6%;
+  &:hover {
+    background-color: rgba(190, 144, 212, 1);
+  }
+  @include respond-to("medium") {
+    float: none;
+    width: 100%;
+  }
 }
 
 // .go-back-button{
