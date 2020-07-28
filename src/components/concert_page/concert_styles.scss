@@ -105,7 +105,7 @@
   text-align: justify;
   color: white;
   white-space: pre-line;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .main-info-col {
@@ -148,10 +148,10 @@ hr.solid {
 
 .concert-date-info {
   @include respond-to("xx-large") {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
   @include respond-to("x-large") {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -354,7 +354,7 @@ hr.break-modal {
 }
 
 .MuiTypography-body1 {
-  font-size: 0.8rem !important;
+  font-size: 1rem !important;
 }
 
 .pretty {
@@ -412,7 +412,7 @@ hr.break-modal {
   margin: auto;
   margin-left: 10px;
   line-height: 17px;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .add-user-icon {
@@ -445,12 +445,12 @@ hr.break-modal {
 
 .item-name {
   float: left;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .item-price {
   float: right;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .checkout-button {
@@ -484,12 +484,14 @@ hr.break-modal {
 }
 
 .fa-stack-1x {
-  font-size: 0.8rem !important;
+  font-size: 1rem !important;
 }
 
 .react-multi-email {
-  font-size: 0.7rem !important;
+  font-size: 0.8rem !important;
   line-height: 1rem !important;
+  max-height: 5rem;
+  overflow: auto;
 }
 
 .react-multi-email > input {

@@ -30,11 +30,13 @@ const Profile = (props) => {
   const [stubs, setStubs] = useState([]);
   const [is_loaded, setIsLoaded] = useState(false);
   const [auth, setAuth] = useState(false);
+  const [username, setUsername] = useState("");
   const history = useHistory();
 
   Auth.currentAuthenticatedUser({})
     .then((user) => {
       setAuth(true);
+      setUsername(user.username);
     })
     .catch((err) => {
       setAuth(false);
@@ -58,10 +60,7 @@ const Profile = (props) => {
     console.log(variables);
     const fetchData = async () => {
       // RSVP'd Upcoming shows
-      const upcoming_result = await getUpcomingPurchasedShows(
-        width,
-        variables.username
-      );
+      const upcoming_result = await getUpcomingPurchasedShows(width, username);
       console.log(upcoming_result);
       setUpcomingConcerts(upcoming_result.slice(0, 5));
       // setStubs(getStubs);
@@ -113,30 +112,53 @@ const Profile = (props) => {
                   className="profile-user-icon"
                   src="https://onfour-media.s3.amazonaws.com/website+component/account_circle_24pxicon.png"
                 ></img>
-                <h4 className="profile-preview-content-header username-header">
-                  Hello, {variables.name}!
-                </h4>
               </div>
-              <h4 className="profile-preview-content-header dashboard-header">
-                Dashboard
+              <h4 className="profile-preview-content-header username-header">
+                Hello, {username}!
               </h4>
+              {/* <h4 className="profile-preview-content-header dashboard-header">
+                Dashboard
+              </h4> */}
               {/* <h4 className="profile-preview-content-header perform-header">I want to perform</h4> */}
             </div>
           </Row>
           <Row className="profile-section">
             <Col className="profile-column" size={1}>
-              <Row>
-                <Col size={1}>
-                  <h4 className="profile-preview-content-header">
-                    UPCOMING SHOWS
+              {upcoming_concerts.length > 0 ? (
+                <div>
+                  <Row>
+                    <Col size={1}>
+                      <h4 className="profile-preview-content-header">
+                        UPCOMING SHOWS
+                      </h4>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col size={1}>
+                      <FlexibleGrid
+                        content_list={upcoming_concerts}
+                        num_cols={5}
+                      />
+                    </Col>
+                  </Row>
+                </div>
+              ) : (
+                <div className="profile-empty-state">
+                  <h4 className="empty-state-message">
+                    Oops... it looks like you aren't going to any upcoming
+                    shows.
                   </h4>
-                </Col>
-              </Row>
-              <Row>
-                <Col size={1}>
-                  <FlexibleGrid content_list={upcoming_concerts} num_cols={5} />
-                </Col>
-              </Row>
+                  <h5 className="empty-state-message">
+                    Get your next ticket to a show below!
+                  </h5>
+                  <button
+                    className="upcoming-prompt-button"
+                    onClick={() => history.push("/upcoming")}
+                  >
+                    View Upcoming Shows
+                  </button>
+                </div>
+              )}
             </Col>
           </Row>
           {/* <Row className="profile-section">
