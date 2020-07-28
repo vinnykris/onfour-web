@@ -18,6 +18,9 @@ const FeaturedContent = (props) => {
           },
         }}
       >
+        <Row className="more-info">
+          <p className="more-info-text">MORE INFO</p>
+        </Row>
         <Grid className="featured-content">
           <Row>
             <Col size={3} className="poster-container">

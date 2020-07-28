@@ -41,17 +41,17 @@
   height: 90%;
   &:hover {
     color: #fff;
-    opacity: 0.25;
+    opacity: 0.18;
     transition: all 0.2s;
     -webkit-transition: all 0.2s;
     cursor: pointer;
-    .RSVP {
+    .more-info {
       z-index: 50;
     }
   }
   &:hover:after {
     opacity: 1;
-    .RSVP {
+    .more-info {
       z-index: 0;
     }
   }
@@ -60,13 +60,13 @@
     &:hover {
     opacity: 1;
     }
-    .RSVP {
+    .more-info {
       z-index: 0;
     }
   }
 }
 
-.RSVP {
+.more-info {
   margin: 0;
   position: absolute;
   top: 50%;
@@ -76,7 +76,7 @@
   z-index: 0;
 }
 
-.RSVP-text {
+.more-info-text {
   text-align: center;
   color: white;
   font-size: 1.5rem;
