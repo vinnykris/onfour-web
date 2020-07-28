@@ -1,9 +1,12 @@
-// React imports
+
+// // Main App component
 import React from "react";
 import { Router, Switch, Route, withRouter } from "react-router-dom";
 import history from "./history";
 
 // Component imports
+import NotFound404 from "./components/not_found_page/not_found404";
+import NotFoundPage from "./components/not_found_page/not_found_page"
 import NavBar from "./components/navbar/navbar";
 import About from "./components/about_page/about_page";
 import StreamPage from "./components/stream_page/stream_page";
@@ -66,6 +69,7 @@ function App() {
           <Route path="/artists" component={ArtistsPage} />
           <Route path="/forgot" component={Forgot} />
           <Route path="/soundcheck" component={SoundCheck} />
+          <Route path="*" component={NotFoundPage}/>
         </Switch>
         <Footer />
       </Router>
