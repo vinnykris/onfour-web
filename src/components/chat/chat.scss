@@ -178,6 +178,7 @@ button:focus {
 // CHAT
 .form {
   display: flex;
+  height: 50px;
   border-radius: 10px;
   @include respond-to("small") {
     min-height: 50px;
@@ -475,8 +476,9 @@ button:focus {
 }
 .emoji-mart {
   position:absolute;
-  right:20px;
-  bottom:80px;
+  width: 100% !important;
+  bottom: 50px;
+  right: 0px;
 }
 
 @media (min-width: 320px) and (max-width: 1200px) {
