@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
 import SharePopup from "./share_popup";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-// import { Prompt } from "react-router";
 import moment from "moment";
 
 // AWS Imports
@@ -690,11 +689,7 @@ const StreamPage = () => {
                     <Col size={0.5}></Col>
                   </Row>
                 </Col>
-                <Col
-                  size={3}
-                  id="chat_container"
-                  className="sticky-container"
-                >
+                <Col size={3} id="chat_container" className="sticky-container">
                   <div className="chat-main" id="chat_main">
                     <div className="chat-wrapper">
                       {/* {

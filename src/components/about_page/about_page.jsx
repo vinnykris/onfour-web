@@ -315,6 +315,19 @@ const AboutPage = () => {
                   </Col>
                 </Row>
                 <Row>
+                  {/* {width <= 1024 ? (
+                    <FlexibleGrid
+                      className="preview-flex-row"
+                      content_list={concerts}
+                      num_cols={4}
+                    />
+                  ) : (
+                      <FlexibleGrid
+                        className="preview-flex-row"
+                        content_list={concerts}
+                        num_cols={5}
+                      />
+                    )} */}
                   <FlexibleGrid
                     className="preview-flex-row"
                     content_list={concerts}

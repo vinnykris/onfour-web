@@ -37,35 +37,36 @@
   background-color: white;
   margin: 7% 3% 7% 3%;
   position: relative;
+  border-radius: 8px 8px 7px 7px;
   height: 90%;
   &:hover {
     color: #fff;
-    opacity: 0.25;
+    opacity: 0.18;
     transition: all 0.2s;
     -webkit-transition: all 0.2s;
     cursor: pointer;
-    .RSVP {
+    .more-info {
       z-index: 50;
     }
   }
   &:hover:after {
     opacity: 1;
-    .RSVP {
+    .more-info {
       z-index: 0;
     }
   }
 
   @include respond-to("small") {
     &:hover {
-    opacity: 1;
+      opacity: 1;
     }
-    .RSVP {
+    .more-info {
       z-index: 0;
     }
   }
 }
 
-.RSVP {
+.more-info {
   margin: 0;
   position: absolute;
   top: 50%;
@@ -75,7 +76,7 @@
   z-index: 0;
 }
 
-.RSVP-text {
+.more-info-text {
   text-align: center;
   color: white;
   font-size: 1.5rem;
@@ -85,9 +86,12 @@
 .poster-container {
   position: relative;
   width: 100%;
-  height: 17vw;
+  // height: 17vw;
+  height: 0px;
+  padding-bottom: 100%;
   @include respond-to("small") {
-    height: 30vh;
+    // height: 30vh;
+    padding-bottom: 100%;
   }
 }
 
@@ -98,6 +102,7 @@
   top: 0;
   width: 100%;
   height: 100%;
+  border-radius: 7px 7px 0px 0px;
 }
 
 .featured-header {
@@ -118,7 +123,7 @@
   background-color: black;
   color: white;
   margin-left: 10px;
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 0.7rem;
   font-weight: bold;
   font-family: "Heebo", sans-serif;
@@ -135,14 +140,14 @@
   // overflow: hidden;
   // display: inherit;
   // width:300px;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: bold;
   color: #1b1b1b;
   text-align: left;
-  margin-top: 8px;
+  margin-top: 5px;
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 35px;
   letter-spacing: 0.4px;
   vertical-align: text-top;
   font-family: "Heebo", sans-serif;
@@ -152,6 +157,9 @@
     margin-right: 7px;
     margin-left: 5px;
     margin-bottom: 30px;
+  }
+  @include respond-to("large") {
+    margin-bottom: 50px;
   }
 }
 
@@ -173,7 +181,7 @@
 
 .time {
   // font-size: 80%;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: $medium-weight;
   color: #1b1b1b;
   text-align: left;
@@ -223,7 +231,6 @@
   // bottom: 0px;
 }
 
-
 .poster-tag {
   position: absolute;
   text-align: left;
@@ -246,7 +253,7 @@
   font-weight: bold;
   color: rgb(255, 255, 255);
   right: 10px;
-  top : 15px;
+  top: 15px;
   padding: 0px 5px 0px 5px;
   @include respond-to("small") {
     top: 10px;
@@ -371,7 +378,7 @@ a.nav-page-white {
   margin: auto;
   background-color: rgba(0, 0, 0, 0.5);
   @include respond-to("small") {
-    padding-top: 0vh;    
+    padding-top: 0vh;
   }
 }
 
@@ -386,11 +393,10 @@ a.nav-page-white {
   }
 
   @include respond-to("small") {
-    filter: invert(0%);  
-    font-size: 25px; 
+    filter: invert(0%);
+    font-size: 25px;
     margin-right: 15px;
   }
-
 }
 
 .popup-info-content {
@@ -410,8 +416,7 @@ a.nav-page-white {
   text-align: justify;
 }
 
-
-// MODAL STYLING 
+// MODAL STYLING
 .modal-container {
   width: 100%;
   height: 100%;
@@ -475,13 +480,13 @@ a.nav-page-white {
   text-align: justify;
   white-space: pre-wrap;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE 10+ */
+  -ms-overflow-style: none; /* IE 10+ */
   &::-webkit-scrollbar {
     width: 5px;
     background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(209, 209, 209, 0.596); 
+    background: rgba(209, 209, 209, 0.596);
     border-radius: 20px;
   }
 }
@@ -501,13 +506,13 @@ a.nav-page-white {
   text-align: justify;
   white-space: pre-wrap;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE 10+ */
+  -ms-overflow-style: none; /* IE 10+ */
   &::-webkit-scrollbar {
     width: 5px;
     background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(209, 209, 209, 0.596); 
+    background: rgba(209, 209, 209, 0.596);
     border-radius: 20px;
   }
 }
@@ -540,7 +545,7 @@ a.nav-page-white {
   height: 40px;
   position: relative;
   width: 100%;
-  border-bottom: 1px solid #E3E3E3;
+  border-bottom: 1px solid #e3e3e3;
 }
 
 .modal-info {
@@ -588,7 +593,7 @@ a.nav-page-white {
   font-size: 0.85rem;
 }
 
-.modal-free-button{
+.modal-free-button {
   width: 100%;
   background-color: black;
   color: white;
@@ -598,13 +603,13 @@ a.nav-page-white {
   font-size: 0.85rem;
   padding-top: 15px;
   height: 48px;
-  // &:hover{
-  //   cursor: pointer;
-  //   border: 1px solid white;
-  // }
+  &:hover {
+    cursor: pointer;
+    border: 1px solid white;
+  }
 }
 
-// FESTIVAL SECTION 
+// FESTIVAL SECTION
 
 .festival-image {
   width: 10vw;
@@ -630,13 +635,13 @@ a.nav-page-white {
   text-align: justify;
   white-space: pre-wrap;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE 10+ */
+  -ms-overflow-style: none; /* IE 10+ */
   &::-webkit-scrollbar {
     width: 5px;
     background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(209, 209, 209, 0.596); 
+    background: rgba(209, 209, 209, 0.596);
     border-radius: 20px;
   }
 }
@@ -657,7 +662,7 @@ a.nav-page-white {
   font-size: 0.85rem;
   color: #000000;
   text-align: left;
-   @include respond-to("small") {
+  @include respond-to("small") {
     color: white;
   }
 }
@@ -667,13 +672,13 @@ a.nav-page-white {
   overflow: hidden;
   padding-right: 4px;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE 10+ */
+  -ms-overflow-style: none; /* IE 10+ */
   &::-webkit-scrollbar {
     width: 3px;
     background-color: rgba(228, 228, 228, 0.37); /* Chrome/Safari/Webkit */
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(255, 188, 183, 0.424); 
+    background: rgba(255, 188, 183, 0.424);
     border-radius: 20px;
   }
 
@@ -686,7 +691,7 @@ a.nav-page-white {
 
 .festival-read-more {
   color: #007bff;
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 }
@@ -723,7 +728,6 @@ a.nav-page-white {
 .mobile {
   width: 100%;
   padding-right: 0px;
-  
 }
 
 .mobile-modal-row {
@@ -763,7 +767,7 @@ a.nav-page-white {
   font-size: 0.6rem;
 }
 
-.mobile-modal-free-button{
+.mobile-modal-free-button {
   width: 100%;
   height: 3vh;
   background-color: black;
@@ -773,7 +777,7 @@ a.nav-page-white {
   font-weight: bold;
   font-size: 0.6rem;
   padding: 0px;
-  &:hover{
+  &:hover {
     cursor: initial;
   }
 }
@@ -785,5 +789,13 @@ a.nav-page-white {
   width: 100%;
   @include respond-to("small") {
     height: 100vh;
+  }
+}
+.google-signin {
+  background-color: black;
+  color: white;
+  &:hover {
+    cursor: pointer;
+    margin: 1px;
   }
 }

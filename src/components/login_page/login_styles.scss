@@ -4,8 +4,9 @@
 
 .login-page-content {
   background-color: black;
-  height: 50%;
+  min-height: 60vh;
   width: 100%;
+  margin-top: -1px;
 }
 
 .signin-form {
@@ -43,7 +44,7 @@
   color: white;
   font-size: 14px;
   font-weight: 420;
-  background-color: #7c1fb5;
+  background-color: #794d94;
 }
 
 .processing-message {
@@ -70,7 +71,7 @@
 }
 
 .signup-link {
-  color: #7c1fb5;
+  color: #794d94;
   text-decoration: underline;
 }
 
