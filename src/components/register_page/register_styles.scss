@@ -8,10 +8,14 @@
   width: 100%;
 }
 
+.form-section {
+  width: 100%;
+}
+
 .register-form {
-  margin-top: 7%;
-  width: 90%;
-  padding-bottom: 7%;
+  margin-top: 2.5%;
+  width: 29%;
+  padding-bottom: 2%;
 }
 
 .register-fields-section {
@@ -23,12 +27,12 @@
 }
 
 .register-input-left {
-  width: 95%;
+  width: 50%;
   float: left;
 }
 
 .register-input-right {
-  width: 95%;
+  width: 50%;
   float: right;
 }
 
@@ -36,30 +40,26 @@
   width: 100%;
 }
 
-.register-purple-scheme {
-  background-color: #979bbb;
+.register-input-row {
+  padding-bottom: 2.5%;
 }
 
-.label-text {
-  color: white;
-}
-
-.label-text-left {
-  color: white;
-  float: left;
-}
-
-.label-text-right {
-  color: white;
-  float: left;
-  padding-left: 5%;
-}
-
-.register-submit-button {
-  width: 38%;
+.fan-register-submit-button {
+  width: 47%;
   color: white;
   font-size: 14px;
   font-weight: 420;
+  background-color: #794d94;
+  float: left;
+}
+
+.artist-register-submit-button {
+  width: 47%;
+  color: white;
+  font-size: 14px;
+  font-weight: 420;
+  background-color: #794d94;
+  float: right;
 }
 
 .sign-up-message {
@@ -83,8 +83,33 @@
 }
 
 .register-verification-submit-button {
-  width: 50%;
+  width: 100%;
   color: white;
   font-size: 14px;
   font-weight: 420;
+  background-color: #794d94;
+}
+
+.signup-header {
+  padding-bottom: 3%;
+  text-align: center;
+}
+
+.signup-header-text {
+  color: white;
+  width: 100%;
+}
+
+.signin-link {
+  color: #794d94;
+  text-decoration: underline;
+}
+
+.signup-footer {
+  color: white;
+  padding-bottom: 5%;
+}
+
+.verification-footer {
+  padding-bottom: 40%;
 }

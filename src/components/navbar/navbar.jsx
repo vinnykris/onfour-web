@@ -43,7 +43,8 @@ const NavBar = () => {
   const [dropdown_open, setDropdownOpen] = useState(false); // Tracks drop down menu
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
-  const [username, setUsername] = useState(""); // Tracks user's email after signing in
+  const [username, setUsername] = useState(""); // Tracks user's username after signing in
+  const [profile_url, setProfileURL] = useState(""); // Tracks user's username after signing in
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
   const [last, setLast] = useState(""); // Tracks first name of signed in user
 
@@ -60,6 +61,7 @@ const NavBar = () => {
       setUserEmail(user.attributes.email);
       setAuth(true);
       setUsername(user.username);
+      setProfileURL("");
     })
     // .then((user) => setUsername(user.username))
     // .then((user) => setAuth(true))
@@ -118,6 +120,10 @@ const NavBar = () => {
     signOut();
     setShowMobileLogin(false);
     closeMenu("nav-signout");
+  };
+
+  const openProfile = () => {
+    console.log("clicked go to profile");
   };
 
   return (
@@ -251,6 +257,12 @@ const NavBar = () => {
                       </div>
                       <button
                         className="sign-out-button-mobile"
+                        onClick={openProfile}
+                      >
+                        MY PROFILE
+                      </button>
+                      <button
+                        className="sign-out-button-mobile"
                         onClick={signOutMobile}
                       >
                         SIGN OUT
@@ -353,10 +365,11 @@ const NavBar = () => {
                   if (!auth) {
                     return (
                       <NavLink
-                        to=""
+                        to={{
+                          pathname: "/login",
+                          state: { current: location },
+                        }}
                         className={style}
-                        data-toggle="modal"
-                        data-target="#sign_in_Modal"
                       >
                         LOGIN
                       </NavLink>
@@ -374,6 +387,23 @@ const NavBar = () => {
                           </DropdownToggle>
                         </div>
                         <DropdownMenu right>
+                          <DropdownItem
+                            className="sign-out-button"
+                            onClick={openProfile}
+                          >
+                            <NavLink
+                              // to={{
+                              //   pathname: "/profile",
+                              //   search: `?name=${username}`,
+                              //   state: {
+                              //     name: username,
+                              //   },
+                              // }}
+                              to="/profile"
+                            >
+                              MY PROFILE
+                            </NavLink>
+                          </DropdownItem>
                           <DropdownItem
                             className="sign-out-button"
                             onClick={signOut}
