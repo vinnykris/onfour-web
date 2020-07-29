@@ -15,31 +15,31 @@ const StubSlider = ({ stubs }) => {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   console.log(stubs);
 
-  //   $(".centered-stubs").slick({
-  //     centerMode: true,
-  //     centerPadding: "60px",
-  //     slidesToShow: 3,
-  //     responsive: [
-  //       {
-  //         breakpoint: 768,
-  //         settings: {
-  //           arrows: false,
-  //           centerMode: true,
-  //           centerPadding: "40px",
-  //           slidesToShow: 3,
-  //         },
-  //       },
-  //       {
-  //         breakpoint: 480,
-  //         settings: {
-  //           arrows: false,
-  //           centerMode: true,
-  //           centerPadding: "40px",
-  //           slidesToShow: 1,
-  //         },
-  //       },
-  //     ],
-  //   });
+    // $(".centered-stubs").slick({
+    //   centerMode: true,
+    //   centerPadding: "60px",
+    //   slidesToShow: 3,
+    //   responsive: [
+    //     {
+    //       breakpoint: 768,
+    //       settings: {
+    //         arrows: false,
+    //         centerMode: true,
+    //         centerPadding: "40px",
+    //         slidesToShow: 3,
+    //       },
+    //     },
+    //     {
+    //       breakpoint: 480,
+    //       settings: {
+    //         arrows: false,
+    //         centerMode: true,
+    //         centerPadding: "40px",
+    //         slidesToShow: 1,
+    //       },
+    //     },
+    //   ],
+    // });
 
   var settings = {
     centerMode: true,
