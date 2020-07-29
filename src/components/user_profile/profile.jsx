@@ -109,10 +109,18 @@ const Profile = (props) => {
 
   const goToTicket = () => {
     setCurrentPage("ticketstub");
+    if (document.getElementById("dashboard-icon") && document.getElementById("ticket-icon")) {
+      document.getElementById("dashboard-icon").style.opacity = 0.5;
+      document.getElementById("ticket-icon").style.opacity = 1;
+    }
   }
 
   const goToDashboard = () => {
     setCurrentPage("dashboard");
+    if (document.getElementById("dashboard-icon") && document.getElementById("ticket-icon")) {
+      document.getElementById("dashboard-icon").style.opacity = 1;
+      document.getElementById("ticket-icon").style.opacity = 0.5;
+    }
   }
 
   return (
@@ -123,10 +131,10 @@ const Profile = (props) => {
           <Col className="profile-button-col">
             <div className="profile-button-bar">
               <Row>
-                <img src={dashboardIcon} className="profile-dashboard-icon" onClick={goToDashboard}></img>
+                <img src={dashboardIcon} className="profile-dashboard-icon initial-highlight" id="dashboard-icon" onClick={goToDashboard}></img>
               </Row>
               <Row>
-                <img src={ticketIcon} className="profile-dashboard-icon" onClick={goToTicket}></img>
+                <img src={ticketIcon} className="profile-dashboard-icon" id="ticket-icon" onClick={goToTicket}></img>
               </Row>
             </div>
           </Col>
