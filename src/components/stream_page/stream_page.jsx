@@ -52,6 +52,7 @@ const StreamPage = () => {
   const [artist_fb, setArtistFB] = useState("");
   const [artist_spotify, setArtistSpotify] = useState("");
   const [artist_twitter, setArtistTwitter] = useState("");
+  const [artist_youtube, setArtistYoutube] = useState("");
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
   const [is_live, setIsLive] = useState(false);
@@ -59,6 +60,9 @@ const StreamPage = () => {
   const [username, setUsername] = useState(""); // Username from login
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
   const [show_popup, setShowPopup] = useState(false); // If popup should be shown
+  const [description_button_icon, setDescriptionButtonIcon] = useState(
+    "fa fa-chevron-down"
+  );
 
   // Function passed as prop to chat
   const chatStatus = (mode) => {
@@ -195,10 +199,16 @@ const StreamPage = () => {
     const artist_info_list = artist_info.data.getCreateOnfourRegistration;
     setArtistName(artist_info_list.artist_name);
     setArtistBio(artist_info_list.artist_bio);
-    setArtistFB(artist_info_list.facebook);
-    setArtistIG(artist_info_list.instagram);
-    setArtistSpotify(artist_info_list.spotify);
-    setArtistTwitter(artist_info_list.twitter);
+    // setArtistFB(artist_info_list.facebook);
+    // setArtistIG(artist_info_list.instagram);
+    // setArtistSpotify(artist_info_list.spotify);
+    // setArtistTwitter(artist_info_list.twitter);
+    // setArtistYoutube(artist_info_list.youtube);
+    setArtistFB("https://instagram.com/superduperfriend");
+    setArtistIG("https://instagram.com/superduperfriend");
+    setArtistSpotify("https://instagram.com/superduperfriend");
+    setArtistTwitter("https://instagram.com/superduperfriend");
+    setArtistYoutube("https://instagram.com/superduperfriend");
   };
 
   // GET USER'S REGISTRATION INFORMATION
@@ -270,6 +280,24 @@ const StreamPage = () => {
       setButtonIcon("fa fa-chevron-right");
       document.getElementById("chat_container").style.display = "inline";
       document.getElementById("stream_col").style.flex = "7";
+    }
+  };
+
+  const toggleDescription = () => {
+    if (description_button_icon === "fa fa-chevron-down") {
+      setDescriptionButtonIcon("fa fa-chevron-up");
+      document.getElementById("artist_bio").style.display = "none";
+      document.getElementById("stream_info_section").style.height = "10%";
+      document.getElementById("stream_main_section").style.height = "90%";
+      document.getElementById("stream_info_bottom").style.height = "50%";
+      document.getElementById("stream_info_top").style.height = "50%";
+    } else {
+      setDescriptionButtonIcon("fa fa-chevron-down");
+      document.getElementById("artist_bio").style.display = "flex";
+      document.getElementById("stream_info_section").style.height = "40%";
+      document.getElementById("stream_main_section").style.height = "60%";
+      document.getElementById("stream_info_bottom").style.height = "15%";
+      document.getElementById("stream_info_top").style.height = "15%";
     }
   };
 
@@ -392,7 +420,7 @@ const StreamPage = () => {
               <Row className="desktop-stream-row">
                 {/* <Col size={0.5}></Col> */}
                 <Col size={6} id="stream_col">
-                  <div className="stream-main">
+                  <div className="stream-main" id="stream_main_section">
                     <div className="stream-wrapper" id="video_player">
                       <VideoPlayer
                         url={
@@ -414,12 +442,20 @@ const StreamPage = () => {
                           <i className={button_icon}></i>
                         </button>
                       </div>
+                      <div className="toggle-description">
+                        <button
+                          className="toggle-description-button"
+                          onClick={toggleDescription}
+                        >
+                          <i className={description_button_icon}></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <div className="stream-info-wrapper">
+                  <div className="stream-info-wrapper" id="stream_info_section">
                     <Row className="stream-info-row">
                       <Col size={1}>
-                        <Row className="buttons-row">
+                        <Row className="buttons-row" id="stream_info_top">
                           <Col size={2}>
                             <div className="artist-name-container">
                               <h3 className="artist-name-stream">
@@ -465,7 +501,7 @@ const StreamPage = () => {
                             </Row>
                           </Col>
                         </Row>
-                        <Row className="artist-bio-row">
+                        <Row className="artist-bio-row" id="artist_bio">
                           <Col size={1}>
                             {/* <h5 className="show-time">
                               {show_time} (refresh the page if stream doesn't
@@ -476,7 +512,105 @@ const StreamPage = () => {
                             </div>
                           </Col>
                         </Row>
-                        <Row className="bottom-buttons-row">
+                        <Row
+                          className="bottom-buttons-row"
+                          id="stream_info_bottom"
+                        >
+                          <Col size={1}>
+                            <div className="social-media-container">
+                              <ul className="social-list">
+                                {artist_ig ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarInsta",
+                                        })
+                                      }
+                                      href={artist_ig}
+                                      className="fa fa-instagram"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Instagram Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
+
+                                {artist_spotify ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarSpotify",
+                                        })
+                                      }
+                                      href={artist_spotify}
+                                      className="fa fa-spotify"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Spotify Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
+
+                                {artist_youtube ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarYoutube",
+                                        })
+                                      }
+                                      href={artist_youtube}
+                                      className="fa fa-youtube"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Youtube Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
+
+                                {artist_fb ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarFacebook",
+                                        })
+                                      }
+                                      href={artist_fb}
+                                      className="fa fa-facebook"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Facebook Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
+
+                                {artist_twitter ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarTwitter",
+                                        })
+                                      }
+                                      href={artist_twitter}
+                                      className="fa fa-twitter"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Twitter Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
+                              </ul>
+                            </div>
+                          </Col>
                           <Col size={1}>
                             <div className="feedback-container">
                               <a
@@ -490,7 +624,7 @@ const StreamPage = () => {
                                 rel="noopener noreferrer"
                               >
                                 <h5 className="show-time feedback-link">
-                                  Share thoughts on the experience
+                                  Share thoughts on your experience
                                 </h5>
                               </a>
                             </div>

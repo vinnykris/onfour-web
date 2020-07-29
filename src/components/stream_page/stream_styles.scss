@@ -212,8 +212,21 @@
   right: 0px;
 }
 
+.toggle-description {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+}
+
 .toggle-chat-button {
   border-radius: 5px 0px 0px 5px;
+  background-color: #17171b;
+  padding: 3px;
+  font-weight: bolder;
+}
+
+.toggle-description-button {
+  border-radius: 0px 5px 0px 0px;
   background-color: #17171b;
   padding: 3px;
   font-weight: bolder;
@@ -229,6 +242,22 @@
 
 .fa-chevron-left {
   margin-left: 2px;
+  color: #f3f3f3;
+  &:hover {
+    color: #497be0;
+  }
+}
+
+.fa-chevron-down {
+  margin-top: 2px;
+  color: #f3f3f3;
+  &:hover {
+    color: #497be0;
+  }
+}
+
+.fa-chevron-up {
+  margin-top: 2px;
   color: #f3f3f3;
   &:hover {
     color: #497be0;
@@ -394,6 +423,7 @@
 .artist-bio-row {
   padding-top: 1%;
   height: 70%;
+  display: flex;
 }
 
 .bottom-buttons-row {
@@ -539,6 +569,30 @@
 .stream-action-button-icon {
   color: black;
   padding-right: 10%;
+}
+
+.social-media-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.social-list {
+  height: 100%;
+}
+
+.social-list li {
+  color: white;
+  margin: auto 2%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.social-list li a {
+  display: flex;
+  font-size: 1.5rem;
+  color: white;
 }
 
 .feedback-container {
