@@ -38,19 +38,28 @@ Amplify.configure(awsmobile);
 const StreamPage = () => {
   // DETERMINE MOBILE VERSION OR NOT
   const { height, width } = useWindowDimensions(); // Dimensions of screen
-
-  // DONATION SECTION
   const tip_based = true; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
-
-  // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat
   const [viewers, setViewers] = useState(0); // Sets number of live viewers on page
-  // Function passed as prop to join chat
-  // const joinSubmit = (name, mode) => {
-  //   setChatName(name);
-  //   // setShowChat(mode);
-  // };
+  const [email, setEmail] = useState(""); // User email input for subscription
+  const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
+  const [show_start_time, setStartTime] = useState(""); // Stores the upcoming show's start time
+  const [show_time, setShowTime] = useState(""); // Store the upcoming show's start time to display
+  const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
+  const [artist_bio, setArtistBio] = useState("");
+  const [artist_ig, setArtistIG] = useState("");
+  const [artist_fb, setArtistFB] = useState("");
+  const [artist_spotify, setArtistSpotify] = useState("");
+  const [artist_twitter, setArtistTwitter] = useState("");
+  const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
+  const [concert_id, setConcertID] = useState("");
+  const [is_live, setIsLive] = useState(false);
+  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
+  const [username, setUsername] = useState(""); // Username from login
+  const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
+  const [show_popup, setShowPopup] = useState(false); // If popup should be shown
+
   // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
@@ -62,8 +71,7 @@ const StreamPage = () => {
   };
 
   // EMAIL SUBSCRIBTION SECTION
-  const [email, setEmail] = useState(""); // User email input for subscription
-  const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
+
   // Function when user submits email
   const emailSubmit = (event) => {
     event.preventDefault();
@@ -92,42 +100,42 @@ const StreamPage = () => {
   }
 
   // ADJUST CHAT HEIGHT BASED ON SCROLL AMOUNT
-  useEffect(() => {
-    document.addEventListener("scroll", () => {
-      if (176 + (width / 100) * 41 - height > 0) {
-        if (document.getElementById("chat_main")) {
-          const scrollCheck_top =
-            window.scrollY > 176 + (width / 100) * 41 - height;
-          const scrollCheck_bottom = window.scrollY < 176;
-          if (!scrollCheck_top) {
-            // if the scroll is not larger than threshold to increase height
-            document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + "px";
-          } else if (scrollCheck_bottom) {
-            // is scroll is larger than lower threshold but less than higher threshold
-            document.getElementById("chat_main").style.height =
-              window.scrollY - 176 + height + "px";
-          } else {
-            document.getElementById("chat_main").style.height = height + "px";
-          }
-        }
-      } else {
-        if (document.getElementById("chat_main")) {
-          const scrollCheck_top = window.scrollY === 0;
-          const scrollCheck_bottom = window.scrollY < 176;
-          if (scrollCheck_top) {
-            document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + "px";
-          } else if (scrollCheck_bottom) {
-            document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + window.scrollY + "px";
-          } else {
-            document.getElementById("chat_main").style.height = height + "px";
-          }
-        }
-      }
-    });
-  });
+  // useEffect(() => {
+  //   document.addEventListener("scroll", () => {
+  //     if (176 + (width / 100) * 41 - height > 0) {
+  //       if (document.getElementById("chat_main")) {
+  //         const scrollCheck_top =
+  //           window.scrollY > 176 + (width / 100) * 41 - height;
+  //         const scrollCheck_bottom = window.scrollY < 176;
+  //         if (!scrollCheck_top) {
+  //           // if the scroll is not larger than threshold to increase height
+  //           document.getElementById("chat_main").style.height =
+  //             (width / 100) * 41 + "px";
+  //         } else if (scrollCheck_bottom) {
+  //           // is scroll is larger than lower threshold but less than higher threshold
+  //           document.getElementById("chat_main").style.height =
+  //             window.scrollY - 176 + height + "px";
+  //         } else {
+  //           document.getElementById("chat_main").style.height = height + "px";
+  //         }
+  //       }
+  //     } else {
+  //       if (document.getElementById("chat_main")) {
+  //         const scrollCheck_top = window.scrollY === 0;
+  //         const scrollCheck_bottom = window.scrollY < 176;
+  //         if (scrollCheck_top) {
+  //           document.getElementById("chat_main").style.height =
+  //             (width / 100) * 41 + "px";
+  //         } else if (scrollCheck_bottom) {
+  //           document.getElementById("chat_main").style.height =
+  //             (width / 100) * 41 + window.scrollY + "px";
+  //         } else {
+  //           document.getElementById("chat_main").style.height = height + "px";
+  //         }
+  //       }
+  //     }
+  //   });
+  // });
 
   // POP_UP WARNING SECTION
   // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
@@ -137,12 +145,6 @@ const StreamPage = () => {
   // };
 
   // GETTING INFORMATION ABOUT MOST RECENT UPCOMING SHOW
-  const [show_start_time, setStartTime] = useState(""); // Stores the upcoming show's start time
-  const [show_time, setShowTime] = useState(""); // Store the upcoming show's start time to display
-  const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
-  const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
-  const [concert_id, setConcertID] = useState("");
-  const [is_live, setIsLive] = useState(false);
 
   // Analytics state variables
   //const [arrival, setArrival] = useState(true);
@@ -192,11 +194,14 @@ const StreamPage = () => {
     );
     const artist_info_list = artist_info.data.getCreateOnfourRegistration;
     setArtistName(artist_info_list.artist_name);
+    setArtistBio(artist_info_list.artist_bio);
+    setArtistFB(artist_info_list.facebook);
+    setArtistIG(artist_info_list.instagram);
+    setArtistSpotify(artist_info_list.spotify);
+    setArtistTwitter(artist_info_list.twitter);
   };
 
   // GET USER'S REGISTRATION INFORMATION
-  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
-  const [username, setUsername] = useState(""); // Username from login
 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
@@ -254,7 +259,7 @@ const StreamPage = () => {
   };
 
   // TOGGLE CHAT SECTION
-  const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
+
   const toggleChat = () => {
     if (button_icon === "fa fa-chevron-right") {
       setButtonIcon("fa fa-chevron-left");
@@ -280,7 +285,6 @@ const StreamPage = () => {
   // `;
 
   // Social media sharing
-  const [show_popup, setShowPopup] = useState(false); // If popup should be shown
 
   // Opens custom popup and records analytics for share button being clicked
   const openPopup = () => {
@@ -384,10 +388,10 @@ const StreamPage = () => {
           </div>
         ) : null} */}
           {width > 600 ? (
-            <Grid>
-              <Row>
+            <Grid className="desktop-stream-grid">
+              <Row className="desktop-stream-row">
                 {/* <Col size={0.5}></Col> */}
-                <Col size={5.5} id="stream_col">
+                <Col size={6} id="stream_col">
                   <div className="stream-main">
                     <div className="stream-wrapper" id="video_player">
                       <VideoPlayer
@@ -412,14 +416,68 @@ const StreamPage = () => {
                       </div>
                     </div>
                   </div>
-                  <Row className="stream-info-row">
-                    <Col size={7}>
-                      <Row>
-                        <Col size={2}>
-                          <h3 className="artist-name-stream">{artist_name}</h3>
-                        </Col>
-                        <Col size={3}>
-                          <Row className="stream-share-row">
+                  <div className="stream-info-wrapper">
+                    <Row className="stream-info-row">
+                      <Col size={1}>
+                        <Row className="buttons-row">
+                          <Col size={2}>
+                            <div className="artist-name-container">
+                              <h3 className="artist-name-stream">
+                                {artist_name}
+                              </h3>
+                            </div>
+                          </Col>
+                          <Col size={3}>
+                            <Row className="stream-share-row">
+                              <ClickAwayListener onClickAway={closePopup}>
+                                <div className="stream-action-button-container">
+                                  <button
+                                    className="stream-action-button"
+                                    onClick={openPopup}
+                                  >
+                                    <i
+                                      className="fa fa-share stream-action-button-icon"
+                                      aria-hidden="true"
+                                    ></i>
+                                    Share
+                                  </button>
+
+                                  <SharePopup show={show_popup} />
+                                </div>
+                              </ClickAwayListener>
+
+                              <div className="stream-action-button-container">
+                                <button className="stream-action-button">
+                                  {" "}
+                                  <i
+                                    className="fa fa-usd stream-action-button-icon"
+                                    aria-hidden="true"
+                                  ></i>
+                                  Donate
+                                </button>
+                              </div>
+
+                              <div className="viewers">
+                                <span className="viewer-count show-time">
+                                  {viewers} watching now
+                                </span>
+                              </div>
+                            </Row>
+                          </Col>
+                        </Row>
+                        <Row className="artist-bio-row">
+                          <Col size={1}>
+                            {/* <h5 className="show-time">
+                              {show_time} (refresh the page if stream doesn't
+                              show up)
+                            </h5> */}
+                            <div className="stream-artist-bio-container">
+                              <p className="stream-artist-bio">{artist_bio}</p>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row className="bottom-buttons-row">
+                          <Col size={1}>
                             <div className="feedback-container">
                               <a
                                 onClick={() =>
@@ -432,55 +490,22 @@ const StreamPage = () => {
                                 rel="noopener noreferrer"
                               >
                                 <h5 className="show-time feedback-link">
-                                  SEND FEEDBACK
+                                  Share thoughts on the experience
                                 </h5>
                               </a>
                             </div>
+                          </Col>
+                        </Row>
 
-                            <ClickAwayListener onClickAway={closePopup}>
-                              <div className="share-container">
-                                <span
-                                  className="share-button"
-                                  onClick={openPopup}
-                                >
-                                  <i
-                                    className="fa fa-share show-time"
-                                    aria-hidden="true"
-                                  ></i>
-                                  <h5 className="show-time share-text">
-                                    SHARE
-                                  </h5>
-                                </span>
-
-                                <SharePopup show={show_popup} />
-                              </div>
-                            </ClickAwayListener>
-
-                            <div className="viewers">
-                              <h5 className="viewer-count show-time">
-                                {viewers} watching now
-                              </h5>
-                            </div>
-                          </Row>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col size={2}>
-                          <h5 className="show-time">
-                            {show_time} (refresh the page if stream doesn't show
-                            up)
-                          </h5>
-                        </Col>
-                      </Row>
-
-                      {/* </Col> */}
-                      {/* <Col size={1} className="social-bar-center">
+                        {/* </Col> */}
+                        {/* <Col size={1} className="social-bar-center">
                            <SocialBar />
                       </Col> */}
-                    </Col>
-                    {/* <Col size={2.5}></Col>
+                      </Col>
+                      {/* <Col size={2.5}></Col>
                     <Col size={0.5}></Col> */}
-                  </Row>
+                    </Row>
+                  </div>
                   <Row>
                     <div className="short-term-spacer">
                       {/* <Col>
