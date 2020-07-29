@@ -27,7 +27,7 @@ import { Grid, Row, Col } from "../grid";
 import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
-
+import { getTickets } from "../../apis/get_user_data";
 // Styles Imports
 import "./stream_styles.scss";
 
@@ -145,6 +145,7 @@ const StreamPage = () => {
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
   const [is_live, setIsLive] = useState(false);
+  const [is_free, setIsFree] = useState(true);
 
   // Analytics state variables
   //const [arrival, setArrival] = useState(true);
@@ -184,6 +185,7 @@ const StreamPage = () => {
     getArtistInfo(info_list[0].artist_id);
     setConcertID(info_list[0].id);
     setIsLive(info_list[0].is_live);
+    setIsFree((info_list[0].general_price === 0));
   };
 
   const getArtistInfo = async (artist_id) => {
@@ -199,14 +201,16 @@ const StreamPage = () => {
   // GET USER'S REGISTRATION INFORMATION
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
+  const [purchasedTickets, setTickets] = useState([]);
 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
   Auth.currentAuthenticatedUser({})
-    .then((user) => {
+    .then(async (user) => {
       setUsername(user.username);
       setShowChat(true);
       setAuth(true);
+      setTickets(await getTickets(user.username));
     })
     .catch((err) => setAuth(false));
 
@@ -300,47 +304,8 @@ const StreamPage = () => {
     <div className="stream-container">
       {show_start_time ? (
         <div className="stream-page-content">
-          {/* {show_alert ? (
-          <div>
-            <div className="popup-desktop">
-              <form className="waiting-msg-box">
-                <span className="popup-close" onClick={hidePopup}>
-                  <i className="fa fa-times fa-2x close-icon"></i>
-                </span>
-                <div className="popup-content">
-                  <h5 className="popup-header">The show hasn't started yet!</h5>
-                  <p className="waiting-msg">
-                    Feel free to look around! If you would like to see clips
-                    from our past shows, click the button below.
-                  </p>
-                  <br></br>
-                  <Link to="/archive">
-                    <button>Go to Past Shows</button>
-                  </Link>
-                </div>
-              </form>
-            </div>
-
-            <div className="popup-mobile">
-              <form className="waiting-msg-box">
-                <span className="popup-close" onClick={hidePopup}>
-                  <i className="fa fa-times close-icon"></i>
-                </span>
-                <div className="popup-content">
-                  <h5 className="popup-header">The show hasn't started yet!</h5>
-                  <p className="waiting-msg">
-                    Feel free to look around! If you would like to see clips
-                    from our past shows, click the button below.
-                  </p>
-                  <br></br>
-                  <Link to="/archive">
-                    <button>Go to Past Shows</button>
-                  </Link>
-                </div>
-              </form>
-            </div>
-          </div>
-        ) : null} */}
+          { is_free || (purchasedTickets.indexOf(concert_id) >= 0) ? (
+            <div>
           {width > 600 ? (
             <Grid>
               <Row>
@@ -726,6 +691,13 @@ const StreamPage = () => {
               </div>
             </div>
           )}
+            </div>
+          ) : (
+            <div>
+              You have to buy ticket first!
+            </div>
+          )
+          }
         </div>
       ) : (
         // <div className={!show_start_time ? 'parentDisable' : ''} width="100%">

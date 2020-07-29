@@ -120,6 +120,12 @@ getCreateOnfourRegistration(username: $input) {
 }
 }`;
 
+export const get_user_concert = `query getCreateOnfourRegistration ($input: String!){
+getCreateOnfourRegistration(username: $input) {
+  concert
+}
+}`;
+
 // Query to retrieve all upcoming shows
 export const list_concerts = `query listConcerts(
 $filter: TableConcertFilterInput
