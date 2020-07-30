@@ -426,7 +426,7 @@ const Concert = (props) => {
               </ClickAwayListener>
             </span>
           ) : null}
-          {loading ? (
+          {!concert_info ? (
             <div className="overlay-box">
               <PulseLoader
                 sizeUnit={"px"}
