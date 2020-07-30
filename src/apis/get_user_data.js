@@ -10,6 +10,7 @@ import Auth from "./UserPool";
 
 // Component Imports
 import FeaturedContent from "../components/upcoming_show_page/featured_content";
+import ProfileStub from "../components/user_profile/profile_stub";
 import ArchiveVideo from "../components/archive_page/archive_video";
 
 // API Imports
@@ -136,6 +137,7 @@ export const getUpcomingPurchasedShows = async (width, username) => {
   // but later, both upcoming_concerts and past_concerts 
   // can be returned by this one function
   var past_concerts = []; 
+  var all_ticketstubs =[];
 
   const getUpcomingFull = async (data) => {
     const artist_id = data.artist_id;
@@ -150,12 +152,24 @@ export const getUpcomingPurchasedShows = async (width, username) => {
         upcoming_concerts.push(
         formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
         );
+        all_ticketstubs.push(
+          <ProfileStub
+            img={await data.data.getConcert.stub_url}
+            className="profile-stub-component"
+          />
+        );
       } else {
         past_concerts.push(
           formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
         );
+        all_ticketstubs.push(
+          <ProfileStub
+            img={await data.data.getConcert.stub_url}
+            className="profile-stub-component"
+          />
+        );
       }
     }
   }
-  return upcoming_concerts;
+  return [upcoming_concerts, past_concerts, all_ticketstubs];
 };
