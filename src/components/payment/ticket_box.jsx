@@ -92,6 +92,7 @@ const TicketBox = ({amount_value, onClick, registerConcert}) => {
         if (!stripe || !elements) {
             // Stripe.js has not yet loaded.
             // Make sure to disable form submission until Stripe.js has loaded.
+            setWaiting(false);
             return;
         }
 
@@ -101,6 +102,9 @@ const TicketBox = ({amount_value, onClick, registerConcert}) => {
         if (result.error) {
             // Show error to your customer.
             console.log(result.error.message);
+            setWaiting(false);
+            setMessage(result.error.message);
+            setDisplayErr(true);
             Analytics.record({ name: "tokenPaymentError" });
         } else {
             // Send the token to AWS lambda function
