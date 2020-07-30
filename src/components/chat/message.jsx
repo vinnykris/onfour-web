@@ -6,11 +6,11 @@ import ReactEmoji from "react-emoji";
 import Linkify from 'react-linkify';
 import * as linkify from 'linkifyjs';
 import hashtag from 'linkifyjs/plugins/hashtag';
+// import { useReducer } from "react";
+// import ReactLinkify from "react-linkify";
 
 // Styles imports
 import "./chat.scss";
-import { useReducer } from "react";
-import ReactLinkify from "react-linkify";
 
 
 hashtag(linkify);
