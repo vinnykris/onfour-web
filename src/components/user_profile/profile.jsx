@@ -41,15 +41,18 @@ const Profile = (props) => {
   const [currentPage, setCurrentPage] = useState("dashboard");
   const history = useHistory();
 
-  Auth.currentAuthenticatedUser({})
-    .then((user) => {
-      setAuth(true);
-      setUsername(user.username);
-    })
-    .catch((err) => {
-      setAuth(false);
-      history.push("/");
-    });
+  useEffect(() => {
+    Auth.currentAuthenticatedUser({})
+      .then((user) => {
+        setAuth(true);
+        setUsername(user.username);
+      })
+      .catch((err) => {
+        setAuth(false);
+        history.push("/");
+      });
+  }, []);
+  
 
   // const getStubs = (concerts) => {
   //   var stub_urls = [];

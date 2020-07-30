@@ -67,6 +67,7 @@ const NavBar = () => {
     // .then((user) => setAuth(true))
     // .then((user) => closeMenu())
     .catch((err) => setAuth(false));
+  
 
   // If the first and last name for the logged in user's email has not been retrieved yet,
   // query the registration database's table to retrieve the first and last name filtered
