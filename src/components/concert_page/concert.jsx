@@ -29,6 +29,7 @@ import { Grid, Row, Col } from "../grid";
 import PulseLoader from "react-spinners/PulseLoader";
 import { Checkbox2, useCheckboxState } from "pretty-checkbox-react";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
+import TicketBox from "../payment/ticket_box";
 
 // Module imports
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -80,6 +81,7 @@ const Concert = (props) => {
   const [has_ticket, setHasTicket] = useState(false);
   const [loading, setLoading] = useState(true);
   const [enter_venue_status, setEnterVenueStatus] = useState(false);
+  const [showPaymentBox, setShowPaymentBox] = useState(false);
 
   var concert_date = null;
   var concert_time = null;
@@ -234,7 +236,12 @@ const Concert = (props) => {
   // Go to checkout page for paid concert
   const goToCheckout = () => {
     console.log("go to checkout");
+    setShowPaymentBox(true);
   };
+
+  const goBackToModal = () => {
+    setShowPaymentBox(false);
+  }
 
   // Sends emails to invited users
   const sendEmailInvites = (user_name) => {
@@ -629,13 +636,15 @@ const Concert = (props) => {
                               {username ? (
                                 <div>
                                   {total > 0 ? (
+                                    <div>
                                     <button
                                       className="checkout-button"
                                       onClick={goToCheckout}
                                       disabled={!username}
                                     >
-                                      CHECKOUT
+                                        CHECKOUT
                                     </button>
+                                    </div>
                                   ) : (
                                     <button
                                       className="checkout-button"
@@ -864,7 +873,11 @@ const Concert = (props) => {
               >
                 <Grid className="modal-grid">
                   <Row className="modal-row">
-                    <Col size={4} className="modal-left-col">
+                    {showPaymentBox ? (
+                      <TicketBox amount_value={total} onClick={goBackToModal} registerConcert={addTicket}></TicketBox>
+                    ): (
+                      <Row className="modal-row">
+                     <Col size={4} className="modal-left-col">
                       <div className="purchase-main">
                         <div className="modal-concert-info">
                           <h3 className="concert-info-modal-header">
@@ -911,10 +924,8 @@ const Concert = (props) => {
                                 label="Backstage Pass"
                               />
                             </Col>
-                            {/* <Col size={1}></Col> */}
                           </Row>
                         </div>
-
                         <hr className="break-modal" />
                         <div className="invite-friends">
                           <Row>
@@ -1067,13 +1078,15 @@ const Concert = (props) => {
                                 {username ? (
                                   <div>
                                     {total > 0 ? (
-                                      <button
-                                        className="checkout-button"
-                                        onClick={goToCheckout}
-                                        disabled={!username}
-                                      >
-                                        CHECKOUT
-                                      </button>
+                                      <div>
+                                        <button
+                                          className="checkout-button"
+                                          onClick={goToCheckout}
+                                          disabled={!username}
+                                        >
+                                          CHECKOUT
+                                        </button>
+                                      </div>
                                     ) : (
                                       <button
                                         className="checkout-button"
@@ -1106,7 +1119,9 @@ const Concert = (props) => {
                           </Row>
                         </div>
                       </div>
-                    </Col>
+                    </Col> 
+                    </Row>
+                    )}
                   </Row>
                 </Grid>
               </Rodal>

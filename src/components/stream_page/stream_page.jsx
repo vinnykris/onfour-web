@@ -309,7 +309,7 @@ const StreamPage = () => {
   // RENDERING SECTION
   return (
     <div className="stream-container">
-      {show_start_time ? (
+      {artist_name ? (
         <div className="stream-page-content">
           {width > 600 ? (
             <Grid>
@@ -740,7 +740,7 @@ const StreamPage = () => {
             sizeUnit={"px"}
             size={18}
             color={"#7b6dac"}
-            loading={!show_start_time}
+            loading={!artist_name}
           />
         </div>
         // </div>
