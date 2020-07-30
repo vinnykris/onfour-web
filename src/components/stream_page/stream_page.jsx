@@ -35,10 +35,6 @@ import "./stream_styles.scss";
 // Image imports
 import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
 import ticket1 from "../../images/icons/ticket1.png";
-import ticket2 from "../../images/icons/ticket2.png";
-import ticket3 from "../../images/icons/ticket3.png";
-import ticket4 from "../../images/icons/ticket4.png";
-import ticket5 from "../../images/icons/ticket5.png";
 
 Amplify.configure(awsmobile);
 
@@ -154,8 +150,18 @@ const StreamPage = () => {
   const [is_live, setIsLive] = useState(false);
   const [is_free, setIsFree] = useState(true);
 
-  // Analytics state variables
-  //const [arrival, setArrival] = useState(true);
+  // If the user is logged in/valid, set their auth value to true and track their email
+  // If the user is not logged in/invalid, reset their auth value to false
+  useEffect(()=> {
+    Auth.currentAuthenticatedUser({})
+      .then(async (user) => {
+        setUsername(user.username);
+        setShowChat(true);
+        setAuth(true);
+        setTickets(await getTickets(user.username));
+      })
+      .catch((err) => setAuth(false));
+  },[]);
 
   // Get the start time for countdown_timer
   // Call stream page analtics
@@ -210,16 +216,6 @@ const StreamPage = () => {
   const [username, setUsername] = useState(""); // Username from login
   const [purchasedTickets, setTickets] = useState([]);
 
-  // If the user is logged in/valid, set their auth value to true and track their email
-  // If the user is not logged in/invalid, reset their auth value to false
-  Auth.currentAuthenticatedUser({})
-    .then(async (user) => {
-      setUsername(user.username);
-      setShowChat(true);
-      setAuth(true);
-      setTickets(await getTickets(user.username));
-    })
-    .catch((err) => setAuth(false));
 
   // If the first name for the logged in user's email has not been retrieved yet,
   // query the registration database's table to retrieve the first name filtered

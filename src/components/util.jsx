@@ -63,7 +63,7 @@ export const createUpcomingObject = (data, artist_data) => {
     formatted_time: moment(data.time, "HH:mm:ss").format("h:mm A"),
     month: month_map[data.date.slice(5, 7)],
     day: data.date.slice(8, 10),
-    general_price: data.general_price,
+    price: data.general_price,
     description: artist_data.artist_bio.toString(),
     days_left: days_left,
     genre: artist_data.genre,
