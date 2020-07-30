@@ -8,6 +8,7 @@ import styled from "styled-components";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import moment from "moment";
 // import { Prompt } from "react-router";
+import { useHistory } from "react-router-dom";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -33,6 +34,11 @@ import "./stream_styles.scss";
 
 // Image imports
 import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
+import ticket1 from "../../images/icons/ticket1.png";
+import ticket2 from "../../images/icons/ticket2.png";
+import ticket3 from "../../images/icons/ticket3.png";
+import ticket4 from "../../images/icons/ticket4.png";
+import ticket5 from "../../images/icons/ticket5.png";
 
 Amplify.configure(awsmobile);
 
@@ -48,6 +54,7 @@ const StreamPage = () => {
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat
   const [viewers, setViewers] = useState(0); // Sets number of live viewers on page
+  const history = useHistory();
   // Function passed as prop to join chat
   // const joinSubmit = (name, mode) => {
   //   setChatName(name);
@@ -304,8 +311,6 @@ const StreamPage = () => {
     <div className="stream-container">
       {show_start_time ? (
         <div className="stream-page-content">
-          { is_free || (purchasedTickets.indexOf(concert_id) >= 0) ? (
-            <div>
           {width > 600 ? (
             <Grid>
               <Row>
@@ -313,17 +318,35 @@ const StreamPage = () => {
                 <Col size={7} id="stream_col">
                   <div className="stream-main">
                     <div className="stream-wrapper">
-                      <VideoPlayer
-                        url={
-                          "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                        }
-                        start_time={show_start_time}
-                        artist_name={artist_name}
-                        concert_name={concert_name}
-                        auth={auth}
-                        username={username}
-                        concert_id={concert_id}
-                      />
+                      {is_free || (purchasedTickets.indexOf(concert_id) >= 0) ? (
+                        <VideoPlayer
+                          url={
+                            "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                          }
+                          start_time={show_start_time}
+                          artist_name={artist_name}
+                          concert_name={concert_name}
+                          auth={auth}
+                          username={username}
+                          concert_id={concert_id}
+                        />
+                      ) : (
+                        <div className="buy-ticket-message-container">
+                          <div className="buy-ticket-message-inner-top">
+                            <Row>
+                              <Col size={2}>
+                                <img src={ticket1} className="buy-ticket-img"></img>
+                              </Col>
+                              <Col size={4}>
+                                <Row>
+                                  <h4 className="buy-ticket-text">{"Oh no, your ticket is missing!\nGo get it now"}</h4>
+                                </Row>
+                              </Col>
+                            </Row>
+                          </div>
+                          <button className="buy-ticket-redirect-button"  onClick={() => history.push("/upcoming/"+concert_id)}>ticket</button>
+                        </div>
+                      )}
                       <div className="toggle-chat">
                         <button
                           className="toggle-chat-button"
@@ -646,17 +669,35 @@ const StreamPage = () => {
               <div className="main-column">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
-                    <VideoPlayer
-                      url={
-                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                      }
-                      start_time={show_start_time}
-                      artist_name={artist_name}
-                      concert_name={concert_name}
-                      auth={auth}
-                      username={username}
-                      concert_id={concert_id}
-                    />
+                    {is_free || (purchasedTickets.indexOf(concert_id) >= 0) ? (
+                      <VideoPlayer
+                        url={
+                          "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                        }
+                        start_time={show_start_time}
+                        artist_name={artist_name}
+                        concert_name={concert_name}
+                        auth={auth}
+                        username={username}
+                        concert_id={concert_id}
+                      />
+                    ) : (
+                      <div className="buy-ticket-message-container">
+                          <div className="buy-ticket-message-inner-top">
+                            <Row>
+                              <Col size={2}>
+                                <img src={ticket1} className="buy-ticket-img"></img>
+                              </Col>
+                              <Col size={4}>
+                                <Row>
+                                  <h4 className="buy-ticket-text">{"Oh no, your ticket is missing!\nGo get it now"}</h4>
+                                </Row>
+                              </Col>
+                            </Row>
+                          </div>
+                          <button className="buy-ticket-redirect-button"  onClick={() => history.push("/upcoming/"+concert_id)}>ticket</button>
+                        </div>
+                    )}
                   </div>
                 </div>
                 <div className="mobile-row payment-row-mobile">
@@ -691,13 +732,6 @@ const StreamPage = () => {
               </div>
             </div>
           )}
-            </div>
-          ) : (
-            <div>
-              You have to buy ticket first!
-            </div>
-          )
-          }
         </div>
       ) : (
         // <div className={!show_start_time ? 'parentDisable' : ''} width="100%">
