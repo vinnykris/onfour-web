@@ -35,7 +35,8 @@
 
 .navbar-custom {
   width: 100%;
-  height: 176px;
+  height: 73px;
+  margin-bottom: 103px;
   background-color: none;
   position: relative;
   display: flex;
@@ -45,7 +46,7 @@
   }
   @include respond-to("small") {
     flex: 0 1 131px;
-    // height: 131px;
+    margin-bottom: 0px;
     padding: 0;
     background-color: black;
   }
@@ -54,17 +55,15 @@
 
 .navbar-black {
   width: 100%;
-  height: 176px;
-  background-color: black;
+  height: 73px;
+  background-color: #303030;
   position: relative;
   display: flex;
   @include respond-to("large") {
-    height: 140px;
     padding: 0;
   }
   @include respond-to("small") {
     flex: 0 1 131px;
-    // height: 131px;
     padding: 0;
     background-color: black;
   }
@@ -85,6 +84,13 @@
   @include respond-to("small") {
     display: none;
   }
+}
+
+.white-purple-logo-desktop {
+  width: 54px;
+  height: 55px;
+  float: left;
+  margin-left: 22px;
 }
 
 .onfour-logo-mobile {
@@ -113,9 +119,7 @@
 .nav-page-black,
 .nav-page-white {
   margin: auto;
-  font-size: 1.1rem;
-  font-family: "Heebo", sans-serif;
-  font-weight: $medium-weight;
+  float: left;
   @include respond-to("x-large") {
     font-size: 0.95rem;
   }
@@ -134,6 +138,7 @@
 }
 
 a.nav-page-white {
+  font-family: "Helvetica Neue";
   color: white;
   &:hover {
     cursor: pointer;
@@ -231,6 +236,14 @@ a.nav-page-black {
   width: auto;
 }
 
+.user-icon-desktop {
+  color: rgb(240, 231, 231);
+  height: 35px;
+  width: 38px;
+  padding-right: 11px;
+  padding-bottom: 5px;
+}
+
 .dropdown-menu-profile {
   width: 100px;
   @include respond-to("small") {
@@ -291,12 +304,22 @@ a.nav-page-black {
 }
 
 .sign-out-button-mobile {
-  margin-top: 10%;
-  margin-bottom: 20%;
+  width: 40%;
+  margin: auto;
+  margin-bottom: 5%;
 }
 
 .logged-in-icon {
   margin: auto;
   height: 30%;
   width: auto;
+}
+
+.dropdown-placement {
+  padding-top: 3px;
+  margin-right: 7px;
+}
+
+.user-dropdown-menu {
+  background-color: #282828;
 }

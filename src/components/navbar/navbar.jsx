@@ -22,10 +22,12 @@ import { Grid, Row, Col } from "../grid";
 import LoginSwitcher from "../sign_in_mobile/login_switcher";
 import LoggedInUser from "../sign_in_mobile/logged_in_user";
 import { useWindowDimensions } from "../custom_hooks";
+import history from "../../history";
 
 // Image imports
 import new_logo_white from "../../images/logos/new_logo_white.png";
 import login_icon from "../../images/icons/login.png";
+import desktop_icon from "../../images/logos/white-purple-logo.png";
 
 // Styles imports
 import "./navbar_styles.scss";
@@ -38,6 +40,7 @@ const NavBar = () => {
   let navbar_custom = "navbar-black"; // Default navbar SASS class
   let style = "nav-page-white"; // Default navbar color style
   let icon = new_logo_white; // Default navbar icon
+  let desktop_logo = desktop_icon; // New Navbar Desktop icon
   let location = useLocation(); // Get location of user navigation
 
   const [dropdown_open, setDropdownOpen] = useState(false); // Tracks drop down menu
@@ -63,29 +66,21 @@ const NavBar = () => {
       setUsername(user.username);
       setProfileURL("");
     })
-    // .then((user) => setUsername(user.username))
-    // .then((user) => setAuth(true))
-    // .then((user) => closeMenu())
     .catch((err) => setAuth(false));
-  
 
-  // If the first and last name for the logged in user's email has not been retrieved yet,
-  // query the registration database's table to retrieve the first and last name filtered
-  // for the specific email and assign that value to first and last
-  // if (first === "" && last === "" && user_email !== "") {
-  //   API.graphql(
-  //     graphqlOperation(queries.query_name, {
-  //       filter: { email: { eq: user_email } },
-  //     })
-  //   ).then((data) => {
-  //     setFirst(
-  //       data.data.listCreateOnfourRegistrations.items[0].first.toUpperCase()
-  //     );
-  //     setLast(
-  //       data.data.listCreateOnfourRegistrations.items[0].last.toUpperCase()
-  //     );
-  //   });
-  // }
+  // Fetching the first name of a signed in user
+  const getUserData = async () => {
+    const user_data = await API.graphql(
+      graphqlOperation(queries.get_user_data, {
+        input: username,
+      })
+    );
+    setFirst(user_data.data.getCreateOnfourRegistration.first);
+  };
+
+  if (username) {
+    getUserData();
+  }
 
   // Change styles if on about page
   if (location.pathname === "/") {
@@ -123,8 +118,10 @@ const NavBar = () => {
     closeMenu("nav-signout");
   };
 
+  // On mobile, redirects to profile page and closes the modal
   const openProfile = () => {
-    console.log("clicked go to profile");
+    history.push("/profile");
+    closeMenu("nav-signout");
   };
 
   return (
@@ -250,26 +247,26 @@ const NavBar = () => {
               <div className="signin-content">
                 <Row>
                   <div className="sign-out-container">
-                    <Col size={1}>
-                      <div className="greeting-mobile">
-                        <p className="greeting-mobile-text">
-                          HI, {username.toUpperCase()}{" "}
-                        </p>
-                      </div>
-                      <button
-                        className="sign-out-button-mobile"
-                        onClick={openProfile}
-                      >
-                        MY PROFILE
-                      </button>
-                      <button
-                        className="sign-out-button-mobile"
-                        onClick={signOutMobile}
-                      >
-                        SIGN OUT
-                      </button>
-                    </Col>
+                    <div className="greeting-mobile">
+                      <p className="greeting-mobile-text">Hi, {first}! </p>
+                    </div>
                   </div>
+                </Row>
+                <Row className="mobile-dropdown-row">
+                  <button
+                    className="sign-out-button-mobile"
+                    onClick={openProfile}
+                  >
+                    MY PROFILE
+                  </button>
+                </Row>
+                <Row className="mobile-dropdown-row">
+                  <button
+                    className="sign-out-button-mobile"
+                    onClick={signOutMobile}
+                  >
+                    SIGN OUT
+                  </button>
                 </Row>
               </div>
             </Grid>
@@ -325,43 +322,33 @@ const NavBar = () => {
           {/* DESKTOP CODE */}
           <Grid className="desktop-grid">
             <Row className="desktop-row">
-              <Col size={1}>
-                <NavLink to="/archive" className={style}>
-                  PAST SHOWS
-                </NavLink>
-              </Col>
-              <Col size={1}>
-                <NavLink to="/artists" className={style}>
-                  FOR ARTISTS
-                </NavLink>
-              </Col>
-              <Col size={1}>
-                <NavLink exact to="/" className={style}>
-                  ABOUT US
-                </NavLink>
-              </Col>
-              <Col size={1}>
+              <Col size={3.5}>
                 <NavLink exact to="/">
                   {" "}
                   <img
-                    className="onfour-logo-desktop"
-                    src={icon}
+                    className="white-purple-logo-desktop"
+                    src={desktop_logo}
                     width="auto"
                     alt="nav-logo"
                   ></img>
                 </NavLink>
               </Col>
-              <Col size={1}>
+              <Col size={0.8}>
+                <NavLink exact to="/" className={style}>
+                  About Us
+                </NavLink>
+              </Col>
+              <Col size={0.87}>
+                <NavLink to="/artists" className={style}>
+                  For Artists
+                </NavLink>
+              </Col>
+              <Col size={0.73}>
                 <NavLink to="/stream" className={style}>
-                  STREAM
+                  Stream
                 </NavLink>
               </Col>
-              <Col size={1}>
-                <NavLink to="/upcoming" className={style}>
-                  UPCOMING
-                </NavLink>
-              </Col>
-              <Col size={1}>
+              <Col size={0.5}>
                 {(() => {
                   if (!auth) {
                     return (
@@ -372,26 +359,29 @@ const NavBar = () => {
                         }}
                         className={style}
                       >
-                        LOGIN
+                        Sign In
                       </NavLink>
                     );
                   } else {
                     return (
-                      <Dropdown isOpen={dropdown_open} toggle={toggle}>
+                      <Dropdown
+                        isOpen={dropdown_open}
+                        toggle={toggle}
+                        className="dropdown-placement"
+                      >
                         <div className="toggle-color">
-                          <DropdownToggle
-                            className="toggle-greeting"
-                            tag="a"
-                            caret
-                          >
-                            HI, {username.toUpperCase()}
+                          <DropdownToggle tag="a" caret className={style}>
+                            <img
+                              className="user-icon-desktop"
+                              src={login_icon}
+                              alt="profile-icon"
+                            ></img>
+                            {first} {""}
+                            {/* {first} */}
                           </DropdownToggle>
                         </div>
                         <DropdownMenu right>
-                          <DropdownItem
-                            className="sign-out-button"
-                            onClick={openProfile}
-                          >
+                          <DropdownItem className="sign-out-button">
                             <NavLink
                               // to={{
                               //   pathname: "/profile",
