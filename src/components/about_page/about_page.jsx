@@ -55,6 +55,11 @@ const AboutPage = () => {
     setScroll(false);
   }
 
+  const scrollDown = () => {
+    console.log("heyhey");
+    window.scroll({ top: height, behavior: "smooth" });
+  }
+
   // Add in Analytics that about page was visited
   useEffect(() => {
     aboutPageVisit();
@@ -228,6 +233,11 @@ const AboutPage = () => {
                     </button>
                   </Row>
                 </Col>
+              </Row>
+              <Row>
+                <p 
+                  className="fa fa-chevron-down go-down-button" 
+                  onClick={scrollDown}></p>
               </Row>
             </div>
           </Row>
