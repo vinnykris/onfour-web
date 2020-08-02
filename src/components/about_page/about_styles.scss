@@ -75,7 +75,7 @@
 .banner-video {
   width: 100%;
   object-fit: cover;
-  height: 100vh;
+  height: 115vh;
 }
 .banner-header-desktop {
   @include respond-to("small") {

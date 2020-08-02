@@ -124,6 +124,11 @@ const NavBar = () => {
     closeMenu("nav-signout");
   };
 
+  // On desktop, redirects to profile page
+  const openProfileDesktop = () => {
+    history.push("/profile");
+  };
+
   return (
     <div className={navbar_custom}>
       {width <= 600 ? (
@@ -333,22 +338,22 @@ const NavBar = () => {
                   ></img>
                 </NavLink>
               </Col>
-              <Col size={0.8}>
+              <Col size={0.6}>
                 <NavLink exact to="/" className={style}>
                   About Us
                 </NavLink>
               </Col>
-              <Col size={0.87}>
+              <Col size={0.65}>
                 <NavLink to="/artists" className={style}>
                   For Artists
                 </NavLink>
               </Col>
-              <Col size={0.73}>
+              <Col size={0.53}>
                 <NavLink to="/stream" className={style}>
                   Stream
                 </NavLink>
               </Col>
-              <Col size={0.5}>
+              <Col size={0.42}>
                 {(() => {
                   if (!auth) {
                     return (
@@ -380,26 +385,21 @@ const NavBar = () => {
                             {/* {first} */}
                           </DropdownToggle>
                         </div>
-                        <DropdownMenu right>
-                          <DropdownItem className="sign-out-button">
-                            <NavLink
-                              // to={{
-                              //   pathname: "/profile",
-                              //   search: `?name=${username}`,
-                              //   state: {
-                              //     name: username,
-                              //   },
-                              // }}
-                              to="/profile"
-                            >
-                              MY PROFILE
-                            </NavLink>
+                        <DropdownMenu
+                          className="user-dropdown-menu"
+                          positionFixed="false"
+                        >
+                          <DropdownItem
+                            className="sign-out-button"
+                            onClick={openProfileDesktop}
+                          >
+                            Profile
                           </DropdownItem>
                           <DropdownItem
                             className="sign-out-button"
                             onClick={signOut}
                           >
-                            SIGN OUT
+                            Sign Out
                           </DropdownItem>
                         </DropdownMenu>
                       </Dropdown>
