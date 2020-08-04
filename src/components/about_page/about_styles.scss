@@ -134,7 +134,7 @@
   font-weight: $medium-weight;
   text-align: left;
   width: 100%;
-  font-size: 4vh;
+  font-size: 1.8vw;
 }
 
 .upcoming-description {
@@ -156,15 +156,17 @@
   color: rgb(0, 0, 0);
   font-size: 1.2vw;
   font-weight: bold;
-  padding: 6px 15px 6px 15px;
+  //padding: 6px 15px;
+  //padding: 6px 15px 6px 15px;
+  padding: 3% 6%;
 }
 
 .go-down-button {
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 5vh;
+  font-size: 3vh;
   color: white;
   opacity: 0.7;
   &:hover {

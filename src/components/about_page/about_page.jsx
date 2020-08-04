@@ -55,10 +55,10 @@ const AboutPage = () => {
     setScroll(false);
   }
 
-  const scrollDown = () => {
+  const scrollDown = (section_number) => {
     console.log("heyhey");
-    window.scroll({ top: height, behavior: "smooth" });
-  }
+    window.scroll({ top: height * section_number, behavior: "smooth" });
+  };
 
   // Add in Analytics that about page was visited
   useEffect(() => {
@@ -221,9 +221,9 @@ const AboutPage = () => {
                   <Row>
                     <div className="upcoming-description">
                       {most_recent_concert_artist
-                        ? most_recent_concert_artist.artist_name.toUpperCase() +
+                        ? most_recent_concert_artist.artist_name +
                           " - " +
-                          most_recent_concert.concert_name.toUpperCase()
+                          most_recent_concert.concert_name
                         : "loading..."}
                     </div>
                   </Row>
@@ -235,9 +235,10 @@ const AboutPage = () => {
                 </Col>
               </Row>
               <Row>
-                <p 
-                  className="fa fa-chevron-down go-down-button" 
-                  onClick={scrollDown}></p>
+                <p
+                  className="fa fa-chevron-down go-down-button"
+                  onClick={() => scrollDown(1)}
+                ></p>
               </Row>
             </div>
           </Row>
@@ -276,6 +277,12 @@ const AboutPage = () => {
                 </Col>
               </Row> */}
             </Col>
+            <Row>
+              <p
+                className="fa fa-chevron-down go-down-button"
+                onClick={() => scrollDown(2)}
+              ></p>
+            </Row>
           </Row>
           <Row className="view-height-row why-perform-about">
             <Row
@@ -309,6 +316,12 @@ const AboutPage = () => {
                 src={"https://onfour-media.s3.amazonaws.com/singing+photo.jpg"}
                 alt="singer"
               ></img>
+            </Row>
+            <Row>
+              <p
+                className="fa fa-chevron-down go-down-button"
+                onClick={() => scrollDown(3)}
+              ></p>
             </Row>
           </Row>
           <Row>

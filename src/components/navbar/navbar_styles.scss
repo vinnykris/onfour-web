@@ -166,11 +166,11 @@
   }
   @include respond-to("large") {
     font-size: 0.8rem;
-    margin: 0px !important;
+    //margin: 0px !important;
   }
   @include respond-to("medium") {
     font-size: 0.55rem;
-    margin: 0px !important;
+    //margin: 0px !important;
   }
 }
 
