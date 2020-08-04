@@ -11,7 +11,6 @@ import NavBar from "./components/navbar/navbar";
 import About from "./components/about_page/about_page";
 import StreamPage from "./components/stream_page/stream_page";
 import UpcomingShowPage from "./components/upcoming_show_page/upcoming_show";
-import Ticket from "./components/payment/payment_box";
 import ArchivePage from "./components/archive_page/archive_page";
 import ArtistsPage from "./components/artist_page/artist_page";
 import Footer from "./components/footer/footer";
@@ -52,23 +51,15 @@ function App() {
           <Route exact path="/stream" component={StreamPage} />
           <Route exact path="/upcoming" component={UpcomingShowPage} />
           <Route exact path={`/upcoming/:showID`} component={Concert} />
-          <Route exact path="/ticket" component={Ticket} />
           <Route exact path="/artists" component={ArtistsPage} />
           <Route exact path="/forgot" component={Forgot} />
           <Route exact path="/soundcheck" component={SoundCheck} />
-          <Route path="/profile" component={Profile} />
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/form" component={ArtistForm} />
           <Route exact path="/privacy-policy" component={PrivacyPage} />
           <Route exact path="/terms-of-service" component={TermsOfService} />
-          <Route path="/archive" component={ArchivePage} />
-          <Route path="/stream" component={StreamPage} />
-          <Route path="/upcoming" component={UpcomingShowPage} />
-          <Route path="/ticket" component={Ticket} />
-          <Route path="/artists" component={ArtistsPage} />
-          <Route path="/forgot" component={Forgot} />
-          <Route path="/soundcheck" component={SoundCheck} />
           <Route path="*" component={NotFoundPage}/>
         </Switch>
         <Footer />

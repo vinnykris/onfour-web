@@ -1,26 +1,8 @@
-// PAYMENT COMPONENT STYLING
+// TICKET PAYMENT COMPONENT STYLING
 
 @import "../../styles";
 
 // card payment section
-.payment-modal {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  // padding-top: 35vh;
-  z-index: 10;
-  margin: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.payment-bar {
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  background-color: none;
-  position: relative;
-}
 
 .ticket-bar {
   width: 100%;
@@ -34,17 +16,6 @@
 .ticket-inner-container {
   height: 100%; 
   width: 100%;
-}
-
-.payment-form {
-  background-color: whitesmoke;
-  // border: 1px solid #30309663;
-  width: 100%;
-  max-width: 450px;
-  padding: 20px 40px 20px 40px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0px 3px 5px rgb(238, 237, 237);
 }
 
 .ticket-checkout-header {
@@ -85,19 +56,6 @@
 .process-text {
   margin: 0px;
   padding: 0px;
-}
-.payment-button {
-  width: 20%;
-  // height: 20%;
-  background-color: #303096;
-  color: white;
-  align-items: center;
-  text-align: center;
-  padding: 1vh 0.7vw;
-  border: none;
-  cursor: pointer;
-  border-radius: 3px;
-  box-shadow: 0px 3px 5px rgb(202, 202, 202);
 }
 
 .ticket-form-input {
@@ -154,34 +112,3 @@
   margin: 0px;
 }
 
-//currency input
-.currency-form-input {
-  width: 100%;
-  font-size: 100%;
-  padding: 11px 15px 11px 8px;
-  color: #303096;
-  background-color: transparent;
-  border-radius: 5px;
-  //   border: none;
-  animation: 2ms void-animation-out;
-  &::placeholder {
-    color: #30309663;
-  }
-}
-
-.ticket-currency-form-input {
-  width: 100%;
-  font-size: 100%;
-  padding: 11px 15px 11px 8px;
-  color: #794D94;
-  background-color: #794d9427;
-  border-radius: 3px;
-  border: none;
-  animation: 2ms void-animation-out;
-  &::placeholder {
-    color: #794d9481;
-  }
-  &:focus {
-        border: 2px solid #794D94;
-  }
-}

@@ -6,15 +6,13 @@ import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import stripeTokenHandler from "./stripe";
 
 // Component Imports
-import FormField from "./ticket_form_field";
-import CurrencyField from "./ticket_currency_field";
 import { useInputValue } from "../custom_hooks";
 
 // AWS Imports
 import { Analytics } from "aws-amplify";
 
 // Styles Imports
-import "./payment_styles.scss";
+import "./ticket_box_styles.scss";
 
 // PaymentBox is a wrapper component for CheckoutForm
 // It is used for cleaner layout
