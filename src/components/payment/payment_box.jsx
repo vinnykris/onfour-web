@@ -185,7 +185,7 @@ const CheckoutForm = () => {
                     disabled={!stripe}
                     onClick={needConfirmation}
                   >
-                    Pay
+                    Pay ${amount_value}
                   </button>
                 ) : (
                   <div>

@@ -339,7 +339,7 @@ const StreamPage = () => {
                                 <div className="buy-ticket-text-container">
                                   <Row>
                                     <h4 className="buy-ticket-text">
-                                      It looks like your ticket is missing...
+                                      It looks like your ticket is missing.
                                     </h4>
                                   </Row>
                                   <Row>
@@ -710,7 +710,7 @@ const StreamPage = () => {
                                 <div className="buy-ticket-text-container">
                                   <Row>
                                     <h4 className="buy-ticket-text">
-                                      It looks like your ticket is missing...
+                                      It looks like your ticket is missing.
                                     </h4>
                                   </Row>
                                   <Row>
