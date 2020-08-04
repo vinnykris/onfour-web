@@ -325,89 +325,6 @@ const NavBar = () => {
       ) : (
         <div className="main-content desktop-nav-main">
           {/* DESKTOP CODE */}
-          {/* <Grid className="desktop-grid">
-            <Row className="desktop-row">
-              <Col size={3.5}>
-                <NavLink exact to="/">
-                  {" "}
-                  <img
-                    className="white-purple-logo-desktop"
-                    src={desktop_logo}
-                    width="auto"
-                    alt="nav-logo"
-                  ></img>
-                </NavLink>
-              </Col>
-              <Col size={0.6}>
-                <NavLink exact to="/" className={style}>
-                  About Us
-                </NavLink>
-              </Col>
-              <Col size={0.65}>
-                <NavLink to="/artists" className={style}>
-                  For Artists
-                </NavLink>
-              </Col>
-              <Col size={0.53}>
-                <NavLink to="/stream" className={style}>
-                  Stream
-                </NavLink>
-              </Col>
-              <Col size={0.42}>
-                {(() => {
-                  if (!auth) {
-                    return (
-                      <NavLink
-                        to={{
-                          pathname: "/login",
-                          state: { current: location },
-                        }}
-                        className={style}
-                      >
-                        Sign In
-                      </NavLink>
-                    );
-                  } else {
-                    return (
-                      <Dropdown
-                        isOpen={dropdown_open}
-                        toggle={toggle}
-                        className="dropdown-placement"
-                      >
-                        <div className="toggle-color">
-                          <DropdownToggle tag="a" caret className={style}>
-                            <img
-                              className="user-icon-desktop"
-                              src={login_icon}
-                              alt="profile-icon"
-                            ></img>
-                            {first} {""}
-                          </DropdownToggle>
-                        </div>
-                        <DropdownMenu
-                          className="user-dropdown-menu"
-                          positionFixed="false"
-                        >
-                          <DropdownItem
-                            className="sign-out-button"
-                            onClick={openProfileDesktop}
-                          >
-                            Profile
-                          </DropdownItem>
-                          <DropdownItem
-                            className="sign-out-button"
-                            onClick={signOut}
-                          >
-                            Sign Out
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
-                    );
-                  }
-                })()}
-              </Col>
-            </Row>
-          </Grid> */}
           <div className="onfour-nav-logo">
             <NavLink exact to="/">
               {" "}
@@ -433,46 +350,50 @@ const NavBar = () => {
               Upcoming
             </NavLink>
             {!auth ? (
-              <NavLink
-                to={{
-                  pathname: "/login",
-                  state: { current: location },
-                }}
-                className={style + " sign-in-link"}
-              >
-                Log In
-              </NavLink>
-            ) : (
-              <Dropdown
-                isOpen={dropdown_open}
-                toggle={toggle}
-                className="dropdown-placement"
-              >
-                <div className="toggle-color">
-                  <DropdownToggle tag="a" caret className={style}>
-                    <img
-                      className="user-icon-desktop"
-                      src={login_icon}
-                      alt="profile-icon"
-                    ></img>
-                    {first} {""}
-                  </DropdownToggle>
-                </div>
-                <DropdownMenu
-                  className="user-dropdown-menu"
-                  positionFixed="false"
+              <div className="login-link-container">
+                <NavLink
+                  to={{
+                    pathname: "/login",
+                    state: { current: location },
+                  }}
+                  className="sign-in-link"
                 >
-                  <DropdownItem
-                    className="sign-out-button"
-                    onClick={openProfileDesktop}
+                  Log In
+                </NavLink>
+              </div>
+            ) : (
+              <div className="login-link-container logged-in">
+                <Dropdown
+                  isOpen={dropdown_open}
+                  toggle={toggle}
+                  className="dropdown-placement"
+                >
+                  <div className="toggle-color">
+                    <DropdownToggle tag="a" caret>
+                      <img
+                        className="user-icon-desktop"
+                        src={login_icon}
+                        alt="profile-icon"
+                      ></img>
+                      {first} {""}
+                    </DropdownToggle>
+                  </div>
+                  <DropdownMenu
+                    className="user-dropdown-menu"
+                    positionFixed="false"
                   >
-                    Profile
-                  </DropdownItem>
-                  <DropdownItem className="sign-out-button" onClick={signOut}>
-                    Sign Out
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
+                    <DropdownItem
+                      className="sign-out-button"
+                      onClick={openProfileDesktop}
+                    >
+                      Profile
+                    </DropdownItem>
+                    <DropdownItem className="sign-out-button" onClick={signOut}>
+                      Sign Out
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
             )}
           </div>
         </div>
