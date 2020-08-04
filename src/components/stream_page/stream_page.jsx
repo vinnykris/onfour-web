@@ -152,7 +152,7 @@ const StreamPage = () => {
 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
-  useEffect(()=> {
+  useEffect(() => {
     Auth.currentAuthenticatedUser({})
       .then(async (user) => {
         setUsername(user.username);
@@ -161,7 +161,7 @@ const StreamPage = () => {
         setTickets(await getTickets(user.username));
       })
       .catch((err) => setAuth(false));
-  },[]);
+  }, []);
 
   // Get the start time for countdown_timer
   // Call stream page analtics
@@ -187,10 +187,10 @@ const StreamPage = () => {
     setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
     setShowTime(
       info_list[0].date +
-      " " +
-      (hour > 12
-        ? (hour - 12).toString() + minutes + "PM"
-        : hour < 12
+        " " +
+        (hour > 12
+          ? (hour - 12).toString() + minutes + "PM"
+          : hour < 12
           ? info_list[0].time.slice(0, 5) + "AM"
           : info_list[0].time.slice(0, 5) + "PM")
     );
@@ -198,7 +198,7 @@ const StreamPage = () => {
     getArtistInfo(info_list[0].artist_id);
     setConcertID(info_list[0].id);
     setIsLive(info_list[0].is_live);
-    setIsFree((info_list[0].general_price === 0));
+    setIsFree(info_list[0].general_price === 0);
   };
 
   const getArtistInfo = async (artist_id) => {
@@ -215,7 +215,6 @@ const StreamPage = () => {
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
   const [purchasedTickets, setTickets] = useState([]);
-
 
   // If the first name for the logged in user's email has not been retrieved yet,
   // query the registration database's table to retrieve the first name filtered
@@ -314,7 +313,7 @@ const StreamPage = () => {
                 <Col size={7} id="stream_col">
                   <div className="stream-main">
                     <div className="stream-wrapper">
-                      {is_free || (purchasedTickets.indexOf(concert_id) >= 0) ? (
+                      {is_free || purchasedTickets.indexOf(concert_id) >= 0 ? (
                         <VideoPlayer
                           url={
                             "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
@@ -329,18 +328,37 @@ const StreamPage = () => {
                       ) : (
                         <div className="buy-ticket-message-container">
                           <div className="buy-ticket-message-inner-top">
-                            <Row>
+                            <Row className="buy-ticket-message-row">
                               <Col size={2}>
-                                <img src={ticket1} className="buy-ticket-img"></img>
+                                <img
+                                  src={ticket1}
+                                  className="buy-ticket-img"
+                                ></img>
                               </Col>
-                              <Col size={4}>
-                                <Row>
-                                  <h4 className="buy-ticket-text">{"Oh no, your ticket is missing!\nGo get it now"}</h4>
-                                </Row>
+                              <Col size={4} className="buy-ticket-text-col">
+                                <div className="buy-ticket-text-container">
+                                  <Row>
+                                    <h4 className="buy-ticket-text">
+                                      It looks like your ticket is missing...
+                                    </h4>
+                                  </Row>
+                                  <Row>
+                                    <h5 className="buy-ticket-text">
+                                      Go get your ticket below!
+                                    </h5>
+                                  </Row>
+                                </div>
                               </Col>
                             </Row>
                           </div>
-                          <button className="buy-ticket-redirect-button"  onClick={() => history.push("/upcoming/"+concert_id)}>ticket</button>
+                          <button
+                            className="buy-ticket-redirect-button"
+                            onClick={() =>
+                              history.push("/upcoming/" + concert_id)
+                            }
+                          >
+                            Get Ticket
+                          </button>
                         </div>
                       )}
                       <div className="toggle-chat">
@@ -665,7 +683,7 @@ const StreamPage = () => {
               <div className="main-column">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
-                    {is_free || (purchasedTickets.indexOf(concert_id) >= 0) ? (
+                    {is_free || purchasedTickets.indexOf(concert_id) >= 0 ? (
                       <VideoPlayer
                         url={
                           "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
@@ -679,20 +697,41 @@ const StreamPage = () => {
                       />
                     ) : (
                       <div className="buy-ticket-message-container">
+                        <div className="buy-ticket-message-inner">
                           <div className="buy-ticket-message-inner-top">
                             <Row>
                               <Col size={2}>
-                                <img src={ticket1} className="buy-ticket-img"></img>
+                                <img
+                                  src={ticket1}
+                                  className="buy-ticket-img"
+                                ></img>
                               </Col>
-                              <Col size={4}>
-                                <Row>
-                                  <h4 className="buy-ticket-text">{"Oh no, your ticket is missing!\nGo get it now"}</h4>
-                                </Row>
+                              <Col size={4} className="buy-ticket-text-col">
+                                <div className="buy-ticket-text-container">
+                                  <Row>
+                                    <h4 className="buy-ticket-text">
+                                      It looks like your ticket is missing...
+                                    </h4>
+                                  </Row>
+                                  <Row>
+                                    <h5 className="buy-ticket-text">
+                                      Go get your ticket below!
+                                    </h5>
+                                  </Row>
+                                </div>
                               </Col>
                             </Row>
                           </div>
-                          <button className="buy-ticket-redirect-button"  onClick={() => history.push("/upcoming/"+concert_id)}>ticket</button>
+                          <button
+                            className="buy-ticket-redirect-button"
+                            onClick={() =>
+                              history.push("/upcoming/" + concert_id)
+                            }
+                          >
+                            Get Ticket
+                          </button>
                         </div>
+                      </div>
                     )}
                   </div>
                 </div>
