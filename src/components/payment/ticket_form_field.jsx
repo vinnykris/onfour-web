@@ -14,6 +14,7 @@ const FormFieldContainer = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   margin-right: 3%;
+  height: 15%;
 `;
 
 // Style defination for the label of each form field
@@ -33,16 +34,16 @@ const Input = styled.input`
   width: 100%;
   font-size: 100%;
   padding: 11px 15px 11px 8px;
-  color: #794D94;
-  background-color: #794d9427;
+  color: #000000;
+  background-color:  #FFFFFF;
   border: none;
   border-radius: 3px;
   animation: 2ms void-animation-out;
   &::placeholder {
-    color: #794d9481;
+    color: #C4C4C4;
   }
   &:focus {
-        border: 2px solid #794D94;
+    border: none;
   }
 `;
 
@@ -50,7 +51,7 @@ const Input = styled.input`
 const FormField = ({ label, type, name, placeholder, value, onChange, required }) => {
     return (
         <FormFieldContainer>
-            <Label htmlFor={name}>{label}</Label>
+            {/* <Label htmlFor={name}>{label}</Label> */}
             <Input name={name} type={type} placeholder={placeholder} value={value} onChange={onChange} required={required} />
         </FormFieldContainer>
     );

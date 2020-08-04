@@ -16,6 +16,7 @@ const FormFieldContainer = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   margin-right: 3%;
+  height: 15%;
 `;
 
 // Style defination for the label of each form field
@@ -23,7 +24,7 @@ const Label = styled.label`
   width: 20%;
   min-width: 70px;
   padding: 11px 0;
-  color: #794D94;
+  color: #000000;
   font-size: 100%;
   overflow: hidden;
   text-overflow: ellipsis;

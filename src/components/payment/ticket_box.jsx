@@ -8,6 +8,7 @@ import stripeTokenHandler from "./stripe";
 // Component Imports
 import FormField from "./ticket_form_field";
 import CurrencyField from "./ticket_currency_field";
+import { useInputValue } from "../custom_hooks";
 
 // AWS Imports
 import { Analytics } from "aws-amplify";
@@ -17,7 +18,7 @@ import "./payment_styles.scss";
 
 // PaymentBox is a wrapper component for CheckoutForm
 // It is used for cleaner layout
-const TicketBox = ({amount_value, onClick, registerConcert}) => {
+const TicketBox = ({amount_value, onClick, registerConcert, header}) => {
     // Stripe constants
     const stripe = useStripe();
     const elements = useElements();
@@ -29,23 +30,24 @@ const TicketBox = ({amount_value, onClick, registerConcert}) => {
     const [display_err, setDisplayErr] = useState(false); // Variable to display error message
     const [waiting, setWaiting] = useState(false); // Variable to display processing message
 
-    // State variables for the information inside payment form
-    const [name, setName] = useState(""); // The input username
-    const [email, setEmail] = useState(""); // The input user's email
+    // Input form values
+    const name = useInputValue("");
+    const email = useInputValue("");
 
     // Style defination for card information input section
     const iframeStyles = {
         base: {
-            color: "#794D94",
+            color: "#000000",
+            backgrondColor: "#FFFFFF",
             fontSize: "16px",
-            iconColor: "#794D94",
+            iconColor: "#C4C4C4",
             "::placeholder": {
-                color: "#794D9463",
+                color: "#C4C4C4",
             },
         },
         invalid: {
             iconColor: "#ed586e",
-            color: "##ed586e",
+            color: "#ed586e",
         },
         complete: {
             iconColor: "#08c43a",
@@ -57,30 +59,6 @@ const TicketBox = ({amount_value, onClick, registerConcert}) => {
         iconStyle: "solid",
         style: iframeStyles,
         hidePostalCode: true,
-    };
-
-    // This function set needConfirm to false
-    // It is called after the user clicks the PAY button
-    const needConfirmation = (event) => {
-        event.preventDefault();
-        if (!stripe || !elements) {
-            // Stripe.js has not yet loaded.
-            // Make sure to disable form submission until Stripe.js has loaded.
-            return;
-        }
-        setNeedConfirm(false);
-    };
-
-    // This function gets called when user closed the payment modal
-    // It reset the status of the payment modal back to original
-    const resetPayment = (event) => {
-        event.preventDefault();
-        setPayed(false);
-        setDisplayErr(false);
-        setNeedConfirm(true);
-        setWaiting(false);
-        setName("");
-        setEmail("");
     };
 
     // This function gets called after user clicked the CONFIRM button
@@ -111,8 +89,8 @@ const TicketBox = ({amount_value, onClick, registerConcert}) => {
             const payment_result = await stripeTokenHandler(
                 result.token,
                 Math.round(amount_value * 100),
-                name,
-                email
+                name.value,
+                email.value
             );
             setMessage(payment_result);
             if (payment_result === "Charge processed successfully!") {
@@ -131,75 +109,63 @@ const TicketBox = ({amount_value, onClick, registerConcert}) => {
 
     return (
         <div className="ticket-bar">
-            <div>
+            <div className="ticket-inner-container">
+                <div className="ticket-checkout-header">
+                    <div className="ticket-header-container">
+                        <h5>{header}</h5>
+                    </div> 
+                </div>
                 <form id="ticket" className="ticket-form" onSubmit={submitPayment}>
                     {(() => {
                         if (!payed) {
                             return (
                                 <div>
-                                    {display_err && <p className="error-msg">{payment_message}</p>}
-                                    <CurrencyField
-                                        name="amount"
-                                        label="Amount"
-                                        value={amount_value}
-                                    />
-                                    <FormField
+                                    {display_err ? <p className="error-msg">{payment_message}</p> : <br></br>}
+                                    <input
                                         name="name"
                                         label="Name"
-                                        type="text"
-                                        placeholder="Jane Doe"
-                                        value={name}
-                                        onChange={(event) => setName(event.target.value)}
+                                        type="name"
+                                        placeholder="Cardholder Name"
+                                        className="ticket-form-input short-width-input"
                                         required
+                                        {...name}
                                     />
-                                    <FormField
+                                    <input
                                         name="email"
                                         label="Email"
                                         type="email"
-                                        placeholder="jane.doe@example.com"
-                                        value={email}
-                                        onChange={(event) => setEmail(event.target.value)}
+                                        placeholder="Email for the Receipt"
+                                        className="ticket-form-input short-width-input"
                                         required
+                                        {...email}
                                     />
+                                    <div className="ticket-form-input">
+                                        <CardElement options={cardElementOpts} />
+                                    </div>
                                     <br></br>
-                                    <CardElement options={cardElementOpts} />
-                                    <br></br>
-                                    {/* {need_confirm ? (
-                                        <button
-                                            className="ticket-button"
-                                            type="toConfirm"
-                                            disabled={!stripe}
-                                            onClick={needConfirmation}
-                                        >
-                                            Pay
-                                        </button>
-                                    ) : ( */}
-                                            <div>
-                                                {waiting ? (
-                                                    <div>
-                                                        <p className="process-text">Processing</p>
-                                                    </div>
-                                                ) : (
-                                                        <div>
-                                                            <button
-                                                                form="none"
-                                                                className="ticket-button"
-                                                                onClick={onClick}
-                                                            >
-                                                                Go Back
-                                                            </button>
-                                                            <button
-                                                                form="ticket"
-                                                                className="ticket-button"
-                                                                type="submit"
-                                                                disabled={!stripe}
-                                                            >
-                                                                Pay
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                            </div>
-                                        {/* )} */}
+                                    {waiting ? (
+                                        <div>
+                                            <p className="process-text">Processing</p>
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <button
+                                                form="none"
+                                                className="ticket-button"
+                                                onClick={onClick}
+                                            >
+                                                GO BACK
+                                            </button>
+                                            <button
+                                                form="ticket"
+                                                className="ticket-button"
+                                                type="submit"
+                                                disabled={!stripe}
+                                            >
+                                                PAY
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             );
                         } else {

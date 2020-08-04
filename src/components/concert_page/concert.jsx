@@ -448,7 +448,7 @@ const Concert = (props) => {
               >
                 <Grid className="modal-grid">
                   {showPaymentBox ? (
-                      <TicketBox amount_value={total} onClick={goBackToModal} registerConcert={addTicket}></TicketBox>
+                      <TicketBox amount_value={total} onClick={goBackToModal} registerConcert={addTicket} header={concert_info.artist_name + ": " + concert_info.concert_name}></TicketBox>
                   ): (
                     <div className="mobile-rodal">
                       <div className="purchase-main">
@@ -878,7 +878,7 @@ const Concert = (props) => {
                 <Grid className="modal-grid">
                   <Row className="modal-row">
                     {showPaymentBox ? (
-                      <TicketBox amount_value={total} onClick={goBackToModal} registerConcert={addTicket}></TicketBox>
+                          <TicketBox amount_value={total} onClick={goBackToModal} registerConcert={addTicket} header={concert_info.artist_name + ": " + concert_info.concert_name}></TicketBox>
                     ): (
                       <Row className="modal-row">
                      <Col size={4} className="modal-left-col">
