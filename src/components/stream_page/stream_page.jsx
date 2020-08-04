@@ -313,7 +313,9 @@ const StreamPage = () => {
                 <Col size={7} id="stream_col">
                   <div className="stream-main">
                     <div className="stream-wrapper">
-                      {is_free || purchasedTickets.indexOf(concert_id) >= 0 ? (
+                      {is_free ||
+                      (purchasedTickets &&
+                        purchasedTickets.indexOf(concert_id)) >= 0 ? (
                         <VideoPlayer
                           url={
                             "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
@@ -683,7 +685,9 @@ const StreamPage = () => {
               <div className="main-column">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
-                    {is_free || purchasedTickets.indexOf(concert_id) >= 0 ? (
+                    {is_free ||
+                    (purchasedTickets &&
+                      purchasedTickets.indexOf(concert_id)) >= 0 ? (
                       <VideoPlayer
                         url={
                           "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
