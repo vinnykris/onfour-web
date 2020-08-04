@@ -121,6 +121,22 @@ const dashboardPage = ({ width, upcoming_concerts, memories, history }) => {
               </button>
             </div>
           )}
+
+          <div className="user-crews-container ">
+            <Row className="user-crews-title">
+              <Col size={1}>
+                <h4 className="profile-preview-content-header">My Crews</h4>
+              </Col>
+            </Row>
+            <Row>
+              <Col size={1}>
+                {/* @TODO: Add check for empty array of crews when backend is ready. Right now just displaying basic + */}
+                <div className="create-crew-wrapper">
+                  <p>Create Crew +</p>
+                </div>
+              </Col>
+            </Row>
+          </div>
         </Col>
       </Row>
     </Col>

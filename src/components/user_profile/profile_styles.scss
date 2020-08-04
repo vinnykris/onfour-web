@@ -10,7 +10,7 @@
   overflow: auto;
   align-items: flex-start;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE 10+ */
+  -ms-overflow-style: none; /* IE 10+ */
   &::-webkit-scrollbar {
     width: 10px;
     background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
@@ -188,4 +188,32 @@
   background-color: black;
   border: 1px solid #2c28f8;
   color: white;
+}
+
+.user-crews-container {
+  margin: 32px 0px;
+
+  & .user-crews-title {
+    margin-bottom: 32px;
+  }
+
+  & .create-crew-wrapper {
+    width: 242px;
+    height: 270px;
+    background: rgba(50, 50, 50, 0.67);
+    border-radius: 7px 7px 7px 7px;
+    cursor: pointer;
+
+    & > p {
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 15px;
+      line-height: 270px;
+      text-align: center;
+      letter-spacing: 0.045em;
+      vertical-align: middle;
+      color: #dbdbdb;
+    }
+  }
 }
