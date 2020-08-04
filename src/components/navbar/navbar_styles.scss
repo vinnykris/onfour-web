@@ -5,6 +5,8 @@
 .main-content {
   width: 100%;
   display: flex;
+  align-items: center;
+  max-width: 100vw;
 }
 
 .desktop-grid {
@@ -35,7 +37,7 @@
 
 .navbar-custom {
   width: 100%;
-  height: 57px;
+  height: 53px;
   background-color: none;
   position: relative;
   display: flex;
@@ -85,11 +87,33 @@
   }
 }
 
-.white-purple-logo-desktop {
-  width: 41px;
-  height: 42px;
+.onfour-nav-logo {
   float: left;
-  margin-left: 22px;
+  margin-left: 25px;
+}
+
+.white-purple-logo-desktop {
+  width: 38px;
+  height: 39px;
+  //float: left;
+}
+
+.nav-links-container {
+  display: inline-block;
+  margin-left: auto;
+  width: auto;
+  margin-right: 25px;
+  // align-self: flex-end;
+  // flex-flow: row;
+  @include respond-to("x-large") {
+    margin-right: 15px;
+  }
+  @include respond-to("large") {
+    margin-right: 10px;
+  }
+  @include respond-to("medium") {
+    margin-right: 5px;
+  }
 }
 
 .onfour-logo-mobile {
@@ -115,22 +139,22 @@
   color: white;
 }
 
-.nav-page-black,
-.nav-page-white {
-  margin: auto;
-  float: left;
-  @include respond-to("x-large") {
-    font-size: 0.95rem;
-  }
-  @include respond-to("large") {
-    font-size: 0.8rem;
-    margin: 0px !important;
-  }
-  @include respond-to("medium") {
-    font-size: 0.55rem;
-    margin: 0px !important;
-  }
-}
+// .nav-page-black,
+// .nav-page-white {
+//   // margin: 0% 10% !important;
+//   float: left;
+//   @include respond-to("x-large") {
+//     font-size: 0.95rem;
+//   }
+//   @include respond-to("large") {
+//     font-size: 0.8rem;
+//     margin: 0px !important;
+//   }
+//   @include respond-to("medium") {
+//     font-size: 0.55rem;
+//     margin: 0px !important;
+//   }
+// }
 
 .nav-home {
   float: left;
@@ -141,6 +165,10 @@
 a.nav-page-white {
   font-family: "Helvetica Neue";
   color: white;
+  margin: 35px;
+  font-weight: normal;
+  letter-spacing: 0.045em;
+  font-size: 16px;
   &:hover {
     cursor: pointer;
     color: white;
@@ -150,6 +178,22 @@ a.nav-page-white {
     color: white;
     text-decoration: "underline";
   }
+  @include respond-to("x-large") {
+    margin: 25px;
+    font-size: 15px;
+  }
+  @include respond-to("large") {
+    font-size: 14px;
+  }
+  @include respond-to("medium") {
+    font-size: 12px;
+    margin: 20px;
+  }
+}
+
+.sign-in-link {
+  font-weight: bold !important;
+  color: #e5cffa !important;
 }
 
 a.nav-page-black {
