@@ -217,3 +217,12 @@
     }
   }
 }
+
+.user-crews-modal {
+  & .rodal-dialog {
+    border-radius: 10px;
+    & .rodal-close:before, & .rodal-close:after {
+      background: white !important;
+    }
+  }
+}

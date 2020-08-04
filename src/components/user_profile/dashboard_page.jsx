@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Row, Col } from "../grid";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
+import Rodal from "rodal";
 import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.png";
 
 import "./profile_styles.scss";
 
-const dashboardPage = ({ width, upcoming_concerts, memories, history }) => {
+const DashboardPage = ({ width, upcoming_concerts, memories, history }) => {
+  const [showCrewModal, setShowCrewModal] = useState(false);
+  const [modalColor, setModalColor] = useState('#E26A6A');
+
+  const closeModal = () => {
+    setShowCrewModal(false);
+  };
+
   return (
     <Col size={7}>
       <Row className="header-section">
@@ -131,16 +139,31 @@ const dashboardPage = ({ width, upcoming_concerts, memories, history }) => {
             <Row>
               <Col size={1}>
                 {/* @TODO: Add check for empty array of crews when backend is ready. Right now just displaying basic + */}
-                <div className="create-crew-wrapper">
+                <div
+                  className="create-crew-wrapper"
+                  onClick={() => setShowCrewModal(true)}
+                >
                   <p>Create Crew +</p>
                 </div>
               </Col>
             </Row>
           </div>
+
+          <Rodal
+            visible={showCrewModal}
+            onClose={closeModal}
+            width={458}
+            height={527}
+            measure="px"
+            customStyles={{ background: modalColor }}
+            customMaskStyles={{ background: 'rgba(0,0,0,0.8)', cursor: 'pointer' }}
+            className='user-crews-modal'
+          >
+          </Rodal>
         </Col>
       </Row>
     </Col>
   );
 };
 
-export default dashboardPage;
+export default DashboardPage;
