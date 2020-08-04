@@ -440,7 +440,7 @@ const NavBar = () => {
                 }}
                 className={style + " sign-in-link"}
               >
-                Sign In
+                Log In
               </NavLink>
             ) : (
               <Dropdown

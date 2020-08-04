@@ -35,14 +35,14 @@
 
 .banner-container {
   width: 100%;
-  margin-top: -176px;
+  margin-top: -57px;
   // height: 100vh;
-  @include respond-to("large") {
-    margin-top: -140px;
-  }
-  @include respond-to("small") {
-    margin-top: -131px;
-  }
+  // @include respond-to("large") {
+  //   margin-top: -140px;
+  // }
+  // @include respond-to("small") {
+  //   margin-top: -131px;
+  // }
 }
 
 .banner-container img {
@@ -75,7 +75,7 @@
 .banner-video {
   width: 100%;
   object-fit: cover;
-  height: 115vh;
+  height: 100vh;
 }
 .banner-header-desktop {
   @include respond-to("small") {
@@ -157,6 +157,20 @@
   font-size: 1.2vw;
   font-weight: bold;
   padding: 6px 15px 6px 15px;
+}
+
+.go-down-button {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 5vh;
+  color: white;
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
 }
 
 .description-text {

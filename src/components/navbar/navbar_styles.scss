@@ -155,6 +155,24 @@
 //     margin: 0px !important;
 //   }
 // }
+.nav-page-black,
+.nav-page-white {
+  margin: auto;
+  font-family: Helvetica;
+  font-style: normal;
+  float: left;
+  @include respond-to("x-large") {
+    font-size: 0.95rem;
+  }
+  @include respond-to("large") {
+    font-size: 0.8rem;
+    margin: 0px !important;
+  }
+  @include respond-to("medium") {
+    font-size: 0.55rem;
+    margin: 0px !important;
+  }
+}
 
 .nav-home {
   float: left;
@@ -163,7 +181,8 @@
 }
 
 a.nav-page-white {
-  font-family: "Helvetica Neue";
+  font-family: Helvetica;
+  font-style: normal;
   color: white;
   margin: 35px;
   font-weight: normal;
@@ -342,7 +361,8 @@ a.nav-page-black {
 
 .sign-out-button {
   color: white !important;
-  font-family: "Helvetica Neue" !important;
+  font-family: Helvetica !important;
+  font-style: normal !important;
   background-color: #17171b !important;
   outline: none !important;
   font-size: 14px;
