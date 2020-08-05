@@ -211,18 +211,13 @@ hr.solid {
 
 .rodal-dialog {
   max-height: 80vh;
-  max-width: 120vh;
-  @include respond-to("x-large") {
-    max-width: 100vh;
-    max-height: 65vh;
-  }
+  max-width: 80vw;
   @include respond-to("large") {
-    max-width: 80vh;
-    // max-height: 50vh;
+    max-height: 60vh;
   }
   @include respond-to("small") {
     max-height: 100vh;
-    max-width: 100vh;
+    max-width: 100vw;
   }
 }
 

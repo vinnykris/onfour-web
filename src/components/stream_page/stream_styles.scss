@@ -241,6 +241,7 @@
 
 .stream-wrapper {
   margin: auto;
+  background: #131313;
   width: 100%;
   // height: 100%;
   // height: 41.4473684vw;
@@ -255,6 +256,115 @@
 .stream-wrapper-mobile {
   width: 100%;
   height: 55%;
+}
+
+.buy-ticket-message-container {
+  height: 100%;
+  width: 100%;
+  @include respond-to("small") {
+    width: 100%;
+    position: relative;
+    padding-bottom: 55%;
+    background-color: #171717;
+  }
+}
+
+.buy-ticket-message-inner {
+  height: auto;
+}
+
+.buy-ticket-message-inner-top {
+  width: 60%;
+  position: absolute;
+  //height: 20vh;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  @include respond-to("small") {
+    width: 100%;
+    top: 30%;
+  }
+}
+
+.buy-ticket-message-row {
+  height: 100%;
+  width: 100%;
+}
+
+.ticket-img-col {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.buy-ticket-img {
+  width: 8vw;
+  position: relative;
+  //top: 50%;
+  //transform: translateY(-50%);
+  @include respond-to("small") {
+    width: 15vw;
+  }
+}
+
+.buy-ticket-text-col {
+  display: flex;
+  align-items: center;
+}
+
+.buy-ticket-text-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  //margin: auto;
+}
+
+.buy-ticket-text {
+  font-size: 1.6vw;
+  color: white;
+  white-space: pre-wrap;
+  position: relative;
+  text-align: left;
+  float: left;
+  padding-left: 0;
+  //top: 60%;
+  //transform: translateY(-60%);
+  @include respond-to("small") {
+    font-size: 4vw;
+    margin-bottom: 0;
+    //top: 50%;
+    //transform: translateY(-50%);
+  }
+}
+.buy-ticket-redirect-button {
+  position: absolute;
+  font-size: 1.1rem;
+  bottom: 40%;
+  background-color: #794d94;
+  font-weight: bold;
+  border-radius: 3px;
+  left: 50%;
+  transform: translate(-50%, 40%);
+  &:hover {
+    background-color: #976bb3;
+  }
+
+  @include respond-to("large") {
+    font-size: 0.9rem;
+    bottom: 35%;
+    transform: translate(-50%, 35%);
+  }
+  @include respond-to("medium") {
+    font-size: 0.8rem;
+    bottom: 30%;
+    transform: translate(-50%, 30%);
+  }
+  @include respond-to("small") {
+    font-size: 4vw;
+    //width: 30%;
+    bottom: 30%;
+    transform: translate(-50%, 30%);
+  }
 }
 
 .player-wrapper {
@@ -696,7 +806,3 @@
   padding: 5%;
   padding-bottom: 0;
 }
-
-// .modal-backdrop {
-//   z-index: -1;
-// }

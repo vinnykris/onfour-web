@@ -10,6 +10,7 @@ import Auth from "./UserPool";
 
 // Component Imports
 import FeaturedContent from "../components/upcoming_show_page/featured_content";
+import ProfileStub from "../components/user_profile/profile_stub";
 import ArchiveVideo from "../components/archive_page/archive_video";
 
 // API Imports
@@ -17,88 +18,6 @@ import { getArtistInfo } from "./get_concert_data";
 import { formatUpcomingShow } from "../components/util";
 
 Amplify.configure(awsmobile);
-
-const month_map = {
-  "01": "JAN",
-  "02": "FEB",
-  "03": "MAR",
-  "04": "APR",
-  "05": "MAY",
-  "06": "JUN",
-  "07": "JUL",
-  "08": "AUG",
-  "09": "SEP",
-  "10": "OCT",
-  "11": "NOV",
-  "12": "DEC",
-};
-const day_map = {
-  Sat: "Sunday",
-  Sun: "Monday",
-  Mon: "Tuesday",
-  Tue: "Wednesday",
-  Wed: "Thursday",
-  Thu: "Friday",
-  Fri: "Saturday",
-};
-
-// getConcertInfo queries all elements in the future concert database
-// and create a list of FeaturedContent objects with the data returned
-// from the database.
-export const getUpcomingShows = async (width, username) => {
-  var upcoming_concerts = [];
-  // Calling the API, using async and await is necessary
-  const info = await API.graphql(
-    graphqlOperation(queries.list_upcoming_concerts)
-  );
-
-  const info_list = info.data.listFutureConcerts.items; // Stores the items in database
-  info_list.sort((a, b) => a.timePassed - b.timePassed);
-  // console.log(info_list);
-
-  // Iterate through each element in the list and add the created
-  // FeaturedContent to concerts
-  info_list.forEach((data) => {
-    const day_in_week = new Date(data.date).toString();
-    const hour = parseInt(data.time.slice(0, 2));
-    const minutes = data.time.slice(2, 5);
-    const time_left =
-      +new Date(data.date + "T" + "24:00:00" + ".000-04:00") - +new Date();
-    const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
-
-    upcoming_concerts.push(
-      <FeaturedContent
-        img={data.url}
-        name={data.artist}
-        concert_name={data.concertName}
-        week_day={day_map[day_in_week.slice(0, 3)]}
-        date={
-          data.date.slice(8, 10) +
-          " " +
-          month_map[data.date.slice(5, 7)] +
-          " " +
-          data.date.slice(0, 4)
-        }
-        month={month_map[data.date.slice(5, 7)]}
-        day={data.date.slice(8, 10)}
-        time={
-          hour > 12
-            ? (hour - 12).toString() + minutes + "PM"
-            : hour < 12
-            ? data.time.slice(0, 5) + "AM"
-            : data.time.slice(0, 5) + "PM"
-        }
-        price={data.price}
-        description={data.description.toString()}
-        days_left={days_left}
-        width={width}
-        genre={data.genre}
-      />
-    );
-  });
-
-  return upcoming_concerts;
-};
 
 // Asynchronous function to get list of videos from database
 export const getMemories = async (username) => {
@@ -133,17 +52,21 @@ export const getMemories = async (username) => {
   return archive_videos;
 };
 
-export const getMostRecentUpcomingInfo = async () => {
-  // Calling the API, using async and await is necessary
-  const info = await API.graphql(
-    graphqlOperation(queries.list_upcoming_concerts)
-  );
-
-  const info_list = info.data.listFutureConcerts.items; // Stores the items in database
-  info_list.sort((a, b) => a.timePassed - b.timePassed);
-
-  return info_list[0];
-};
+export const getTickets = async (username) => {
+  if (username) {
+    const user_data = await API.graphql(
+      graphqlOperation(queries.get_user_concert, {
+        input: username,
+      })
+    );
+    const concert_data = user_data.data.getCreateOnfourRegistration.concert;
+    if (concert_data && isNaN(parseInt(concert_data))) {
+      const parsed_concerts = JSON.parse(concert_data);
+      const concerts_ids = Object.keys(parsed_concerts);
+      return concerts_ids;
+    }
+  }
+}
 
 // Function fetches an authenticated user's concerts JSON. It then
 // parses it and retrieves the concert_ids for each concert. It then
@@ -214,6 +137,7 @@ export const getUpcomingPurchasedShows = async (width, username) => {
   // but later, both upcoming_concerts and past_concerts 
   // can be returned by this one function
   var past_concerts = []; 
+  var all_ticketstubs =[];
 
   const getUpcomingFull = async (data) => {
     const artist_id = data.artist_id;
@@ -228,12 +152,24 @@ export const getUpcomingPurchasedShows = async (width, username) => {
         upcoming_concerts.push(
         formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
         );
+        all_ticketstubs.push(
+          <ProfileStub
+            img={await data.data.getConcert.stub_url}
+            className="profile-stub-component"
+          />
+        );
       } else {
         past_concerts.push(
           formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
         );
+        all_ticketstubs.push(
+          <ProfileStub
+            img={await data.data.getConcert.stub_url}
+            className="profile-stub-component"
+          />
+        );
       }
     }
   }
-  return upcoming_concerts;
+  return [upcoming_concerts, past_concerts, all_ticketstubs];
 };
