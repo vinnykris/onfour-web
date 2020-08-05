@@ -2,20 +2,11 @@
 
 @import "../../styles";
 
-// .desktop-grid-stream {
-//   @include respond-to("small") {
-//     display: none;
-//   }
-// }
-
-// html,
-// body {
-//   height: 100%;
-// }
-
 .stream-container {
   height: 100vh;
+  max-height: 100vh;
   width: 100vw;
+  max-width: 100vw;
   @include respond-to("small") {
     display: flex;
     flex: 1 1 auto;
@@ -28,7 +19,9 @@
   background-color: black;
   //height: auto;
   height: 100vh;
+  max-height: 100vh;
   width: 100vw;
+  max-width: 100vw;
   @include respond-to("small") {
     display: flex;
     flex: 1 1 auto;
@@ -38,12 +31,16 @@
 
 .desktop-stream-grid {
   height: 100vh;
+  max-height: 100vh;
   width: 100vw;
+  max-width: 100vw;
 }
 
 .desktop-stream-row {
   height: calc(100vh - 53px);
+  max-height: calc(100vh - 53px);
   width: 100vw;
+  max-width: 100vw;
 }
 
 .mobile-grid-stream {
@@ -80,65 +77,14 @@
 
 // CHAT STYLING
 .chat-main {
-  // height: 37vw;
-  // height: calc(47vw - 25px);
-  // height: 100%;
   height: 100%;
   width: 100%;
-  // position: relative;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  // bottom: 0;
-  // align-self: flex-end;
-  // margin: auto;
-  // margin-top: 7%;
   justify-content: center;
   align-items: center;
-  // height: 660px;
-  // @include respond-to("xx-large") {
-  //   height: 560px;
-  // }
-
-  // @include respond-to("x-large") {
-  //   height: 465px;
-  // }
-
-  // @include respond-to("large") {
-  //   height: 380px;
-  // }
-
-  // @include respond-to("medium") {
-  //   height: 310px;
-  // }
-
-  // @include respond-to("small") {
-  //   display: none;
-  // }
 }
-
-// .stream-row {
-//   height: 660px;
-//   @include respond-to("xx-large") {
-//     height: 560px;
-//   }
-
-//   @include respond-to("x-large") {
-//     height: 465px;
-//   }
-
-//   @include respond-to("large") {
-//     height: 380px;
-//   }
-
-//   @include respond-to("medium") {
-//     height: 310px;
-//   }
-
-//   @include respond-to("small") {
-//     display: none;
-//   }
-// }
 
 .main-column {
   max-width: 100%;

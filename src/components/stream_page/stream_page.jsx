@@ -74,6 +74,8 @@ const StreamPage = () => {
   const [is_free, setIsFree] = useState(true);
   const [purchasedTickets, setTickets] = useState([]);
 
+  const [open_modal, setOpenModal] = useState(false);
+
   const history = useHistory();
 
   // Function passed as prop to chat
@@ -258,7 +260,6 @@ const StreamPage = () => {
     window.open(url, "_blank");
   };
 
-  const [open_modal, setOpenModal] = useState(false);
   // Analytics tracker for payment modal
   const donateModal = () => {
     Analytics.record({ name: "paymentModalClicked" });
@@ -402,8 +403,8 @@ const StreamPage = () => {
                 customStyles={{
                   padding: 0,
                   overflow: scroll,
-                  maxHeight: "50vh",
-                  maxWidth: "50vw",
+                  maxHeight: "400px",
+                  maxWidth: "600px",
                 }}
                 className="rodal-custom"
               >
@@ -515,7 +516,10 @@ const StreamPage = () => {
                               </ClickAwayListener>
 
                               <div className="stream-action-button-container">
-                                <button className="stream-action-button">
+                                <button
+                                  className="stream-action-button"
+                                  onClick={donateModal}
+                                >
                                   {" "}
                                   <i
                                     className="fa fa-usd stream-action-button-icon"
