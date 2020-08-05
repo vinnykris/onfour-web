@@ -11,7 +11,7 @@
 .forgot-form {
   margin-top: 2.5%;
   width: 29%;
-  padding-bottom: 13%;
+  padding-bottom: 18%;
 }
 
 .forgot-fields-section {
@@ -33,7 +33,7 @@
   color: white;
   font-size: 14px;
   font-weight: 420;
-  background-color: #7c1fb5;
+  background-color: #794d94;
 }
 
 .forgot-input {
@@ -85,4 +85,28 @@
 
 .forgot-verification-footer {
   padding-bottom: 1%;
+}
+
+.forgot-form-mobile {
+  margin-top: 2.5%;
+  width: 85%;
+  padding-bottom: 2%;
+}
+
+.forgot-header-text-mobile {
+  color: white;
+  width: 100%;
+  font-size: 88%;
+  padding-top: 5%;
+}
+
+.forgot-footer-mobile {
+  color: white;
+  padding-top: 3%;
+  padding-bottom: 5%;
+  font-size: 15px;
+}
+
+.forgot-verification-footer-mobile {
+  padding-bottom: 60%;
 }

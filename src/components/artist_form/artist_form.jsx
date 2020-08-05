@@ -5,7 +5,7 @@ import history from "../../history";
 import React, { useState, useEffect } from "react";
 
 //Component imports
-import { useInputValue } from "../custom_hooks";
+import { useInputValue, useWindowDimensions } from "../custom_hooks";
 
 // Styles imports
 import "./artist_form_styles.scss";
@@ -31,6 +31,8 @@ const ArtistForm = () => {
   const artist_twitter = useInputValue("");
   const artist_facebook = useInputValue("");
   const artist_soundcloud = useInputValue("");
+  const artist_phone = useInputValue("");
+  const refer_info = useInputValue("");
 
   // Error tracks the error message, username tracks the username of an
   // authenticated user, and auth tracks if a user is authenticated
@@ -38,6 +40,8 @@ const ArtistForm = () => {
   const [error, setError] = useState("");
   const [username, setUsername] = useState("");
   const [auth, setAuth] = useState(false);
+
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   // Tracks if a user is logged in, and their username if so
   // Sets proper error message if not logged in
@@ -67,6 +71,8 @@ const ArtistForm = () => {
       facebook: artist_facebook.value,
       soundcloud: artist_soundcloud.value,
       is_artist: true,
+      phone: artist_phone.value,
+      refer_note: refer_info.value,
     };
 
     if (auth) {
@@ -88,98 +94,265 @@ const ArtistForm = () => {
 
   return (
     <div className="artist-form-container">
-      <form
-        className="artist-form"
-        action="/"
-        id="artist-signup"
-        onSubmit={handleSubmit}
-      >
-        <h4 className="artist-form-header">Apply to Perform</h4>
-        <label className="artist-label-text" for="artist_name_slot">
-          Your Artist Name*
-        </label>
-        <input
-          className="artist-form-input"
-          name="artist_name"
-          id="artist_name"
-          required
-          {...artist_name}
-        />
-        <label className="artist-label-text" for="artist_bio_slot">
-          Artist Bio*
-        </label>
-        <input
-          className="artist-form-input"
+      {width > 600 ? (
+        <form
+          className="artist-form"
+          action="/"
+          id="artist-signup"
+          onSubmit={handleSubmit}
+        >
+          <h4 className="artist-form-header">Apply to Perform</h4>
+          <h7 className="artist-form-message">
+            Thanks for your interest in performing on onfour! We deeply care
+            about artists and recognize that your music and comfort come first.
+            Please fill out and submit the form below to gain approval to
+            perform. You should hear from our team within 1 or 2 business days.
+          </h7>
+          <br></br>
+          <label className="artist-label-text" for="artist_name_slot">
+            Artist Name*
+          </label>
+          <input
+            className="artist-form-input"
+            name="artist_name"
+            id="artist_name"
+            required
+            {...artist_name}
+          />
+          <label className="artist-label-text" for="artist_bio_slot">
+            Artist Bio*
+          </label>
+          <textarea
+            className="artist-form-input artist-bio"
+            name="artist_bio"
+            form="artist-signup"
+            // rows="4"
+            // cols="10"
+            wrap="soft"
+            placeholder="Please include your full artist bio here. This will be populated for your concert descriptions that fans see."
+            {...artist_bio}
+          />
+          {/* <input
+          className="artist-form-input artist-bio"
           name="artist_bio"
           id="artist_bio"
           required
+          placeholder="Please include your full artist bio here. This will be populated for your concert descriptions that fans see."
           {...artist_bio}
-        />
-        <label className="artist-label-text" for="genre_slot">
-          Your Genre*
-        </label>
-        <input
-          className="artist-form-input"
-          name="genre"
-          id="genre"
-          required
-          {...artist_genre}
-        />
-        <label className="artist-label-text" for="ins_url_slot">
-          Instagram URL*
-        </label>
-        <input
-          className="artist-form-input"
-          name="insta_url"
-          id="insta_url"
-          {...artist_ins}
-        />
-        <label className="artist-label-text" for="spotify_slot">
-          Spotify URL
-        </label>
-        <input
-          className="artist-form-input"
-          name="apotify_URL"
-          id="spotify_url"
-          {...artist_spotify}
-        />
-        <label className="artist-label-text" for="twitter_url_slot">
-          Twitter URL
-        </label>
-        <input
-          className="artist-form-input"
-          name="twitter_url"
-          id="twitter_url"
-          {...artist_twitter}
-        />
-        <label className="artist-label-text" for="facebool_url_slot">
-          Facebook URL
-        </label>
-        <input
-          className="artist-form-input"
-          name="facebool_url"
-          id="facebool_url"
-          {...artist_facebook}
-        />
-        <label className="artist-label-text" for="soundcloud_url_slot">
-          Soundcloud URL
-        </label>
-        <input
-          className="artist-form-input"
-          name="soundcloud_url"
-          id="soundcloud_url"
-          {...artist_soundcloud}
-        />
-        <div className="error-message">{error}</div>
-        <button
-          className="artist-form-submit-button"
-          type="submit"
-          form="artist-signup"
-          value="Submit"
+        /> */}
+          <label className="artist-label-text" for="genre_slot">
+            Genre*
+          </label>
+          <input
+            className="artist-form-input"
+            name="genre"
+            id="genre"
+            required
+            {...artist_genre}
+          />
+          <label className="artist-label-text" for="phone_number_slot">
+            Phone Number*
+          </label>
+          <input
+            className="artist-form-input"
+            name="phone_number"
+            id="phone_number"
+            {...artist_phone}
+          />
+          <label className="artist-label-text" for="ins_url_slot">
+            Instagram Handle / URL*
+          </label>
+          <input
+            className="artist-form-input"
+            name="insta_url"
+            id="insta_url"
+            {...artist_ins}
+          />
+          <label className="artist-label-text" for="spotify_slot">
+            Spotify URL
+          </label>
+          <input
+            className="artist-form-input"
+            name="apotify_URL"
+            id="spotify_url"
+            {...artist_spotify}
+          />
+          <label className="artist-label-text" for="twitter_url_slot">
+            Twitter Handle / URL
+          </label>
+          <input
+            className="artist-form-input"
+            name="twitter_url"
+            id="twitter_url"
+            {...artist_twitter}
+          />
+          <label className="artist-label-text" for="facebool_url_slot">
+            Facebook URL
+          </label>
+          <input
+            className="artist-form-input"
+            name="facebool_url"
+            id="facebool_url"
+            {...artist_facebook}
+          />
+          <label className="artist-label-text" for="soundcloud_url_slot">
+            Soundcloud URL
+          </label>
+          <input
+            className="artist-form-input"
+            name="soundcloud_url"
+            id="soundcloud_url"
+            {...artist_soundcloud}
+          />
+          <label className="artist-label-text" for="refer_info_slot">
+            How did you hear about onfour / who referred you?
+          </label>
+          <input
+            className="artist-form-input"
+            name="refer_info"
+            id="refer_info"
+            {...refer_info}
+          />
+          <div className="error-message">{error}</div>
+          <button
+            className="artist-form-submit-button"
+            type="submit"
+            form="artist-signup"
+            value="Submit"
+          >
+            Submit
+          </button>
+        </form>
+      ) : (
+        <form
+          className="artist-form-mobile"
+          action="/"
+          id="artist-signup"
+          onSubmit={handleSubmit}
         >
-          Submit
-        </button>
-      </form>
+          <h4 className="artist-form-header">Apply to Perform</h4>
+          <h7 className="artist-form-message">
+            Thanks for your interest in performing on onfour! We deeply care
+            about artists and recognize that your music and comfort come first.
+            Please fill out and submit the form below to gain approval to
+            perform. You should hear from our team within 1 or 2 business days.
+          </h7>
+          <br></br>
+          <label className="artist-label-text" for="artist_name_slot">
+            Artist Name*
+          </label>
+          <input
+            className="artist-form-input"
+            name="artist_name"
+            id="artist_name"
+            required
+            {...artist_name}
+          />
+          <label className="artist-label-text" for="artist_bio_slot">
+            Artist Bio*
+          </label>
+          <textarea
+            className="artist-form-input artist-bio"
+            name="artist_bio"
+            form="artist-signup"
+            // rows="4"
+            // cols="10"
+            wrap="soft"
+            placeholder="Please include your full artist bio here. This will be populated for your concert descriptions that fans see."
+            {...artist_bio}
+          />
+          {/* <input
+            className="artist-form-input artist-bio"
+            name="artist_bio"
+            id="artist_bio"
+            required
+            placeholder="Please include your full artist bio here. This will be populated for your concert descriptions that fans see."
+            {...artist_bio}
+          /> */}
+          <label className="artist-label-text" for="genre_slot">
+            Genre*
+          </label>
+          <input
+            className="artist-form-input"
+            name="genre"
+            id="genre"
+            required
+            {...artist_genre}
+          />
+          <label className="artist-label-text" for="phone_number_slot">
+            Phone Number*
+          </label>
+          <input
+            className="artist-form-input"
+            name="phone_number"
+            id="phone_number"
+            {...artist_phone}
+          />
+          <label className="artist-label-text" for="ins_url_slot">
+            Instagram Handle / URL*
+          </label>
+          <input
+            className="artist-form-input"
+            name="insta_url"
+            id="insta_url"
+            {...artist_ins}
+          />
+          <label className="artist-label-text" for="spotify_slot">
+            Spotify URL
+          </label>
+          <input
+            className="artist-form-input"
+            name="apotify_URL"
+            id="spotify_url"
+            {...artist_spotify}
+          />
+          <label className="artist-label-text" for="twitter_url_slot">
+            Twitter Handle / URL
+          </label>
+          <input
+            className="artist-form-input"
+            name="twitter_url"
+            id="twitter_url"
+            {...artist_twitter}
+          />
+          <label className="artist-label-text" for="facebool_url_slot">
+            Facebook URL
+          </label>
+          <input
+            className="artist-form-input"
+            name="facebool_url"
+            id="facebool_url"
+            {...artist_facebook}
+          />
+          <label className="artist-label-text" for="soundcloud_url_slot">
+            Soundcloud URL
+          </label>
+          <input
+            className="artist-form-input"
+            name="soundcloud_url"
+            id="soundcloud_url"
+            {...artist_soundcloud}
+          />
+          <label className="artist-label-text" for="refer_info_slot">
+            How did you hear about onfour / who referred you?
+          </label>
+          <input
+            className="artist-form-input"
+            name="refer_info"
+            id="refer_info"
+            {...refer_info}
+          />
+          <div className="error-message">{error}</div>
+          <button
+            className="artist-form-submit-button"
+            type="submit"
+            form="artist-signup"
+            value="Submit"
+          >
+            Submit
+          </button>
+        </form>
+      )}
     </div>
   );
 };

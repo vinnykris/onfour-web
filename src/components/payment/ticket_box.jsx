@@ -1,219 +1,188 @@
+// React Imports
 import React, { useState } from "react";
-import "./payment_styles.scss";
-import {
-    useStripe,
-    useElements,
-    CardElement,
-} from "@stripe/react-stripe-js";
-import FormField from "./form_field";
+
+// Stripe Imports
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import stripeTokenHandler from "./stripe";
-import CurrencyField from "./currency_field";
 
+// Component Imports
+import { useInputValue } from "../custom_hooks";
 
-const CheckoutForm = () => {
-    const stripe = useStripe();
-    const elements = useElements();
-    const [payed, setPayed] = useState(false);
-    const [needConfirm, setNeedConfirm] = useState(true);
-    const [paymentMessage, setMessage] = useState("");
-    const [displayErr, setDisplayErr] = useState(false);
-    const [waiting, setWaiting] = useState(false);
+// AWS Imports
+import { Analytics } from "aws-amplify";
 
-    // state variables for the information inside payment form
-    const [amount_value, setAmount] = useState('');
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+// Styles Imports
+import "./ticket_box_styles.scss";
 
+// PaymentBox is a wrapper component for CheckoutForm
+// It is used for cleaner layout
+const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
+  // Stripe constants
+  const stripe = useStripe();
+  const elements = useElements();
 
-    const iframeStyles = {
-        base: {
-            color: "#303096",
-            fontSize: "16px",
-            iconColor: "#303096",
-            "::placeholder": {
-                color: "#30309663"
-            }
-        },
-        invalid: {
-            iconColor: "#ed586e",
-            color: "##ed586e"
-        },
-        complete: {
-            iconColor: "#08c43a"
-        }
-    };
+  // State variables for diffenet payment form display
+  const [payed, setPayed] = useState(false); // Variable to show the payment success message
+  const [need_confirm, setNeedConfirm] = useState(true); // Variable to show the CONFIRM button
+  const [payment_message, setMessage] = useState(""); // Variable to store the payment error message
+  const [display_err, setDisplayErr] = useState(false); // Variable to display error message
+  const [waiting, setWaiting] = useState(false); // Variable to display processing message
 
-    const cardElementOpts = {
-        iconStyle: "solid",
-        style: iframeStyles,
-        hidePostalCode: true
-    };
+  // Input form values
+  const name = useInputValue("");
+  const email = useInputValue("");
 
-    const needConfirmation = (event) => {
-        event.preventDefault();
-        if (!stripe || !elements) {
-            // Stripe.js has not yet loaded.
-            // Make sure to disable form submission until Stripe.js has loaded.
-            return;
-        }
-        setNeedConfirm(false);
-    };
+  // Style defination for card information input section
+  const iframeStyles = {
+    base: {
+      color: "#000000",
+      backgrondColor: "#FFFFFF",
+      fontSize: "16px",
+      iconColor: "#C4C4C4",
+      "::placeholder": {
+        color: "#C4C4C4",
+      },
+    },
+    invalid: {
+      iconColor: "#ed586e",
+      color: "#ed586e",
+    },
+    complete: {
+      iconColor: "#08c43a",
+    },
+  };
 
-    const resetPayment = (event) =>{
-        event.preventDefault();
-        setPayed(false);
-        setDisplayErr(false);
-        setNeedConfirm(true);
-        setWaiting(false);
-        setAmount('');
-        setName('');
-        setEmail('');
-    };
+  // Input content defination for card input information
+  const cardElementOpts = {
+    iconStyle: "solid",
+    style: iframeStyles,
+    hidePostalCode: true,
+  };
 
-    const submitPayment = async (event) =>{
-        event.preventDefault();
-        setWaiting(true);
+  // This function gets called after user clicked the CONFIRM button
+  // It's sending the Stripe token to the AWS lambda function for executing the payment
+  const submitPayment = async (event) => {
+    event.preventDefault();
+    setWaiting(true);
 
-        if (!stripe || !elements) {
-            // Stripe.js has not yet loaded.
-            // Make sure to disable form submission until Stripe.js has loaded.
-            return;
-        }
-
-        const card = elements.getElement(CardElement);
-        const result = await stripe.createToken(card);
-
-        console.log("test1", result);
-
-        if (result.error) {
-            // Show error to your customer.
-            console.log(result.error.message);
-        } else {
-            console.log("test2");
-            // Send the token to your server.
-            // This function does not exist yet; we will define it in the next step.
-            const payment_result = await stripeTokenHandler(result.token, Math.round(amount_value*100), name, email);
-            setMessage(payment_result);
-            if (payment_result === "Charge processed successfully!") {
-                setPayed(true);
-            } else {
-                setNeedConfirm(true);
-                setDisplayErr(true);
-                setWaiting(false);
-            }
-            
-        }
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      setWaiting(false);
+      return;
     }
 
+    const card = elements.getElement(CardElement);
+    const result = await stripe.createToken(card);
 
-    return (
-        <div>
-            <form id="ticket" className="payment-form" onSubmit={submitPayment}>
-                {(() => {
-                    if (!payed) {
-                        return (
-                            <div>
-                                <button className="close" data-dismiss="modal" aria-label="Close" onClick={resetPayment}>
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+    if (result.error) {
+      // Show error to your customer.
+      console.log(result.error.message);
+      setWaiting(false);
+      setMessage(result.error.message);
+      setDisplayErr(true);
+      Analytics.record({ name: "tokenPaymentError" });
+    } else {
+      // Send the token to AWS lambda function
+      const payment_result = await stripeTokenHandler(
+        result.token,
+        Math.round(amount_value * 100),
+        name.value,
+        email.value
+      );
+      setMessage(payment_result);
+      if (payment_result === "Charge processed successfully!") {
+        // if payment succeeds, setPay to true to display the payment success message
+        setPayed(true);
+        registerConcert();
+      } else {
+        // if there is an error, display the error and change the processing message back to the CONFIRM button
+        Analytics.record({ name: "stripeError" });
+        setNeedConfirm(true);
+        setDisplayErr(true);
+        setWaiting(false);
+      }
+    }
+  };
 
-                                <br></br>
-                                {displayErr && (
-                                    <p className='error-msg'>{paymentMessage}</p>
-                                )}
-                                <CurrencyField
-                                    className="currency-form-input"
-                                    name="amount"
-                                    label="Amount"
-                                    placeholder="$0.00"
-                                    value={amount_value}
-                                    onChange={(event) =>
-                                        setAmount(event.target.value.substring(1))
-                                    }
-                                    prefix="$"
-                                    decimalScale={2}
-                                    required
-                                />
-                                <FormField
-                                    name="name"
-                                    label="Name"
-                                    type="text"
-                                    placeholder="Jane Doe"
-                                    value={name}
-                                    onChange={(event) => setName(event.target.value)}
-                                    required
-                                />
-                                <FormField
-                                    name="email"
-                                    label="Email"
-                                    type="email"
-                                    placeholder="jane.doe@example.com"
-                                    value={email}
-                                    onChange={(event) => setEmail(event.target.value)}
-                                    required
-                                />
-                                <br></br>
-                                <CardElement options={cardElementOpts}/>
-                                <br></br>
-                                {needConfirm ? (
-                                    <button className="payment-button" type="toConfirm" disabled={!stripe} onClick={needConfirmation}>
-                                        Pay
-                                    </button>
-                                ) : (
-                                    <div>
-                                        {waiting ? (
-                                            <div>
-                                                <p>Processing</p>
-                                            </div>
-                                        ) : (
-                                             <div>
-                                                <p>Please confirm you are donating ${amount_value}</p>
-                                                        <button form="ticket" className="payment-button" type="submit" disabled={!stripe}>
-                                                    Confirm
-                                                </button>
-                                            </div>
-                                        )}    
-                                    </div>
-                                )}
-                            </div>
-                        );
-                    } else {
-                        return (
-                            <div>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={resetPayment}>
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <br></br>
-                                <div className = "pay_sucess_msg">Payment Successful!</div>
-                                {/* if (messageRec) {
-                                    return ();
-                                } else {
-                                    return (<div className="pay_sucess_msg"></div>);
-                                }; */}
-                            </div>
-                        );
-                    }
-                })()}
-            </form>
+  return (
+    <div className="ticket-bar">
+      <div className="ticket-inner-container">
+        <div className="ticket-checkout-header">
+          <div className="ticket-header-container">
+            <h5>{header}</h5>
+          </div>
         </div>
-    );
+        <form id="ticket" className="ticket-form" onSubmit={submitPayment}>
+          {(() => {
+            if (!payed) {
+              return (
+                <div>
+                  {display_err ? (
+                    <p className="error-msg">{payment_message}</p>
+                  ) : (
+                    <br></br>
+                  )}
+                  <input
+                    name="name"
+                    label="Name"
+                    type="name"
+                    placeholder="Cardholder Name"
+                    className="ticket-form-input short-width-input"
+                    required
+                    {...name}
+                  />
+                  <input
+                    name="email"
+                    label="Email"
+                    type="email"
+                    placeholder="Email for the Receipt"
+                    className="ticket-form-input short-width-input"
+                    required
+                    {...email}
+                  />
+                  <div className="ticket-form-input">
+                    <CardElement options={cardElementOpts} />
+                  </div>
+                  <br></br>
+                  {waiting ? (
+                    <div>
+                      <p className="process-text">Processing</p>
+                    </div>
+                  ) : (
+                    <div>
+                      <button
+                        form="none"
+                        className="ticket-button"
+                        onClick={onClick}
+                      >
+                        GO BACK
+                      </button>
+                      <button
+                        form="ticket"
+                        className="ticket-button"
+                        type="submit"
+                        disabled={!stripe}
+                      >
+                        PAY ${amount_value}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              );
+            } else {
+              return (
+                <div>
+                  <br></br>
+                  <div className="pay_sucess_msg">Payment Successful!</div>
+                </div>
+              );
+            }
+          })()}
+        </form>
+      </div>
+    </div>
+  );
 };
 
-
-// const stripePromise = loadStripe("pk_test_QYP6EIav9kdtsfLIRkarusKO00YsyMSiOK");
-
-const payment_box = () => {
-    return (
-        <div>
-            <br></br>
-            <br></br>
-            <div className="paymentbar">
-                <CheckoutForm />  
-                <br></br>
-                <br></br>
-            </div>
-        </div>
-    );
-};
-
-export default payment_box;
+export default TicketBox;

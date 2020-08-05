@@ -4,8 +4,10 @@ import React, { useState, useEffect } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
 import SharePopup from "./share_popup";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-// import { Prompt } from "react-router";
 import moment from "moment";
+import Rodal from "rodal";
+// import { Prompt } from "react-router";
+import { useHistory } from "react-router-dom";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -19,6 +21,7 @@ import Auth from "../../apis/UserPool";
 // Component Imports
 import VideoPlayer from "./video_player";
 import Chat from "../chat/stream_chat";
+
 // import Join from "../chat/join_chat";
 // import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
@@ -27,11 +30,15 @@ import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/video_chat_App";
 
+import { getTickets } from "../../apis/get_user_data";
+import PaymentBox from "../payment/donate_box";
 // Styles Imports
 import "./stream_styles.scss";
+import "rodal/lib/rodal.css";
 
 // Image imports
 import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
+import ticket1 from "../../images/icons/ticket1.png";
 
 Amplify.configure(awsmobile);
 
@@ -47,6 +54,7 @@ const StreamPage = () => {
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat
   const [viewers, setViewers] = useState(0); // Sets number of live viewers on page
+  const history = useHistory();
   // Function passed as prop to join chat
   // const joinSubmit = (name, mode) => {
   //   setChatName(name);
@@ -144,9 +152,20 @@ const StreamPage = () => {
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
   const [is_live, setIsLive] = useState(false);
+  const [is_free, setIsFree] = useState(true);
 
-  // Analytics state variables
-  //const [arrival, setArrival] = useState(true);
+  // If the user is logged in/valid, set their auth value to true and track their email
+  // If the user is not logged in/invalid, reset their auth value to false
+  useEffect(() => {
+    Auth.currentAuthenticatedUser({})
+      .then(async (user) => {
+        setUsername(user.username);
+        setShowChat(true);
+        setAuth(true);
+        setTickets(await getTickets(user.username));
+      })
+      .catch((err) => setAuth(false));
+  }, []);
 
   // Get the start time for countdown_timer
   // Call stream page analtics
@@ -183,6 +202,7 @@ const StreamPage = () => {
     getArtistInfo(info_list[0].artist_id);
     setConcertID(info_list[0].id);
     setIsLive(info_list[0].is_live);
+    setIsFree(info_list[0].general_price === 0);
   };
 
   const getArtistInfo = async (artist_id) => {
@@ -198,16 +218,7 @@ const StreamPage = () => {
   // GET USER'S REGISTRATION INFORMATION
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
-
-  // If the user is logged in/valid, set their auth value to true and track their email
-  // If the user is not logged in/invalid, reset their auth value to false
-  Auth.currentAuthenticatedUser({})
-    .then((user) => {
-      setUsername(user.username);
-      setShowChat(true);
-      setAuth(true);
-    })
-    .catch((err) => setAuth(false));
+  const [purchasedTickets, setTickets] = useState([]);
 
   // If the first name for the logged in user's email has not been retrieved yet,
   // query the registration database's table to retrieve the first name filtered
@@ -233,9 +244,15 @@ const StreamPage = () => {
     window.open(url, "_blank");
   };
 
+  const [open_modal, setOpenModal] = useState(false);
   // Analytics tracker for payment modal
   const donateModal = () => {
     Analytics.record({ name: "paymentModalClicked" });
+    setOpenModal(true);
+  };
+
+  const closeModal = () => {
+    setOpenModal(false);
   };
 
   // Record in analytics that stream page was visited
@@ -343,66 +360,81 @@ const StreamPage = () => {
     <div className="stream-container">
       {artist_name ? (
         <div className="stream-page-content">
-          {/* {show_alert ? (
-          <div>
-            <div className="popup-desktop">
-              <form className="waiting-msg-box">
-                <span className="popup-close" onClick={hidePopup}>
-                  <i className="fa fa-times fa-2x close-icon"></i>
-                </span>
-                <div className="popup-content">
-                  <h5 className="popup-header">The show hasn't started yet!</h5>
-                  <p className="waiting-msg">
-                    Feel free to look around! If you would like to see clips
-                    from our past shows, click the button below.
-                  </p>
-                  <br></br>
-                  <Link to="/archive">
-                    <button>Go to Past Shows</button>
-                  </Link>
-                </div>
-              </form>
-            </div>
-
-            <div className="popup-mobile">
-              <form className="waiting-msg-box">
-                <span className="popup-close" onClick={hidePopup}>
-                  <i className="fa fa-times close-icon"></i>
-                </span>
-                <div className="popup-content">
-                  <h5 className="popup-header">The show hasn't started yet!</h5>
-                  <p className="waiting-msg">
-                    Feel free to look around! If you would like to see clips
-                    from our past shows, click the button below.
-                  </p>
-                  <br></br>
-                  <Link to="/archive">
-                    <button>Go to Past Shows</button>
-                  </Link>
-                </div>
-              </form>
-            </div>
-          </div>
-        ) : null} */}
           {width > 600 ? (
             <Grid>
+              <Rodal
+                visible={open_modal}
+                onClose={closeModal}
+                width={100}
+                height={100}
+                measure="%"
+                customStyles={{
+                  padding: 0,
+                  overflow: scroll,
+                  maxHeight: "50vh",
+                  maxWidth: "50vw",
+                }}
+                className="rodal-custom"
+              >
+                <PaymentBox />
+              </Rodal>
+              {/* <Modal is_open={open_modal}></Modal> */}
               <Row>
                 {/* <Col size={0.5}></Col> */}
                 <Col size={5.5} id="stream_col">
                   <div className="stream-main">
-                    <div className="stream-wrapper" id="video_player">
-                      <VideoPlayer
-                        url={
-                          "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                        }
-                        start_time={show_start_time}
-                        artist_name={artist_name}
-                        concert_name={concert_name}
-                        auth={auth}
-                        username={username}
-                        concert_id={concert_id}
-                        is_live={is_live}
-                      />
+                    <div className="stream-wrapper">
+                      {is_free ||
+                      (purchasedTickets &&
+                        purchasedTickets.indexOf(concert_id)) >= 0 ? (
+                        <VideoPlayer
+                          url={
+                            "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                          }
+                          start_time={show_start_time}
+                          artist_name={artist_name}
+                          concert_name={concert_name}
+                          auth={auth}
+                          username={username}
+                          concert_id={concert_id}
+                          is_live={is_live}
+                        />
+                      ) : (
+                        <div className="buy-ticket-message-container">
+                          <div className="buy-ticket-message-inner-top">
+                            <Row className="buy-ticket-message-row">
+                              <Col size={2}>
+                                <img
+                                  src={ticket1}
+                                  className="buy-ticket-img"
+                                ></img>
+                              </Col>
+                              <Col size={4} className="buy-ticket-text-col">
+                                <div className="buy-ticket-text-container">
+                                  <Row>
+                                    <h4 className="buy-ticket-text">
+                                      It looks like your ticket is missing.
+                                    </h4>
+                                  </Row>
+                                  <Row>
+                                    <h5 className="buy-ticket-text">
+                                      Go get your ticket below!
+                                    </h5>
+                                  </Row>
+                                </div>
+                              </Col>
+                            </Row>
+                          </div>
+                          <button
+                            className="buy-ticket-redirect-button"
+                            onClick={() =>
+                              history.push("/upcoming/" + concert_id)
+                            }
+                          >
+                            Get Ticket
+                          </button>
+                        </div>
+                      )}
                       <div className="toggle-chat">
                         <button
                           className="toggle-chat-button"
@@ -546,13 +578,13 @@ const StreamPage = () => {
                         >
                           <button
                             className="stripe-button-border button-height"
-                            data-toggle="modal"
-                            data-target="#paymentModal"
+                            //data-toggle="modal"
+                            //data-target="#paymentModal"
                             onClick={donateModal}
                           >
                             Tip with Card
                           </button>{" "}
-                          <Modal></Modal>
+                          {/* <Modal></Modal> */}
                         </Col>
                         <Col
                           size={1}
@@ -690,11 +722,7 @@ const StreamPage = () => {
                     <Col size={0.5}></Col>
                   </Row>
                 </Col>
-                <Col
-                  size={3}
-                  id="chat_container"
-                  className="sticky-container"
-                >
+                <Col size={3} id="chat_container" className="sticky-container">
                   <div className="chat-main" id="chat_main">
                     <div className="chat-wrapper">
                       {/* {
@@ -791,18 +819,59 @@ const StreamPage = () => {
               <div className="main-column">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
-                    <VideoPlayer
-                      url={
-                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                      }
-                      start_time={show_start_time}
-                      artist_name={artist_name}
-                      concert_name={concert_name}
-                      auth={auth}
-                      username={username}
-                      concert_id={concert_id}
-                      is_live={is_live}
-                    />
+                    {is_free ||
+                    (purchasedTickets &&
+                      purchasedTickets.indexOf(concert_id)) >= 0 ? (
+                      <VideoPlayer
+                        url={
+                          "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                        }
+                        start_time={show_start_time}
+                        artist_name={artist_name}
+                        concert_name={concert_name}
+                        auth={auth}
+                        username={username}
+                        concert_id={concert_id}
+                        is_live={is_live}
+                      />
+                    ) : (
+                      <div className="buy-ticket-message-container">
+                        <div className="buy-ticket-message-inner">
+                          <div className="buy-ticket-message-inner-top">
+                            <Row>
+                              <Col size={2}>
+                                <img
+                                  src={ticket1}
+                                  className="buy-ticket-img"
+                                ></img>
+                              </Col>
+                              <Col size={4} className="buy-ticket-text-col">
+                                <div className="buy-ticket-text-container">
+                                  <Row>
+                                    <h4 className="buy-ticket-text">
+                                      It looks like your ticket is missing.
+                                    </h4>
+                                  </Row>
+                                  <Row>
+                                    <h5 className="buy-ticket-text">
+                                      Go get your ticket below!
+                                    </h5>
+                                  </Row>
+                                </div>
+                              </Col>
+                            </Row>
+                          </div>
+                          <button
+                            className="buy-ticket-redirect-button"
+                            onClick={() =>
+                              history.push("/upcoming/" + concert_id)
+                            }
+                          >
+                            Get Ticket
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="mobile-row payment-row-mobile">

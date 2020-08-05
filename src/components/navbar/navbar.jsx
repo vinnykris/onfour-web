@@ -12,17 +12,20 @@ import {
 import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";
 import Amplify from "aws-amplify";
-// import { API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+import * as queries from "../../graphql/queries";
 
 // Component imports
 import { Grid, Row, Col } from "../grid";
 import LoginSwitcher from "../sign_in_mobile/login_switcher";
 import LoggedInUser from "../sign_in_mobile/logged_in_user";
 import { useWindowDimensions } from "../custom_hooks";
+import history from "../../history";
 
 // Image imports
 import new_logo_white from "../../images/logos/new_logo_white.png";
 import login_icon from "../../images/icons/login.png";
+import desktop_icon from "../../images/logos/white-purple-logo.png";
 
 // Styles imports
 import "./navbar_styles.scss";
@@ -35,12 +38,16 @@ const NavBar = () => {
   let navbar_custom = "navbar-black"; // Default navbar SASS class
   let style = "nav-page-white"; // Default navbar color style
   let icon = new_logo_white; // Default navbar icon
+  let desktop_logo = desktop_icon; // New Navbar Desktop icon
   let location = useLocation(); // Get location of user navigation
 
   const [dropdown_open, setDropdownOpen] = useState(false); // Tracks drop down menu
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [user_email, setUserEmail] = useState(""); // Tracks user's email after signing in
-  const [username, setUsername] = useState(""); // Tracks user's email after signing in
+  const [username, setUsername] = useState(""); // Tracks user's username after signing in
+  const [profile_url, setProfileURL] = useState(""); // Tracks user's username after signing in
+  const [first, setFirst] = useState(""); // Tracks first name of signed in user
+  const [last, setLast] = useState(""); // Tracks first name of signed in user
 
   const [show_mobile_login, setShowMobileLogin] = useState(false); // Tracks whether user clicked sign-in or not on mobile
 
@@ -55,8 +62,23 @@ const NavBar = () => {
       setUserEmail(user.attributes.email);
       setAuth(true);
       setUsername(user.username);
+      setProfileURL("");
     })
     .catch((err) => setAuth(false));
+
+  // Fetching the first name of a signed in user
+  const getUserData = async () => {
+    const user_data = await API.graphql(
+      graphqlOperation(queries.get_user_data, {
+        input: username,
+      })
+    );
+    setFirst(user_data.data.getCreateOnfourRegistration.first);
+  };
+
+  if (username) {
+    getUserData();
+  }
 
   // Change styles if on about page
   if (location.pathname === "/") {
@@ -99,6 +121,16 @@ const NavBar = () => {
     if (document.getElementById("leave-call-button")) {
       document.getElementById("leave-call-button").click();
     }
+  };
+  // On mobile, redirects to profile page and closes the modal
+  const openProfile = () => {
+    history.push("/profile");
+    closeMenu("nav-signout");
+  };
+
+  // On desktop, redirects to profile page
+  const openProfileDesktop = () => {
+    history.push("/profile");
   };
 
   return (
@@ -224,20 +256,26 @@ const NavBar = () => {
               <div className="signin-content">
                 <Row>
                   <div className="sign-out-container">
-                    <Col size={1}>
-                      <div className="greeting-mobile">
-                        <p className="greeting-mobile-text">
-                          HI, {username.toUpperCase()}{" "}
-                        </p>
-                      </div>
-                      <button
-                        className="sign-out-button-mobile"
-                        onClick={signOutMobile}
-                      >
-                        SIGN OUT
-                      </button>
-                    </Col>
+                    <div className="greeting-mobile">
+                      <p className="greeting-mobile-text">Hi, {first}! </p>
+                    </div>
                   </div>
+                </Row>
+                <Row className="mobile-dropdown-row">
+                  <button
+                    className="sign-out-button-mobile"
+                    onClick={openProfile}
+                  >
+                    MY PROFILE
+                  </button>
+                </Row>
+                <Row className="mobile-dropdown-row">
+                  <button
+                    className="sign-out-button-mobile"
+                    onClick={signOutMobile}
+                  >
+                    SIGN OUT
+                  </button>
                 </Row>
               </div>
             </Grid>
@@ -289,106 +327,80 @@ const NavBar = () => {
           </Grid>
         </div>
       ) : (
-        <div className="main-content">
+        <div className="main-content desktop-nav-main">
           {/* DESKTOP CODE */}
-          <Grid className="desktop-grid">
-            <Row className="desktop-row">
-              <Col size={1}>
+          <div className="onfour-nav-logo">
+            <NavLink exact to="/" onClick={leaveVideoChat}>
+              {" "}
+              <img
+                className="white-purple-logo-desktop"
+                src={desktop_logo}
+                width="auto"
+                alt="nav-logo"
+              ></img>
+            </NavLink>
+          </div>
+          <div className="nav-links-container">
+            <NavLink exact to="/" className={style} onClick={leaveVideoChat}>
+              About Us
+            </NavLink>
+            <NavLink to="/artists" className={style} onClick={leaveVideoChat}>
+              For Artists
+            </NavLink>
+            <NavLink to="/stream" className={style} onClick={leaveVideoChat}>
+              Stream
+            </NavLink>
+            <NavLink to="/upcoming" className={style} onClick={leaveVideoChat}>
+              Upcoming
+            </NavLink>
+            {!auth ? (
+              <div className="login-link-container">
                 <NavLink
-                  to="/archive"
-                  className={style}
+                  to={{
+                    pathname: "/login",
+                    state: { current: location },
+                  }}
+                  className="sign-in-link"
                   onClick={leaveVideoChat}
                 >
-                  PAST SHOWS
+                  Log In
                 </NavLink>
-              </Col>
-              <Col size={1}>
-                <NavLink
-                  to="/artists"
-                  className={style}
-                  onClick={leaveVideoChat}
+              </div>
+            ) : (
+              <div className="login-link-container logged-in">
+                <Dropdown
+                  isOpen={dropdown_open}
+                  toggle={toggle}
+                  className="dropdown-placement"
                 >
-                  FOR ARTISTS
-                </NavLink>
-              </Col>
-              <Col size={1}>
-                <NavLink
-                  exact
-                  to="/"
-                  className={style}
-                  onClick={leaveVideoChat}
-                >
-                  ABOUT US
-                </NavLink>
-              </Col>
-              <Col size={1}>
-                <NavLink exact to="/" onClick={leaveVideoChat}>
-                  {" "}
-                  <img
-                    className="onfour-logo-desktop"
-                    src={icon}
-                    width="auto"
-                    alt="nav-logo"
-                  ></img>
-                </NavLink>
-              </Col>
-              <Col size={1}>
-                <NavLink
-                  to="/stream"
-                  className={style}
-                  onClick={leaveVideoChat}
-                >
-                  STREAM
-                </NavLink>
-              </Col>
-              <Col size={1}>
-                <NavLink
-                  to="/upcoming"
-                  className={style}
-                  onClick={leaveVideoChat}
-                >
-                  UPCOMING
-                </NavLink>
-              </Col>
-              <Col size={1}>
-                {(() => {
-                  if (!auth) {
-                    return (
-                      <NavLink
-                        to="/login"
-                        className={style}
-                        onClick={leaveVideoChat}
-                      >
-                        LOGIN
-                      </NavLink>
-                    );
-                  } else {
-                    return (
-                      <Dropdown isOpen={dropdown_open} toggle={toggle}>
-                        <div className="toggle-color">
-                          <DropdownToggle
-                            className="toggle-greeting"
-                            tag="a"
-                            caret
-                          >
-                            HI, {username.toUpperCase()}
-                          </DropdownToggle>
-                        </div>
-                        <DropdownMenu right>
-                          <DropdownItem
-                            className="sign-out-button"
-                            onClick={signOut}
-                          >
-                            SIGN OUT
-                          </DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
-                    );
-                  }
-                })()}
-              </Col>
-            </Row>
-          </Grid>
+                  <div className="toggle-color">
+                    <DropdownToggle tag="a" caret>
+                      <img
+                        className="user-icon-desktop"
+                        src={login_icon}
+                        alt="profile-icon"
+                      ></img>
+                      {first} {""}
+                    </DropdownToggle>
+                  </div>
+                  <DropdownMenu
+                    className="user-dropdown-menu"
+                    positionFixed="false"
+                  >
+                    <DropdownItem
+                      className="sign-out-button"
+                      onClick={openProfileDesktop}
+                    >
+                      Profile
+                    </DropdownItem>
+                    <DropdownItem className="sign-out-button" onClick={signOut}>
+                      Sign Out
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

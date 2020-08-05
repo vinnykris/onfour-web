@@ -2,9 +2,9 @@
 import React from "react";
 
 // Component Imports
-import PaymentBox from "./payment_box";
+import PaymentBox from "./donate_box";
 
-// PaymentModal is a modal wrappper for the PaymentBox component 
+// PaymentModal is a modal wrappper for the PaymentBox component
 // Each modal is identified by its id
 const PaymentModal = () => {
   return (

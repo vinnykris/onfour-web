@@ -18,6 +18,9 @@ const FeaturedContent = (props) => {
           },
         }}
       >
+        <Row className="more-info">
+          <p className="more-info-text">MORE INFO</p>
+        </Row>
         <Grid className="featured-content">
           <Row>
             <Col size={3} className="poster-container">
@@ -36,14 +39,15 @@ const FeaturedContent = (props) => {
               <Row>
                 <Col size={3}>
                   <p className="artist-name">
-                    {props.artist_name} - {props.concert_name}
+                    {props.artist_name}
+                    {/* - {props.concert_name} */}
                   </p>
                 </Col>
               </Row>
               <Row className="time-row">
                 <Col size={3}>
                   <p className="time">
-                    {props.week_day} | {props.date} | {props.time} EST{" "}
+                    {props.week_day} | {props.date} | {props.formatted_time} EST{" "}
                   </p>
                 </Col>
               </Row>

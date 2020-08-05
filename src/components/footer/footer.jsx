@@ -1,6 +1,6 @@
 // React
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, NavLink } from "react-router-dom";
 
 // Components
 import { Grid, Row, Col } from "../grid";
@@ -36,16 +36,18 @@ const Footer = () => {
     <div>
       {show_footer ? (
         <div className="footer-container">
-          <Grid>
+          <Grid className="footer-grid">
             <Row>
               <Col size={1}></Col>
               <Col size={5}>
-                <img
-                  className="onfour-logo-footer"
-                  src={white_logo}
-                  width="auto"
-                  alt="nav-logo"
-                ></img>
+                <div className="footer-logo-container">
+                  <img
+                    className="onfour-logo-footer"
+                    src={white_logo}
+                    width="auto"
+                    alt="nav-logo"
+                  ></img>
+                </div>
               </Col>
               <Col size={1}></Col>
               <Col size={3}>
@@ -63,6 +65,16 @@ const Footer = () => {
                       >
                         Contact Us
                       </a>
+                    </li>
+                    <li>
+                      <NavLink to="/privacy-policy" className="privacy-link">
+                        Privacy Policy
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/terms-of-service" className="privacy-link">
+                        Terms of Service
+                      </NavLink>
                     </li>
                   </ul>
                 </div>

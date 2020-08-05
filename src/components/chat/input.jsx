@@ -1,5 +1,12 @@
 // React imports
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+// Component imports
+import ChatTooltip from "./chat_tooltip";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+
+// Picker import
+import { Picker } from "emoji-mart";
 
 // Styles imports
 import "./chat.scss";
@@ -9,6 +16,8 @@ import Auth from "../../apis/UserPool";
 
 // Component for input field for chat
 const Input = ({ message, setMessage, sendMessage, name }) => {
+  const [emojiPickerVisibility, setEmojiPickerVisibility] = useState(false);
+  const [selectedEmoji, setSelectedEmoji] = useState("");
   const [auth, setAuth] = useState("");
 
   Auth.currentAuthenticatedUser({})
@@ -16,6 +25,26 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
       setAuth(true);
     })
     .catch((err) => setAuth(false));
+
+  //set picker visibility to false on click outside the picker
+  const handleEmojiPickerClose = () => {
+    setEmojiPickerVisibility(false);
+  };
+
+  //activates on emoji click within picker
+  //changes selectedEmoji useState
+  const onEmojiClick = (emojiObject) => {
+    setSelectedEmoji(emojiObject.native);
+  };
+
+  //listens for selectedEmoji useState change
+  //appends emoji to message
+  useEffect(() => {
+    if (selectedEmoji != "") {
+      setMessage({ message }.message + selectedEmoji);
+      setSelectedEmoji("");
+    }
+  }, [selectedEmoji]);
 
   return (
     <div>
@@ -32,6 +61,31 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
             }
           />
           {/* <ChatTooltip title="Please login through the navigation bar."> */}
+
+          {/* visibility toggler */}
+          <div
+            className="emoji-button"
+            onClick={(event) =>
+              setEmojiPickerVisibility(!emojiPickerVisibility)
+            }
+          >
+            <i class="fa fa-smile-o" aria-hidden="true"></i>
+          </div>
+
+          {/* picker element */}
+          {emojiPickerVisibility && (
+            <ClickAwayListener onClickAway={handleEmojiPickerClose}>
+              <div>
+                <Picker
+                  onSelect={onEmojiClick}
+                  theme="dark"
+                  set="twitter"
+                  sheetSize="64"
+                />
+              </div>
+            </ClickAwayListener>
+          )}
+
           <button
             className="send-button"
             onClick={(event) => sendMessage(event)}

@@ -26,7 +26,7 @@ function VideoPlayer({
   auth,
   username,
   concert_id,
-  is_live
+  is_live,
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
@@ -126,28 +126,31 @@ function VideoPlayer({
     }
   });
 
-  const [registered_concert, setRegisteredConcert] = useState(false);
-  const registerConcert = async (concert_reg_load) => {
-    // Calling the API, using async and await is necessary
-    await API.graphql(
-      graphqlOperation(mutations.update_registration_concert, {
-        input: concert_reg_load,
-      })
-    );
-  };
+  // THIS SHOULD ALSO ADD THE CONCERT TO THE USER IN THE DATABASE
 
-  if (!timer_placeholder.length) {
-    if (auth && !registered_concert) {
-      if (concert_id) {
-        const concert_reg_load = {
-          username: username,
-          concert: concert_id,
-        };
-        registerConcert(concert_reg_load);
-        setRegisteredConcert(true);
-      }
-    }
-  }
+  // const [registered_concert, setRegisteredConcert] = useState(false);
+  // const registerConcert = async (concert_reg_load) => {
+  //   console.log(concert_reg_load.concert);
+  //   // Calling the API, using async and await is necessary
+  //   await API.graphql(
+  //     graphqlOperation(mutations.update_registration_concert, {
+  //       input: concert_reg_load,
+  //     })
+  //   );
+  // };
+
+  // if (!timer_placeholder.length) {
+  //   if (auth && !registered_concert) {
+  //     if (concert_id) {
+  //       const concert_reg_load = {
+  //         username: username,
+  //         concert: concert_id,
+  //       };
+  //       registerConcert(concert_reg_load);
+  //       setRegisteredConcert(true);
+  //     }
+  //   }
+  // }
 
   // this function asks Amplify analytics to record the streamVisit event
   const recordEvent = () => {
@@ -200,10 +203,14 @@ function VideoPlayer({
                   />
                 </div>
                 <br></br>
-                <h7 className="waiting-message2">The artist is still backstage, the performance should begin soon.</h7>
+                <h7 className="waiting-message2">
+                  The artist is still backstage, the performance should begin
+                  soon.
+                </h7>
                 <br></br>
                 <h7 className="waiting-message2">
-                    If you are unable to see the stream well, please try refreshing your browser.
+                  If you are unable to see the stream well, please try
+                  refreshing your browser.
                 </h7>
               </div>
             </div>
