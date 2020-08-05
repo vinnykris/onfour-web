@@ -42,7 +42,7 @@
 }
 
 .desktop-stream-row {
-  height: 100vh;
+  height: calc(100vh - 53px);
   width: 100vw;
 }
 
@@ -83,7 +83,7 @@
   // height: 37vw;
   // height: calc(47vw - 25px);
   // height: 100%;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   // position: relative;
   position: -webkit-sticky;
