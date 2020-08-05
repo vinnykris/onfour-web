@@ -232,6 +232,7 @@
   margin: 12px;
   margin-top: 21px;
   position: relative;
+  height: 100%;
 
   & .crew-modal-stacked-row {
     display: block;
@@ -324,7 +325,7 @@
 
   & .crew-modal-save-button-wrapper {
     position: absolute;
-    bottom: -118px;
+    bottom: 10px;
     width: 100%;
 
     & button {
@@ -347,6 +348,53 @@
     & button:active,
     & button:focus {
       outline: none !important;
+    }
+  }
+
+  & .crew-modal-user-container {
+    height: 110px;
+    overflow-y: scroll;
+  }
+
+  & .crew-modal-add-user-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    & .crew-modal-add-user-data {
+      display: flex;
+
+      & .crew-modal-add-user-initial {
+        border: 1px solid;
+        border-radius: 50%;
+        height: 45px;
+        width: 45px;
+        color: #f2abab;
+        background: white;
+        font-size: 25px;
+        line-height: 45px;
+        font-weight: 500;
+      }
+
+      & .crew-modal-add-user-email {
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 45px;
+        letter-spacing: 0.045em;
+        color: #f2abab;
+        margin-left: 13px;
+      }
+    }
+
+    & .crew-modal-add-user-remove-button {
+      height: 100%;
+      line-height: 45px;
+      cursor: pointer;
+
+      & path {
+        color: #f1a3a3;
+      }
     }
   }
 }
