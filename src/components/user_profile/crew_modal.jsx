@@ -31,10 +31,17 @@ const CrewModal = () => {
       const newCrewMemberEmail = event.currentTarget.value;
       const newCrewMemberInitial = newCrewMemberEmail[0].toUpperCase();
 
-      setCrewMembers([
-        { email: newCrewMemberEmail, initial: newCrewMemberInitial },
-        ...crewMembers,
-      ]);
+      const duplicateCrewMemberEmail = crewMembers.filter(
+        (member) => member.email === newCrewMemberEmail
+      );
+
+      if (duplicateCrewMemberEmail.length === 0) {
+        setCrewMembers([
+          { email: newCrewMemberEmail, initial: newCrewMemberInitial },
+          ...crewMembers,
+        ]);
+      }
+
       event.currentTarget.value = "";
     }
   };
