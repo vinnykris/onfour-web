@@ -22,15 +22,14 @@
   position: relative;
 }
 
-
 .donate-form {
-  background-color: #F5F6F7;
+  background-color: #f5f6f7;
   width: 100%;
-  max-width: 500px;
+  height: 100%;
+  //max-width: 500px;
   padding: 20px 40px 20px 40px;
   border: none;
 }
-
 
 .donate-process-text {
   margin: 0px;
@@ -38,7 +37,7 @@
 }
 
 .donate-form-input {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 3px;
   height: 15%;
   // height: 20%;
@@ -52,7 +51,7 @@
   padding: 12px 24px;
   color: #000000;
   &::placeholder {
-    color: #C4C4C4;
+    color: #c4c4c4;
   }
   &:focus {
     border: none;
@@ -66,7 +65,7 @@
 .donate-button {
   width: 60%;
   // height: 20%;
-  background-color:  #794D94;
+  background-color: #794d94;
   color: white;
   align-items: center;
   font-weight: bold;
@@ -80,7 +79,6 @@
   margin-left: 10px;
   margin-right: 10px;
 }
-
 
 .pay-success-msg {
   color: #4d4d4d;

@@ -7,6 +7,7 @@ import SharePopup from "./share_popup";
 import styled from "styled-components";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import moment from "moment";
+import Rodal from "rodal";
 // import { Prompt } from "react-router";
 import { useHistory } from "react-router-dom";
 
@@ -22,6 +23,7 @@ import Auth from "../../apis/UserPool";
 // Component Imports
 import VideoPlayer from "./video_player";
 import Chat from "../chat/stream_chat";
+
 // import Join from "../chat/join_chat";
 // import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
@@ -29,8 +31,10 @@ import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 import { getTickets } from "../../apis/get_user_data";
+import PaymentBox from "../payment/donate_box";
 // Styles Imports
 import "./stream_styles.scss";
+import "rodal/lib/rodal.css";
 
 // Image imports
 import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
@@ -240,9 +244,15 @@ const StreamPage = () => {
     window.open(url, "_blank");
   };
 
+  const [open_modal, setOpenModal] = useState(false);
   // Analytics tracker for payment modal
   const donateModal = () => {
     Analytics.record({ name: "paymentModalClicked" });
+    setOpenModal(true);
+  };
+
+  const closeModal = () => {
+    setOpenModal(false);
   };
 
   // Record in analytics that stream page was visited
@@ -308,6 +318,23 @@ const StreamPage = () => {
         <div className="stream-page-content">
           {width > 600 ? (
             <Grid>
+              <Rodal
+                visible={open_modal}
+                onClose={closeModal}
+                width={100}
+                height={100}
+                measure="%"
+                customStyles={{
+                  padding: 0,
+                  overflow: scroll,
+                  maxHeight: "50vh",
+                  maxWidth: "50vw",
+                }}
+                className="rodal-custom"
+              >
+                <PaymentBox />
+              </Rodal>
+              {/* <Modal is_open={open_modal}></Modal> */}
               <Row>
                 {/* <Col size={0.5}></Col> */}
                 <Col size={7} id="stream_col">
@@ -504,13 +531,13 @@ const StreamPage = () => {
                         >
                           <button
                             className="stripe-button-border button-height"
-                            data-toggle="modal"
-                            data-target="#paymentModal"
+                            //data-toggle="modal"
+                            //data-target="#paymentModal"
                             onClick={donateModal}
                           >
                             Tip with Card
                           </button>{" "}
-                          <Modal></Modal>
+                          {/* <Modal></Modal> */}
                         </Col>
                         <Col
                           size={1}
