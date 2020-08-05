@@ -52,7 +52,6 @@ const Profile = (props) => {
         history.push("/");
       });
   }, []);
-  
 
   // const getStubs = (concerts) => {
   //   var stub_urls = [];
@@ -81,10 +80,7 @@ const Profile = (props) => {
       await setStubs(ticket_stubs);
       // Archive videos (sorting from most recent -> oldest)
       // const memories_result = await getMemories(variables.username);
-      await setMemories(
-        memories_result
-          .slice(0, 4)
-      );
+      await setMemories(memories_result.slice(0, 4));
       setIsLoaded(true);
     };
     fetchData();
@@ -112,42 +108,67 @@ const Profile = (props) => {
 
   const goToTicket = () => {
     setCurrentPage("ticketstub");
-    if (document.getElementById("dashboard-icon") && document.getElementById("ticket-icon")) {
+    if (
+      document.getElementById("dashboard-icon") &&
+      document.getElementById("ticket-icon")
+    ) {
       document.getElementById("dashboard-icon").style.opacity = 0.5;
       document.getElementById("ticket-icon").style.opacity = 1;
     }
-  }
+  };
 
   const goToDashboard = () => {
     setCurrentPage("dashboard");
-    if (document.getElementById("dashboard-icon") && document.getElementById("ticket-icon")) {
+    if (
+      document.getElementById("dashboard-icon") &&
+      document.getElementById("ticket-icon")
+    ) {
       document.getElementById("dashboard-icon").style.opacity = 1;
       document.getElementById("ticket-icon").style.opacity = 0.5;
     }
-  }
+  };
 
   return (
     <div className="profile-page">
       {is_loaded ? (
         <Grid>
           <Row>
-          <Col className="profile-button-col">
-            <div className="profile-button-bar">
-              <Row>
-                <img src={dashboardIcon} className="profile-dashboard-icon initial-highlight" id="dashboard-icon" onClick={goToDashboard}></img>
-              </Row>
-              <Row>
-                <img src={ticketIcon} className="profile-dashboard-icon" id="ticket-icon" onClick={goToTicket}></img>
-              </Row>
-            </div>
-          </Col>
-          { currentPage==="dashboard" ? (
-            <DashboardPage width={width} upcoming_concerts={upcoming_concerts} memories={memories} history={history}></DashboardPage>
-          ):( 
-            <TicketPage stubs={stubs} width={width} history={history}></TicketPage>
-          )}
-          
-          {/* <Col size={7}>
+            <Col className="profile-button-col">
+              <div className="profile-button-bar">
+                <Row>
+                  <img
+                    src={dashboardIcon}
+                    className="profile-dashboard-icon initial-highlight"
+                    id="dashboard-icon"
+                    onClick={goToDashboard}
+                  ></img>
+                </Row>
+                <Row>
+                  <img
+                    src={ticketIcon}
+                    className="profile-dashboard-icon"
+                    id="ticket-icon"
+                    onClick={goToTicket}
+                  ></img>
+                </Row>
+              </div>
+            </Col>
+            {currentPage === "dashboard" ? (
+              <DashboardPage
+                width={width}
+                upcoming_concerts={upcoming_concerts}
+                memories={memories}
+                history={history}
+              ></DashboardPage>
+            ) : (
+              <TicketPage
+                stubs={stubs}
+                width={width}
+                history={history}
+              ></TicketPage>
+            )}
+
+            {/* <Col size={7}>
             <Row className="header-section">
                 <img src={dashboardIcon} className="profile-header-icon"></img>
                 <h4 className="profile-preview-content-header username-header">
