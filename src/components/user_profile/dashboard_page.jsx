@@ -6,6 +6,7 @@ import Rodal from "rodal";
 import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.png";
 
 import "./profile_styles.scss";
+import CrewModal from "./crew_modal";
 
 const DashboardPage = ({ width, upcoming_concerts, memories, history }) => {
   const [showCrewModal, setShowCrewModal] = useState(false);
@@ -159,6 +160,7 @@ const DashboardPage = ({ width, upcoming_concerts, memories, history }) => {
             customMaskStyles={{ background: 'rgba(0,0,0,0.8)', cursor: 'pointer' }}
             className='user-crews-modal'
           >
+            <CrewModal />
           </Rodal>
         </Col>
       </Row>

@@ -221,8 +221,132 @@
 .user-crews-modal {
   & .rodal-dialog {
     border-radius: 10px;
-    & .rodal-close:before, & .rodal-close:after {
+    & .rodal-close:before,
+    & .rodal-close:after {
       background: white !important;
+    }
+  }
+}
+
+.user-create-crew {
+  margin: 12px;
+  margin-top: 21px;
+  position: relative;
+
+  & .crew-modal-stacked-row {
+    display: block;
+    margin-top: 15px;
+  }
+
+  & .crew-modal-flex-row {
+    margin-top: 18px;
+    display: flex;
+  }
+
+  & p {
+    font-family: Helvetica;
+    font-style: normal;
+    color: #ffffff;
+  }
+
+  & .crew-modal-section-title {
+    text-align: left;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0.045em;
+  }
+
+  & .crew-modal-members-text {
+    font-family: Helvetica;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 47px;
+    letter-spacing: 0.045em;
+    color: #f2abab;
+    margin-left: 13px;
+  }
+
+  & .crew-modal-members-icon {
+    border: 1px solid;
+    border-radius: 50%;
+    height: 47px;
+    width: 47px;
+    color: #f2abab;
+
+    & svg {
+      height: 41px;
+
+      & path {
+        color: #f2abab;
+      }
+    }
+  }
+
+  & .crew-modal-input {
+    height: 44px;
+    background: #e0e0e0;
+    font-family: Helvetica;
+    border: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0.045em;
+
+    color: #000000;
+
+    &::placeholder {
+      font-size: 13px;
+      line-height: 15px;
+      letter-spacing: 0.045em;
+      color: #252121;
+    }
+
+    &:focus {
+      background: #ffffff !important;
+    }
+  }
+
+  & .crew-modal-color-wrapper {
+    display: flex;
+
+    & .crew-modal-color-option {
+      height: 47px;
+      width: 47px;
+      border-radius: 50%;
+      border: 1px solid #f2abab;
+      margin-right: 17px;
+      cursor: pointer;
+    }
+  }
+
+  & .crew-modal-save-button-wrapper {
+    position: absolute;
+    bottom: -118px;
+    width: 100%;
+
+    & button {
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 17px;
+      line-height: 20px;
+      text-align: center;
+      letter-spacing: 0.045em;
+      color: #ffffff;
+      background: none;
+      margin: 0px auto;
+    }
+
+    & button:disabled {
+      color: #f2abab !important;
+    }
+
+    & button:active,
+    & button:focus {
+      outline: none !important;
     }
   }
 }
