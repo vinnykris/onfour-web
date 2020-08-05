@@ -75,7 +75,6 @@ const CheckoutForm = () => {
     setNeedConfirm(false);
   };
 
-
   // This function gets called after user clicked the CONFIRM button
   // It's sending the Stripe token to the AWS lambda function for executing the payment
   const submitPayment = async (event) => {
@@ -122,7 +121,7 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div>
+    <div className="donate-box-container">
       <form id="donate" className="donate-form" onSubmit={submitPayment}>
         {(() => {
           if (!payed) {
@@ -131,13 +130,13 @@ const CheckoutForm = () => {
                 {display_err ? (
                   <p className="error-msg">{payment_message}</p>
                 ) : (
-                    <br></br>
+                  <br></br>
                 )}
-                <NumberFormat 
+                <NumberFormat
                   className="donate-form-input short-width-input"
                   name="amount"
                   placeholder="Amount $0.00"
-                  value={amount_value} 
+                  value={amount_value}
                   onChange={(event) =>
                     setAmount(event.target.value.substring(1))
                   }
@@ -186,14 +185,16 @@ const CheckoutForm = () => {
                       </div>
                     ) : (
                       <div>
-                        <p className="donate-process-text">Please confirm you are donating ${amount_value}</p>
+                        <p className="donate-process-text">
+                          Please confirm you are donating ${amount_value}
+                        </p>
                         <button
                           form="donate"
                           className="donate-button"
                           type="submit"
                           disabled={!stripe}
                         >
-                              Confirm
+                          Confirm
                         </button>
                       </div>
                     )}
@@ -218,9 +219,7 @@ const CheckoutForm = () => {
 // donateBox is a wrapper component for CheckoutForm
 // It is used for cleaner layout
 const DonateBox = () => {
-  return (
-    <CheckoutForm />
-  );
+  return <CheckoutForm />;
 };
 
 export default DonateBox;
