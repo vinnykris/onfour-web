@@ -32,6 +32,8 @@ import VideoChat from "../video_chat/App/video_chat_App";
 
 import { getTickets } from "../../apis/get_user_data";
 import PaymentBox from "../payment/donate_box";
+import VenmoBox from "../payment/venmo_box";
+import PaypalBox from "../payment/paypal_box";
 // Styles Imports
 import "./stream_styles.scss";
 import "rodal/lib/rodal.css";
@@ -75,6 +77,9 @@ const StreamPage = () => {
   const [purchasedTickets, setTickets] = useState([]);
 
   const [open_modal, setOpenModal] = useState(false);
+  const [venmo_selected, setVenmoSelected] = useState(false);
+  const [credit_selected, setCreditSelected] = useState(true);
+  const [paypal_selected, setPaypalSelected] = useState(false);
 
   const history = useHistory();
 
@@ -387,6 +392,52 @@ const StreamPage = () => {
     }, 5000);
   });
 
+  const paymentTabSelected = (option) => {
+    if (option == 0) {
+      setCreditSelected(true);
+      setVenmoSelected(false);
+      setPaypalSelected(false);
+      document.getElementById("credit-tab").classList.add("selected-tab");
+      document.getElementById("venmo-tab").classList.remove("selected-tab");
+      document.getElementById("paypal-tab").classList.remove("selected-tab");
+      document.getElementById("credit-tab-text").classList.add("selected-tab");
+      document
+        .getElementById("venmo-tab-text")
+        .classList.remove("selected-tab");
+      document
+        .getElementById("paypal-tab-text")
+        .classList.remove("selected-tab");
+    } else if (option == 1) {
+      setCreditSelected(false);
+      setVenmoSelected(true);
+      setPaypalSelected(false);
+      document.getElementById("venmo-tab").classList.add("selected-tab");
+      document.getElementById("credit-tab").classList.remove("selected-tab");
+      document.getElementById("paypal-tab").classList.remove("selected-tab");
+      document.getElementById("venmo-tab-text").classList.add("selected-tab");
+      document
+        .getElementById("credit-tab-text")
+        .classList.remove("selected-tab");
+      document
+        .getElementById("paypal-tab-text")
+        .classList.remove("selected-tab");
+    } else if (option == 2) {
+      setCreditSelected(false);
+      setVenmoSelected(false);
+      setPaypalSelected(true);
+      document.getElementById("paypal-tab").classList.add("selected-tab");
+      document.getElementById("venmo-tab").classList.remove("selected-tab");
+      document.getElementById("credit-tab").classList.remove("selected-tab");
+      document.getElementById("paypal-tab-text").classList.add("selected-tab");
+      document
+        .getElementById("venmo-tab-text")
+        .classList.remove("selected-tab");
+      document
+        .getElementById("credit-tab-text")
+        .classList.remove("selected-tab");
+    }
+  };
+
   // RENDERING SECTION
   return (
     <div className="stream-container">
@@ -403,12 +454,63 @@ const StreamPage = () => {
                 customStyles={{
                   padding: 0,
                   overflow: scroll,
-                  maxHeight: "400px",
-                  maxWidth: "600px",
+                  maxHeight: "545px",
+                  maxWidth: "671px",
                 }}
                 className="rodal-custom"
               >
-                <PaymentBox />
+                <Grid className="payment-modal-grid">
+                  <Row className="payment-modal-header">
+                    <Col size={1}>
+                      <h4 className="payment-modal-header-text">
+                        Donate to {artist_name}
+                      </h4>
+                    </Col>
+                  </Row>
+                  <Row className="payment-modal-header">
+                    <Col
+                      size={1}
+                      className="payment-modal-tab selected-tab"
+                      id="credit-tab"
+                    >
+                      <span
+                        onClick={() => paymentTabSelected(0)}
+                        className="payment-modal-tab-text selected-tab"
+                        id="credit-tab-text"
+                      >
+                        Credit Card
+                      </span>
+                    </Col>
+                    <Col size={1} className="payment-modal-tab" id="venmo-tab">
+                      <span
+                        onClick={() => paymentTabSelected(1)}
+                        className="payment-modal-tab-text"
+                        id="venmo-tab-text"
+                      >
+                        Venmo
+                      </span>
+                    </Col>
+                    <Col size={1} className="payment-modal-tab" id="paypal-tab">
+                      <span
+                        onClick={() => paymentTabSelected(2)}
+                        className="payment-modal-tab-text"
+                        id="paypal-tab-text"
+                      >
+                        Paypal
+                      </span>
+                    </Col>
+                  </Row>
+                </Grid>
+                {(() => {
+                  if (credit_selected) {
+                    return <PaymentBox />;
+                  } else if (venmo_selected) {
+                    return <VenmoBox />;
+                  } else {
+                    return <PaypalBox />;
+                  }
+                })()}
+                {/* <PaymentBox /> */}
               </Rodal>
               {/* <Modal is_open={open_modal}></Modal> */}
               <Row className="desktop-stream-row">
@@ -517,7 +619,7 @@ const StreamPage = () => {
 
                               <div className="stream-action-button-container">
                                 <button
-                                  className="stream-action-button"
+                                  className="stream-action-button donate-stream-button"
                                   onClick={donateModal}
                                 >
                                   {" "}

@@ -227,6 +227,55 @@
   // margin: auto;
 }
 
+.payment-modal-grid {
+  background-color: #e5e5e5;
+  height: 20%;
+}
+
+.payment-modal-header {
+  height: 50%;
+  width: 100%;
+}
+
+.payment-modal-header-text {
+  font-weight: bold;
+  font-size: 19px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: 0.045em;
+  margin-top: 23px;
+  color: #000000;
+}
+
+.payment-modal-tab {
+  display: flex;
+  cursor: pointer;
+}
+
+.payment-modal-tab.selected-tab {
+  border-bottom: 3px solid #794d94;
+}
+
+.payment-modal-tab-text {
+  display: flex;
+  margin: auto;
+  margin-bottom: 15px;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 19px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: 0.045em;
+
+  color: #929292;
+}
+
+.payment-modal-tab-text.selected-tab {
+  color: #000000;
+  margin-bottom: 12px;
+}
+
 // STREAM VIDEO STYLING
 .stream-main {
   position: relative;
@@ -471,14 +520,14 @@
 }
 
 .buttons-row {
-  height: 15%;
+  height: 20%;
   // border-radius: 4px 4px 0 0;
   // border-bottom: 1px solid #454242;
 }
 
 .artist-bio-row {
   padding-top: 1%;
-  height: 70%;
+  height: 65%;
   display: flex;
 }
 
@@ -573,8 +622,13 @@
 
 .stream-artist-bio {
   color: white;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   text-align: left;
+  //font-weight: normal;
+  line-height: 127.49%;
+  /* or 18px */
+
+  letter-spacing: 0.06em;
 }
 
 .stream-share-row {
@@ -599,13 +653,22 @@
   border-radius: 4px;
   background-color: white;
   color: black;
-  width: auto;
-  height: 100%;
+  width: 104px;
+  height: 33px;
   align-items: center;
-  font-size: 0.7rem;
+  font-size: 12px;
   letter-spacing: 0.09em;
   font-weight: bold;
   line-height: 0.7rem;
+}
+
+.donate-stream-button {
+  background-color: #794d94;
+  color: white;
+}
+
+.donate-stream-button i {
+  color: white;
 }
 
 .stream-action-button-text {
@@ -925,9 +988,9 @@
 }
 
 .venmo-code {
-  max-width: 125px;
-  margin-top: -3%;
-  padding-bottom: 3%;
+  // max-width: 125px;
+  // margin-top: -3%;
+  // padding-bottom: 3%;
   // padding-top: 3%;
 }
 
