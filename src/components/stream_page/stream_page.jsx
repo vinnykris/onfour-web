@@ -304,17 +304,17 @@ const StreamPage = () => {
     if (description_button_icon === "fa fa-chevron-down") {
       setDescriptionButtonIcon("fa fa-chevron-up");
       document.getElementById("artist_bio").style.display = "none";
-      document.getElementById("stream_info_section").style.height = "10%";
-      document.getElementById("stream_main_section").style.height = "90%";
-      document.getElementById("stream_info_bottom").style.height = "50%";
-      document.getElementById("stream_info_top").style.height = "50%";
+      document.getElementById("stream_info_section").style.height = "14%";
+      document.getElementById("stream_main_section").style.height = "86%";
+      document.getElementById("stream_info_bottom").style.height = "43%";
+      document.getElementById("stream_info_top").style.height = "57%";
     } else {
       setDescriptionButtonIcon("fa fa-chevron-down");
       document.getElementById("artist_bio").style.display = "flex";
       document.getElementById("stream_info_section").style.height = "40%";
       document.getElementById("stream_main_section").style.height = "60%";
       document.getElementById("stream_info_bottom").style.height = "15%";
-      document.getElementById("stream_info_top").style.height = "15%";
+      document.getElementById("stream_info_top").style.height = "20%";
     }
   };
 
@@ -883,24 +883,12 @@ const StreamPage = () => {
                 <Col size={3} id="chat_container" className="sticky-container">
                   <div className="chat-main" id="chat_main">
                     <div className="chat-wrapper">
-                      {/* {
-                      username ? (
-                        <Chat
-                          chat_name={username ? username : null}
-                          chatStatus={chatStatus}
-                        />
-                      ) : (
-                        // <Join joinSubmit={joinSubmit} />
-                        <WaitingChat />
-                      )
-                      } */}
-                      {/* {console.log(username)} */}
-                      <Row className="video-chat-row">
+                      {/* <Row className="video-chat-row">
                         <VideoChat
                           user_name={username ? username : "GUEST"}
                           artist_name="vinnykris"
                         ></VideoChat>
-                      </Row>
+                      </Row> */}
                       <Row className="chat-row">
                         <Chat
                           chat_name={username ? username : "GUEST"}

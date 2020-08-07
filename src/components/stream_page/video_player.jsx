@@ -36,13 +36,13 @@ function VideoPlayer({
     // FOR LIVE WEBSITE: uncomment out line 38 and commment out line 43-44
     // to block the stream when the show hasn't started
 
-    const difference = +new Date(start_time) - +new Date();
+    // const difference = +new Date(start_time) - +new Date();
 
     // FOR SOUNDCHECK: comment out line 38 and uncomment out line 43-44
     // to unblock the stream
 
-    // const difference =
-    //   +new Date("2020-06-03T19:00:00.000 - 04: 00") - +new Date();
+    const difference =
+      +new Date("2020-06-03T19:00:00.000 - 04: 00") - +new Date();
 
     let time_left = {};
 
