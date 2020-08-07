@@ -9,6 +9,8 @@ import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from "../urlUtils";
 import DailyIframe from "@daily-co/daily-js";
 import { logDailyEvent } from "../logUtils";
 import getToken from "../getToken";
+import {Grid, Row, Col} from "../../grid";
+import { useInputValue } from "../../custom_hooks";
 
 const STATE_IDLE = "STATE_IDLE";
 const STATE_CREATING = "STATE_CREATING";
@@ -27,6 +29,12 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
   const [mute_all, setMuteAll] = useState(true);
   const [mute_button_msg, setMuteButtonMsg] = useState("UNMUTE ALL");
   const isInCrew = (owner_name.indexOf(user_name) >= 0);
+  // Input form values
+  const layer1_bps = useInputValue(80000);
+  const layer2_bps = useInputValue(300000);
+  const resolution_width = useInputValue(320);
+  const resolution_height = useInputValue(180);
+  const frame_rate = useInputValue(10);
   /**
    * Creates a new call room.
    */
@@ -63,20 +71,27 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
    * be done with the call object for a while and you're no longer listening to its
    * events.
    */
-  const startJoiningPublicCall = useCallback(url => {
+  const startJoiningPublicCall = useCallback((url,layer1_bps, layer2_bps, frame_rate, resolution_width, resolution_height) => {
+    console.log(layer1_bps.value, layer2_bps.value, resolution_width.value, resolution_height.value, frame_rate.value);
     const newCallObject = DailyIframe.createCallObject({
-      userName: user_name
+      userName: user_name,
+      subscribeToTracksAutomatically: false,
+      dailyConfig: {
+        camSimulcastEncodings: [
+          { maxBitrate: layer1_bps.value, scaleResolutionDownBy: 2 },
+          { maxBitrate: layer2_bps.value, scaleResolutionDownBy: 1 },
+        ],
+      },
     });
     // setRoomUrl(url);
     setRoomUrl("public");
-    setCallObject(newCallObject);
-    setAppState(STATE_JOINING);
     newCallObject.setBandwidth({
-      kbs: 20,
-      trackConstraints: { width: 160, height: 90, frameRate: 5 }
+      // kbs: 20,
+      trackConstraints: { width: resolution_width.value, height: resolution_height.value, frameRate: frame_rate.value }
     });
     newCallObject.join({ url });
-    
+    setCallObject(newCallObject);
+    setAppState(STATE_JOINING);
   }, []);
 
   const startJoiningPrivateCall = useCallback(async url => {
@@ -85,17 +100,24 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
       console.log(newToken);
       const newCallObject = DailyIframe.createCallObject({
         userName: user_name,
-        token: newToken
+        token: newToken,
+        subscribeToTracksAutomatically: false,
+        dailyConfig: {
+          camSimulcastEncodings: [
+            { maxBitrate: layer1_bps.value, scaleResolutionDownBy: 2 },
+            { maxBitrate: layer2_bps.value, scaleResolutionDownBy: 1 },
+          ],
+        },
       });
       // setRoomUrl(url);
       setRoomUrl("private");
-      setCallObject(newCallObject);
-      setAppState(STATE_JOINING);
       newCallObject.setBandwidth({
-        kbs: 20,
-        trackConstraints: { width: 160, height: 90, frameRate: 5 }
+        // kbs: 20,
+        trackConstraints: { width: resolution_width.value, height: resolution_height.value, frameRate: frame_rate.value }
       });
       newCallObject.join({ url });
+      setCallObject(newCallObject);
+      setAppState(STATE_JOINING);
     } 
     // else {
     //   const newCallObject = DailyIframe.createCallObject({
@@ -342,7 +364,7 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
               <StartButton
                 disabled={!enableStartButton}
                 onClick={() => {
-                  createPublicCall().then(url => startJoiningPublicCall(url));
+                  createPublicCall().then(url => startJoiningPublicCall(url, layer1_bps, layer2_bps, frame_rate, resolution_width, resolution_height));
                 }}
                 artistView={artistView}
               />
@@ -351,6 +373,54 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
                   By joining this video call, you will be seen by the artist as well as your crew members!
                 </div>
               ): null}
+              <form id="video-chat-params-form">
+                <Grid>
+                  <Row>
+                    <Col size = {1}>
+                      <input
+                        className="artist-form-input"
+                        placeholder="layer1 bps"
+                        required
+                        {...layer1_bps}
+                      />
+                    </Col>
+                    <Col size = {1}>
+                      <input
+                        className="artist-form-input"
+                        placeholder="layer2 bps"
+                        required
+                        {...layer2_bps}
+                      />
+                    </Col>
+                    <Col size = {1}>
+                      <input
+                        className="artist-form-input"
+                        placeholder="frame rate"
+                        required
+                        {...frame_rate}
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col size = {1}>
+                      <input
+                        className="artist-form-input"
+                        placeholder="width"
+                        required
+                        {...resolution_width}
+                      />
+                    </Col>
+                    <Col size = {1}>
+                      <input
+                        className="artist-form-input"
+                        placeholder="height"
+                        required
+                        {...resolution_height}
+                      />
+                    </Col>
+                  </Row>
+                </Grid>
+              </form>
             </div>
           ) : (
             <StartButton
