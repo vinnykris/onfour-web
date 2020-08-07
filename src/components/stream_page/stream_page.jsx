@@ -43,7 +43,7 @@ import ticket1 from "../../images/icons/ticket1.png";
 Amplify.configure(awsmobile);
 
 // Main stream page component. Holds stream video, chat, and payment functionality
-const StreamPage = () => {
+const StreamPage = ({is_soundcheck}) => {
   // DETERMINE MOBILE VERSION OR NOT
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
@@ -347,7 +347,7 @@ const StreamPage = () => {
                           url={
                             "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                           }
-                          start_time={show_start_time}
+                          start_time={is_soundcheck? "2020-06-03T19:00:00.000-04: 00" : show_start_time}
                           artist_name={artist_name}
                           concert_name={concert_name}
                           auth={auth}
@@ -719,7 +719,7 @@ const StreamPage = () => {
                         url={
                           "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                         }
-                        start_time={show_start_time}
+                        start_time={is_soundcheck? "2020-06-03T19:00:00.000-04: 00" : show_start_time}
                         artist_name={artist_name}
                         concert_name={concert_name}
                         auth={auth}

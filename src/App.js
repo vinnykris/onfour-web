@@ -5,7 +5,6 @@ import { Router, Switch, Route, withRouter } from "react-router-dom";
 import history from "./history";
 
 // Component imports
-import NotFound404 from "./components/not_found_page/not_found404";
 import NotFoundPage from "./components/not_found_page/not_found_page"
 import NavBar from "./components/navbar/navbar";
 import About from "./components/about_page/about_page";
@@ -15,7 +14,6 @@ import ArchivePage from "./components/archive_page/archive_page";
 import ArtistsPage from "./components/artist_page/artist_page";
 import Footer from "./components/footer/footer";
 import Forgot from "./components/forgot_page/forgot_page";
-import SoundCheck from "./components/soundcheck_page/soundcheck_page";
 import Concert from "./components/concert_page/concert";
 import Profile from "./components/user_profile/profile";
 import Register from "./components/register_page/register_page";
@@ -48,12 +46,12 @@ function App() {
         <Switch>
           <Route exact path="/" component={About} />
           <Route exact path="/archive" component={ArchivePage} />
-          <Route exact path="/stream" component={StreamPage} />
+          <Route exact path="/stream" component={() => <StreamPage is_soundcheck={false} />}/>
           <Route exact path="/upcoming" component={UpcomingShowPage} />
           <Route exact path={`/upcoming/:showID`} component={Concert} />
           <Route exact path="/artists" component={ArtistsPage} />
           <Route exact path="/forgot" component={Forgot} />
-          <Route exact path="/soundcheck" component={SoundCheck} />
+          <Route exact path="/soundcheck" component={() =><StreamPage is_soundcheck={true}/>}/>
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
