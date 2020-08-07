@@ -30,11 +30,11 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
   const [mute_button_msg, setMuteButtonMsg] = useState("UNMUTE ALL");
   const isInCrew = (owner_name.indexOf(user_name) >= 0);
   // Input form values
-  const layer1_bps = useInputValue(80000);
-  const layer2_bps = useInputValue(300000);
-  const resolution_width = useInputValue(320);
-  const resolution_height = useInputValue(180);
-  const frame_rate = useInputValue(10);
+  const layer1_bps = useInputValue('');
+  const layer2_bps = useInputValue('');
+  const resolution_width = useInputValue('');
+  const resolution_height = useInputValue('');
+  const frame_rate = useInputValue('');
   /**
    * Creates a new call room.
    */
@@ -101,20 +101,9 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
       const newCallObject = DailyIframe.createCallObject({
         userName: user_name,
         token: newToken,
-        subscribeToTracksAutomatically: false,
-        dailyConfig: {
-          camSimulcastEncodings: [
-            { maxBitrate: layer1_bps.value, scaleResolutionDownBy: 2 },
-            { maxBitrate: layer2_bps.value, scaleResolutionDownBy: 1 },
-          ],
-        },
       });
       // setRoomUrl(url);
       setRoomUrl("private");
-      newCallObject.setBandwidth({
-        // kbs: 20,
-        trackConstraints: { width: resolution_width.value, height: resolution_height.value, frameRate: frame_rate.value }
-      });
       newCallObject.join({ url });
       setCallObject(newCallObject);
       setAppState(STATE_JOINING);
@@ -378,7 +367,7 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
                   <Row>
                     <Col size = {1}>
                       <input
-                        className="artist-form-input"
+                        className="video-form-input"
                         placeholder="layer1 bps"
                         required
                         {...layer1_bps}
@@ -386,7 +375,7 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
                     </Col>
                     <Col size = {1}>
                       <input
-                        className="artist-form-input"
+                        className="video-form-input"
                         placeholder="layer2 bps"
                         required
                         {...layer2_bps}
@@ -394,7 +383,7 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
                     </Col>
                     <Col size = {1}>
                       <input
-                        className="artist-form-input"
+                        className="video-form-input"
                         placeholder="frame rate"
                         required
                         {...frame_rate}
@@ -404,7 +393,7 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
                   <Row>
                     <Col size = {1}>
                       <input
-                        className="artist-form-input"
+                        className="video-form-input"
                         placeholder="width"
                         required
                         {...resolution_width}
@@ -412,7 +401,7 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
                     </Col>
                     <Col size = {1}>
                       <input
-                        className="artist-form-input"
+                        className="video-form-input"
                         placeholder="height"
                         required
                         {...resolution_height}
