@@ -28,6 +28,9 @@ const CrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
   const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
   const [memberInputDisabled, setMemberInputDisabled] = useState(false);
 
+  const [showDiscardModal, setShowDiscardModal] = useState(false);
+  const [discardChanges, setDiscardChanges] = useState(false);
+
   const checkValidEmailFormat = (email) => {
     const emailValidationRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
     return emailValidationRegex.test(email);
@@ -78,6 +81,26 @@ const CrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
     setCrewName(event.currentTarget.value);
   };
 
+  const handleCloseMainModal = () => {
+    if (crewName.length > 2 || crewMembers.length > 0) {
+      setShowDiscardModal(true);
+    } else {
+      closeModal();
+    }
+  };
+
+  const handleCloseDiscardModal = () => {
+    setShowDiscardModal(false);
+  };
+
+  const handleDiscardData = () => {
+    setDiscardChanges(true);
+    handleCloseDiscardModal();
+    setCrewMembers([]);
+    setCrewName("");
+    closeModal();
+  };
+
   useEffect(() => {
     if (crewName.length > 2 && crewMembers.length > 0) {
       setSaveButtonDisabled(false);
@@ -89,7 +112,7 @@ const CrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
   return (
     <Rodal
       visible={showCrewModal}
-      onClose={closeModal}
+      onClose={handleCloseMainModal}
       width={458}
       height={527}
       measure="px"
@@ -106,6 +129,7 @@ const CrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
               placeholder="What do you want to call this crew?"
               className="crew-modal-input"
               onChange={handleCreNameChange}
+              value={crewName}
             />
           </Row>
           <Row className="crew-modal-stacked-row">
@@ -125,7 +149,10 @@ const CrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
               crewMembers.map((member, index) => (
                 <div className="crew-modal-add-user-wrapper" key={member.email}>
                   <div className="crew-modal-add-user-data">
-                    <div className="crew-modal-add-user-initial" style={{ color: selectedColor }}>
+                    <div
+                      className="crew-modal-add-user-initial"
+                      style={{ color: selectedColor }}
+                    >
                       {member.initial}
                     </div>
                     <div className="crew-modal-add-user-data-wrapper">
@@ -174,6 +201,30 @@ const CrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
           </Row>
         </Col>
       </Row>
+
+      <Rodal
+        visible={showDiscardModal}
+        onClose={handleCloseDiscardModal}
+        width={378}
+        height={146}
+        measure="px"
+        closeMaskOnClick={false}
+        showCloseButton={false}
+        customMaskStyles={{ background: "rgba(0,0,0,0.6)" }}
+        className="crew-modal-discard-modal"
+      >
+        <Row>
+          <Col size={1}>
+            <Row className="crew-modal-discard-text">
+              <p>Are you sure you want to discard changes?</p>
+            </Row>
+            <Row className="crew-modal-discard-buttons">
+              <button onClick={() => setShowDiscardModal(false)}>Cancel</button>
+              <button onClick={handleDiscardData} className="crew-modal-discard-button-discard">Discard</button>
+            </Row>
+          </Col>
+        </Row>
+      </Rodal>
     </Rodal>
   );
 };
