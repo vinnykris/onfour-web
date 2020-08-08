@@ -173,3 +173,13 @@ export const get_user_by_email = `query listUsersByEmail ($input: String!) {
   }
 }
 `;
+
+export const get_crew_by_id = `query getCrew ($input: ID!) {
+  getCrew(id: $input) {
+    id 
+    name 
+    members 
+    admin  
+  }
+}
+`;

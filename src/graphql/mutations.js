@@ -67,3 +67,10 @@ export const create_crew = `mutation createCrew($input: CreateCrewInput!) {
   }
 }
 `;
+
+export const update_crew = `mutation updateCrew($input: UpdateCrewInput!) {
+  updateCrew(input: $input) {
+    id
+  }
+}
+`;
