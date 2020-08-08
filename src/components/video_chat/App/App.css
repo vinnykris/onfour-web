@@ -75,3 +75,20 @@
   color: rgb(173, 173, 173);
   position: absolute;
 }
+
+
+.video-form-input {
+    background-color: #17171b;
+    border: 1px solid #b7b7b741;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.video-form-input:focus {
+    border: 1px solid #b7b7b741;
+}
+.video-form-input::placeholder {
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  top: 0px;
+}

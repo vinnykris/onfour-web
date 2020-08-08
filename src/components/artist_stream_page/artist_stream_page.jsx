@@ -160,14 +160,14 @@ const StreamPage = () => {
 
   // RENDERING SECTION
   return (
-    <div className="stream-container">
+    <div className="artist-stream-container">
       {show_start_time ? (
-        <div className="stream-page-content">
+        <div className="artist-stream-page-content">
           {width > 600 ? (
             <Grid>
               <Row>
                 {/* <Col size={0.5}></Col> */}
-                <Col size={2} id="stream_col">
+                <Col size={2} id="artist-stream-col">
                   <div className="artist-stream-main">
                     <div className="artist-stream-wrapper" id="video_player">
                       <div className="artist-box-header">Stream Preview</div>

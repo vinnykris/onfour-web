@@ -304,17 +304,17 @@ const StreamPage = () => {
     if (description_button_icon === "fa fa-chevron-down") {
       setDescriptionButtonIcon("fa fa-chevron-up");
       document.getElementById("artist_bio").style.display = "none";
-      document.getElementById("stream_info_section").style.height = "10%";
-      document.getElementById("stream_main_section").style.height = "90%";
-      document.getElementById("stream_info_bottom").style.height = "50%";
-      document.getElementById("stream_info_top").style.height = "50%";
+      document.getElementById("stream_info_section").style.height = "14%";
+      document.getElementById("stream_main_section").style.height = "86%";
+      document.getElementById("stream_info_bottom").style.height = "43%";
+      document.getElementById("stream_info_top").style.height = "57%";
     } else {
       setDescriptionButtonIcon("fa fa-chevron-down");
       document.getElementById("artist_bio").style.display = "flex";
       document.getElementById("stream_info_section").style.height = "40%";
       document.getElementById("stream_main_section").style.height = "60%";
       document.getElementById("stream_info_bottom").style.height = "15%";
-      document.getElementById("stream_info_top").style.height = "15%";
+      document.getElementById("stream_info_top").style.height = "20%";
     }
   };
 
@@ -412,7 +412,7 @@ const StreamPage = () => {
               {/* <Modal is_open={open_modal}></Modal> */}
               <Row className="desktop-stream-row">
                 {/* <Col size={0.5}></Col> */}
-                <Col size={6} id="stream_col">
+                <Col size={6} id="stream_col" className="stream-col">
                   <div className="stream-main" id="stream_main_section">
                     <div className="stream-wrapper" id="video_player">
                       {is_free ||
@@ -672,229 +672,11 @@ const StreamPage = () => {
                     <Col size={0.5}></Col> */}
                     </Row>
                   </div>
-                  <Row>
-                    <div className="short-term-spacer">
-                      {/* <Col>
-                        <img className="artist-image" src={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/achille.png"}></img>
-                      </Col> */}
-                    </div>
-                  </Row>
-
-                  {/* DONATE ROW */}
-                  <Row className="donate-row">
-                    <Col size={1} className="donate-stripe donate-box">
-                      <p className="donate-description">Credit Card</p>
-                      {tip_based ? (
-                        <p className="donate-subdescription">
-                          Tip {artist_name} via credit card. Your card
-                          information will not be stored anywhere.
-                        </p>
-                      ) : (
-                        <p className="donate-subdescription">
-                          Donate via credit card to For the GWORLS and LGBTQ
-                          Freedom Fund. Your card information will not be stored
-                          anywhere.
-                        </p>
-                      )}
-                    </Col>
-                    <Col size={1} className="donate-paypal donate-box">
-                      <p className="donate-description">PayPal</p>
-                      {tip_based ? (
-                        <p className="donate-subdescription">
-                          onfour will ensure your tip is sent to {artist_name}.
-                        </p>
-                      ) : (
-                        <p className="donate-subdescription">
-                          onfour will ensure your donation is sent to For the
-                          GWORLS and LGBTQ Freedom Fund.
-                        </p>
-                      )}
-                    </Col>
-                    <Col size={1} className="donate-venmo donate-box">
-                      <p className="donate-description">Venmo</p>
-                      {tip_based ? (
-                        <p className="donate-subdescription">
-                          @SpencerAmer from onfour will ensure your tip is sent
-                          to {artist_name}.
-                        </p>
-                      ) : (
-                        <p className="donate-subdescription">
-                          @SpencerAmer from onfour will ensure your donation is
-                          sent to For the GWORLS and LGBTQ Freedom Fund.
-                        </p>
-                      )}
-                    </Col>
-                  </Row>
-
-                  {/* DONATE ROW */}
-                  <Row className="donate-row-buttons">
-                    {tip_based ? (
-                      <div className="payment-container">
-                        <Col
-                          size={1}
-                          className="donate-stripe donate-box-button"
-                        >
-                          <button
-                            className="stripe-button-border button-height"
-                            //data-toggle="modal"
-                            //data-target="#paymentModal"
-                            onClick={donateModal}
-                          >
-                            Tip with Card
-                          </button>{" "}
-                          {/* <Modal></Modal> */}
-                        </Col>
-                        <Col
-                          size={1}
-                          className="donate-paypal donate-box-button"
-                        >
-                          <button
-                            className="stripe-button-border button-height paypal-button"
-                            onClick={donatePaypal}
-                          >
-                            Tip with Paypal
-                          </button>
-                        </Col>
-                        <Col
-                          size={1}
-                          className="donate-venmo donate-box-button"
-                        >
-                          <img
-                            className="venmo-code"
-                            src={VenmoCode}
-                            alt="venmo-qr"
-                          ></img>
-                        </Col>
-                      </div>
-                    ) : (
-                      <div className="payment-container">
-                        <Col
-                          size={1}
-                          className="donate-stripe donate-box-button"
-                        >
-                          <button
-                            className="stripe-button-border button-height"
-                            data-toggle="modal"
-                            data-target="#paymentModal"
-                            onClick={donateModal}
-                          >
-                            Donate with Card
-                          </button>{" "}
-                          <Modal></Modal>
-                        </Col>
-                        <Col
-                          size={1}
-                          className="donate-paypal donate-box-button"
-                        >
-                          <button
-                            className="stripe-button-border button-height paypal-button"
-                            onClick={donatePaypal}
-                          >
-                            Donate with Paypal
-                          </button>
-                        </Col>
-                        <Col
-                          size={1}
-                          className="donate-venmo donate-box-button"
-                        >
-                          <img
-                            className="venmo-code"
-                            src={VenmoCode}
-                            alt="venmo-qr"
-                          ></img>
-                        </Col>
-                      </div>
-                    )}
-                  </Row>
-
-                  <Row className="stream-subscribe-box">
-                    <Col size={0.5}></Col>
-                    <Col size={7}>
-                      <Row>
-                        <p className="stream-subscribe-title">Subscribe</p>
-                      </Row>
-                      <Row>
-                        <Col size={3}>
-                          <p className="stream-subscribe-description">
-                            To stay informed about upcoming events, subscribe to
-                            our mailing list:
-                          </p>
-                          {(() => {
-                            if (email_submitted) {
-                              return (
-                                <p className="subscribe-success">
-                                  Thank you and stay tuned!
-                                </p>
-                              );
-                            } else {
-                              return (
-                                <form
-                                  className="stream-email-form"
-                                  action="/"
-                                  id="newsletter"
-                                  onSubmit={emailSubmit}
-                                >
-                                  <input
-                                    type="email"
-                                    placeholder="Enter your email here..."
-                                    name="email"
-                                    required
-                                    value={email}
-                                    style={{ width: "70%" }}
-                                    onChange={(event) =>
-                                      setEmail(event.target.value)
-                                    }
-                                  />
-                                  <button
-                                    type="submit"
-                                    form="newsletter"
-                                    value="Submit"
-                                    style={{ width: "auto" }}
-                                    className="button-border button-height adjust-font-size"
-                                  >
-                                    {" "}
-                                    Submit
-                                  </button>
-                                </form>
-                              );
-                            }
-                          })()}
-                        </Col>
-                        <Col size={1}></Col>
-                        <Col size={3}>
-                          <SocialBar
-                            show_text={true}
-                            instagram={"https://www.instagram.com/_onfour"}
-                            spotify={
-                              "https://open.spotify.com/playlist/3KbuKf1zti8EtbJ4Ot7Iq4"
-                            }
-                            youtube={
-                              "https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ"
-                            }
-                            facebook={"https://www.facebook.com/onfour"}
-                            twitter={"https://twitter.com/_Onfour"}
-                          ></SocialBar>
-                        </Col>
-                      </Row>
-                    </Col>
-                    <Col size={0.5}></Col>
-                  </Row>
+                 
                 </Col>
                 <Col size={3} id="chat_container" className="sticky-container">
                   <div className="chat-main" id="chat_main">
                     <div className="chat-wrapper">
-                      {/* {
-                      username ? (
-                        <Chat
-                          chat_name={username ? username : null}
-                          chatStatus={chatStatus}
-                        />
-                      ) : (
-                        // <Join joinSubmit={joinSubmit} />
-                        <WaitingChat />
-                      )
-                      } */}
-                      {/* {console.log(username)} */}
                       <Row className="video-chat-row">
                         <VideoChat
                           user_name={username ? username : "GUEST"}
