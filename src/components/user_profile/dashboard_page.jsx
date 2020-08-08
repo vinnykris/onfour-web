@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { Row, Col } from "../grid";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
-import Rodal from "rodal";
 import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.png";
 
 import "./profile_styles.scss";
@@ -10,7 +9,7 @@ import CrewModal from "./crew_modal";
 
 const DashboardPage = ({ width, upcoming_concerts, memories, history }) => {
   const [showCrewModal, setShowCrewModal] = useState(false);
-  const [modalColor, setModalColor] = useState('#E26A6A');
+  const [modalColor, setModalColor] = useState("#E26A6A");
 
   const closeModal = () => {
     setShowCrewModal(false);
@@ -150,18 +149,7 @@ const DashboardPage = ({ width, upcoming_concerts, memories, history }) => {
             </Row>
           </div>
 
-          <Rodal
-            visible={showCrewModal}
-            onClose={closeModal}
-            width={458}
-            height={527}
-            measure="px"
-            customStyles={{ background: modalColor }}
-            customMaskStyles={{ background: 'rgba(0,0,0,0.8)', cursor: 'pointer' }}
-            className='user-crews-modal'
-          >
-            <CrewModal />
-          </Rodal>
+          <CrewModal showCrewModal={showCrewModal} closeModal={closeModal} />
         </Col>
       </Row>
     </Col>

@@ -320,6 +320,14 @@
       border: 1px solid #f2abab;
       margin-right: 17px;
       cursor: pointer;
+
+      & > svg {
+        height: 43px;
+
+        & > path {
+          color: white;
+        }
+      }
     }
   }
 
