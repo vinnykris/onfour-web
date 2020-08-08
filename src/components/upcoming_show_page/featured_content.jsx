@@ -47,7 +47,7 @@ const FeaturedContent = (props) => {
               <Row className="time-row">
                 <Col size={3}>
                   <p className="time">
-                    {props.week_day} | {props.date} | {props.time} EST{" "}
+                    {props.week_day} | {props.date} | {props.formatted_time} EST{" "}
                   </p>
                 </Col>
               </Row>
