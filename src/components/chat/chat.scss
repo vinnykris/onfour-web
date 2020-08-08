@@ -252,7 +252,7 @@ button:focus {
     font-size: 1em;
   }
   @include respond-to("large") {
-    font-size: 0.4em;
+    font-size: 0.6em;
   }
   @include respond-to("small") {
     font-size: 1em;
@@ -360,11 +360,14 @@ button:focus {
   letter-spacing: 0;
   font-size: 1.1em;
   margin-bottom: 0;
+  @include respond-to("xx-large") {
+    font-size: 0.9em;
+  }
   @include respond-to("x-large") {
-    font-size: 0.7em;
+    font-size: 0.8em;
   }
   @include respond-to("large") {
-    font-size: 0.55em;
+    font-size: 0.7em;
   }
   @include respond-to("small") {
     font-size: 1em;
@@ -389,11 +392,14 @@ button:focus {
   color: #f2f2f2;
   letter-spacing: 0.3px;
   margin-bottom: 0;
+  @include respond-to("xx-large") {
+    font-size: 0.8em;
+  }
   @include respond-to("x-large") {
     font-size: 0.7em;
   }
   @include respond-to("large") {
-    font-size: 0.55em;
+    font-size: 0.6em;
   }
   @include respond-to("small") {
     font-size: 1em;

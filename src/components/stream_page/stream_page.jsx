@@ -45,7 +45,7 @@ import ticket1 from "../../images/icons/ticket1.png";
 Amplify.configure(awsmobile);
 
 // Main stream page component. Holds stream video, chat, and payment functionality
-const StreamPage = ({is_soundcheck}) => {
+const StreamPage = ({ is_soundcheck }) => {
   // DETERMINE MOBILE VERSION OR NOT
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   const tip_based = true; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
@@ -71,7 +71,7 @@ const StreamPage = ({is_soundcheck}) => {
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
   const [show_popup, setShowPopup] = useState(false); // If popup should be shown
   const [description_button_icon, setDescriptionButtonIcon] = useState(
-    "fa fa-chevron-down"
+    "fa fa-chevron-up"
   );
   const [is_free, setIsFree] = useState(true);
   const [purchasedTickets, setTickets] = useState([]);
@@ -229,16 +229,16 @@ const StreamPage = ({is_soundcheck}) => {
     const artist_info_list = artist_info.data.getCreateOnfourRegistration;
     setArtistName(artist_info_list.artist_name);
     setArtistBio(artist_info_list.artist_bio);
-    // setArtistFB(artist_info_list.facebook);
-    // setArtistIG(artist_info_list.instagram);
-    // setArtistSpotify(artist_info_list.spotify);
-    // setArtistTwitter(artist_info_list.twitter);
-    // setArtistYoutube(artist_info_list.youtube);
-    setArtistFB("https://instagram.com/superduperfriend");
-    setArtistIG("https://instagram.com/superduperfriend");
-    setArtistSpotify("https://instagram.com/superduperfriend");
-    setArtistTwitter("https://instagram.com/superduperfriend");
-    setArtistYoutube("https://instagram.com/superduperfriend");
+    setArtistFB(artist_info_list.facebook);
+    setArtistIG(artist_info_list.instagram);
+    setArtistSpotify(artist_info_list.spotify);
+    setArtistTwitter(artist_info_list.twitter);
+    setArtistYoutube(artist_info_list.youtube);
+    // setArtistFB("https://instagram.com/superduperfriend");
+    // setArtistIG("https://instagram.com/superduperfriend");
+    // setArtistSpotify("https://instagram.com/superduperfriend");
+    // setArtistTwitter("https://instagram.com/superduperfriend");
+    // setArtistYoutube("https://instagram.com/superduperfriend");
   };
 
   // If the first name for the logged in user's email has not been retrieved yet,
@@ -299,28 +299,39 @@ const StreamPage = ({is_soundcheck}) => {
       document.getElementById("chat_container").style.display = "none";
       // document.getElementById("chat_container").style.display = "none";
       document.getElementById("stream_col").style.flex = "9";
+      document.getElementById("chat_toggle_button").style.right = "0px";
     } else {
       setButtonIcon("fa fa-chevron-right");
       document.getElementById("chat_container").style.display = "inline";
       document.getElementById("stream_col").style.flex = "7";
+      document.getElementById("chat_toggle_button").style.right = "-3px";
     }
   };
 
   const toggleDescription = () => {
     if (description_button_icon === "fa fa-chevron-down") {
       setDescriptionButtonIcon("fa fa-chevron-up");
-      document.getElementById("artist_bio").style.display = "none";
-      document.getElementById("stream_info_section").style.height = "14%";
-      document.getElementById("stream_main_section").style.height = "86%";
-      document.getElementById("stream_info_bottom").style.height = "43%";
-      document.getElementById("stream_info_top").style.height = "57%";
+      document.getElementById("artist_bio").classList.add("artist-bio-row");
+      document
+        .getElementById("artist_bio")
+        .classList.remove("artist-bio-row-expanded");
+      document.getElementById("stream_info_section").style.height = "15%";
+      document.getElementById("stream_main_section").style.height = "85%";
+      document.getElementById("stream_info_bottom").style.height = "50%";
+      document.getElementById("stream_info_top").style.height = "50%";
+      document.getElementById("description_toggle_button").style.bottom =
+        "-3px";
     } else {
       setDescriptionButtonIcon("fa fa-chevron-down");
-      document.getElementById("artist_bio").style.display = "flex";
-      document.getElementById("stream_info_section").style.height = "40%";
-      document.getElementById("stream_main_section").style.height = "60%";
-      document.getElementById("stream_info_bottom").style.height = "15%";
+      document
+        .getElementById("artist_bio")
+        .classList.add("artist-bio-row-expanded");
+      document.getElementById("artist_bio").classList.remove("artist-bio-row");
+      document.getElementById("stream_info_section").style.height = "30%";
+      document.getElementById("stream_main_section").style.height = "70%";
+      document.getElementById("stream_info_bottom").style.height = "20%";
       document.getElementById("stream_info_top").style.height = "20%";
+      document.getElementById("description_toggle_button").style.bottom = "0px";
     }
   };
 
@@ -525,7 +536,11 @@ const StreamPage = ({is_soundcheck}) => {
                           url={
                             "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                           }
-                          start_time={is_soundcheck? "2020-06-03T19:00:00.000-04: 00" : show_start_time}
+                          start_time={
+                            is_soundcheck
+                              ? "2020-06-03T19:00:00.000-04: 00"
+                              : show_start_time
+                          }
                           artist_name={artist_name}
                           concert_name={concert_name}
                           auth={auth}
@@ -569,7 +584,7 @@ const StreamPage = ({is_soundcheck}) => {
                           </button>
                         </div>
                       )}
-                      <div className="toggle-chat">
+                      <div className="toggle-chat" id="chat_toggle_button">
                         <button
                           className="toggle-chat-button"
                           onClick={toggleChat}
@@ -577,7 +592,10 @@ const StreamPage = ({is_soundcheck}) => {
                           <i className={button_icon}></i>
                         </button>
                       </div>
-                      <div className="toggle-description">
+                      <div
+                        className="toggle-description"
+                        id="description_toggle_button"
+                      >
                         <button
                           className="toggle-description-button"
                           onClick={toggleDescription}
@@ -864,7 +882,11 @@ const StreamPage = ({is_soundcheck}) => {
                         url={
                           "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                         }
-                        start_time={is_soundcheck? "2020-06-03T19:00:00.000-04: 00" : show_start_time}
+                        start_time={
+                          is_soundcheck
+                            ? "2020-06-03T19:00:00.000-04: 00"
+                            : show_start_time
+                        }
                         artist_name={artist_name}
                         concert_name={concert_name}
                         auth={auth}
