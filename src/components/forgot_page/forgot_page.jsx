@@ -23,7 +23,6 @@ const Forgot = () => {
   const [password, setPassword] = useState(""); // Password
   const [confirm_password, setConfirmPassword] = useState(""); // Repeated password
   const [error, setError] = useState(""); // Tracking/setting error message when changing password
-  const [error_color, setErrorColor] = useState("red"); // Tracking/setting error message when changing password
   const [success, setSuccess] = useState(true); //Track if the reset password is seccessful
 
   const { height, width } = useWindowDimensions(); // Dimensions of screen
@@ -219,7 +218,7 @@ const Forgot = () => {
                         required
                       />
                     </Row>
-                    <div style={{ color: error_color }}>{error}</div>
+                    <div style={{ color: "red" }}>{error}</div>
                     <br></br>
                     <Row className="forgot-verification-footer">
                       <button
@@ -291,7 +290,7 @@ const Forgot = () => {
                         required
                       />
                     </Row>
-                    <div style={{ color: error_color }}>{error}</div>
+                    <div style={{ color: "red" }}>{error}</div>
                     <br></br>
                     <Row className="forgot-verification-footer-mobile">
                       <button

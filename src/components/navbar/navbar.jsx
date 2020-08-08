@@ -1,5 +1,5 @@
 // React imports
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
   Dropdown,
@@ -8,14 +8,12 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-// GraphQL
-import * as queries from "../../graphql/queries";
-
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";
 import Amplify from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
+import * as queries from "../../graphql/queries";
 
 // Component imports
 import { Grid, Row, Col } from "../grid";
@@ -118,6 +116,12 @@ const NavBar = () => {
     closeMenu("nav-signout");
   };
 
+  // Function to leave video chat for desktop version
+  const leaveVideoChat = () => {
+    if (document.getElementById("leave-call-button")) {
+      document.getElementById("leave-call-button").click();
+    }
+  };
   // On mobile, redirects to profile page and closes the modal
   const openProfile = () => {
     history.push("/profile");
@@ -326,7 +330,7 @@ const NavBar = () => {
         <div className="main-content desktop-nav-main">
           {/* DESKTOP CODE */}
           <div className="onfour-nav-logo">
-            <NavLink exact to="/">
+            <NavLink exact to="/" onClick={leaveVideoChat}>
               {" "}
               <img
                 className="white-purple-logo-desktop"
@@ -337,16 +341,16 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div className="nav-links-container">
-            <NavLink exact to="/" className={style}>
+            <NavLink exact to="/" className={style} onClick={leaveVideoChat}>
               About Us
             </NavLink>
-            <NavLink to="/artists" className={style}>
+            <NavLink to="/artists" className={style} onClick={leaveVideoChat}>
               For Artists
             </NavLink>
-            <NavLink to="/stream" className={style}>
+            <NavLink to="/stream" className={style} onClick={leaveVideoChat}>
               Stream
             </NavLink>
-            <NavLink to="/upcoming" className={style}>
+            <NavLink to="/upcoming" className={style} onClick={leaveVideoChat}>
               Upcoming
             </NavLink>
             {!auth ? (
@@ -357,6 +361,7 @@ const NavBar = () => {
                     state: { current: location },
                   }}
                   className="sign-in-link"
+                  onClick={leaveVideoChat}
                 >
                   Log In
                 </NavLink>

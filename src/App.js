@@ -1,11 +1,10 @@
-
 // // Main App component
 import React from "react";
-import { Router, Switch, Route, withRouter } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import history from "./history";
 
 // Component imports
-import NotFoundPage from "./components/not_found_page/not_found_page"
+import NotFoundPage from "./components/not_found_page/not_found_page";
 import NavBar from "./components/navbar/navbar";
 import About from "./components/about_page/about_page";
 import StreamPage from "./components/stream_page/stream_page";
@@ -46,19 +45,27 @@ function App() {
         <Switch>
           <Route exact path="/" component={About} />
           <Route exact path="/archive" component={ArchivePage} />
-          <Route exact path="/stream" component={() => <StreamPage is_soundcheck={false} />}/>
+          <Route
+            exact
+            path="/stream"
+            component={() => <StreamPage is_soundcheck={false} />}
+          />
           <Route exact path="/upcoming" component={UpcomingShowPage} />
           <Route exact path={`/upcoming/:showID`} component={Concert} />
           <Route exact path="/artists" component={ArtistsPage} />
           <Route exact path="/forgot" component={Forgot} />
-          <Route exact path="/soundcheck" component={() =><StreamPage is_soundcheck={true}/>}/>
+          <Route
+            exact
+            path="/soundcheck"
+            component={() => <StreamPage is_soundcheck={true} />}
+          />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/form" component={ArtistForm} />
           <Route exact path="/privacy-policy" component={PrivacyPage} />
           <Route exact path="/terms-of-service" component={TermsOfService} />
-          <Route path="*" component={NotFoundPage}/>
+          <Route path="*" component={NotFoundPage} />
         </Switch>
         <Footer />
       </Router>

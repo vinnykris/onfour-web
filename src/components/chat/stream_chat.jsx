@@ -10,7 +10,7 @@ import Input from "./input";
 import Messages from "./messages";
 
 // AWS imports
-import Amplify, { Analytics } from "aws-amplify";
+import { Analytics } from "aws-amplify";
 
 // Styles imports
 import "./chat.scss";
@@ -18,9 +18,9 @@ import "./chat.scss";
 let socket; // Socket declaration
 
 // Main chat component
-const Chat = ({ chat_name, chatStatus, setViewers }) => {
+const Chat = ({ chat_name, chatStatus, setViewers, artistView }) => {
   const [name, setName] = useState(chat_name); // User's chat name
-  const [room, setRoom] = useState("CHAT"); // Title of chat and room all users are in
+  const [room, setRoom] = useState("Chat"); // Title of chat and room all users are in
   const [users, setUsers] = useState(""); // List of users in chat room
   const [message, setMessage] = useState(""); // Holds inputted message
   const [messages, setMessages] = useState([]); // Holds list of messages
@@ -107,7 +107,10 @@ const Chat = ({ chat_name, chatStatus, setViewers }) => {
   useEffect(() => () => closeChat(), []);
 
   return (
-    <div className="chat-outer-container">
+    <div
+      className={"chat-outer-container" + (artistView ? " artist-view" : "")}
+      id="chat-main"
+    >
       <div className="chat-container">
         <InfoBar room={room} users={users} />
         <Messages messages={messages} name={name} />

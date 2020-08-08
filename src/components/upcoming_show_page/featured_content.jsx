@@ -39,7 +39,7 @@ const FeaturedContent = (props) => {
               <Row>
                 <Col size={3}>
                   <p className="artist-name">
-                    {props.artist_name} 
+                    {props.artist_name}
                     {/* - {props.concert_name} */}
                   </p>
                 </Col>
