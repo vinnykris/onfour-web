@@ -187,7 +187,7 @@
 .upcoming-prompt-button:focus:not([disabled]) {
   background-color: black;
   border: 1px solid #2c28f8;
-  color: white;
+  color: #cfc8c4;
 }
 
 .user-crews-container {
@@ -240,7 +240,7 @@
   }
 
   & .crew-modal-flex-row {
-    margin-top: 18px;
+    margin-top: 3px;
     display: flex;
   }
 
@@ -265,7 +265,7 @@
     font-size: 13px;
     line-height: 47px;
     letter-spacing: 0.045em;
-    color: #f2abab;
+    color: rgba(245,240,237,0.6);
     margin-left: 13px;
   }
 
@@ -274,13 +274,13 @@
     border-radius: 50%;
     height: 47px;
     width: 47px;
-    color: #f2abab;
+    color: rgba(245,240,237,0.6);
 
     & svg {
       height: 41px;
 
       & path {
-        color: #f2abab;
+        color: rgba(245,240,237,0.6);
       }
     }
   }
@@ -317,7 +317,7 @@
       height: 47px;
       width: 47px;
       border-radius: 50%;
-      border: 1px solid #f2abab;
+      border: 1px solid rgba(245,240,237,0.6);
       margin-right: 17px;
       cursor: pointer;
 
@@ -350,7 +350,7 @@
     }
 
     & button:disabled {
-      color: #f2abab !important;
+      color: rgba(245,240,237,0.6) !important;
     }
 
     & button:active,
@@ -367,6 +367,7 @@
   & .crew-modal-add-user-wrapper {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10px;
 
     & .crew-modal-add-user-data {
       display: flex;
@@ -376,22 +377,36 @@
         border-radius: 50%;
         height: 45px;
         width: 45px;
-        color: #f2abab;
+        color: rgba(245,240,237,0.6);
         background: white;
         font-size: 25px;
         line-height: 45px;
         font-weight: 500;
       }
 
-      & .crew-modal-add-user-email {
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 13px;
-        line-height: 45px;
-        letter-spacing: 0.045em;
-        color: #f2abab;
+      & .crew-modal-add-user-data-wrapper {
         margin-left: 13px;
+        text-align: left;
+
+        & .crew-modal-add-user-name {
+          font-family: Helvetica;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 15px;
+          letter-spacing: 0.045em;
+          color: white;
+          margin: 0px !important;
+        }
+
+        & .crew-modal-add-user-email {
+          font-family: Helvetica;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 13px;
+          letter-spacing: 0.045em;
+          color: rgba(245,240,237,0.6);
+          margin: 0px !important;
+        }
       }
     }
 
@@ -401,7 +416,7 @@
       cursor: pointer;
 
       & path {
-        color: #f1a3a3;
+        color: rgba(245,240,237,0.6);
       }
     }
   }

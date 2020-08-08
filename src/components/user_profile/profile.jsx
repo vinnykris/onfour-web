@@ -159,6 +159,7 @@ const Profile = (props) => {
                 upcoming_concerts={upcoming_concerts}
                 memories={memories}
                 history={history}
+                username={username}
               ></DashboardPage>
             ) : (
               <TicketPage

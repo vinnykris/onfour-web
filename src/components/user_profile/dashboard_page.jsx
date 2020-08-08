@@ -7,9 +7,8 @@ import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.p
 import "./profile_styles.scss";
 import CrewModal from "./crew_modal";
 
-const DashboardPage = ({ width, upcoming_concerts, memories, history }) => {
+const DashboardPage = ({ width, upcoming_concerts, memories, username, history }) => {
   const [showCrewModal, setShowCrewModal] = useState(false);
-  const [modalColor, setModalColor] = useState("#E26A6A");
 
   const closeModal = () => {
     setShowCrewModal(false);
@@ -149,7 +148,7 @@ const DashboardPage = ({ width, upcoming_concerts, memories, history }) => {
             </Row>
           </div>
 
-          <CrewModal showCrewModal={showCrewModal} closeModal={closeModal} />
+          <CrewModal showCrewModal={showCrewModal} closeModal={closeModal} currentUsername={username} />
         </Col>
       </Row>
     </Col>
