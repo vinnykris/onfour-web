@@ -65,3 +65,20 @@ export const update_user = `mutation updateCreateOnfourRegistration($input: Upda
   }
 }
 `;
+
+export const create_crew = `mutation createCrew($input: CreateCrewInput!) {
+  createCrew(input: $input) {
+    id 
+    name 
+    members 
+    admin
+  }
+}
+`;
+
+export const update_crew = `mutation updateCrew($input: UpdateCrewInput!) {
+  updateCrew(input: $input) {
+    id
+  }
+}
+`;

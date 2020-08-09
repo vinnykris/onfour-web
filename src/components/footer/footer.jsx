@@ -25,7 +25,12 @@ const Footer = () => {
   // When either screen width or location are updated, effect hook is run
   // Hides footer if stream page and on mobile
   useEffect(() => {
-    if (location.pathname === "/stream" && width <= 600) {
+    if (
+      location.pathname === "/stream" ||
+      location.pathname === "/profile" ||
+      location.pathname === "/soundcheck" ||
+      location.pathname === "/artiststream"
+    ) {
       setShowFooter(false);
     } else {
       setShowFooter(true);

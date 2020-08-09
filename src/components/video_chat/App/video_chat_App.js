@@ -75,7 +75,6 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
     console.log(layer1_bps.value, layer2_bps.value, resolution_width.value, resolution_height.value, frame_rate.value);
     const newCallObject = DailyIframe.createCallObject({
       userName: user_name,
-      subscribeToTracksAutomatically: false,
       dailyConfig: {
         camSimulcastEncodings: [
           { maxBitrate: layer1_bps.value, scaleResolutionDownBy: 2 },
