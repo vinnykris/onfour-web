@@ -9,27 +9,41 @@ import UserCrews from "./user_crews";
 
 import "./profile_styles.scss";
 
-let fistCrewMembers = new Map();
-fistCrewMembers.set("josetalking@gmail.com", "jose.avilez");
-fistCrewMembers.set("user@email.com", "another.user");
-fistCrewMembers.set("thisone@verylongemailnow.com", "this.one");
-fistCrewMembers.set("berna@hotmail.com", "berna");
-fistCrewMembers.set("pena.dalton@gmail.com", "");
-
 const firstCrew = {
   name: "Test Crew",
   admin: "jose.avilez",
   members: [
-    { username: "josetalking@gmail.com", email: "jose.avilez" },
-    { username: "user@email.com", email: "another.user" },
-    { username: "thisone@verylongemailnow.com", email: "this.one" },
-    { username: "berna@hotmail.com", email: "berna" },
-    { username: "", email: "pena.dalton@gmail.com" },
+    { email: "josetalking@gmail.com", username: "jose.avilez" },
+    { email: "user@email.com", username: "another.user" },
+    { email: "thisone@verylongemailnow.com", username: "this.one" },
+    { email: "berna@hotmail.com", username: "berna" },
+    { email: "", username: "pena.dalton@gmail.com" },
   ],
   color: "#E26A6A",
 };
 
-const userCrews = [firstCrew];
+const secondCrew = {
+  name: "Another Crew the a long name",
+  admin: "onfour-vinod",
+  members: [
+    { email: "josetalking@gmail.com", username: "jose.avilez" },
+    { email: "user@email.com", username: "another.user" },
+    { email: "vkk9@cornell.edu", username: "onfour-vinod" },
+  ],
+  color: "#6A6EE2",
+};
+
+const thirdCrew = {
+  name: "Highschool",
+  admin: "onfour-vinod",
+  members: [
+    { email: "josetalking@gmail.com", username: "jose.avilez" },
+    { email: "vkk9@cornell.edu", username: "onfour-vinod" },
+  ],
+  color: "#3EB095",
+}
+
+const userCrews = [firstCrew, secondCrew, thirdCrew, secondCrew, firstCrew, secondCrew];
 
 const DashboardPage = ({
   width,
@@ -159,7 +173,7 @@ const DashboardPage = ({
             </div>
           )}
 
-          <div className="user-crews-container ">
+          <div className="user-crews-container">
             <Row className="user-crews-title">
               <Col size={1}>
                 <h4 className="profile-preview-content-header">

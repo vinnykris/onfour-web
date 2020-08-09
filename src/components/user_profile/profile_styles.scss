@@ -192,6 +192,8 @@
 
 .user-crews-container {
   margin: 32px 0px;
+  width: 100%;
+  overflow: scroll;
 
   & .user-crews-title {
     margin-bottom: 32px;
@@ -472,6 +474,117 @@
         border-left: 1px solid #cecece;
         color: #bc3535 !important;
       }
+    }
+  }
+}
+
+.crew-stub-wrapper {
+  width: 242px;
+  height: 277px;
+  border-radius: 7px;
+  margin-right: 40px;
+  position: relative;
+  cursor: pointer;
+
+  & .crew-stub-title {
+    height: 39px;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+
+    & > p {
+      font-family: Helvetica;
+      font-style: italic;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 39px;
+      text-align: center;
+      letter-spacing: 0.045em;
+      color: #ffffff;
+      width: 90%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin: 0px auto;
+    }
+  }
+
+  & .crew-stub-crew-members {
+    display: block;
+
+    & .crew-stub-member {
+      border-bottom: 1px solid rgba(245, 240, 237, 0.6);
+      padding-top: 9px;
+      padding-bottom: 8px;
+
+      & .crew-stub-member-initial {
+        height: 43px !important;
+        width: 43px !important;
+        border-radius: 50%;
+        border: 1px solid rgba(245, 240, 237, 0.6);
+        margin-left: 20px;
+        line-height: 45px;
+        background-color: white;
+        font-size: 25px;
+      }
+
+      & .crew-stub-member-data-wrapper {
+        width: 169px;
+        text-align: left;
+        padding-left: 15px;
+
+        & > p {
+          margin: 0px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          margin: 0px auto;
+        }
+
+        & .crew-stub-member-data-username {
+          font-family: Helvetica;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 14px;
+          letter-spacing: 0.045em;
+          color: #ffffff;
+        }
+
+        & .crew-stub-member-data-email {
+          font-family: Helvetica;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 13px;
+          letter-spacing: 0.045em;
+          color: rgba(245, 240, 237, 0.6);
+        }
+      }
+    }
+
+    & .crew-stub-member:nth-child(3) {
+      border-bottom: none !important;
+    }
+  }
+
+  & .crew-stub-options {
+    position: absolute;
+    bottom: 0px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    font-family: Helvetica;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 52px;
+    letter-spacing: 0.045em;
+    height: 52px;
+    color: #ffffff;
+    width: 100%;
+    border-top: 1px solid rgba(245, 240, 237, 0.6);
+
+    & > p {
+      text-align: center;
+      color: #ffffff;
+      width: 100%;
     }
   }
 }
