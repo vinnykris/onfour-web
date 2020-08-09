@@ -4,10 +4,40 @@ import { Row, Col } from "../grid";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.png";
 
-import "./profile_styles.scss";
 import CrewModal from "./crew_modal";
+import UserCrews from "./user_crews";
 
-const DashboardPage = ({ width, upcoming_concerts, memories, username, history }) => {
+import "./profile_styles.scss";
+
+let fistCrewMembers = new Map();
+fistCrewMembers.set("josetalking@gmail.com", "jose.avilez");
+fistCrewMembers.set("user@email.com", "another.user");
+fistCrewMembers.set("thisone@verylongemailnow.com", "this.one");
+fistCrewMembers.set("berna@hotmail.com", "berna");
+fistCrewMembers.set("pena.dalton@gmail.com", "");
+
+const firstCrew = {
+  name: "Test Crew",
+  admin: "jose.avilez",
+  members: [
+    { username: "josetalking@gmail.com", email: "jose.avilez" },
+    { username: "user@email.com", email: "another.user" },
+    { username: "thisone@verylongemailnow.com", email: "this.one" },
+    { username: "berna@hotmail.com", email: "berna" },
+    { username: "", email: "pena.dalton@gmail.com" },
+  ],
+  color: "#E26A6A",
+};
+
+const userCrews = [firstCrew];
+
+const DashboardPage = ({
+  width,
+  upcoming_concerts,
+  memories,
+  username,
+  history,
+}) => {
   const [showCrewModal, setShowCrewModal] = useState(false);
 
   const closeModal = () => {
@@ -132,23 +162,40 @@ const DashboardPage = ({ width, upcoming_concerts, memories, username, history }
           <div className="user-crews-container ">
             <Row className="user-crews-title">
               <Col size={1}>
-                <h4 className="profile-preview-content-header">My Crews</h4>
+                <h4 className="profile-preview-content-header">
+                  My Crews{" "}
+                  {userCrews.length > 0 && (
+                    <span
+                      onClick={() => setShowCrewModal(true)}
+                      style={{ color: "white", cursor: "pointer" }}
+                    >
+                      +
+                    </span>
+                  )}
+                </h4>
               </Col>
             </Row>
             <Row>
               <Col size={1}>
-                {/* @TODO: Add check for empty array of crews when backend is ready. Right now just displaying basic + */}
-                <div
-                  className="create-crew-wrapper"
-                  onClick={() => setShowCrewModal(true)}
-                >
-                  <p>Create Crew +</p>
-                </div>
+                {userCrews.length > 0 ? (
+                  <UserCrews userCrews={userCrews} />
+                ) : (
+                  <div
+                    className="create-crew-wrapper"
+                    onClick={() => setShowCrewModal(true)}
+                  >
+                    <p>Create Crew +</p>
+                  </div>
+                )}
               </Col>
             </Row>
           </div>
 
-          <CrewModal showCrewModal={showCrewModal} closeModal={closeModal} currentUsername={username} />
+          <CrewModal
+            showCrewModal={showCrewModal}
+            closeModal={closeModal}
+            currentUsername={username}
+          />
         </Col>
       </Row>
     </Col>
