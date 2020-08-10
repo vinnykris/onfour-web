@@ -18,6 +18,7 @@ export default function Tile(props) {
   const [audioMute, setAudioMute] = useState(false);
   const random_id = Math.random();
   const audio_component_id = "audio" + random_id.toString();
+  const fans_microphone_id = "fans-mic" + random_id.toString();
 
   /**
    * When video track changes, update video srcObject
@@ -70,25 +71,40 @@ export default function Tile(props) {
   //   }
   // }
 
-  function toggle_audio_mute() {
+  function toggle_audio_mute(mute_all) {
     if (document.getElementById(random_id)) {
-      if (document.getElementById(random_id).style.color === "red") {
-        document.getElementById(random_id).style.color = "white";
-        setAudioMute(false);
-      }
-      else {
+      if (mute_all) {
         document.getElementById(random_id).style.color = "red";
         setAudioMute(true);
+      } else {
+        document.getElementById(random_id).style.color = "white";
+        setAudioMute(false);
       }
     }
   }
 
   useEffect(() => {
-    if(props.artistView) {
-    toggle_audio_mute()
+    if (props.artistView) {
+    toggle_audio_mute(props.mute_all)
     }
   }, [props.mute_all])
 
+
+  useEffect(() => {
+    if (!props.isLocalPerson) {
+      reflect_audio_change(props.audioTrack);
+    }
+  }, [props.audioTrack])
+
+  function reflect_audio_change(audioTrack) {
+    if (document.getElementById(fans_microphone_id)) {
+      if (audioTrack) {
+        document.getElementById(fans_microphone_id).style.color = "white";
+      } else {
+        document.getElementById(fans_microphone_id).style.color = "red";
+      }
+    }
+  }
 
   return (
     !props.isArtist ? (
@@ -100,9 +116,13 @@ export default function Tile(props) {
               <i 
                 className="fa fa-microphone-slash mute-others-icon" 
                 id={random_id} 
-                // onClick={toggle_audio_mute}
               ></i>
-            ) : null}
+            ) : (
+              <i
+                className="fa fa-microphone-slash mute-others-icon"
+                id={fans_microphone_id}
+              ></i>
+            )}
             {/* <div className="range-slider-container">
               <RangeSlider
                 value={volume_value}

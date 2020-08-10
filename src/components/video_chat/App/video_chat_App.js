@@ -30,11 +30,15 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
   const [mute_button_msg, setMuteButtonMsg] = useState("UNMUTE ALL");
   const isInCrew = (owner_name.indexOf(user_name) >= 0);
   // Input form values
-  const layer1_bps = useInputValue('');
-  const layer2_bps = useInputValue('');
-  const resolution_width = useInputValue('');
-  const resolution_height = useInputValue('');
-  const frame_rate = useInputValue('');
+  // const layer1_bps = useInputValue('');
+  // const layer2_bps = useInputValue('');
+  // const resolution_width = useInputValue('');
+  // const resolution_height = useInputValue('');
+  // const frame_rate = useInputValue('');
+  const max_kbs = useInputValue(20);
+  const resolution_width = useInputValue(320);
+  const resolution_height = useInputValue(180);
+  const frame_rate = useInputValue(10);
   /**
    * Creates a new call room.
    */
@@ -71,22 +75,22 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
    * be done with the call object for a while and you're no longer listening to its
    * events.
    */
-  const startJoiningPublicCall = useCallback((url,layer1_bps, layer2_bps, frame_rate, resolution_width, resolution_height) => {
-    console.log(layer1_bps.value, layer2_bps.value, resolution_width.value, resolution_height.value, frame_rate.value);
+  const startJoiningPublicCall = useCallback((url, max_kbs, frame_rate, resolution_width, resolution_height) => {
+    console.log(parseInt(resolution_width.value), parseInt(resolution_height.value), parseInt(frame_rate.value));
     const newCallObject = DailyIframe.createCallObject({
       userName: user_name,
-      dailyConfig: {
-        camSimulcastEncodings: [
-          { maxBitrate: layer1_bps.value, scaleResolutionDownBy: 2 },
-          { maxBitrate: layer2_bps.value, scaleResolutionDownBy: 1 },
-        ],
-      },
+      // dailyConfig: {
+      //   camSimulcastEncodings: [
+      //     { maxBitrate: layer1_bps.value, scaleResolutionDownBy: 2 },
+      //     { maxBitrate: layer2_bps.value, scaleResolutionDownBy: 1 },
+      //   ],
+      // },
     });
     // setRoomUrl(url);
     setRoomUrl("public");
     newCallObject.setBandwidth({
-      // kbs: 20,
-      trackConstraints: { width: resolution_width.value, height: resolution_height.value, frameRate: frame_rate.value }
+      kbs: parseInt(max_kbs.value),
+      trackConstraints: { width: parseInt(resolution_width.value), height: parseInt(resolution_height.value), frameRate: parseInt(frame_rate.value) }
     });
     newCallObject.join({ url });
     setCallObject(newCallObject);
@@ -352,7 +356,7 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
               <StartButton
                 disabled={!enableStartButton}
                 onClick={() => {
-                  createPublicCall().then(url => startJoiningPublicCall(url, layer1_bps, layer2_bps, frame_rate, resolution_width, resolution_height));
+                  createPublicCall().then(url => startJoiningPublicCall(url, max_kbs, frame_rate, resolution_width, resolution_height));
                 }}
                 artistView={artistView}
               />
@@ -367,17 +371,9 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
                     <Col size = {1}>
                       <input
                         className="video-form-input"
-                        placeholder="layer1 bps"
+                        placeholder="max kbs"
                         required
-                        {...layer1_bps}
-                      />
-                    </Col>
-                    <Col size = {1}>
-                      <input
-                        className="video-form-input"
-                        placeholder="layer2 bps"
-                        required
-                        {...layer2_bps}
+                        {...max_kbs}
                       />
                     </Col>
                     <Col size = {1}>
