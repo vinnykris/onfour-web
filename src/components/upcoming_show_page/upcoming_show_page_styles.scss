@@ -782,6 +782,15 @@
   }
 }
 
+.overlay-box {
+  background: black;
+  padding-top: 20vh;
+  height: 71vh;
+  width: 100%;
+  @include respond-to("small") {
+    height: 100vh;
+  }
+}
 .google-signin {
   background-color: black;
   color: white;

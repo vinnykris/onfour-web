@@ -51,9 +51,34 @@ export const update_registration_concert = `mutation updateCreateOnfourRegistrat
 }
 `;
 
+// Mutation to update the is_live value for a concert in concert DB
+export const update_concert_is_live = `mutation updateConcert($input: UpdateConcertInput!) {
+  updateConcert(input: $input) {
+    id
+    is_live
+  }
+}
+`;
 export const update_user = `mutation updateCreateOnfourRegistration($input: UpdateCreateOnfourRegistrationInput!) {
   updateCreateOnfourRegistration(input: $input) {
     username
+  }
+}
+`;
+
+export const create_crew = `mutation createCrew($input: CreateCrewInput!) {
+  createCrew(input: $input) {
+    id 
+    name 
+    members 
+    admin
+  }
+}
+`;
+
+export const update_crew = `mutation updateCrew($input: UpdateCrewInput!) {
+  updateCrew(input: $input) {
+    id
   }
 }
 `;

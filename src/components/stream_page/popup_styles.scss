@@ -5,24 +5,35 @@
   position: absolute;
   background-color: rgba(34, 28, 28, 0.75);
   z-index: 100;
-  width: 27vh;
-  height: 9vh;
+  width: 160px;
+  height: 80px;
   border-radius: 10px;
-  transform: translate(-50%, -140%);
-  -ms-transform: translate(-50%, -140%);
-  left: 50%;
+  transform: translate(-60%, -140%);
+  -ms-transform: translate(-60%, -140%);
+  justify-content: space-between;
+  //left: 50%;
   @include respond-to("x-large") {
-    width: 25vh;
-    height: 8vh;
+    width: 160px;
+    height: 70px;
+    transform: translate(-100%, -140%);
+    -ms-transform: translate(-100%, -140%);
   }
   @include respond-to("large") {
-    width: 22vh;
-    height: 7vh;
+    width: 160px;
+    height: 60px;
   }
   @include respond-to("medium") {
-    width: 20vh;
-    height: 7vh;
+    width: 160px;
+    height: 50px;
   }
+}
+
+.popup-overlay ul li {
+  margin: auto;
+}
+
+.popup-overlay ul li a {
+  font-size: 2rem;
 }
 
 .social-list {

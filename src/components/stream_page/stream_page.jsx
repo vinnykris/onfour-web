@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
-import Popup from "reactjs-popup";
 import SharePopup from "./share_popup";
-import styled from "styled-components";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import moment from "moment";
 import Rodal from "rodal";
@@ -30,8 +28,12 @@ import { Grid, Row, Col } from "../grid";
 import SocialBar from "../social_bar/social_bar";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
+import VideoChat from "../video_chat/App/video_chat_App";
+
 import { getTickets } from "../../apis/get_user_data";
 import PaymentBox from "../payment/donate_box";
+import VenmoBox from "../payment/venmo_box";
+import PaypalBox from "../payment/paypal_box";
 // Styles Imports
 import "./stream_styles.scss";
 import "rodal/lib/rodal.css";
@@ -43,23 +45,44 @@ import ticket1 from "../../images/icons/ticket1.png";
 Amplify.configure(awsmobile);
 
 // Main stream page component. Holds stream video, chat, and payment functionality
-const StreamPage = () => {
+const StreamPage = ({ is_soundcheck }) => {
   // DETERMINE MOBILE VERSION OR NOT
   const { height, width } = useWindowDimensions(); // Dimensions of screen
-
-  // DONATION SECTION
   const tip_based = true; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
-
-  // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat
   const [viewers, setViewers] = useState(0); // Sets number of live viewers on page
+  const [email, setEmail] = useState(""); // User email input for subscription
+  const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
+  const [show_start_time, setStartTime] = useState(""); // Stores the upcoming show's start time
+  const [show_time, setShowTime] = useState(""); // Store the upcoming show's start time to display
+  const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
+  const [artist_bio, setArtistBio] = useState("");
+  const [artist_ig, setArtistIG] = useState("");
+  const [artist_fb, setArtistFB] = useState("");
+  const [artist_spotify, setArtistSpotify] = useState("");
+  const [artist_twitter, setArtistTwitter] = useState("");
+  const [artist_youtube, setArtistYoutube] = useState("");
+  const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
+  const [concert_id, setConcertID] = useState("");
+  const [is_live, setIsLive] = useState(false);
+  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
+  const [username, setUsername] = useState(""); // Username from login
+  const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
+  const [show_popup, setShowPopup] = useState(false); // If popup should be shown
+  const [description_button_icon, setDescriptionButtonIcon] = useState(
+    "fa fa-chevron-up"
+  );
+  const [is_free, setIsFree] = useState(true);
+  const [purchasedTickets, setTickets] = useState([]);
+
+  const [open_modal, setOpenModal] = useState(false);
+  const [venmo_selected, setVenmoSelected] = useState(false);
+  const [credit_selected, setCreditSelected] = useState(true);
+  const [paypal_selected, setPaypalSelected] = useState(false);
+
   const history = useHistory();
-  // Function passed as prop to join chat
-  // const joinSubmit = (name, mode) => {
-  //   setChatName(name);
-  //   // setShowChat(mode);
-  // };
+
   // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
@@ -71,8 +94,7 @@ const StreamPage = () => {
   };
 
   // EMAIL SUBSCRIBTION SECTION
-  const [email, setEmail] = useState(""); // User email input for subscription
-  const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
+
   // Function when user submits email
   const emailSubmit = (event) => {
     event.preventDefault();
@@ -101,42 +123,42 @@ const StreamPage = () => {
   }
 
   // ADJUST CHAT HEIGHT BASED ON SCROLL AMOUNT
-  useEffect(() => {
-    document.addEventListener("scroll", () => {
-      if (176 + (width / 100) * 41 - height > 0) {
-        if (document.getElementById("chat_main")) {
-          const scrollCheck_top =
-            window.scrollY > 176 + (width / 100) * 41 - height;
-          const scrollCheck_bottom = window.scrollY < 176;
-          if (!scrollCheck_top) {
-            // if the scroll is not larger than threshold to increase height
-            document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + "px";
-          } else if (scrollCheck_bottom) {
-            // is scroll is larger than lower threshold but less than higher threshold
-            document.getElementById("chat_main").style.height =
-              window.scrollY - 176 + height + "px";
-          } else {
-            document.getElementById("chat_main").style.height = height + "px";
-          }
-        }
-      } else {
-        if (document.getElementById("chat_main")) {
-          const scrollCheck_top = window.scrollY === 0;
-          const scrollCheck_bottom = window.scrollY < 176;
-          if (scrollCheck_top) {
-            document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + "px";
-          } else if (scrollCheck_bottom) {
-            document.getElementById("chat_main").style.height =
-              (width / 100) * 41 + window.scrollY + "px";
-          } else {
-            document.getElementById("chat_main").style.height = height + "px";
-          }
-        }
-      }
-    });
-  });
+  // useEffect(() => {
+  //   document.addEventListener("scroll", () => {
+  //     if (176 + (width / 100) * 41 - height > 0) {
+  //       if (document.getElementById("chat_main")) {
+  //         const scrollCheck_top =
+  //           window.scrollY > 176 + (width / 100) * 41 - height;
+  //         const scrollCheck_bottom = window.scrollY < 176;
+  //         if (!scrollCheck_top) {
+  //           // if the scroll is not larger than threshold to increase height
+  //           document.getElementById("chat_main").style.height =
+  //             (width / 100) * 41 + "px";
+  //         } else if (scrollCheck_bottom) {
+  //           // is scroll is larger than lower threshold but less than higher threshold
+  //           document.getElementById("chat_main").style.height =
+  //             window.scrollY - 176 + height + "px";
+  //         } else {
+  //           document.getElementById("chat_main").style.height = height + "px";
+  //         }
+  //       }
+  //     } else {
+  //       if (document.getElementById("chat_main")) {
+  //         const scrollCheck_top = window.scrollY === 0;
+  //         const scrollCheck_bottom = window.scrollY < 176;
+  //         if (scrollCheck_top) {
+  //           document.getElementById("chat_main").style.height =
+  //             (width / 100) * 41 + "px";
+  //         } else if (scrollCheck_bottom) {
+  //           document.getElementById("chat_main").style.height =
+  //             (width / 100) * 41 + window.scrollY + "px";
+  //         } else {
+  //           document.getElementById("chat_main").style.height = height + "px";
+  //         }
+  //       }
+  //     }
+  //   });
+  // });
 
   // POP_UP WARNING SECTION
   // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
@@ -146,13 +168,6 @@ const StreamPage = () => {
   // };
 
   // GETTING INFORMATION ABOUT MOST RECENT UPCOMING SHOW
-  const [show_start_time, setStartTime] = useState(""); // Stores the upcoming show's start time
-  const [show_time, setShowTime] = useState(""); // Store the upcoming show's start time to display
-  const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
-  const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
-  const [concert_id, setConcertID] = useState("");
-  const [is_live, setIsLive] = useState(false);
-  const [is_free, setIsFree] = useState(true);
 
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
@@ -213,12 +228,18 @@ const StreamPage = () => {
     );
     const artist_info_list = artist_info.data.getCreateOnfourRegistration;
     setArtistName(artist_info_list.artist_name);
+    setArtistBio(artist_info_list.artist_bio);
+    setArtistFB(artist_info_list.facebook);
+    setArtistIG(artist_info_list.instagram);
+    setArtistSpotify(artist_info_list.spotify);
+    setArtistTwitter(artist_info_list.twitter);
+    setArtistYoutube(artist_info_list.youtube);
+    // setArtistFB("https://instagram.com/superduperfriend");
+    // setArtistIG("https://instagram.com/superduperfriend");
+    // setArtistSpotify("https://instagram.com/superduperfriend");
+    // setArtistTwitter("https://instagram.com/superduperfriend");
+    // setArtistYoutube("https://instagram.com/superduperfriend");
   };
-
-  // GET USER'S REGISTRATION INFORMATION
-  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
-  const [username, setUsername] = useState(""); // Username from login
-  const [purchasedTickets, setTickets] = useState([]);
 
   // If the first name for the logged in user's email has not been retrieved yet,
   // query the registration database's table to retrieve the first name filtered
@@ -244,7 +265,6 @@ const StreamPage = () => {
     window.open(url, "_blank");
   };
 
-  const [open_modal, setOpenModal] = useState(false);
   // Analytics tracker for payment modal
   const donateModal = () => {
     Analytics.record({ name: "paymentModalClicked" });
@@ -272,17 +292,46 @@ const StreamPage = () => {
   };
 
   // TOGGLE CHAT SECTION
-  const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
+
   const toggleChat = () => {
     if (button_icon === "fa fa-chevron-right") {
       setButtonIcon("fa fa-chevron-left");
       document.getElementById("chat_container").style.display = "none";
       // document.getElementById("chat_container").style.display = "none";
       document.getElementById("stream_col").style.flex = "9";
+      document.getElementById("chat_toggle_button").style.right = "0px";
     } else {
       setButtonIcon("fa fa-chevron-right");
       document.getElementById("chat_container").style.display = "inline";
       document.getElementById("stream_col").style.flex = "7";
+      document.getElementById("chat_toggle_button").style.right = "-3px";
+    }
+  };
+
+  const toggleDescription = () => {
+    if (description_button_icon === "fa fa-chevron-down") {
+      setDescriptionButtonIcon("fa fa-chevron-up");
+      document.getElementById("artist_bio").classList.add("artist-bio-row");
+      document
+        .getElementById("artist_bio")
+        .classList.remove("artist-bio-row-expanded");
+      document.getElementById("stream_info_section").style.height = "15%";
+      document.getElementById("stream_main_section").style.height = "85%";
+      document.getElementById("stream_info_bottom").style.height = "50%";
+      document.getElementById("stream_info_top").style.height = "50%";
+      document.getElementById("description_toggle_button").style.bottom =
+        "-3px";
+    } else {
+      setDescriptionButtonIcon("fa fa-chevron-down");
+      document
+        .getElementById("artist_bio")
+        .classList.add("artist-bio-row-expanded");
+      document.getElementById("artist_bio").classList.remove("artist-bio-row");
+      document.getElementById("stream_info_section").style.height = "30%";
+      document.getElementById("stream_main_section").style.height = "70%";
+      document.getElementById("stream_info_bottom").style.height = "20%";
+      document.getElementById("stream_info_top").style.height = "20%";
+      document.getElementById("description_toggle_button").style.bottom = "0px";
     }
   };
 
@@ -298,7 +347,6 @@ const StreamPage = () => {
   // `;
 
   // Social media sharing
-  const [show_popup, setShowPopup] = useState(false); // If popup should be shown
 
   // Opens custom popup and records analytics for share button being clicked
   const openPopup = () => {
@@ -311,13 +359,103 @@ const StreamPage = () => {
     setShowPopup(false);
   };
 
+  // TOGGLE BETWEEN CHAT AND VIDEO CHAT SECTION
+  const turnOnVideoChat = () => {
+    if (document.getElementById("chat-main")) {
+      document.getElementById("chat-main").style.display = "none";
+      document.getElementById("video-chat-main").style.display = "block";
+      document
+        .getElementById("chat-circle")
+        .classList.remove("selected-circle");
+      document.getElementById("video-circle").classList.add("selected-circle");
+    }
+  };
+  const turnOnChat = () => {
+    if (document.getElementById("video-chat-main")) {
+      document.getElementById("chat-main").style.display = "inline";
+      document.getElementById("video-chat-main").style.display = "none";
+      document
+        .getElementById("video-circle")
+        .classList.remove("selected-circle");
+      document.getElementById("chat-circle").classList.add("selected-circle");
+    }
+  };
+
+  const getIsLive = async () => {
+    // Calling the API, using async and await is necessary
+    if (concert_id) {
+      console.log("calling api");
+      await API.graphql(
+        graphqlOperation(queries.get_concert_is_live, {
+          id: concert_id,
+        })
+      ).then((data) => {
+        if (data.data.getConcert.is_live) {
+          setIsLive(data.data.getConcert.is_live);
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      getIsLive();
+    }, 5000);
+  });
+
+  const paymentTabSelected = (option) => {
+    if (option == 0) {
+      setCreditSelected(true);
+      setVenmoSelected(false);
+      setPaypalSelected(false);
+      document.getElementById("credit-tab").classList.add("selected-tab");
+      document.getElementById("venmo-tab").classList.remove("selected-tab");
+      document.getElementById("paypal-tab").classList.remove("selected-tab");
+      document.getElementById("credit-tab-text").classList.add("selected-tab");
+      document
+        .getElementById("venmo-tab-text")
+        .classList.remove("selected-tab");
+      document
+        .getElementById("paypal-tab-text")
+        .classList.remove("selected-tab");
+    } else if (option == 1) {
+      setCreditSelected(false);
+      setVenmoSelected(true);
+      setPaypalSelected(false);
+      document.getElementById("venmo-tab").classList.add("selected-tab");
+      document.getElementById("credit-tab").classList.remove("selected-tab");
+      document.getElementById("paypal-tab").classList.remove("selected-tab");
+      document.getElementById("venmo-tab-text").classList.add("selected-tab");
+      document
+        .getElementById("credit-tab-text")
+        .classList.remove("selected-tab");
+      document
+        .getElementById("paypal-tab-text")
+        .classList.remove("selected-tab");
+    } else if (option == 2) {
+      setCreditSelected(false);
+      setVenmoSelected(false);
+      setPaypalSelected(true);
+      document.getElementById("paypal-tab").classList.add("selected-tab");
+      document.getElementById("venmo-tab").classList.remove("selected-tab");
+      document.getElementById("credit-tab").classList.remove("selected-tab");
+      document.getElementById("paypal-tab-text").classList.add("selected-tab");
+      document
+        .getElementById("venmo-tab-text")
+        .classList.remove("selected-tab");
+      document
+        .getElementById("credit-tab-text")
+        .classList.remove("selected-tab");
+    }
+  };
+
   // RENDERING SECTION
   return (
     <div className="stream-container">
       {artist_name ? (
         <div className="stream-page-content">
           {width > 600 ? (
-            <Grid>
+            <Grid className="desktop-stream-grid">
               <Rodal
                 visible={open_modal}
                 onClose={closeModal}
@@ -327,19 +465,70 @@ const StreamPage = () => {
                 customStyles={{
                   padding: 0,
                   overflow: scroll,
-                  maxHeight: "50vh",
-                  maxWidth: "50vw",
+                  maxHeight: "545px",
+                  maxWidth: "671px",
                 }}
                 className="rodal-custom"
               >
-                <PaymentBox />
+                <Grid className="payment-modal-grid">
+                  <Row className="payment-modal-header">
+                    <Col size={1}>
+                      <h4 className="payment-modal-header-text">
+                        Donate to {artist_name}
+                      </h4>
+                    </Col>
+                  </Row>
+                  <Row className="payment-modal-header">
+                    <Col
+                      size={1}
+                      className="payment-modal-tab selected-tab"
+                      id="credit-tab"
+                    >
+                      <span
+                        onClick={() => paymentTabSelected(0)}
+                        className="payment-modal-tab-text selected-tab"
+                        id="credit-tab-text"
+                      >
+                        Credit Card
+                      </span>
+                    </Col>
+                    <Col size={1} className="payment-modal-tab" id="venmo-tab">
+                      <span
+                        onClick={() => paymentTabSelected(1)}
+                        className="payment-modal-tab-text"
+                        id="venmo-tab-text"
+                      >
+                        Venmo
+                      </span>
+                    </Col>
+                    <Col size={1} className="payment-modal-tab" id="paypal-tab">
+                      <span
+                        onClick={() => paymentTabSelected(2)}
+                        className="payment-modal-tab-text"
+                        id="paypal-tab-text"
+                      >
+                        Paypal
+                      </span>
+                    </Col>
+                  </Row>
+                </Grid>
+                {(() => {
+                  if (credit_selected) {
+                    return <PaymentBox />;
+                  } else if (venmo_selected) {
+                    return <VenmoBox />;
+                  } else {
+                    return <PaypalBox />;
+                  }
+                })()}
+                {/* <PaymentBox /> */}
               </Rodal>
               {/* <Modal is_open={open_modal}></Modal> */}
-              <Row>
+              <Row className="desktop-stream-row">
                 {/* <Col size={0.5}></Col> */}
-                <Col size={7} id="stream_col">
-                  <div className="stream-main">
-                    <div className="stream-wrapper">
+                <Col size={6} id="stream_col">
+                  <div className="stream-main" id="stream_main_section">
+                    <div className="stream-wrapper" id="video_player">
                       {is_free ||
                       (purchasedTickets &&
                         purchasedTickets.indexOf(concert_id)) >= 0 ? (
@@ -347,12 +536,17 @@ const StreamPage = () => {
                           url={
                             "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                           }
-                          start_time={show_start_time}
+                          start_time={
+                            is_soundcheck
+                              ? "2020-06-03T19:00:00.000-04: 00"
+                              : show_start_time
+                          }
                           artist_name={artist_name}
                           concert_name={concert_name}
                           auth={auth}
                           username={username}
                           concert_id={concert_id}
+                          is_live={is_live}
                         />
                       ) : (
                         <div className="buy-ticket-message-container">
@@ -390,319 +584,288 @@ const StreamPage = () => {
                           </button>
                         </div>
                       )}
-                      <div className="toggle-chat">
+                      <div className="toggle-chat" id="chat_toggle_button">
                         <button
                           className="toggle-chat-button"
                           onClick={toggleChat}
                         >
-                          <i class={button_icon}></i>
+                          <i className={button_icon}></i>
+                        </button>
+                      </div>
+                      <div
+                        className="toggle-description"
+                        id="description_toggle_button"
+                      >
+                        <button
+                          className="toggle-description-button"
+                          onClick={toggleDescription}
+                        >
+                          <i className={description_button_icon}></i>
                         </button>
                       </div>
                     </div>
                   </div>
-                  <Row className="stream-info-row">
-                    <Col size={7}>
-                      <Row>
-                        <Col size={2}>
-                          <h3 className="artist-name-stream">{artist_name}</h3>
-                        </Col>
-                        <Col size={3}>
-                          <Row className="stream-share-row">
+                  <div className="stream-info-wrapper" id="stream_info_section">
+                    <Row className="stream-info-row">
+                      <Col size={1}>
+                        <Row className="buttons-row" id="stream_info_top">
+                          <Col size={2}>
+                            <div className="artist-name-container">
+                              <h3 className="artist-name-stream">
+                                {artist_name}
+                              </h3>
+                            </div>
+                          </Col>
+                          <Col size={3}>
+                            <Row className="stream-share-row">
+                              <ClickAwayListener onClickAway={closePopup}>
+                                <div className="stream-action-button-container">
+                                  <button
+                                    className="stream-action-button"
+                                    onClick={openPopup}
+                                  >
+                                    <i
+                                      className="fa fa-share fa-fw stream-action-button-icon"
+                                      aria-hidden="true"
+                                    ></i>
+                                    Share
+                                  </button>
+
+                                  <SharePopup show={show_popup} />
+                                </div>
+                              </ClickAwayListener>
+
+                              <div className="stream-action-button-container">
+                                <button
+                                  className="stream-action-button donate-stream-button"
+                                  onClick={donateModal}
+                                >
+                                  {" "}
+                                  <i
+                                    className="fa fa-usd fa-fw stream-action-button-icon"
+                                    aria-hidden="true"
+                                  ></i>
+                                  Donate
+                                </button>
+                              </div>
+
+                              <div className="viewers">
+                                <span className="viewer-count show-time">
+                                  {viewers} watching now
+                                </span>
+                              </div>
+                            </Row>
+                          </Col>
+                        </Row>
+                        <Row className="artist-bio-row" id="artist_bio">
+                          <Col size={1}>
+                            {/* <h5 className="show-time">
+                              {show_time} (refresh the page if stream doesn't
+                              show up)
+                            </h5> */}
+                            <div className="stream-artist-bio-container">
+                              <p className="stream-artist-bio">{artist_bio}</p>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row
+                          className="bottom-buttons-row"
+                          id="stream_info_bottom"
+                        >
+                          <Col size={1}>
+                            <div className="social-media-container">
+                              <ul className="social-list">
+                                {artist_ig ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarInsta",
+                                        })
+                                      }
+                                      href={artist_ig}
+                                      className="fa fa-instagram"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Instagram Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
+
+                                {artist_spotify ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarSpotify",
+                                        })
+                                      }
+                                      href={artist_spotify}
+                                      className="fa fa-spotify"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Spotify Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
+
+                                {artist_youtube ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarYoutube",
+                                        })
+                                      }
+                                      href={artist_youtube}
+                                      className="fa fa-youtube"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Youtube Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
+
+                                {artist_fb ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarFacebook",
+                                        })
+                                      }
+                                      href={artist_fb}
+                                      className="fa fa-facebook"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Facebook Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
+
+                                {artist_twitter ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarTwitter",
+                                        })
+                                      }
+                                      href={artist_twitter}
+                                      className="fa fa-twitter"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Twitter Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
+                              </ul>
+                            </div>
+                          </Col>
+                          <Col size={1}>
                             <div className="feedback-container">
                               <a
-                                onClick={Analytics.record({
-                                  name: "sendFeedbackClicked",
-                                })}
+                                onClick={() =>
+                                  Analytics.record({
+                                    name: "sendFeedbackClicked",
+                                  })
+                                }
                                 href="https://forms.gle/5rP8nXznckGCuRE77"
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
                                 <h5 className="show-time feedback-link">
-                                  SEND FEEDBACK
+                                  Share thoughts on your experience
                                 </h5>
                               </a>
                             </div>
-
-                            <ClickAwayListener onClickAway={closePopup}>
-                              <div className="share-container">
-                                <span
-                                  className="share-button"
-                                  onClick={openPopup}
-                                >
-                                  <i
-                                    class="fa fa-share show-time"
-                                    aria-hidden="true"
-                                  ></i>
-                                  <h5 className="show-time share-text">
-                                    SHARE
-                                  </h5>
-                                </span>
-
-                                <SharePopup show={show_popup} />
-                              </div>
-                            </ClickAwayListener>
-
-                            <div className="viewers">
-                              <h5 className="viewer-count show-time">
-                                {viewers} watching now
-                              </h5>
-                            </div>
-                          </Row>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col size={2}>
-                          <h5 className="show-time">
-                            {show_time} (refresh the page if stream doesn't show
-                            up)
-                          </h5>
-                        </Col>
-                      </Row>
-
-                      {/* </Col> */}
-                      {/* <Col size={1} className="social-bar-center">
-                           <SocialBar />
-                      </Col> */}
-                    </Col>
-                    {/* <Col size={2.5}></Col>
-                    <Col size={0.5}></Col> */}
-                  </Row>
-                  <Row>
-                    <div className="short-term-spacer">
-                      {/* <Col>
-                        <img className="artist-image" src={"https://onfour-media.s3.amazonaws.com/upcoming_show_poster/festival/achille.png"}></img>
-                      </Col> */}
-                    </div>
-                  </Row>
-
-                  {/* DONATE ROW */}
-                  <Row className="donate-row">
-                    <Col size={1} className="donate-stripe donate-box">
-                      <p className="donate-description">Credit Card</p>
-                      {tip_based ? (
-                        <p className="donate-subdescription">
-                          Tip {artist_name} via credit card. Your card
-                          information will not be stored anywhere.
-                        </p>
-                      ) : (
-                        <p className="donate-subdescription">
-                          Donate via credit card to For the GWORLS and LGBTQ
-                          Freedom Fund. Your card information will not be stored
-                          anywhere.
-                        </p>
-                      )}
-                    </Col>
-                    <Col size={1} className="donate-paypal donate-box">
-                      <p className="donate-description">PayPal</p>
-                      {tip_based ? (
-                        <p className="donate-subdescription">
-                          onfour will ensure your tip is sent to {artist_name}.
-                        </p>
-                      ) : (
-                        <p className="donate-subdescription">
-                          onfour will ensure your donation is sent to For the
-                          GWORLS and LGBTQ Freedom Fund.
-                        </p>
-                      )}
-                    </Col>
-                    <Col size={1} className="donate-venmo donate-box">
-                      <p className="donate-description">Venmo</p>
-                      {tip_based ? (
-                        <p className="donate-subdescription">
-                          onfour (@SpencerAmer) will ensure your tip is sent to{" "}
-                          {artist_name}.
-                        </p>
-                      ) : (
-                        <p className="donate-subdescription">
-                          @SpencerAmer from onfour will ensure your donation is
-                          sent to For the GWORLS and LGBTQ Freedom Fund.
-                        </p>
-                      )}
-                    </Col>
-                  </Row>
-
-                  {/* DONATE ROW */}
-                  <Row className="donate-row-buttons">
-                    {tip_based ? (
-                      <div className="payment-container">
-                        <Col
-                          size={1}
-                          className="donate-stripe donate-box-button"
-                        >
-                          <button
-                            className="stripe-button-border button-height"
-                            //data-toggle="modal"
-                            //data-target="#paymentModal"
-                            onClick={donateModal}
-                          >
-                            Tip with Card
-                          </button>{" "}
-                          {/* <Modal></Modal> */}
-                        </Col>
-                        <Col
-                          size={1}
-                          className="donate-paypal donate-box-button"
-                        >
-                          <button
-                            className="stripe-button-border button-height paypal-button"
-                            onClick={donatePaypal}
-                          >
-                            Tip with Paypal
-                          </button>
-                        </Col>
-                        <Col
-                          size={1}
-                          className="donate-venmo donate-box-button"
-                        >
-                          <img
-                            className="venmo-code"
-                            src={VenmoCode}
-                            alt="venmo-qr"
-                          ></img>
-                        </Col>
-                      </div>
-                    ) : (
-                      <div className="payment-container">
-                        <Col
-                          size={1}
-                          className="donate-stripe donate-box-button"
-                        >
-                          <button
-                            className="stripe-button-border button-height"
-                            data-toggle="modal"
-                            data-target="#paymentModal"
-                            onClick={donateModal}
-                          >
-                            Donate with Card
-                          </button>{" "}
-                          <Modal></Modal>
-                        </Col>
-                        <Col
-                          size={1}
-                          className="donate-paypal donate-box-button"
-                        >
-                          <button
-                            className="stripe-button-border button-height paypal-button"
-                            onClick={donatePaypal}
-                          >
-                            Donate with Paypal
-                          </button>
-                        </Col>
-                        <Col
-                          size={1}
-                          className="donate-venmo donate-box-button"
-                        >
-                          <img
-                            className="venmo-code"
-                            src={VenmoCode}
-                            alt="venmo-qr"
-                          ></img>
-                        </Col>
-                      </div>
-                    )}
-                  </Row>
-
-                  <Row className="stream-subscribe-box">
-                    <Col size={0.5}></Col>
-                    <Col size={7}>
-                      <Row>
-                        <p className="stream-subscribe-title">Subscribe</p>
-                      </Row>
-                      <Row>
-                        <Col size={3}>
-                          <p className="stream-subscribe-description">
-                            To stay informed about upcoming events, subscribe to
-                            our mailing list:
-                          </p>
-                          {(() => {
-                            if (email_submitted) {
-                              return (
-                                <p className="subscribe-success">
-                                  Thank you and stay tuned!
-                                </p>
-                              );
-                            } else {
-                              return (
-                                <form
-                                  class="stream-email-form"
-                                  action="/"
-                                  id="newsletter"
-                                  onSubmit={emailSubmit}
-                                >
-                                  <input
-                                    type="email"
-                                    placeholder="Enter your email here..."
-                                    name="email"
-                                    required
-                                    value={email}
-                                    style={{ width: "70%" }}
-                                    onChange={(event) =>
-                                      setEmail(event.target.value)
-                                    }
-                                  />
-                                  <button
-                                    type="submit"
-                                    form="newsletter"
-                                    value="Submit"
-                                    style={{ width: "auto" }}
-                                    className="button-border button-height adjust-font-size"
-                                  >
-                                    {" "}
-                                    Submit
-                                  </button>
-                                </form>
-                              );
-                            }
-                          })()}
-                        </Col>
-                        <Col size={1}></Col>
-                        <Col size={3}>
-                          <SocialBar
-                            show_text={true}
-                            instagram={"https://www.instagram.com/_onfour"}
-                            spotify={
-                              "https://open.spotify.com/playlist/3KbuKf1zti8EtbJ4Ot7Iq4"
-                            }
-                            youtube={
-                              "https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ"
-                            }
-                            facebook={"https://www.facebook.com/onfour"}
-                            twitter={"https://twitter.com/_Onfour"}
-                          ></SocialBar>
-                        </Col>
-                      </Row>
-                    </Col>
-                    <Col size={0.5}></Col>
-                  </Row>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </div>
                 </Col>
-
-                <Col
-                  size={2.5}
-                  id="chat_container"
-                  className="sticky-container"
-                >
+                <Col size={3} id="chat_container" className="sticky-container">
                   <div className="chat-main" id="chat_main">
                     <div className="chat-wrapper">
-                      {/* {
-                      username ? (
+                      {/* <Row className="video-chat-row">
+                        <VideoChat
+                          user_name={username ? username : "GUEST"}
+                          artist_name="vinnykris"
+                        ></VideoChat>
+                      </Row> */}
+                      <Row className="chat-row">
                         <Chat
-                          chat_name={username ? username : null}
+                          chat_name={username ? username : "GUEST"}
                           chatStatus={chatStatus}
+                          setViewers={getViewers}
                         />
-                      ) : (
-                        // <Join joinSubmit={joinSubmit} />
-                        <WaitingChat />
-                      )
-                      } */}
-                      {/* {console.log(username)} */}
-                      <Chat
-                        chat_name={username ? username : "GUEST"}
-                        chatStatus={chatStatus}
-                        setViewers={getViewers}
-                      />
+                      </Row>
+                      {/* <Row className="controll-toolbar-row">
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-glass">
+                            <i
+                              id="placeholder1"
+                              className="fa fa-glass controll-toolbar-button"
+                            ></i>
+                          </div>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-smile-o">
+                            <i
+                              id="placeholder2"
+                              className="fa fa-smile-o controll-toolbar-button"
+                            ></i>
+                          </div>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div
+                            className="controll-toolbar-button-container button-commenting-o"
+                            onClick={turnOnChat}
+                          >
+                            <i
+                              id="chat-circle"
+                              className="fa fa-commenting-o controll-toolbar-button selected-circle"
+                            ></i>
+                          </div>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div
+                            className="controll-toolbar-button-container button-video-camera"
+                            onClick={turnOnVideoChat}
+                          >
+                            <i
+                              id="video-circle"
+                              className="fa fa-video-camera controll-toolbar-button"
+                            ></i>
+                          </div>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-hand-rock-o">
+                            <i
+                              id="placeholder3"
+                              className="fa fa-hand-rock-o controll-toolbar-button"
+                            ></i>
+                          </div>
+                        </Col>
+                        <Col size="1" className="controll-toolbar-col">
+                          <div className="controll-toolbar-button-container button-heart">
+                            <i
+                              id="placeholder4"
+                              className="fa fa-heart controll-toolbar-button"
+                            ></i>
+                          </div>
+                        </Col>
+                      </Row> */}
                     </div>
                   </div>
                 </Col>
+
                 {/* <Col size={0.5}></Col> */}
               </Row>
               {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
@@ -719,12 +882,17 @@ const StreamPage = () => {
                         url={
                           "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
                         }
-                        start_time={show_start_time}
+                        start_time={
+                          is_soundcheck
+                            ? "2020-06-03T19:00:00.000-04: 00"
+                            : show_start_time
+                        }
                         artist_name={artist_name}
                         concert_name={concert_name}
                         auth={auth}
                         username={username}
                         concert_id={concert_id}
+                        is_live={is_live}
                       />
                     ) : (
                       <div className="buy-ticket-message-container">

@@ -117,6 +117,7 @@ getCreateOnfourRegistration(username: $input) {
   username
   first
   concert
+  crew
 }
 }`;
 
@@ -163,3 +164,22 @@ getConcert(id: $id) {
   general_price
 }
 }`;
+
+export const get_user_by_email = `query listUsersByEmail ($input: String!) {
+  listUsersByEmail(email: $input) {
+		items {
+      username 
+    }
+  }
+}
+`;
+
+export const get_crew_by_id = `query getCrew ($input: ID!) {
+  getCrew(id: $input) {
+    id 
+    name 
+    members 
+    admin  
+  }
+}
+`;

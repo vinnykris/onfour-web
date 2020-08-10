@@ -56,7 +56,6 @@ const AboutPage = () => {
   }
 
   const scrollDown = (section_number) => {
-    console.log("heyhey");
     window.scroll({ top: height * section_number, behavior: "smooth" });
   };
 
