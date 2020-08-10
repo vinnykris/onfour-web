@@ -119,12 +119,12 @@ const StreamPage = () => {
     if (button_icon === "fa fa-chevron-left") {
       setButtonIcon("fa fa-chevron-right");
       document.getElementById("chat_container").style.display = "none";
-      document.getElementById("stream_col").style.display = "none";
+      document.getElementById("artist-stream-col").style.display = "none";
       setVideoColNum(6);
     } else {
       setButtonIcon("fa fa-chevron-left");
       document.getElementById("chat_container").style.display = "inline";
-      document.getElementById("stream_col").style.display = "inline";
+      document.getElementById("artist-stream-col").style.display = "inline";
       setVideoColNum(2);
     }
   };
