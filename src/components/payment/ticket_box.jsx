@@ -179,7 +179,7 @@ const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
                                 PAY ${amount_value}
                             </button>
                         ) : (
-                            <Tooltip title="Please log in to purchase your ticket">
+                            <Tooltip title="Please agree to the terms first">
                                 <button
                                     form="placeholder"
                                     className="ticket-button-disabled"
