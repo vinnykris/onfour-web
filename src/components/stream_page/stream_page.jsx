@@ -319,19 +319,19 @@ const StreamPage = ({ is_soundcheck }) => {
       document.getElementById("stream_main_section").style.height = "85%";
       document.getElementById("stream_info_bottom").style.height = "50%";
       document.getElementById("stream_info_top").style.height = "50%";
-      document.getElementById("description_toggle_button").style.bottom =
-        "-3px";
+      // document.getElementById("description_toggle_button").style.bottom =
+      //   "-3px";
     } else {
       setDescriptionButtonIcon("fa fa-chevron-down");
       document
         .getElementById("artist_bio")
         .classList.add("artist-bio-row-expanded");
       document.getElementById("artist_bio").classList.remove("artist-bio-row");
-      document.getElementById("stream_info_section").style.height = "30%";
-      document.getElementById("stream_main_section").style.height = "70%";
+      document.getElementById("stream_info_section").style.height = "35%";
+      document.getElementById("stream_main_section").style.height = "65%";
       document.getElementById("stream_info_bottom").style.height = "20%";
       document.getElementById("stream_info_top").style.height = "20%";
-      document.getElementById("description_toggle_button").style.bottom = "0px";
+      // document.getElementById("description_toggle_button").style.bottom = "0px";
     }
   };
 
