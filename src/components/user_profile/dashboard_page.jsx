@@ -4,7 +4,7 @@ import { Row, Col } from "../grid";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.png";
 
-import CrewModal from "./crew_modal";
+import CreateCrewModal from "./create_crew_modal";
 import UserCrews from "./user_crews";
 
 import "./profile_styles.scss";
@@ -181,7 +181,7 @@ const DashboardPage = ({
                   {userCrews.length > 0 && (
                     <span
                       onClick={() => setShowCrewModal(true)}
-                      style={{ color: "white", cursor: "pointer" }}
+                      style={{ color: "white", cursor: "pointer", fontSize: "22px" }}
                     >
                       +
                     </span>
@@ -205,7 +205,7 @@ const DashboardPage = ({
             </Row>
           </div>
 
-          <CrewModal
+          <CreateCrewModal
             showCrewModal={showCrewModal}
             closeModal={closeModal}
             currentUsername={username}

@@ -220,6 +220,10 @@
   }
 }
 
+.user-crews-container::-webkit-scrollbar {
+  display: none;
+}
+
 .user-crews-modal {
   & .rodal-dialog {
     border-radius: 10px;
@@ -512,7 +516,7 @@
     display: block;
 
     & .crew-stub-member {
-      border-bottom: 1px solid rgba(245, 240, 237, 0.6);
+      border-bottom: 1px solid rgba(245, 240, 237, 0.4);
       padding-top: 9px;
       padding-bottom: 8px;
 
@@ -579,12 +583,13 @@
     height: 52px;
     color: #ffffff;
     width: 100%;
-    border-top: 1px solid rgba(245, 240, 237, 0.6);
+    border-top: 1px solid rgba(245, 240, 237, 0.4);
 
     & > p {
       text-align: center;
       color: #ffffff;
       width: 100%;
+      line-height: 36px;
     }
   }
 }

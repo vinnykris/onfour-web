@@ -9,7 +9,7 @@ import { Row, Col } from "../grid";
 
 import { getUsernameByEmail } from "../../utils/crew";
 
-const CrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
+const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
   const [availableColors, setAvailableColors] = useState([
     "#E26A6A",
     "#E465A2",
@@ -229,4 +229,4 @@ const CrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
   );
 };
 
-export default CrewModal;
+export default CreateCrewModal;
