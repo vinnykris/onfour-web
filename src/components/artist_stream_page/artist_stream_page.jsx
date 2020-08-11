@@ -75,12 +75,19 @@ const StreamPage = () => {
   const [start_date, setStartDate] = useState("");
   const [is_live, setIsLive] = useState(false);
   const [go_live_message, setGoLiveMsg] = useState("GO LIVE");
-  // Analytics state variables
-  //const [arrival, setArrival] = useState(true);
+  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
+  const [username, setUsername] = useState(""); // Username from login
 
   // Get the start time for countdown_timer
   useEffect(() => {
     getStartTimeAndIsLive();
+    Auth.currentAuthenticatedUser({})
+      .then((user) => {
+        setUsername(user.username);
+        setShowChat(true);
+        setAuth(true);
+      })
+      .catch((err) => setAuth(false));
   }, []);
 
   // Query upcoming show database
@@ -98,33 +105,19 @@ const StreamPage = () => {
       setGoLiveMsg(data.data.getConcert.is_live ? "DISCONNECT" : "GO LIVE");
     });
   };
-
-  // GET USER'S REGISTRATION INFORMATION
-  const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
-  const [username, setUsername] = useState(""); // Username from login
-
-  // If the user is logged in/valid, set their auth value to true and track their email
-  // If the user is not logged in/invalid, reset their auth value to false
-  Auth.currentAuthenticatedUser({})
-    .then((user) => {
-      setUsername(user.username);
-      setShowChat(true);
-      setAuth(true);
-    })
-    .catch((err) => setAuth(false));
-
+  
   // TOGGLE CHAT SECTION
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-left");
   const toggleChat = () => {
     if (button_icon === "fa fa-chevron-left") {
       setButtonIcon("fa fa-chevron-right");
       document.getElementById("chat_container").style.display = "none";
-      document.getElementById("stream_col").style.display = "none";
+      document.getElementById("artist-stream-col").style.display = "none";
       setVideoColNum(6);
     } else {
       setButtonIcon("fa fa-chevron-left");
       document.getElementById("chat_container").style.display = "inline";
-      document.getElementById("stream_col").style.display = "inline";
+      document.getElementById("artist-stream-col").style.display = "inline";
       setVideoColNum(2);
     }
   };
@@ -220,13 +213,13 @@ const StreamPage = () => {
                     </div>
                   </Row>
                 </Col>
-                <Col size={4} id="chat_container" className="sticky-container">
+                <Col size={4} id="chat_container" className="artist-sticky-container">
                   <div className="artist-video-main">
                     <div className="artist-video-wrapper">
                       <div className="artist-box-header video-chat-box-header">Video Roulette</div>
                       <VideoChat 
                         user_name={username ? username : "GUEST"} 
-                        artist_name="vinnykris"
+                        artist_name={username}
                         artistView={true} 
                         colNum={video_col_num} 
                         isReady={show_start_time}
