@@ -1,23 +1,21 @@
 // React imports
-import React, { useEffect, useState, } from "react";
+import React, { useEffect, useState } from "react";
 
 // Component imports
 import ChatTooltip from "./chat_tooltip";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 // Picker import
-import { Picker } from 'emoji-mart';
+import { Picker } from "emoji-mart";
 
 // Styles imports
 import "./chat.scss";
 
 // AWS imports
-import Amplify, { Analytics } from "aws-amplify";
 import Auth from "../../apis/UserPool";
 
 // Component for input field for chat
 const Input = ({ message, setMessage, sendMessage, name }) => {
-
   const [emojiPickerVisibility, setEmojiPickerVisibility] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState("");
   const [auth, setAuth] = useState("");
@@ -31,26 +29,25 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
   //set picker visibility to false on click outside the picker
   const handleEmojiPickerClose = () => {
     setEmojiPickerVisibility(false);
-  }
+  };
 
   //activates on emoji click within picker
   //changes selectedEmoji useState
-  const onEmojiClick = (emojiObject) =>{
+  const onEmojiClick = (emojiObject) => {
     setSelectedEmoji(emojiObject.native);
-  }
+  };
 
   //listens for selectedEmoji useState change
   //appends emoji to message
   useEffect(() => {
-      if(selectedEmoji != ""){
-        setMessage({message}.message + selectedEmoji);
-        setSelectedEmoji("");
-      }
-  },[selectedEmoji]);
-
+    if (selectedEmoji != "") {
+      setMessage({ message }.message + selectedEmoji);
+      setSelectedEmoji("");
+    }
+  }, [selectedEmoji]);
 
   return (
-    <div>
+    <div className="input-container">
       {auth ? (
         <form className="form">
           <input
@@ -68,32 +65,32 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
           {/* visibility toggler */}
           <div
             className="emoji-button"
-            onClick={(event) => setEmojiPickerVisibility(!emojiPickerVisibility)}
+            onClick={(event) =>
+              setEmojiPickerVisibility(!emojiPickerVisibility)
+            }
           >
             <i class="fa fa-smile-o" aria-hidden="true"></i>
           </div>
 
-
           {/* picker element */}
-          {emojiPickerVisibility &&
+          {emojiPickerVisibility && (
             <ClickAwayListener onClickAway={handleEmojiPickerClose}>
               <div>
-                   <Picker
-                      onSelect={onEmojiClick}
-                      theme="dark"
-                      set="twitter"
-                      sheetSize="64"
-                   />
+                <Picker
+                  onSelect={onEmojiClick}
+                  theme="dark"
+                  set="twitter"
+                  sheetSize="64"
+                />
               </div>
             </ClickAwayListener>
-          }
-
+          )}
 
           <button
             className="send-button"
             onClick={(event) => sendMessage(event)}
           >
-            <i class="fa fa-send"></i>
+            <i className="fa fa-send"></i>
           </button>
           {/* </ChatTooltip> */}
         </form>
@@ -110,7 +107,7 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
             disabled={!message}
             onClick={(event) => sendMessage(event)}
           >
-            <i class="fa fa-send"></i>
+            <i className="fa fa-send"></i>
           </button>
         </form>
       )}

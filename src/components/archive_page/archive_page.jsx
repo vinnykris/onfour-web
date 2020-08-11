@@ -3,13 +3,10 @@ import React, { useState, useEffect } from "react";
 
 // Component imports
 import FlexibleGrid from "../flexible_grid/flexible_grid";
-import ArchiveVideo from "./archive_video";
 import { useWindowDimensions } from "../custom_hooks";
 import { formatArchiveVideos } from "../util";
 
 // AWS Imports
-import { API, graphqlOperation } from "aws-amplify";
-import * as queries from "../../graphql/queries";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";

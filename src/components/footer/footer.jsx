@@ -25,7 +25,12 @@ const Footer = () => {
   // When either screen width or location are updated, effect hook is run
   // Hides footer if stream page and on mobile
   useEffect(() => {
-    if (location.pathname === "/stream" && width <= 600) {
+    if (
+      location.pathname === "/stream" ||
+      location.pathname === "/profile" ||
+      location.pathname === "/soundcheck" ||
+      location.pathname === "/artiststream"
+    ) {
       setShowFooter(false);
     } else {
       setShowFooter(true);
@@ -56,7 +61,9 @@ const Footer = () => {
                   <ul>
                     <li>
                       <a
-                        onClick={Analytics.record({ name: "contactUsFooter" })}
+                        onClick={() =>
+                          Analytics.record({ name: "contactUsFooter" })
+                        }
                         href="mailto:onfour.box@gmail.com"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -72,6 +79,11 @@ const Footer = () => {
                     <li>
                       <NavLink to="/terms-of-service" className="privacy-link">
                         Terms of Service
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/ticket-agreement" className="privacy-link">
+                        Ticket Agreement
                       </NavLink>
                     </li>
                   </ul>
@@ -91,7 +103,9 @@ const Footer = () => {
                   <ul>
                     <li>
                       <a
-                        onClick={Analytics.record({ name: "instaFooter" })}
+                        onClick={() =>
+                          Analytics.record({ name: "instaFooter" })
+                        }
                         href="https://www.instagram.com/_onfour/"
                         target="_blank"
                         className="fa fa-instagram"
@@ -102,7 +116,9 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        onClick={Analytics.record({ name: "youtubeFooter" })}
+                        onClick={() =>
+                          Analytics.record({ name: "youtubeFooter" })
+                        }
                         href="https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ/featured"
                         target="_blank"
                         className="fa fa-youtube"
@@ -113,7 +129,9 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
-                        onClick={Analytics.record({ name: "twitterFooter" })}
+                        onClick={() =>
+                          Analytics.record({ name: "twitterFooter" })
+                        }
                         href="https://twitter.com/_Onfour"
                         target="_blank"
                         className="fa fa-twitter"

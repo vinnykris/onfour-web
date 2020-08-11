@@ -56,7 +56,7 @@ const Register = () => {
 
     // Email/First Name/Last Name/Concerts information passed into AppSync API/Registration Table
     const register_payload = {
-      username: username,
+      username: username.toLowerCase(),
       email: email,
       first: first,
       last: last,
