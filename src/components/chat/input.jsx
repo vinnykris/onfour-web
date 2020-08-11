@@ -47,7 +47,7 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
   }, [selectedEmoji]);
 
   return (
-    <div>
+    <div className="input-container">
       {auth ? (
         <form className="form">
           <input
