@@ -43,7 +43,6 @@ const Register = (props) => {
   const state = props.location.state;
 
   useEffect(() => {
-    console.log(state.current);
     if (state) {
       setFromPath(state.current);
     }
