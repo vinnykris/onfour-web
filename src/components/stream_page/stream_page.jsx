@@ -467,6 +467,7 @@ const StreamPage = ({ is_soundcheck }) => {
                   overflow: scroll,
                   maxHeight: "545px",
                   maxWidth: "671px",
+
                 }}
                 className="rodal-custom"
               >
@@ -870,6 +871,22 @@ const StreamPage = ({ is_soundcheck }) => {
             </Grid>
           ) : (
             <div className="mobile-grid-stream">
+              <Rodal
+                visible={open_modal}
+                onClose={closeModal}
+                width={100}
+                height={100}
+                measure="%"
+                customStyles={{
+                  padding: 0,
+                  overflow: scroll,
+                  // maxHeight: "400px",
+                  // maxWidth: "600px",
+                }}
+                className="rodal-custom"
+              >
+                <PaymentBox />
+              </Rodal>
               <div className="main-column">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
@@ -936,8 +953,9 @@ const StreamPage = ({ is_soundcheck }) => {
                   {tip_based ? (
                     <button
                       className="stripe-button-border mobile-payment-button"
-                      data-toggle="modal"
-                      data-target="#paymentModal"
+                      // data-toggle="modal"
+                      // data-target="#paymentModal"
+                      onClick={donateModal}
                     >
                       Tip {artist_name}
                     </button>
@@ -950,7 +968,7 @@ const StreamPage = ({ is_soundcheck }) => {
                       Donate
                     </button>
                   )}
-                  <Modal isOpen={false}></Modal>
+                  {/* <Modal isOpen={false}></Modal> */}
                 </div>
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
