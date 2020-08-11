@@ -154,7 +154,7 @@ const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
                         onChange={(event) => setChecked(!checked)}
                     />
                     <label className="term-agreement-text">
-                          I am aware of and agree to these <a href="/terms-of-service" target="_blank">terms</a>
+                          I have read and agree to these <a href="/ticket-agreement" target="_blank">terms</a>
                     </label>
                   {waiting ? (
                     <div>
