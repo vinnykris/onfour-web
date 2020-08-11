@@ -20,6 +20,7 @@ import Login from "./components/login_page/login_page";
 import ArtistForm from "./components/artist_form/artist_form";
 import PrivacyPage from "./components/policies/privacy_page";
 import TermsOfService from "./components/policies/terms_of_service";
+import PaymentAgreement from "./components/policies/payment_agreement";
 
 // Bootstrap import
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -65,6 +66,7 @@ function App() {
           <Route exact path="/form" component={ArtistForm} />
           <Route exact path="/privacy-policy" component={PrivacyPage} />
           <Route exact path="/terms-of-service" component={TermsOfService} />
+          <Route exact path="/ticket-agreement" component={PaymentAgreement} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
         <Footer />
