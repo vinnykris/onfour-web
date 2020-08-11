@@ -23,7 +23,7 @@ const firstCrew = {
 };
 
 const secondCrew = {
-  name: "Another Crew the a long name",
+  name: "Another Crew the a long name but I can still add a little more text here",
   admin: "onfour-vinod",
   members: [
     { email: "josetalking@gmail.com", username: "jose.avilez" },
