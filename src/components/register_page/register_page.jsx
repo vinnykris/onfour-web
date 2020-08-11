@@ -2,7 +2,7 @@
 import history from "../../history";
 
 // React
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PasswordStrengthBar from "react-password-strength-bar";
 
 // Components
@@ -24,7 +24,7 @@ import "./register_styles.scss";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
-const Register = () => {
+const Register = (props) => {
   const [username, setUsername] = useState(""); // Tracks user's username
   const [email, setEmail] = useState(""); // Tracks user's email
   const [password, setPassword] = useState(""); // Tracks user's password
@@ -39,6 +39,14 @@ const Register = () => {
   const [pin, setPin] = useState(""); // Tracks user's verification code
   const [auto_signup, setAutoSignUp] = useState(false); // Tracks if user is being auto logged in
   const [is_artist, setIsArtist] = useState(false); // Tracks if user signing up is a musician or a fan
+  const [from_path, setFromPath] = useState(null);
+  const state = props.location.state;
+
+  useEffect(() => {
+    if (state) {
+      setFromPath(state.current);
+    }
+  }, []);
 
   // Function that occurs after the user clicks the submit button to sign up
   const registerSubmit = (event) => {
@@ -166,8 +174,13 @@ const Register = () => {
     setUsername("");
     setPassword("");
     setRepeatPassword("");
-    if (is_artist) history.push("/form");
-    else history.push("/stream");
+    if (is_artist) {
+      history.push("/form");
+    } else if (from_path) {
+      history.push(from_path);
+    } else {
+      history.push("/");
+    }
   };
 
   // Function for checking a user's submitted pin to confirm account
