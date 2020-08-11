@@ -107,18 +107,70 @@ const dashboardPage = ({ width, upcoming_concerts, memories, history }) => {
             </div>
           ) : (
             <div className="profile-empty-state">
-              <h4 className="empty-state-message">
-                Oops... it looks like you aren't going to any upcoming shows.
-              </h4>
-              <h5 className="empty-state-message">
-                Get your ticket to a show below!
-              </h5>
-              <button
-                className="upcoming-prompt-button"
-                onClick={() => history.push("/upcoming")}
-              >
-                View Upcoming Shows
-              </button>
+                <Row>
+                  <Col size={1}>
+                    <h4 className="profile-preview-content-header">
+                      MY UPCOMING SHOWS
+                  </h4>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col size={1} className="empty-upcoming-concert-container">
+                    <h4 className="empty-state-message">
+                      Oops... it looks like you aren't going to any upcoming shows.
+                    </h4>
+                    <h5 className="empty-state-message">
+                      Get your ticket to a show below!
+                    </h5>
+                    <button
+                      className="upcoming-prompt-button"
+                      onClick={() => history.push("/upcoming")}
+                    >
+                      View Upcoming Shows
+                    </button>
+                  </Col>
+                </Row>
+              {memories.length > 0 ? (
+                <div>
+                  <Row>
+                    <Col size={1}>
+                      <h4 className="profile-preview-content-header">
+                        MY MEMORIES
+                    </h4>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col size={1}>
+                      {width <= 600 ? (
+                        <FlexibleGrid content_list={memories} num_cols={1} />
+                      ) : (
+                          <div>
+                            {width < 1280 ? (
+                              <div>
+                                {width <= 768 ? (
+                                  <FlexibleGrid
+                                    content_list={memories}
+                                    num_cols={3}
+                                  />
+                                ) : (
+                                    <FlexibleGrid
+                                      content_list={memories}
+                                      num_cols={4}
+                                    />
+                                  )}
+                              </div>
+                            ) : (
+                                <FlexibleGrid
+                                  content_list={memories}
+                                  num_cols={5}
+                                />
+                              )}
+                          </div>
+                        )}
+                    </Col>
+                  </Row>
+                </div>
+              ) : null}
             </div>
           )}
         </Col>

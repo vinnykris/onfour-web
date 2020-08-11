@@ -319,19 +319,19 @@ const StreamPage = ({ is_soundcheck }) => {
       document.getElementById("stream_main_section").style.height = "85%";
       document.getElementById("stream_info_bottom").style.height = "50%";
       document.getElementById("stream_info_top").style.height = "50%";
-      document.getElementById("description_toggle_button").style.bottom =
-        "-3px";
+      // document.getElementById("description_toggle_button").style.bottom =
+      //   "-3px";
     } else {
       setDescriptionButtonIcon("fa fa-chevron-down");
       document
         .getElementById("artist_bio")
         .classList.add("artist-bio-row-expanded");
       document.getElementById("artist_bio").classList.remove("artist-bio-row");
-      document.getElementById("stream_info_section").style.height = "30%";
-      document.getElementById("stream_main_section").style.height = "70%";
+      document.getElementById("stream_info_section").style.height = "35%";
+      document.getElementById("stream_main_section").style.height = "65%";
       document.getElementById("stream_info_bottom").style.height = "20%";
       document.getElementById("stream_info_top").style.height = "20%";
-      document.getElementById("description_toggle_button").style.bottom = "0px";
+      // document.getElementById("description_toggle_button").style.bottom = "0px";
     }
   };
 
@@ -483,27 +483,25 @@ const StreamPage = ({ is_soundcheck }) => {
                       size={1}
                       className="payment-modal-tab selected-tab"
                       id="credit-tab"
+                      onClick={() => paymentTabSelected(0)}
                     >
                       <span
-                        onClick={() => paymentTabSelected(0)}
                         className="payment-modal-tab-text selected-tab"
                         id="credit-tab-text"
                       >
                         Credit Card
                       </span>
                     </Col>
-                    <Col size={1} className="payment-modal-tab" id="venmo-tab">
+                    <Col size={1} className="payment-modal-tab" id="venmo-tab" onClick={() => paymentTabSelected(1)}>
                       <span
-                        onClick={() => paymentTabSelected(1)}
                         className="payment-modal-tab-text"
                         id="venmo-tab-text"
                       >
                         Venmo
                       </span>
                     </Col>
-                    <Col size={1} className="payment-modal-tab" id="paypal-tab">
+                    <Col size={1} className="payment-modal-tab" id="paypal-tab" onClick={() => paymentTabSelected(2)}>
                       <span
-                        onClick={() => paymentTabSelected(2)}
                         className="payment-modal-tab-text"
                         id="paypal-tab-text"
                       >
