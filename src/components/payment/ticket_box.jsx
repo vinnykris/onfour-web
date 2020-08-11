@@ -7,6 +7,7 @@ import stripeTokenHandler from "./stripe";
 
 // Component Imports
 import { useInputValue } from "../custom_hooks";
+import Tooltip from "@material-ui/core/Tooltip";
 
 // AWS Imports
 import { Analytics } from "aws-amplify";
@@ -27,6 +28,7 @@ const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
   const [payment_message, setMessage] = useState(""); // Variable to store the payment error message
   const [display_err, setDisplayErr] = useState(false); // Variable to display error message
   const [waiting, setWaiting] = useState(false); // Variable to display processing message
+  const [checked, setChecked] = useState(false); // Tracks whether the agree to the terms box is checked
 
   // Input form values
   const name = useInputValue("");
@@ -118,54 +120,74 @@ const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
             if (!payed) {
               return (
                 <div>
-                  {display_err ? (
-                    <p className="error-msg">{payment_message}</p>
-                  ) : (
-                    <br></br>
-                  )}
-                  <input
-                    name="name"
-                    label="Name"
-                    type="name"
-                    placeholder="Cardholder Name"
-                    className="ticket-form-input short-width-input"
-                    required
-                    {...name}
-                  />
-                  <input
-                    name="email"
-                    label="Email"
-                    type="email"
-                    placeholder="Email for the Receipt"
-                    className="ticket-form-input short-width-input"
-                    required
-                    {...email}
-                  />
-                  <div className="ticket-form-input">
-                    <CardElement options={cardElementOpts} />
-                  </div>
-                  <br></br>
+                    {display_err ? (
+                        <p className="error-msg">{payment_message}</p>
+                    ) : (
+                        <br></br>
+                    )}
+                    <input
+                        name="name"
+                        label="Name"
+                        type="name"
+                        placeholder="Cardholder Name"
+                        className="ticket-form-input short-width-input"
+                        required
+                        {...name}
+                    />
+                    <input
+                        name="email"
+                        label="Email"
+                        type="email"
+                        placeholder="Email for the Receipt"
+                        className="ticket-form-input short-width-input"
+                        required
+                        {...email}
+                    />
+                    <div className="ticket-form-input">
+                        <CardElement options={cardElementOpts} />
+                    </div>
+                    <input
+                        className="term-agreement-checkbox"
+                        name="isConsent"
+                        type="checkbox"
+                        checked={checked}
+                        onChange={(event) => setChecked(!checked)}
+                    />
+                    <label className="term-agreement-text">
+                          I am aware of and agree to these <a href="/terms-of-service" target="_blank">terms</a>
+                    </label>
                   {waiting ? (
                     <div>
                       <p className="process-text">Processing</p>
                     </div>
                   ) : (
                     <div>
-                      <button
-                        form="none"
-                        className="ticket-button"
-                        onClick={onClick}
-                      >
-                        GO BACK
-                      </button>
-                      <button
-                        form="ticket"
-                        className="ticket-button"
-                        type="submit"
-                        disabled={!stripe}
-                      >
-                        PAY ${amount_value}
-                      </button>
+                        <button
+                            form="none"
+                            className="ticket-button"
+                            onClick={onClick}
+                        >
+                            GO BACK
+                        </button>
+                        {checked? (
+                            <button
+                                form="ticket"
+                                className="ticket-button"
+                                type="submit"
+                                disabled={!stripe}
+                            >
+                                PAY ${amount_value}
+                            </button>
+                        ) : (
+                            <Tooltip title="Please agree to the terms first">
+                                <button
+                                    form="placeholder"
+                                    className="ticket-button-disabled"
+                                >
+                                    PAY ${amount_value}
+                                </button>
+                            </Tooltip>
+                        )}
                     </div>
                   )}
                 </div>
