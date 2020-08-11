@@ -1,7 +1,9 @@
 // React Imports
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+// Main Imports
+//import history from "../../history";
 
 // Function import
 import { createUpcomingObject } from "../util";
@@ -82,6 +84,8 @@ const Concert = (props) => {
   const [loading, setLoading] = useState(true);
   const [enter_venue_status, setEnterVenueStatus] = useState(false);
   const [showPaymentBox, setShowPaymentBox] = useState(false);
+
+  let location = useLocation();
 
   var concert_date = null;
   var concert_time = null;
@@ -677,17 +681,27 @@ const Concert = (props) => {
                                 ) : (
                                   <div>
                                     {total > 0 ? (
-                                      <Tooltip title="Please log in to purchase your ticket">
-                                        <button className="checkout-button-disabled">
+                                      <NavLink
+                                        to={{
+                                          pathname: "/login",
+                                          state: { current: location },
+                                        }}
+                                      >
+                                        <button className="checkout-button">
                                           CHECKOUT
                                         </button>
-                                      </Tooltip>
+                                      </NavLink>
                                     ) : (
-                                      <Tooltip title="Please log in to get your ticket">
-                                        <button className="checkout-button-disabled">
+                                      <NavLink
+                                        to={{
+                                          pathname: "/login",
+                                          state: { current: location },
+                                        }}
+                                      >
+                                        <button className="checkout-button">
                                           GET TICKET
                                         </button>
-                                      </Tooltip>
+                                      </NavLink>
                                     )}
                                   </div>
                                 )}
@@ -830,7 +844,7 @@ const Concert = (props) => {
                     </div>
                   ) : (
                     <button className="buy-ticket-button" onClick={getTicket}>
-                      {total > 0? "BUY TICKETS" : "RSVP"}
+                      {total > 0 ? "BUY TICKETS" : "RSVP"}
                     </button>
                   )}
                 </Col>
@@ -885,9 +899,9 @@ const Concert = (props) => {
               <Rodal
                 visible={open_modal}
                 onClose={hideModal}
-                width={120}
-                height={70}
-                measure="vh"
+                width={930}
+                height={514}
+                measure="px"
                 customStyles={{ padding: 0, overflow: scroll }}
                 className="rodal-custom"
               >
@@ -1131,17 +1145,27 @@ const Concert = (props) => {
                                     ) : (
                                       <div>
                                         {total > 0 ? (
-                                          <Tooltip title="Please log in to purchase your ticket">
-                                            <button className="checkout-button-disabled">
+                                          <NavLink
+                                            to={{
+                                              pathname: "/login",
+                                              state: { current: location },
+                                            }}
+                                          >
+                                            <button className="checkout-button">
                                               CHECKOUT
                                             </button>
-                                          </Tooltip>
+                                          </NavLink>
                                         ) : (
-                                          <Tooltip title="Please log in to get your ticket">
-                                            <button className="checkout-button-disabled">
+                                          <NavLink
+                                            to={{
+                                              pathname: "/login",
+                                              state: { current: location },
+                                            }}
+                                          >
+                                            <button className="checkout-button">
                                               GET TICKET
                                             </button>
-                                          </Tooltip>
+                                          </NavLink>
                                         )}
                                       </div>
                                     )}
@@ -1235,7 +1259,7 @@ const Concert = (props) => {
                             className="buy-ticket-button"
                             onClick={getTicket}
                           >
-                            {total > 0? "BUY TICKETS" : "RSVP"}
+                            {total > 0 ? "BUY TICKETS" : "RSVP"}
                           </button>
                         )}
                       </div>
