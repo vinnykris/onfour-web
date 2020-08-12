@@ -611,6 +611,35 @@
     height: 558px;
   }
 
+  & .single-crew-context-menu {
+    position: absolute;
+    background: white;
+    width: 109px;
+    box-shadow: 0px 4px 6px rgba(75, 75, 75, 0.6);
+    border-radius: 5px;
+    top: 25px;
+    right: 43px;
+
+    & .single-crew-context-item {
+      height: 32px;
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+      line-height: 32px;
+      letter-spacing: 0.025em;
+      color: #646464;
+      border-bottom: 1px solid #ECECEC;
+      cursor: pointer;
+    }
+
+    & .single-crew-context-item-delete {
+      border-bottom: none !important;
+      color: #bc3535 !important;
+    }
+  }
+
   & .single-crew-title {
     height: 54px;
     background-color: rgba(0, 0, 0, 0.4);
@@ -619,7 +648,7 @@
     border-top-right-radius: 20px;
 
     & > p {
-      width: 90%;
+      width: 80%;
       line-height: 54px;
       text-align: center;
       font-family: Helvetica;
@@ -633,6 +662,20 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       margin: 0px auto;
+    }
+
+    & > span {
+      position: absolute;
+      right: 15px;
+      top: 18px;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: Helvetica;
+      font-weight: bold;
+      font-size: 20px;
+      letter-spacing: 0.045em;
+      color: #ffffff;
+      cursor: pointer;
     }
   }
 
@@ -692,7 +735,7 @@
       }
 
       & .single-crew-member-data-wrapper {
-        width: 300px;
+        width: 250px;
         text-align: left;
         padding-left: 23px;
 
@@ -722,6 +765,26 @@
           color: rgba(245, 240, 237, 0.6);
         }
       }
+
+      & .sigle-crew-member-remove-button {
+        cursor: pointer;
+        margin-top: 12px;
+        margin-left: 45px;
+
+        & path {
+          color: rgba(245, 240, 237, 0.6);
+        }
+      }
+
+      & .single-crew-member-admin {
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 17px;
+        color: rgba(245, 240, 237, 0.6);
+        height: 25px;
+        margin-top: 10px;
+      }
     }
   }
 
@@ -741,7 +804,7 @@
       letter-spacing: 0.045em;
       color: #ffffff;
       background: none;
-      
+
       &:focus {
         outline: none;
       }

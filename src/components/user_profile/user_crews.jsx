@@ -67,7 +67,7 @@ const UserCrews = ({ userCrews }) => {
         crewName={selectedCrew.name}
         crewColor={selectedCrew.color}
         crewAdmin={selectedCrew.admin}
-        crewMembers={selectedCrew.members}
+        crewMembersProp={selectedCrew.members}
       />
     </Row>
   );
