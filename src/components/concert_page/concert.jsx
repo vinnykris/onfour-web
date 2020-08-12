@@ -335,7 +335,7 @@ const Concert = (props) => {
         document.getElementById("calendar-redirect-msg").style.visibility =
           "hidden";
       }
-        setStubAnimationDone(true);
+      setStubAnimationDone(true);
       // Go back to the concert page after half a second
       setTimeout(() => {
         setShowStub(false);
@@ -391,7 +391,7 @@ const Concert = (props) => {
         if (result.status === 200) {
           setCalenderAdded(true);
           setCalendarBtnClicked(false);
-          console.log(concert_info.date)
+          console.log(concert_info.date);
           // animationEnd();
         }
       })
@@ -429,7 +429,7 @@ const Concert = (props) => {
                               className="calendar-redirect-msg"
                               id="calendar-redirect-msg"
                             >
-                              This event has been added to your calendar! Go to{" "}
+                              We've got you covered! Check your{" "}
                               <a
                                 href={
                                   "https://calendar.google.com/calendar/b/0/r/week/" +
@@ -437,9 +437,9 @@ const Concert = (props) => {
                                 }
                                 target="_blank"
                               >
-                                google calendar
+                                Google Calendar
                               </a>{" "}
-                              to confirm!
+                              for a surprise.
                             </p>
                           ) : calendar_button_clicked ? (
                             <div className="moonloader-container">
@@ -912,7 +912,7 @@ const Concert = (props) => {
                               className="calendar-redirect-msg"
                               id="calendar-redirect-msg"
                             >
-                              This event has been added to your calendar! Go to{" "}
+                              We've got you covered! Check your{" "}
                               <a
                                 href={
                                   "https://calendar.google.com/calendar/b/0/r/week/" +
@@ -920,9 +920,9 @@ const Concert = (props) => {
                                 }
                                 target="_blank"
                               >
-                                google calendar
+                                Google Calendar
                               </a>{" "}
-                              to confirm!
+                              for a surprise.
                             </p>
                           ) : calendar_button_clicked ? (
                             <div className="moonloader-container">
