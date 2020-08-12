@@ -81,6 +81,11 @@ const Footer = () => {
                         Terms of Service
                       </NavLink>
                     </li>
+                    <li>
+                      <NavLink to="/ticket-agreement" className="privacy-link">
+                        Ticket Agreement
+                      </NavLink>
+                    </li>
                   </ul>
                 </div>
               </Col>

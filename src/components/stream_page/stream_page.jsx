@@ -319,19 +319,19 @@ const StreamPage = ({ is_soundcheck }) => {
       document.getElementById("stream_main_section").style.height = "85%";
       document.getElementById("stream_info_bottom").style.height = "50%";
       document.getElementById("stream_info_top").style.height = "50%";
-      document.getElementById("description_toggle_button").style.bottom =
-        "-3px";
+      // document.getElementById("description_toggle_button").style.bottom =
+      //   "-3px";
     } else {
       setDescriptionButtonIcon("fa fa-chevron-down");
       document
         .getElementById("artist_bio")
         .classList.add("artist-bio-row-expanded");
       document.getElementById("artist_bio").classList.remove("artist-bio-row");
-      document.getElementById("stream_info_section").style.height = "30%";
-      document.getElementById("stream_main_section").style.height = "70%";
+      document.getElementById("stream_info_section").style.height = "35%";
+      document.getElementById("stream_main_section").style.height = "65%";
       document.getElementById("stream_info_bottom").style.height = "20%";
       document.getElementById("stream_info_top").style.height = "20%";
-      document.getElementById("description_toggle_button").style.bottom = "0px";
+      // document.getElementById("description_toggle_button").style.bottom = "0px";
     }
   };
 
@@ -467,6 +467,7 @@ const StreamPage = ({ is_soundcheck }) => {
                   overflow: scroll,
                   maxHeight: "545px",
                   maxWidth: "671px",
+
                 }}
                 className="rodal-custom"
               >
@@ -483,27 +484,25 @@ const StreamPage = ({ is_soundcheck }) => {
                       size={1}
                       className="payment-modal-tab selected-tab"
                       id="credit-tab"
+                      onClick={() => paymentTabSelected(0)}
                     >
                       <span
-                        onClick={() => paymentTabSelected(0)}
                         className="payment-modal-tab-text selected-tab"
                         id="credit-tab-text"
                       >
                         Credit Card
                       </span>
                     </Col>
-                    <Col size={1} className="payment-modal-tab" id="venmo-tab">
+                    <Col size={1} className="payment-modal-tab" id="venmo-tab" onClick={() => paymentTabSelected(1)}>
                       <span
-                        onClick={() => paymentTabSelected(1)}
                         className="payment-modal-tab-text"
                         id="venmo-tab-text"
                       >
                         Venmo
                       </span>
                     </Col>
-                    <Col size={1} className="payment-modal-tab" id="paypal-tab">
+                    <Col size={1} className="payment-modal-tab" id="paypal-tab" onClick={() => paymentTabSelected(2)}>
                       <span
-                        onClick={() => paymentTabSelected(2)}
                         className="payment-modal-tab-text"
                         id="paypal-tab-text"
                       >
@@ -872,6 +871,22 @@ const StreamPage = ({ is_soundcheck }) => {
             </Grid>
           ) : (
             <div className="mobile-grid-stream">
+              <Rodal
+                visible={open_modal}
+                onClose={closeModal}
+                width={100}
+                height={100}
+                measure="%"
+                customStyles={{
+                  padding: 0,
+                  overflow: scroll,
+                  // maxHeight: "400px",
+                  // maxWidth: "600px",
+                }}
+                className="rodal-custom"
+              >
+                <PaymentBox />
+              </Rodal>
               <div className="main-column">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
@@ -938,8 +953,9 @@ const StreamPage = ({ is_soundcheck }) => {
                   {tip_based ? (
                     <button
                       className="stripe-button-border mobile-payment-button"
-                      data-toggle="modal"
-                      data-target="#paymentModal"
+                      // data-toggle="modal"
+                      // data-target="#paymentModal"
+                      onClick={donateModal}
                     >
                       Tip {artist_name}
                     </button>
@@ -952,7 +968,7 @@ const StreamPage = ({ is_soundcheck }) => {
                       Donate
                     </button>
                   )}
-                  <Modal isOpen={false}></Modal>
+                  {/* <Modal isOpen={false}></Modal> */}
                 </div>
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
