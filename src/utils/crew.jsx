@@ -108,6 +108,35 @@ export const updateCrewUsers = async (crew_id, crew_members) => {
   );
 };
 
+// This function takes in a crew id and a crew name and updates the crew name
+export const updateCrewName = async (crew_id, crew_name) => {
+  const payload = {
+    id: crew_id,
+    name: crew_name,
+  };
+
+  API.graphql(
+    graphqlOperation(mutations.update_crew, {
+      input: payload,
+    })
+  );
+};
+
+// This function takes in a crew id and a crew admin username
+// and updates the crew's admin
+export const updateCrewAdmin = async (crew_id, crew_admin) => {
+  const payload = {
+    id: crew_id,
+    admin: crew_admin,
+  };
+
+  API.graphql(
+    graphqlOperation(mutations.update_crew, {
+      input: payload,
+    })
+  );
+};
+
 // This is the function to call for the full createCrew flow
 // It takes in emails, crew name, the admin username, and a color and
 // creates a crew object and adds the crew id to each user's list of crews
@@ -171,4 +200,60 @@ export const addUserToCrew = async (crew_id, username, email, color) => {
 
   await updateCrewUsers(crew_id, crew_members);
   await updateUserCrews(username, users_crews);
+};
+
+// This function will change the color of a given user's selected crew
+export const changeCrewColor = async (crew_id, username, color) => {
+  const users_crews = await getCrewsByUsername(username);
+  users_crews[crew_id] = color;
+  await updateUserCrews(username, users_crews);
+};
+
+// This function will fetch a crew and delete the user with the
+// given email from the crew object
+export const removeUserFromCrew = async (email, crew_id) => {
+  const crew_data = await getCrewObject(crew_id);
+  let crew_members = crew_data.data.getCrew.members;
+  crew_members = await parseObjectJSON(crew_members);
+  delete crew_members[email];
+  await updateCrewUsers(crew_id, crew_members);
+};
+
+// This function will fetch a user and delete the crew id from their
+// list of crews
+export const removeCrewFromUser = async (username, crew_id) => {
+  let user_crews = await getCrewsByUsername(username);
+  delete user_crews[crew_id];
+  await updateUserCrews(username, user_crews);
+};
+
+// This function is used either to remove a user from a crew or when a user
+// wants to leave a crew. It calls both the removeCrewFromUser and the
+// removeUserFromCrew functions
+export const leaveOrRemoveFromCrew = async (email, username, crew_id) => {
+  await removeUserFromCrew(email, crew_id);
+  if (username) await removeCrewFromUser(username, crew_id);
+};
+
+// This function will delete the crew object
+// It will also delete the crew id from the crew list of each
+// user that was in the crew
+export const deleteCrew = async (crew_id) => {
+  const crew_data = await getCrewObject(crew_id);
+  const crew_members = crew_data.data.getCrew.members;
+  const crew_members_JSON = await parseObjectJSON(crew_members);
+  const crew_members_keys = Object.keys(crew_members_JSON);
+  for (let i = 0; i < crew_members_keys.length; i++) {
+    const username = crew_members_JSON[crew_members_keys[i]];
+    if (username) {
+      await removeCrewFromUser(username, crew_id);
+    }
+  }
+  await API.graphql(
+    graphqlOperation(mutations.delete_crew, {
+      input: {
+        id: crew_id,
+      },
+    })
+  );
 };
