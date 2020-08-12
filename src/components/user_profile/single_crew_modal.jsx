@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Rodal from "rodal";
 
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
@@ -60,6 +60,10 @@ const SingleCrewModal = ({
       crewMembers.filter((member, index) => index !== deleteIndex)
     );
   };
+
+  useEffect(() => {
+    setCrewMembers(crewMembersProp);
+  }, [crewMembersProp]);
 
   return (
     <Rodal
