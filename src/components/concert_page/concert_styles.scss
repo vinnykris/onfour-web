@@ -78,9 +78,22 @@
 .calendar-button {
   margin: 2%;
   visibility: hidden;
+  position: relative;
   @include respond-to("small") {
     margin: 2% 0%;
   }
+}
+
+.calendar-redirect-msg {
+  color: white;
+  visibility: visible;
+}
+
+.moonloader-container {
+  visibility: visible;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .buy-ticket-button:hover:not([disabled]) {
