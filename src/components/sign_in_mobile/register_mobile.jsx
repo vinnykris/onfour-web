@@ -4,6 +4,7 @@ import history from "../../history";
 // React
 import React, { useState } from "react";
 import PasswordStrengthBar from "react-password-strength-bar";
+import ReactTooltip from "react-tooltip";
 
 // Components
 import { Grid, Row, Col } from "../grid";
@@ -22,6 +23,13 @@ import { API, graphqlOperation } from "aws-amplify";
 // Styles
 import "./sign_in_mobile_styles.scss";
 import "../register_page/register_styles.scss";
+
+// Utils
+import {
+  containsUppercaseAndLowercase,
+  containsNumber,
+  containsSpecialCharacter,
+} from "../../utils/register";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -349,7 +357,91 @@ const RegisterMobile = ({ toggleLogin }) => {
                               setPassword(event.target.value)
                             }
                             required
+                            data-tip
+                            data-for="registerTipMobile"
                           />
+                          <ReactTooltip
+                            id="registerTipMobile"
+                            place="bottom"
+                            effect="solid"
+                            offset="{'bottom': 220}"
+                            scrollHide={false}
+                          >
+                            <p className="password-tooltip-white-mobile">
+                              Your password must contain the following:
+                            </p>
+                            <p className="password-suggestion-bullets-mobile">
+                              {password.length > 7 ? (
+                                <i className="fa fa-check green-password-suggestion-mobile"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion-mobile"></i>
+                              )}
+                              <text
+                                className={
+                                  password.length > 7
+                                    ? "green-password-suggestion-mobile"
+                                    : "red-password-suggestion-mobile"
+                                }
+                              >
+                                {" "}
+                                8 or more characters
+                              </text>
+                            </p>
+                            <br></br>
+                            <p className="password-suggestion-bullets-mobile">
+                              {containsUppercaseAndLowercase(password) ? (
+                                <i className="fa fa-check green-password-suggestion-mobile"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion-mobile"></i>
+                              )}
+                              <text
+                                className={
+                                  containsUppercaseAndLowercase(password)
+                                    ? "green-password-suggestion-mobile"
+                                    : "red-password-suggestion-mobile"
+                                }
+                              >
+                                {" "}
+                                Uppercase and lowercase letters
+                              </text>
+                            </p>
+                            <br></br>
+                            <p className="password-suggestion-bullets-mobile">
+                              {containsNumber(password) ? (
+                                <i className="fa fa-check green-password-suggestion-mobile"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion-mobile"></i>
+                              )}
+                              <text
+                                className={
+                                  containsNumber(password)
+                                    ? "green-password-suggestion-mobile"
+                                    : "red-password-suggestion-mobile"
+                                }
+                              >
+                                {" "}
+                                At least 1 number
+                              </text>
+                            </p>
+                            <br></br>
+                            <p className="password-suggestion-bullets-mobile">
+                              {containsSpecialCharacter(password) ? (
+                                <i className="fa fa-check green-password-suggestion-mobile"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion-mobile"></i>
+                              )}
+                              <text
+                                className={
+                                  containsSpecialCharacter(password)
+                                    ? "green-password-suggestion-mobile"
+                                    : "red-password-suggestion-mobile"
+                                }
+                              >
+                                {" "}
+                                At least 1 special character
+                              </text>
+                            </p>
+                          </ReactTooltip>
                         </Row>
                         <Row className="register-input-row">
                           <input
