@@ -640,6 +640,10 @@
     }
   }
 
+  & .single-crew-context-no-border {
+    border-bottom: none !important;
+  }
+
   & .single-crew-title {
     height: 54px;
     background-color: rgba(0, 0, 0, 0.4);

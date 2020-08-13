@@ -14,6 +14,7 @@ const SingleCrewModal = ({
   crewColor,
   crewAdmin,
   crewMembersProp,
+  username,
 }) => {
   const [crewMembers, setCrewMembers] = useState(crewMembersProp);
   const [emailValue, setEmailValue] = useState("");
@@ -41,11 +42,11 @@ const SingleCrewModal = ({
 
       if (duplicateCrewMemberEmail.length === 0) {
         setCrewMembers([
+          ...crewMembers,
           {
             email: newCrewMemberEmail,
-            userName: newCrewMemberUserName,
+            username: newCrewMemberUserName,
           },
-          ...crewMembers,
         ]);
 
         setEmailValue("");
@@ -88,10 +89,18 @@ const SingleCrewModal = ({
               className="single-crew-context-menu"
               style={{ display: showContextMenu ? "block" : "none" }}
             >
-              <div className="single-crew-context-item">Rename</div>
-              <div className="single-crew-context-item single-crew-context-item-delete">
-                Delete Crew
-              </div>
+              {username === crewAdmin ? (
+                <>
+                  <div className="single-crew-context-item">Rename</div>
+                  <div className="single-crew-context-item single-crew-context-item-delete">
+                    Delete Crew
+                  </div>
+                </>
+              ) : (
+                <div className="single-crew-context-item single-crew-context-no-border">
+                  Leave Crew
+                </div>
+              )}
             </div>
           </Row>
           <Row className="single-crew-input">
@@ -128,7 +137,7 @@ const SingleCrewModal = ({
                 {member.username === crewAdmin && (
                   <div className="single-crew-member-admin">admin</div>
                 )}
-                {member.username !== crewAdmin && (
+                {member.username !== crewAdmin && username === crewAdmin && (
                   <div className="sigle-crew-member-remove-button">
                     <RemoveCircleOutlineIcon
                       onClick={() => handleCrewMemberRemoval(index)}

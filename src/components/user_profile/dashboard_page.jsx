@@ -72,7 +72,7 @@ const DashboardPage = ({
 
   const getUserCrews = async () => {
     const userCrews = await getCrewsByUsername(username);
-    
+
     if (userCrews) {
       const crewsIdArray = Object.keys(userCrews);
       const crewsDataPromises = [];
@@ -87,15 +87,30 @@ const DashboardPage = ({
         const crewMembersArray = [];
         const crewMembersEntries = Object.entries(JSON.parse(crew.members));
 
-        crewMembersEntries.forEach(member => {
+        crewMembersEntries.forEach((member) => {
           const processedMember = {
             email: member[0],
             username: member[1] || member[0],
-            initial: member[1] ? member[1][0].toUpperCase() : member[0][0].toUpperCase(),
+            initial: member[1]
+              ? member[1][0].toUpperCase()
+              : member[0][0].toUpperCase(),
           };
 
           crewMembersArray.push(processedMember);
         });
+
+        let adminLocation = 0;
+        crewMembersArray.forEach((member, memberIndex) => {
+          if (member.username === crew.admin) {
+            adminLocation = memberIndex;
+          }
+        });
+
+        if (adminLocation !== 0) {
+          const tempMember = crewMembersArray[0];
+          crewMembersArray[0] = crewMembersArray[adminLocation];
+          crewMembersArray[adminLocation] = tempMember;
+        }
 
         crewData[crewIndex].color = userCrews[crew.id];
         crewData[crewIndex].membersArray = crewMembersArray;
@@ -300,7 +315,7 @@ const DashboardPage = ({
             <Row>
               <Col size={1}>
                 {userCrews.length > 0 ? (
-                  <UserCrews userCrews={userCrews} />
+                  <UserCrews userCrews={userCrews} username={username} />
                 ) : (
                   <div
                     className="create-crew-wrapper"
