@@ -40,12 +40,15 @@ const Profile = (props) => {
   const [username, setUsername] = useState("");
   const [currentPage, setCurrentPage] = useState("dashboard");
   const history = useHistory();
+  const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
     Auth.currentAuthenticatedUser({})
       .then((user) => {
         setAuth(true);
         setUsername(user.username);
+        setUserEmail(user.attributes.email);
+        console.log({ user });
       })
       .catch((err) => {
         setAuth(false);
@@ -160,6 +163,7 @@ const Profile = (props) => {
                 memories={memories}
                 history={history}
                 username={username}
+                userEmail={userEmail}
               ></DashboardPage>
             ) : (
               <TicketPage

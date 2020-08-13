@@ -50,6 +50,7 @@ const DashboardPage = ({
   upcoming_concerts,
   memories,
   username,
+  userEmail,
   history,
 }) => {
   const [showCrewModal, setShowCrewModal] = useState(false);
@@ -262,6 +263,7 @@ const DashboardPage = ({
             showCrewModal={showCrewModal}
             closeModal={closeModal}
             currentUsername={username}
+            currentUserEmail={userEmail}
           />
         </Col>
       </Row>

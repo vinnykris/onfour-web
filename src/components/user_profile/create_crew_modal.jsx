@@ -7,15 +7,15 @@ import CheckIcon from "@material-ui/icons/Check";
 
 import { Row, Col } from "../grid";
 
-import { getUsernameByEmail } from "../../utils/crew";
+import { getUsernameByEmail, createCrew } from "../../utils/crew";
 
-const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
+const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername, currentUserEmail }) => {
   const [availableColors, setAvailableColors] = useState([
-    "#E26A6A",
-    "#E465A2",
-    "#3EB095",
-    "#B89F45",
-    "#6A6EE2",
+    "E26A6A",
+    "E465A2",
+    "3EB095",
+    "B89F45",
+    "6A6EE2",
   ]);
   const [selectedColor, setSelectedColor] = useState(
     availableColors[
@@ -101,6 +101,15 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
     closeModal();
   };
 
+  const handleCrewCreation = async () => {
+    const emailsToSave = [currentUserEmail];
+    crewMembers.map(member => emailsToSave.push(member.email));
+
+    await createCrew(emailsToSave, crewName, currentUsername, selectedColor);
+
+    closeModal();
+  };
+
   useEffect(() => {
     if (crewName.length > 2 && crewMembers.length > 0) {
       setSaveButtonDisabled(false);
@@ -116,7 +125,7 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
       width={458}
       height={527}
       measure="px"
-      customStyles={{ background: selectedColor }}
+      customStyles={{ background: `#${selectedColor}` }}
       customMaskStyles={{ background: "rgba(0,0,0,0.8)", cursor: "pointer" }}
       className="user-crews-modal"
     >
@@ -151,7 +160,7 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
                   <div className="crew-modal-add-user-data">
                     <div
                       className="crew-modal-add-user-initial"
-                      style={{ color: selectedColor }}
+                      style={{ color: `#${selectedColor}` }}
                     >
                       {member.initial}
                     </div>
@@ -186,7 +195,7 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
             <div className="crew-modal-color-wrapper">
               {availableColors.map((color) => (
                 <div
-                  style={{ backgroundColor: color }}
+                  style={{ backgroundColor: `#${color}` }}
                   className="crew-modal-color-option"
                   key={color}
                   onClick={() => setSelectedColor(color)}
@@ -197,7 +206,7 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername }) => {
             </div>
           </Row>
           <Row className="crew-modal-save-button-wrapper">
-            <button disabled={saveButtonDisabled}>SAVE</button>
+            <button disabled={saveButtonDisabled} onClick={handleCrewCreation}>SAVE</button>
           </Row>
         </Col>
       </Row>
