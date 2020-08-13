@@ -48,7 +48,6 @@ const Profile = (props) => {
         setAuth(true);
         setUsername(user.username);
         setUserEmail(user.attributes.email);
-        console.log({ user });
       })
       .catch((err) => {
         setAuth(false);

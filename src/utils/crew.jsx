@@ -183,7 +183,7 @@ export const getCrewObject = async (crew_id) => {
       input: crew_id,
     })
   );
-  return crew_data;
+  return crew_data.data.getCrew;
 };
 
 // This function fetches the current crew object and a given user's current

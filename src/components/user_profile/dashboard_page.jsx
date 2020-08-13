@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Row, Col } from "../grid";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
@@ -6,6 +6,8 @@ import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.p
 
 import CreateCrewModal from "./create_crew_modal";
 import UserCrews from "./user_crews";
+
+import { getCrewsByUsername, getCrewObject } from "../../utils/crew";
 
 import "./profile_styles.scss";
 
@@ -23,7 +25,8 @@ const firstCrew = {
 };
 
 const secondCrew = {
-  name: "Another Crew the a long name but I can still add a little more text here",
+  name:
+    "Another Crew the a long name but I can still add a little more text here",
   admin: "onfour-vinod",
   members: [
     { email: "josetalking@gmail.com", username: "jose.avilez" },
@@ -41,9 +44,16 @@ const thirdCrew = {
     { email: "vkk9@cornell.edu", username: "onfour-vinod" },
   ],
   color: "#3EB095",
-}
+};
 
-const userCrews = [firstCrew, secondCrew, thirdCrew, secondCrew, firstCrew, secondCrew];
+const userCrews1 = [
+  firstCrew,
+  secondCrew,
+  thirdCrew,
+  secondCrew,
+  firstCrew,
+  secondCrew,
+];
 
 const DashboardPage = ({
   width,
@@ -54,10 +64,50 @@ const DashboardPage = ({
   history,
 }) => {
   const [showCrewModal, setShowCrewModal] = useState(false);
+  const [userCrews, setUserCrews] = useState([]);
 
   const closeModal = () => {
     setShowCrewModal(false);
   };
+
+  const getUserCrews = async () => {
+    const userCrews = await getCrewsByUsername(username);
+    
+    if (userCrews) {
+      const crewsIdArray = Object.keys(userCrews);
+      const crewsDataPromises = [];
+
+      crewsIdArray.forEach((crewId) => {
+        crewsDataPromises.push(getCrewObject(crewId));
+      });
+
+      const crewData = await Promise.all(crewsDataPromises);
+
+      crewData.forEach((crew, crewIndex) => {
+        const crewMembersArray = [];
+        const crewMembersEntries = Object.entries(JSON.parse(crew.members));
+
+        crewMembersEntries.forEach(member => {
+          const processedMember = {
+            email: member[0],
+            username: member[1] || member[0],
+            initial: member[1] ? member[1][0].toUpperCase() : member[0][0].toUpperCase(),
+          };
+
+          crewMembersArray.push(processedMember);
+        });
+
+        crewData[crewIndex].color = userCrews[crew.id];
+        crewData[crewIndex].membersArray = crewMembersArray;
+      });
+
+      setUserCrews(crewData);
+    }
+  };
+
+  useEffect(() => {
+    getUserCrews();
+  }, []);
 
   return (
     <Col size={7}>
@@ -235,7 +285,11 @@ const DashboardPage = ({
                   {userCrews.length > 0 && (
                     <span
                       onClick={() => setShowCrewModal(true)}
-                      style={{ color: "white", cursor: "pointer", fontSize: "22px" }}
+                      style={{
+                        color: "white",
+                        cursor: "pointer",
+                        fontSize: "22px",
+                      }}
                     >
                       +
                     </span>

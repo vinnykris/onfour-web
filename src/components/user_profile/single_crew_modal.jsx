@@ -73,7 +73,7 @@ const SingleCrewModal = ({
       height={558}
       measure="px"
       showCloseButton={false}
-      customStyles={{ background: crewColor }}
+      customStyles={{ background: `#${crewColor}` }}
       customMaskStyles={{ background: "rgba(0,0,0,0.8)", cursor: "pointer" }}
       className="single-crew-modal"
     >
@@ -109,7 +109,7 @@ const SingleCrewModal = ({
               <Row key={member.email} className="single-crew-member">
                 <div
                   className="single-crew-member-initial"
-                  style={{ color: crewColor }}
+                  style={{ color: `#${crewColor}` }}
                 >
                   {member.username.length > 0
                     ? member.username[0].toUpperCase()

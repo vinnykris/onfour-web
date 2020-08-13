@@ -22,7 +22,7 @@ const UserCrews = ({ userCrews }) => {
           {userCrews.map((crew, index) => (
             <div
               key={`${crew.name}${index}`}
-              style={{ backgroundColor: crew.color }}
+              style={{ backgroundColor: `#${crew.color}` }}
               className="crew-stub-wrapper"
               onClick={() => handleCrewSelection(index)}
             >
@@ -30,11 +30,11 @@ const UserCrews = ({ userCrews }) => {
                 <p title={crew.name}>{crew.name}</p>
               </Row>
               <Row className="crew-stub-crew-members">
-                {crew.members.slice(0, 3).map((member) => (
+                {crew.membersArray.slice(0, 3).map((member) => (
                   <Row key={member.email} className="crew-stub-member">
                     <div
                       className="crew-stub-member-initial"
-                      style={{ color: crew.color }}
+                      style={{ color: `#${crew.color}` }}
                     >
                       {member.username.length > 0
                         ? member.username[0].toUpperCase()
@@ -67,7 +67,7 @@ const UserCrews = ({ userCrews }) => {
         crewName={selectedCrew.name}
         crewColor={selectedCrew.color}
         crewAdmin={selectedCrew.admin}
-        crewMembersProp={selectedCrew.members}
+        crewMembersProp={selectedCrew.membersArray}
       />
     </Row>
   );
