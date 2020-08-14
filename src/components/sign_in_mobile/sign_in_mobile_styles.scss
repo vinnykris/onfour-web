@@ -126,17 +126,26 @@
 .red-password-suggestion-mobile {
   color: #e29696;
   margin-right: 7px;
+  font-size: 13px;
 }
 
 .green-password-suggestion-mobile {
   color: #a6c88a;
   margin-right: 7px;
+  font-size: 13px;
 }
 
 .password-tooltip-white-mobile {
-  color: #ededed;
+  color: white;
+  font-size: 13px;
+  margin-bottom: 10px;
 }
 
 .password-suggestion-bullets-mobile {
   float: left;
+  margin-bottom: 0px;
+}
+
+.checkbox-row {
+  margin-top: 25px;
 }
