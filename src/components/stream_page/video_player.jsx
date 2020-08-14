@@ -3,8 +3,11 @@ import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import MoonLoader from "react-spinners/MoonLoader";
 
+import videojs from "video.js";
+import "video.js/dist/video-js.css";
 // Styling Imports
 import "./stream_styles.scss";
+import "./video_js_styles.scss";
 import { Grid, Row, Col } from "../grid";
 import { useWindowDimensions } from "../custom_hooks";
 
@@ -13,6 +16,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
+import { useRef } from "react";
 
 Amplify.configure(awsmobile);
 
@@ -162,6 +166,23 @@ function VideoPlayer({
   // stream depending on the countdown
 
   // if (auth) {
+
+  const player_ref = useRef();
+
+  useEffect(() => {
+    const player = videojs(
+      player_ref.current,
+      { autoplay: true, muted: true, controls: true, liveui: true },
+      () => {
+        player.src(url);
+      }
+    );
+
+    return () => {
+      player.dispose();
+    };
+  }, []);
+
   return (
     <div className="countdown-wrapper">
       {timer_placeholder.length ? (
@@ -182,16 +203,22 @@ function VideoPlayer({
       ) : (
         <div className="player-wrapper">
           {is_live ? (
-            <ReactPlayer
-              className="video-player"
-              url={url}
-              width="100%"
-              height="100%"
-              playing
-              controls
-              playsinline={width <= 600}
-            />
+            // <ReactPlayer
+            //   className="video-player"
+            //   url={url}
+            //   width="100%"
+            //   height="100%"
+            //   playing
+            //   controls
+            //   playsinline={width <= 600}
+            // />
+            <div data-vjs-player>
+              <video ref={player_ref} className="video-js" />
+            </div>
           ) : (
+            // <video-js className="vjs-default-skin" width="100" height="100" controls>
+            //   <source src={url} type="application/x-mpegURL"></source>
+            // </video-js>
             <div className="waiting-for-artist-screen">
               <div className="waiting-message-container">
                 <div className="not-live-loader">
