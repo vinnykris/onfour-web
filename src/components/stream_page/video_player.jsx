@@ -177,7 +177,6 @@ function VideoPlayer({
         player.src(url);
       }
     );
-
     return () => {
       player.dispose();
     };
@@ -213,6 +212,11 @@ function VideoPlayer({
             //   playsinline={width <= 600}
             // />
             <div data-vjs-player>
+              <div className="vjs-control-bar control-bar-top">
+                <div className="live-indicator">
+                  <span className="live-indicator-text">LIVE</span>
+                </div>
+              </div>
               <video ref={player_ref} className="video-js" />
             </div>
           ) : (
