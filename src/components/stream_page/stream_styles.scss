@@ -152,12 +152,14 @@
 .toggle-chat {
   position: absolute;
   right: -3px;
+  z-index: 2;
 }
 
 .toggle-description {
   position: absolute;
   left: 0px;
   bottom: -3px;
+  z-index: 2;
 }
 
 .toggle-chat-button {
