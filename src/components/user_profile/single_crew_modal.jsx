@@ -70,11 +70,10 @@ const SingleCrewModal = ({
     <Rodal
       visible={showModal}
       onClose={handleClose}
-      width={458}
-      height={558}
+      width={511}
+      height={700}
       measure="px"
       showCloseButton={false}
-      customStyles={{ background: `#${crewColor}` }}
       customMaskStyles={{ background: "rgba(0,0,0,0.8)", cursor: "pointer" }}
       className="single-crew-modal"
     >

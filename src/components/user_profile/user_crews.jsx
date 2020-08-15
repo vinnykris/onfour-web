@@ -22,7 +22,6 @@ const UserCrews = ({ userCrews, username }) => {
           {userCrews.map((crew, index) => (
             <div
               key={`${crew.name}${index}`}
-              style={{ backgroundColor: `#${crew.color}` }}
               className="crew-stub-wrapper"
               onClick={() => handleCrewSelection(index)}
             >
@@ -30,31 +29,26 @@ const UserCrews = ({ userCrews, username }) => {
                 <p title={crew.name}>{crew.name}</p>
               </Row>
               <Row className="crew-stub-crew-members">
-                {crew.membersArray.slice(0, 3).map((member) => (
+                {crew.membersArray.slice(0,6).map((member) => (
                   <Row key={member.email} className="crew-stub-member">
                     <div
                       className="crew-stub-member-initial"
-                      style={{ color: `#${crew.color}` }}
+                      style={{
+                        backgroundColor: `#${member.color}`,
+                      }}
                     >
                       {member.username.length > 0
                         ? member.username[0].toUpperCase()
                         : member.email[0].toUpperCase()}
                     </div>
-                    <div className="crew-stub-member-data-wrapper">
-                      <p className="crew-stub-member-data-username">
-                        {member.username.length > 0
-                          ? member.username
-                          : member.email}
-                      </p>
-                      <p className="crew-stub-member-data-email">
-                        {member.email}
-                      </p>
-                    </div>
+                    <p
+                      title={member.username}
+                      className="crew-stub-member-data-username"
+                    >
+                      {member.username}
+                    </p>
                   </Row>
                 ))}
-              </Row>
-              <Row className="crew-stub-options">
-                <p>...</p>
               </Row>
             </div>
           ))}

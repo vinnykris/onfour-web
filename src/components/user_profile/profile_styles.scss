@@ -419,27 +419,29 @@
 }
 
 .crew-stub-wrapper {
-  width: 242px;
-  height: 277px;
-  border-radius: 7px;
+  width: 325px;
+  height: 264px;
+  border-radius: 10px;
   margin-right: 40px;
   position: relative;
   cursor: pointer;
+  background-color: #2a2a31;
 
   & .crew-stub-title {
     height: 39px;
-    background-color: rgba(0, 0, 0, 0.4);
-    text-align: center;
+    text-align: left;
+    margin-top: 15px;
 
     & > p {
-      font-family: Helvetica;
-      font-style: italic;
-      font-weight: bold;
-      font-size: 18px;
-      line-height: 39px;
-      text-align: center;
-      letter-spacing: 0.045em;
-      color: #ffffff;
+      font-family: $exo2;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 23px;
+      line-height: 28px;
+      display: flex;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.87);
+      opacity: 0.6;
       width: 90%;
       overflow: hidden;
       white-space: nowrap;
@@ -449,54 +451,51 @@
   }
 
   & .crew-stub-crew-members {
-    display: block;
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 200px;
+    align-items: center;
+    justify-content: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    align-content: flex-start;
 
     & .crew-stub-member {
-      border-bottom: 1px solid rgba(245, 240, 237, 0.4);
       padding-top: 9px;
       padding-bottom: 8px;
+      width: 85px;
+      display: block;
+      margin-right: 3px;
+      margin-left: 3px;
 
       & .crew-stub-member-initial {
-        height: 43px !important;
-        width: 43px !important;
+        height: 54px !important;
+        width: 54px !important;
         border-radius: 50%;
-        border: 1px solid rgba(245, 240, 237, 0.6);
-        margin-left: 20px;
-        line-height: 45px;
-        background-color: white;
+        margin: 0px auto;
+        line-height: 57px;
+        color: white;
         font-size: 25px;
       }
 
-      & .crew-stub-member-data-wrapper {
-        width: 169px;
-        text-align: left;
-        padding-left: 15px;
-
-        & > p {
-          margin: 0px;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          margin: 0px auto;
-        }
-
-        & .crew-stub-member-data-username {
-          font-family: Helvetica;
-          font-style: normal;
-          font-weight: bold;
-          font-size: 14px;
-          letter-spacing: 0.045em;
-          color: #ffffff;
-        }
-
-        & .crew-stub-member-data-email {
-          font-family: Helvetica;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 13px;
-          letter-spacing: 0.045em;
-          color: rgba(245, 240, 237, 0.6);
-        }
+      & .crew-stub-member-data-username {
+        font-family: $montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.02em;
+        color: rgba(255, 255, 255, 0.87);
+        width: 90%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin: 0px auto;
+        margin-top: 5px;
       }
     }
 
@@ -531,16 +530,14 @@
 }
 
 .single-crew-modal {
-  width: 458px;
   & .rodal-dialog {
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 0px;
+    background-color: #222229;
   }
 
   & .single-crew-column {
-    width: 458px;
     position: relative;
-    height: 558px;
   }
 
   & .single-crew-context-menu {

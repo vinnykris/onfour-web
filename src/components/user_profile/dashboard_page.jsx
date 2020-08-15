@@ -65,6 +65,12 @@ const DashboardPage = ({
 }) => {
   const [showCrewModal, setShowCrewModal] = useState(false);
   const [userCrews, setUserCrews] = useState([]);
+  const [availableColors, setAvailableColors] = useState([
+    "D1AE53",
+    "04ADC0",
+    "BF8AF4",
+    "49BDFE",
+  ]);
 
   const closeModal = () => {
     setShowCrewModal(false);
@@ -94,6 +100,10 @@ const DashboardPage = ({
             initial: member[1]
               ? member[1][0].toUpperCase()
               : member[0][0].toUpperCase(),
+            color:
+              availableColors[
+                Math.floor(Math.random() * Math.floor(availableColors.length))
+              ],
           };
 
           crewMembersArray.push(processedMember);
