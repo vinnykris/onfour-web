@@ -398,10 +398,10 @@ const StreamPage = ({ is_soundcheck }) => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    setInterval(() => {
       getIsLive();
-    }, 5000);
-  });
+    }, 3000);
+  }, []);
 
   const paymentTabSelected = (option) => {
     if (option == 0) {
@@ -467,7 +467,6 @@ const StreamPage = ({ is_soundcheck }) => {
                   overflow: scroll,
                   maxHeight: "545px",
                   maxWidth: "671px",
-
                 }}
                 className="rodal-custom"
               >
@@ -493,7 +492,12 @@ const StreamPage = ({ is_soundcheck }) => {
                         Credit Card
                       </span>
                     </Col>
-                    <Col size={1} className="payment-modal-tab" id="venmo-tab" onClick={() => paymentTabSelected(1)}>
+                    <Col
+                      size={1}
+                      className="payment-modal-tab"
+                      id="venmo-tab"
+                      onClick={() => paymentTabSelected(1)}
+                    >
                       <span
                         className="payment-modal-tab-text"
                         id="venmo-tab-text"
@@ -501,7 +505,12 @@ const StreamPage = ({ is_soundcheck }) => {
                         Venmo
                       </span>
                     </Col>
-                    <Col size={1} className="payment-modal-tab" id="paypal-tab" onClick={() => paymentTabSelected(2)}>
+                    <Col
+                      size={1}
+                      className="payment-modal-tab"
+                      id="paypal-tab"
+                      onClick={() => paymentTabSelected(2)}
+                    >
                       <span
                         className="payment-modal-tab-text"
                         id="paypal-tab-text"
