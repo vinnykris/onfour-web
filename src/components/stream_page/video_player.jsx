@@ -1,13 +1,17 @@
 // React Imports
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+
+// External imports
 import ReactPlayer from "react-player";
 import MoonLoader from "react-spinners/MoonLoader";
 
+// VideoJS Imports
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-// Styling Imports
-import "./stream_styles.scss";
 import "./video_js_styles.scss";
+import "videojs-landscape-fullscreen";
+
+// Custom Component Imports
 import { Grid, Row, Col } from "../grid";
 import { useWindowDimensions } from "../custom_hooks";
 
@@ -16,7 +20,9 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
-import { useRef } from "react";
+
+// Styling Imports
+import "./stream_styles.scss";
 
 Amplify.configure(awsmobile);
 
@@ -179,6 +185,14 @@ function VideoPlayer({
           player.src(url);
         }
       );
+      // configure plugins
+      player.landscapeFullscreen({
+        fullscreen: {
+          enterOnRotate: true,
+          alwaysInLandscapeMode: true,
+          iOS: true,
+        },
+      });
     }
   }, [timer_placeholder.length, is_live]);
 

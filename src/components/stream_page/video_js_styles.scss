@@ -39,6 +39,9 @@
   align-items: center;
   border-radius: 5px;
   background-color: #c42424;
+  @include respond-to("small") {
+    margin-right: 10px;
+  }
 }
 
 .live-indicator-text {
