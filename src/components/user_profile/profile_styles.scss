@@ -231,6 +231,7 @@
 .user-crews-modal {
   & .rodal-dialog {
     border-radius: 10px;
+    background-color: #222229;
     & .rodal-close:before,
     & .rodal-close:after {
       background: white !important;
@@ -239,14 +240,41 @@
 }
 
 .user-create-crew {
-  margin: 12px;
-  margin-top: 21px;
+  margin-right: 15px;
+  margin-left: 15px;
   position: relative;
   height: 100%;
 
+  & .crew-modal-title-information {
+    margin-top: 5px !important;
+    margin-bottom: 50px !important;
+  }
+
+  & .crew-modal-title {
+    font-family: $exo2;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 28px;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.87);
+    text-align: left;
+  }
+
+  & .crew-modal-description {
+    font-family: $montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 9px;
+    line-height: 11px;
+    letter-spacing: 0.045em;
+    color: rgba(255, 255, 255, 0.38);
+    text-align: left;
+  }
+
   & .crew-modal-stacked-row {
     display: block;
-    margin-top: 15px;
+    margin-top: 25px;
   }
 
   & .crew-modal-flex-row {
@@ -261,62 +289,39 @@
   }
 
   & .crew-modal-section-title {
-    text-align: left;
-    font-weight: bold;
-    font-size: 17px;
-    line-height: 20px;
     letter-spacing: 0.045em;
+    font-family: $montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.065em;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.87);
   }
 
   & .crew-modal-members-text {
-    font-family: Helvetica;
+    font-family: $montserrat;
     font-style: normal;
-    font-weight: normal;
-    font-size: 13px;
-    line-height: 47px;
+    font-weight: 600;
+    font-size: 9px;
+    line-height: 34px;
     letter-spacing: 0.045em;
-    color: rgba(245, 240, 237, 0.6);
-    margin-left: 13px;
+    color: rgba(255, 255, 255, 0.38);
+    padding-left: 10px;
   }
 
   & .crew-modal-members-icon {
-    border: 1px solid;
-    border-radius: 50%;
-    height: 47px;
-    width: 47px;
+    height: 34px;
+    width: 34px;
     color: rgba(245, 240, 237, 0.6);
 
     & svg {
-      height: 41px;
+      font-size: 34px;
 
       & path {
         color: rgba(245, 240, 237, 0.6);
       }
-    }
-  }
-
-  & .crew-modal-input {
-    height: 44px;
-    background: #e0e0e0;
-    font-family: Helvetica;
-    border: none;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 21px;
-    letter-spacing: 0.045em;
-
-    color: #000000;
-
-    &::placeholder {
-      font-size: 13px;
-      line-height: 15px;
-      letter-spacing: 0.045em;
-      color: #252121;
-    }
-
-    &:focus {
-      background: #ffffff !important;
     }
   }
 
@@ -345,90 +350,17 @@
     position: absolute;
     bottom: 10px;
     width: 100%;
+    display: flex;
+    justify-content: flex-end;
 
-    & button {
-      font-family: Helvetica;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 17px;
-      line-height: 20px;
-      text-align: center;
-      letter-spacing: 0.045em;
-      color: #ffffff;
-      background: none;
-      margin: 0px auto;
-    }
-
-    & button:disabled {
-      color: rgba(245, 240, 237, 0.6) !important;
-    }
-
-    & button:active,
-    & button:focus {
-      outline: none !important;
+    & > div {
+      width: fit-content;
     }
   }
 
   & .crew-modal-user-container {
     height: 110px;
-    overflow-y: scroll;
-  }
-
-  & .crew-modal-add-user-wrapper {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-
-    & .crew-modal-add-user-data {
-      display: flex;
-
-      & .crew-modal-add-user-initial {
-        border: 1px solid;
-        border-radius: 50%;
-        height: 45px;
-        width: 45px;
-        color: rgba(245, 240, 237, 0.6);
-        background: white;
-        font-size: 25px;
-        line-height: 45px;
-        font-weight: 500;
-      }
-
-      & .crew-modal-add-user-data-wrapper {
-        margin-left: 13px;
-        text-align: left;
-
-        & .crew-modal-add-user-name {
-          font-family: Helvetica;
-          font-style: normal;
-          font-weight: bold;
-          font-size: 15px;
-          letter-spacing: 0.045em;
-          color: white;
-          margin: 0px !important;
-        }
-
-        & .crew-modal-add-user-email {
-          font-family: Helvetica;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 13px;
-          letter-spacing: 0.045em;
-          color: rgba(245, 240, 237, 0.6);
-          margin: 0px !important;
-        }
-      }
-    }
-
-    & .crew-modal-add-user-remove-button {
-      height: 100%;
-      line-height: 45px;
-      cursor: pointer;
-
-      & path {
-        color: rgba(245, 240, 237, 0.6);
-      }
-    }
+    overflow-y: overlay;
   }
 }
 
@@ -630,7 +562,7 @@
       line-height: 32px;
       letter-spacing: 0.025em;
       color: #646464;
-      border-bottom: 1px solid #ECECEC;
+      border-bottom: 1px solid #ececec;
       cursor: pointer;
     }
 
@@ -818,4 +750,136 @@
 
 .memories-container {
   margin-top: 30px;
+}
+
+.crew-modal-input {
+  background: #222229;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.87);
+  height: 62px;
+
+  &::placeholder {
+    font-size: 13px;
+    line-height: 26px;
+    letter-spacing: 0.045em;
+    color: rgba(255, 255, 255, 0.38);
+  }
+
+  &:focus {
+    border: 1px solid #e465a2 !important;
+  }
+}
+
+.crew-modal-button-primary {
+  font-family: $montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  color: #000000;
+  background: #e465a2;
+  border-radius: 4px;
+  width: 167px;
+  height: 49px;
+
+  &:disabled {
+    color: rgba(0, 0, 0, 0.38) !important;
+  }
+
+  &:hover {
+    background: #ea91bd !important;
+  }
+
+  &:active,
+  &:focus {
+    outline: none !important;
+  }
+}
+
+.crew-modal-button-secondary {
+  font-family: $montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.6);
+  background: none;
+
+  &:disabled {
+    color: rgba(255, 255, 255, 0.28) !important;
+  }
+
+  &:hover, &:active, &:focus {
+    color: #E465A2 !important;
+    outline: none;
+  }
+}
+
+.crew-modal-add-user-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  & .crew-modal-add-user-data {
+    display: flex;
+
+    & .crew-modal-add-user-initial {
+      border: 1px solid;
+      border-radius: 50%;
+      height: 45px;
+      width: 45px;
+      color: rgba(245, 240, 237, 0.6);
+      background: white;
+      font-size: 25px;
+      line-height: 45px;
+      font-weight: 500;
+      font-family: $exo2;
+    }
+
+    & .crew-modal-add-user-data-wrapper {
+      margin-left: 13px;
+      text-align: left;
+
+      & .crew-modal-add-user-name {
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 15px;
+        letter-spacing: 0.045em;
+        color: white;
+        margin: 0px !important;
+      }
+
+      & .crew-modal-add-user-email {
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        letter-spacing: 0.045em;
+        color: rgba(245, 240, 237, 0.6);
+        margin: 0px !important;
+      }
+    }
+  }
+
+  & .crew-modal-add-user-remove-button {
+    height: 100%;
+    line-height: 45px;
+    cursor: pointer;
+
+    & path {
+      color: rgba(245, 240, 237, 0.6);
+    }
+  }
 }

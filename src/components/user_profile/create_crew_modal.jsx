@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Rodal from "rodal";
 
-import PersonOutlineRoundedIcon from "@material-ui/icons/PersonOutlineRounded";
+import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import CheckIcon from "@material-ui/icons/Check";
 
 import { Row, Col } from "../grid";
 
 import { getUsernameByEmail, createCrew } from "../../utils/crew";
 
-const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername, currentUserEmail }) => {
+const CreateCrewModal = ({
+  showCrewModal,
+  closeModal,
+  currentUsername,
+  currentUserEmail,
+}) => {
   const [availableColors, setAvailableColors] = useState([
-    "E26A6A",
-    "E465A2",
-    "3EB095",
-    "B89F45",
-    "6A6EE2",
+    "D1AE53",
+    "04ADC0",
+    "BF8AF4",
+    "49BDFE",
   ]);
   const [selectedColor, setSelectedColor] = useState(
     availableColors[
@@ -60,6 +63,10 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername, currentUs
             email: newCrewMemberEmail,
             initial: newCrewMemberInitial,
             userName: newCrewMemberUserName,
+            color:
+              availableColors[
+                Math.floor(Math.random() * Math.floor(availableColors.length))
+              ],
           },
           ...crewMembers,
         ]);
@@ -103,7 +110,7 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername, currentUs
 
   const handleCrewCreation = async () => {
     const emailsToSave = [currentUserEmail];
-    crewMembers.map(member => emailsToSave.push(member.email));
+    crewMembers.map((member) => emailsToSave.push(member.email));
 
     await createCrew(emailsToSave, crewName, currentUsername, selectedColor);
 
@@ -122,15 +129,21 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername, currentUs
     <Rodal
       visible={showCrewModal}
       onClose={handleCloseMainModal}
-      width={458}
-      height={527}
+      width={511}
+      height={559}
       measure="px"
-      customStyles={{ background: `#${selectedColor}` }}
       customMaskStyles={{ background: "rgba(0,0,0,0.8)", cursor: "pointer" }}
       className="user-crews-modal"
     >
       <Row className="user-create-crew">
         <Col size={1}>
+          <Row className="crew-modal-stacked-row crew-modal-title-information">
+            <h1 className="crew-modal-title">Create New Crew</h1>
+            <p className="crew-modal-description">
+              After creating your crew, you can invite them to concerts in your
+              upcoming concert page.
+            </p>
+          </Row>
           <Row className="crew-modal-stacked-row">
             <p className="crew-modal-section-title">Crew Name*</p>
             <input
@@ -142,10 +155,10 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername, currentUs
             />
           </Row>
           <Row className="crew-modal-stacked-row">
-            <p className="crew-modal-section-title">Crew Members</p>
+            <p className="crew-modal-section-title">Members</p>
             <input
               type="text"
-              placeholder="Invite by Name or Email"
+              placeholder="Type an email address to add"
               className="crew-modal-input"
               onKeyDown={async (event) => await handleNewCrewMember(event)}
               onChange={(event) => setEmailValue(event.currentTarget.value)}
@@ -160,7 +173,9 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername, currentUs
                   <div className="crew-modal-add-user-data">
                     <div
                       className="crew-modal-add-user-initial"
-                      style={{ color: `#${selectedColor}` }}
+                      style={{
+                        background: `#${member.color}`,
+                      }}
                     >
                       {member.initial}
                     </div>
@@ -184,29 +199,23 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername, currentUs
             ) : (
               <div className="crew-modal-flex-row">
                 <div className="crew-modal-members-icon">
-                  <PersonOutlineRoundedIcon />
+                  <AccountCircleOutlinedIcon />
                 </div>
                 <p className="crew-modal-members-text">No crew members yet</p>
               </div>
             )}
           </Row>
-          <Row className="crew-modal-stacked-row">
-            <p className="crew-modal-section-title">Card Color</p>
-            <div className="crew-modal-color-wrapper">
-              {availableColors.map((color) => (
-                <div
-                  style={{ backgroundColor: `#${color}` }}
-                  className="crew-modal-color-option"
-                  key={color}
-                  onClick={() => setSelectedColor(color)}
-                >
-                  {color === selectedColor && <CheckIcon />}
-                </div>
-              ))}
-            </div>
-          </Row>
           <Row className="crew-modal-save-button-wrapper">
-            <button disabled={saveButtonDisabled} onClick={handleCrewCreation}>SAVE</button>
+            <div>
+              <button className="crew-modal-button-secondary">Cancel</button>
+              <button
+                className="crew-modal-button-primary"
+                disabled={saveButtonDisabled}
+                onClick={handleCrewCreation}
+              >
+                Create
+              </button>
+            </div>
           </Row>
         </Col>
       </Row>
@@ -229,7 +238,12 @@ const CreateCrewModal = ({ showCrewModal, closeModal, currentUsername, currentUs
             </Row>
             <Row className="crew-modal-discard-buttons">
               <button onClick={() => setShowDiscardModal(false)}>Cancel</button>
-              <button onClick={handleDiscardData} className="crew-modal-discard-button-discard">Discard</button>
+              <button
+                onClick={handleDiscardData}
+                className="crew-modal-discard-button-discard"
+              >
+                Discard
+              </button>
             </Row>
           </Col>
         </Row>
