@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Rodal from "rodal";
 
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import RemoveCircleOutlinedIcon from "@material-ui/icons/RemoveCircleOutlined";
 
 import { Row, Col } from "../grid";
 
@@ -31,9 +31,6 @@ const CreateCrewModal = ({
   const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
   const [memberInputDisabled, setMemberInputDisabled] = useState(false);
 
-  const [showDiscardModal, setShowDiscardModal] = useState(false);
-  const [discardChanges, setDiscardChanges] = useState(false);
-
   const checkValidEmailFormat = (email) => {
     const emailValidationRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
     return emailValidationRegex.test(email);
@@ -59,6 +56,7 @@ const CreateCrewModal = ({
         newCrewMemberUserName !== currentUsername
       ) {
         setCrewMembers([
+          ...crewMembers,
           {
             email: newCrewMemberEmail,
             initial: newCrewMemberInitial,
@@ -68,7 +66,6 @@ const CreateCrewModal = ({
                 Math.floor(Math.random() * Math.floor(availableColors.length))
               ],
           },
-          ...crewMembers,
         ]);
 
         setEmailValue("");
@@ -84,25 +81,16 @@ const CreateCrewModal = ({
     );
   };
 
-  const handleCreNameChange = (event) => {
+  const handleCrewNameChange = (event) => {
     setCrewName(event.currentTarget.value);
   };
 
   const handleCloseMainModal = () => {
-    if (crewName.length > 2 || crewMembers.length > 0) {
-      setShowDiscardModal(true);
-    } else {
-      closeModal();
-    }
-  };
-
-  const handleCloseDiscardModal = () => {
-    setShowDiscardModal(false);
+    handleDiscardData();
+    closeModal();
   };
 
   const handleDiscardData = () => {
-    setDiscardChanges(true);
-    handleCloseDiscardModal();
     setCrewMembers([]);
     setCrewName("");
     closeModal();
@@ -130,7 +118,7 @@ const CreateCrewModal = ({
       visible={showCrewModal}
       onClose={handleCloseMainModal}
       width={511}
-      height={559}
+      height={700}
       measure="px"
       customMaskStyles={{ background: "rgba(0,0,0,0.8)", cursor: "pointer" }}
       className="user-crews-modal"
@@ -150,7 +138,7 @@ const CreateCrewModal = ({
               type="text"
               placeholder="What do you want to call this crew?"
               className="crew-modal-input"
-              onChange={handleCreNameChange}
+              onChange={handleCrewNameChange}
               value={crewName}
             />
           </Row>
@@ -180,19 +168,21 @@ const CreateCrewModal = ({
                       {member.initial}
                     </div>
                     <div className="crew-modal-add-user-data-wrapper">
-                      <p className="crew-modal-add-user-name">
-                        {member.userName}
-                      </p>
-                      <p className="crew-modal-add-user-email">
-                        {member.email}
-                      </p>
-                    </div>
-                  </div>
+                      <div className="crew-modal-user-info">
+                        <p className="crew-modal-add-user-name">
+                          {member.userName}
+                        </p>
+                        <p className="crew-modal-add-user-email">
+                          {member.email}
+                        </p>
+                      </div>
 
-                  <div className="crew-modal-add-user-remove-button">
-                    <RemoveCircleOutlineIcon
-                      onClick={() => handleRemoveCrewMember(index)}
-                    />
+                      <div className="crew-modal-add-user-remove-button">
+                        <RemoveCircleOutlinedIcon
+                          onClick={() => handleRemoveCrewMember(index)}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))
@@ -207,7 +197,12 @@ const CreateCrewModal = ({
           </Row>
           <Row className="crew-modal-save-button-wrapper">
             <div>
-              <button className="crew-modal-button-secondary">Cancel</button>
+              <button
+                className="crew-modal-button-secondary"
+                onClick={handleCloseMainModal}
+              >
+                Cancel
+              </button>
               <button
                 className="crew-modal-button-primary"
                 disabled={saveButtonDisabled}
@@ -219,35 +214,6 @@ const CreateCrewModal = ({
           </Row>
         </Col>
       </Row>
-
-      <Rodal
-        visible={showDiscardModal}
-        onClose={handleCloseDiscardModal}
-        width={378}
-        height={146}
-        measure="px"
-        closeMaskOnClick={false}
-        showCloseButton={false}
-        customMaskStyles={{ background: "rgba(0,0,0,0.6)" }}
-        className="crew-modal-discard-modal"
-      >
-        <Row>
-          <Col size={1}>
-            <Row className="crew-modal-discard-text">
-              <p>Are you sure you want to discard changes?</p>
-            </Row>
-            <Row className="crew-modal-discard-buttons">
-              <button onClick={() => setShowDiscardModal(false)}>Cancel</button>
-              <button
-                onClick={handleDiscardData}
-                className="crew-modal-discard-button-discard"
-              >
-                Discard
-              </button>
-            </Row>
-          </Col>
-        </Row>
-      </Rodal>
     </Rodal>
   );
 };

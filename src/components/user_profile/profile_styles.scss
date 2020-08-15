@@ -359,7 +359,7 @@
   }
 
   & .crew-modal-user-container {
-    height: 110px;
+    height: 260px;
     overflow-y: overlay;
   }
 }
@@ -820,8 +820,10 @@
     color: rgba(255, 255, 255, 0.28) !important;
   }
 
-  &:hover, &:active, &:focus {
-    color: #E465A2 !important;
+  &:hover,
+  &:active,
+  &:focus {
+    color: #e465a2 !important;
     outline: none;
   }
 }
@@ -833,16 +835,15 @@
 
   & .crew-modal-add-user-data {
     display: flex;
+    width: 100%;
 
     & .crew-modal-add-user-initial {
-      border: 1px solid;
       border-radius: 50%;
-      height: 45px;
-      width: 45px;
-      color: rgba(245, 240, 237, 0.6);
-      background: white;
+      height: 58px;
+      width: 58px;
+      color: white;
       font-size: 25px;
-      line-height: 45px;
+      line-height: 58px;
       font-weight: 500;
       font-family: $exo2;
     }
@@ -850,36 +851,52 @@
     & .crew-modal-add-user-data-wrapper {
       margin-left: 13px;
       text-align: left;
+      display: flex;
+      width: 85%;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(136, 136, 136, 0.38);
 
-      & .crew-modal-add-user-name {
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 15px;
-        letter-spacing: 0.045em;
-        color: white;
-        margin: 0px !important;
+      & .crew-modal-user-info {
+        padding-top: 7px;
+        padding-left: 10px;
+
+        & .crew-modal-add-user-name {
+          font-family: $exo2;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 19px;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.05em;
+          color: rgba(255, 255, 255, 0.87);
+          margin: 0px !important;
+        }
+
+        & .crew-modal-add-user-email {
+          font-family: $montserrat;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 9px;
+          line-height: 11px;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.045em;
+          color: rgba(255, 255, 255, 0.87);
+          margin: 0px !important;
+        }
       }
 
-      & .crew-modal-add-user-email {
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 13px;
-        letter-spacing: 0.045em;
-        color: rgba(245, 240, 237, 0.6);
-        margin: 0px !important;
+      & .crew-modal-add-user-remove-button {
+        height: 100%;
+        line-height: 45px;
+        cursor: pointer;
+        padding-right: 20px;
+
+        & path {
+          color: rgba(245, 240, 237, 0.6);
+        }
       }
-    }
-  }
-
-  & .crew-modal-add-user-remove-button {
-    height: 100%;
-    line-height: 45px;
-    cursor: pointer;
-
-    & path {
-      color: rgba(245, 240, 237, 0.6);
     }
   }
 }
