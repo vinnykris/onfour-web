@@ -31,7 +31,7 @@
   z-index: 10;
   align-items: center;
   border-radius: 5px;
-  background-color: #794d94;
+  background-color: #c42424;
 }
 
 .live-indicator-text {
@@ -53,5 +53,16 @@
 }
 
 .vjs-control-bar span {
+  color: white;
+}
+
+.vjs-big-play-button {
+  border: none !important;
+  top: calc(50% - 0.81666em) !important;
+  left: calc(50% - 1.5em) !important;
+  background-color: rgba(90, 75, 109, 0.7) !important;
+}
+
+.vjs-icon-placeholder {
   color: white;
 }

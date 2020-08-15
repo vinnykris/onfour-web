@@ -33,6 +33,7 @@ function VideoPlayer({
   is_live,
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
+  var player = null;
 
   // This function calculates the time difference between current time and show start time
   // and represent the difference in days, hours, minuts and seconds
@@ -170,15 +171,20 @@ function VideoPlayer({
   const player_ref = useRef();
 
   useEffect(() => {
-    const player = videojs(
-      player_ref.current,
-      { autoplay: true, muted: true, controls: true, liveui: true },
-      () => {
-        player.src(url);
-      }
-    );
+    if (!timer_placeholder.length && is_live) {
+      player = videojs(
+        player_ref.current,
+        { autoplay: true, muted: true, controls: true, liveui: true },
+        () => {
+          player.src(url);
+        }
+      );
+    }
+  }, [timer_placeholder.length, is_live]);
+
+  useEffect(() => {
     return () => {
-      player.dispose();
+      if (player) player.dispose();
     };
   }, []);
 
@@ -202,15 +208,6 @@ function VideoPlayer({
       ) : (
         <div className="player-wrapper">
           {is_live ? (
-            // <ReactPlayer
-            //   className="video-player"
-            //   url={url}
-            //   width="100%"
-            //   height="100%"
-            //   playing
-            //   controls
-            //   playsinline={width <= 600}
-            // />
             <div data-vjs-player>
               <div className="vjs-control-bar control-bar-top">
                 <div className="live-indicator">
@@ -220,9 +217,6 @@ function VideoPlayer({
               <video ref={player_ref} className="video-js" />
             </div>
           ) : (
-            // <video-js className="vjs-default-skin" width="100" height="100" controls>
-            //   <source src={url} type="application/x-mpegURL"></source>
-            // </video-js>
             <div className="waiting-for-artist-screen">
               <div className="waiting-message-container">
                 <div className="not-live-loader">
@@ -255,18 +249,5 @@ function VideoPlayer({
       )}
     </div>
   );
-  // } else {
-  //   return (
-  //     <div className="countdown-wrapper">
-  //       <div className="waiting-screen">
-  //         <div className="waiting-message-container">
-  //           <h3 className="waiting-message1">
-  //             Please sign in to view the stream
-  //           </h3>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 }
 export default VideoPlayer;
