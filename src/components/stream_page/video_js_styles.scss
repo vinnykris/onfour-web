@@ -13,12 +13,19 @@
 .video-js .vjs-control-bar {
   padding-left: 40px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+  @include respond-to("small") {
+    padding-left: 0;
+  }
 }
 
 .control-bar-top {
   top: 0;
   bottom: auto;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0)
+  ) !important;
 }
 
 .live-indicator {
