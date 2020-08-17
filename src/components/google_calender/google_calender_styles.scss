@@ -1,12 +1,10 @@
 // GOOGLE PAGE STYLING
 
-@import "../../styles";
-
 .google-signin {
-    background-color: black;
-    color: white;
-    &:hover {
-        cursor: pointer;
-        margin: 1px;
-    }
+  background-color: black;
+  color: white;
+  &:hover {
+    cursor: pointer;
+    margin: 1px;
+  }
 }

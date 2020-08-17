@@ -1,59 +1,6 @@
-// Sass main styles
-// mixin reference - Hugo Giraudel https://css-tricks.com/snippets/sass/mixin-manage-breakpoints/
-
-// Typeface
-@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap");
-$heebo: "Heebo", sans-serif;
-
-// Font Weights
-$regular-weight: 400;
-$medium-weight: 500;
-$semimedium-weight: 600;
-$bold-weight: 700;
-
-* {
-  font-family: "Heebo", sans-serif;
-  color: #4d4d4d;
-}
-
-$breakpoints: (
-  "x-small": (
-    max-width: 414px,
-  ),
-  "small": (
-    max-width: 600px,
-  ),
-  "medium": (
-    max-width: 800px,
-  ),
-  "large": (
-    max-width: 1024px,
-  ),
-  "x-large": (
-    max-width: 1440px,
-  ),
-  "xx-large": (
-    max-width: 1880px,
-  ),
-  "xxx-large": (
-    min-width: 1881px,
-  ),
-) !default;
-
-@mixin respond-to($breakpoint) {
-  // If the key exists in the map
-  @if map-has-key($breakpoints, $breakpoint) {
-    // Prints a media query based on the value
-    @media #{inspect(map-get($breakpoints, $breakpoint))} {
-      @content;
-    }
-  }
-  // If the key doesn't exist in the map
-  @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-        + "Available breakpoints are: #{map-keys($breakpoints)}.";
-  }
-}
+@import "./mixins";
+@import "./fonts";
+@import "./colors";
 
 .custom-app {
   display: flex;

@@ -202,7 +202,7 @@ const AboutPage = () => {
               <Row className="header-tag-row">
                 <Col>
                   <Row>
-                    <span className="header-tag">REIMAGINING</span>
+                    <span className="header-1">REIMAGINING</span>
                   </Row>
                   <Row>
                     <span className="header-tag">LIVE</span>
