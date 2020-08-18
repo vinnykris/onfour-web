@@ -9,8 +9,6 @@ import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from "../urlUtils";
 import DailyIframe from "@daily-co/daily-js";
 import { logDailyEvent } from "../logUtils";
 import getToken from "../getToken";
-import {Grid, Row, Col} from "../../grid";
-import { useInputValue } from "../../custom_hooks";
 
 const STATE_IDLE = "STATE_IDLE";
 const STATE_CREATING = "STATE_CREATING";
@@ -18,27 +16,32 @@ const STATE_JOINING = "STATE_JOINING";
 const STATE_JOINED = "STATE_JOINED";
 const STATE_LEAVING = "STATE_LEAVING";
 const STATE_ERROR = "STATE_ERROR";
-const owner_name = ["takoyuxin", "onfour-yuxin", "onfour-spencer", "spencer", "onfour-vinod", "vinnykris", "alilyen", "onfour-bar","barkadosh"];
-const crew_name = "onfour Crew"
+const owner_name = [
+  "takoyuxin",
+  "onfour-yuxin",
+  "onfour-spencer",
+  "spencer",
+  "onfour-vinod",
+  "vinnykris",
+  "alilyen",
+  "onfour-bar",
+  "barkadosh",
+];
+const crew_name = "onfour Crew";
 
-export default function VideoChatApp({ user_name, artist_name, artistView, colNum}) {
+export default function VideoChatApp({
+  user_name,
+  artist_name,
+  artistView,
+  colNum,
+}) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
   const [isPublic, setIsPublic] = useState(true);
   const [mute_all, setMuteAll] = useState(true);
   const [mute_button_msg, setMuteButtonMsg] = useState("UNMUTE ALL");
-  const isInCrew = (owner_name.indexOf(user_name) >= 0);
-  // Input form values
-  // const layer1_bps = useInputValue('');
-  // const layer2_bps = useInputValue('');
-  // const resolution_width = useInputValue('');
-  // const resolution_height = useInputValue('');
-  // const frame_rate = useInputValue('');
-  const max_kbs = useInputValue(20);
-  const resolution_width = useInputValue(320);
-  const resolution_height = useInputValue(180);
-  const frame_rate = useInputValue(10);
+  const isInCrew = owner_name.indexOf(user_name) >= 0;
   /**
    * Creates a new call room.
    */
@@ -46,8 +49,8 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
     setAppState(STATE_CREATING);
     return api
       .createRoom(true)
-      .then(room => room.url)
-      .catch(error => {
+      .then((room) => room.url)
+      .catch((error) => {
         console.log("Error creating room", error);
         setRoomUrl(null);
         setAppState(STATE_IDLE);
@@ -58,8 +61,8 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
     setAppState(STATE_CREATING);
     return api
       .createRoom(false)
-      .then(room => room.url)
-      .catch(error => {
+      .then((room) => room.url)
+      .catch((error) => {
         console.log("Error creating room", error);
         setRoomUrl(null);
         setAppState(STATE_IDLE);
@@ -75,42 +78,39 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
    * be done with the call object for a while and you're no longer listening to its
    * events.
    */
-  const startJoiningPublicCall = useCallback((url, max_kbs, frame_rate, resolution_width, resolution_height) => {
-    console.log(parseInt(resolution_width.value), parseInt(resolution_height.value), parseInt(frame_rate.value));
+  const startJoiningPublicCall = useCallback((url) => {
     const newCallObject = DailyIframe.createCallObject({
       userName: user_name,
-      // dailyConfig: {
-      //   camSimulcastEncodings: [
-      //     { maxBitrate: layer1_bps.value, scaleResolutionDownBy: 2 },
-      //     { maxBitrate: layer2_bps.value, scaleResolutionDownBy: 1 },
-      //   ],
-      // },
     });
     // setRoomUrl(url);
     setRoomUrl("public");
-    newCallObject.setBandwidth({
-      kbs: parseInt(max_kbs.value),
-      trackConstraints: { width: parseInt(resolution_width.value), height: parseInt(resolution_height.value), frameRate: parseInt(frame_rate.value) }
-    });
-    newCallObject.join({ url });
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
+    // newCallObject.setBandwidth({
+    //   kbs: 40,
+    //   trackConstraints: { width: 320, height: 180, frameRate: 5 },
+    // });
+    newCallObject.join({ url });
   }, []);
 
-  const startJoiningPrivateCall = useCallback(async url => {
-    if (owner_name.indexOf(user_name) >=0 ) {
+  const startJoiningPrivateCall = useCallback(async (url) => {
+    if (owner_name.indexOf(user_name) >= 0) {
       const newToken = await getToken(user_name);
       console.log(newToken);
       const newCallObject = DailyIframe.createCallObject({
         userName: user_name,
         token: newToken,
       });
-      // setRoomUrl(url);
+      setRoomUrl(url);
       setRoomUrl("private");
-      newCallObject.join({ url });
       setCallObject(newCallObject);
       setAppState(STATE_JOINING);
-    } 
+    //   newCallObject.setBandwidth({
+    //     kbs: 20,
+    //     trackConstraints: { width: 160, height: 90, frameRate: 5 },
+    //   });
+      newCallObject.join({ url });
+    }
     // else {
     //   const newCallObject = DailyIframe.createCallObject({
     //     userName: user_name
@@ -132,7 +132,7 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
     callObject.leave();
   }, [callObject]);
 
-  const completelyLeaveVideoChat = useCallback(async() => {
+  const completelyLeaveVideoChat = useCallback(async () => {
     if (!callObject) return;
     setAppState(STATE_LEAVING);
     await callObject.leave();
@@ -149,13 +149,15 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
   useEffect(() => {
     const url = roomUrlFromPageUrl();
     if (url === "public") {
-      url && startJoiningPublicCall("https://onfour_test.daily.co/test_default_video_off");
+      url &&
+        startJoiningPublicCall(
+          "https://onfour_test.daily.co/test_default_video_off"
+        );
       if (isInCrew) {
         switchToPublicVideoChat();
       } else {
         setIsPublic(true);
       }
-      
     }
   }, [startJoiningPublicCall]);
 
@@ -278,7 +280,8 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
   const switchToPublicVideoChat = () => {
     if (document.getElementById("public-room")) {
       document.getElementById("public-room").style.color = "white";
-      document.getElementById("private-room").style.color = "rgb(173, 173, 173)";
+      document.getElementById("private-room").style.color =
+        "rgb(173, 173, 173)";
       setIsPublic(true);
       startLeavingCall();
     }
@@ -294,20 +297,18 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
   };
 
   const toggle_mute_unmute_all = () => {
-    if (mute_all){
+    if (mute_all) {
       setMuteAll(false);
       setMuteButtonMsg("MUTE ALL");
     } else {
       setMuteAll(true);
       setMuteButtonMsg("UNMUTE ALL");
     }
-  }
+  };
 
   return (
-    <div className={(artistView? "artist-": "")+ "app"} id="video-chat-main">
-      {artistView? (
-        null
-      ): (
+    <div className={(artistView ? "artist-" : "") + "app"} id="video-chat-main">
+      {artistView ? null : (
         <div>
           {!isInCrew ? (
             <div className="room-name-row">
@@ -315,12 +316,20 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
                 PUBLIC
               </div>
             </div>
-          ): (
+          ) : (
             <div className="room-name-row">
-              <div className="public-room click-active" id="public-room" onClick={switchToPublicVideoChat}>
+              <div
+                className="public-room click-active"
+                id="public-room"
+                onClick={switchToPublicVideoChat}
+              >
                 PUBLIC
               </div>
-              <div className = "private-room click-active" id = "private-room" onClick = { switchToPrivateVideoChat }>
+              <div
+                className="private-room click-active"
+                id="private-room"
+                onClick={switchToPrivateVideoChat}
+              >
                 {crew_name}
               </div>
             </div>
@@ -333,14 +342,21 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
         // that want to access call object state and bind event listeners to the
         // call object, this can be a helpful pattern.
         <CallObjectContext.Provider value={callObject}>
-          <button 
-            id="leave-call-button" 
-            className="transparent-completely-leave-video-chat-button" 
+          <button
+            id="leave-call-button"
+            className="transparent-completely-leave-video-chat-button"
             onClick={completelyLeaveVideoChat}
           >
             leave
           </button>
-          <Call roomUrl={roomUrl} artist_name={artist_name} isPublic={isPublic} artistView={artistView} colNum={colNum} mute_all={mute_all}/>
+          <Call
+            roomUrl={roomUrl}
+            artist_name={artist_name}
+            isPublic={isPublic}
+            artistView={artistView}
+            colNum={colNum}
+            mute_all={mute_all}
+          />
           <Tray
             disabled={!enableCallButtons}
             onClickLeaveCall={startLeavingCall}
@@ -356,61 +372,22 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
               <StartButton
                 disabled={!enableStartButton}
                 onClick={() => {
-                  createPublicCall().then(url => startJoiningPublicCall(url, max_kbs, frame_rate, resolution_width, resolution_height));
+                  createPublicCall().then((url) => startJoiningPublicCall(url));
                 }}
                 artistView={artistView}
               />
-              {!artistView? (
+              {!artistView ? (
                 <div className="public-video-notice">
-                  By joining this video call, you will be seen by the artist as well as your crew members!
+                  By joining this video call, you will be seen by the artist as
+                  well as your crew members!
                 </div>
-              ): null}
-              <form id="video-chat-params-form">
-                <Grid>
-                  <Row>
-                    <Col size = {1}>
-                      <input
-                        className="video-form-input"
-                        placeholder="max kbs"
-                        required
-                        {...max_kbs}
-                      />
-                    </Col>
-                    <Col size = {1}>
-                      <input
-                        className="video-form-input"
-                        placeholder="frame rate"
-                        required
-                        {...frame_rate}
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col size = {1}>
-                      <input
-                        className="video-form-input"
-                        placeholder="width"
-                        required
-                        {...resolution_width}
-                      />
-                    </Col>
-                    <Col size = {1}>
-                      <input
-                        className="video-form-input"
-                        placeholder="height"
-                        required
-                        {...resolution_height}
-                      />
-                    </Col>
-                  </Row>
-                </Grid>
-              </form>
+              ) : null}
             </div>
           ) : (
             <StartButton
               disabled={!enableStartButton}
               onClick={() => {
-                createPrivateCall().then(url => startJoiningPrivateCall(url));
+                createPrivateCall().then((url) => startJoiningPrivateCall(url));
               }}
             />
           )}
