@@ -232,6 +232,9 @@
   & .rodal-dialog {
     border-radius: 10px;
     background-color: #222229;
+    padding: 15px;
+    padding-top: 5px !important;
+
     & .rodal-close:before,
     & .rodal-close:after {
       background: white !important;
@@ -244,124 +247,124 @@
   margin-left: 15px;
   position: relative;
   height: 100%;
+}
 
-  & .crew-modal-title-information {
-    margin-top: 5px !important;
-    margin-bottom: 50px !important;
+.crew-modal-title-information {
+  margin-top: 5px !important;
+  margin-bottom: 50px !important;
+}
+
+.crew-modal-title {
+  font-family: $exo2;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 28px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.87);
+  text-align: left;
+}
+
+.crew-modal-description {
+  font-family: $montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 9px;
+  line-height: 11px;
+  letter-spacing: 0.045em;
+  color: rgba(255, 255, 255, 0.38);
+  text-align: left;
+}
+
+.crew-modal-stacked-row {
+  display: block !important;
+  margin-top: 25px !important;
+}
+
+.crew-modal-flex-row {
+  margin-top: 3px;
+  display: flex;
+}
+
+p {
+  font-family: Helvetica;
+  font-style: normal;
+  color: #ffffff;
+}
+
+.crew-modal-section-title {
+  letter-spacing: 0.045em;
+  font-family: $montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.065em;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.crew-modal-members-text {
+  font-family: $montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 9px;
+  line-height: 34px;
+  letter-spacing: 0.045em;
+  color: rgba(255, 255, 255, 0.38);
+  padding-left: 10px;
+}
+
+.crew-modal-members-icon {
+  height: 34px;
+  width: 34px;
+  color: rgba(245, 240, 237, 0.6);
+
+  & svg {
+    font-size: 34px;
+
+    & path {
+      color: rgba(245, 240, 237, 0.6);
+    }
   }
+}
 
-  & .crew-modal-title {
-    font-family: $exo2;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 23px;
-    line-height: 28px;
-    letter-spacing: 0.04em;
-    color: rgba(255, 255, 255, 0.87);
-    text-align: left;
-  }
+.crew-modal-color-wrapper {
+  display: flex;
 
-  & .crew-modal-description {
-    font-family: $montserrat;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 9px;
-    line-height: 11px;
-    letter-spacing: 0.045em;
-    color: rgba(255, 255, 255, 0.38);
-    text-align: left;
-  }
+  & .crew-modal-color-option {
+    height: 47px;
+    width: 47px;
+    border-radius: 50%;
+    border: 1px solid rgba(245, 240, 237, 0.6);
+    margin-right: 17px;
+    cursor: pointer;
 
-  & .crew-modal-stacked-row {
-    display: block;
-    margin-top: 25px;
-  }
+    & > svg {
+      height: 43px;
 
-  & .crew-modal-flex-row {
-    margin-top: 3px;
-    display: flex;
-  }
-
-  & p {
-    font-family: Helvetica;
-    font-style: normal;
-    color: #ffffff;
-  }
-
-  & .crew-modal-section-title {
-    letter-spacing: 0.045em;
-    font-family: $montserrat;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 16px;
-    letter-spacing: 0.065em;
-    text-align: left;
-    color: rgba(255, 255, 255, 0.87);
-  }
-
-  & .crew-modal-members-text {
-    font-family: $montserrat;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 9px;
-    line-height: 34px;
-    letter-spacing: 0.045em;
-    color: rgba(255, 255, 255, 0.38);
-    padding-left: 10px;
-  }
-
-  & .crew-modal-members-icon {
-    height: 34px;
-    width: 34px;
-    color: rgba(245, 240, 237, 0.6);
-
-    & svg {
-      font-size: 34px;
-
-      & path {
-        color: rgba(245, 240, 237, 0.6);
+      & > path {
+        color: white;
       }
     }
   }
+}
 
-  & .crew-modal-color-wrapper {
-    display: flex;
+.crew-modal-save-button-wrapper {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 
-    & .crew-modal-color-option {
-      height: 47px;
-      width: 47px;
-      border-radius: 50%;
-      border: 1px solid rgba(245, 240, 237, 0.6);
-      margin-right: 17px;
-      cursor: pointer;
-
-      & > svg {
-        height: 43px;
-
-        & > path {
-          color: white;
-        }
-      }
-    }
+  & > div {
+    width: fit-content;
   }
+}
 
-  & .crew-modal-save-button-wrapper {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-
-    & > div {
-      width: fit-content;
-    }
-  }
-
-  & .crew-modal-user-container {
-    height: 260px;
-    overflow-y: overlay;
-  }
+.crew-modal-user-container {
+  height: 270px;
+  overflow-y: overlay;
 }
 
 .crew-modal-discard-modal {
@@ -532,7 +535,8 @@
 .single-crew-modal {
   & .rodal-dialog {
     border-radius: 10px;
-    padding: 0px;
+    padding: 15px;
+    padding-top: 5px !important;
     background-color: #222229;
   }
 
@@ -648,6 +652,7 @@
     display: block;
     max-height: 395px;
     overflow-y: overlay;
+    margin-top: 15px;
 
     & .single-crew-member {
       border-bottom: 1px solid rgba(245, 240, 237, 0.4);
@@ -708,16 +713,6 @@
           color: rgba(245, 240, 237, 0.6);
         }
       }
-
-      & .single-crew-member-admin {
-        font-family: Helvetica;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 17px;
-        color: rgba(245, 240, 237, 0.6);
-        height: 25px;
-        margin-top: 10px;
-      }
     }
   }
 
@@ -747,6 +742,19 @@
 
 .memories-container {
   margin-top: 30px;
+}
+
+.single-crew-member-admin {
+  font-family: $montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.065em;
+  color: rgba(255, 255, 255, 0.38);
+  margin-right: 30px;
 }
 
 .crew-modal-input {
@@ -788,6 +796,7 @@
   border-radius: 4px;
   width: 167px;
   height: 49px;
+  padding: 0px;
 
   &:disabled {
     color: rgba(0, 0, 0, 0.38) !important;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Row, Col } from "../grid";
 
-import SingleCrewModal from "./single_crew_modal";
+import EditCrewModal from "./edit_crew_modal";
 
 const UserCrews = ({ userCrews, username }) => {
   const [showCrewModal, setShowCrewModal] = useState(false);
@@ -55,7 +55,7 @@ const UserCrews = ({ userCrews, username }) => {
         </Row>
       </Col>
 
-      <SingleCrewModal
+      <EditCrewModal
         showModal={showCrewModal}
         handleClose={() => setShowCrewModal(false)}
         crewName={selectedCrew.name}
