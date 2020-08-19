@@ -28,9 +28,11 @@ import { formatArchiveVideos, formatUpcomingShow } from "../util";
 
 // Image Imports
 // import gradient_header from "../../images/mobile_gradient.png";
+import home_background from "../../images/backgrounds/home-page-background.jpeg";
 
 // Styling Imports
 import "./about_styles.scss";
+import FeaturedConcertBox from "./featured_concert_box";
 
 Amplify.configure(awsmobile);
 
@@ -185,12 +187,9 @@ const AboutPage = () => {
           {/* BANNER ROW */}
           <Row className="banner-row">
             <div className="banner-container">
-              {/* <img
-                className="banner-header-desktop"
-                src={header_image_url}
-                alt="nav-logo"
-              ></img> */}
-              <video
+              <img src={home_background} className="home-page-featured" />
+              <div className="home-page-overlay" />
+              {/* <video
                 className="banner-video"
                 data-src="https://onfour-media.s3.amazonaws.com/website+component/banner_video_guitar.mp4"
                 loop
@@ -198,41 +197,16 @@ const AboutPage = () => {
                 muted
                 volume="0"
                 src="https://onfour-media.s3.amazonaws.com/website+component/banner_video_guitar.mp4"
-              ></video>
-              <Row className="header-tag-row">
-                <Col>
-                  <Row>
-                    <span className="header-1">REIMAGINING</span>
-                  </Row>
-                  <Row>
-                    <span className="header-tag">LIVE</span>
-                  </Row>
-                  <Row>
-                    <span className="header-tag">MUSIC.</span>
-                  </Row>
-                </Col>
-              </Row>
-              <Row className="upcoming-row">
-                <Col className="upcoming-col">
-                  <Row>
-                    <span className="upcoming-header-tag">UP NEXT</span>
-                  </Row>
-                  <Row>
-                    <div className="upcoming-description">
-                      {most_recent_concert_artist
-                        ? most_recent_concert_artist.artist_name +
-                          " - " +
-                          most_recent_concert.concert_name
-                        : "loading..."}
-                    </div>
-                  </Row>
-                  <Row className="upcoming-button-container">
-                    <button className="upcoming-button" onClick={goToVenue}>
-                      GO TO VENUE
-                    </button>
-                  </Row>
-                </Col>
-              </Row>
+              ></video> */}
+              <div className="featured-concert-container">
+                <Row className="upcoming-row">
+                  <FeaturedConcertBox
+                    artist_info={most_recent_concert_artist}
+                    concert_info={most_recent_concert}
+                  />
+                </Row>
+              </div>
+
               <Row>
                 <p
                   className="fa fa-chevron-down go-down-button"

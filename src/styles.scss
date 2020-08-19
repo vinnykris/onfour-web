@@ -25,6 +25,34 @@
   height: 48px;
 }
 
+// PRIMARY BUTTON STYLES
+.primary-button {
+  min-width: 167px;
+  min-height: 49px;
+  background-color: $primary-color;
+  border-radius: 4px;
+  color: $on-primary;
+}
+
+.primary-button:hover {
+  background-color: #ea91bd;
+}
+
+.primary-button:focus {
+  background-color: $primary-color;
+}
+
+.primary-button:disabled {
+  background-color: $primary-color;
+  color: rgba(0, 0, 0, 0.38) !important;
+}
+
+// TAG STYLES
+.tag-body {
+  background-color: $on-background;
+  padding: 5px;
+}
+
 // PAGE SPECIFIC STYLES
 
 // MAIN PAGE STYLING
