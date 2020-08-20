@@ -42,6 +42,9 @@ import "rodal/lib/rodal.css";
 import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
 import ticket1 from "../../images/icons/ticket1.png";
 
+// Utils
+import { getCrewsByUsername } from "../../utils/crew";
+
 Amplify.configure(awsmobile);
 
 // Main stream page component. Holds stream video, chat, and payment functionality
@@ -65,6 +68,8 @@ const StreamPage = ({ is_soundcheck }) => {
   const [artist_youtube, setArtistYoutube] = useState("");
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
+  const [concert_crews, setConcertCrews] = useState("");
+  const [user_crews, setUserCrews] = useState("");
   const [is_live, setIsLive] = useState(false);
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
@@ -178,6 +183,7 @@ const StreamPage = ({ is_soundcheck }) => {
         setShowChat(true);
         setAuth(true);
         setTickets(await getTickets(user.username));
+        setUserCrews(await getCrewsByUsername(user.username));
       })
       .catch((err) => setAuth(false));
   }, []);
@@ -218,6 +224,7 @@ const StreamPage = ({ is_soundcheck }) => {
     setConcertID(info_list[0].id);
     setIsLive(info_list[0].is_live);
     setIsFree(info_list[0].general_price === 0);
+    setConcertCrews(JSON.parse(info_list[0].crew_list));
   };
 
   const getArtistInfo = async (artist_id) => {
