@@ -49,7 +49,7 @@ const EditCrewModal = ({
         (member) => member.email === newCrewMemberEmail
       );
 
-      if (duplicateCrewMemberEmail.length === 0) {
+      if (duplicateCrewMemberEmail.length === 0 && crewMembers.length < 6) {
         setCrewMembers([
           ...crewMembers,
           {
@@ -94,6 +94,20 @@ const EditCrewModal = ({
     setCrewMembers(crewMembersProp);
     setNewCrewName(crewName);
   }, [crewMembersProp, crewName]);
+
+  useEffect(() => {
+    if (crewMembers.length >= 6) {
+      setMemberInputDisabled(true);
+    } else {
+      setMemberInputDisabled(false);
+    }
+  }, [crewMembers]);
+
+  useEffect(() => {
+    if (crewMembers.length >= 6) {
+      setMemberInputDisabled(true);
+    }
+  }, [memberInputDisabled]);
 
   return (
     <Rodal
