@@ -254,7 +254,7 @@ button:focus {
   overflow: auto;
   flex: auto;
   max-width: 100%;
-  min-height: 0;
+  min-height: 700px;
   max-height: 100%;
   // scrollbar-width: none; /* Firefox */
   // -ms-overflow-style: none;  /* IE 10+ */
@@ -268,7 +268,6 @@ button:focus {
   // }
 }
 // MESSAGE
-
 
 .css-y1c0xs {
   scrollbar-width: none; /* Firefox */
@@ -327,6 +326,7 @@ button:focus {
 }
 
 .message-text {
+  user-select: none;
   max-width: 20em;
   word-wrap: break-word;
   letter-spacing: 0;
@@ -355,6 +355,7 @@ button:focus {
 }
 
 .sent-text {
+  user-select: none;
   display: flex;
   align-items: center;
   font-family: Helvetica;
@@ -466,8 +467,15 @@ button:focus {
 }
 .fa-smile-o {
   color: #f1f1f3;
+}
+
+.user-sent-likebox{
+  position:absolute;
+  user-select: none;
+  margin-top:23px;
 
 }
+
 
 //emoji-mart custom styles (overridden from emoji-mart stylesheet)
 @import "../../../node_modules/emoji-mart/css/emoji-mart.css";
@@ -485,7 +493,14 @@ button:focus {
   .text-container {
     display: none;
   }
+  .user-sent-likebox{
+    position:absolute;
+    user-select: none;
+    margin-top:15px;
+
+  }
 }
+
 
 .tooltip-text {
   font-size: 1rem;

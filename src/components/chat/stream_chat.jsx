@@ -1,5 +1,5 @@
 // React imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // Module imports
 import io from "socket.io-client";
@@ -8,7 +8,9 @@ import io from "socket.io-client";
 import InfoBar from "./info_bar";
 import Input from "./input";
 import Messages from "./messages";
+import Message from "./message";
 
+import ScrollToBottom from "react-scroll-to-bottom";
 // AWS imports
 import Amplify, { Analytics } from "aws-amplify";
 
@@ -17,15 +19,18 @@ import "./chat.scss";
 
 let socket; // Socket declaration
 
+
 // Main chat component
-const Chat = ({ chat_name, chatStatus, setViewers }) => {
+const Chat = ({ chat_name, chatStatus, setViewers}) => {
   const [name, setName] = useState(chat_name); // User's chat name
   const [room, setRoom] = useState("CHAT"); // Title of chat and room all users are in
   const [users, setUsers] = useState(""); // List of users in chat room
   const [message, setMessage] = useState(""); // Holds inputted message
   const [messages, setMessages] = useState([]); // Holds list of messages
   const [error, setError] = useState("");
-  const ENDPOINT = "https://onfour-chat.herokuapp.com/"; // Chat server endpoint
+  // const ENDPOINT = "https://onfour-chat.herokuapp.com/"; // Chat server endpoint
+
+  const ENDPOINT = "https://onfour-chat-tester.herokuapp.com/"; //test endpoint
 
   // Function that is called when user leaves chat
   const closeChat = () => {
@@ -35,7 +40,6 @@ const Chat = ({ chat_name, chatStatus, setViewers }) => {
 
   // Function called on mount
   useEffect(() => {
-    console.log(name);
     socket = io(ENDPOINT); // Connect socket to server
 
     setName(name);
@@ -60,7 +64,57 @@ const Chat = ({ chat_name, chatStatus, setViewers }) => {
       setUsers(users);
       setViewers(users.length);
     });
+    socket.on("like", (data) => {
+
+      let msg = {
+        user: data.user,
+        text: data.text,
+        timeStamp: data.timeStamp,
+        likes: data.likes,
+        likeSocketId: data.socketId
+      };
+
+      setLikedMsg(msg); ///trigger useEffect for likedmsg
+    });
+    socket.on("unlike", (data) => {
+      let msg = {
+        user: data.user,
+        text: data.text,
+        timeStamp: data.timeStamp,
+        likes: data.likes,
+        likeSocketId: data.socketId
+      };
+
+      setUnlikedMsg(msg); //trigger useEffect for unlikedmsg
+
+    });
   }, []);
+
+  const [unlikedMsg, setUnlikedMsg] = useState();
+  const [likedMsg, setLikedMsg] = useState();
+
+  const [random, setRandom] = useState(Math.random()); //sometimes on like, messages don't rerender. Changing this state forces rerender
+  const reRender = () => setRandom(Math.random());
+
+  useEffect(()=>{
+    let msgList = messages;
+    msgList.forEach(msg=>{ //find message in list of messages shown on client
+      if(likedMsg.user == msg.user && likedMsg.text == msg.text && likedMsg.timeStamp == msg.timeStamp){
+        msg.likes++;
+        reRender();
+      }
+    });
+  }, [likedMsg]);
+
+  useEffect(()=>{
+    let msgList = messages;
+    msgList.forEach(msg=>{ //find message in list of messages shown on client
+      if(unlikedMsg.user == msg.user && unlikedMsg.text == msg.text && unlikedMsg.timeStamp == msg.timeStamp){
+        msg.likes--;
+        reRender();
+      }
+    });
+  }, [unlikedMsg]);
 
   // Hook is run when error is updated
   useEffect(() => {
@@ -80,7 +134,6 @@ const Chat = ({ chat_name, chatStatus, setViewers }) => {
         "You cannot send messages as a guest. Please log in to send messages!"
       );
     } else {
-      console.log(name);
       if (message) {
         if (message.length > 140) {
           alert("Message cannot be longer than 140 characters.");
@@ -106,11 +159,25 @@ const Chat = ({ chat_name, chatStatus, setViewers }) => {
   // Called on unmount
   useEffect(() => () => closeChat(), []);
 
+  //map each message into a <Message /> object and pass it to return
+  const createMessages = (messages, name) => {
+    let block = messages.map(function(message, i){
+      return (
+        <div key={i}>
+          <Message message={message} name={name} socket={socket} />
+        </div>
+      );
+    });
+    return block;
+  }
+
   return (
-    <div className="chat-outer-container">
+    <div>
       <div className="chat-container">
         <InfoBar room={room} users={users} />
-        <Messages messages={messages} name={name} />
+        <ScrollToBottom className="messages">
+          {createMessages(messages, name)}
+        </ScrollToBottom>
         <Input
           message={message}
           setMessage={setMessage}
