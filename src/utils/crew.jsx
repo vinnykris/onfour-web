@@ -1,0 +1,174 @@
+// Graphql Imports
+import * as queries from "../graphql/queries";
+import * as mutations from "../graphql/mutations";
+
+// APIs
+import awsmobile from "../apis/AppSync";
+import Amplify from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
+
+Amplify.configure(awsmobile); // Configuring AppSync API
+
+// Below is an example of the inputs to the createCrew function
+// emails will be an array of email strings, crew_name will be a string,
+// admin_user will be a username string, and color will be a string
+
+// const emails = ["barkadosh1@gmail.com", "userdoesnotexist@gmail.com"];
+// const crew_name = "Bar's Newest Crew!";
+// const admin_user = "barkadosh";
+// const color = "green";
+
+// This function returns an empty json object if the object is undefined
+// Otherwise, it parses the object into JSON format and returns it
+export const parseObjectJSON = async (object) => {
+  if (!object) {
+    object = {};
+  } else {
+    object = JSON.parse(object);
+  }
+  return object;
+};
+
+// When an email is passed in, this function will return the username
+// associated with that email
+// If no user is found, it returns an empty string
+export const getUsernameByEmail = async (email) => {
+  const user_data = await API.graphql(
+    graphqlOperation(queries.get_user_by_email, {
+      input: email,
+    })
+  );
+
+  const username_array = user_data.data.listUsersByEmail.items;
+  const username_value =
+    username_array.length > 0 ? username_array[0].username : "";
+  return username_value;
+};
+
+// This function will take in a username and will return the user's crews
+// in a JSON parsed format. If the user does not have a crew object, it
+// will return {}
+export const getCrewsByUsername = async (username) => {
+  const user_data = await API.graphql(
+    graphqlOperation(queries.get_user_data, {
+      input: username,
+    })
+  );
+  let crew_data = user_data.data.getCreateOnfourRegistration.crew;
+  crew_data = await parseObjectJSON(crew_data);
+  return crew_data;
+};
+
+// This function is the mutation that creates the actual crew object in the
+// database and it returns the crew id of the newly created object
+// It takes in the crew name, the object of users to be added to the crew,
+// and the username of the admin user
+export const createCrewObject = async (crew_name, added_users, admin_user) => {
+  const crew_data = {
+    name: crew_name,
+    members: JSON.stringify(added_users),
+    admin: admin_user,
+  };
+
+  const crew_returned_data = await API.graphql(
+    graphqlOperation(mutations.create_crew, {
+      input: crew_data,
+    })
+  );
+  return crew_returned_data.data.createCrew.id;
+};
+
+// This function takes in a username and a crew_data object and it
+// adds the crew_data object to the user's list of crews in the database
+export const updateUserCrews = async (username, crew_data) => {
+  const payload = {
+    username,
+    crew: JSON.stringify(crew_data),
+  };
+
+  API.graphql(
+    graphqlOperation(mutations.update_user, {
+      input: payload,
+    })
+  );
+};
+
+// This function takes in a crew id and a JSON object of crew members
+// It updates the crew's members to contain this new JSON object of members
+export const updateCrewUsers = async (crew_id, crew_members) => {
+  const payload = {
+    id: crew_id,
+    members: JSON.stringify(crew_members),
+  };
+
+  API.graphql(
+    graphqlOperation(mutations.update_crew, {
+      input: payload,
+    })
+  );
+};
+
+// This is the function to call for the full createCrew flow
+// It takes in emails, crew name, the admin username, and a color and
+// creates a crew object and adds the crew id to each user's list of crews
+export const createCrew = async (emails, crew_name, admin_user, color) => {
+  // added_users will contain all usernames in the form email : username
+  // all users will have an email key, but for users that can not be found in
+  // the DB using the email, an empty string will be used as the username. If a
+  // username is found, its value will be used
+  let added_users = {};
+  // verified_usernames will be a list of the usernames that are found using
+  // the getUsernameByEmail query (only valid users)
+  let verified_usernames = [];
+
+  // for each email, get its associated username (or empty string if no associated
+  // username) and add the combination to added_users. If it is a valid username
+  // (meaning, non empty string), add that valued to verified_usernames
+  for (let i = 0; i < emails.length; i++) {
+    const current_email = emails[i];
+    const current_username = await getUsernameByEmail(current_email);
+    added_users[current_email] = current_username;
+    if (current_username) verified_usernames.push(current_username);
+  }
+
+  // function creates the crew and returns its ID
+  const crew_id = await createCrewObject(crew_name, added_users, admin_user);
+
+  // for each user, fetch the user's current list of crews. Edit this list
+  // to contain the new crew (crew_id : color) and then call the mutation
+  // to update the user's crew list in the database using this new list
+  for (let i = 0; i < verified_usernames.length; i++) {
+    const current_username = verified_usernames[i];
+    const crew_data = await getCrewsByUsername(current_username);
+    crew_data[crew_id] = color;
+    await updateUserCrews(current_username, crew_data);
+  }
+};
+
+// Returns a crew object. To access its components, use
+// crew_data.data.getCrew.X, where X can be one of the following 4 values:
+// admin, id, members, and name
+export const getCrewObject = async (crew_id) => {
+  const crew_data = await API.graphql(
+    graphqlOperation(queries.get_crew_by_id, {
+      input: crew_id,
+    })
+  );
+  return crew_data;
+};
+
+// This function fetches the current crew object and a given user's current
+// list of crews. It adds the user to the crew object's members, and it adds
+// the crew to the user's list of crews
+export const addUserToCrew = async (crew_id, username, email, color) => {
+  const crew_data = await getCrewObject(crew_id);
+  let crew_members = crew_data.data.getCrew.members;
+  crew_members = await parseObjectJSON(crew_members);
+  crew_members[email] = username;
+
+  const users_crews = await getCrewsByUsername(username);
+  users_crews[crew_id] = color;
+
+  await updateCrewUsers(crew_id, crew_members);
+  await updateUserCrews(username, users_crews);
+};

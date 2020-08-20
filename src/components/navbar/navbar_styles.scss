@@ -5,6 +5,8 @@
 .main-content {
   width: 100%;
   display: flex;
+  align-items: center;
+  max-width: 100vw;
 }
 
 .desktop-grid {
@@ -35,17 +37,16 @@
 
 .navbar-custom {
   width: 100%;
-  height: 176px;
+  height: 53px;
   background-color: none;
   position: relative;
   display: flex;
   @include respond-to("large") {
-    height: 140px;
     padding: 0;
   }
   @include respond-to("small") {
     flex: 0 1 131px;
-    // height: 131px;
+    margin-bottom: 0px;
     padding: 0;
     background-color: black;
   }
@@ -54,17 +55,17 @@
 
 .navbar-black {
   width: 100%;
-  height: 176px;
-  background-color: black;
+  height: 53px;
+  box-shadow: 0px 3px 3px #000000;
+  background-color: #17171b;
   position: relative;
   display: flex;
+  color: #17171b;
   @include respond-to("large") {
-    height: 140px;
     padding: 0;
   }
   @include respond-to("small") {
     flex: 0 1 131px;
-    // height: 131px;
     padding: 0;
     background-color: black;
   }
@@ -84,6 +85,36 @@
   }
   @include respond-to("small") {
     display: none;
+  }
+}
+
+.onfour-nav-logo {
+  float: left;
+  margin-left: 25px;
+}
+
+.white-purple-logo-desktop {
+  width: 38px;
+  height: 39px;
+  //float: left;
+}
+
+.nav-links-container {
+  display: flex;
+  margin-left: auto;
+  width: auto;
+  margin-right: 25px;
+  align-items: center;
+  // align-self: flex-end;
+  // flex-flow: row;
+  @include respond-to("x-large") {
+    margin-right: 15px;
+  }
+  @include respond-to("large") {
+    margin-right: 10px;
+  }
+  @include respond-to("medium") {
+    margin-right: 5px;
   }
 }
 
@@ -110,20 +141,38 @@
   color: white;
 }
 
+// .nav-page-black,
+// .nav-page-white {
+//   // margin: 0% 10% !important;
+//   float: left;
+//   @include respond-to("x-large") {
+//     font-size: 0.95rem;
+//   }
+//   @include respond-to("large") {
+//     font-size: 0.8rem;
+//     margin: 0px !important;
+//   }
+//   @include respond-to("medium") {
+//     font-size: 0.55rem;
+//     margin: 0px !important;
+//   }
+// }
 .nav-page-black,
 .nav-page-white {
   margin: auto;
-  font-size: 1.1rem;
-  font-family: "Heebo", sans-serif;
-  font-weight: $medium-weight;
+  font-family: Helvetica;
+  font-style: normal;
+  float: left;
   @include respond-to("x-large") {
     font-size: 0.95rem;
   }
   @include respond-to("large") {
     font-size: 0.8rem;
+    //margin: 0px !important;
   }
   @include respond-to("medium") {
-    font-size: 0.65rem;
+    font-size: 0.55rem;
+    //margin: 0px !important;
   }
 }
 
@@ -133,8 +182,15 @@
   padding: 20px;
 }
 
-a.nav-page-white {
+.login-link-container {
+  font-family: Helvetica;
+  font-style: normal;
   color: white;
+  margin: 35px;
+  font-weight: normal;
+  letter-spacing: 0.045em;
+  font-size: 16px;
+  float: left;
   &:hover {
     cursor: pointer;
     color: white;
@@ -144,6 +200,68 @@ a.nav-page-white {
     color: white;
     text-decoration: "underline";
   }
+  @include respond-to("x-large") {
+    margin: 25px;
+    font-size: 15px;
+  }
+  @include respond-to("large") {
+    font-size: 14px;
+  }
+  @include respond-to("medium") {
+    font-size: 12px;
+    margin: 20px;
+  }
+}
+
+.logged-in {
+  margin: 0px 35px;
+  @include respond-to("x-large") {
+    margin: 0px 25px;
+    font-size: 15px;
+  }
+  @include respond-to("large") {
+    font-size: 14px;
+  }
+  @include respond-to("medium") {
+    font-size: 12px;
+    margin: 20px;
+  }
+}
+
+a.nav-page-white {
+  display: flex;
+  font-family: Helvetica;
+  font-style: normal;
+  color: white;
+  margin: 0px 35px;
+  font-weight: normal;
+  letter-spacing: 0.045em;
+  font-size: 16px;
+  &:hover {
+    cursor: pointer;
+    color: white;
+    text-decoration: "none";
+  }
+  &:active {
+    color: white;
+    text-decoration: "underline";
+  }
+  @include respond-to("x-large") {
+    margin: 0px 25px;
+    font-size: 15px;
+  }
+  @include respond-to("large") {
+    font-size: 14px;
+  }
+  @include respond-to("medium") {
+    font-size: 12px;
+    margin: 20px;
+  }
+}
+
+.sign-in-link {
+  font-weight: bold !important;
+  color: #e5cffa !important;
 }
 
 a.nav-page-black {
@@ -231,6 +349,14 @@ a.nav-page-black {
   width: auto;
 }
 
+.user-icon-desktop {
+  color: rgb(240, 231, 231);
+  height: 35px;
+  width: 38px;
+  padding-right: 11px;
+  padding-bottom: 5px;
+}
+
 .dropdown-menu-profile {
   width: 100px;
   @include respond-to("small") {
@@ -283,20 +409,37 @@ a.nav-page-black {
 }
 
 .sign-out-button {
-  width: 100%;
-  height: 100%;
-  color: rgb(124, 124, 124);
+  color: white !important;
+  font-family: Helvetica !important;
+  font-style: normal !important;
+  background-color: #17171b !important;
+  outline: none !important;
   font-size: 14px;
   font-weight: 420;
 }
 
+.sign-out-button:hover {
+  background-color: #27272e !important;
+}
+
 .sign-out-button-mobile {
-  margin-top: 10%;
-  margin-bottom: 20%;
+  width: 40%;
+  margin: auto;
+  margin-bottom: 5%;
 }
 
 .logged-in-icon {
   margin: auto;
   height: 30%;
   width: auto;
+}
+
+.dropdown-placement {
+  padding-top: 4px;
+  margin-right: 7px;
+}
+
+.user-dropdown-menu {
+  background-color: #17171b !important;
+  box-shadow: 0px 0px 6px #000000 !important;
 }

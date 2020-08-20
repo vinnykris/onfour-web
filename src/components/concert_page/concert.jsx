@@ -1,7 +1,10 @@
 // React Imports
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import MoonLoader from "react-spinners/MoonLoader";
+// Main Imports
+//import history from "../../history";
 
 // Function import
 import { createUpcomingObject } from "../util";
@@ -82,6 +85,10 @@ const Concert = (props) => {
   const [loading, setLoading] = useState(true);
   const [enter_venue_status, setEnterVenueStatus] = useState(false);
   const [showPaymentBox, setShowPaymentBox] = useState(false);
+  const [calender_added, setCalenderAdded] = useState(false);
+  const [calendar_button_clicked, setCalendarBtnClicked] = useState(false);
+
+  let location = useLocation();
 
   var concert_date = null;
   var concert_time = null;
@@ -211,7 +218,7 @@ const Concert = (props) => {
           clearInterval(interval);
         }
       }
-    }, 5000);
+    }, 500);
     return () => clearInterval(interval);
   }, [concert_info]);
 
@@ -241,7 +248,7 @@ const Concert = (props) => {
 
   const goBackToModal = () => {
     setShowPaymentBox(false);
-  }
+  };
 
   // Sends emails to invited users
   const sendEmailInvites = (user_name) => {
@@ -313,9 +320,9 @@ const Concert = (props) => {
     document.getElementById("add-to-calendar").style.visibility = "visible";
 
     // After 8 seconds, end the stub animation and go back to the concert page
-    setTimeout(() => {
-      if (!stub_animation_done) animationEnd();
-    }, 8000);
+    // setTimeout(() => {
+    //   if (!stub_animation_done) animationEnd();
+    // }, 8000);
   };
 
   // Animated the ticket stub leaving the screen and hides the calendar button
@@ -323,6 +330,10 @@ const Concert = (props) => {
     if (!stub_animation_done) {
       if (document.getElementById("add-to-calendar")) {
         document.getElementById("add-to-calendar").style.visibility = "hidden";
+      }
+      if (document.getElementById("calendar-redirect-msg")) {
+        document.getElementById("calendar-redirect-msg").style.visibility =
+          "hidden";
       }
       setStubAnimationDone(true);
       // Go back to the concert page after half a second
@@ -335,12 +346,9 @@ const Concert = (props) => {
   // Function to add event element to calendar
   // Ends animation
   const addToCalendar = async () => {
-    if (!ApiCalendar.sign) {
-      await ApiCalendar.handleAuthClick();
-    }
-    // await ApiCalendar.handleSignoutClick();
+    setCalendarBtnClicked(true);
+    await ApiCalendar.handleAuthClick();
     await addEvent();
-    await animationEnd();
   };
 
   const handleGeneralClicked = () => {
@@ -380,7 +388,12 @@ const Concert = (props) => {
     };
     await ApiCalendar.createEvent(eventLoad)
       .then((result) => {
-        console.log(result);
+        if (result.status === 200) {
+          setCalenderAdded(true);
+          setCalendarBtnClicked(false);
+          console.log(concert_info.date);
+          // animationEnd();
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -411,13 +424,41 @@ const Concert = (props) => {
                           className="ticket-stub-img"
                         />
                         <div className="calendar-button">
-                          <button
-                            id="add-to-calendar"
-                            className="buy-ticket-button calendar-button"
-                            onClick={addToCalendar}
-                          >
-                            Add to Calendar
-                          </button>
+                          {calender_added ? (
+                            <p
+                              className="calendar-redirect-msg"
+                              id="calendar-redirect-msg"
+                            >
+                              We've got you covered! Check your{" "}
+                              <a
+                                href={
+                                  "https://calendar.google.com/calendar/b/0/r/week/" +
+                                  concert_info.date.replace(/-/gi, "/")
+                                }
+                                target="_blank"
+                              >
+                                Google Calendar
+                              </a>{" "}
+                              for a surprise.
+                            </p>
+                          ) : calendar_button_clicked ? (
+                            <div className="moonloader-container">
+                              <MoonLoader
+                                sizeUnit={"px"}
+                                size={30}
+                                color={"white"}
+                                loading={!calender_added}
+                              />
+                            </div>
+                          ) : (
+                            <button
+                              id="add-to-calendar"
+                              className="buy-ticket-button calendar-button"
+                              onClick={addToCalendar}
+                            >
+                              Add to Calendar
+                            </button>
+                          )}
                         </div>
                       </div>
                     ) : null}
@@ -448,8 +489,17 @@ const Concert = (props) => {
               >
                 <Grid className="modal-grid">
                   {showPaymentBox ? (
-                      <TicketBox amount_value={total} onClick={goBackToModal} registerConcert={addTicket} header={concert_info.artist_name + ": " + concert_info.concert_name}></TicketBox>
-                  ): (
+                    <TicketBox
+                      amount_value={total}
+                      onClick={goBackToModal}
+                      registerConcert={addTicket}
+                      header={
+                        concert_info.artist_name +
+                        ": " +
+                        concert_info.concert_name
+                      }
+                    ></TicketBox>
+                  ) : (
                     <div className="mobile-rodal">
                       <div className="purchase-main">
                         <div className="modal-concert-info">
@@ -458,7 +508,8 @@ const Concert = (props) => {
                             {concert_info.concert_name}
                           </h3>
                           <p className="concert-date-info">
-                            {concert_info.week_day} {concert_info.formatted_date}{" "}
+                            {concert_info.week_day}{" "}
+                            {concert_info.formatted_date}{" "}
                             {concert_info.formatted_time} EST
                           </p>
                         </div>
@@ -509,7 +560,9 @@ const Concert = (props) => {
                                   ></i>
                                 </span>
 
-                                <p className="invite-text">Invite Your Friends</p>
+                                <p className="invite-text">
+                                  Invite Your Friends
+                                </p>
                               </span>
                             </Col>
                           </Row>
@@ -561,7 +614,9 @@ const Concert = (props) => {
                       <div className="purchase-review">
                         <div className="order-summary">
                           <Row>
-                            <span className="summary-header">Order Summary</span>
+                            <span className="summary-header">
+                              Order Summary
+                            </span>
                           </Row>
                           <div className="ticket-selections">
                             <Row>
@@ -615,7 +670,9 @@ const Concert = (props) => {
                         <div className="total-purchase">
                           <Row>
                             <Col size={4}>
-                              <span className="item-name total-item">Total</span>
+                              <span className="item-name total-item">
+                                Total
+                              </span>
                             </Col>
                             {total > 0 ? (
                               <Col size={1}>
@@ -640,13 +697,13 @@ const Concert = (props) => {
                                   <div>
                                     {total > 0 ? (
                                       <div>
-                                      <button
-                                        className="checkout-button"
-                                        onClick={goToCheckout}
-                                        disabled={!username}
-                                      >
+                                        <button
+                                          className="checkout-button"
+                                          onClick={goToCheckout}
+                                          disabled={!username}
+                                        >
                                           CHECKOUT
-                                      </button>
+                                        </button>
                                       </div>
                                     ) : (
                                       <button
@@ -661,17 +718,27 @@ const Concert = (props) => {
                                 ) : (
                                   <div>
                                     {total > 0 ? (
-                                      <Tooltip title="Please log in to purchase your ticket">
-                                        <button className="checkout-button-disabled">
+                                      <NavLink
+                                        to={{
+                                          pathname: "/login",
+                                          state: { current: location },
+                                        }}
+                                      >
+                                        <button className="checkout-button">
                                           CHECKOUT
                                         </button>
-                                      </Tooltip>
+                                      </NavLink>
                                     ) : (
-                                      <Tooltip title="Please log in to get your ticket">
-                                        <button className="checkout-button-disabled">
+                                      <NavLink
+                                        to={{
+                                          pathname: "/login",
+                                          state: { current: location },
+                                        }}
+                                      >
+                                        <button className="checkout-button">
                                           GET TICKET
                                         </button>
-                                      </Tooltip>
+                                      </NavLink>
                                     )}
                                   </div>
                                 )}
@@ -814,7 +881,7 @@ const Concert = (props) => {
                     </div>
                   ) : (
                     <button className="buy-ticket-button" onClick={getTicket}>
-                      RSVP
+                      {total > 0 ? "BUY TICKETS" : "RSVP"}
                     </button>
                   )}
                 </Col>
@@ -840,13 +907,41 @@ const Concert = (props) => {
                           className="ticket-stub-img"
                         />
                         <div className="calendar-button">
-                          <button
-                            id="add-to-calendar"
-                            className="buy-ticket-button calendar-button"
-                            onClick={addToCalendar}
-                          >
-                            Add to Calendar
-                          </button>
+                          {calender_added ? (
+                            <p
+                              className="calendar-redirect-msg"
+                              id="calendar-redirect-msg"
+                            >
+                              We've got you covered! Check your{" "}
+                              <a
+                                href={
+                                  "https://calendar.google.com/calendar/b/0/r/week/" +
+                                  concert_info.date.replace(/-/gi, "/")
+                                }
+                                target="_blank"
+                              >
+                                Google Calendar
+                              </a>{" "}
+                              for a surprise.
+                            </p>
+                          ) : calendar_button_clicked ? (
+                            <div className="moonloader-container">
+                              <MoonLoader
+                                sizeUnit={"px"}
+                                size={30}
+                                color={"white"}
+                                loading={!calender_added}
+                              />
+                            </div>
+                          ) : (
+                            <button
+                              id="add-to-calendar"
+                              className="buy-ticket-button calendar-button"
+                              onClick={addToCalendar}
+                            >
+                              Add to Calendar
+                            </button>
+                          )}
                         </div>
                       </div>
                     ) : null}
@@ -869,262 +964,283 @@ const Concert = (props) => {
               <Rodal
                 visible={open_modal}
                 onClose={hideModal}
-                width={120}
-                height={70}
-                measure="vh"
+                width={930}
+                height={514}
+                measure="px"
                 customStyles={{ padding: 0, overflow: scroll }}
                 className="rodal-custom"
               >
                 <Grid className="modal-grid">
                   <Row className="modal-row">
                     {showPaymentBox ? (
-                          <TicketBox amount_value={total} onClick={goBackToModal} registerConcert={addTicket} header={concert_info.artist_name + ": " + concert_info.concert_name}></TicketBox>
-                    ): (
+                      <TicketBox
+                        amount_value={total}
+                        onClick={goBackToModal}
+                        registerConcert={addTicket}
+                        header={
+                          concert_info.artist_name +
+                          ": " +
+                          concert_info.concert_name
+                        }
+                      ></TicketBox>
+                    ) : (
                       <Row className="modal-row">
-                     <Col size={4} className="modal-left-col">
-                      <div className="purchase-main">
-                        <div className="modal-concert-info">
-                          <h3 className="concert-info-modal-header">
-                            {concert_info.artist_name}:{" "}
-                            {concert_info.concert_name}
-                          </h3>
-                          <p className="concert-date-info">
-                            {concert_info.week_day}{" "}
-                            {concert_info.formatted_date}{" "}
-                            {concert_info.formatted_time} EST
-                          </p>
-                        </div>
-                        <hr className="break-modal" />
-                        <div className="ticket-types">
-                          <Row className="ticket-row">
-                            <Col size={3}>
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    icon={<CircleUnchecked />}
-                                    checkedIcon={<CircleCheckedFilled />}
-                                    name="general-checked"
-                                    checked={general_checked}
-                                    onChange={handleGeneralClicked}
+                        <Col size={4} className="modal-left-col">
+                          <div className="purchase-main">
+                            <div className="modal-concert-info">
+                              <h3 className="concert-info-modal-header">
+                                {concert_info.artist_name}:{" "}
+                                {concert_info.concert_name}
+                              </h3>
+                              <p className="concert-date-info">
+                                {concert_info.week_day}{" "}
+                                {concert_info.formatted_date}{" "}
+                                {concert_info.formatted_time} EST
+                              </p>
+                            </div>
+                            <hr className="break-modal" />
+                            <div className="ticket-types">
+                              <Row className="ticket-row">
+                                <Col size={3}>
+                                  <FormControlLabel
+                                    control={
+                                      <Checkbox
+                                        icon={<CircleUnchecked />}
+                                        checkedIcon={<CircleCheckedFilled />}
+                                        name="general-checked"
+                                        checked={general_checked}
+                                        onChange={handleGeneralClicked}
+                                      />
+                                    }
+                                    label="General Admission"
                                   />
-                                }
-                                label="General Admission"
-                              />
-                            </Col>
-                          </Row>
-                          <Row className="ticket-row">
-                            <Col size={3}>
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    icon={<CircleUnchecked />}
-                                    checkedIcon={<CircleCheckedFilled />}
-                                    name="backstage-checked"
-                                    checked={backstage_checked}
-                                    onChange={handleBackstageClicked}
-                                    disabled
+                                </Col>
+                              </Row>
+                              <Row className="ticket-row">
+                                <Col size={3}>
+                                  <FormControlLabel
+                                    control={
+                                      <Checkbox
+                                        icon={<CircleUnchecked />}
+                                        checkedIcon={<CircleCheckedFilled />}
+                                        name="backstage-checked"
+                                        checked={backstage_checked}
+                                        onChange={handleBackstageClicked}
+                                        disabled
+                                      />
+                                    }
+                                    label="Backstage Pass"
                                   />
-                                }
-                                label="Backstage Pass"
-                              />
-                            </Col>
-                          </Row>
-                        </div>
-                        <hr className="break-modal" />
-                        <div className="invite-friends">
-                          <Row>
-                            <Col size={1}>
-                              <span className="invite-prompt">
-                                <span className="fa-stack">
-                                  <i className="fa fa-circle fa-stack-2x icon-background"></i>
-                                  <i
-                                    className="fa fa-stack-1x fa-user-plus add-user-icon"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
+                                </Col>
+                              </Row>
+                            </div>
+                            <hr className="break-modal" />
+                            <div className="invite-friends">
+                              <Row>
+                                <Col size={1}>
+                                  <span className="invite-prompt">
+                                    <span className="fa-stack">
+                                      <i className="fa fa-circle fa-stack-2x icon-background"></i>
+                                      <i
+                                        className="fa fa-stack-1x fa-user-plus add-user-icon"
+                                        aria-hidden="true"
+                                      ></i>
+                                    </span>
 
-                                <p className="invite-text">
-                                  Invite Your Friends
-                                </p>
-                              </span>
-                            </Col>
-                          </Row>
-                          <Row>
-                            <Col size={1}>
-                              <div className="email-input-field">
-                                {" "}
-                                <ReactMultiEmail
-                                  placeholder="Please separate emails with commas"
-                                  style={{ background: "#EEEEEE" }}
-                                  emails={emails}
-                                  onChange={(_emails) => {
-                                    setEmails(_emails);
-                                  }}
-                                  validateEmail={(email) => {
-                                    return isEmail(email) && emails.length < 10; // return boolean
-                                  }}
-                                  getLabel={(email, index, removeEmail) => {
-                                    return (
-                                      <div data-tag key={index}>
-                                        {email}
-                                        <span
-                                          data-tag-handle
-                                          onClick={() => removeEmail(index)}
-                                        >
-                                          ×
+                                    <p className="invite-text">
+                                      Invite Your Friends
+                                    </p>
+                                  </span>
+                                </Col>
+                              </Row>
+                              <Row>
+                                <Col size={1}>
+                                  <div className="email-input-field">
+                                    {" "}
+                                    <ReactMultiEmail
+                                      placeholder="Please separate emails with commas"
+                                      style={{ background: "#EEEEEE" }}
+                                      emails={emails}
+                                      onChange={(_emails) => {
+                                        setEmails(_emails);
+                                      }}
+                                      validateEmail={(email) => {
+                                        return (
+                                          isEmail(email) && emails.length < 10
+                                        ); // return boolean
+                                      }}
+                                      getLabel={(email, index, removeEmail) => {
+                                        return (
+                                          <div data-tag key={index}>
+                                            {email}
+                                            <span
+                                              data-tag-handle
+                                              onClick={() => removeEmail(index)}
+                                            >
+                                              ×
+                                            </span>
+                                          </div>
+                                        );
+                                      }}
+                                    />
+                                  </div>
+                                  <div>
+                                    {emails.length >= 10 ? (
+                                      <p className="emails-warning">
+                                        You have reached the maximum number of
+                                        invites!
+                                      </p>
+                                    ) : (
+                                      <p className="emails-warning backstage-hidden-text">
+                                        Input validated
+                                      </p>
+                                    )}
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                          </div>
+                        </Col>
+                        <Col size={3} className="modal-right-col">
+                          <div className="purchase-review">
+                            <div className="order-summary">
+                              <Row>
+                                <span className="summary-header">
+                                  Order Summary
+                                </span>
+                              </Row>
+                              <div className="ticket-selections">
+                                <Row>
+                                  <Col size={4}>
+                                    <span className="item-name">
+                                      1x General Admission
+                                    </span>
+                                  </Col>
+                                  {general_price > 0 ? (
+                                    <Col size={1}>
+                                      <span className="item-price">
+                                        ${general_price}
+                                      </span>
+                                    </Col>
+                                  ) : (
+                                    <Col size={1}>
+                                      <span className="item-price">FREE</span>
+                                    </Col>
+                                  )}
+                                </Row>
+                                {backstage_pass ? (
+                                  <Row>
+                                    <Col size={4}>
+                                      <span className="item-name">
+                                        1x Backstage Pass
+                                      </span>
+                                    </Col>
+                                    {backstage_price > 0 ? (
+                                      <Col size={1}>
+                                        <span className="item-price">
+                                          ${backstage_price}
                                         </span>
-                                      </div>
-                                    );
-                                  }}
-                                />
-                              </div>
-                              <div>
-                                {emails.length >= 10 ? (
-                                  <p className="emails-warning">
-                                    You have reached the maximum number of
-                                    invites!
-                                  </p>
+                                      </Col>
+                                    ) : (
+                                      <Col size={1}>
+                                        <span className="item-price">FREE</span>
+                                      </Col>
+                                    )}
+                                  </Row>
                                 ) : (
-                                  <p className="emails-warning backstage-hidden-text">
-                                    Input validated
-                                  </p>
+                                  <Row>
+                                    <Col size={1}>
+                                      <div className="backstage-hidden-text">
+                                        NO BACKSTAGE PASS
+                                      </div>
+                                    </Col>
+                                  </Row>
                                 )}
                               </div>
-                            </Col>
-                          </Row>
-                        </div>
-                      </div>
-                    </Col>
-                    <Col size={3} className="modal-right-col">
-                      <div className="purchase-review">
-                        <div className="order-summary">
-                          <Row>
-                            <span className="summary-header">
-                              Order Summary
-                            </span>
-                          </Row>
-                          <div className="ticket-selections">
-                            <Row>
-                              <Col size={4}>
-                                <span className="item-name">
-                                  1x General Admission
-                                </span>
-                              </Col>
-                              {general_price > 0 ? (
-                                <Col size={1}>
-                                  <span className="item-price">
-                                    ${general_price}
-                                  </span>
-                                </Col>
-                              ) : (
-                                <Col size={1}>
-                                  <span className="item-price">FREE</span>
-                                </Col>
-                              )}
-                            </Row>
-                            {backstage_pass ? (
+                            </div>
+                            <hr className="break-modal right-col-break" />
+                            <div className="total-purchase">
                               <Row>
                                 <Col size={4}>
-                                  <span className="item-name">
-                                    1x Backstage Pass
+                                  <span className="item-name total-item">
+                                    Total
                                   </span>
                                 </Col>
-                                {backstage_price > 0 ? (
+                                {total > 0 ? (
                                   <Col size={1}>
-                                    <span className="item-price">
-                                      ${backstage_price}
+                                    <span className="item-price total-item">
+                                      ${total}
                                     </span>
                                   </Col>
                                 ) : (
                                   <Col size={1}>
-                                    <span className="item-price">FREE</span>
+                                    <span className="item-price total-item">
+                                      FREE
+                                    </span>
                                   </Col>
                                 )}
                               </Row>
-                            ) : (
+                            </div>
+                            <div className="checkout-button-container">
                               <Row>
                                 <Col size={1}>
-                                  <div className="backstage-hidden-text">
-                                    NO BACKSTAGE PASS
+                                  <div>
+                                    {username ? (
+                                      <div>
+                                        {total > 0 ? (
+                                          <div>
+                                            <button
+                                              className="checkout-button"
+                                              onClick={goToCheckout}
+                                              disabled={!username}
+                                            >
+                                              CHECKOUT
+                                            </button>
+                                          </div>
+                                        ) : (
+                                          <button
+                                            className="checkout-button"
+                                            onClick={addTicket}
+                                            disabled={!username}
+                                          >
+                                            GET TICKET
+                                          </button>
+                                        )}
+                                      </div>
+                                    ) : (
+                                      <div>
+                                        {total > 0 ? (
+                                          <NavLink
+                                            to={{
+                                              pathname: "/login",
+                                              state: { current: location },
+                                            }}
+                                          >
+                                            <button className="checkout-button">
+                                              CHECKOUT
+                                            </button>
+                                          </NavLink>
+                                        ) : (
+                                          <NavLink
+                                            to={{
+                                              pathname: "/login",
+                                              state: { current: location },
+                                            }}
+                                          >
+                                            <button className="checkout-button">
+                                              GET TICKET
+                                            </button>
+                                          </NavLink>
+                                        )}
+                                      </div>
+                                    )}
                                   </div>
                                 </Col>
                               </Row>
-                            )}
+                            </div>
                           </div>
-                        </div>
-                        <hr className="break-modal right-col-break" />
-                        <div className="total-purchase">
-                          <Row>
-                            <Col size={4}>
-                              <span className="item-name total-item">
-                                Total
-                              </span>
-                            </Col>
-                            {total > 0 ? (
-                              <Col size={1}>
-                                <span className="item-price total-item">
-                                  ${total}
-                                </span>
-                              </Col>
-                            ) : (
-                              <Col size={1}>
-                                <span className="item-price total-item">
-                                  FREE
-                                </span>
-                              </Col>
-                            )}
-                          </Row>
-                        </div>
-                        <div className="checkout-button-container">
-                          <Row>
-                            <Col size={1}>
-                              <div>
-                                {username ? (
-                                  <div>
-                                    {total > 0 ? (
-                                      <div>
-                                        <button
-                                          className="checkout-button"
-                                          onClick={goToCheckout}
-                                          disabled={!username}
-                                        >
-                                          CHECKOUT
-                                        </button>
-                                      </div>
-                                    ) : (
-                                      <button
-                                        className="checkout-button"
-                                        onClick={addTicket}
-                                        disabled={!username}
-                                      >
-                                        GET TICKET
-                                      </button>
-                                    )}
-                                  </div>
-                                ) : (
-                                  <div>
-                                    {total > 0 ? (
-                                      <Tooltip title="Please log in to purchase your ticket">
-                                        <button className="checkout-button-disabled">
-                                          CHECKOUT
-                                        </button>
-                                      </Tooltip>
-                                    ) : (
-                                      <Tooltip title="Please log in to get your ticket">
-                                        <button className="checkout-button-disabled">
-                                          GET TICKET
-                                        </button>
-                                      </Tooltip>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-                            </Col>
-                          </Row>
-                        </div>
-                      </div>
-                    </Col> 
-                    </Row>
+                        </Col>
+                      </Row>
                     )}
                   </Row>
                 </Grid>
@@ -1208,7 +1324,7 @@ const Concert = (props) => {
                             className="buy-ticket-button"
                             onClick={getTicket}
                           >
-                            RSVP
+                            {total > 0 ? "BUY TICKETS" : "RSVP"}
                           </button>
                         )}
                       </div>

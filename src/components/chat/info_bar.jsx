@@ -1,5 +1,5 @@
 // React imports
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 // Component imports
 import ChatTooltip from "./chat_tooltip";
@@ -58,7 +58,7 @@ const InfoBar = ({ room, users }) => {
             </div>
           </ClickAwayListener>
           {width <= 600 ? (
-            <p className="number-of-users">{users.length}</p>
+            <p className="onfour-title">{users.length}</p>
           ) : null}
         </div>
       </div>

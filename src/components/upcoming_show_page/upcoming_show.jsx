@@ -39,7 +39,6 @@ const UpcomingShowPage = () => {
   const getUpcomingFull = async (data) => {
     const artist_id = data.artist_id;
     const artist_info = await getArtistInfo(artist_id);
-    console.log(artist_info);
     let merged = { ...data, ...artist_info };
     return merged;
   };
@@ -49,7 +48,6 @@ const UpcomingShowPage = () => {
       var full_concerts = [];
       // Upcoming shows
       const upcoming_result = await getConcertInfo();
-      console.log(upcoming_result);
       for await (const data of upcoming_result) {
         full_concerts.push(formatUpcomingShow(await getUpcomingFull(data)));
       }
@@ -87,7 +85,7 @@ const UpcomingShowPage = () => {
             <div>
               {width < 1280 ? (
                 <div>
-                  {width <= 768? (
+                  {width <= 768 ? (
                     <div className="upcoming-show-grid">
                       <FlexibleGrid
                         content_list={formatted_concerts}
@@ -95,10 +93,10 @@ const UpcomingShowPage = () => {
                       />
                     </div>
                   ) : (
-                    <div className = "upcoming-show-grid">
+                    <div className="upcoming-show-grid">
                       <FlexibleGrid
-                        content_list = {formatted_concerts}
-                        num_cols = {4}
+                        content_list={formatted_concerts}
+                        num_cols={4}
                       />
                     </div>
                   )}

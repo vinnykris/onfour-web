@@ -4,13 +4,19 @@ import React, {useState, useEffect} from "react";
 // Module imports
 import ReactEmoji from "react-emoji";
 import io from "socket.io-client";
+import Linkify from 'react-linkify';
+import * as linkify from 'linkifyjs';
+import hashtag from 'linkifyjs/plugins/hashtag';
+// import { useReducer } from "react";
+// import ReactLinkify from "react-linkify";
 
 // Styles imports
 import "./chat.scss";
-import { useReducer } from "react";
 
 // let socket; // Socket declaration
 
+hashtag(linkify);
+    
 // Component that styles the message according to the sender
 const Message = ({ message: { user, text, timeStamp, likes }, name, socket }) => {
   let is_sent_by_current_user = false; // Boolean checking if sender iscurrent user
@@ -73,27 +79,44 @@ const Message = ({ message: { user, text, timeStamp, likes }, name, socket }) =>
   if (staff.indexOf(user) > -1) {
     is_staff = true;
   }
-
+  // var linkifyOptions = 
+  //   {
+  //       formatHref: function (href, type) {
+  //         if (type === 'hashtag') {
+  //           href = 'https://twitter.com/hashtag/' + href.substring(1);
+  //         }
+  //         return href;
+  //       }
+        
+  //     };
   //setPastClock change is the trigger for liking a message^^
 
   return is_sent_by_current_user ? (
     <div className="message-container justify-end" onClick={() => setPastClock(clock)}>
       <p className="sent-text pr-10">{trimmed_name} </p>
       <div className="message-box background-dark">
-        <p className="message-text color-white">{ReactEmoji.emojify(text)}</p>
+        {/* <Linkify Options={linkifyOptions}> */}
+        <Linkify>
+        <p  className="message-text color-white">{ReactEmoji.emojify(text)}</p>
+        </Linkify>
+        
       </div>
       <div className="user-sent-likebox">{likes>0 && ReactEmoji.emojify("<3" + likes)}</div>
     </div>
   ) : is_admin ? (
     <div className="message-container justify-middle" onClick={() => setPastClock(clock)}>
       <div className="message-box-admin background-white">
+      <Linkify>
         <p className="sent-text">{ReactEmoji.emojify(text)}</p>
+        </Linkify>
       </div>
     </div>
   ) : is_staff ? (
     <div className="message-container justify-start" onClick={() => setPastClock(clock)}>
       <div className="message-box background-staff">
+      <Linkify>
         <p className="message-text color-white">{ReactEmoji.emojify(text)}</p>
+        </Linkify>
       </div>
       <p className="sent-text pl-10">{user} </p>
       <div className="user-sent-likebox">{likes>0 && ReactEmoji.emojify("<3" + likes)}</div>
@@ -101,7 +124,9 @@ const Message = ({ message: { user, text, timeStamp, likes }, name, socket }) =>
   ) : (
     <div className="message-container justify-start" onClick={() => setPastClock(clock)}>
       <div className="message-box background-light">
+      <Linkify>
         <p className="message-text color-dark">{ReactEmoji.emojify(text)}</p>
+        </Linkify>
       </div>
       <p className="sent-text pl-10">{user} </p>
       <div className="user-sent-likebox">{likes>0 && ReactEmoji.emojify("<3" + likes)}</div>
