@@ -74,8 +74,10 @@ export default function Tile(props) {
   function toggle_audio_mute(mute_all) {
     if (document.getElementById(fans_microphone_id)) {
       if (mute_all) {
-        document.getElementById(fans_microphone_id).style.color = "#fb5554";
-        setAudioMute(true);
+        if (!props.isLocalPerson) {
+          document.getElementById(fans_microphone_id).style.color = "#fb5554";
+          setAudioMute(true);
+        }
       } else {
         if (props.audioTrack) {
           document.getElementById(fans_microphone_id).style.color = "white";
