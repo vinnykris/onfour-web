@@ -413,9 +413,9 @@ export default function VideoChatApp({
           />
         </CallObjectContext.Provider>
       ) : (
-        <div>
+        <div className="video-chat-prompt-container">
           {isPublic ? (
-            <div>
+            <div className="enter-video-chat-prompt">
               <StartButton
                 disabled={!enableStartButton}
                 onClick={() => {
@@ -425,8 +425,9 @@ export default function VideoChatApp({
               />
               {!artistView ? (
                 <div className="public-video-notice">
-                  By joining this video call, you will be seen by the artist as
-                  well as your crew members!
+                  Please use headphones to avoid audio feedback issues.{" "}
+                  <br></br>This is a public room, so get ready to make some new
+                  friends!
                 </div>
               ) : null}
             </div>
