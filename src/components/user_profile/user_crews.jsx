@@ -3,16 +3,19 @@ import React, { useState } from "react";
 import { Row, Col } from "../grid";
 
 import EditCrewModal from "./edit_crew_modal";
+import SingleCrewModal from "./single_crew_modal";
 
 const UserCrews = ({ userCrews, username }) => {
-  const [showCrewModal, setShowCrewModal] = useState(false);
+  const [showEditCrewModal, setshowEditCrewModal] = useState(false);
+  const [showSingleCrewModal, setShowSingleCrewModal] = useState(false);
   const [selectedCrew, setSelectedCrew] = useState(userCrews[0]);
 
   const handleCrewSelection = (crewIndex) => {
     const userSelectedCrew = userCrews[crewIndex];
     setSelectedCrew(userSelectedCrew);
 
-    setShowCrewModal(true);
+    if (userSelectedCrew.admin === username) setshowEditCrewModal(true);
+    else setShowSingleCrewModal(true);
   };
 
   return (
@@ -29,7 +32,7 @@ const UserCrews = ({ userCrews, username }) => {
                 <p title={crew.name}>{crew.name}</p>
               </Row>
               <Row className="crew-stub-crew-members">
-                {crew.membersArray.slice(0,6).map((member) => (
+                {crew.membersArray.slice(0, 6).map((member) => (
                   <Row key={member.email} className="crew-stub-member">
                     <div
                       className="crew-stub-member-initial"
@@ -56,10 +59,19 @@ const UserCrews = ({ userCrews, username }) => {
       </Col>
 
       <EditCrewModal
-        showModal={showCrewModal}
-        handleClose={() => setShowCrewModal(false)}
+        showModal={showEditCrewModal}
+        handleClose={() => setshowEditCrewModal(false)}
         crewName={selectedCrew.name}
         crewColor={selectedCrew.color}
+        crewAdmin={selectedCrew.admin}
+        crewMembersProp={selectedCrew.membersArray}
+        username={username}
+      />
+
+      <SingleCrewModal
+        showModal={showSingleCrewModal}
+        handleClose={() => setShowSingleCrewModal(false)}
+        crewName={selectedCrew.name}
         crewAdmin={selectedCrew.admin}
         crewMembersProp={selectedCrew.membersArray}
         username={username}
