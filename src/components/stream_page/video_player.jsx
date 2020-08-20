@@ -1,10 +1,17 @@
 // React Imports
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+
+// External imports
 import ReactPlayer from "react-player";
 import MoonLoader from "react-spinners/MoonLoader";
 
-// Styling Imports
-import "./stream_styles.scss";
+// VideoJS Imports
+import videojs from "video.js";
+import "video.js/dist/video-js.css";
+import "./video_js_styles.scss";
+import "videojs-landscape-fullscreen";
+
+// Custom Component Imports
 import { Grid, Row, Col } from "../grid";
 import { useWindowDimensions } from "../custom_hooks";
 
@@ -13,6 +20,9 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
+
+// Styling Imports
+import "./stream_styles.scss";
 
 Amplify.configure(awsmobile);
 
@@ -29,6 +39,7 @@ function VideoPlayer({
   is_live,
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
+  var player = null;
 
   // This function calculates the time difference between current time and show start time
   // and represent the difference in days, hours, minuts and seconds
@@ -162,6 +173,35 @@ function VideoPlayer({
   // stream depending on the countdown
 
   // if (auth) {
+
+  const player_ref = useRef();
+
+  useEffect(() => {
+    if (!timer_placeholder.length && is_live) {
+      player = videojs(
+        player_ref.current,
+        { autoplay: true, muted: true, controls: true, liveui: true },
+        () => {
+          player.src(url);
+        }
+      );
+      // configure plugins
+      player.landscapeFullscreen({
+        fullscreen: {
+          enterOnRotate: true,
+          alwaysInLandscapeMode: true,
+          iOS: true,
+        },
+      });
+    }
+  }, [timer_placeholder.length, is_live]);
+
+  useEffect(() => {
+    return () => {
+      if (player) player.dispose();
+    };
+  }, []);
+
   return (
     <div className="countdown-wrapper">
       {timer_placeholder.length ? (
@@ -182,15 +222,14 @@ function VideoPlayer({
       ) : (
         <div className="player-wrapper">
           {is_live ? (
-            <ReactPlayer
-              className="video-player"
-              url={url}
-              width="100%"
-              height="100%"
-              playing
-              controls
-              playsinline={width <= 600}
-            />
+            <div data-vjs-player>
+              <div className="vjs-control-bar control-bar-top">
+                <div className="live-indicator">
+                  <span className="live-indicator-text">LIVE</span>
+                </div>
+              </div>
+              <video ref={player_ref} className="video-js" />
+            </div>
           ) : (
             <div className="waiting-for-artist-screen">
               <div className="waiting-message-container">
@@ -224,18 +263,5 @@ function VideoPlayer({
       )}
     </div>
   );
-  // } else {
-  //   return (
-  //     <div className="countdown-wrapper">
-  //       <div className="waiting-screen">
-  //         <div className="waiting-message-container">
-  //           <h3 className="waiting-message1">
-  //             Please sign in to view the stream
-  //           </h3>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 }
 export default VideoPlayer;
