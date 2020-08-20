@@ -234,6 +234,7 @@
     background-color: #222229;
     padding: 15px;
     padding-top: 5px !important;
+    max-height: 700px !important;
 
     & .rodal-close:before,
     & .rodal-close:after {
@@ -352,7 +353,7 @@ p {
 
 .crew-modal-save-button-wrapper {
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -538,6 +539,7 @@ p {
     padding: 15px;
     padding-top: 5px !important;
     background-color: #222229;
+    max-height: 700px !important;
   }
 
   & .single-crew-column {

@@ -70,6 +70,8 @@ const DashboardPage = ({
     "04ADC0",
     "BF8AF4",
     "49BDFE",
+    "444DF2",
+    "E26A6A",
   ]);
 
   const closeModal = () => {

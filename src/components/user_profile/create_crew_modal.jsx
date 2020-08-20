@@ -19,6 +19,8 @@ const CreateCrewModal = ({
     "04ADC0",
     "BF8AF4",
     "49BDFE",
+    "444DF2",
+    "E26A6A",
   ]);
   const [selectedColor, setSelectedColor] = useState(
     availableColors[
@@ -53,7 +55,8 @@ const CreateCrewModal = ({
 
       if (
         duplicateCrewMemberEmail.length === 0 &&
-        newCrewMemberUserName !== currentUsername
+        newCrewMemberUserName !== currentUsername &&
+        crewMembers.length < 5
       ) {
         setCrewMembers([
           ...crewMembers,
@@ -106,12 +109,25 @@ const CreateCrewModal = ({
   };
 
   useEffect(() => {
+    console.log(crewMembers.length >= 5);
     if (crewName.length > 2 && crewMembers.length > 0) {
       setSaveButtonDisabled(false);
     } else {
       setSaveButtonDisabled(true);
     }
+
+    if (crewMembers.length >= 5) {
+      setMemberInputDisabled(true);
+    } else {
+      setMemberInputDisabled(false);
+    }
   }, [crewMembers, crewName]);
+
+  useEffect(() => {
+    if (crewMembers.length >= 5) {
+      setMemberInputDisabled(true);
+    }
+  }, [memberInputDisabled]);
 
   return (
     <Rodal
