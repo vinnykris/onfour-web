@@ -1,6 +1,6 @@
+@import "colors";
 @import "./mixins";
 @import "./fonts";
-@import "./colors";
 
 .custom-app {
   display: flex;
@@ -17,7 +17,7 @@
 .button-border {
   border-radius: 3px;
   // box-shadow: 0px 3px 5px grey;
-  font-weight: $medium-weight;
+  //font-weight: $medium-weight;
   letter-spacing: 0.4px;
 }
 
@@ -47,10 +47,18 @@
   color: rgba(0, 0, 0, 0.38) !important;
 }
 
+.tag-container {
+  width: 55px;
+  height: 24px;
+}
+
 // TAG STYLES
 .tag-body {
   background-color: $on-background;
-  padding: 5px;
+  //padding: 5px;
+  height: 100%;
+  width: 100%;
+  display: flex;
 }
 
 // PAGE SPECIFIC STYLES
@@ -136,7 +144,7 @@ h5 {
   line-height: 2rem;
   text-align: left;
   font-size: 18px;
-  font-weight: $regular-weight;
+  font-weight: 400;
   color: white;
 }
 

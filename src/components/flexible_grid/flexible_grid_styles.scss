@@ -1,8 +1,20 @@
 // ARCHIVE PAGE COMPONENT STYLING
 
 // FLEXIBLE GRID STYLING
+
 .black-element {
-  background-color: black;
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+}
+
+.black-element:first-child {
+  padding-left: 0;
+  padding-right: 7.5px;
+}
+
+.black-element:last-child {
+  padding-left: 7.5px;
+  padding-right: 0;
 }
 
 .grid-row {

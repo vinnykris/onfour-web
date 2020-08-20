@@ -168,19 +168,6 @@ const AboutPage = () => {
 
   return (
     <div className="about-page-content">
-      {/* {!most_recent_concert ? (
-        <div className="about-page-loading-background">
-          <div className="about-page-loader">
-            <PulseLoader
-              sizeUnit={"px"}
-              size={18}
-              color={"#4878fa"}
-              loading={!most_recent_concert}
-            ></PulseLoader>
-          </div>
-        </div>
-      ) : (
-      <div> */}
       {width > 600 ? (
         // {/* DESKTOP LAYOUT */}
         <Grid className="desktop-grid-about">
@@ -207,106 +194,27 @@ const AboutPage = () => {
                 </Row>
               </div>
 
-              <Row>
+              {/* <Row>
                 <p
                   className="fa fa-chevron-down go-down-button"
                   onClick={() => scrollDown(1)}
                 ></p>
-              </Row>
+              </Row> */}
             </div>
           </Row>
-          <Row className="view-height-row">
-            <Col size={12}>
-              <p className="description-text" id="section2-text">
-                Onfour is the premier live-streaming concert platform. We are
-                redefining what it means to experience live music digitally and
-                are dedicated to empowering artists to connect with fans in new,
-                meaningful ways.
-                {/* Onfour is the premier live-streaming concert platform, built and
-                designed for musicians. We are dedicated to empowering musicians
-                and enabling them to connect with fans in new, meaningful ways.
-                Experience studio-like quality from the comfort of your own home.
-                <br></br>
-                <br></br>
-                Due to the COVID-19 pandemic, we are hosting live-stream concerts
-                and will donate all of our proceeds to{" "}
-                <a
-                  href="https://www.grammy.com/musicares/donations"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  MusiCares
-                </a>{" "}
-                to help relieve musicians during this difficult time. */}
-              </p>
-              {/* <Row>
-                <Col size={1}>
-                  <button
-                    onClick={() => history.push("/stream")}
-                    className="button-on-black"
-                  >
-                    Tune into the stream!
-                  </button>
-                </Col>
-              </Row> */}
-            </Col>
-            <Row>
-              <p
-                className="fa fa-chevron-down go-down-button"
-                onClick={() => scrollDown(2)}
-              ></p>
-            </Row>
-          </Row>
-          <Row className="view-height-row why-perform-about">
-            <Row
-              className="why-perform-text-container"
-              id="why-perform-text-container"
-            >
-              <Col>
-                <Row>
-                  <div className="why-perform-title">Perform with onfour</div>
-                </Row>
-                <Row>
-                  <div className="why-perform-text">
-                    {
-                      "Provide your fans with a better live experience: \nPlug in with your audio interface and mixer. \nTicket your shows, set your own prices, and receive tips. \nChat with your fans in real-time. \nRecord your full show for free in high definition. \nReal-time tech support for setting up and streaming."
-                    }
-                  </div>
-                </Row>
-              </Col>
-            </Row>
-            <Row className="why-perform-learn-more-row">
-              <button
-                className="why-perform-learn-more-button"
-                onClick={learnMore}
-              >
-                LEARN MORE
-              </button>
-            </Row>
-            <Row className="why-perform-image-container">
-              <img
-                className="why-perform-image"
-                src={"https://onfour-media.s3.amazonaws.com/singing+photo.jpg"}
-                alt="singer"
-              ></img>
-            </Row>
-            <Row>
-              <p
-                className="fa fa-chevron-down go-down-button"
-                onClick={() => scrollDown(3)}
-              ></p>
-            </Row>
-          </Row>
+
           <Row>
             <Col size={1}>
               <div className="about-preview-content">
                 <Row>
                   <Col size={1}>
-                    <h4 className="preview-content-header">UPCOMING</h4>
+                    <span className="preview-content-header header-4">
+                      Upcoming Shows
+                    </span>
                   </Col>
                   <Col size={1}>
                     <NavLink to="/upcoming">
-                      <span className="view-all">VIEW ALL</span>
+                      <span className="view-all header-4">View All</span>
                     </NavLink>
                   </Col>
                 </Row>
@@ -332,11 +240,13 @@ const AboutPage = () => {
                 </Row>
                 <Row className="archive-preview-row">
                   <Col size={1}>
-                    <h4 className="preview-content-header">PAST SHOWS</h4>
+                    <span className="preview-content-header header-4">
+                      Past Shows
+                    </span>
                   </Col>
                   <Col size={1}>
                     <NavLink to="/archive">
-                      <span className="view-all">VIEW ALL</span>
+                      <span className="view-all header-4">View All</span>
                     </NavLink>
                   </Col>
                 </Row>

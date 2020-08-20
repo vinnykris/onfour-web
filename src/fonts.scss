@@ -1,11 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
 
-$regular-weight: 400;
-$medium-weight: 500;
-$semimedium-weight: 600;
-$bold-weight: 700;
-
 // HEADERS
 .header-1 {
   font-family: "Exo 2", sans-serif;
@@ -136,5 +131,6 @@ $bold-weight: 700;
   font-size: 9px;
   line-height: 11px;
   letter-spacing: 0.045em;
-  //color: #ffffff;
+  color: $on-card;
+  margin: auto;
 }

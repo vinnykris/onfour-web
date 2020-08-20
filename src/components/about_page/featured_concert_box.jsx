@@ -54,7 +54,7 @@ const FeaturedConcertBox = ({ artist_info, concert_info }) => {
     <Grid>
       {/* {loaded ? () : ()} */}
       <Row>
-        <Col>
+        <Col className="tag-container">
           <Tag content={days_left} />
         </Col>
       </Row>
