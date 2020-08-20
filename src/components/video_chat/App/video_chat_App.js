@@ -45,10 +45,10 @@ export default function VideoChatApp({
   /**
    * Creates a new call room.
    */
-  const createPublicCall = useCallback(() => {
+  const createPublicCall = useCallback((room_name) => {
     setAppState(STATE_CREATING);
     return api
-      .createRoom(true)
+      .createRoom(room_name)
       .then((room) => room.url)
       .catch((error) => {
         console.log("Error creating room", error);
@@ -57,17 +57,17 @@ export default function VideoChatApp({
       });
   }, []);
 
-  const createPrivateCall = useCallback(() => {
-    setAppState(STATE_CREATING);
-    return api
-      .createRoom(false)
-      .then((room) => room.url)
-      .catch((error) => {
-        console.log("Error creating room", error);
-        setRoomUrl(null);
-        setAppState(STATE_IDLE);
-      });
-  }, []);
+  // const createPrivateCall = useCallback(() => {
+  //   setAppState(STATE_CREATING);
+  //   return api
+  //     .createRoom(false)
+  //     .then((room) => room.url)
+  //     .catch((error) => {
+  //       console.log("Error creating room", error);
+  //       setRoomUrl(null);
+  //       setAppState(STATE_IDLE);
+  //     });
+  // }, []);
 
   /**
    * Starts joining an existing call.
@@ -82,8 +82,8 @@ export default function VideoChatApp({
     const newCallObject = DailyIframe.createCallObject({
       userName: user_name,
     });
-    // setRoomUrl(url);
-    setRoomUrl("public");
+    setRoomUrl(url.split("/").pop());
+    // setRoomUrl("public");
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
     // newCallObject.setBandwidth({
@@ -148,31 +148,46 @@ export default function VideoChatApp({
    */
   useEffect(() => {
     const url = roomUrlFromPageUrl();
-    if (url === "public") {
-      url &&
-        startJoiningPublicCall(
-          "https://onfour_test.daily.co/test_default_video_off"
-        );
-      if (isInCrew) {
-        switchToPublicVideoChat();
-      } else {
-        setIsPublic(true);
-      }
+    console.log(url);
+    if (url === "room1") {
+      url && startJoiningPublicCall("https://onfour.daily.co/room1");
+      switchToPublicVideoChat();
+    } else if (url === "room2") {
+      url && startJoiningPublicCall("https://onfour.daily.co/room2");
+      switchToPrivateVideoChat();
+    } else if (url === "room3") {
+      url && startJoiningPublicCall("https://onfour.daily.co/room3");
+      switchToPrivateVideoChat();
+    } else if (url === "room4") {
+      url && startJoiningPublicCall("https://onfour.daily.co/room4");
+      switchToPrivateVideoChat();
+    } else if (url === "room5") {
+      url && startJoiningPublicCall("https://onfour.daily.co/room5");
+      switchToPrivateVideoChat();
     }
+  
+    // if (url === "public") {
+    //   url && startJoiningPublicCall("https://onfour.daily.co/room1");
+    //   if (isInCrew) {
+    //     switchToPublicVideoChat();
+    //   } else {
+    //     setIsPublic(true);
+    //   }
+    // }
   }, [startJoiningPublicCall]);
 
-  useEffect(() => {
-    const url = roomUrlFromPageUrl();
-    if (url === "private") {
-      if (isInCrew) {
-        url && startJoiningPrivateCall("https://onfour_test.daily.co/bar");
-        switchToPrivateVideoChat();
-      } else {
-        setRoomUrl(null);
-        setIsPublic(true);
-      }
-    }
-  }, [startJoiningPrivateCall]);
+  // useEffect(() => {
+  //   const url = roomUrlFromPageUrl();
+  //   if (url === "private") {
+  //     if (isInCrew) {
+  //       url && startJoiningPrivateCall("https://onfour_test.daily.co/bar");
+  //       switchToPrivateVideoChat();
+  //     } else {
+  //       setRoomUrl(null);
+  //       setIsPublic(true);
+  //     }
+  //   }
+  // }, [startJoiningPrivateCall]);
 
   /**
    * Update the page's URL to reflect the active call when roomUrl changes.
@@ -305,7 +320,7 @@ export default function VideoChatApp({
       setMuteButtonMsg("UNMUTE ALL");
     }
   };
-
+  
   return (
     <div className={(artistView ? "artist-" : "") + "app"} id="video-chat-main">
       {artistView ? null : (
@@ -372,7 +387,7 @@ export default function VideoChatApp({
               <StartButton
                 disabled={!enableStartButton}
                 onClick={() => {
-                  createPublicCall().then((url) => startJoiningPublicCall(url));
+                  createPublicCall("room1").then((url) => startJoiningPublicCall(url));
                 }}
                 artistView={artistView}
               />
@@ -384,10 +399,16 @@ export default function VideoChatApp({
               ) : null}
             </div>
           ) : (
+            // <StartButton
+            //   disabled={!enableStartButton}
+            //   onClick={() => {
+            //     createPrivateCall().then((url) => startJoiningPrivateCall(url));
+            //   }}
+            // />
             <StartButton
               disabled={!enableStartButton}
               onClick={() => {
-                createPrivateCall().then((url) => startJoiningPrivateCall(url));
+                createPublicCall("room2").then((url) => startJoiningPublicCall(url));
               }}
             />
           )}
