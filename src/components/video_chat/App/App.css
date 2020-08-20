@@ -24,25 +24,34 @@
 }
 
 .room-name-row {
+  display: flex;
   height: 30px;
   width: 100%;
   position: relative;
-  background-color: #1C1C1C;
-  border-top: 1px solid #3C3C3C;
-  border-bottom: 1px solid #3C3C3C;
+  background-color: #1c1c1c;
+  border-top: 1px solid #3c3c3c;
+  border-bottom: 1px solid #3c3c3c;
 }
 
 .public-room {
+  display: flex;
+  position: relative;
   height: auto;
-  width: 50%;
-  position: absolute;
+  width: 20%;
+  /* position: absolute; */
   text-align: center;
   font-weight: 500;
   font-size: 0.8rem;
-  left: 0px;
+  /* left: 0px;
   top: 50%;
-  transform: translateY(-50%);
-  color: white;
+  transform: translateY(-50%); */
+  color: rgb(173, 173, 173);
+}
+
+.room-tab-text {
+  display: flex;
+  margin: auto;
+  color: rgb(173, 173, 173);
 }
 
 .only-public {
@@ -63,7 +72,7 @@
 }
 
 .click-active:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .public-video-notice {
@@ -76,16 +85,15 @@
   position: absolute;
 }
 
-
 .video-form-input {
-    background-color: #17171b;
-    border: 1px solid #b7b7b741;
-    color: white;
-    font-size: 0.9rem;
+  background-color: #17171b;
+  border: 1px solid #b7b7b741;
+  color: white;
+  font-size: 0.9rem;
 }
 
 .video-form-input:focus {
-    border: 1px solid #b7b7b741;
+  border: 1px solid #b7b7b741;
 }
 .video-form-input::placeholder {
   font-size: 0.9rem;

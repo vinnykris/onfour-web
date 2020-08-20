@@ -105,10 +105,10 @@ export default function VideoChatApp({
       setRoomUrl("private");
       setCallObject(newCallObject);
       setAppState(STATE_JOINING);
-    //   newCallObject.setBandwidth({
-    //     kbs: 20,
-    //     trackConstraints: { width: 160, height: 90, frameRate: 5 },
-    //   });
+      //   newCallObject.setBandwidth({
+      //     kbs: 20,
+      //     trackConstraints: { width: 160, height: 90, frameRate: 5 },
+      //   });
       newCallObject.join({ url });
     }
     // else {
@@ -154,7 +154,7 @@ export default function VideoChatApp({
           "https://onfour_test.daily.co/test_default_video_off"
         );
       if (isInCrew) {
-        switchToPublicVideoChat();
+        switchRoom();
       } else {
         setIsPublic(true);
       }
@@ -244,6 +244,10 @@ export default function VideoChatApp({
     };
   }, [callObject]);
 
+  useEffect(() => {
+    document.getElementById("public-room-1").style.color = "white";
+  }, []);
+
   /**
    * Show the call UI if we're either joining, already joined, or are showing
    * an error.
@@ -277,14 +281,31 @@ export default function VideoChatApp({
    */
   const enableStartButton = appState === STATE_IDLE;
 
-  const switchToPublicVideoChat = () => {
-    if (document.getElementById("public-room")) {
-      document.getElementById("public-room").style.color = "white";
-      document.getElementById("private-room").style.color =
-        "rgb(173, 173, 173)";
-      setIsPublic(true);
-      startLeavingCall();
+  const room_ids = [
+    "public-room-1",
+    "public-room-2",
+    "public-room-3",
+    "public-room-4",
+    "public-room-5",
+  ];
+
+  const switchRoom = (room_number) => {
+    // if (document.getElementById("public-room-1")) {
+    //   document.getElementById("public-room-1").style.color = "white";
+    //   document.getElementById("private-room").style.color =
+    //     "rgb(173, 173, 173)";
+    //   setIsPublic(true);
+    //   startLeavingCall();
+    // }
+    const selected = room_ids[room_number];
+    for (const index in room_ids) {
+      if (room_ids[index] != selected) {
+        //const element = object[key];
+        document.getElementById(room_ids[index]).style.color =
+          "rgb(173, 173, 173)";
+      }
     }
+    document.getElementById(selected).style.color = "white";
   };
 
   const switchToPrivateVideoChat = () => {
@@ -320,17 +341,43 @@ export default function VideoChatApp({
             <div className="room-name-row">
               <div
                 className="public-room click-active"
-                id="public-room"
-                onClick={switchToPublicVideoChat}
+                onClick={() => switchRoom(0)}
               >
-                PUBLIC
+                <div id="public-room-1" className="room-tab-text">
+                  Room 1
+                </div>
               </div>
               <div
-                className="private-room click-active"
-                id="private-room"
-                onClick={switchToPrivateVideoChat}
+                className="public-room click-active"
+                onClick={() => switchRoom(1)}
               >
-                {crew_name}
+                <div id="public-room-2" className="room-tab-text">
+                  Room 2
+                </div>
+              </div>
+              <div
+                className="public-room click-active"
+                onClick={() => switchRoom(2)}
+              >
+                <div id="public-room-3" className="room-tab-text">
+                  Room 3
+                </div>
+              </div>
+              <div
+                className="public-room click-active"
+                onClick={() => switchRoom(3)}
+              >
+                <div id="public-room-4" className="room-tab-text">
+                  Room 4
+                </div>
+              </div>
+              <div
+                className="public-room click-active"
+                onClick={() => switchRoom(4)}
+              >
+                <div id="public-room-5" className="room-tab-text">
+                  Room 5
+                </div>
               </div>
             </div>
           )}
