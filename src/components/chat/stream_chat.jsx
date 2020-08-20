@@ -7,7 +7,6 @@ import io from "socket.io-client";
 // Component imports
 import InfoBar from "./info_bar";
 import Input from "./input";
-import Messages from "./messages";
 import Message from "./message";
 
 import ScrollToBottom from "react-scroll-to-bottom";
