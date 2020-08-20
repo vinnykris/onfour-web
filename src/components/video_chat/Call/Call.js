@@ -119,7 +119,7 @@ export default function Call(props) {
   useEffect(() => {
     const t = setTimeout(() => {
       dispatch({ type: CLICK_ALLOW_TIMEOUT });
-    }, 2500);
+    }, 1500);
 
     return function cleanup() {
       clearTimeout(t);

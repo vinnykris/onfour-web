@@ -74,7 +74,7 @@ export default function Tile(props) {
   function toggle_audio_mute(mute_all) {
     if (document.getElementById(random_id)) {
       if (mute_all) {
-        document.getElementById(random_id).style.color = "red";
+        document.getElementById(random_id).style.color = "#fb5554";
         setAudioMute(true);
       } else {
         document.getElementById(random_id).style.color = "white";
@@ -91,9 +91,7 @@ export default function Tile(props) {
 
 
   useEffect(() => {
-    if (!props.isLocalPerson) {
-      reflect_audio_change(props.audioTrack);
-    }
+    reflect_audio_change(props.audioTrack);
   }, [props.audioTrack])
 
   function reflect_audio_change(audioTrack) {
@@ -101,7 +99,7 @@ export default function Tile(props) {
       if (audioTrack) {
         document.getElementById(fans_microphone_id).style.color = "white";
       } else {
-        document.getElementById(fans_microphone_id).style.color = "red";
+        document.getElementById(fans_microphone_id).style.color = "#fb5554";
       }
     }
   }
@@ -110,8 +108,8 @@ export default function Tile(props) {
     !props.isArtist ? (
       <div className={getClassNames()}>
         <div className="background" />
-        {!props.isLocalPerson ? (
-          <div>
+        {/* {!props.isLocalPerson ? ( */}
+          {/* <div> */}
             {props.artistView? (
               <i 
                 className="fa fa-microphone-slash mute-others-icon" 
@@ -132,8 +130,8 @@ export default function Tile(props) {
                 }}
               />
             </div> */}
-          </div>
-        ):null}
+          {/* </div> */}
+        {/* // ):null} */}
         <div className="video-call-participant-name">
           {props.username}
         </div>

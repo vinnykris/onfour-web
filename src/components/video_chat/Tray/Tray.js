@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import speak_icon from "../../../images/video_chat_icons/radio_button_checked_24px.png";
 import "./Tray.css";
 import TrayButton, {
   TYPE_MUTE_CAMERA,
@@ -68,6 +69,84 @@ export default function Tray(props) {
     props.onClickLeaveCall && props.onClickLeaveCall();
   }
 
+  let item = document.getElementById("press-to-talk");
+  let timerID;
+  let counter = 0;
+
+  let pressHoldEvent = new CustomEvent("pressHold");
+
+  // Increase or decreae value to adjust how long
+  // one should keep pressing down before the pressHold
+  // event fires
+  let pressHoldDuration = 10;
+
+  useEffect(() => {
+    if (item) {
+      // console.log("getting item");
+      // Listening for the mouse and touch events
+      item.addEventListener("mousedown", pressingDown, false);
+      item.addEventListener("mouseup", notPressingDown, false);
+      item.addEventListener("mouseleave", notPressingDown, false);
+
+      item.addEventListener("touchstart", pressingDown, false);
+      item.addEventListener("touchend", notPressingDown, false);
+
+      // // Listening for space bar pressing event
+      // document.addEventListener("keypress", pressingSpaceDown, false);
+      // document.addEventListener("keyup", notPressingSpaceDown, false);
+
+      // Listening for our custom pressHold event
+      item.addEventListener("pressHold", doSomething, false);
+    }
+  }, [item]);
+
+  function pressingDown(e) {
+    // Start the timer
+    requestAnimationFrame(timer);
+    e.preventDefault();
+  }
+
+  function pressingSpaceDown(e) {
+    if (e.charCode === 32 || e.keyCode === 32) {
+      requestAnimationFrame(timer);
+    }
+    e.preventDefault();
+  }
+
+  function notPressingSpaceDown(e) {
+    if (e.charCode === 32 || e.keyCode === 32) {
+      cancelAnimationFrame(timerID);
+      counter = 0;
+      callObject.setLocalAudio(false);
+    }
+    e.preventDefault();
+  }
+
+  function notPressingDown(e) {
+    // Stop the timer
+    cancelAnimationFrame(timerID);
+    counter = 0;
+    callObject.setLocalAudio(false);
+    e.preventDefault();
+  }
+
+  //
+  // Runs at 60fps when you are pressing down
+  //
+  function timer() {
+    if (counter < pressHoldDuration) {
+      timerID = requestAnimationFrame(timer);
+      counter++;
+    } else {
+      item.dispatchEvent(pressHoldEvent);
+    }
+  }
+
+  function doSomething(e) {
+    callObject.setLocalAudio(true);
+    
+  }
+
   /**
    * Start listening for participant changes when callObject is set (i.e. when the component mounts).
    * This event will capture any changes to your audio/video mute state.
@@ -113,6 +192,9 @@ export default function Tray(props) {
             highlighted={isMicMuted}
             onClick={toggleMic}
           />
+          <button id="press-to-talk" className="press-to-talk-btn">
+            <img src={speak_icon}></img>
+          </button>
         </div>
       ) : (
         <button
@@ -131,7 +213,7 @@ export default function Tray(props) {
         highlighted={isEnabledActiveSpeaker}
         onClick={toggleActiveSpeaker}
       /> */}
-      
+
       {/* {DailyIframe.supportedBrowser().supportsScreenShare && (
         <TrayButton
           type={TYPE_SCREEN}
