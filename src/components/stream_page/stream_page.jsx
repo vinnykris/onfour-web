@@ -619,9 +619,9 @@ const StreamPage = ({ is_soundcheck }) => {
                         <Row className="buttons-row" id="stream_info_top">
                           <Col size={2}>
                             <div className="artist-name-container">
-                              <h3 className="artist-name-stream">
+                              <span className="header-4 artist-name-stream">
                                 {artist_name}
-                              </h3>
+                              </span>
                             </div>
                           </Col>
                           <Col size={3}>

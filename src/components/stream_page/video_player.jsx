@@ -207,9 +207,9 @@ function VideoPlayer({
       {timer_placeholder.length ? (
         <div className="waiting-screen">
           <div className="waiting-message-container">
-            <h3 className="waiting-message1">Next Stream Coming Soon</h3>
+            <h3 className="header-3">Next Stream Coming Soon</h3>
             {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
-            <h5 className="waiting-message2">
+            <h5 className="header-4">
               {artist_name} - {concert_name}
             </h5>
           </div>
