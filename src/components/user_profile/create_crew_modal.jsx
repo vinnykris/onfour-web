@@ -109,7 +109,6 @@ const CreateCrewModal = ({
   };
 
   useEffect(() => {
-    console.log(crewMembers.length >= 5);
     if (crewName.length > 2 && crewMembers.length > 0) {
       setSaveButtonDisabled(false);
     } else {

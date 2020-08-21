@@ -18,6 +18,8 @@ const UserCrews = ({ userCrews, username }) => {
     else setShowSingleCrewModal(true);
   };
 
+  console.log({ userCrews });
+
   return (
     <Row>
       <Col size={1}>
@@ -66,6 +68,7 @@ const UserCrews = ({ userCrews, username }) => {
         crewAdmin={selectedCrew.admin}
         crewMembersProp={selectedCrew.membersArray}
         username={username}
+        crewId={selectedCrew.id}
       />
 
       <SingleCrewModal

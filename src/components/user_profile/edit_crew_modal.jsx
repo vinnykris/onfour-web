@@ -5,7 +5,11 @@ import RemoveCircleOutlinedIcon from "@material-ui/icons/RemoveCircleOutlined";
 
 import { Row, Col } from "../grid";
 
-import { getUsernameByEmail } from "../../utils/crew";
+import {
+  getUsernameByEmail,
+  updateCrewName,
+  updateCrewUsers,
+} from "../../utils/crew";
 
 const EditCrewModal = ({
   showModal,
@@ -15,6 +19,7 @@ const EditCrewModal = ({
   crewAdmin,
   crewMembersProp,
   username,
+  crewId,
 }) => {
   const [crewMembers, setCrewMembers] = useState(crewMembersProp);
   const [emailValue, setEmailValue] = useState("");
@@ -88,6 +93,28 @@ const EditCrewModal = ({
     setSaveButtonDisabled(true);
     setNewCrewName(crewName);
     setCrewMembers(crewMembersProp);
+  };
+
+  const handleUpdateCrew = async () => {
+    if (newCrewName !== crewName && newCrewName.length > 2)
+      await updateCrewName(crewId, newCrewName);
+
+    if (
+      crewMembersProp !== crewMembers &&
+      crewMembers.length < 7 &&
+      crewMembers.length > 1
+    ) {
+      const savingMembers = {};
+
+      crewMembers.forEach((member) => {
+        savingMembers[member.email] =
+          member.username === member.email ? "" : member.username;
+      });
+
+      await updateCrewUsers(crewId, savingMembers);
+    }
+
+    handleClose();
   };
 
   useEffect(() => {
@@ -191,6 +218,7 @@ const EditCrewModal = ({
               </button>
               <button
                 className="crew-modal-button-primary"
+                onClick={handleUpdateCrew}
                 disabled={saveButtonDisabled}
               >
                 Save Changes
