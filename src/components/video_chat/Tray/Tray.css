@@ -49,6 +49,8 @@
 
 .volume-slider {
   opacity: 0;
+  height: 30px !important;
+  padding: 0px 0 !important;
 }
 
 .volume-icon:hover {
