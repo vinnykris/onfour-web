@@ -8,7 +8,10 @@ import { Row, Col } from "../grid";
 import {
   getUsernameByEmail,
   updateCrewName,
+  addUserToCrew,
   updateCrewUsers,
+  removeUserFromCrew,
+  removeCrewFromUser,
 } from "../../utils/crew";
 
 const EditCrewModal = ({
@@ -104,14 +107,72 @@ const EditCrewModal = ({
       crewMembers.length < 7 &&
       crewMembers.length > 1
     ) {
-      const savingMembers = {};
+      const removeMembers = [];
+      const addMembers = [];
+      let saveUnknownUsers = false;
 
-      crewMembers.forEach((member) => {
-        savingMembers[member.email] =
-          member.username === member.email ? "" : member.username;
+      crewMembersProp.forEach((oldMember) => {
+        let memberFound = false;
+        crewMembers.forEach((newMember) => {
+          if (oldMember.email === newMember.email) memberFound = true;
+        });
+
+        if (!memberFound) {
+          removeMembers.push({
+            email: oldMember.email,
+            username: oldMember.username,
+          });
+
+          if (oldMember.email === oldMember.username) saveUnknownUsers = true;
+        }
       });
 
-      await updateCrewUsers(crewId, savingMembers);
+      crewMembers.forEach((newMember) => {
+        let foundNewMember = true;
+        crewMembersProp.forEach((oldMember) => {
+          if (newMember.email === oldMember.email) foundNewMember = false;
+        });
+
+        if (foundNewMember)
+          addMembers.push({
+            username: newMember.username,
+            email: newMember.email,
+          });
+      });
+
+      const removeMembersPromise = [];
+      const removeCrewUserPromise = [];
+      const addMembersPromise = [];
+
+      addMembers.forEach((newMember) => {
+        if (newMember.username !== newMember.email) {
+          addMembersPromise.push(
+            addUserToCrew(crewId, newMember.username, newMember.email, "D1AE53")
+          );
+        }
+      });
+
+      removeMembers.forEach((oldMember) => {
+        removeMembersPromise.push(removeUserFromCrew(oldMember.email, crewId));
+        if (oldMember.email !== oldMember.username)
+          removeCrewUserPromise.push(
+            removeCrewFromUser(oldMember.username, crewId)
+          );
+      });
+
+      await Promise.all(addMembersPromise);
+      await Promise.all(removeMembersPromise);
+      await Promise.all(removeCrewUserPromise);
+
+      if (saveUnknownUsers) {
+        const savingMembers = {};
+        crewMembers.forEach((member) => {
+          savingMembers[member.email] =
+            member.username === member.email ? "" : member.username;
+        });
+
+        await updateCrewUsers(crewId, savingMembers);
+      }
     }
 
     handleClose();
@@ -128,13 +189,18 @@ const EditCrewModal = ({
     } else {
       setMemberInputDisabled(false);
     }
+
+    if (crewMembers.length < 2) setSaveButtonDisabled(true);
   }, [crewMembers]);
 
   useEffect(() => {
     if (crewMembers.length >= 6) {
       setMemberInputDisabled(true);
     }
-  }, [memberInputDisabled]);
+
+    if (crewMembers.length < 2) setSaveButtonDisabled(true);
+    else setSaveButtonDisabled(false);
+  }, [memberInputDisabled, saveButtonDisabled]);
 
   return (
     <Rodal
