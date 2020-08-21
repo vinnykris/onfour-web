@@ -70,7 +70,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [concert_id, setConcertID] = useState("");
   const [concert_crews, setConcertCrews] = useState("");
   const [user_crews, setUserCrews] = useState("");
-  const [is_live, setIsLive] = useState(false);
+  const [is_live, setIsLive] = useState(true);
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
@@ -222,7 +222,7 @@ const StreamPage = ({ is_soundcheck }) => {
     setConcertName(info_list[0].concert_name);
     getArtistInfo(info_list[0].artist_id);
     setConcertID(info_list[0].id);
-    setIsLive(info_list[0].is_live);
+    // setIsLive(info_list[0].is_live);
     setIsFree(info_list[0].general_price === 0);
     setConcertCrews(JSON.parse(info_list[0].crew_list));
   };
@@ -404,11 +404,11 @@ const StreamPage = ({ is_soundcheck }) => {
     }
   };
 
-  useEffect(() => {
-    setInterval(() => {
-      getIsLive();
-    }, 3000);
-  }, []);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     getIsLive();
+  //   }, 3000);
+  // }, []);
 
   const paymentTabSelected = (option) => {
     if (option == 0) {
