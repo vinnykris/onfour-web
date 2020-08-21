@@ -75,3 +75,7 @@
 .muted {
   color: #fb5554;
 }
+
+.press-to-talk-btn {
+  background-color: transparent;
+}
