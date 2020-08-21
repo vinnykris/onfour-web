@@ -143,6 +143,7 @@ listConcerts(filter: $filter, limit: 1000) {
     artist_id
     concert_name
     general_price
+    crew_list
   }
 }
 }`;
