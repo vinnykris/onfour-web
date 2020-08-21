@@ -70,8 +70,9 @@
 
 .press-to-talk-btn {
   background-color: #E465A2 !important;
-  width: 200px !important;
+  width: 55% !important;
   font-size: 0.8rem !important;
+  line-height: 30px !important;
   /* margin: 2px !important; */
   margin-left: 20px !important;
   color: #17171b !important;
