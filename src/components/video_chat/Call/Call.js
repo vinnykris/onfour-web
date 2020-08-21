@@ -147,6 +147,7 @@ export default function Call(props) {
           isArtist={props.artist_name === callItem.username}
           mute_all={props.mute_all}
           username={callItem.username}
+          volume = {props.volume}
         />
       );
       if (isLarge) {

@@ -9,6 +9,7 @@ import TrayButton, {
 import CallObjectContext from "../CallObjectContext";
 import { logDailyEvent } from "../logUtils";
 //import DailyIframe from "@daily-co/daily-js";
+import RangeSlider from "react-bootstrap-range-slider";
 
 /**
  * Gets [isCameraMuted, isMicMuted, isSharingScreen].
@@ -113,6 +114,17 @@ export default function Tray(props) {
             highlighted={isMicMuted}
             onClick={toggleMic}
           />
+          <div className="volume-container">
+            <i class="fas fa-volume-up volume-icon"></i>
+            <RangeSlider
+              className="volume-slider"
+              value={props.volume * 100}
+              onChange={(changeEvent) =>
+                props.adjust_volume(changeEvent.target.value / 100)
+              }
+              variant="dark"
+            />
+          </div>
         </div>
       ) : (
         <button
@@ -131,7 +143,7 @@ export default function Tray(props) {
         highlighted={isEnabledActiveSpeaker}
         onClick={toggleActiveSpeaker}
       /> */}
-      
+
       {/* {DailyIframe.supportedBrowser().supportsScreenShare && (
         <TrayButton
           type={TYPE_SCREEN}

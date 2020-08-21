@@ -36,6 +36,13 @@ export default function Tile(props) {
       (audioEl.current.srcObject = new MediaStream([props.audioTrack]));
   }, [props.audioTrack]);
 
+  useEffect(() => {
+    console.log(props.volume);
+    if (document.getElementById(audio_component_id)) {
+      document.getElementById(audio_component_id).volume = props.volume;
+    }
+  },[props.volume])
+
   function getLoadingComponent() {
     return props.isLoading && <p className="loading">Loading...</p>;
   }
@@ -72,36 +79,36 @@ export default function Tile(props) {
   // }
 
   function toggle_audio_mute(mute_all) {
-    if (document.getElementById(random_id)) {
-      if (mute_all) {
-        document.getElementById(random_id).style.display = "inline";
-        setAudioMute(true);
-      } else {
-        document.getElementById(random_id).style.display = "none";
-        setAudioMute(false);
+    if (props.artistView) {
+      if (document.getElementById(random_id)) {
+        if (mute_all) {
+          document.getElementById(random_id).style.opacity = "100";
+          setAudioMute(true);
+        } else {
+          document.getElementById(random_id).style.opacity = "0";
+          setAudioMute(false);
+        }
       }
     }
   }
 
   useEffect(() => {
     if (props.artistView) {
-    toggle_audio_mute(props.mute_all)
+      toggle_audio_mute(props.mute_all);
     }
   }, [props.mute_all])
 
 
   useEffect(() => {
-    if (!props.isLocalPerson) {
-      reflect_audio_change(props.audioTrack);
-    }
+    reflect_audio_change(props.audioTrack);
   }, [props.audioTrack])
 
   function reflect_audio_change(audioTrack) {
     if (document.getElementById(fans_microphone_id)) {
       if (audioTrack) {
-        document.getElementById(random_id).style.display = "none";
+        document.getElementById(fans_microphone_id).style.opacity = "0";
       } else {
-        document.getElementById(random_id).style.display = "inline";
+        document.getElementById(fans_microphone_id).style.opacity = "100";
       }
     }
   }
@@ -110,8 +117,8 @@ export default function Tile(props) {
     !props.isArtist ? (
       <div className={getClassNames()}>
         <div className="background" />
-        {!props.isLocalPerson ? (
-          <div>
+        {/* {!props.isLocalPerson ? (
+          <div> */}
             {props.artistView? (
               <i 
                 className="fa fa-microphone-slash mute-others-icon" 
@@ -132,8 +139,8 @@ export default function Tile(props) {
                 }}
               />
             </div> */}
-          </div>
-        ):null}
+          {/* </div>
+        ):null} */}
         <div className="video-call-participant-name">
           {props.username}
         </div>
