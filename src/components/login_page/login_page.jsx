@@ -1,5 +1,6 @@
 // Main Imports
 import history from "../../history";
+import { NavLink, useLocation } from "react-router-dom";
 
 // React
 import React, { useState, useEffect } from "react";
@@ -127,9 +128,18 @@ const Login = (props) => {
               </p>
               <p className="signin-footer">
                 Don't have an account?{" "}
-                <a href="/register" className="signup-link">
+                {/* <a href="/register" className="signup-link">
                   Sign up
-                </a>
+                </a> */}
+                <NavLink
+                  to={{
+                    pathname: "/register",
+                    state: { current: from_path },
+                  }}
+                  className="signup-link"
+                >
+                  Sign up
+                </NavLink>
                 .
               </p>
             </div>

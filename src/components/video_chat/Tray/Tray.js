@@ -296,14 +296,6 @@ export default function Tray(props) {
               variant="dark"
             />
           </div>
-          <button
-            id="press-to-talk"
-            type="unmute-all"
-            className="tray-button press-to-talk-btn"
-            disabled={props.disabled}
-          >
-            Press & hold to talk
-          </button>
         </div>
       ) : (
         <button
@@ -331,6 +323,14 @@ export default function Tray(props) {
           onClick={toggleSharingScreen}
         />
       )} */}
+      <button
+        id="press-to-talk"
+        type="unmute-all"
+        className="tray-button press-to-talk-btn"
+        disabled={props.disabled}
+      >
+        Press & hold to talk
+      </button>
       <TrayButton
         type={TYPE_LEAVE}
         disabled={props.disabled}
