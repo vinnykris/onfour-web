@@ -44,8 +44,8 @@ export default function Tray(props) {
   const [isMicMuted, setMicMuted] = useState(false);
   const [isSharingScreen, setSharingScreen] = useState(false);
   const [isEnabledActiveSpeaker, setEnableActiveSpeaker] = useState(false);
-  const [camera_icon, setCameraIcon] = useState("fas fa-video-slash muted");
-  const [mic_icon, setMicIcon] = useState("fas fa-microphone-slash muted");
+  const [camera_icon, setCameraIcon] = useState("fas fa-video-slash unmuted");
+  const [mic_icon, setMicIcon] = useState("fas fa-microphone-slash unmuted");
   const [volume_icon, setVolumeIcon] = useState("fas fa-volume-up unmuted");
   const [current_volume, setCurrentVol] = useState(100);
   //const [leave_icon, setLeaveIcon] = useState("")
