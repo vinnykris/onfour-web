@@ -53,13 +53,14 @@
   position: absolute;
   right: 5px;
   top: 5px;
-  color: white;
-  z-index: 2;
+  color: red;
+  display: none;
+  z-index: 1;
 }
 
-.mute-others-icon:hover {
+/* .mute-others-icon:hover {
     cursor: pointer;
-}
+} */
 
 .mute-others-icon:active {
   color: red;

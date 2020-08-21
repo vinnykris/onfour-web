@@ -512,6 +512,7 @@ button:focus {
   width: 100% !important;
   bottom: 50px;
   right: 0px;
+  z-index: 2;
 }
 
 @media (min-width: 320px) and (max-width: 1200px) {

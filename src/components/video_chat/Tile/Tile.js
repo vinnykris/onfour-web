@@ -74,10 +74,10 @@ export default function Tile(props) {
   function toggle_audio_mute(mute_all) {
     if (document.getElementById(random_id)) {
       if (mute_all) {
-        document.getElementById(random_id).style.color = "red";
+        document.getElementById(random_id).style.display = "inline";
         setAudioMute(true);
       } else {
-        document.getElementById(random_id).style.color = "white";
+        document.getElementById(random_id).style.display = "none";
         setAudioMute(false);
       }
     }
@@ -99,9 +99,9 @@ export default function Tile(props) {
   function reflect_audio_change(audioTrack) {
     if (document.getElementById(fans_microphone_id)) {
       if (audioTrack) {
-        document.getElementById(fans_microphone_id).style.color = "white";
+        document.getElementById(random_id).style.display = "none";
       } else {
-        document.getElementById(fans_microphone_id).style.color = "red";
+        document.getElementById(random_id).style.display = "inline";
       }
     }
   }
