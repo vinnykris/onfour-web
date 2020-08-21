@@ -70,7 +70,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [concert_id, setConcertID] = useState("");
   const [concert_crews, setConcertCrews] = useState("");
   const [user_crews, setUserCrews] = useState("");
-  const [is_live, setIsLive] = useState(false);
+  const [is_live, setIsLive] = useState(true);
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
@@ -222,7 +222,7 @@ const StreamPage = ({ is_soundcheck }) => {
     setConcertName(info_list[0].concert_name);
     getArtistInfo(info_list[0].artist_id);
     setConcertID(info_list[0].id);
-    setIsLive(info_list[0].is_live);
+    // setIsLive(info_list[0].is_live);
     setIsFree(info_list[0].general_price === 0);
     setConcertCrews(JSON.parse(info_list[0].crew_list));
   };
@@ -404,11 +404,11 @@ const StreamPage = ({ is_soundcheck }) => {
     }
   };
 
-  useEffect(() => {
-    setInterval(() => {
-      getIsLive();
-    }, 3000);
-  }, []);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     getIsLive();
+  //   }, 3000);
+  // }, []);
 
   const paymentTabSelected = (option) => {
     if (option == 0) {
@@ -541,7 +541,7 @@ const StreamPage = ({ is_soundcheck }) => {
               {/* <Modal is_open={open_modal}></Modal> */}
               <Row className="desktop-stream-row">
                 {/* <Col size={0.5}></Col> */}
-                <Col size={6} id="stream_col">
+                <Col size={6} id="stream_col" className="stream-col">
                   <div className="stream-main" id="stream_main_section">
                     <div className="stream-wrapper" id="video_player">
                       {is_free ||
@@ -804,16 +804,17 @@ const StreamPage = ({ is_soundcheck }) => {
                       </Col>
                     </Row>
                   </div>
+                 
                 </Col>
                 <Col size={3} id="chat_container" className="sticky-container">
                   <div className="chat-main" id="chat_main">
                     <div className="chat-wrapper">
-                      {/* <Row className="video-chat-row">
+                      <Row className="video-chat-row">
                         <VideoChat
                           user_name={username ? username : "GUEST"}
                           artist_name="vinnykris"
                         ></VideoChat>
-                      </Row> */}
+                      </Row>
                       <Row className="chat-row">
                         <Chat
                           chat_name={username ? username : "GUEST"}
