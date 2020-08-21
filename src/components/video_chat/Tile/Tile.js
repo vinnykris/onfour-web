@@ -36,6 +36,12 @@ export default function Tile(props) {
       (audioEl.current.srcObject = new MediaStream([props.audioTrack]));
   }, [props.audioTrack]);
 
+  useEffect(() => {
+    if (document.getElementById(audio_component_id)) {
+      document.getElementById(audio_component_id).volume = props.volume;
+    }
+  },[props.volume])
+
   function getLoadingComponent() {
     return props.isLoading && <p className="loading">Loading...</p>;
   }
@@ -72,42 +78,36 @@ export default function Tile(props) {
   // }
 
   function toggle_audio_mute(mute_all) {
-    if (document.getElementById(fans_microphone_id)) {
-      if (mute_all) {
-        if (!props.isLocalPerson) {
-          document.getElementById(fans_microphone_id).style.color = "#fb5554";
+    if (props.artistView) {
+      if (document.getElementById(random_id)) {
+        if (mute_all) {
+          document.getElementById(random_id).style.opacity = "100";
           setAudioMute(true);
+        } else {
+          document.getElementById(random_id).style.opacity = "0";
+          setAudioMute(false);
         }
-      } else {
-        if (props.audioTrack) {
-          document.getElementById(fans_microphone_id).style.color = "white";
-        }
-
-        setAudioMute(false);
       }
     }
   }
 
   useEffect(() => {
-    // if (props.artistView) {
-    toggle_audio_mute(props.mute_all)
-    console.log(props.mute_all)
-    // }
+    if (props.artistView) {
+      toggle_audio_mute(props.mute_all);
+    }
   }, [props.mute_all])
 
 
   useEffect(() => {
-    if (!props.mute_all || props.isLocalPerson) {
-      reflect_audio_change(props.audioTrack);
-    }
+    reflect_audio_change(props.audioTrack);
   }, [props.audioTrack])
 
   function reflect_audio_change(audioTrack) {
     if (document.getElementById(fans_microphone_id)) {
       if (audioTrack) {
-        document.getElementById(fans_microphone_id).style.color = "white";
+        document.getElementById(fans_microphone_id).style.opacity = "0";
       } else {
-        document.getElementById(fans_microphone_id).style.color = "#fb5554";
+        document.getElementById(fans_microphone_id).style.opacity = "100";
       }
     }
   }
@@ -121,7 +121,7 @@ export default function Tile(props) {
             {props.artistView? (
               <i 
                 className="fa fa-microphone-slash mute-others-icon" 
-                id={fans_microphone_id} 
+                id={random_id} 
               ></i>
             ) : (
               <i

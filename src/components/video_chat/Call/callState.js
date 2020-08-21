@@ -133,7 +133,7 @@ function getMessage(callState, isPublic) {
   let detail = null;
   let isError = false;
   if (callState.fatalError) {
-    header = `Fatal error: ${callState.fatalError}`;
+    header = `OOPS! ${callState.fatalError}. Leaving in 3s...`;
     isError = true;
   } else if (callState.camOrMicError) {
     header = `Camera or mic access error: ${callState.camOrMicError}`;

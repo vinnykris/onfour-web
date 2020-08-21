@@ -53,8 +53,9 @@
   position: absolute;
   left: 5px;
   bottom: 5px;
-  color: white;
-  z-index: 2;
+  color: #fb5554;
+  z-index: 1;
+  opacity: 0;
 }
 
 /* .mute-others-icon:hover {

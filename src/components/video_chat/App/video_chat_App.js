@@ -41,6 +41,7 @@ export default function VideoChatApp({
   const [isPublic, setIsPublic] = useState(true);
   const [mute_all, setMuteAll] = useState(true);
   const [mute_button_msg, setMuteButtonMsg] = useState("UNMUTE ALL");
+  const [volume, setVolume] = useState(1);
   const [current_room, setCurrentRoom] = useState("room1");
   const isInCrew = owner_name.indexOf(user_name) >= 0;
 
@@ -235,6 +236,10 @@ export default function VideoChatApp({
           break;
         case "error":
           setAppState(STATE_ERROR);
+          setTimeout(function () {
+              setRoomUrl(null);
+              setAppState(STATE_IDLE);
+          }, 3000);
           break;
         default:
           break;
@@ -279,7 +284,8 @@ export default function VideoChatApp({
    * until then avoids this scenario.
    * !!!
    */
-  const enableCallButtons = [STATE_JOINED, STATE_ERROR].includes(appState);
+  const enableCallButtons = [STATE_JOINED].includes(appState);
+  // const enableCallButtons = [STATE_JOINED, STATE_ERROR].includes(appState);
 
   /**
    * Only enable the start button if we're in an idle state (i.e. not creating,
@@ -418,6 +424,7 @@ export default function VideoChatApp({
             artistView={artistView}
             colNum={colNum}
             mute_all={mute_all}
+            volume={volume}
           />
           <Tray
             disabled={!enableCallButtons}
@@ -425,6 +432,8 @@ export default function VideoChatApp({
             artistView={artistView}
             mute_function={toggle_mute_unmute_all}
             button_message={mute_button_msg}
+            volume={volume}
+            adjust_volume={setVolume}
           />
         </CallObjectContext.Provider>
       ) : (
