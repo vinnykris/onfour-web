@@ -127,6 +127,7 @@ export default function Tray(props) {
     cancelAnimationFrame(timerID);
     counter = 0;
     callObject.setLocalAudio(false);
+    props.stream_vol_adjust(0.9);
     e.preventDefault();
   }
 
@@ -143,8 +144,9 @@ export default function Tray(props) {
   }
 
   function doSomething(e) {
+    console.log("setting volume");
     callObject.setLocalAudio(true);
-    
+    props.stream_vol_adjust(0.25);
   }
 
   /**

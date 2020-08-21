@@ -37,6 +37,7 @@ function VideoPlayer({
   username,
   concert_id,
   is_live,
+  stream_volume
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   var player = null;
@@ -175,12 +176,14 @@ function VideoPlayer({
   // if (auth) {
 
   const player_ref = useRef();
+  const [global_player,setGlobalPlayer] = useState();
+
 
   useEffect(() => {
     if (!timer_placeholder.length && is_live) {
       player = videojs(
         player_ref.current,
-        { autoplay: true, muted: true, controls: true, liveui: true },
+        { autoplay: true, muted: false, controls: true, liveui: true },
         () => {
           player.src(url);
         }
@@ -193,14 +196,25 @@ function VideoPlayer({
           iOS: true,
         },
       });
+      setGlobalPlayer(player);
     }
   }, [timer_placeholder.length, is_live]);
 
   useEffect(() => {
     return () => {
       if (player) player.dispose();
+      if (global_player) global_player.dispose();
+      setGlobalPlayer();
     };
   }, []);
+
+  useEffect(() => {
+    if (stream_volume) {
+      if (global_player) {
+        global_player.volume(stream_volume);
+      }
+    }
+  },[stream_volume]);
 
   return (
     <div className="countdown-wrapper">

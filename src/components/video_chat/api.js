@@ -14,7 +14,7 @@ async function createRoom(is_public) {
 
   // Comment out the above and uncomment the below, using your own URL
   if (is_public) {
-    return { url: "https://onfour_test.daily.co/test_default_video_off" };
+    return { url: "https://onfour.daily.co/room1" };
   } else {
     return { url: "https://onfour_test.daily.co/bar" };
   }
