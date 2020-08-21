@@ -186,14 +186,15 @@ export default function Tray(props) {
             />
           </div>
           /> */}
-          <button
+          {/* <button
             type={TYPE_MUTE_MIC}
             className="tray-button"
             onClick={switchMicIcon}
             disabled={props.disabled}
           >
             <i className={mic_icon}></i>
-          </button>
+          </button> */}
+
           <div className="volume-container">
             <button
               type="unmute-all"
@@ -206,17 +207,16 @@ export default function Tray(props) {
             </button>
             <RangeSlider
               className="volume-slider"
-              id = "range-slider-haha"
+              id="range-slider-haha"
               value={props.volume * 100}
-              onChange={(changeEvent) =>
-                {
-                  props.adjust_volume(changeEvent.target.value / 100);
-                  reflect_speaker(changeEvent.target.value);
-                }
-              }
+              onChange={(changeEvent) => {
+                props.adjust_volume(changeEvent.target.value / 100);
+                reflect_speaker(changeEvent.target.value);
+              }}
               variant="dark"
             />
           </div>
+          <button className="tray-talk-button">Press and hold to talk</button>
         </div>
       ) : (
         <button
