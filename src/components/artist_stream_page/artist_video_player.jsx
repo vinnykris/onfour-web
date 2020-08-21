@@ -19,7 +19,7 @@ function VideoPlayer({ url, is_live }) {
 
   // Showing the stream
   return (
-    <div className="player-wrapper">
+    <div className="artist-player-wrapper">
       {width <= 600 ? (
         <div className="player-inner-container">
           <ReactPlayer
