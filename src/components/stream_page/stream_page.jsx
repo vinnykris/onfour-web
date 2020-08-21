@@ -85,6 +85,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [venmo_selected, setVenmoSelected] = useState(false);
   const [credit_selected, setCreditSelected] = useState(true);
   const [paypal_selected, setPaypalSelected] = useState(false);
+  const [stream_volume, setStreamVolume] = useState(1.0);
 
   const history = useHistory();
 
@@ -562,6 +563,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           username={username}
                           concert_id={concert_id}
                           is_live={is_live}
+                          stream_volume={stream_volume}
                         />
                       ) : (
                         <div className="buy-ticket-message-container">
@@ -804,7 +806,6 @@ const StreamPage = ({ is_soundcheck }) => {
                       </Col>
                     </Row>
                   </div>
-                 
                 </Col>
                 <Col size={3} id="chat_container" className="sticky-container">
                   <div className="chat-main" id="chat_main">
@@ -813,6 +814,7 @@ const StreamPage = ({ is_soundcheck }) => {
                         <VideoChat
                           user_name={username ? username : "GUEST"}
                           artist_name="vinnykris"
+                          stream_vol_adjust={setStreamVolume}
                         ></VideoChat>
                       </Row>
                       <Row className="chat-row">

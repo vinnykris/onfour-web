@@ -17,12 +17,19 @@
 }
 
 .range-slider__wrap {
-    position: relative;
+    position: absolute;
+    transform: rotate(-90deg);
+
     /* display: block; */
-    display: inline-flex;
-    left: -6px;
-    height: calc(1.5em + 0.75rem + 2px);
+    /* display: inline-flex; */
+    left: -15px;
+    top: -55px;
+    height: 30px;
     width: 80px;
+}
+
+.range-slider__tooltip {
+  display: none !important;
 }
 
 .range-slider--primary {
@@ -61,6 +68,19 @@
   flex-direction: row;
 }
 
+.press-to-talk-btn {
+  background-color: #E465A2 !important;
+  width: 200px !important;
+  font-size: 0.8rem !important;
+  /* margin: 2px !important; */
+  margin-left: 20px !important;
+  color: #17171b !important;
+  font-family: 'Exo 2', sans-serif;
+}
+
+.press-to-talk-btn:active {
+  background-color: #EA91BD !important;
+}
 /* .new-tray-button {
   width: 48px;
   height: 30px;

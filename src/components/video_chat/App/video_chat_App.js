@@ -34,6 +34,7 @@ export default function VideoChatApp({
   artist_name,
   artistView,
   colNum,
+  stream_vol_adjust
 }) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
@@ -118,14 +119,14 @@ export default function VideoChatApp({
     // }
   }, []);
 
-  /**
-   * Starts leaving the current call.
-   */
-  const startLeavingCall = useCallback(() => {
-    if (!callObject) return;
-    setAppState(STATE_LEAVING);
-    callObject.leave();
-  }, [callObject]);
+                 /**
+                  * Starts leaving the current call.
+                  */
+                 const startLeavingCall = useCallback(() => {
+                   if (!callObject) return;
+                   setAppState(STATE_LEAVING);
+                   callObject.leave();
+                 }, [callObject]);
 
   const completelyLeaveVideoChat = useCallback(async () => {
     if (!callObject) return;
@@ -188,38 +189,38 @@ export default function VideoChatApp({
   //   }
   // }, [startJoiningPrivateCall]);
 
-  /**
-   * Update the page's URL to reflect the active call when roomUrl changes.
-   *
-   * This demo uses replaceState rather than pushState in order to avoid a bit
-   * of state-management complexity. See the comments around enableCallButtons
-   * and enableStartButton for more information.
-   */
-  useEffect(() => {
-    const pageUrl = pageUrlFromRoomUrl(roomUrl);
-    if (pageUrl === window.location.href) return;
-    window.history.replaceState(null, null, pageUrl);
-  }, [roomUrl]);
+                 /**
+                  * Update the page's URL to reflect the active call when roomUrl changes.
+                  *
+                  * This demo uses replaceState rather than pushState in order to avoid a bit
+                  * of state-management complexity. See the comments around enableCallButtons
+                  * and enableStartButton for more information.
+                  */
+                 useEffect(() => {
+                   const pageUrl = pageUrlFromRoomUrl(roomUrl);
+                   if (pageUrl === window.location.href) return;
+                   window.history.replaceState(null, null, pageUrl);
+                 }, [roomUrl]);
 
-  /**
-   * Uncomment to attach call object to window for debugging purposes.
-   */
-  // useEffect(() => {
-  //   window.callObject = callObject;
-  // }, [callObject]);
+                 /**
+                  * Uncomment to attach call object to window for debugging purposes.
+                  */
+                 // useEffect(() => {
+                 //   window.callObject = callObject;
+                 // }, [callObject]);
 
-  /**
-   * Update app state based on reported meeting state changes.
-   *
-   * NOTE: Here we're showing how to completely clean up a call with destroy().
-   * This isn't strictly necessary between join()s, but is good practice when
-   * you know you'll be done with the call object for a while and you're no
-   * longer listening to its events.
-   */
-  useEffect(() => {
-    if (!callObject) return;
+                 /**
+                  * Update app state based on reported meeting state changes.
+                  *
+                  * NOTE: Here we're showing how to completely clean up a call with destroy().
+                  * This isn't strictly necessary between join()s, but is good practice when
+                  * you know you'll be done with the call object for a while and you're no
+                  * longer listening to its events.
+                  */
+                 useEffect(() => {
+                   if (!callObject) return;
 
-    const events = ["joined-meeting", "left-meeting", "error"];
+                   const events = ["joined-meeting", "left-meeting", "error"];
 
     function handleNewMeetingState(event) {
       event && logDailyEvent(event);
@@ -246,21 +247,21 @@ export default function VideoChatApp({
       }
     }
 
-    // Use initial state
-    handleNewMeetingState();
+                   // Use initial state
+                   handleNewMeetingState();
 
-    // Listen for changes in state
-    for (const event of events) {
-      callObject.on(event, handleNewMeetingState);
-    }
+                   // Listen for changes in state
+                   for (const event of events) {
+                     callObject.on(event, handleNewMeetingState);
+                   }
 
-    // Stop listening for changes in state
-    return function cleanup() {
-      for (const event of events) {
-        callObject.off(event, handleNewMeetingState);
-      }
-    };
-  }, [callObject]);
+                   // Stop listening for changes in state
+                   return function cleanup() {
+                     for (const event of events) {
+                       callObject.off(event, handleNewMeetingState);
+                     }
+                   };
+                 }, [callObject]);
 
   // useEffect(() => {
   //   document.getElementById("public-room" + current_room.substr(current_room.length - 1)).style.color = "white";
@@ -287,18 +288,18 @@ export default function VideoChatApp({
   const enableCallButtons = [STATE_JOINED].includes(appState);
   // const enableCallButtons = [STATE_JOINED, STATE_ERROR].includes(appState);
 
-  /**
-   * Only enable the start button if we're in an idle state (i.e. not creating,
-   * joining, etc.).
-   *
-   * !!!
-   * IMPORTANT: only one call object is meant to be used at a time. Creating a
-   * new call object with DailyIframe.createCallObject() *before* your previous
-   * callObject.destroy() completely finishes can result in unexpected behavior.
-   * Disabling the start button until then avoids that scenario.
-   * !!!
-   */
-  const enableStartButton = appState === STATE_IDLE;
+                 /**
+                  * Only enable the start button if we're in an idle state (i.e. not creating,
+                  * joining, etc.).
+                  *
+                  * !!!
+                  * IMPORTANT: only one call object is meant to be used at a time. Creating a
+                  * new call object with DailyIframe.createCallObject() *before* your previous
+                  * callObject.destroy() completely finishes can result in unexpected behavior.
+                  * Disabling the start button until then avoids that scenario.
+                  * !!!
+                  */
+                 const enableStartButton = appState === STATE_IDLE;
 
   const room_ids = [
     "public-room-1",
@@ -329,14 +330,16 @@ export default function VideoChatApp({
     document.getElementById(selected).style.color = "white";
   };
 
-  const switchToPrivateVideoChat = () => {
-    if (document.getElementById("public-room")) {
-      document.getElementById("public-room").style.color = "rgb(173, 173, 173)";
-      document.getElementById("private-room").style.color = "white";
-      setIsPublic(false);
-      startLeavingCall();
-    }
-  };
+                 const switchToPrivateVideoChat = () => {
+                   if (document.getElementById("public-room")) {
+                     document.getElementById("public-room").style.color =
+                       "rgb(173, 173, 173)";
+                     document.getElementById("private-room").style.color =
+                       "white";
+                     setIsPublic(false);
+                     startLeavingCall();
+                   }
+                 };
 
   const toggle_mute_unmute_all = () => {
     if (mute_all) {
@@ -434,6 +437,7 @@ export default function VideoChatApp({
             button_message={mute_button_msg}
             volume={volume}
             adjust_volume={setVolume}
+            stream_vol_adjust={stream_vol_adjust}
           />
         </CallObjectContext.Provider>
       ) : (

@@ -17,6 +17,7 @@ export default function Tile(props) {
 
   const [audioMute, setAudioMute] = useState(false);
   const random_id = Math.random();
+  const video_component_id = "video" + random_id.toString();
   const audio_component_id = "audio" + random_id.toString();
   const fans_microphone_id = "fans-mic" + random_id.toString();
 
@@ -48,7 +49,7 @@ export default function Tile(props) {
 
   function getVideoComponent() {
     return (
-      props.videoTrack && <video autoPlay muted playsInline ref={videoEl} />
+      props.videoTrack && <video autoPlay id={video_component_id} muted playsInline ref={videoEl} />
     );
   }
 
@@ -106,8 +107,15 @@ export default function Tile(props) {
     if (document.getElementById(fans_microphone_id)) {
       if (audioTrack) {
         document.getElementById(fans_microphone_id).style.opacity = "0";
+        if (document.getElementById(video_component_id)) {
+          document.getElementById(video_component_id).style.border =
+            "2px solid #E465A2";
+        }
       } else {
         document.getElementById(fans_microphone_id).style.opacity = "100";
+        if (document.getElementById(video_component_id)) {
+          document.getElementById(video_component_id).style.border = "none";
+        }
       }
     }
   }
