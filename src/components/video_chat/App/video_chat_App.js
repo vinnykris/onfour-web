@@ -236,6 +236,10 @@ export default function VideoChatApp({
           break;
         case "error":
           setAppState(STATE_ERROR);
+          setTimeout(function () {
+              setRoomUrl(null);
+              setAppState(STATE_IDLE);
+          }, 3000);
           break;
         default:
           break;
@@ -280,7 +284,8 @@ export default function VideoChatApp({
    * until then avoids this scenario.
    * !!!
    */
-  const enableCallButtons = [STATE_JOINED, STATE_ERROR].includes(appState);
+  const enableCallButtons = [STATE_JOINED].includes(appState);
+  // const enableCallButtons = [STATE_JOINED, STATE_ERROR].includes(appState);
 
   /**
    * Only enable the start button if we're in an idle state (i.e. not creating,
