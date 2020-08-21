@@ -37,6 +37,7 @@
   width: 100%;
 }
 
+
 .mobile-grid-stream {
   display: inline;
   @include respond-to("small") {
@@ -106,8 +107,8 @@
 }
 
 .chat-row {
-  height: 100%;
-  // height: 40%;
+  // height: 100%;
+  height: 40%;
   width: 100%;
   position: relative;
 }
@@ -295,6 +296,7 @@
   background: #131313;
   width: 100%;
   height: 100%;
+  // border-bottom: 3px solid black;
   // height: 100%;
   // height: 41.4473684vw;
   // width: auto;
@@ -542,7 +544,7 @@
 }
 
 .bottom-buttons-row {
-  border-radius: 4px 4px 0 0;
+  // border-radius: 4px 4px 0 0;
   border-top: 1px solid #454242;
   height: 50%;
 }

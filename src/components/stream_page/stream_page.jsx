@@ -541,7 +541,7 @@ const StreamPage = ({ is_soundcheck }) => {
               {/* <Modal is_open={open_modal}></Modal> */}
               <Row className="desktop-stream-row">
                 {/* <Col size={0.5}></Col> */}
-                <Col size={6} id="stream_col">
+                <Col size={6} id="stream_col" className="stream-col">
                   <div className="stream-main" id="stream_main_section">
                     <div className="stream-wrapper" id="video_player">
                       {is_free ||
@@ -804,16 +804,17 @@ const StreamPage = ({ is_soundcheck }) => {
                       </Col>
                     </Row>
                   </div>
+                 
                 </Col>
                 <Col size={3} id="chat_container" className="sticky-container">
                   <div className="chat-main" id="chat_main">
                     <div className="chat-wrapper">
-                      {/* <Row className="video-chat-row">
+                      <Row className="video-chat-row">
                         <VideoChat
                           user_name={username ? username : "GUEST"}
                           artist_name="vinnykris"
                         ></VideoChat>
-                      </Row> */}
+                      </Row>
                       <Row className="chat-row">
                         <Chat
                           chat_name={username ? username : "GUEST"}

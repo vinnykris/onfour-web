@@ -21,9 +21,10 @@ import { logDailyEvent } from "../logUtils";
 export default function Call(props) {
   const callObject = useContext(CallObjectContext);
   callObject.setBandwidth({
-    kbs: 20,
-    trackConstraints: { width: 160, height: 90, frameRate: 5 }
+    kbs: 40,
+    trackConstraints: { width: 640, height: 360, frameRate: 8 },
   });
+  
   const [callState, dispatch] = useReducer(callReducer, initialCallState);
 
   /**
@@ -144,8 +145,9 @@ export default function Call(props) {
           isLoading={callItem.isLoading}
           artistView={props.artistView}
           isArtist={props.artist_name === callItem.username}
-          mute_all = {props.mute_all}
-          username = {callItem.username}
+          mute_all={props.mute_all}
+          username={callItem.username}
+          volume = {props.volume}
         />
       );
       if (isLarge) {
