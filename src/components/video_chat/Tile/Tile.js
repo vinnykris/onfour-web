@@ -37,7 +37,6 @@ export default function Tile(props) {
   }, [props.audioTrack]);
 
   useEffect(() => {
-    console.log(props.volume);
     if (document.getElementById(audio_component_id)) {
       document.getElementById(audio_component_id).volume = props.volume;
     }

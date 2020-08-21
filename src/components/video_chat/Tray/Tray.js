@@ -44,6 +44,14 @@ export default function Tray(props) {
   const [isMicMuted, setMicMuted] = useState(false);
   const [isSharingScreen, setSharingScreen] = useState(false);
   const [isEnabledActiveSpeaker, setEnableActiveSpeaker] = useState(false);
+  const [camera_icon, setCameraIcon] = useState("fas fa-video-slash muted");
+  const [mic_icon, setMicIcon] = useState("fas fa-microphone-slash muted");
+  const [volume_icon, setVolumeIcon] = useState("fas fa-volume-up unmuted");
+  const [current_volume, setCurrentVol] = useState(100);
+  //const [leave_icon, setLeaveIcon] = useState("")
+  // var camera_icon = "fa fa-microphone-slash";
+  // var mic_icon = "fa fa-microphone-slash";
+  // var leave_icon = "fa fa-microphone-slash";
 
   function toggleCamera() {
     callObject.setLocalVideo(isCameraMuted);
@@ -98,17 +106,69 @@ export default function Tray(props) {
     };
   }, [callObject]);
 
+  function switchCameraIcon() {
+    if (camera_icon == "fas fa-video-slash muted") {
+      console.log("camera should be on");
+      setCameraIcon("fas fa-video unmuted");
+      setCameraMuted(false);
+      toggleCamera();
+    } else {
+      console.log("camera should be off");
+      setCameraIcon("fas fa-video-slash muted");
+      setCameraMuted(true);
+      toggleCamera();
+    }
+  }
+
+  function switchMicIcon() {
+    if (mic_icon == "fas fa-microphone-slash muted") {
+      setMicIcon("fas fa-microphone unmuted");
+      setMicMuted(false);
+      toggleMic();
+    } else {
+      setMicIcon("fas fa-microphone-slash muted");
+      setMicMuted(true);
+      toggleMic();
+    }
+  }
+
+  function switchVolumeIcon() {
+    if (volume_icon == "fas fa-volume-mute volume-icon muted") {
+      setVolumeIcon("fas fa-volume-up unmuted");
+      props.adjust_volume(current_volume);
+    } else {
+      setVolumeIcon("fas fa-volume-mute volume-icon muted");
+      console.log(props.volume);
+      setCurrentVol(props.volume);
+      props.adjust_volume(0);
+    }
+  }
+
+  function reflect_speaker(volume) {
+    if (volume > 0) {
+      setVolumeIcon("fas fa-volume-up unmuted");
+    }
+  }
+
   return (
     <div className="tray">
       {!props.artistView ? (
-        <div>
-          <TrayButton
+        <div className="tray-icon-row">
+          {/* <TrayButton
             type={TYPE_MUTE_CAMERA}
             disabled={props.disabled}
             highlighted={isCameraMuted}
             onClick={toggleCamera}
-          />
-          <TrayButton
+          /> */}
+          <button
+            type={TYPE_MUTE_CAMERA}
+            className="tray-button"
+            onClick={switchCameraIcon}
+            disabled={props.disabled}
+          >
+            <i className={camera_icon}></i>
+          </button>
+          {/* <TrayButton
             type={TYPE_MUTE_MIC}
             disabled={props.disabled}
             highlighted={isMicMuted}
@@ -121,6 +181,38 @@ export default function Tray(props) {
               value={props.volume * 100}
               onChange={(changeEvent) =>
                 props.adjust_volume(changeEvent.target.value / 100)
+              }
+              variant="dark"
+            />
+          </div>
+          /> */}
+          <button
+            type={TYPE_MUTE_MIC}
+            className="tray-button"
+            onClick={switchMicIcon}
+            disabled={props.disabled}
+          >
+            <i className={mic_icon}></i>
+          </button>
+          <div className="volume-container">
+            <button
+              type="unmute-all"
+              className="tray-button"
+              disabled={props.disabled}
+              //highlighted={props.button_message === "MUTE ALL"}
+              onClick={switchVolumeIcon}
+            >
+              <i className={volume_icon}></i>
+            </button>
+            <RangeSlider
+              className="volume-slider"
+              id = "range-slider-haha"
+              value={props.volume * 100}
+              onChange={(changeEvent) =>
+                {
+                  props.adjust_volume(changeEvent.target.value / 100);
+                  reflect_speaker(changeEvent.target.value);
+                }
               }
               variant="dark"
             />

@@ -7,7 +7,6 @@
   align-items: center;
 }
 
-
 .artist-mute-all-button {
   font-size: 0.7rem;
   margin-left: 20px;
@@ -21,7 +20,7 @@
     position: relative;
     /* display: block; */
     display: inline-flex;
-    left: 10px;
+    left: -6px;
     height: calc(1.5em + 0.75rem + 2px);
     width: 80px;
 }
@@ -52,12 +51,25 @@
   opacity: 0;
 }
 
-.volume-icon {
-  font-size: 23px;
-  padding-left: 20px;
-  margin: 0px;
-}
-
 .volume-icon:hover {
   cursor: pointer;
+}
+.tray-icon-row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* .new-tray-button {
+  width: 48px;
+  height: 30px;
+  color: white;
+  z-index: 10;
+} */
+
+.unmuted {
+  color: white;
+}
+
+.muted {
+  color: #fb5554;
 }
