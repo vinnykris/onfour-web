@@ -7,7 +7,6 @@
   align-items: center;
 }
 
-
 .artist-mute-all-button {
   font-size: 0.7rem;
   margin-left: 20px;
@@ -15,4 +14,24 @@
   height: 25px;
   padding: 0px 10px;
   background-color: #3a3a3d;
+}
+
+.tray-icon-row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* .new-tray-button {
+  width: 48px;
+  height: 30px;
+  color: white;
+  z-index: 10;
+} */
+
+.unmuted {
+  color: white;
+}
+
+.muted {
+  color: #fb5554;
 }

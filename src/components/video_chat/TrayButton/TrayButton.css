@@ -4,6 +4,9 @@
   border: none;
   background-color: transparent;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tray-button:disabled {
