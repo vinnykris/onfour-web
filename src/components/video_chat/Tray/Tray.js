@@ -287,19 +287,22 @@ export default function Tray(props) {
             </button>
             <RangeSlider
               className="volume-slider"
-              id = "range-slider-haha"
+              id="range-slider-haha"
               value={props.volume * 100}
-              onChange={(changeEvent) =>
-                {
-                  props.adjust_volume(changeEvent.target.value / 100);
-                  reflect_speaker(changeEvent.target.value);
-                }
-              }
+              onChange={(changeEvent) => {
+                props.adjust_volume(changeEvent.target.value / 100);
+                reflect_speaker(changeEvent.target.value);
+              }}
               variant="dark"
             />
           </div>
-          <button id="press-to-talk" className="press-to-talk-btn">
-            <img src={speak_icon}></img>
+          <button
+            id="press-to-talk"
+            type="unmute-all"
+            className="tray-button press-to-talk-btn"
+            disabled={props.disabled}
+          >
+            Press & hold to talk
           </button>
         </div>
       ) : (
