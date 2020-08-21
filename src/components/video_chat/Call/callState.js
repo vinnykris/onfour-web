@@ -144,8 +144,10 @@ function getMessage(callState, isPublic) {
     header = 'Click "Allow" to enable camera and mic access';
   } else if (Object.keys(callState.callItems).length === 1) {
     if (isPublic) {
-      header = "Copy and share this page's URL to invite others";
-      detail = window.location.href;
+      // header = "Copy and share this page's URL to invite others";
+      // detail = window.location.href;
+      header = "";
+      detail = "";
     } else {
       header = "This is your private crew room!";
       detail = "only your crew members have access to this room";
