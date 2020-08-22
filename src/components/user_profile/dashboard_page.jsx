@@ -93,7 +93,7 @@ const DashboardPage = ({
   }, []);
 
   return (
-    <Col size={7}>
+    <Col size={7} style={{ width: "90%" }}>
       <Row className="header-section">
         <img src={dashboardIcon} className="profile-header-icon"></img>
         <h4 className="profile-preview-content-header username-header">
@@ -260,7 +260,7 @@ const DashboardPage = ({
             </div>
           )}
 
-          <div className="user-crews-container">
+          <div className="user-crews-container profile-empty-state">
             <Row className="user-crews-title">
               <Col size={1}>
                 <h4 className="profile-preview-content-header">
@@ -280,8 +280,8 @@ const DashboardPage = ({
                 </h4>
               </Col>
             </Row>
-            <Row>
-              <Col size={1}>
+            <Row className="user-crew-wrapper">
+              <Col size={1} className="user-crews-column">
                 {userCrews.length > 0 ? (
                   <UserCrews
                     userCrews={userCrews}

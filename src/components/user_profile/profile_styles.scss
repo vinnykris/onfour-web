@@ -196,8 +196,6 @@
 
 .user-crews-container {
   margin: 32px 0px;
-  width: 100%;
-  overflow: scroll;
 
   & .user-crews-title {
     margin-bottom: 32px;
@@ -955,5 +953,21 @@ p {
       border-left: 1px solid rgba(136, 136, 136, 0.38);
       padding: 5px !important;
     }
+  }
+}
+
+.user-crew-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.user-crews-column {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    width: 0px;
   }
 }
