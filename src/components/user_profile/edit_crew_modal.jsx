@@ -37,6 +37,7 @@ const EditCrewModal = ({
     "444DF2",
     "E26A6A",
   ]);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const checkValidEmailFormat = (email) => {
     const emailValidationRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -178,6 +179,16 @@ const EditCrewModal = ({
     handleClose();
   };
 
+  const handleConfirmDelete = () => {
+    console.log("Deleting...");
+    setShowConfirmationModal(false);
+    handleMainModalClose();
+  };
+
+  const handleCloseConfirmationModal = () => {
+    setShowConfirmationModal(false);
+  };
+
   useEffect(() => {
     setCrewMembers(crewMembersProp);
     setNewCrewName(crewName);
@@ -199,7 +210,6 @@ const EditCrewModal = ({
     }
 
     if (crewMembers.length < 2) setSaveButtonDisabled(true);
-    else setSaveButtonDisabled(false);
   }, [memberInputDisabled, saveButtonDisabled]);
 
   return (
@@ -279,7 +289,10 @@ const EditCrewModal = ({
           </Row>
           <Row className="crew-modal-save-button-wrapper">
             <div>
-              <button className="crew-modal-button-secondary">
+              <button
+                className="crew-modal-button-secondary"
+                onClick={() => setShowConfirmationModal(true)}
+              >
                 Delete Crew
               </button>
               <button
@@ -293,6 +306,34 @@ const EditCrewModal = ({
           </Row>
         </Col>
       </Row>
+      <Rodal
+        visible={showConfirmationModal}
+        onClose={handleCloseConfirmationModal}
+        width={310}
+        height={151}
+        measure="px"
+        showCloseButton={false}
+        customMaskStyles={{ background: "rgba(0,0,0,0.8)", cursor: "pointer" }}
+        className="crew-confirmation-modal"
+      >
+        <Row className="crew-confirmation-description">
+          <h1>Are you sure you want to delete this crew?</h1>
+        </Row>
+        <Row className="crew-confrimation-buttons">
+          <button
+            className="crew-modal-button-secondary"
+            onClick={handleCloseConfirmationModal}
+          >
+            Cancel
+          </button>
+          <button
+            className="crew-modal-button-secondary"
+            onClick={handleConfirmDelete}
+          >
+            Delete Crew
+          </button>
+        </Row>
+      </Rodal>
     </Rodal>
   );
 };

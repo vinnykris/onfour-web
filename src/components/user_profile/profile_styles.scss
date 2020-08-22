@@ -917,3 +917,43 @@ p {
   height: 380px !important;
   max-height: 380px !important;
 }
+
+.crew-confirmation-modal {
+  background: #2a2a31;
+
+  & .rodal-dialog {
+    padding: 0px;
+  }
+
+  & .crew-confirmation-description {
+    height: 94px;
+    & h1 {
+      font-family: $montserrat;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 34px;
+      text-align: center;
+      letter-spacing: 0.02em;
+      color: rgba(255, 255, 255, 0.87);
+      margin: 0px;
+      margin-top: 13px;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+
+  & .crew-confrimation-buttons {
+    height: 49px;
+    border-top: 1px solid rgba(136, 136, 136, 0.38);
+
+    & > button {
+      height: 49px;
+      width: 155px;
+    }
+    & > button:nth-last-child(1) {
+      border-left: 1px solid rgba(136, 136, 136, 0.38);
+      padding: 5px !important;
+    }
+  }
+}
