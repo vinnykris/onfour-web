@@ -3,6 +3,8 @@ import Rodal from "rodal";
 
 import RemoveCircleOutlinedIcon from "@material-ui/icons/RemoveCircleOutlined";
 
+import { deleteCrew } from "../../utils/crew";
+
 import { Row, Col } from "../grid";
 
 import {
@@ -179,8 +181,8 @@ const EditCrewModal = ({
     handleClose();
   };
 
-  const handleConfirmDelete = () => {
-    console.log("Deleting...");
+  const handleConfirmDelete = async () => {
+    await deleteCrew(crewId);
     setShowConfirmationModal(false);
     handleMainModalClose();
   };

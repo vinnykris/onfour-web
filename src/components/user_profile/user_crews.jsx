@@ -5,7 +5,7 @@ import { Row, Col } from "../grid";
 import EditCrewModal from "./edit_crew_modal";
 import SingleCrewModal from "./single_crew_modal";
 
-const UserCrews = ({ userCrews, username }) => {
+const UserCrews = ({ userCrews, username, userEmail }) => {
   const [showEditCrewModal, setshowEditCrewModal] = useState(false);
   const [showSingleCrewModal, setShowSingleCrewModal] = useState(false);
   const [selectedCrew, setSelectedCrew] = useState(userCrews[0]);
@@ -76,6 +76,8 @@ const UserCrews = ({ userCrews, username }) => {
         crewAdmin={selectedCrew.admin}
         crewMembersProp={selectedCrew.membersArray}
         username={username}
+        userEmail={userEmail}
+        crewId={selectedCrew.id}
       />
     </Row>
   );

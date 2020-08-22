@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Rodal from "rodal";
 
+import { leaveOrRemoveFromCrew } from '../../utils/crew';
+
 import { Row, Col } from "../grid";
 
 const SingleCrewModal = ({
@@ -10,6 +12,8 @@ const SingleCrewModal = ({
   crewAdmin,
   crewMembersProp,
   username,
+  userEmail,
+  crewId,
 }) => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
@@ -17,8 +21,8 @@ const SingleCrewModal = ({
     setShowConfirmationModal(false);
   };
 
-  const handleConfirmLeave = () => {
-    console.log("Leaving crew...");
+  const handleConfirmLeave = async () => {
+    await leaveOrRemoveFromCrew(userEmail, username, crewId);
     setShowConfirmationModal(false);
     handleClose();
   };

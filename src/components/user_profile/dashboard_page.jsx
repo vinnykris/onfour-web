@@ -11,50 +11,6 @@ import { getCrewsByUsername, getCrewObject } from "../../utils/crew";
 
 import "./profile_styles.scss";
 
-const firstCrew = {
-  name: "Test Crew",
-  admin: "jose.avilez",
-  members: [
-    { email: "josetalking@gmail.com", username: "jose.avilez" },
-    { email: "user@email.com", username: "another.user" },
-    { email: "thisone@verylongemailnow.com", username: "this.one" },
-    { email: "berna@hotmail.com", username: "berna" },
-    { email: "", username: "pena.dalton@gmail.com" },
-  ],
-  color: "#E26A6A",
-};
-
-const secondCrew = {
-  name:
-    "Another Crew the a long name but I can still add a little more text here",
-  admin: "onfour-vinod",
-  members: [
-    { email: "josetalking@gmail.com", username: "jose.avilez" },
-    { email: "user@email.com", username: "another.user" },
-    { email: "vkk9@cornell.edu", username: "onfour-vinod" },
-  ],
-  color: "#6A6EE2",
-};
-
-const thirdCrew = {
-  name: "Highschool",
-  admin: "onfour-vinod",
-  members: [
-    { email: "josetalking@gmail.com", username: "jose.avilez" },
-    { email: "vkk9@cornell.edu", username: "onfour-vinod" },
-  ],
-  color: "#3EB095",
-};
-
-const userCrews1 = [
-  firstCrew,
-  secondCrew,
-  thirdCrew,
-  secondCrew,
-  firstCrew,
-  secondCrew,
-];
-
 const DashboardPage = ({
   width,
   upcoming_concerts,
@@ -327,7 +283,11 @@ const DashboardPage = ({
             <Row>
               <Col size={1}>
                 {userCrews.length > 0 ? (
-                  <UserCrews userCrews={userCrews} username={username} />
+                  <UserCrews
+                    userCrews={userCrews}
+                    username={username}
+                    userEmail={userEmail}
+                  />
                 ) : (
                   <div
                     className="create-crew-wrapper"
