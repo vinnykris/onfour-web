@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Rodal from "rodal";
 
 import { Row, Col } from "../grid";
@@ -11,6 +11,18 @@ const SingleCrewModal = ({
   crewMembersProp,
   username,
 }) => {
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+
+  const handleCloseConfirmationModal = () => {
+    setShowConfirmationModal(false);
+  };
+
+  const handleConfirmLeave = () => {
+    console.log("Leaving crew...");
+    setShowConfirmationModal(false);
+    handleClose();
+  };
+
   return (
     <Rodal
       visible={showModal}
@@ -56,10 +68,43 @@ const SingleCrewModal = ({
             ))}
           </Row>
           <Row className="crew-modal-save-button-wrapper">
-            <button className="crew-modal-button-secondary crew-modal-button-centered">LEAVE CREW</button>
+            <button
+              onClick={() => setShowConfirmationModal(true)}
+              className="crew-modal-button-secondary crew-modal-button-centered"
+            >
+              LEAVE CREW
+            </button>
           </Row>
         </Col>
       </Row>
+      <Rodal
+        visible={showConfirmationModal}
+        onClose={handleCloseConfirmationModal}
+        width={310}
+        height={151}
+        measure="px"
+        showCloseButton={false}
+        customMaskStyles={{ background: "rgba(0,0,0,0.8)", cursor: "pointer" }}
+        className="crew-confirmation-modal"
+      >
+        <Row className="crew-confirmation-description">
+          <h1>Are you sure you want to leave this crew?</h1>
+        </Row>
+        <Row className="crew-confrimation-buttons">
+          <button
+            className="crew-modal-button-secondary"
+            onClick={handleCloseConfirmationModal}
+          >
+            Cancel
+          </button>
+          <button
+            className="crew-modal-button-secondary"
+            onClick={handleConfirmLeave}
+          >
+            Leave Crew
+          </button>
+        </Row>
+      </Rodal>
     </Rodal>
   );
 };
