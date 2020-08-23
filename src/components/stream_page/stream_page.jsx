@@ -42,6 +42,9 @@ import "rodal/lib/rodal.css";
 import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
 import ticket1 from "../../images/icons/ticket1.png";
 
+// Utils
+import { getCrewsByUsername } from "../../utils/crew";
+
 Amplify.configure(awsmobile);
 
 // Main stream page component. Holds stream video, chat, and payment functionality
@@ -65,7 +68,9 @@ const StreamPage = ({ is_soundcheck }) => {
   const [artist_youtube, setArtistYoutube] = useState("");
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
-  const [is_live, setIsLive] = useState(false);
+  const [concert_crews, setConcertCrews] = useState("");
+  const [user_crews, setUserCrews] = useState("");
+  const [is_live, setIsLive] = useState(true);
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
@@ -80,6 +85,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [venmo_selected, setVenmoSelected] = useState(false);
   const [credit_selected, setCreditSelected] = useState(true);
   const [paypal_selected, setPaypalSelected] = useState(false);
+  const [stream_volume, setStreamVolume] = useState(1.0);
 
   const history = useHistory();
 
@@ -178,6 +184,7 @@ const StreamPage = ({ is_soundcheck }) => {
         setShowChat(true);
         setAuth(true);
         setTickets(await getTickets(user.username));
+        setUserCrews(await getCrewsByUsername(user.username));
       })
       .catch((err) => setAuth(false));
   }, []);
@@ -216,8 +223,9 @@ const StreamPage = ({ is_soundcheck }) => {
     setConcertName(info_list[0].concert_name);
     getArtistInfo(info_list[0].artist_id);
     setConcertID(info_list[0].id);
-    setIsLive(info_list[0].is_live);
+    // setIsLive(info_list[0].is_live);
     setIsFree(info_list[0].general_price === 0);
+    setConcertCrews(JSON.parse(info_list[0].crew_list));
   };
 
   const getArtistInfo = async (artist_id) => {
@@ -397,11 +405,11 @@ const StreamPage = ({ is_soundcheck }) => {
     }
   };
 
-  useEffect(() => {
-    setInterval(() => {
-      getIsLive();
-    }, 3000);
-  }, []);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     getIsLive();
+  //   }, 3000);
+  // }, []);
 
   const paymentTabSelected = (option) => {
     if (option == 0) {
@@ -534,7 +542,7 @@ const StreamPage = ({ is_soundcheck }) => {
               {/* <Modal is_open={open_modal}></Modal> */}
               <Row className="desktop-stream-row">
                 {/* <Col size={0.5}></Col> */}
-                <Col size={6} id="stream_col">
+                <Col size={6} id="stream_col" className="stream-col">
                   <div className="stream-main" id="stream_main_section">
                     <div className="stream-wrapper" id="video_player">
                       {is_free ||
@@ -555,6 +563,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           username={username}
                           concert_id={concert_id}
                           is_live={is_live}
+                          stream_volume={stream_volume}
                         />
                       ) : (
                         <div className="buy-ticket-message-container">
@@ -801,12 +810,13 @@ const StreamPage = ({ is_soundcheck }) => {
                 <Col size={3} id="chat_container" className="sticky-container">
                   <div className="chat-main" id="chat_main">
                     <div className="chat-wrapper">
-                      {/* <Row className="video-chat-row">
+                      <Row className="video-chat-row">
                         <VideoChat
                           user_name={username ? username : "GUEST"}
                           artist_name="vinnykris"
+                          stream_vol_adjust={setStreamVolume}
                         ></VideoChat>
-                      </Row> */}
+                      </Row>
                       <Row className="chat-row">
                         <Chat
                           chat_name={username ? username : "GUEST"}

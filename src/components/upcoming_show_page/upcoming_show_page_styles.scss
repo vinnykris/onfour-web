@@ -3,7 +3,8 @@
 
 .upcoming-show-page-content {
   background-color: black;
-  min-height: 70vh;
+  // margin-top: -1px;
+  min-height: calc(-53px + 100vh);
 }
 
 .upcoming-show-grid {

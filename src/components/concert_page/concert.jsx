@@ -1,7 +1,10 @@
 // React Imports
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import MoonLoader from "react-spinners/MoonLoader";
+// Main Imports
+//import history from "../../history";
 
 // Function import
 import { createUpcomingObject } from "../util";
@@ -82,6 +85,10 @@ const Concert = (props) => {
   const [loading, setLoading] = useState(true);
   const [enter_venue_status, setEnterVenueStatus] = useState(false);
   const [showPaymentBox, setShowPaymentBox] = useState(false);
+  const [calender_added, setCalenderAdded] = useState(false);
+  const [calendar_button_clicked, setCalendarBtnClicked] = useState(false);
+
+  let location = useLocation();
 
   var concert_date = null;
   var concert_time = null;
@@ -211,7 +218,7 @@ const Concert = (props) => {
           clearInterval(interval);
         }
       }
-    }, 5000);
+    }, 500);
     return () => clearInterval(interval);
   }, [concert_info]);
 
@@ -313,9 +320,9 @@ const Concert = (props) => {
     document.getElementById("add-to-calendar").style.visibility = "visible";
 
     // After 8 seconds, end the stub animation and go back to the concert page
-    setTimeout(() => {
-      if (!stub_animation_done) animationEnd();
-    }, 8000);
+    // setTimeout(() => {
+    //   if (!stub_animation_done) animationEnd();
+    // }, 8000);
   };
 
   // Animated the ticket stub leaving the screen and hides the calendar button
@@ -323,6 +330,10 @@ const Concert = (props) => {
     if (!stub_animation_done) {
       if (document.getElementById("add-to-calendar")) {
         document.getElementById("add-to-calendar").style.visibility = "hidden";
+      }
+      if (document.getElementById("calendar-redirect-msg")) {
+        document.getElementById("calendar-redirect-msg").style.visibility =
+          "hidden";
       }
       setStubAnimationDone(true);
       // Go back to the concert page after half a second
@@ -335,12 +346,9 @@ const Concert = (props) => {
   // Function to add event element to calendar
   // Ends animation
   const addToCalendar = async () => {
-    if (!ApiCalendar.sign) {
-      await ApiCalendar.handleAuthClick();
-    }
-    // await ApiCalendar.handleSignoutClick();
+    setCalendarBtnClicked(true);
+    await ApiCalendar.handleAuthClick();
     await addEvent();
-    await animationEnd();
   };
 
   const handleGeneralClicked = () => {
@@ -380,7 +388,12 @@ const Concert = (props) => {
     };
     await ApiCalendar.createEvent(eventLoad)
       .then((result) => {
-        console.log(result);
+        if (result.status === 200) {
+          setCalenderAdded(true);
+          setCalendarBtnClicked(false);
+          console.log(concert_info.date);
+          // animationEnd();
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -411,13 +424,41 @@ const Concert = (props) => {
                           className="ticket-stub-img"
                         />
                         <div className="calendar-button">
-                          <button
-                            id="add-to-calendar"
-                            className="buy-ticket-button calendar-button"
-                            onClick={addToCalendar}
-                          >
-                            Add to Calendar
-                          </button>
+                          {calender_added ? (
+                            <p
+                              className="calendar-redirect-msg"
+                              id="calendar-redirect-msg"
+                            >
+                              We've got you covered! Check your{" "}
+                              <a
+                                href={
+                                  "https://calendar.google.com/calendar/b/0/r/week/" +
+                                  concert_info.date.replace(/-/gi, "/")
+                                }
+                                target="_blank"
+                              >
+                                Google Calendar
+                              </a>{" "}
+                              for a surprise.
+                            </p>
+                          ) : calendar_button_clicked ? (
+                            <div className="moonloader-container">
+                              <MoonLoader
+                                sizeUnit={"px"}
+                                size={30}
+                                color={"white"}
+                                loading={!calender_added}
+                              />
+                            </div>
+                          ) : (
+                            <button
+                              id="add-to-calendar"
+                              className="buy-ticket-button calendar-button"
+                              onClick={addToCalendar}
+                            >
+                              Add to Calendar
+                            </button>
+                          )}
                         </div>
                       </div>
                     ) : null}
@@ -677,17 +718,27 @@ const Concert = (props) => {
                                 ) : (
                                   <div>
                                     {total > 0 ? (
-                                      <Tooltip title="Please log in to purchase your ticket">
-                                        <button className="checkout-button-disabled">
+                                      <NavLink
+                                        to={{
+                                          pathname: "/login",
+                                          state: { current: location },
+                                        }}
+                                      >
+                                        <button className="checkout-button">
                                           CHECKOUT
                                         </button>
-                                      </Tooltip>
+                                      </NavLink>
                                     ) : (
-                                      <Tooltip title="Please log in to get your ticket">
-                                        <button className="checkout-button-disabled">
+                                      <NavLink
+                                        to={{
+                                          pathname: "/login",
+                                          state: { current: location },
+                                        }}
+                                      >
+                                        <button className="checkout-button">
                                           GET TICKET
                                         </button>
-                                      </Tooltip>
+                                      </NavLink>
                                     )}
                                   </div>
                                 )}
@@ -830,7 +881,7 @@ const Concert = (props) => {
                     </div>
                   ) : (
                     <button className="buy-ticket-button" onClick={getTicket}>
-                      {total > 0? "BUY TICKETS" : "RSVP"}
+                      {total > 0 ? "BUY TICKETS" : "RSVP"}
                     </button>
                   )}
                 </Col>
@@ -856,13 +907,41 @@ const Concert = (props) => {
                           className="ticket-stub-img"
                         />
                         <div className="calendar-button">
-                          <button
-                            id="add-to-calendar"
-                            className="buy-ticket-button calendar-button"
-                            onClick={addToCalendar}
-                          >
-                            Add to Calendar
-                          </button>
+                          {calender_added ? (
+                            <p
+                              className="calendar-redirect-msg"
+                              id="calendar-redirect-msg"
+                            >
+                              We've got you covered! Check your{" "}
+                              <a
+                                href={
+                                  "https://calendar.google.com/calendar/b/0/r/week/" +
+                                  concert_info.date.replace(/-/gi, "/")
+                                }
+                                target="_blank"
+                              >
+                                Google Calendar
+                              </a>{" "}
+                              for a surprise.
+                            </p>
+                          ) : calendar_button_clicked ? (
+                            <div className="moonloader-container">
+                              <MoonLoader
+                                sizeUnit={"px"}
+                                size={30}
+                                color={"white"}
+                                loading={!calender_added}
+                              />
+                            </div>
+                          ) : (
+                            <button
+                              id="add-to-calendar"
+                              className="buy-ticket-button calendar-button"
+                              onClick={addToCalendar}
+                            >
+                              Add to Calendar
+                            </button>
+                          )}
                         </div>
                       </div>
                     ) : null}
@@ -885,9 +964,9 @@ const Concert = (props) => {
               <Rodal
                 visible={open_modal}
                 onClose={hideModal}
-                width={120}
-                height={70}
-                measure="vh"
+                width={930}
+                height={514}
+                measure="px"
                 customStyles={{ padding: 0, overflow: scroll }}
                 className="rodal-custom"
               >
@@ -1131,17 +1210,27 @@ const Concert = (props) => {
                                     ) : (
                                       <div>
                                         {total > 0 ? (
-                                          <Tooltip title="Please log in to purchase your ticket">
-                                            <button className="checkout-button-disabled">
+                                          <NavLink
+                                            to={{
+                                              pathname: "/login",
+                                              state: { current: location },
+                                            }}
+                                          >
+                                            <button className="checkout-button">
                                               CHECKOUT
                                             </button>
-                                          </Tooltip>
+                                          </NavLink>
                                         ) : (
-                                          <Tooltip title="Please log in to get your ticket">
-                                            <button className="checkout-button-disabled">
+                                          <NavLink
+                                            to={{
+                                              pathname: "/login",
+                                              state: { current: location },
+                                            }}
+                                          >
+                                            <button className="checkout-button">
                                               GET TICKET
                                             </button>
-                                          </Tooltip>
+                                          </NavLink>
                                         )}
                                       </div>
                                     )}
@@ -1235,7 +1324,7 @@ const Concert = (props) => {
                             className="buy-ticket-button"
                             onClick={getTicket}
                           >
-                            {total > 0? "BUY TICKETS" : "RSVP"}
+                            {total > 0 ? "BUY TICKETS" : "RSVP"}
                           </button>
                         )}
                       </div>

@@ -20,7 +20,7 @@
 
 .call-message.error {
   color: #d81a1a;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
 }
 
 .call-message-header {
