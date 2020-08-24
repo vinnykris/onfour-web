@@ -37,7 +37,7 @@ function VideoPlayer({
   username,
   concert_id,
   is_live,
-  stream_volume
+  stream_volume,
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   var player = null;
@@ -176,8 +176,7 @@ function VideoPlayer({
   // if (auth) {
 
   const player_ref = useRef();
-  const [global_player,setGlobalPlayer] = useState();
-
+  const [global_player, setGlobalPlayer] = useState();
 
   useEffect(() => {
     if (!timer_placeholder.length && is_live) {
@@ -185,7 +184,9 @@ function VideoPlayer({
         player_ref.current,
         { autoplay: true, muted: false, controls: true, liveui: true },
         () => {
-          player.src(url);
+          player.src(
+            "https://onfour-concert-archive.s3.amazonaws.com/delivery/clipped/justice_speaks_1/individual_clips/anjali.mp4"
+          );
         }
       );
       // configure plugins
@@ -214,7 +215,7 @@ function VideoPlayer({
         global_player.volume(stream_volume);
       }
     }
-  },[stream_volume]);
+  }, [stream_volume]);
 
   return (
     <div className="countdown-wrapper">

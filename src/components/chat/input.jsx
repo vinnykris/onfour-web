@@ -51,7 +51,7 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
       {auth ? (
         <form className="form">
           <input
-            className="input"
+            className="body-2 input"
             type="text"
             placeholder="Type a message..."
             value={message}

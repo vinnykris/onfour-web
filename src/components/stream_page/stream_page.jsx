@@ -201,7 +201,7 @@ const StreamPage = ({ is_soundcheck }) => {
       })
     );
     const artist_info_list = artist_info.data.getCreateOnfourRegistration;
-    setArtistName(artist_info_list.artist_name);
+    setArtistName("Anjali Taneja");
     setArtistBio(artist_info_list.artist_bio);
     setArtistFB(artist_info_list.facebook);
     setArtistIG(artist_info_list.instagram);

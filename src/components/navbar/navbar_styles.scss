@@ -206,6 +206,32 @@ a.nav-page-white {
   }
 }
 
+// .nav-page-white {
+//   display: flex;
+//   color: $on-background;
+//   margin: 0px 35px;
+//   &:hover {
+//     cursor: pointer;
+//     color: white;
+//     text-decoration: "none";
+//   }
+//   &:active {
+//     color: white;
+//     text-decoration: "underline";
+//   }
+//   @include respond-to("x-large") {
+//     margin: 0px 25px;
+//     font-size: 15px;
+//   }
+//   @include respond-to("large") {
+//     font-size: 14px;
+//   }
+//   @include respond-to("medium") {
+//     font-size: 12px;
+//     margin: 20px;
+//   }
+// }
+
 .nav-home {
   float: left;
   text-align: end;
@@ -213,13 +239,7 @@ a.nav-page-white {
 }
 
 .login-link-container {
-  // font-family: Helvetica;
-  // font-style: normal;
   color: $on-background;
-  margin: 35px;
-  // font-weight: normal;
-  // letter-spacing: 0.045em;
-  // font-size: 16px;
   float: left;
   &:hover {
     cursor: pointer;
@@ -230,37 +250,30 @@ a.nav-page-white {
     color: white;
     text-decoration: "underline";
   }
-  @include respond-to("x-large") {
-    margin: 25px;
-    font-size: 15px;
-  }
+
   @include respond-to("large") {
     font-size: 14px;
   }
   @include respond-to("medium") {
     font-size: 12px;
-    margin: 20px;
+    //margin: 20px;
   }
 }
 
 .logged-in {
   margin: 0px 35px;
+  color: $on-background !important;
   @include respond-to("x-large") {
     margin: 0px 25px;
-    font-size: 15px;
+    //font-size: 15px;
   }
   @include respond-to("large") {
-    font-size: 14px;
+    //font-size: 14px;
   }
   @include respond-to("medium") {
-    font-size: 12px;
+    //font-size: 12px;
     margin: 20px;
   }
-}
-
-.sign-in-link {
-  font-weight: bold !important;
-  color: #e5cffa !important;
 }
 
 a.nav-page-black {
@@ -343,17 +356,30 @@ a.nav-page-black {
 
 .user-icon {
   margin: auto;
-  color: rgb(240, 231, 231);
+  color: $on-background;
   height: 30%;
   width: auto;
 }
 
 .user-icon-desktop {
-  color: rgb(240, 231, 231);
-  height: 35px;
-  width: 38px;
-  padding-right: 11px;
-  padding-bottom: 5px;
+  // color: rgb(240, 231, 231);
+  height: 20px;
+  width: 20px;
+
+  // margin-bottom: 5px;
+  margin: auto;
+  margin-right: 10px;
+}
+
+.dropdown-toggle {
+  display: flex;
+  margin: 0 !important;
+}
+
+.dropdown-toggle::after {
+  display: flex !important;
+  margin: auto;
+  margin-left: 8px !important;
 }
 
 .dropdown-menu-profile {
@@ -434,8 +460,8 @@ a.nav-page-black {
 }
 
 .dropdown-placement {
-  padding-top: 4px;
-  margin-right: 7px;
+  // padding-top: 4px;
+  // margin-right: 7px;
 }
 
 .user-dropdown-menu {

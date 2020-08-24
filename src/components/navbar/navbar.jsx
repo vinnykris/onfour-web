@@ -344,54 +344,58 @@ const NavBar = () => {
             <NavLink
               exact
               to="/"
-              className="nav-page-white header-5"
+              className="nav-page-white header-6"
               onClick={leaveVideoChat}
             >
               About Us
             </NavLink>
             <NavLink
               to="/artists"
-              className="nav-page-white header-5"
+              className="nav-page-white header-6"
               onClick={leaveVideoChat}
             >
               For Artists
             </NavLink>
             <NavLink
               to="/stream"
-              className="nav-page-white header-5"
+              className="nav-page-white header-6"
               onClick={leaveVideoChat}
             >
               Stream
             </NavLink>
             <NavLink
               to="/upcoming"
-              className="nav-page-white header-5"
+              className="nav-page-white header-6"
               onClick={leaveVideoChat}
             >
               Upcoming
             </NavLink>
             {!auth ? (
-              <div className="login-link-container header-5">
+              <div className="login-link-container">
                 <NavLink
                   to={{
                     pathname: "/login",
                     state: { current: location },
                   }}
-                  className="sign-in-link"
+                  className="nav-page-white header-6"
                   onClick={leaveVideoChat}
                 >
                   Log In
                 </NavLink>
               </div>
             ) : (
-              <div className="login-link-container logged-in header-5">
+              <div className="login-link-container logged-in header-6">
                 <Dropdown
                   isOpen={dropdown_open}
                   toggle={toggle}
                   className="dropdown-placement"
                 >
                   <div className="toggle-color">
-                    <DropdownToggle tag="a" caret>
+                    <DropdownToggle
+                      tag="a"
+                      caret
+                      className="nav-page-white header-6"
+                    >
                       <img
                         className="user-icon-desktop"
                         src={login_icon}
