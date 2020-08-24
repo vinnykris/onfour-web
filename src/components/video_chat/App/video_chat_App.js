@@ -189,38 +189,38 @@ export default function VideoChatApp({
   //   }
   // }, [startJoiningPrivateCall]);
 
-                 /**
-                  * Update the page's URL to reflect the active call when roomUrl changes.
-                  *
-                  * This demo uses replaceState rather than pushState in order to avoid a bit
-                  * of state-management complexity. See the comments around enableCallButtons
-                  * and enableStartButton for more information.
-                  */
-                 useEffect(() => {
-                   const pageUrl = pageUrlFromRoomUrl(roomUrl);
-                   if (pageUrl === window.location.href) return;
-                   window.history.replaceState(null, null, pageUrl);
-                 }, [roomUrl]);
+    /**
+    * Update the page's URL to reflect the active call when roomUrl changes.
+    *
+    * This demo uses replaceState rather than pushState in order to avoid a bit
+    * of state-management complexity. See the comments around enableCallButtons
+    * and enableStartButton for more information.
+    */
+    useEffect(() => {
+      const pageUrl = pageUrlFromRoomUrl(roomUrl);
+      if (pageUrl === window.location.href) return;
+      window.history.replaceState(null, null, pageUrl);
+    }, [roomUrl]);
 
-                 /**
-                  * Uncomment to attach call object to window for debugging purposes.
-                  */
-                 // useEffect(() => {
-                 //   window.callObject = callObject;
-                 // }, [callObject]);
+    /**
+    * Uncomment to attach call object to window for debugging purposes.
+    */
+    // useEffect(() => {
+    //   window.callObject = callObject;
+    // }, [callObject]);
 
-                 /**
-                  * Update app state based on reported meeting state changes.
-                  *
-                  * NOTE: Here we're showing how to completely clean up a call with destroy().
-                  * This isn't strictly necessary between join()s, but is good practice when
-                  * you know you'll be done with the call object for a while and you're no
-                  * longer listening to its events.
-                  */
-                 useEffect(() => {
-                   if (!callObject) return;
+    /**
+    * Update app state based on reported meeting state changes.
+    *
+    * NOTE: Here we're showing how to completely clean up a call with destroy().
+    * This isn't strictly necessary between join()s, but is good practice when
+    * you know you'll be done with the call object for a while and you're no
+    * longer listening to its events.
+    */
+    useEffect(() => {
+      if (!callObject) return;
 
-                   const events = ["joined-meeting", "left-meeting", "error"];
+      const events = ["joined-meeting", "left-meeting", "error"];
 
     function handleNewMeetingState(event) {
       event && logDailyEvent(event);
@@ -238,8 +238,11 @@ export default function VideoChatApp({
         case "error":
           setAppState(STATE_ERROR);
           setTimeout(function () {
+            callObject.destroy().then(() => {
               setRoomUrl(null);
+              setCallObject(null);
               setAppState(STATE_IDLE);
+            });
           }, 3000);
           break;
         default:
@@ -247,21 +250,21 @@ export default function VideoChatApp({
       }
     }
 
-                   // Use initial state
-                   handleNewMeetingState();
+    // Use initial state
+    handleNewMeetingState();
 
-                   // Listen for changes in state
-                   for (const event of events) {
-                     callObject.on(event, handleNewMeetingState);
-                   }
+    // Listen for changes in state
+    for (const event of events) {
+      callObject.on(event, handleNewMeetingState);
+    }
 
-                   // Stop listening for changes in state
-                   return function cleanup() {
-                     for (const event of events) {
-                       callObject.off(event, handleNewMeetingState);
-                     }
-                   };
-                 }, [callObject]);
+    // Stop listening for changes in state
+    return function cleanup() {
+      for (const event of events) {
+        callObject.off(event, handleNewMeetingState);
+      }
+    };
+  }, [callObject]);
 
   // useEffect(() => {
   //   document.getElementById("public-room" + current_room.substr(current_room.length - 1)).style.color = "white";

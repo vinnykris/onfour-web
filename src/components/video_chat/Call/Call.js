@@ -20,11 +20,13 @@ import { logDailyEvent } from "../logUtils";
 
 export default function Call(props) {
   const callObject = useContext(CallObjectContext);
-  callObject.setBandwidth({
-    kbs: 40,
-    trackConstraints: { width: 640, height: 360, frameRate: 8 },
-  });
-  
+  if (callObject) {
+    callObject.setBandwidth({
+      kbs: 40,
+      trackConstraints: { width: 640, height: 360, frameRate: 8 },
+    });
+  }
+
   const [callState, dispatch] = useReducer(callReducer, initialCallState);
 
   /**
