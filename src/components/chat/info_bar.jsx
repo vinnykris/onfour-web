@@ -39,7 +39,7 @@ const InfoBar = ({ room, users }) => {
       <div className="info-container">
         <div className="chat-header-text">
           <ClickAwayListener onClickAway={handleTooltipClose}>
-            <div>
+            <div className="chat-header">
               <ChatTooltip
                 PopperProps={{
                   disablePortal: true,
@@ -52,14 +52,12 @@ const InfoBar = ({ room, users }) => {
                 title={participants_string}
               >
                 <span onClick={handleTooltipOpen}>
-                  <p className="onfour-title">{room}</p>
+                  <p className="header-6">{room}</p>
                 </span>
               </ChatTooltip>
             </div>
           </ClickAwayListener>
-          {width <= 600 ? (
-            <p className="onfour-title">{users.length}</p>
-          ) : null}
+          {width <= 600 ? <p className="onfour-title">{users.length}</p> : null}
         </div>
       </div>
     </div>

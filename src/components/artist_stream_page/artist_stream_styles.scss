@@ -2,7 +2,6 @@
 
 @import "../../styles";
 
-
 .artist-stream-container {
   height: calc(-53px + 100vh);
   @include respond-to("small") {
@@ -58,7 +57,7 @@
 
 // CHAT STYLING
 .artist-chat-main {
-  height: calc((-53px + 100vh)/2);
+  height: calc((-53px + 100vh) / 2);
   // height: 100vh;
   width: 100%;
   // position: -webkit-sticky;
@@ -114,7 +113,7 @@
   border-bottom: 3px solid black;
 }
 
-.full-width{
+.full-width {
   width: 100%;
   height: 50%;
 }
@@ -179,7 +178,6 @@
   top: 0px;
 }
 
-
 .artist-toggle-chat-button {
   border-radius: 5px 0px 0px 5px;
   background-color: transparent;
@@ -209,7 +207,6 @@
   width: 100%;
   height: 100%;
 }
-
 
 .artist-video-wrapper {
   display: inline-block;
@@ -285,11 +282,344 @@
   text-align: right;
 }
 
+.inline-form {
+  display: flex;
+}
+
+.inline-form button {
+  margin: 0px 2px;
+  padding: 0px 10px;
+}
+
+.waiting_banner-container {
+  width: 100%;
+}
+
+.waiting_banner-container img {
+  width: 100%;
+  object-fit: cover;
+}
+
+// Waiting Screen
+.countdown-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  @include respond-to("small") {
+    position: inherit;
+  }
+}
+
+.waiting-screen {
+  width: 100%;
+  // height: 100%;
+  //padding-bottom: 56.25%; /* 16:9 */
+  background: linear-gradient(
+      240.7deg,
+      #8c4fdc 1.46%,
+      rgba(255, 255, 255, 0) 96.73%
+    ),
+    #497be0;
+
+  @include respond-to("small") {
+    height: 220px;
+  }
+}
+
+.artist-image {
+  width: 5vw;
+  height: 5vw;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 50%;
+  @include respond-to("small") {
+    width: 11.5vh;
+    height: 11.5vh;
+  }
+}
+
+.countdown-component-wrapper {
+  margin: 0;
+  position: absolute;
+  padding: 4px 8px 4px 8px;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #e7281e;
+  @include respond-to("small") {
+    top: 38%;
+  }
+}
+
+.timer-block {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.timer-number {
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 24px;
+  height: 25px;
+}
+
+.timer-label {
+  font-size: 8px;
+  color: white;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 7px;
+  height: 8px;
+}
+
+.parentDisable {
+  background: black;
+  z-index: 998;
+  padding-top: 20vh;
+  height: 71vh;
+  width: 100%;
+}
+
+.overlay-box {
+  background: black;
+  padding-top: 20vh;
+  height: 71vh;
+  width: 100%;
+  @include respond-to("small") {
+    height: 100vh;
+  }
+}
+
+.waiting-message-container {
+  margin: 0;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @include respond-to("small") {
+    top: 30%;
+  }
+}
+
+.waiting-message1 {
+  color: white;
+  @include respond-to("small") {
+    font-size: 20px;
+  }
+}
+
+.waiting-message2 {
+  color: white;
+  font-weight: lighter;
+  letter-spacing: 0.5px;
+  @include respond-to("small") {
+    font-size: 13px;
+  }
+}
+.popup-desktop {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  padding-top: 35vh;
+  z-index: 10;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  @include respond-to("small") {
+    display: none;
+  }
+}
+
+.popup-mobile {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 10;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  @include respond-to("small") {
+    display: inline;
+  }
+}
+
+.waiting-msg-box {
+  background-color: whitesmoke;
+  width: 100%;
+  max-width: 450px;
+
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 3px 5px rgb(238, 237, 237);
+}
+
+.waiting-msg {
+  color: #636363;
+}
+
+.popup-close {
+  padding: 3%;
+  float: right;
+  filter: invert(75%);
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.popup-header {
+  font-size: 1.25rem;
+}
+
+.popup-content {
+  margin-top: 3%;
+  width: 100%;
+  padding: 20px 40px 20px 40px;
+}
+
+.donate-row-buttons {
+  margin-top: -1px;
+}
+
+.donate-stripe {
+  background-color: #62628c;
+}
+
+.donate-paypal {
+  background-color: #979bbb;
+}
+
+.donate-venmo {
+  background-color: #846eac;
+}
+
+.donate-box {
+  padding: 5% 3% 0% 3%;
+}
+
+.donate-box-button {
+  padding: 1% 3% 2% 3%;
+  @include respond-to("small") {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+// .venmo-code {
+//   max-width: 125px;
+//   margin-top: -3%;
+//   padding-bottom: 3%;
+//   // padding-top: 3%;
+// }
+
+.mobile-payment-button {
+  height: 60px;
+}
+
+.stripe-button-border {
+  border-radius: 3px;
+  box-shadow: 0px 3px 5px rgb(83, 82, 82);
+  font-weight: $medium-weight;
+  letter-spacing: 0.4px;
+  width: 100%;
+  @include respond-to("small") {
+    box-shadow: none;
+  }
+}
+
+.social-bar-mobile {
+  margin-top: 5%;
+}
+
+.main-content-mobile-stream {
+  padding: 5%;
+  padding-bottom: 0;
+}
+
+// .modal-backdrop {
+//   z-index: -1;
+// }
+
+.controll-toolbar-button {
+  font-size: 1.5rem;
+  color: white;
+  // padding: 10px;
+  position: absolute;
+  left: 50%;
+  // border-radius: 3px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.button-video-camera {
+  background-color: #47c8c0;
+}
+
+.button-commenting-o {
+  background-color: #9240b9;
+}
+
+.button-glass {
+  background-color: #5d5ad4;
+}
+
+.button-heart {
+  background-color: #7bc6de;
+}
+
+.button-hand-rock-o {
+  background-color: #b14092;
+}
+
+.button-smile-o {
+  background-color: #609fda;
+}
+
+.selected-circle {
+  color: white;
+}
+
+.controll-toolbar-row {
+  background-color: #17171b;
+  border-top: 1px solid #3c3c3c;
+  height: 70px;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  /* display: flex; */
+  padding: 0px 8px 0px 8px;
+}
+
+.controll-toolbar-col {
+  margin: 3px;
+}
+
+.controll-toolbar-button-container {
+  position: relative;
+  padding-top: 100%;
+  border-radius: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
+
+.video-chat-main {
+  display: none;
+}
+
 .artist-box-header {
   height: 30px;
   width: 100%;
   background-color: #17171b;
-  color: #DDDDDD;
+  color: #dddddd;
   text-align: left;
   line-height: 30px;
   border-bottom: 1px solid #454242;
@@ -317,7 +647,7 @@
   top: 2px;
   height: 30px;
   width: auto;
-  color: #DDDDDD;
+  color: #dddddd;
   font-family: Helvetica;
   font-style: normal;
   font-weight: normal;

@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
+
+// HEADERS
+.header-1 {
+  font-family: "Exo 2", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 63px;
+  line-height: 87px;
+  color: #ffffff;
+}
+
+.header-2 {
+  font-family: "Exo 2", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 74px;
+  color: #ffffff;
+}
+
+.header-3 {
+  font-family: "Exo 2", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 55px;
+  letter-spacing: 0.035em;
+  color: #ffffff;
+}
+
+.header-4 {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+}
+
+.header-5 {
+  font-family: "Exo 2", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 28px;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+}
+
+.header-6 {
+  font-family: "Exo 2", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+.header-7 {
+  font-family: "Exo 2", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+// SUBTITLES
+.subtitle-1 {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 26px;
+  letter-spacing: 0.035em;
+  color: #ffffff;
+}
+
+.subtitle-2 {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 177.5%;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+}
+
+// BODY TEXT
+.body-1 {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+.body-2 {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.045em;
+  color: #ffffff;
+}
+
+// BUTTON TEXT
+.button-text {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.1em;
+  //color: #ffffff;
+}
+
+.segmented-button-text {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.065em;
+  //color: #ffffff;
+}
+
+// TAG TEXT
+.tag-text {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 9px;
+  line-height: 11px;
+  letter-spacing: 0.045em;
+  color: $on-card;
+  margin: auto;
+}

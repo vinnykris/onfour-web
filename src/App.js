@@ -30,6 +30,8 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./styles.scss";
+// import "./fonts.scss";
+// import "./colors.scss";
 
 // Amplify imports
 import Amplify from "aws-amplify";

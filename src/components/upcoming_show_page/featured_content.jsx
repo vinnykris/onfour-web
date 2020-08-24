@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
 import { Grid, Row, Col } from "../grid";
+import Tag from "../tag";
 
 // FeaturedContent is the unit element for an upcoming concert
 const FeaturedContent = (props) => {
   return (
-    <div className="single-element">
+    <div>
       <Link
         to={{
           pathname: `/upcoming/${props.id}`,
@@ -18,24 +19,24 @@ const FeaturedContent = (props) => {
           },
         }}
       >
-        <Row className="more-info">
-          <p className="more-info-text">MORE INFO</p>
-        </Row>
         <Grid className="featured-content">
           <Row>
-            <Col size={3} className="poster-container">
+            <div className="poster-container">
               <img
                 className="concert-poster"
                 src={props.img}
                 alt="content-img"
               ></img>
-            </Col>
+            </div>
           </Row>
           <Row>
-            <Col size={3} className="show-content-bar">
-              <Row>
+            <div className="show-content-bar">
+              {/* <Row>
                 <div className="genre-box">{props.genre.toUpperCase()}</div>
-              </Row>
+              </Row> */}
+              <div className="tag-container featured-content-tag">
+                <Tag content="In x days" />
+              </div>
               <Row>
                 <Col size={3}>
                   <p className="artist-name">
@@ -51,7 +52,7 @@ const FeaturedContent = (props) => {
                   </p>
                 </Col>
               </Row>
-            </Col>
+            </div>
           </Row>
         </Grid>
       </Link>

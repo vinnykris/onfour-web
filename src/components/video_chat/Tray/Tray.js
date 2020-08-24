@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import speak_icon from "../../../images/video_chat_icons/radio_button_checked_24px.png";
-import "./Tray.css";
+import "./Tray.scss";
 import TrayButton, {
   TYPE_MUTE_CAMERA,
   TYPE_MUTE_MIC,
@@ -11,6 +11,7 @@ import CallObjectContext from "../CallObjectContext";
 import { logDailyEvent } from "../logUtils";
 //import DailyIframe from "@daily-co/daily-js";
 import RangeSlider from "react-bootstrap-range-slider";
+import exit_icon from "../../../images/video_chat_icons/exit.png";
 
 /**
  * Gets [isCameraMuted, isMicMuted, isSharingScreen].
@@ -326,18 +327,26 @@ export default function Tray(props) {
       <button
         id="press-to-talk"
         type="unmute-all"
-        className="tray-button press-to-talk-btn"
+        className="tray-button press-to-talk-btn header-7"
         disabled={props.disabled}
       >
-        Press & hold to talk
+        Press and hold to talk
       </button>
-      <TrayButton
+      <button
+        type={TYPE_LEAVE}
+        className="tray-button"
+        onClick={leaveCall}
+        disabled={props.disabled}
+      >
+        <img className="tray-button exit-button" src={exit_icon}></img>
+      </button>
+      {/* <TrayButton
         type={TYPE_LEAVE}
         disabled={props.disabled}
         newButtonGroup={true}
         highlighted={true}
         onClick={leaveCall}
-      />
+      /> */}
     </div>
   );
 }

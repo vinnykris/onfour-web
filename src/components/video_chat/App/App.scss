@@ -1,3 +1,4 @@
+@import "../../../styles.scss";
 .app {
   /* display: none; */
   background-color: #17171b;
@@ -53,12 +54,12 @@
   margin: auto;
 }
 
-.room1 {
-  color: white;
+.room-selected {
+  color: white !important;
 }
 
 .room-others {
-  color: rgb(173, 173, 173);
+  color: rgb(173, 173, 173) !important;
 }
 .only-public {
   left: 25%;
@@ -89,7 +90,7 @@
   /* margin-top: 50%; */
   font-size: 0.7rem;
   text-align: center;
-  color: rgb(173, 173, 173);
+  color: $on-background;
   position: relative;
 }
 

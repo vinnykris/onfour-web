@@ -9,11 +9,11 @@ import "./StartButton.css";
 export default function StartButton(props) {
   return (
     <button
-      className="start-button"
+      className="primary-button button-text"
       disabled={props.disabled}
       onClick={props.onClick}
     >
-      {props.artistView? "See And Hear The Fans" :"Join Video Call"}
+      {props.artistView ? "See And Hear The Fans" : "Join Video Call"}
     </button>
   );
 }
