@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+
 import { Row, Col } from "../grid";
 
 import EditCrewModal from "./edit_crew_modal";
@@ -19,7 +22,7 @@ const UserCrews = ({ userCrews, username, userEmail }) => {
   };
 
   return (
-    <Row>
+    <Row className="crews-container">
       <Col size={1}>
         <Row>
           {userCrews.map((crew, index) => (
@@ -57,6 +60,13 @@ const UserCrews = ({ userCrews, username, userEmail }) => {
           ))}
         </Row>
       </Col>
+
+      <div className="fixed-crew-navigation-button">
+        <ArrowForwardIosIcon />
+      </div>
+      <div className="fixed-crew-navigation-button">
+        <ArrowBackIosIcon />
+      </div>
 
       <EditCrewModal
         showModal={showEditCrewModal}

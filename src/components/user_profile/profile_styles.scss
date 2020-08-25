@@ -971,3 +971,17 @@ p {
     width: 0px;
   }
 }
+
+.crews-container {
+  position: relative;
+
+  .fixed-crew-navigation-button {
+    position: absolute;
+    bottom: 40px;
+    right: 15px;
+
+    & > svg {
+      font-size: 50px !important;
+    }
+  }
+}

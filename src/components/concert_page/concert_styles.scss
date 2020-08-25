@@ -587,3 +587,111 @@ hr.break-modal {
 .mobile-backstage {
   display: none !important;
 }
+
+.invite-crew-button {
+  height: 60px;
+
+  & > button {
+    background: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
+    & > span {
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 17px;
+      letter-spacing: 0.045em;
+      color: #ffffff;
+      margin-left: 10px;
+      line-height: 20px;
+    }
+
+    & > svg {
+      background: black;
+      border-radius: 50%;
+      padding: 3px;
+
+      & > path {
+        color: white;
+      }
+    }
+  }
+}
+
+.crew-modal-relative {
+  position: relative;
+
+  .crew-input-rounded {
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    box-sizing: border-box;
+    border-radius: 20px;
+    background: #222229;
+    color: rgba(255, 255, 255, 0.87);
+
+    &:placeholder {
+      font-family: $montserrat;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 26px;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.87);
+    }
+
+    &:focus {
+      border: 1.5px solid #e465a2 !important;
+    }
+  }
+  & > svg {
+    position: absolute;
+    right: 10px;
+    top: 11px;
+
+    & > path {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+
+.crew-invite-single-crew {
+  border-bottom: 1px solid rgba(136, 136, 136, 0.38);
+  height: 50px;
+  justify-content: space-between;
+
+  & > .crew-invite-selection {
+    display: flex;
+
+    & > .crew-invite-radio {
+      height: 20px;
+      width: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.87);
+      border-radius: 50%;
+      margin-top: 16px;
+      margin-right: 20px;
+      margin-left: 10px;
+    }
+
+    & > p {
+      margin: 0px;
+      line-height: 50px;
+      font-family: $exo2;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.87);
+    }
+  }
+
+  & .crew-invite-options {
+    line-height: 40px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 30px;
+    margin-right: 10px;
+  }
+}

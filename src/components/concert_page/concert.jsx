@@ -30,6 +30,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { Checkbox2, useCheckboxState } from "pretty-checkbox-react";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
 import TicketBox from "../payment/ticket_box";
+import InviteCrewModal from "./invite_crew_modal";
 
 // Module imports
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -42,6 +43,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 // import CircleChecked from '@material-ui/icons/CheckCircleOutline';
 import CircleCheckedFilled from "@material-ui/icons/CheckCircle";
 import CircleUnchecked from "@material-ui/icons/RadioButtonUnchecked";
+import GroupAddOutlinedIcon from "@material-ui/icons/GroupAddOutlined";
 
 // EmailJS Import
 import emailjs from "emailjs-com";
@@ -82,6 +84,7 @@ const Concert = (props) => {
   const [loading, setLoading] = useState(true);
   const [enter_venue_status, setEnterVenueStatus] = useState(false);
   const [showPaymentBox, setShowPaymentBox] = useState(false);
+  const [showInviteModal, setShowInviteModal] = useState(false);
 
   var concert_date = null;
   var concert_time = null;
@@ -830,7 +833,7 @@ const Concert = (props) => {
                     </div>
                   ) : (
                     <button className="buy-ticket-button" onClick={getTicket}>
-                      {total > 0? "BUY TICKETS" : "RSVP"}
+                      {total > 0 ? "BUY TICKETS" : "RSVP"}
                     </button>
                   )}
                 </Col>
@@ -1235,10 +1238,21 @@ const Concert = (props) => {
                             className="buy-ticket-button"
                             onClick={getTicket}
                           >
-                            {total > 0? "BUY TICKETS" : "RSVP"}
+                            {total > 0 ? "BUY TICKETS" : "RSVP"}
                           </button>
                         )}
                       </div>
+
+                      <div className="invite-crew-button">
+                        <button onClick={() => setShowInviteModal(true)}>
+                          <GroupAddOutlinedIcon />
+                          <span> INVITE CREW</span>
+                        </button>
+                      </div>
+                      <InviteCrewModal
+                        showModal={showInviteModal}
+                        handleClose={() => setShowInviteModal(false)}
+                      />
                     </Col>
                   </Row>
                   <Row>
