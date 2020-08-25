@@ -72,10 +72,16 @@ const FeaturedConcertBox = ({ artist_info, concert_info }) => {
       </Row>
       <Row className="featured-concert-box-row">
         <Col>
-          <PrimaryButton
+          {/* <PrimaryButton
             content="PEEK INSIDE"
             action={() => history.push("/upcoming/" + concert_id)}
-          />
+          /> */}
+          <button
+            className="primary-button button-text featured-concert-action-button"
+            onClick={() => history.push("/upcoming/" + concert_id)}
+          >
+            PEEK INSIDE
+          </button>
         </Col>
       </Row>
     </Grid>
