@@ -137,3 +137,9 @@
   border-left: none;
   border-right: none;
 }
+
+.create-room-error {
+  font-size: 0.8rem;
+  padding: 5px 0px;
+  color: #fb5554;
+}

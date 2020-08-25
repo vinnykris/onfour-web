@@ -47,21 +47,36 @@ export default function VideoChatApp({
   const [volume, setVolume] = useState(1);
   const [current_room, setCurrentRoom] = useState("room1");
   const isInCrew = owner_name.indexOf(user_name) >= 0;
-  const self_create_room_name = useInputValue("");
+  const self_create_room_name = useInputValue(roomUrl ? roomUrl : "");
+  const [already_created_room_name, setCreatedRoomName] = useState("");
+  const [isRoomCreated, setIsRoomCreated] = useState(false);
+  const [error_msg, setErrorMsg] = useState('');
 
   /**
    * Creates a new call room.
    */
-  const createPublicCall = useCallback((room_name) => {
+  const createPublicCall = useCallback(async (room_name, is_created) => {
     setAppState(STATE_CREATING);
-    return api
-      .createRoom(room_name)
-      .then((room) => room.url)
-      .catch((error) => {
-        console.log("Error creating room", error);
-        setRoomUrl(null);
-        setAppState(STATE_IDLE);
-      });
+    console.log(is_created);
+    let response = await api.createRoom(room_name, is_created);
+    if (response.url) {
+      return response.url
+    } else if (response.error) {
+      setErrorMsg(response.info);
+      setRoomUrl(null);
+      setAppState(STATE_IDLE);
+      throw "error creating room";
+    }
+    // return api
+    //   .createRoom(room_name, is_created)
+    //   .then((room) => {
+    //     room.url
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error creating room", error);
+    //     setRoomUrl(null);
+    //     setAppState(STATE_IDLE);
+    //   });
   }, []);
 
   // const createPrivateCall = useCallback(() => {
@@ -128,7 +143,6 @@ export default function VideoChatApp({
   */
   const startLeavingCall = useCallback(() => {
     if (!callObject) return;
-    console.log(callObject);
     setAppState(STATE_LEAVING);
     callObject.leave();
   }, [callObject]);
@@ -168,9 +182,12 @@ export default function VideoChatApp({
       switchRoom(3);
       setCurrentRoom("room4");
     } else if (url){
-      url && startJoiningPublicCall("https://onfour.daily.co/room5");
+      url && startJoiningPublicCall("https://onfour.daily.co/" + url);
       switchRoom(4);
-      setCurrentRoom("room5");
+      setCurrentRoom(url);
+      setCreatedRoomName(url);
+      setIsRoomCreated(true);
+      setIsPublic(false);
     }
   
     // if (url === "public") {
@@ -196,38 +213,38 @@ export default function VideoChatApp({
   //   }
   // }, [startJoiningPrivateCall]);
 
-  /**
-  * Update the page's URL to reflect the active call when roomUrl changes.
-  *
-  * This demo uses replaceState rather than pushState in order to avoid a bit
-  * of state-management complexity. See the comments around enableCallButtons
-  * and enableStartButton for more information.
-  */
-  useEffect(() => {
-    const pageUrl = pageUrlFromRoomUrl(roomUrl);
-    if (pageUrl === window.location.href) return;
-    window.history.replaceState(null, null, pageUrl);
-  }, [roomUrl]);
+    /**
+    * Update the page's URL to reflect the active call when roomUrl changes.
+    *
+    * This demo uses replaceState rather than pushState in order to avoid a bit
+    * of state-management complexity. See the comments around enableCallButtons
+    * and enableStartButton for more information.
+    */
+    useEffect(() => {
+      const pageUrl = pageUrlFromRoomUrl(roomUrl);
+      if (pageUrl === window.location.href) return;
+      window.history.replaceState(null, null, pageUrl);
+    }, [roomUrl]);
 
-  /**
-  * Uncomment to attach call object to window for debugging purposes.
-  */
-  // useEffect(() => {
-  //   window.callObject = callObject;
-  // }, [callObject]);
+    /**
+    * Uncomment to attach call object to window for debugging purposes.
+    */
+    // useEffect(() => {
+    //   window.callObject = callObject;
+    // }, [callObject]);
 
-  /**
-  * Update app state based on reported meeting state changes.
-  *
-  * NOTE: Here we're showing how to completely clean up a call with destroy().
-  * This isn't strictly necessary between join()s, but is good practice when
-  * you know you'll be done with the call object for a while and you're no
-  * longer listening to its events.
-  */
-  useEffect(() => {
-    if (!callObject) return;
+    /**
+    * Update app state based on reported meeting state changes.
+    *
+    * NOTE: Here we're showing how to completely clean up a call with destroy().
+    * This isn't strictly necessary between join()s, but is good practice when
+    * you know you'll be done with the call object for a while and you're no
+    * longer listening to its events.
+    */
+    useEffect(() => {
+      if (!callObject) return;
 
-    const events = ["joined-meeting", "left-meeting", "error"];
+      const events = ["joined-meeting", "left-meeting", "error"];
 
     function handleNewMeetingState(event) {
       event && logDailyEvent(event);
@@ -245,9 +262,11 @@ export default function VideoChatApp({
         case "error":
           setAppState(STATE_ERROR);
           setTimeout(function () {
-            setRoomUrl(null);
-            setCallObject(null);
-            setAppState(STATE_IDLE);
+            callObject.destroy().then(() => {
+              setRoomUrl(null);
+              setCallObject(null);
+              setAppState(STATE_IDLE);
+            });
           }, 3000);
           break;
         default:
@@ -314,7 +333,7 @@ export default function VideoChatApp({
     "public-room-2",
     "public-room-3",
     "public-room-4",
-    "create-room",
+    isRoomCreated? already_created_room_name : "create-room",
   ];
 
   const switchRoom = (room_number) => {
@@ -329,6 +348,7 @@ export default function VideoChatApp({
     setCurrentRoom("room" + (room_number + 1));
     if (room_number === 4) {
       setIsPublic(false);
+      setCurrentRoom(already_created_room_name);
     } else {
       setIsPublic(true);
     }
@@ -412,8 +432,11 @@ export default function VideoChatApp({
               className="public-room click-active"
               onClick={() => switchRoom(4)}
             >
-              <div id="create-room" className="room-tab-text room-others">
-                Create Room
+              <div
+                id={isRoomCreated ? already_created_room_name : "create-room"}
+                className="room-tab-text room-others"
+              >
+                {isRoomCreated ? already_created_room_name : "Create Room"}
               </div>
             </div>
           </div>
@@ -461,7 +484,7 @@ export default function VideoChatApp({
                 create_room={false}
                 disabled={!enableStartButton}
                 onClick={() => {
-                  createPublicCall(current_room).then((url) =>
+                  createPublicCall(current_room, isRoomCreated).then((url) =>
                     startJoiningPublicCall(url)
                   );
                 }}
@@ -475,13 +498,26 @@ export default function VideoChatApp({
                 </div>
               ) : null}
             </div>
+          ) : // <StartButton
+          //   disabled={!enableStartButton}
+          //   onClick={() => {
+          //     createPrivateCall().then((url) => startJoiningPrivateCall(url));
+          //   }}
+          // />
+          isRoomCreated ? (
+            <div className="enter-video-chat-prompt">
+              <StartButton
+                create_room={false}
+                disabled={!enableStartButton}
+                onClick={() => {
+                  createPublicCall(current_room, isRoomCreated).then((url) =>
+                    startJoiningPublicCall(url)
+                  );
+                }}
+                artistView={artistView}
+              />
+            </div>
           ) : (
-            // <StartButton
-            //   disabled={!enableStartButton}
-            //   onClick={() => {
-            //     createPrivateCall().then((url) => startJoiningPrivateCall(url));
-            //   }}
-            // />
             <div className="enter-video-chat-prompt">
               <input
                 className="create-room-name-input"
@@ -492,11 +528,19 @@ export default function VideoChatApp({
                 create_room={true}
                 disabled={!enableStartButton}
                 onClick={() => {
-                  createPublicCall("room2").then((url) =>
-                    startJoiningPublicCall(url)
-                  );
+                  createPublicCall(
+                    self_create_room_name.value,
+                    isRoomCreated
+                  ).then((url) => {
+                    startJoiningPublicCall(url);
+                    setIsRoomCreated(true);
+                    setCreatedRoomName(self_create_room_name.value);
+                    setCurrentRoom(self_create_room_name.value);
+                  }).catch((err) => console.log(err));
                 }}
+                artistView={artistView}
               />
+              <p className="create-room-error">{error_msg}</p>
             </div>
           )}
         </div>
