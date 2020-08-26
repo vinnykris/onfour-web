@@ -38,20 +38,22 @@ const FeaturedContent = (props) => {
                 <Tag content="In x days" />
               </div>
               <Row>
-                <Col size={3}>
-                  <p className="artist-name">
+                <Col size={1}>
+                  <div className="subtitle-2 featured-content-info">
                     {props.artist_name}
+                    <br></br>
+                    {props.week_day} | {props.date} | {props.formatted_time} EST{" "}
                     {/* - {props.concert_name} */}
-                  </p>
+                  </div>
                 </Col>
               </Row>
-              <Row className="time-row">
+              {/* <Row className="time-row">
                 <Col size={3}>
-                  <p className="time">
+                  <div className="time">
                     {props.week_day} | {props.date} | {props.formatted_time} EST{" "}
                   </p>
                 </Col>
-              </Row>
+              </Row> */}
             </div>
           </Row>
         </Grid>
