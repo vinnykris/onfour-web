@@ -2,8 +2,9 @@
 import history from "../../history";
 
 // React
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PasswordStrengthBar from "react-password-strength-bar";
+import ReactTooltip from "react-tooltip";
 
 // Components
 import { Grid, Row, Col } from "../grid";
@@ -22,9 +23,16 @@ import { API, graphqlOperation } from "aws-amplify";
 // Styles
 import "./register_styles.scss";
 
+// Utils
+import {
+  containsUppercaseAndLowercase,
+  containsNumber,
+  containsSpecialCharacter,
+} from "../../utils/register";
+
 Amplify.configure(awsmobile); // Configuring AppSync API
 
-const Register = () => {
+const Register = (props) => {
   const [username, setUsername] = useState(""); // Tracks user's username
   const [email, setEmail] = useState(""); // Tracks user's email
   const [password, setPassword] = useState(""); // Tracks user's password
@@ -39,6 +47,14 @@ const Register = () => {
   const [pin, setPin] = useState(""); // Tracks user's verification code
   const [auto_signup, setAutoSignUp] = useState(false); // Tracks if user is being auto logged in
   const [is_artist, setIsArtist] = useState(false); // Tracks if user signing up is a musician or a fan
+  const [from_path, setFromPath] = useState(null);
+  const state = props.location.state;
+
+  useEffect(() => {
+    if (state) {
+      setFromPath(state.current);
+    }
+  }, []);
 
   // Function that occurs after the user clicks the submit button to sign up
   const registerSubmit = (event) => {
@@ -56,7 +72,7 @@ const Register = () => {
 
     // Email/First Name/Last Name/Concerts information passed into AppSync API/Registration Table
     const register_payload = {
-      username: username,
+      username: username.toLowerCase(),
       email: email,
       first: first,
       last: last,
@@ -166,8 +182,13 @@ const Register = () => {
     setUsername("");
     setPassword("");
     setRepeatPassword("");
-    if (is_artist) history.push("/form");
-    else history.push("/stream");
+    if (is_artist) {
+      history.push("/form");
+    } else if (from_path) {
+      history.push(from_path);
+    } else {
+      history.push("/");
+    }
   };
 
   // Function for checking a user's submitted pin to confirm account
@@ -344,7 +365,89 @@ const Register = () => {
                               setPassword(event.target.value)
                             }
                             required
+                            data-tip
+                            data-for="registerTip"
                           />
+                          <ReactTooltip
+                            id="registerTip"
+                            place="left"
+                            effect="solid"
+                          >
+                            <p className="password-tooltip-white">
+                              Your password must contain the following:
+                            </p>
+                            <p className="password-suggestion-bullets">
+                              {password.length > 7 ? (
+                                <i className="fa fa-check green-password-suggestion"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion"></i>
+                              )}
+                              <text
+                                className={
+                                  password.length > 7
+                                    ? "green-password-suggestion"
+                                    : "red-password-suggestion"
+                                }
+                              >
+                                {" "}
+                                8 or more characters
+                              </text>
+                            </p>
+                            <br></br>
+                            <p className="password-suggestion-bullets">
+                              {containsUppercaseAndLowercase(password) ? (
+                                <i className="fa fa-check green-password-suggestion"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion"></i>
+                              )}
+                              <text
+                                className={
+                                  containsUppercaseAndLowercase(password)
+                                    ? "green-password-suggestion"
+                                    : "red-password-suggestion"
+                                }
+                              >
+                                {" "}
+                                Uppercase and lowercase letters
+                              </text>
+                            </p>
+                            <br></br>
+                            <p className="password-suggestion-bullets">
+                              {containsNumber(password) ? (
+                                <i className="fa fa-check green-password-suggestion"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion"></i>
+                              )}
+                              <text
+                                className={
+                                  containsNumber(password)
+                                    ? "green-password-suggestion"
+                                    : "red-password-suggestion"
+                                }
+                              >
+                                {" "}
+                                At least 1 number
+                              </text>
+                            </p>
+                            <br></br>
+                            <p className="password-suggestion-bullets">
+                              {containsSpecialCharacter(password) ? (
+                                <i className="fa fa-check green-password-suggestion"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion"></i>
+                              )}
+                              <text
+                                className={
+                                  containsSpecialCharacter(password)
+                                    ? "green-password-suggestion"
+                                    : "red-password-suggestion"
+                                }
+                              >
+                                {" "}
+                                At least 1 special character
+                              </text>
+                            </p>
+                          </ReactTooltip>
                           <input
                             className="register-input-right"
                             type="password"
@@ -353,7 +456,7 @@ const Register = () => {
                             id="password_r_slot"
                             placeholder="Repeat Password"
                             onChange={(event) =>
-                              setUsername(event.target.value)
+                              setRepeatPassword(event.target.value)
                             }
                             required
                           />

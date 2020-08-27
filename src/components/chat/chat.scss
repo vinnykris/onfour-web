@@ -214,11 +214,15 @@ button:focus {
   }
 }
 
+.input-container {
+  width: 100%;
+}
+
 .input {
   border: none;
   border-radius: 0;
   padding: 3% 12px;
-  width: 90%;
+  width: 70%;
   font-size: 1.2em;
   color: white;
   @include respond-to("x-large") {
@@ -247,7 +251,7 @@ button:focus {
   display: inline-block;
   border: none;
   letter-spacing: 1px;
-  width: 18%;
+  width: 15%;
   @include respond-to("x-large") {
     font-size: 1em;
   }
@@ -492,7 +496,7 @@ button:focus {
   cursor: pointer;
   border: none;
   letter-spacing: 1px;
-  width: 18%;
+  width: 15%;
   display: inline-grid;
   grid-auto-flow: column;
   align-items: center;

@@ -17,6 +17,7 @@ export default function Tile(props) {
 
   const [audioMute, setAudioMute] = useState(false);
   const random_id = Math.random();
+  const video_component_id = "video" + random_id.toString();
   const audio_component_id = "audio" + random_id.toString();
   const fans_microphone_id = "fans-mic" + random_id.toString();
 
@@ -84,7 +85,6 @@ export default function Tile(props) {
           document.getElementById(random_id).style.opacity = "100";
           setAudioMute(true);
         } else {
-          document.getElementById(random_id).style.opacity = "0";
           setAudioMute(false);
         }
       }
@@ -106,30 +106,52 @@ export default function Tile(props) {
     if (document.getElementById(fans_microphone_id)) {
       if (audioTrack) {
         document.getElementById(fans_microphone_id).style.opacity = "0";
+        if (document.getElementById(video_component_id)) {
+          document.getElementById(video_component_id).style.border =
+            "2px solid #E465A2";
+        }
       } else {
         document.getElementById(fans_microphone_id).style.opacity = "100";
+        if (document.getElementById(video_component_id)) {
+          document.getElementById(video_component_id).style.border = "none";
+        }
+      }
+    }
+    if (document.getElementById(random_id)) {
+      if (!props.mute_all) {
+        if (audioTrack) {
+          document.getElementById(random_id).style.opacity = "0";
+          if (document.getElementById(video_component_id)) {
+            document.getElementById(video_component_id).style.border =
+              "2px solid #E465A2";
+          }
+        } else {
+          document.getElementById(random_id).style.opacity = "100";
+          if (document.getElementById(video_component_id)) {
+            document.getElementById(video_component_id).style.border = "none";
+          }
+        }
       }
     }
   }
 
-  return (
-    !props.isArtist ? (
-      <div className={getClassNames()}>
-        <div className="background" />
-        {/* {!props.isLocalPerson ? (
+  return !props.isArtist ? (
+    <div className={getClassNames()} id={video_component_id}>
+      <div className="background" />
+      {/* {!props.isLocalPerson ? (
           <div> */}
-            {props.artistView? (
-              <i 
-                className="fa fa-microphone-slash mute-others-icon" 
-                id={random_id} 
-              ></i>
-            ) : (
-              <i
-                className="fa fa-microphone-slash mute-others-icon"
-                id={fans_microphone_id}
-              ></i>
-            )}
-            {/* <div className="range-slider-container">
+      {props.artistView ? (
+        <i
+          className="fa fa-microphone-slash mute-others-icon"
+          id={random_id}
+        ></i>
+      ) : (
+        <i
+          className="fa fa-microphone-slash mute-others-icon"
+          id={fans_microphone_id}
+        ></i>
+      )}
+      {/* <div className="range-slider-container">
               <RangeSlider
                 value={volume_value}
                 onChange={changeEvent => {
@@ -138,15 +160,12 @@ export default function Tile(props) {
                 }}
               />
             </div> */}
-          {/* </div>
+      {/* </div>
         ):null} */}
-        <div className="video-call-participant-name">
-          {props.username}
-        </div>
-        {getLoadingComponent()}
-        {getVideoComponent()}
-        {getAudioComponent()}
-      </div>
-    ) : null
-  );
+      <div className="video-call-participant-name">{props.username}</div>
+      {getLoadingComponent()}
+      {getVideoComponent()}
+      {getAudioComponent()}
+    </div>
+  ) : null;
 }

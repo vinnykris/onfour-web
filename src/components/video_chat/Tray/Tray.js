@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import speak_icon from "../../../images/video_chat_icons/radio_button_checked_24px.png";
 import "./Tray.css";
 import TrayButton, {
   TYPE_MUTE_CAMERA,
@@ -75,6 +76,86 @@ export default function Tray(props) {
 
   function leaveCall() {
     props.onClickLeaveCall && props.onClickLeaveCall();
+  }
+
+  let item = document.getElementById("press-to-talk");
+  let timerID;
+  let counter = 0;
+
+  let pressHoldEvent = new CustomEvent("pressHold");
+
+  // Increase or decreae value to adjust how long
+  // one should keep pressing down before the pressHold
+  // event fires
+  let pressHoldDuration = 10;
+
+  useEffect(() => {
+    if (item) {
+      // console.log("getting item");
+      // Listening for the mouse and touch events
+      item.addEventListener("mousedown", pressingDown, false);
+      item.addEventListener("mouseup", notPressingDown, false);
+      item.addEventListener("mouseleave", notPressingDown, false);
+
+      item.addEventListener("touchstart", pressingDown, false);
+      item.addEventListener("touchend", notPressingDown, false);
+
+      // // Listening for space bar pressing event
+      // document.addEventListener("keypress", pressingSpaceDown, false);
+      // document.addEventListener("keyup", notPressingSpaceDown, false);
+
+      // Listening for our custom pressHold event
+      item.addEventListener("pressHold", doSomething, false);
+    }
+  }, [item]);
+
+  function pressingDown(e) {
+    // Start the timer
+    requestAnimationFrame(timer);
+    e.preventDefault();
+  }
+
+  function pressingSpaceDown(e) {
+    if (e.charCode === 32 || e.keyCode === 32) {
+      requestAnimationFrame(timer);
+    }
+    e.preventDefault();
+  }
+
+  function notPressingSpaceDown(e) {
+    if (e.charCode === 32 || e.keyCode === 32) {
+      cancelAnimationFrame(timerID);
+      counter = 0;
+      callObject.setLocalAudio(false);
+    }
+    e.preventDefault();
+  }
+
+  function notPressingDown(e) {
+    // Stop the timer
+    cancelAnimationFrame(timerID);
+    counter = 0;
+    callObject.setLocalAudio(false);
+    props.stream_vol_adjust(0.9);
+    e.preventDefault();
+  }
+
+  //
+  // Runs at 60fps when you are pressing down
+  //
+  function timer() {
+    if (counter < pressHoldDuration) {
+      timerID = requestAnimationFrame(timer);
+      counter++;
+    } else {
+      item.dispatchEvent(pressHoldEvent);
+    }
+  }
+
+  function doSomething(e) {
+    console.log("setting volume");
+    callObject.setLocalAudio(true);
+    props.stream_vol_adjust(0.25);
   }
 
   /**
@@ -186,14 +267,14 @@ export default function Tray(props) {
             />
           </div>
           /> */}
-          <button
+          {/* <button
             type={TYPE_MUTE_MIC}
             className="tray-button"
             onClick={switchMicIcon}
             disabled={props.disabled}
           >
             <i className={mic_icon}></i>
-          </button>
+          </button> */}
           <div className="volume-container">
             <button
               type="unmute-all"
@@ -206,17 +287,23 @@ export default function Tray(props) {
             </button>
             <RangeSlider
               className="volume-slider"
-              id = "range-slider-haha"
+              id="range-slider-haha"
               value={props.volume * 100}
-              onChange={(changeEvent) =>
-                {
-                  props.adjust_volume(changeEvent.target.value / 100);
-                  reflect_speaker(changeEvent.target.value);
-                }
-              }
+              onChange={(changeEvent) => {
+                props.adjust_volume(changeEvent.target.value / 100);
+                reflect_speaker(changeEvent.target.value);
+              }}
               variant="dark"
             />
           </div>
+          <button
+            id="press-to-talk"
+            type="unmute-all"
+            className="tray-button press-to-talk-btn"
+            disabled={props.disabled}
+          >
+            Press & hold to talk
+          </button>
         </div>
       ) : (
         <button
@@ -250,6 +337,7 @@ export default function Tray(props) {
         newButtonGroup={true}
         highlighted={true}
         onClick={leaveCall}
+        id = "leave-video-chat-button"
       />
     </div>
   );

@@ -47,7 +47,7 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
   }, [selectedEmoji]);
 
   return (
-    <div>
+    <div className="input-container">
       {auth ? (
         <form className="form">
           <input
@@ -102,6 +102,15 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
             placeholder="Please sign in to send messages!"
             disabled
           />
+          {/* visibility toggler */}
+          <div
+            className="emoji-button"
+            onClick={(event) =>
+              setEmojiPickerVisibility(!emojiPickerVisibility)
+            }
+          >
+            <i class="fa fa-smile-o" aria-hidden="true"></i>
+          </div>
           <button
             className="send-button"
             disabled={!message}

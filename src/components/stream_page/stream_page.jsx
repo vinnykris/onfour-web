@@ -42,6 +42,9 @@ import "rodal/lib/rodal.css";
 import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
 import ticket1 from "../../images/icons/ticket1.png";
 
+// Utils
+import { getCrewsByUsername } from "../../utils/crew";
+
 Amplify.configure(awsmobile);
 
 // Main stream page component. Holds stream video, chat, and payment functionality
@@ -65,7 +68,9 @@ const StreamPage = ({ is_soundcheck }) => {
   const [artist_youtube, setArtistYoutube] = useState("");
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
-  const [is_live, setIsLive] = useState(false);
+  const [concert_crews, setConcertCrews] = useState("");
+  const [user_crews, setUserCrews] = useState("");
+  const [is_live, setIsLive] = useState(true);
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
@@ -80,6 +85,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [venmo_selected, setVenmoSelected] = useState(false);
   const [credit_selected, setCreditSelected] = useState(true);
   const [paypal_selected, setPaypalSelected] = useState(false);
+  const [stream_volume, setStreamVolume] = useState(1.0);
 
   const history = useHistory();
 
@@ -178,6 +184,7 @@ const StreamPage = ({ is_soundcheck }) => {
         setShowChat(true);
         setAuth(true);
         setTickets(await getTickets(user.username));
+        setUserCrews(await getCrewsByUsername(user.username));
       })
       .catch((err) => setAuth(false));
   }, []);
@@ -216,8 +223,9 @@ const StreamPage = ({ is_soundcheck }) => {
     setConcertName(info_list[0].concert_name);
     getArtistInfo(info_list[0].artist_id);
     setConcertID(info_list[0].id);
-    setIsLive(info_list[0].is_live);
+    // setIsLive(info_list[0].is_live);
     setIsFree(info_list[0].general_price === 0);
+    setConcertCrews(JSON.parse(info_list[0].crew_list));
   };
 
   const getArtistInfo = async (artist_id) => {
@@ -397,11 +405,11 @@ const StreamPage = ({ is_soundcheck }) => {
     }
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      getIsLive();
-    }, 5000);
-  });
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     getIsLive();
+  //   }, 3000);
+  // }, []);
 
   const paymentTabSelected = (option) => {
     if (option == 0) {
@@ -483,27 +491,35 @@ const StreamPage = ({ is_soundcheck }) => {
                       size={1}
                       className="payment-modal-tab selected-tab"
                       id="credit-tab"
+                      onClick={() => paymentTabSelected(0)}
                     >
                       <span
-                        onClick={() => paymentTabSelected(0)}
                         className="payment-modal-tab-text selected-tab"
                         id="credit-tab-text"
                       >
                         Credit Card
                       </span>
                     </Col>
-                    <Col size={1} className="payment-modal-tab" id="venmo-tab">
+                    <Col
+                      size={1}
+                      className="payment-modal-tab"
+                      id="venmo-tab"
+                      onClick={() => paymentTabSelected(1)}
+                    >
                       <span
-                        onClick={() => paymentTabSelected(1)}
                         className="payment-modal-tab-text"
                         id="venmo-tab-text"
                       >
                         Venmo
                       </span>
                     </Col>
-                    <Col size={1} className="payment-modal-tab" id="paypal-tab">
+                    <Col
+                      size={1}
+                      className="payment-modal-tab"
+                      id="paypal-tab"
+                      onClick={() => paymentTabSelected(2)}
+                    >
                       <span
-                        onClick={() => paymentTabSelected(2)}
                         className="payment-modal-tab-text"
                         id="paypal-tab-text"
                       >
@@ -547,6 +563,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           username={username}
                           concert_id={concert_id}
                           is_live={is_live}
+                          stream_volume={stream_volume}
                         />
                       ) : (
                         <div className="buy-ticket-message-container">
@@ -789,7 +806,6 @@ const StreamPage = ({ is_soundcheck }) => {
                       </Col>
                     </Row>
                   </div>
-                 
                 </Col>
                 <Col size={3} id="chat_container" className="sticky-container">
                   <div className="chat-main" id="chat_main">
@@ -798,6 +814,7 @@ const StreamPage = ({ is_soundcheck }) => {
                         <VideoChat
                           user_name={username ? username : "GUEST"}
                           artist_name="vinnykris"
+                          stream_vol_adjust={setStreamVolume}
                         ></VideoChat>
                       </Row>
                       <Row className="chat-row">
@@ -873,6 +890,22 @@ const StreamPage = ({ is_soundcheck }) => {
             </Grid>
           ) : (
             <div className="mobile-grid-stream">
+              <Rodal
+                visible={open_modal}
+                onClose={closeModal}
+                width={100}
+                height={100}
+                measure="%"
+                customStyles={{
+                  padding: 0,
+                  overflow: scroll,
+                  // maxHeight: "400px",
+                  // maxWidth: "600px",
+                }}
+                className="rodal-custom"
+              >
+                <PaymentBox />
+              </Rodal>
               <div className="main-column">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
@@ -939,8 +972,9 @@ const StreamPage = ({ is_soundcheck }) => {
                   {tip_based ? (
                     <button
                       className="stripe-button-border mobile-payment-button"
-                      data-toggle="modal"
-                      data-target="#paymentModal"
+                      // data-toggle="modal"
+                      // data-target="#paymentModal"
+                      onClick={donateModal}
                     >
                       Tip {artist_name}
                     </button>
@@ -953,7 +987,7 @@ const StreamPage = ({ is_soundcheck }) => {
                       Donate
                     </button>
                   )}
-                  <Modal isOpen={false}></Modal>
+                  {/* <Modal isOpen={false}></Modal> */}
                 </div>
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
