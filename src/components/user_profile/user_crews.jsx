@@ -8,7 +8,7 @@ import { Row, Col } from "../grid";
 import EditCrewModal from "./edit_crew_modal";
 import SingleCrewModal from "./single_crew_modal";
 
-const UserCrews = ({ userCrews, username, userEmail }) => {
+const UserCrews = ({ userCrews, username, userEmail, updateCrews }) => {
   const [showEditCrewModal, setshowEditCrewModal] = useState(false);
   const [showSingleCrewModal, setShowSingleCrewModal] = useState(false);
   const [selectedCrew, setSelectedCrew] = useState(userCrews[0]);
@@ -19,6 +19,12 @@ const UserCrews = ({ userCrews, username, userEmail }) => {
 
     if (userSelectedCrew.admin === username) setshowEditCrewModal(true);
     else setShowSingleCrewModal(true);
+  };
+
+  const handleCloseCrewModal = (update) => {
+    if (update === true) updateCrews();
+    setShowSingleCrewModal(false);
+    setshowEditCrewModal(false);
   };
 
   return (
@@ -70,7 +76,7 @@ const UserCrews = ({ userCrews, username, userEmail }) => {
 
       <EditCrewModal
         showModal={showEditCrewModal}
-        handleClose={() => setshowEditCrewModal(false)}
+        handleClose={handleCloseCrewModal}
         crewName={selectedCrew.name}
         crewColor={selectedCrew.color}
         crewAdmin={selectedCrew.admin}
@@ -81,7 +87,7 @@ const UserCrews = ({ userCrews, username, userEmail }) => {
 
       <SingleCrewModal
         showModal={showSingleCrewModal}
-        handleClose={() => setShowSingleCrewModal(false)}
+        handleClose={handleCloseCrewModal}
         crewName={selectedCrew.name}
         crewAdmin={selectedCrew.admin}
         crewMembersProp={selectedCrew.membersArray}

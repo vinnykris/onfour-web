@@ -30,7 +30,8 @@ const DashboardPage = ({
     "E26A6A",
   ]);
 
-  const closeModal = () => {
+  const closeModal = (update) => {
+    if (update === true) getUserCrews();
     setShowCrewModal(false);
   };
 
@@ -287,6 +288,7 @@ const DashboardPage = ({
                     userCrews={userCrews}
                     username={username}
                     userEmail={userEmail}
+                    updateCrews={getUserCrews}
                   />
                 ) : (
                   <div

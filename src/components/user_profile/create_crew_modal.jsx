@@ -105,7 +105,7 @@ const CreateCrewModal = ({
 
     await createCrew(emailsToSave, crewName, currentUsername, selectedColor);
 
-    closeModal();
+    closeModal(true);
   };
 
   useEffect(() => {

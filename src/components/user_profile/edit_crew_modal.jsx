@@ -94,8 +94,8 @@ const EditCrewModal = ({
     setSaveButtonDisabled(false);
   };
 
-  const handleMainModalClose = () => {
-    handleClose();
+  const handleMainModalClose = (update) => {
+    handleClose(update ? update : false);
     setSaveButtonDisabled(true);
     setNewCrewName(crewName);
     setCrewMembers(crewMembersProp);
@@ -178,13 +178,13 @@ const EditCrewModal = ({
       }
     }
 
-    handleClose();
+    handleClose(true);
   };
 
   const handleConfirmDelete = async () => {
     await deleteCrew(crewId);
     setShowConfirmationModal(false);
-    handleMainModalClose();
+    handleMainModalClose(true);
   };
 
   const handleCloseConfirmationModal = () => {
