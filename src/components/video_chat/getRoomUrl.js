@@ -18,7 +18,7 @@ const getRoomUrl = async (room_name) => {
                 enable_chat: false,
                 start_video_off: false,
                 start_audio_off: true,
-                owner_only_broadcast: false,
+                owner_only_broadcast: true,
             },
             name: room_name,
             privacy: "public",
