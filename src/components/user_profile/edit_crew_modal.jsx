@@ -129,7 +129,6 @@ const EditCrewModal = ({
       });
 
       crewMembers.forEach((newMember) => {
-        console.log({ newMember });
         let foundNewMember = true;
         crewMembersProp.forEach((oldMember) => {
           if (newMember.email === oldMember.email) foundNewMember = false;
@@ -174,7 +173,6 @@ const EditCrewModal = ({
           savingMembers[member.email] =
             member.username === member.email ? "" : member.username;
         });
-        console.log({ savingMembers });
         await updateCrewUsers(crewId, savingMembers);
       }
     }

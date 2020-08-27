@@ -24,7 +24,7 @@ const SingleCrewModal = ({
   const handleConfirmLeave = async () => {
     await leaveOrRemoveFromCrew(userEmail, username, crewId);
     setShowConfirmationModal(false);
-    handleClose();
+    handleClose(true);
   };
 
   return (

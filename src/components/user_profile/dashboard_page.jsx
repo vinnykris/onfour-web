@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PulseLoader from "react-spinners/PulseLoader";
 
 import { Row, Col } from "../grid";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
@@ -29,6 +30,7 @@ const DashboardPage = ({
     "444DF2",
     "E26A6A",
   ]);
+  const [loadingCrews, setLoadingCrews] = useState(false);
 
   const closeModal = (update) => {
     if (update === true) getUserCrews();
@@ -36,6 +38,7 @@ const DashboardPage = ({
   };
 
   const getUserCrews = async () => {
+    setLoadingCrews(true);
     const userCrews = await getCrewsByUsername(username);
 
     if (userCrews) {
@@ -92,6 +95,7 @@ const DashboardPage = ({
       });
 
       setUserCrews(crewData);
+      setLoadingCrews(false);
     }
   };
 
@@ -288,23 +292,36 @@ const DashboardPage = ({
               </Col>
             </Row>
             <Row className="user-crew-wrapper">
-              <Col size={1} className="user-crews-column">
-                {userCrews.length > 0 ? (
-                  <UserCrews
-                    userCrews={userCrews}
-                    username={username}
-                    userEmail={userEmail}
-                    updateCrews={getUserCrews}
-                  />
-                ) : (
-                  <div
-                    className="create-crew-wrapper"
-                    onClick={() => setShowCrewModal(true)}
-                  >
-                    <p>Create Crew +</p>
+              {loadingCrews !== true ? (
+                <Col size={1} className="user-crews-column">
+                  {userCrews.length > 0 ? (
+                    <UserCrews
+                      userCrews={userCrews}
+                      username={username}
+                      userEmail={userEmail}
+                      updateCrews={getUserCrews}
+                    />
+                  ) : (
+                    <div
+                      className="create-crew-wrapper"
+                      onClick={() => setShowCrewModal(true)}
+                    >
+                      <p>Create Crew +</p>
+                    </div>
+                  )}
+                </Col>
+              ) : (
+                <Col size={1} className="user-crews-column">
+                  <div className="user-crews-loader">
+                    <PulseLoader
+                      sizeUnit="px"
+                      size={18}
+                      color="#7b6dac"
+                      loading={loadingCrews}
+                    />
                   </div>
-                )}
-              </Col>
+                </Col>
+              )}
             </Row>
           </div>
 
