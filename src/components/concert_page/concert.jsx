@@ -60,6 +60,7 @@ import "react-multi-email/style.css";
 
 // Image imports
 import samar_mehdi_ticket from "../../images/tickets/samar_mehdi_ticket.png";
+import Tag from "../tag";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -1245,110 +1246,32 @@ const Concert = (props) => {
                   </Row>
                 </Grid>
               </Rodal>
-
-              <Row className="info-row">
-                <Col size={1} className="concert-info-col">
-                  <div className="concert-image-container">
-                    <img
-                      className="concert-image"
-                      src={concert_info.img}
-                      alt="concert-poster"
-                    ></img>
+              <div className="banner-container">
+                <img
+                  src={concert_info.img}
+                  className="concert-page-featured"
+                  alt="concert-poster"
+                />
+                <div className="concert-page-overlay" />
+              </div>
+              <div className="countdown-box">
+                <div className="countdown-inner">
+                  {" "}
+                  <CountdownTimer
+                    start_date={concert_info.date}
+                    start_time={concert_info.time}
+                  />
+                </div>
+              </div>
+              <div className="concert-info">
+                <div className="tag-calendar">
+                  <div className="tag-container concert-tag">
+                    <Tag content="In x days" />
                   </div>
-                  <div className="concert-logistics">
-                    <Row>
-                      <div className="concert-genre-box">
-                        {concert_info.genre.toUpperCase()}
-                      </div>
-                    </Row>
-                    <Row className="logistics-row">
-                      <span className="logistics-text">
-                        {concert_info.week_day.toUpperCase()},{" "}
-                        {concert_info.formatted_date}
-                      </span>
-                    </Row>
-                    <hr className="solid" />
-                    <Row className="logistics-row">
-                      <span className="logistics-text">
-                        {concert_info.formatted_time} EST
-                      </span>
-                    </Row>
-                    <hr className="solid" />
-                    <Row className="logistics-row">
-                      <span className="logistics-text">
-                        STREAMED FROM {concert_info.location.toUpperCase()}
-                      </span>
-                    </Row>
-                    <hr className="solid" />
-                    <SocialBar
-                      instagram={concert_info.instagram}
-                      spotify={concert_info.spotify}
-                      youtube={concert_info.youtube}
-                      facebook={concert_info.facebook}
-                      twitter={concert_info.twitter}
-                    />
-                  </div>
-                </Col>
-                <Col size={2} className="concert-info-col main-info-col">
-                  <Row className="countdown-and-buttons">
-                    <Col size={1}>
-                      <div className="countdown-timer">
-                        <CountdownTimer
-                          start_date={concert_info.date}
-                          start_time={concert_info.time}
-                        />
-                      </div>
-                      <div className="buy-ticket">
-                        {has_ticket ? (
-                          <div>
-                            {enter_venue_status ? (
-                              <NavLink to="/stream">
-                                {" "}
-                                <button
-                                  className="buy-ticket-button"
-                                  // onClick={goToVenue}
-                                >
-                                  Enter Venue
-                                </button>
-                              </NavLink>
-                            ) : (
-                              <Tooltip title="Please try again 30 minutes before the show!">
-                                <button className="buy-ticket-button-disabled">
-                                  Enter Venue
-                                </button>
-                              </Tooltip>
-                            )}
-                          </div>
-                        ) : (
-                          <button
-                            className="buy-ticket-button"
-                            onClick={getTicket}
-                          >
-                            {total > 0 ? "BUY TICKETS" : "RSVP"}
-                          </button>
-                        )}
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <div className="concert-text-container">
-                      <Col size={1}>
-                        <div>
-                          <h3 className="titles">
-                            {concert_info.artist_name.toUpperCase()} –{" "}
-                            {concert_info.concert_name.toUpperCase()}
-                          </h3>
-                        </div>
-                        <div>
-                          <p className="artist-description-text">
-                            {concert_info.description}
-                          </p>
-                        </div>
-                      </Col>
-                    </div>
-                  </Row>
-                  <Row>
-                    <div className="share-concert-container">
+                  <span className="secondary-button segmented-button-text add-to-calendar">
+                    + Add to calendar
+                  </span>
+                  {/* <div className="share-concert-container">
                       <Col size={1}>
                         <div>
                           <h5 className="share-concert-text">
@@ -1408,10 +1331,167 @@ const Concert = (props) => {
                           </ul>
                         </div>
                       </Col>
+                    </div> */}
+                </div>
+                <div className="concert-info-inner">
+                  <div className="concert-main-info">
+                    <div>
+                      <h3 className="header-3 titles">
+                        {concert_info.artist_name.toUpperCase()} –{" "}
+                        {concert_info.concert_name.toUpperCase()}
+                      </h3>
+                    </div>
+                    <div>
+                      <p className="body-1 artist-description-text">
+                        {concert_info.description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="concert-logistics">
+                    <Row>
+                      {/* <div className="buy-ticket"> */}
+                      {has_ticket ? (
+                        <div className="button-container">
+                          {enter_venue_status ? (
+                            <NavLink to="/stream">
+                              {" "}
+                              <button className="primary-button button-text concert-ticket-button">
+                                <span>Enter Venue</span>
+                              </button>
+                            </NavLink>
+                          ) : (
+                            <Tooltip title="Please try again 30 minutes before the show!">
+                              <button
+                                className="primary-button button-text concert-ticket-button"
+                                disabled
+                              >
+                                <span>Enter Venue</span>
+                              </button>
+                            </Tooltip>
+                          )}
+                        </div>
+                      ) : (
+                        <button
+                          className="primary-button button-text concert-ticket-button"
+                          onClick={getTicket}
+                        >
+                          {total > 0 ? (
+                            <span>Buy Tickets</span>
+                          ) : (
+                            <span>RSVP</span>
+                          )}
+                        </button>
+                      )}
+                      {/* </div> */}
+                    </Row>
+                    <Row>
+                      <div className="button-container">
+                        <button className="primary-button button-text invite-crew-button">
+                          <span>Invite Crew</span>
+                        </button>
+                      </div>
+                    </Row>
+
+                    <Row className="logistics-row">
+                      <span className="header-6">
+                        {concert_info.week_day}, {concert_info.formatted_date}
+                      </span>
+                    </Row>
+                    <hr className="solid" />
+                    <Row className="logistics-row">
+                      <span className="header-6">
+                        {concert_info.formatted_time} EST
+                      </span>
+                    </Row>
+                    <hr className="solid" />
+                    <Row className="logistics-row">
+                      <span className="header-6">
+                        Streamed from {concert_info.location}
+                      </span>
+                    </Row>
+                    <hr className="solid" />
+                    <SocialBar
+                      instagram={concert_info.instagram}
+                      spotify={concert_info.spotify}
+                      youtube={concert_info.youtube}
+                      facebook={concert_info.facebook}
+                      twitter={concert_info.twitter}
+                    />
+                  </div>
+                </div>
+                <div className="share-concert">
+                  <div>
+                    <span className="segmented-button-text share-concert-text">
+                      Share With Friends
+                    </span>
+                  </div>
+                  <div className="share-list-container">
+                    <ul className="social-list">
+                      <li>
+                        <a
+                          onClick={() =>
+                            Analytics.record({
+                              name: "facebookShareClicked",
+                            })
+                          }
+                          href={facebook_link}
+                          className="fab fa-facebook fb-xfbml-parse-ignore"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <span>Facebook Link</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() =>
+                            Analytics.record({
+                              name: "twitterShareClicked",
+                            })
+                          }
+                          className="fa fa-twitter twitter-share-button"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={twitter_link}
+                          data-text="Come watch a concert with me!"
+                          data-url={window.location.href}
+                          data-lang="en"
+                          data-show-count="false"
+                        >
+                          <span>Twitter Link</span>
+                        </a>
+                        <script
+                          async
+                          src="https://platform.twitter.com/widgets.js"
+                          charSet="utf-8"
+                        ></script>
+                      </li>
+                      <li>
+                        <Tooltip title={tooltip_text}>
+                          <span onClick={copyToClipboard}>
+                            <i className="fa fa-clone">
+                              <span>Copy Link</span>
+                            </i>
+                          </span>
+                        </Tooltip>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {/* <Row className="info-row">
+                <Col size={2} className="concert-info-col main-info-col">
+                  <Row className="countdown-and-buttons"></Row>
+                  <Row>
+                    <div className="concert-text-container">
+                      <Col size={1}></Col>
                     </div>
                   </Row>
+                  <Row>
+                    <div className="share-concert-container"></div>
+                  </Row>
                 </Col>
-              </Row>
+              </Row> */}
             </Grid>
           )}
         </div>

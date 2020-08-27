@@ -30,6 +30,8 @@ const Footer = () => {
       location.pathname === "/profile" ||
       location.pathname === "/soundcheck" ||
       location.pathname === "/artiststream"
+      // ||
+      // location.pathname.includes("/upcoming/")
     ) {
       setShowFooter(false);
     } else {

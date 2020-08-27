@@ -149,7 +149,7 @@
   height: auto;
   padding: 2.5vw;
   position: absolute;
-  right: 0;
+  right: calc(149px - 2.5vw);
 }
 
 .upcoming-col {
