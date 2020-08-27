@@ -85,6 +85,12 @@ const DashboardPage = ({
         crewData[crewIndex].membersArray = crewMembersArray;
       });
 
+      crewData.sort((crewA, crewB) => {
+        if (crewA.name < crewB.name) return -1;
+        if (crewA.name > crewB.name) return 1;
+        return 0;
+      });
+
       setUserCrews(crewData);
     }
   };

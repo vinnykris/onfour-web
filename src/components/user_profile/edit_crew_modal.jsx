@@ -125,12 +125,11 @@ const EditCrewModal = ({
             email: oldMember.email,
             username: oldMember.username,
           });
-
-          if (oldMember.email === oldMember.username) saveUnknownUsers = true;
         }
       });
 
       crewMembers.forEach((newMember) => {
+        console.log({ newMember });
         let foundNewMember = true;
         crewMembersProp.forEach((oldMember) => {
           if (newMember.email === oldMember.email) foundNewMember = false;
@@ -141,6 +140,8 @@ const EditCrewModal = ({
             username: newMember.username,
             email: newMember.email,
           });
+
+        if (newMember.email === newMember.username) saveUnknownUsers = true;
       });
 
       const removeMembersPromise = [];
@@ -173,7 +174,7 @@ const EditCrewModal = ({
           savingMembers[member.email] =
             member.username === member.email ? "" : member.username;
         });
-
+        console.log({ savingMembers });
         await updateCrewUsers(crewId, savingMembers);
       }
     }
