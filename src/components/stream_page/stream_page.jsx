@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import SharePopup from "./share_popup";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import moment from "moment";
@@ -946,10 +947,10 @@ const StreamPage = ({ is_soundcheck }) => {
       ) : (
         // <div className={!show_start_time ? 'parentDisable' : ''} width="100%">
         <div className="overlay-box">
-          <PulseLoader
+          <ScaleLoader
             sizeUnit={"px"}
             size={18}
-            color={"#7b6dac"}
+            color={"#E465A2"}
             loading={!artist_name}
           />
         </div>

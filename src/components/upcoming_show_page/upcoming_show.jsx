@@ -1,6 +1,7 @@
 // React Imports
 import React, { useState, useEffect } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 // Component Imports
 // import FeaturedContent from "./featured_content";
@@ -114,10 +115,10 @@ const UpcomingShowPage = () => {
         </div>
       ) : (
         <div className="overlay-box">
-          <PulseLoader
+          <ScaleLoader
             sizeUnit={"px"}
             size={18}
-            color={"#7b6dac"}
+            color={"#E465A2"}
             loading={!is_loaded}
           />
         </div>
