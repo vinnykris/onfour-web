@@ -21,7 +21,7 @@ import Chat from "../chat/stream_chat";
 import { Grid, Row, Col } from "../grid";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
-import VideoChat from "../video_chat/App/video_chat_App";
+import VideoChat from "../video_chat/App/artist_video_chat";
 import CountdownTimer from "../countdown_timer/countdown_timer";
 
 // Styles Imports
@@ -170,7 +170,7 @@ const StreamPage = () => {
                         }
                         is_live={is_live}
                       />
-                      <div className="artist-timer-wrapper">
+                      {/* <div className="artist-timer-wrapper">
                         <CountdownTimer
                           // start_date={start_date}
                           // start_time={start_time}
@@ -178,10 +178,10 @@ const StreamPage = () => {
                           start_time={"12:00:00"}
                           time_up_message={"You Reached Your Scheduled Time!"}
                         />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
-                  <div className="artist-control-main">
+                  {/* <div className="artist-control-main">
                     <div className="artist-box-header">Control</div>
                     <button
                       className="artist-go-live-button"
@@ -189,17 +189,13 @@ const StreamPage = () => {
                     >
                       {go_live_message}
                     </button>
+                  </div> */}
+                  <div className="artist-activity-main">
+                    <div className="artist-box-header">Activity Monitor</div>
+                    <h5 className="artist-show-time">{viewers} watching now</h5>
                   </div>
                 </Col>
                 <Col size={2} id="chat_container">
-                  <Row className="full-width">
-                    <div className="artist-activity-main">
-                      <div className="artist-box-header">Activity Monitor</div>
-                      <h5 className="artist-show-time">
-                        {viewers} watching now
-                      </h5>
-                    </div>
-                  </Row>
                   <Row className="full-width">
                     <div className="artist-chat-main" id="chat_main">
                       <div className="artist-chat-wrapper">
@@ -213,15 +209,21 @@ const StreamPage = () => {
                     </div>
                   </Row>
                 </Col>
-                <Col size={4} id="chat_container" className="artist-sticky-container">
+                <Col
+                  size={4}
+                  id="chat_container"
+                  className="artist-sticky-container"
+                >
                   <div className="artist-video-main">
                     <div className="artist-video-wrapper">
-                      <div className="artist-box-header video-chat-box-header">Video Roulette</div>
-                      <VideoChat 
-                        user_name={username ? username : "GUEST"} 
+                      <div className="artist-box-header video-chat-box-header">
+                        Video Roulette
+                      </div>
+                      <VideoChat
+                        user_name={username ? username : "GUEST"}
                         artist_name={username}
-                        artistView={true} 
-                        colNum={video_col_num} 
+                        artistView={true}
+                        colNum={video_col_num}
                         isReady={show_start_time}
                       ></VideoChat>
                       <div className="artist-toggle-chat">

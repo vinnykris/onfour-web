@@ -337,6 +337,7 @@ export default function Tray(props) {
         newButtonGroup={true}
         highlighted={true}
         onClick={leaveCall}
+        id = "leave-video-chat-button"
       />
     </div>
   );

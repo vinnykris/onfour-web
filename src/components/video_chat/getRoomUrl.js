@@ -11,7 +11,7 @@ const getRoomUrl = async (room_name) => {
         },
         body: JSON.stringify({
             properties: {
-                max_participants: 10,
+                max_participants: 6,
                 autojoin: true,
                 enable_knocking: false,
                 enable_screenshare: false,
