@@ -12,6 +12,16 @@
   }
 }
 
+.overlay-box {
+  background: black;
+  // padding-top: 20vh;
+  height: calc(-53px + 100vh);
+  width: 100%;
+  @include respond-to("small") {
+    height: 100vh;
+  }
+}
+
 .artist-stream-page-content {
   // margin-top: -1px;
   background-color: black;
