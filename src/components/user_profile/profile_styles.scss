@@ -204,22 +204,23 @@
   }
 
   & .create-crew-wrapper {
-    width: 242px;
-    height: 270px;
-    background: rgba(50, 50, 50, 0.67);
-    border-radius: 7px 7px 7px 7px;
+    width: 352px;
+    height: 264px;
+    background: #2a2a31;
+    border-radius: 10px;
     cursor: pointer;
 
     & > p {
-      font-family: Helvetica;
+      font-family: $montserrat;
       font-style: normal;
-      font-weight: bold;
-      font-size: 15px;
-      line-height: 270px;
+      font-weight: 500;
+      font-size: 17px;
+      line-height: 264px;
+      align-items: center;
       text-align: center;
-      letter-spacing: 0.045em;
+      letter-spacing: 0.02em;
+      color: rgba(255, 255, 255, 0.87);
       vertical-align: middle;
-      color: #dbdbdb;
     }
   }
 }
