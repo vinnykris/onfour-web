@@ -1,8 +1,11 @@
 import React from "react";
+import { useEffect } from "react";
 
-const PrimaryButton = ({ content, action }) => {
+const PrimaryButton = ({ content, action, className }) => {
+  useEffect(() => {}, []);
+
   return (
-    <button className="primary-button button-text" onClick={action}>
+    <button className={"primary-button " + className} onClick={action}>
       {content}
     </button>
   );

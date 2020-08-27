@@ -38,7 +38,7 @@
 
 .home-page-overlay {
   position: absolute;
-  top: 62px;
+  top: 49px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -66,6 +66,11 @@
 
 .featured-concert-box-row {
   margin-top: 10px;
+}
+
+.featured-concert-action-button {
+  height: 48px;
+  min-width: 167px;
 }
 
 // .banner-container button {
@@ -134,7 +139,7 @@
   width: 100%;
   height: calc(100vw * 0.46875);
   position: absolute;
-  top: 62px;
+  top: 49px;
   display: flex;
   align-items: center;
 }
@@ -144,7 +149,7 @@
   height: auto;
   padding: 2.5vw;
   position: absolute;
-  right: 0;
+  right: calc(149px - 2.5vw);
 }
 
 .upcoming-col {

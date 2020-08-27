@@ -268,9 +268,9 @@ const StreamPage = ({ is_soundcheck }) => {
       document
         .getElementById("artist_bio")
         .classList.remove("artist-bio-row-expanded");
-      document.getElementById("stream_info_section").style.height = "136px";
+      document.getElementById("stream_info_section").style.height = "126px";
       document.getElementById("stream_main_section").style.height =
-        "calc(100vh - 136px - 62px)";
+        "calc(100vh - 126px - 49px)";
       document.getElementById("description_toggle_button").style.bottom =
         "-3px";
     } else {
@@ -281,7 +281,7 @@ const StreamPage = ({ is_soundcheck }) => {
       document.getElementById("artist_bio").classList.remove("artist-bio-row");
       document.getElementById("stream_info_section").style.height = "320px";
       document.getElementById("stream_main_section").style.height =
-        "calc(100vh - 320px - 62px)";
+        "calc(100vh - 320px - 49px)";
       document.getElementById("description_toggle_button").style.bottom = "0px";
     }
   };
@@ -734,10 +734,13 @@ const StreamPage = ({ is_soundcheck }) => {
                           </Col>
                           <Col size={1} className="donate-button-column">
                             <div className="stream-action-donate-container">
-                              <PrimaryButton
-                                content="DONATE"
-                                action={() => donateModal()}
-                              />
+                              <button
+                                //content="DONATE"
+                                onClick={donateModal}
+                                className="primary-button stream-donate-button segmented-button-text"
+                              >
+                                DONATE
+                              </button>
                             </div>
                           </Col>
                         </Row>

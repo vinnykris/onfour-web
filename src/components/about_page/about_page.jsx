@@ -174,17 +174,11 @@ const AboutPage = () => {
           {/* BANNER ROW */}
           <Row className="banner-row">
             <div className="banner-container">
-              <img src={home_background} className="home-page-featured" />
+              <img
+                src={most_recent_concert.poster_url}
+                className="home-page-featured"
+              />
               <div className="home-page-overlay" />
-              {/* <video
-                className="banner-video"
-                data-src="https://onfour-media.s3.amazonaws.com/website+component/banner_video_guitar.mp4"
-                loop
-                autoPlay
-                muted
-                volume="0"
-                src="https://onfour-media.s3.amazonaws.com/website+component/banner_video_guitar.mp4"
-              ></video> */}
               <div className="featured-concert-container">
                 <Row className="upcoming-row">
                   <FeaturedConcertBox
@@ -193,13 +187,6 @@ const AboutPage = () => {
                   />
                 </Row>
               </div>
-
-              {/* <Row>
-                <p
-                  className="fa fa-chevron-down go-down-button"
-                  onClick={() => scrollDown(1)}
-                ></p>
-              </Row> */}
             </div>
           </Row>
 
@@ -238,7 +225,7 @@ const AboutPage = () => {
                     num_cols={4}
                   />
                 </Row>
-                <Row className="archive-preview-row">
+                {/* <Row className="archive-preview-row">
                   <Col size={1}>
                     <span className="preview-content-header header-4">
                       Past Shows
@@ -252,7 +239,7 @@ const AboutPage = () => {
                 </Row>
                 <Row>
                   <FlexibleGrid content_list={videos} num_cols={4} />
-                </Row>
+                </Row> */}
               </div>
             </Col>
           </Row>

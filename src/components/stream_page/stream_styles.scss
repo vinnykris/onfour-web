@@ -2,8 +2,8 @@
 @import "../../styles";
 
 .stream-container {
-  height: calc(100vh - 62px);
-  max-height: calc(100vh - 62px);
+  height: calc(100vh - 49px);
+  max-height: calc(100vh - 49px);
   width: 100vw;
   max-width: 100vw;
   @include respond-to("small") {
@@ -71,7 +71,7 @@
 
 // CHAT STYLING
 .chat-main {
-  height: calc(-62px + 100vh);
+  height: calc(-49px + 100vh);
   width: 100%;
   position: -webkit-sticky;
   position: sticky;
@@ -278,7 +278,7 @@
   position: relative;
   // height: 100%;
   width: 100%;
-  height: calc(100vh - 136px - 62px);
+  height: calc(100vh - 126px - 49px);
   // margin-top: 3%;
   // margin-right: 0.5%;
 }
@@ -308,7 +308,7 @@
 
 .stream-info-wrapper {
   width: 100%;
-  height: 136px;
+  height: 126px;
   background-color: #1a1919;
   border-top: 3px solid black;
 }
@@ -538,13 +538,13 @@
 }
 
 .artist-bio-row-expanded {
-  height: 184px;
+  height: 194px;
 }
 
 .bottom-buttons-row {
   // border-radius: 4px 4px 0 0;
   border-top: 1px solid #454242;
-  height: 77px;
+  height: 68px;
   padding: 0px 29px 0px 32px;
 }
 
@@ -693,6 +693,11 @@
   vertical-align: middle;
 }
 
+.stream-donate-button {
+  height: 33px !important;
+  width: 104px !important;
+}
+
 .donate-button-column {
   display: flex;
   justify-content: center;
@@ -754,14 +759,14 @@
 
 .social-list [class*="fa fa-"] {
   background: rgba(255, 255, 255, 0.87);
-  border-radius: 39px;
+  border-radius: 27px;
   color: #07070f;
   display: inline-block;
-  height: 39px;
-  line-height: 39px;
+  height: 27px;
+  line-height: 27px;
   margin: auto;
-  width: 39px;
-  font-size: 25px;
+  width: 27px;
+  font-size: 18px;
   text-align: center;
   &:hover {
     background: $secondary-color;
@@ -771,7 +776,7 @@
 
 .social-list li {
   color: white;
-  margin: auto 2%;
+  margin: auto 11.5px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -781,9 +786,9 @@
   display: flex;
   //font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.87);
-  height: 39px;
-  width: 39px;
-  font-size: 39px;
+  height: 27px;
+  width: 27px;
+  font-size: 27px;
   &:hover {
     color: $secondary-color;
   }
