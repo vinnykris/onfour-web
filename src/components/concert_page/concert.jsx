@@ -15,6 +15,7 @@ import { useWindowDimensions } from "../custom_hooks";
 // Graphql Imports
 import * as queries from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
+import { getCrewsByUsername, getCrewObject } from "../../utils/crew";
 
 // AWS Imports
 import { Analytics } from "aws-amplify";
@@ -90,6 +91,7 @@ const Concert = (props) => {
   const [showInviteModal, setShowInviteModal] = useState(false);
   const [calender_added, setCalenderAdded] = useState(false);
   const [calendar_button_clicked, setCalendarBtnClicked] = useState(false);
+  const [userCrews, setUserCrews] = useState([]);
 
   let location = useLocation();
 
@@ -125,6 +127,30 @@ const Concert = (props) => {
     setScroll(false);
   }
 
+  const getUserCrews = async (currentUsername = username) => {
+    const userCrews = await getCrewsByUsername(currentUsername);
+
+    if (userCrews) {
+      const crewsIdArray = Object.keys(userCrews);
+      const crewsDataPromises = [];
+
+      crewsIdArray.forEach((crewId) => {
+        crewsDataPromises.push(getCrewObject(crewId));
+      });
+
+      const crewData = await Promise.all(crewsDataPromises);
+
+      crewData.sort((crewA, crewB) => {
+        if (crewA.name < crewB.name) return -1;
+        if (crewA.name > crewB.name) return 1;
+        return 0;
+      });
+
+      console.log({ crewData });
+      setUserCrews(crewData);
+    }
+  };
+
   const fetchUserData = async (name) => {
     console.log(name);
     const user_concerts = await fetchUserConcertIDs(name);
@@ -133,6 +159,7 @@ const Concert = (props) => {
     if (user_concerts && user_concerts.includes(concert_id)) {
       setHasTicket(true);
     }
+    await getUserCrews(name);
   };
 
   // Runs on mount
@@ -1332,14 +1359,17 @@ const Concert = (props) => {
                         )}
                       </div>
 
-                      <div className="invite-crew-button">
-                        <button onClick={() => setShowInviteModal(true)}>
-                          <GroupAddOutlinedIcon />
-                          <span> INVITE CREW</span>
-                        </button>
-                      </div>
+                      {has_ticket || ( // @TODO: Move this to only be shown when the user has a ticket
+                        <div className="invite-crew-button">
+                          <button onClick={() => setShowInviteModal(true)}>
+                            <GroupAddOutlinedIcon />
+                            <span> INVITE CREW</span>
+                          </button>
+                        </div>
+                      )}
                       <InviteCrewModal
                         showModal={showInviteModal}
+                        userCrews={userCrews}
                         handleClose={() => setShowInviteModal(false)}
                       />
                     </Col>

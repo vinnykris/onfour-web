@@ -13,7 +13,7 @@ const crews = [
   "The meme team",
 ];
 
-const InviteCrewModal = ({ showModal, handleClose }) => {
+const InviteCrewModal = ({ showModal, userCrews, handleClose }) => {
   return (
     <Rodal
       visible={showModal}
@@ -41,12 +41,12 @@ const InviteCrewModal = ({ showModal, handleClose }) => {
             />
             <SearchOutlinedIcon />
           </Row>
-          <Row className="crew-modal-stacked-row">
-            {crews.map((crew) => (
-              <Row className="crew-invite-single-crew">
+          <Row className="crew-modal-stacked-row crew-invite-modal-crews">
+            {userCrews.map((crew) => (
+              <Row className="crew-invite-single-crew" key={crew.id}>
                 <div className="crew-invite-selection">
                   <div className="crew-invite-radio"></div>
-                  <p>{crew}</p>
+                  <p>{crew.name}</p>
                 </div>
 
                 <div className="crew-invite-options">...</div>
