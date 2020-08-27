@@ -943,19 +943,20 @@
   background: black;
   z-index: 998;
   padding-top: 20vh;
-  height: 71vh;
+  height: calc(-53px + 100vh);
   width: 100%;
 }
 
 .overlay-box {
   background: black;
-  // padding-top: 20vh;
-  height: calc(-53px + 100vh);
+  padding-top: 40vh;
+  height: calc(-49px + 100vh);
   width: 100%;
   @include respond-to("small") {
     height: 100vh;
   }
 }
+
 
 .waiting-message-container {
   margin: 0;

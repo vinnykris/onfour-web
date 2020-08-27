@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { useHistory } from "react-router-dom";
 
 import { Grid, Row, Col } from "../grid";
@@ -266,10 +266,10 @@ const Profile = (props) => {
         </Grid>
       ) : (
         <div className="overlay-box">
-          <PulseLoader
+          <ScaleLoader
             sizeUnit={"px"}
             size={18}
-            color={"#7b6dac"}
+            color={"#E465A2"}
             loading={!is_loaded}
           />
         </div>

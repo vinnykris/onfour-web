@@ -5,13 +5,14 @@
   background-color: black;
   margin-top: -1px;
   min-height: calc(-49px + 100vh);
-  padding-top: 126px;
+  // padding-top: 126px;
 }
 
 .upcoming-show-grid {
   background: black;
   padding-left: 3%;
   padding-right: 3%;
+  padding-top: 40px;
   @include respond-to("small") {
     padding-left: 4%;
     padding-right: 4%;
@@ -835,13 +836,14 @@
 
 .overlay-box {
   background: black;
-  padding-top: 20vh;
+  padding-top: 40vh;
   height: 71vh;
   width: 100%;
   @include respond-to("small") {
     height: 100vh;
   }
 }
+
 .google-signin {
   background-color: black;
   color: white;
