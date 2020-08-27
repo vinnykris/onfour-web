@@ -5,9 +5,39 @@
 
 .concert-page {
   margin-top: -1px;
-  background-color: black;
-  padding: 2.5%;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.05)
+    ),
+    #07070f;
+
   min-height: calc(100vh - 250px);
+}
+
+.desktop-concert-page {
+  position: relative;
+}
+
+.concert-page-featured {
+  width: 100%;
+  object-fit: cover;
+  height: calc(100vw * 0.38766);
+}
+
+.concert-page-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(100vw * 0.38766);
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.05)
+    ),
+    linear-gradient(180deg, rgba(7, 7, 15, 0) 0%, #07070f 89.06%);
 }
 
 .concert-image-container {
@@ -28,6 +58,24 @@
 
 .countdown-and-buttons {
   margin-bottom: 8%;
+}
+
+.button-container {
+  width: 100%;
+}
+
+.concert-ticket-button {
+  width: 100%;
+  height: 48px;
+}
+
+.invite-crew-button {
+  width: 100%;
+  height: 49px;
+  margin-top: 14px;
+  margin-bottom: 22px;
+  background-color: $secondary-color !important;
+  color: $on-background !important;
 }
 
 .buy-ticket {
@@ -75,6 +123,13 @@
   }
 }
 
+.add-to-calendar {
+  color: $on-surface-medium;
+  line-height: 24px !important;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
 .calendar-button {
   margin: 2%;
   visibility: hidden;
@@ -116,16 +171,14 @@
 
 .titles {
   text-align: left;
-  color: white;
-  font-size: 1.65rem;
   padding-bottom: 25px;
 }
 
 .artist-description-text {
-  text-align: justify;
-  color: white;
+  text-align: left;
+  //color: white;
   white-space: pre-line;
-  font-size: 0.9rem;
+  //font-size: 0.9rem;
 }
 
 .main-info-col {
@@ -134,6 +187,19 @@
 
 .countdown-timer {
   float: left;
+}
+
+.countdown-box {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-top: calc(100vw * 0.38766 * -0.4119);
+  // top: 390px;
+}
+
+.countdown-inner {
+  display: flex;
+  margin: auto;
 }
 
 hr.solid {
@@ -157,6 +223,44 @@ hr.solid {
   }
 }
 
+.concert-info-absolute {
+  // position: absolute;
+  // display: flex;
+  // width: 100%;
+}
+
+.concert-info {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  max-width: 1440px;
+  margin: auto;
+  margin-top: 61px;
+}
+
+.concert-tag {
+  margin-right: 15px;
+}
+
+.tag-calendar {
+  display: flex;
+  flex-direction: row;
+  width: 948px;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.concert-info-inner {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.concert-main-info {
+  max-width: 602px;
+  margin-right: 60px;
+}
+
 .concert-info-modal-header {
   @include respond-to("xx-large") {
     font-size: 1.2rem;
@@ -176,12 +280,12 @@ hr.solid {
 }
 
 .concert-logistics {
-  margin-top: 5%;
-  width: 350px;
+  // margin-top: 5%;
+  width: 286px;
 }
 
 .logistics-row {
-  margin-top: 5%;
+  //margin-top: 5%;
 }
 
 .logistics-text {
@@ -195,23 +299,19 @@ hr.solid {
   font-size: 0.95rem;
 }
 
+.share-concert {
+  width: 948px;
+  margin: auto;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
 .share-concert-text {
-  font-size: 1rem;
-  margin-top: 20px;
-  color: white;
-  letter-spacing: 0.04em;
-  font-weight: bold;
-  line-height: 118.49%;
+  display: flex;
+  float: left;
   text-align: left;
-  padding: 0;
-  @include respond-to("small") {
-    margin-top: 0;
-    float: left;
-    line-height: 100%;
-    margin-bottom: 0;
-    display: flex;
-    align-self: center;
-  }
+  color: white;
+  margin-bottom: 10px;
 }
 
 .share-list-container {

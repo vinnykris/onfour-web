@@ -45,7 +45,7 @@ const SocialBar = ({
             <a
               onClick={() => Analytics.record({ name: "socialBarSpotify" })}
               href={spotify}
-              className="fa fa-spotify"
+              className="fab fa-spotify"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -73,7 +73,7 @@ const SocialBar = ({
             <a
               onClick={() => Analytics.record({ name: "socialBarFacebook" })}
               href={facebook}
-              className="fa fa-facebook"
+              className="fab fa-facebook"
               target="_blank"
               rel="noopener noreferrer"
             >

@@ -344,28 +344,28 @@ const NavBar = () => {
             <NavLink
               exact
               to="/"
-              className="nav-page-white header-6"
+              className="nav-page-white header-7"
               onClick={leaveVideoChat}
             >
               About Us
             </NavLink>
             <NavLink
               to="/artists"
-              className="nav-page-white header-6"
+              className="nav-page-white header-7"
               onClick={leaveVideoChat}
             >
               For Artists
             </NavLink>
             <NavLink
               to="/stream"
-              className="nav-page-white header-6"
+              className="nav-page-white header-7"
               onClick={leaveVideoChat}
             >
               Stream
             </NavLink>
             <NavLink
               to="/upcoming"
-              className="nav-page-white header-6"
+              className="nav-page-white header-7"
               onClick={leaveVideoChat}
             >
               Upcoming
@@ -377,14 +377,14 @@ const NavBar = () => {
                     pathname: "/login",
                     state: { current: location },
                   }}
-                  className="nav-page-white header-6"
+                  className="nav-page-white header-7"
                   onClick={leaveVideoChat}
                 >
                   Log In
                 </NavLink>
               </div>
             ) : (
-              <div className="login-link-container logged-in header-6">
+              <div className="login-link-container logged-in header-7">
                 <Dropdown
                   isOpen={dropdown_open}
                   toggle={toggle}
@@ -394,7 +394,7 @@ const NavBar = () => {
                     <DropdownToggle
                       tag="a"
                       caret
-                      className="nav-page-white header-6"
+                      className="nav-page-white header-7"
                     >
                       <img
                         className="user-icon-desktop"

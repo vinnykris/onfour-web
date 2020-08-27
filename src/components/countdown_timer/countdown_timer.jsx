@@ -76,17 +76,14 @@ function CountdownTimer({ start_date, start_time, time_up_message }) {
   // timeLeft and combine those together to render in React
   Object.keys(time_left).forEach((interval) => {
     if (!time_left[interval]) {
-      // return;
       timer_components.push(
         <Col size={1} className="countdown-timer-block">
           <Row>
-            <span className="countdown-timer-number">00</span>
-            {/* {interval ==="SECONDS"? null:(
-                            <div className="countdown-timer-number">:</div>
-                        )} */}
-          </Row>
-          <Row>
-            <span className="countdown-timer-label">{interval} </span>
+            {interval === "SECONDS" ? (
+              <span className="header-1 countdown-timer-number">00</span>
+            ) : (
+              <span className="header-1 countdown-timer-number">00:</span>
+            )}
           </Row>
         </Col>
       );
@@ -95,15 +92,17 @@ function CountdownTimer({ start_date, start_time, time_up_message }) {
         timer_components.push(
           <Col size={1} className="countdown-timer-block">
             <Row>
-              <span className="countdown-timer-number">
-                {time_left[interval]}
+              <span className="header-1 countdown-timer-number">
+                {interval === "SECONDS" ? (
+                  <span className="header-1 countdown-timer-number">
+                    {time_left[interval]}
+                  </span>
+                ) : (
+                  <span className="header-1 countdown-timer-number">
+                    {time_left[interval]}:
+                  </span>
+                )}
               </span>
-              {/* {interval === "SECONDS" ? null : (
-                                <div className="countdown-timer-number">:</div>
-                            )} */}
-            </Row>
-            <Row>
-              <span className="countdown-timer-label">{interval} </span>
             </Row>
           </Col>
         );
@@ -111,34 +110,21 @@ function CountdownTimer({ start_date, start_time, time_up_message }) {
         timer_components.push(
           <Col size={1} className="countdown-timer-block">
             <Row>
-              <span className="countdown-timer-number">
-                0{time_left[interval]}
+              <span className="header-1 countdown-timer-number">
+                {interval === "SECONDS" ? (
+                  <span className="header-1 countdown-timer-number">
+                    0{time_left[interval]}
+                  </span>
+                ) : (
+                  <span className="header-1 countdown-timer-number">
+                    0{time_left[interval]}:
+                  </span>
+                )}
               </span>
-              {/* {interval === "SECONDS" ? null : (
-                                <div className="countdown-timer-number">:</div>
-                            )} */}
-            </Row>
-            <Row>
-              <span className="countdown-timer-label">{interval} </span>
             </Row>
           </Col>
         );
       }
-      //   timer_placeholder.push(
-      //     <Col size={1} className="countdown-timer-block">
-      //       <Row>
-      //         <span className="countdown-timer-number">
-      //           {time_left[interval]}
-      //         </span>
-      //         {/* {interval === "SECONDS" ? null : (
-      //                         <div className="countdown-timer-number">:</div>
-      //                     )} */}
-      //       </Row>
-      //       <Row>
-      //         <span className="countdown-timer-label">{interval} </span>
-      //       </Row>
-      //     </Col>
-      //   );
     }
   });
 
