@@ -4,6 +4,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import history from "./history";
 
 // Component imports
+import ArtistStream from "./components/artist_stream_page/artist_stream_page";
 import NotFoundPage from "./components/not_found_page/not_found_page";
 import NavBar from "./components/navbar/navbar";
 import About from "./components/about_page/about_page";
@@ -29,6 +30,8 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./styles.scss";
+// import "./fonts.scss";
+// import "./colors.scss";
 
 // Amplify imports
 import Amplify from "aws-amplify";
@@ -64,6 +67,7 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/form" component={ArtistForm} />
+          <Route exact path="/artiststream" component={ArtistStream} />
           <Route exact path="/privacy-policy" component={PrivacyPage} />
           <Route exact path="/terms-of-service" component={TermsOfService} />
           <Route exact path="/ticket-agreement" component={PaymentAgreement} />

@@ -1,7 +1,5 @@
 // REGISTER PAGE COMPONENT STYLING
 
-@import "../../styles";
-
 .register-prompt {
   color: #7b6dac;
   font-weight: bold;
@@ -121,4 +119,31 @@
   padding-bottom: 5%;
   padding-top: 3%;
   font-size: 15px;
+}
+
+.red-password-suggestion-mobile {
+  color: #e29696;
+  margin-right: 7px;
+  font-size: 13px;
+}
+
+.green-password-suggestion-mobile {
+  color: #a6c88a;
+  margin-right: 7px;
+  font-size: 13px;
+}
+
+.password-tooltip-white-mobile {
+  color: white;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.password-suggestion-bullets-mobile {
+  float: left;
+  margin-bottom: 0px;
+}
+
+.checkbox-row {
+  margin-top: 25px;
 }

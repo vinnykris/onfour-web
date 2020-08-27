@@ -1,10 +1,10 @@
 // UPCOMING SHOW COMPONENT STYLING
-
 @import "../../styles";
 
 .upcoming-show-page-content {
   background-color: black;
-  min-height: 70vh;
+  // margin-top: -1px;
+  min-height: calc(-53px + 100vh);
 }
 
 .upcoming-show-grid {
@@ -33,26 +33,38 @@
 }
 
 .featured-content {
-  background-color: white;
-  margin: 7% 3% 7% 3%;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.09)
+    ),
+    #07070f;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12),
+    0px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
   position: relative;
-  border-radius: 8px 8px 7px 7px;
-  height: 90%;
+  height: 0;
+  width: 100%;
+  padding-bottom: 131%;
   &:hover {
-    color: #fff;
-    opacity: 0.18;
-    transition: all 0.2s;
-    -webkit-transition: all 0.2s;
-    cursor: pointer;
-    .more-info {
-      z-index: 50;
-    }
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.12)
+      ),
+      #07070f;
+    // opacity: 0.18;
+    // transition: all 0.2s;
+    // -webkit-transition: all 0.2s;
+    // cursor: pointer;
+    // .more-info {
+    //   z-index: 50;
+    // }
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
+      0px 1px 3px rgba(0, 0, 0, 0.2);
   }
-  &:hover:after {
-    opacity: 1;
-    .more-info {
-      z-index: 0;
-    }
+  &:focus {
+    border: 1.5px solid $border-focus-card;
   }
 
   @include respond-to("small") {
@@ -85,23 +97,31 @@
 .poster-container {
   position: relative;
   width: 100%;
-  // height: 17vw;
-  height: 0px;
+  height: 0;
   padding-bottom: 100%;
+
   @include respond-to("small") {
     // height: 30vh;
     padding-bottom: 100%;
   }
 }
 
+// .poster-inner-container {
+//   display: flex;
+//   width: 100%;
+//   height: 100%;
+//   padding: 10%;
+// }
+
 .concert-poster {
   position: absolute;
   object-fit: cover;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 7px 7px 0px 0px;
+  left: 10px;
+  top: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border-radius: 10px;
+  //padding: 10px;
 }
 
 .featured-header {
@@ -114,8 +134,13 @@
 }
 
 .show-content-bar {
-  max-width: 100%;
-  height: 100%;
+  width: 100%;
+  height: calc(100% - 76%);
+  padding: 0px 19px;
+}
+
+.featured-content-tag {
+  //margin-left: 19px;
 }
 
 .genre-box {

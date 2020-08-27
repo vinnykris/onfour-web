@@ -1,9 +1,12 @@
 .tray-button {
   width: 44px;
-  height: 30px;
+  /* height: 30px; */
   border: none;
   background-color: transparent;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tray-button:disabled {

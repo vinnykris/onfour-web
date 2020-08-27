@@ -20,7 +20,7 @@ let socket; // Socket declaration
 // Main chat component
 const Chat = ({ chat_name, chatStatus, setViewers, artistView }) => {
   const [name, setName] = useState(chat_name); // User's chat name
-  const [room, setRoom] = useState("Chat"); // Title of chat and room all users are in
+  const [room, setRoom] = useState("Public Chat"); // Title of chat and room all users are in
   const [users, setUsers] = useState(""); // List of users in chat room
   const [message, setMessage] = useState(""); // Holds inputted message
   const [messages, setMessages] = useState([]); // Holds list of messages

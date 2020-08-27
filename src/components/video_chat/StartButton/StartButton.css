@@ -1,6 +1,7 @@
 .start-button {
   /* padding: 20px 30px; */
-  position: absolute;
+  margin: 0 auto;
+  position: relative;
   background: #ffffff;
   font-style: normal;
   font-weight: normal;
@@ -8,8 +9,8 @@
   line-height: 0.8rem;
   text-align: center;
   color: #ffffff;
-  top: 50%;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   background-color: #3a3a3d;
 }

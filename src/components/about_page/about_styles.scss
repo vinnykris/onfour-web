@@ -1,5 +1,4 @@
 // ABOUT PAGE STYLING
-
 @import "../../styles";
 
 //MUSICIAN+ Whats on four PAGE STYLING
@@ -35,20 +34,38 @@
 
 .banner-container {
   width: 100%;
-  margin-top: -53px;
-  // height: 100vh;
-  // @include respond-to("large") {
-  //   margin-top: -140px;
-  // }
-  // @include respond-to("small") {
-  //   margin-top: -131px;
-  // }
 }
 
-.banner-container img {
+.home-page-overlay {
+  position: absolute;
+  top: 62px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(100vw * 0.46875);
+  background: linear-gradient(
+    277.34deg,
+    #181826 5.77%,
+    rgba(0, 0, 0, 0) 93.49%
+  );
+}
+
+.home-page-featured {
   width: 100%;
   object-fit: cover;
-  height: 100vh;
+  height: calc(100vw * 0.46875);
+}
+
+.home-page-featured:before {
+  background: linear-gradient(
+    277.34deg,
+    #181826 5.77%,
+    rgba(0, 0, 0, 0) 93.49%
+  );
+}
+
+.featured-concert-box-row {
+  margin-top: 10px;
 }
 
 // .banner-container button {
@@ -67,16 +84,19 @@
 //   box-shadow: 0px 3px 5px grey;
 // }
 
-.banner-container button:hover {
-  background-color: black;
-  color: white;
-}
+// .banner-container button:hover {
+//   background-color: black;
+//   color: white;
+// }
 
-.banner-video {
-  width: 100%;
-  object-fit: cover;
-  height: 100vh;
-}
+// .banner-video {
+//   width: 100%;
+//   object-fit: cover;
+//   height: calc(100vw * 0.46875);
+//   filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.14)),
+//     drop-shadow(0px 1px 18px rgba(0, 0, 0, 0.12)),
+//     drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.2));
+// }
 .banner-header-desktop {
   @include respond-to("small") {
     display: none;
@@ -103,24 +123,28 @@
 
 .header-tag {
   color: white;
-  font-weight: $medium-weight;
+  font-weight: 500;
   text-align: left;
   width: 100%;
   text-decoration: underline;
   font-size: 8vh;
 }
 
+.featured-concert-container {
+  width: 100%;
+  height: calc(100vw * 0.46875);
+  position: absolute;
+  top: 62px;
+  display: flex;
+  align-items: center;
+}
+
 .upcoming-row {
-  width: 30vw;
+  width: auto;
   height: auto;
   padding: 2.5vw;
-  margin: 0;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
-  top: 50%;
   right: 0;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
 }
 
 .upcoming-col {
@@ -131,7 +155,7 @@
 
 .upcoming-header-tag {
   color: white;
-  font-weight: $medium-weight;
+  font-weight: 500;
   text-align: left;
   width: 100%;
   font-size: 1.8vw;
@@ -283,7 +307,12 @@
 }
 
 .about-page-content {
-  background-color: black;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.05)
+    ),
+    #07070f;
   margin-top: -1px;
 }
 

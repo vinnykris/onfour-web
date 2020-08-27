@@ -17,7 +17,9 @@ export default function Tile(props) {
 
   const [audioMute, setAudioMute] = useState(false);
   const random_id = Math.random();
+  const video_component_id = "video" + random_id.toString();
   const audio_component_id = "audio" + random_id.toString();
+  const fans_microphone_id = "fans-mic" + random_id.toString();
 
   /**
    * When video track changes, update video srcObject
@@ -35,13 +37,19 @@ export default function Tile(props) {
       (audioEl.current.srcObject = new MediaStream([props.audioTrack]));
   }, [props.audioTrack]);
 
+  useEffect(() => {
+    if (document.getElementById(audio_component_id)) {
+      document.getElementById(audio_component_id).volume = props.volume;
+    }
+  },[props.volume])
+
   function getLoadingComponent() {
     return props.isLoading && <p className="loading">Loading...</p>;
   }
 
   function getVideoComponent() {
     return (
-      props.videoTrack && <video autoPlay muted playsInline ref={videoEl} />
+      props.videoTrack && <video autoPlay id={video_component_id} muted playsInline ref={videoEl} />
     );
   }
 
@@ -70,39 +78,65 @@ export default function Tile(props) {
   //   }
   // }
 
-  function toggle_audio_mute() {
-    if (document.getElementById(random_id)) {
-      if (document.getElementById(random_id).style.color === "red") {
-        document.getElementById(random_id).style.color = "white";
-        setAudioMute(false);
-      }
-      else {
-        document.getElementById(random_id).style.color = "red";
-        setAudioMute(true);
+  function toggle_audio_mute(mute_all) {
+    if (props.artistView) {
+      if (document.getElementById(random_id)) {
+        if (mute_all) {
+          document.getElementById(random_id).style.opacity = "100";
+          setAudioMute(true);
+        } else {
+          document.getElementById(random_id).style.opacity = "0";
+          setAudioMute(false);
+        }
       }
     }
   }
 
   useEffect(() => {
-    if(props.artistView) {
-    toggle_audio_mute()
+    if (props.artistView) {
+      toggle_audio_mute(props.mute_all);
     }
   }, [props.mute_all])
 
+
+  useEffect(() => {
+    reflect_audio_change(props.audioTrack);
+  }, [props.audioTrack])
+
+  function reflect_audio_change(audioTrack) {
+    if (document.getElementById(fans_microphone_id)) {
+      if (audioTrack) {
+        document.getElementById(fans_microphone_id).style.opacity = "0";
+        if (document.getElementById(video_component_id)) {
+          document.getElementById(video_component_id).style.border =
+            "2px solid #E465A2";
+        }
+      } else {
+        document.getElementById(fans_microphone_id).style.opacity = "100";
+        if (document.getElementById(video_component_id)) {
+          document.getElementById(video_component_id).style.border = "none";
+        }
+      }
+    }
+  }
 
   return (
     !props.isArtist ? (
       <div className={getClassNames()}>
         <div className="background" />
-        {!props.isLocalPerson ? (
-          <div>
+        {/* {!props.isLocalPerson ? (
+          <div> */}
             {props.artistView? (
               <i 
                 className="fa fa-microphone-slash mute-others-icon" 
                 id={random_id} 
-                // onClick={toggle_audio_mute}
               ></i>
-            ) : null}
+            ) : (
+              <i
+                className="fa fa-microphone-slash mute-others-icon"
+                id={fans_microphone_id}
+              ></i>
+            )}
             {/* <div className="range-slider-container">
               <RangeSlider
                 value={volume_value}
@@ -112,8 +146,8 @@ export default function Tile(props) {
                 }}
               />
             </div> */}
-          </div>
-        ):null}
+          {/* </div>
+        ):null} */}
         <div className="video-call-participant-name">
           {props.username}
         </div>

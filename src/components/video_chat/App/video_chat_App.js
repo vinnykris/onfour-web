@@ -2,7 +2,8 @@ import React, { useEffect, useState, useCallback } from "react";
 import Call from "../Call/Call";
 import StartButton from "../StartButton/StartButton";
 import api from "../api";
-import "./App.css";
+import "./App.scss";
+// import "../../../styles.scss";
 import Tray from "../Tray/Tray";
 import CallObjectContext from "../CallObjectContext";
 import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from "../urlUtils";
@@ -16,43 +17,62 @@ const STATE_JOINING = "STATE_JOINING";
 const STATE_JOINED = "STATE_JOINED";
 const STATE_LEAVING = "STATE_LEAVING";
 const STATE_ERROR = "STATE_ERROR";
-const owner_name = ["takoyuxin", "onfour-yuxin", "onfour-spencer", "spencer", "onfour-vinod", "vinnykris", "alilyen", "onfour-bar","barkadosh"];
-const crew_name = "onfour Crew"
+const owner_name = [
+  "takoyuxin",
+  "onfour-yuxin",
+  "onfour-spencer",
+  "spencer",
+  "onfour-vinod",
+  "vinnykris",
+  "alilyen",
+  "onfour-bar",
+  "barkadosh",
+];
+const crew_name = "onfour Crew";
 
-export default function VideoChatApp({ user_name, artist_name, artistView, colNum}) {
+export default function VideoChatApp({
+  user_name,
+  artist_name,
+  artistView,
+  colNum,
+  stream_vol_adjust,
+}) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
   const [isPublic, setIsPublic] = useState(true);
   const [mute_all, setMuteAll] = useState(true);
   const [mute_button_msg, setMuteButtonMsg] = useState("UNMUTE ALL");
-  const isInCrew = (owner_name.indexOf(user_name) >= 0);
+  const [volume, setVolume] = useState(1);
+  const [current_room, setCurrentRoom] = useState("room1");
+  const isInCrew = owner_name.indexOf(user_name) >= 0;
+
   /**
    * Creates a new call room.
    */
-  const createPublicCall = useCallback(() => {
+  const createPublicCall = useCallback((room_name) => {
     setAppState(STATE_CREATING);
     return api
-      .createRoom(true)
-      .then(room => room.url)
-      .catch(error => {
+      .createRoom(room_name)
+      .then((room) => room.url)
+      .catch((error) => {
         console.log("Error creating room", error);
         setRoomUrl(null);
         setAppState(STATE_IDLE);
       });
   }, []);
 
-  const createPrivateCall = useCallback(() => {
-    setAppState(STATE_CREATING);
-    return api
-      .createRoom(false)
-      .then(room => room.url)
-      .catch(error => {
-        console.log("Error creating room", error);
-        setRoomUrl(null);
-        setAppState(STATE_IDLE);
-      });
-  }, []);
+  // const createPrivateCall = useCallback(() => {
+  //   setAppState(STATE_CREATING);
+  //   return api
+  //     .createRoom(false)
+  //     .then((room) => room.url)
+  //     .catch((error) => {
+  //       console.log("Error creating room", error);
+  //       setRoomUrl(null);
+  //       setAppState(STATE_IDLE);
+  //     });
+  // }, []);
 
   /**
    * Starts joining an existing call.
@@ -63,40 +83,31 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
    * be done with the call object for a while and you're no longer listening to its
    * events.
    */
-  const startJoiningPublicCall = useCallback(url => {
+  const startJoiningPublicCall = useCallback((url) => {
     const newCallObject = DailyIframe.createCallObject({
-      userName: user_name
+      userName: user_name,
     });
-    // setRoomUrl(url);
-    setRoomUrl("public");
+    setRoomUrl(url.split("/").pop());
+    // setRoomUrl("public");
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
-    newCallObject.setBandwidth({
-      kbs: 20,
-      trackConstraints: { width: 160, height: 90, frameRate: 5 }
-    });
     newCallObject.join({ url });
-    
   }, []);
 
-  const startJoiningPrivateCall = useCallback(async url => {
-    if (owner_name.indexOf(user_name) >=0 ) {
+  const startJoiningPrivateCall = useCallback(async (url) => {
+    if (owner_name.indexOf(user_name) >= 0) {
       const newToken = await getToken(user_name);
       console.log(newToken);
       const newCallObject = DailyIframe.createCallObject({
         userName: user_name,
-        token: newToken
+        token: newToken,
       });
-      // setRoomUrl(url);
+      setRoomUrl(url);
       setRoomUrl("private");
       setCallObject(newCallObject);
       setAppState(STATE_JOINING);
-      newCallObject.setBandwidth({
-        kbs: 20,
-        trackConstraints: { width: 160, height: 90, frameRate: 5 }
-      });
       newCallObject.join({ url });
-    } 
+    }
     // else {
     //   const newCallObject = DailyIframe.createCallObject({
     //     userName: user_name
@@ -118,7 +129,7 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
     callObject.leave();
   }, [callObject]);
 
-  const completelyLeaveVideoChat = useCallback(async() => {
+  const completelyLeaveVideoChat = useCallback(async () => {
     if (!callObject) return;
     setAppState(STATE_LEAVING);
     await callObject.leave();
@@ -134,29 +145,50 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
    */
   useEffect(() => {
     const url = roomUrlFromPageUrl();
-    if (url === "public") {
-      url && startJoiningPublicCall("https://onfour_test.daily.co/test_default_video_off");
-      if (isInCrew) {
-        switchToPublicVideoChat();
-      } else {
-        setIsPublic(true);
-      }
-      
+    if (url === "room1") {
+      url && startJoiningPublicCall("https://onfour.daily.co/room1");
+      switchRoom(0);
+      setCurrentRoom("room1");
+    } else if (url === "room2") {
+      url && startJoiningPublicCall("https://onfour.daily.co/room2");
+      switchRoom(1);
+      setCurrentRoom("room2");
+    } else if (url === "room3") {
+      url && startJoiningPublicCall("https://onfour.daily.co/room3");
+      switchRoom(2);
+      setCurrentRoom("room3");
+    } else if (url === "room4") {
+      url && startJoiningPublicCall("https://onfour.daily.co/room4");
+      switchRoom(3);
+      setCurrentRoom("room4");
+    } else if (url === "room5") {
+      url && startJoiningPublicCall("https://onfour.daily.co/room5");
+      switchRoom(4);
+      setCurrentRoom("room5");
     }
+
+    // if (url === "public") {
+    //   url && startJoiningPublicCall("https://onfour.daily.co/room1");
+    //   if (isInCrew) {
+    //     switchToPublicVideoChat();
+    //   } else {
+    //     setIsPublic(true);
+    //   }
+    // }
   }, [startJoiningPublicCall]);
 
-  useEffect(() => {
-    const url = roomUrlFromPageUrl();
-    if (url === "private") {
-      if (isInCrew) {
-        url && startJoiningPrivateCall("https://onfour_test.daily.co/bar");
-        switchToPrivateVideoChat();
-      } else {
-        setRoomUrl(null);
-        setIsPublic(true);
-      }
-    }
-  }, [startJoiningPrivateCall]);
+  // useEffect(() => {
+  //   const url = roomUrlFromPageUrl();
+  //   if (url === "private") {
+  //     if (isInCrew) {
+  //       url && startJoiningPrivateCall("https://onfour_test.daily.co/bar");
+  //       switchToPrivateVideoChat();
+  //     } else {
+  //       setRoomUrl(null);
+  //       setIsPublic(true);
+  //     }
+  //   }
+  // }, [startJoiningPrivateCall]);
 
   /**
    * Update the page's URL to reflect the active call when roomUrl changes.
@@ -206,6 +238,11 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
           break;
         case "error":
           setAppState(STATE_ERROR);
+          setTimeout(function () {
+            setRoomUrl(null);
+            setAppState(STATE_IDLE);
+          }, 3000);
+          console.log(appState);
           break;
         default:
           break;
@@ -228,6 +265,10 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
     };
   }, [callObject]);
 
+  // useEffect(() => {
+  //   document.getElementById("public-room" + current_room.substr(current_room.length - 1)).style.color = "white";
+  // }, []);
+
   /**
    * Show the call UI if we're either joining, already joined, or are showing
    * an error.
@@ -246,7 +287,8 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
    * until then avoids this scenario.
    * !!!
    */
-  const enableCallButtons = [STATE_JOINED, STATE_ERROR].includes(appState);
+  const enableCallButtons = [STATE_JOINED].includes(appState);
+  // const enableCallButtons = [STATE_JOINED, STATE_ERROR].includes(appState);
 
   /**
    * Only enable the start button if we're in an idle state (i.e. not creating,
@@ -261,13 +303,39 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
    */
   const enableStartButton = appState === STATE_IDLE;
 
-  const switchToPublicVideoChat = () => {
-    if (document.getElementById("public-room")) {
-      document.getElementById("public-room").style.color = "white";
-      document.getElementById("private-room").style.color = "rgb(173, 173, 173)";
-      setIsPublic(true);
-      startLeavingCall();
+  const room_ids = [
+    "public-room-1",
+    "public-room-2",
+    "public-room-3",
+    "public-room-4",
+    "public-room-5",
+  ];
+
+  const switchRoom = (room_number) => {
+    // if (document.getElementById("public-room-1")) {
+    //   document.getElementById("public-room-1").style.color = "white";
+    //   document.getElementById("private-room").style.color =
+    //     "rgb(173, 173, 173)";
+    //   setIsPublic(true);
+    //   startLeavingCall();
+    // }
+    startLeavingCall();
+    setCurrentRoom("room" + (room_number + 1));
+    const selected = room_ids[room_number];
+    for (const index in room_ids) {
+      if (room_ids[index] != selected) {
+        //const element = object[key];
+        // document.getElementById(room_ids[index]).style.color =
+        //   "rgb(173, 173, 173) !important";
+        document.getElementById(room_ids[index]).classList.add("room-others");
+        document
+          .getElementById(room_ids[index])
+          .classList.remove("room-selected");
+      }
     }
+    // document.getElementById(selected).style.color = "white !important";
+    document.getElementById(selected).classList.add("room-selected");
+    document.getElementById(selected).classList.remove("room-others");
   };
 
   const switchToPrivateVideoChat = () => {
@@ -280,37 +348,84 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
   };
 
   const toggle_mute_unmute_all = () => {
-    if (mute_all){
+    if (mute_all) {
       setMuteAll(false);
       setMuteButtonMsg("MUTE ALL");
     } else {
       setMuteAll(true);
       setMuteButtonMsg("UNMUTE ALL");
     }
-  }
+  };
 
   return (
-    <div className={(artistView? "artist-": "")+ "app"} id="video-chat-main">
-      {artistView? (
-        null
-      ): (
+    <div className={(artistView ? "artist-" : "") + "app"} id="video-chat-main">
+      {artistView ? null : (
         <div>
-          {!isInCrew ? (
+          {/* {!isInCrew ? (
             <div className="room-name-row">
               <div className="public-room only-public" id="public-room">
                 PUBLIC
               </div>
             </div>
-          ): (
-            <div className="room-name-row">
-              <div className="public-room click-active" id="public-room" onClick={switchToPublicVideoChat}>
-                PUBLIC
-              </div>
-              <div className = "private-room click-active" id = "private-room" onClick = { switchToPrivateVideoChat }>
-                {crew_name}
+          ) : ( */}
+          <div className="room-name-row">
+            <div
+              className="public-room click-active"
+              onClick={() => switchRoom(0)}
+            >
+              <div
+                id="public-room-1"
+                className="body-2 room-tab-text room-selected"
+              >
+                Room 1
               </div>
             </div>
-          )}
+            <div
+              className="public-room click-active"
+              onClick={() => switchRoom(1)}
+            >
+              <div
+                id="public-room-2"
+                className="body-2 room-tab-text room-others"
+              >
+                Room 2
+              </div>
+            </div>
+            <div
+              className="public-room click-active"
+              onClick={() => switchRoom(2)}
+            >
+              <div
+                id="public-room-3"
+                className="body-2 room-tab-text room-others"
+              >
+                Room 3
+              </div>
+            </div>
+            <div
+              className="public-room click-active"
+              onClick={() => switchRoom(3)}
+            >
+              <div
+                id="public-room-4"
+                className="body-2 room-tab-text room-others"
+              >
+                Room 4
+              </div>
+            </div>
+            <div
+              className="public-room click-active"
+              onClick={() => switchRoom(4)}
+            >
+              <div
+                id="public-room-5"
+                className="body-2 room-tab-text room-others"
+              >
+                Room 5
+              </div>
+            </div>
+          </div>
+          {/* )} */}
         </div>
       )}
       {showCall ? (
@@ -319,44 +434,67 @@ export default function VideoChatApp({ user_name, artist_name, artistView, colNu
         // that want to access call object state and bind event listeners to the
         // call object, this can be a helpful pattern.
         <CallObjectContext.Provider value={callObject}>
-          <button 
-            id="leave-call-button" 
-            className="transparent-completely-leave-video-chat-button" 
+          <button
+            id="leave-call-button"
+            className="transparent-completely-leave-video-chat-button"
             onClick={completelyLeaveVideoChat}
           >
             leave
           </button>
-          <Call roomUrl={roomUrl} artist_name={artist_name} isPublic={isPublic} artistView={artistView} colNum={colNum} mute_all={mute_all}/>
+          <Call
+            roomUrl={roomUrl}
+            artist_name={artist_name}
+            isPublic={isPublic}
+            artistView={artistView}
+            colNum={colNum}
+            mute_all={mute_all}
+            volume={volume}
+          />
           <Tray
             disabled={!enableCallButtons}
             onClickLeaveCall={startLeavingCall}
             artistView={artistView}
             mute_function={toggle_mute_unmute_all}
             button_message={mute_button_msg}
+            volume={volume}
+            adjust_volume={setVolume}
+            stream_vol_adjust={stream_vol_adjust}
           />
         </CallObjectContext.Provider>
       ) : (
-        <div>
+        <div className="video-chat-prompt-container">
           {isPublic ? (
-            <div>
+            <div className="enter-video-chat-prompt">
               <StartButton
                 disabled={!enableStartButton}
                 onClick={() => {
-                  createPublicCall().then(url => startJoiningPublicCall(url));
+                  createPublicCall(current_room).then((url) =>
+                    startJoiningPublicCall(url)
+                  );
                 }}
                 artistView={artistView}
               />
-              {!artistView? (
-                <div className="public-video-notice">
-                  By joining this video call, you will be seen by the artist as well as your crew members!
+              {!artistView ? (
+                <div className="public-video-notice segmented-button-text">
+                  Please use headphones to avoid audio feedback issues.{" "}
+                  <br></br>This is a public room, so get ready to make some new
+                  friends!
                 </div>
-              ): null}
+              ) : null}
             </div>
           ) : (
+            // <StartButton
+            //   disabled={!enableStartButton}
+            //   onClick={() => {
+            //     createPrivateCall().then((url) => startJoiningPrivateCall(url));
+            //   }}
+            // />
             <StartButton
               disabled={!enableStartButton}
               onClick={() => {
-                createPrivateCall().then(url => startJoiningPrivateCall(url));
+                createPublicCall("room2").then((url) =>
+                  startJoiningPublicCall(url)
+                );
               }}
             />
           )}

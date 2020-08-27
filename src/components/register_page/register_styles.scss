@@ -1,7 +1,5 @@
 // REGISTER PAGE COMPONENT STYLING
 
-@import "../../styles";
-
 .register-page-content {
   background-color: black;
   height: 50%;
@@ -13,7 +11,7 @@
 }
 
 .register-form {
-  margin-top: 2.5%;
+  margin-top: 8.5%;
   width: 29%;
   padding-bottom: 2%;
 }
@@ -112,4 +110,22 @@
 
 .verification-footer {
   padding-bottom: 40%;
+}
+
+.red-password-suggestion {
+  color: #e29696;
+  margin-right: 7px;
+}
+
+.green-password-suggestion {
+  color: #a6c88a;
+  margin-right: 7px;
+}
+
+.password-tooltip-white {
+  color: #ededed;
+}
+
+.password-suggestion-bullets {
+  float: left;
 }

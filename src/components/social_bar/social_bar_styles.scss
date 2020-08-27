@@ -1,7 +1,5 @@
 // SOCIAL BAR COMPONENT STYLING
-
-@import "../../styles";
-
+@import "../../styles.scss";
 .social-bar-container {
   margin-top: 3%;
 }
@@ -18,7 +16,7 @@
 .social-subscribe-description {
   margin: auto;
   font-size: 17px;
-  font-weight: $medium-weight;
+  font-weight: 600;
   color: #cacaca;
   text-align: center;
   padding-top: 10px;

@@ -1,10 +1,9 @@
 // STREAM COMPONENT STYLING
-
 @import "../../styles";
 
 .stream-container {
-  height: calc(100vh - 53px);
-  max-height: calc(100vh - 53px);
+  height: calc(100vh - 62px);
+  max-height: calc(100vh - 62px);
   width: 100vw;
   max-width: 100vw;
   @include respond-to("small") {
@@ -72,7 +71,7 @@
 
 // CHAT STYLING
 .chat-main {
-  height: calc(-53px + 100vh);
+  height: calc(-62px + 100vh);
   width: 100%;
   position: -webkit-sticky;
   position: sticky;
@@ -106,15 +105,15 @@
 }
 
 .chat-row {
-  height: 100%;
-  // height: 40%;
+  // height: 100%;
+  height: 40%;
   width: 100%;
   position: relative;
 }
 
 .chat-main-mobile {
-  height: calc(100vh - 411px);
-  max-height: calc(100vh - 411px);
+  height: calc(100vh - 191px - (100vw * 0.5625));
+  max-height: calc(100vh - 191px - (100vw * 0.5625));
   // height: 400px;
   display: flex;
   flex-flow: column;
@@ -123,7 +122,7 @@
   flex-grow: 1;
   // height: 60vh;
   min-width: 0;
-  max-width: 100vh;
+  max-width: 100vw;
   // position: relative;
   justify-content: center;
   align-items: center;
@@ -152,12 +151,14 @@
 .toggle-chat {
   position: absolute;
   right: -3px;
+  z-index: 2;
 }
 
 .toggle-description {
   position: absolute;
   left: 0px;
   bottom: -3px;
+  z-index: 2;
 }
 
 .toggle-chat-button {
@@ -277,7 +278,7 @@
   position: relative;
   // height: 100%;
   width: 100%;
-  height: 85%;
+  height: calc(100vh - 136px - 62px);
   // margin-top: 3%;
   // margin-right: 0.5%;
 }
@@ -285,6 +286,7 @@
 .stream-main-mobile {
   width: 100%;
   height: auto;
+  padding-bottom: 56.25%;
 }
 
 .stream-wrapper {
@@ -292,6 +294,7 @@
   background: #131313;
   width: 100%;
   height: 100%;
+  // border-bottom: 3px solid black;
   // height: 100%;
   // height: 41.4473684vw;
   // width: auto;
@@ -305,14 +308,15 @@
 
 .stream-info-wrapper {
   width: 100%;
-  height: 15%;
+  height: 136px;
   background-color: #1a1919;
   border-top: 3px solid black;
 }
 
 .stream-wrapper-mobile {
   width: 100%;
-  height: 55%;
+  position: absolute;
+  padding-bottom: 56.25%;
 }
 
 .buy-ticket-message-container {
@@ -431,8 +435,8 @@
   width: 100%;
   height: 100%;
   @include respond-to("small") {
-    padding-bottom: 56.25%; /* 16:9 */
-    height: auto;
+    //padding-bottom: 56.25%; /* 16:9 */
+    height: 100%;
   }
 }
 
@@ -521,8 +525,8 @@
 }
 
 .buttons-row {
-  height: 50%;
-  padding: 0px 10px;
+  height: 59px;
+  padding: 0px 29px 0px 32px;
   // border-radius: 4px 4px 0 0;
   // border-bottom: 1px solid #454242;
 }
@@ -534,13 +538,14 @@
 }
 
 .artist-bio-row-expanded {
-  height: 60%;
+  height: 184px;
 }
 
 .bottom-buttons-row {
-  border-radius: 4px 4px 0 0;
+  // border-radius: 4px 4px 0 0;
   border-top: 1px solid #454242;
-  height: 50%;
+  height: 77px;
+  padding: 0px 29px 0px 32px;
 }
 
 .artist-name-container {
@@ -567,7 +572,7 @@
   width: auto;
   height: 100%;
   align-items: center;
-  margin-right: 2%;
+  //margin-right: 2%;
   //float: right;
   //margin-right: 5px;
   //margin-top: 5px;
@@ -575,16 +580,16 @@
   //right: 0;
 }
 
-.viewer-count {
-  //width: 150px;
-  font-size: 0.9rem;
-  letter-spacing: 0.04em;
-  color: white;
-  text-align: left;
-  width: 100%;
-  font-weight: $medium-weight;
-  //padding-right: 2%;
-}
+// .viewer-count {
+//   //width: 150px;
+//   font-size: 0.9rem;
+//   letter-spacing: 0.04em;
+//   color: white;
+//   text-align: left;
+//   width: 100%;
+//   font-weight: $medium-weight;
+//   //padding-right: 2%;
+// }
 
 .share-button {
   position: relative;
@@ -638,14 +643,7 @@
 }
 
 .stream-artist-bio {
-  color: white;
-  font-size: 0.8rem;
   text-align: justify;
-  //font-weight: normal;
-  line-height: 127.49%;
-  /* or 18px */
-
-  letter-spacing: 0.06em;
   white-space: pre-line;
 }
 
@@ -657,11 +655,47 @@
   // margin-left: 20%;
 }
 
+.viewers-container {
+  display: flex;
+  align-items: center;
+}
+
+.stream-action-viewers {
+  height: 24px;
+  width: 24px;
+}
+
+.viewer-count {
+  color: $on-background;
+  margin-left: 8px;
+  margin-right: 11px;
+}
+
+.stream-action-feedback {
+  height: 18px;
+  width: 18px;
+  margin-right: 11px;
+}
+
+.stream-action-share {
+  height: 24px;
+  width: 24px;
+}
+
 .stream-action-button-container {
   display: flex;
-  //margin: auto;
-  height: 60%;
-  margin-right: 3%;
+  align-items: center;
+}
+
+.stream-action-donate-container {
+  display: flex;
+  margin-left: auto;
+  vertical-align: middle;
+}
+
+.donate-button-column {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -718,6 +752,23 @@
   height: 100%;
 }
 
+.social-list [class*="fa fa-"] {
+  background: rgba(255, 255, 255, 0.87);
+  border-radius: 39px;
+  color: #07070f;
+  display: inline-block;
+  height: 39px;
+  line-height: 39px;
+  margin: auto;
+  width: 39px;
+  font-size: 25px;
+  text-align: center;
+  &:hover {
+    background: $secondary-color;
+    color: #07070f;
+  }
+}
+
 .social-list li {
   color: white;
   margin: auto 2%;
@@ -728,8 +779,14 @@
 
 .social-list li a {
   display: flex;
-  font-size: 1.5rem;
-  color: white;
+  //font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.87);
+  height: 39px;
+  width: 39px;
+  font-size: 39px;
+  &:hover {
+    color: $secondary-color;
+  }
 }
 
 .social-list li span {

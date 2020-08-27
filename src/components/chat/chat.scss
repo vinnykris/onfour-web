@@ -124,8 +124,8 @@ button:focus {
   // background: #757575;
   background: #17171b;
   border-radius: 4px 4px 0 0;
-  border-bottom: 1px solid #454242;
-  height: 30px;
+  border-bottom: 1px solid rgba(136, 136, 136, 0.38);
+  height: 59px;
   width: 100%;
 }
 
@@ -162,7 +162,7 @@ button:focus {
   font-size: 1rem;
   padding: 5px;
   margin-top: 25px;
-  font-weight: $medium-weight;
+  font-weight: 500;
   &:hover {
     cursor: pointer;
   }
@@ -172,6 +172,7 @@ button:focus {
   display: flex;
   align-items: center;
   height: 100%;
+  width: 100%;
   flex-flow: row;
   color: white;
   @include respond-to("small") {
@@ -516,6 +517,7 @@ button:focus {
   width: 100% !important;
   bottom: 50px;
   right: 0px;
+  z-index: 2;
 }
 
 @media (min-width: 320px) and (max-width: 1200px) {
@@ -525,5 +527,10 @@ button:focus {
 }
 
 .tooltip-text {
-  font-size: 1rem;
+  //font-size: 1rem;
+  margin: auto;
+}
+
+.chat-header {
+  margin: auto;
 }

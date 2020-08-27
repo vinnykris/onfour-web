@@ -1,18 +1,18 @@
 .call {
   /* position: relative; To make it a "positioned" container so children layout works */
-  height: calc(100% - 60px); /* Space for the tray */
+  height: calc(100% - 86px); /* Space for the tray */
   /* display: flex; */
   overflow: auto;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE 10+ */
+  -ms-overflow-style: none; /* IE 10+ */
 }
 
 .call::-webkit-scrollbar {
-    width: 10px;
-    background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
-  }
+  width: 10px;
+  background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
+}
 .call::-webkit-scrollbar-thumb {
-  background: rgba(141, 141, 141, 0.596); 
+  background: rgba(141, 141, 141, 0.596);
   border-radius: 20px;
 }
 
@@ -21,15 +21,15 @@
   height: calc(100% - 30px);
   overflow: auto;
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE 10+ */
+  -ms-overflow-style: none; /* IE 10+ */
 }
 
 .artist-call::-webkit-scrollbar {
-    width: 10px;
-    background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
-  }
+  width: 10px;
+  background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
+}
 .artist-call::-webkit-scrollbar-thumb {
-  background: rgba(141, 141, 141, 0.596); 
+  background: rgba(141, 141, 141, 0.596);
   border-radius: 20px;
 }
 
