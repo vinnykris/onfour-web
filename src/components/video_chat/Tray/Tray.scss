@@ -2,11 +2,14 @@
 
 .tray {
   flex: none;
-  height: 56px;
+  height: 35px;
   background-color: #17171b;
   padding: 0 10px;
   display: flex;
   align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 5px;
 }
 
 .artist-mute-all-button {
@@ -71,10 +74,13 @@
 }
 
 .press-to-talk-btn {
-  background-color: #e465a2 !important;
+  background-color: transparent !important;
   width: 100% !important;
-  height: 56px;
-  color: black !important;
+  height: 35px;
+  color: #E465A2 !important;
+  border: 1px solid #E465A2 !important;
+  box-sizing: border-box !important;
+  border-radius: 10px !important;
   /* font-size: 0.8rem !important; */
   /* line-height: 30px !important; */
   /* margin: 2px !important; */
@@ -84,7 +90,8 @@
 }
 
 .press-to-talk-btn:active {
-  background-color: #ea91bd !important;
+  background-color: #E465A2 !important;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 /* .new-tray-button {
   width: 48px;

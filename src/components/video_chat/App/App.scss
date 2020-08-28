@@ -8,6 +8,7 @@
   /* top: 0px; */
   bottom: 0px;
   width: 100%;
+  position: relative;
 }
 
 .artist-app {
@@ -36,6 +37,7 @@
 
 .public-room {
   display: flex;
+  flex: 1;
   position: relative;
   height: auto;
   width: 20%;
@@ -84,6 +86,7 @@
 
 .public-video-notice {
   display: flex;
+  width: 90%;
   margin: 0 auto;
   margin-top: 20px;
   white-space: pre-wrap;
@@ -92,6 +95,20 @@
   text-align: center;
   color: $on-background;
   position: relative;
+
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 142.5%;
+  /* or 17px */
+
+  text-align: center;
+  letter-spacing: 0.065em;
+
+  /* On Background */
+
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .video-form-input {
@@ -119,5 +136,55 @@
 
 .video-chat-prompt-container {
   display: flex;
-  height: 100%;
+  height: calc(100% - 30px);
+  position: relative;
+}
+
+.create-room-name-input {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), #07070F;
+  border-radius: 5px 5px 0px 0px;
+  border: none;
+  text-align: center; 
+  caret-color: #E465A2;
+  font-size: 0.8rem;
+  color:rgba(255, 255, 255, 0.87);
+}
+
+.create-room-name-input:focus {
+  border-bottom: 1px solid #E465A2;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.create-room-error {
+  font-size: 0.8rem;
+  padding: 5px 0px;
+  color: #fb5554;
+}
+
+.auto-roulette-button {
+  height: 30px;
+  border: 1px solid #E465A2;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: transparent;
+  color: #E465A2;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  letter-spacing: 0.065em;
+}
+
+.auto-roulette-button:active {
+  background: #E465A2;
+  color: rgba(255, 255, 255, 0.87);
 }

@@ -324,19 +324,22 @@ export default function Tray(props) {
           onClick={toggleSharingScreen}
         />
       )} */}
-      <button
-        id="press-to-talk"
-        type="unmute-all"
-        className="tray-button press-to-talk-btn header-7"
-        disabled={props.disabled}
-      >
-        Press and hold to talk
-      </button>
+      {props.artistView ? null : (
+        <button
+          id="press-to-talk"
+          type="unmute-all"
+          className="tray-button press-to-talk-btn segmented-button-text"
+          disabled={props.disabled}
+        >
+          Press and hold to talk
+        </button>
+      )}
       <button
         type={TYPE_LEAVE}
         className="tray-button"
         onClick={leaveCall}
         disabled={props.disabled}
+        id="leave-video-chat-button"
       >
         <img className="tray-button exit-button" src={exit_icon}></img>
       </button>
@@ -346,6 +349,7 @@ export default function Tray(props) {
         newButtonGroup={true}
         highlighted={true}
         onClick={leaveCall}
+        id = "leave-video-chat-button"
       /> */}
     </div>
   );

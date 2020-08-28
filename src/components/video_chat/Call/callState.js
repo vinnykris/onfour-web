@@ -149,8 +149,11 @@ function getMessage(callState, isPublic) {
       header = "";
       detail = "";
     } else {
-      header = "This is your private crew room!";
-      detail = "only your crew members have access to this room";
+      // header = "This is your private crew room!";
+      // detail = "only your crew members have access to this room";
+      header =
+        "This is your own video chat room! Copy and share this page's URL to invite others";
+      detail = window.location.href;
     }
     
   }

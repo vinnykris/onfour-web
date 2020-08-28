@@ -3,11 +3,21 @@
 @import "../../styles";
 
 .artist-stream-container {
-  height: calc(-53px + 100vh);
+  height: calc(-49px + 100vh);
   @include respond-to("small") {
     display: flex;
     flex: 1 1 auto;
     flex-flow: column;
+  }
+}
+
+.overlay-box {
+  background: black;
+  // padding-top: 20vh;
+  height: calc(-49px + 100vh);
+  width: 100%;
+  @include respond-to("small") {
+    height: 100vh;
   }
 }
 
@@ -57,7 +67,7 @@
 
 // CHAT STYLING
 .artist-chat-main {
-  height: calc((-53px + 100vh) / 2);
+  height: calc(-49px + 100vh);
   // height: 100vh;
   width: 100%;
   // position: -webkit-sticky;
@@ -66,14 +76,15 @@
   top: 0px;
   justify-content: center;
   align-items: center;
-  border-top: 3px solid black;
-  border-right: 3px solid black;
-  border-left: 3px solid black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  border-right: 1.5px solid black;
+  border-left: 1.5px solid black;
 }
 
 .artist-video-main {
   // height: 37vw;
-  height: calc(-53px + 100vh);
+  height: calc(-49px + 100vh);
   // height: 100vh;
   width: 100%;
   // position: relative;
@@ -82,8 +93,10 @@
   top: 0;
   justify-content: center;
   align-items: center;
-  border-right: 3px solid black;
-  border-left: 3px solid black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  border-right: 1.5px solid black;
+  border-left: 1.5px solid black;
 }
 
 .artist-control-main {
@@ -92,9 +105,9 @@
   height: 50%;
   justify-content: center;
   align-items: center;
-  border-right: 3px solid black;
-  border-left: 3px solid black;
-  border-top: 3px solid black;
+  border-right: 1.5px solid black;
+  border-left: 1.5px solid black;
+  border-top: 2px solid black;
 }
 
 .artist-timer-wrapper {
@@ -105,12 +118,12 @@
 .artist-activity-main {
   width: 100%;
   background-color: #17171b;
-  height: 100%;
+  height: 50%;
   justify-content: center;
   align-items: center;
-  border-right: 3px solid black;
-  border-left: 3px solid black;
-  border-bottom: 3px solid black;
+  border-right: 1.5px solid black;
+  border-left: 1.5px solid black;
+  border-bottom: 2px solid black;
 }
 
 .full-width {
@@ -237,9 +250,10 @@
   height: 50%;
   width: 100%;
   background-color: #17171b;
-  border-right: 3px solid black;
-  border-left: 3px solid black;
-  border-bottom: 3px solid black;
+  border-right: 1.5px solid black;
+  border-left: 1.5px solid black;
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
 }
 
 .stream-main-mobile {
