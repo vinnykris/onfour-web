@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Rodal from "rodal";
 
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
@@ -18,13 +18,14 @@ const InviteCrewModal = ({
 }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showSingleModal, setShowSingleModal] = useState(false);
-  const [selectedCrew, setSelectedCrew] = useState({
+  const [crewToEdit, setCrewToEdit] = useState({
     name: "",
     id: "",
     admin: "",
     color: "",
     membersArray: [],
   });
+  const [crewNameFilter, setCrewNameFilter] = useState("");
 
   const handleCloseModals = (update = false) => {
     if (update === true) updateCrews();
@@ -33,10 +34,12 @@ const InviteCrewModal = ({
     setShowSingleModal(false);
   };
 
-  const handleOpenCrewModals = (crewIndex) => {
-    setSelectedCrew(userCrews[crewIndex]);
+  const handleOpenCrewModals = (currentCrewId) => {
+    const currentCrewToEdit = userCrews.filter(crew => crew.id === currentCrewId)[0];
+    
+    setCrewToEdit(currentCrewToEdit);
 
-    if (userCrews[crewIndex].admin === username) setShowEditModal(true);
+    if (currentCrewToEdit.admin === username) setShowEditModal(true);
     else setShowSingleModal(true);
   };
 
@@ -64,25 +67,31 @@ const InviteCrewModal = ({
               type="text"
               placeholder="Search crew name"
               className="crew-input-rounded"
+              value={crewNameFilter}
+              onChange={(event) => setCrewNameFilter(event.currentTarget.value)}
             />
             <SearchOutlinedIcon />
           </Row>
           <Row className="crew-modal-stacked-row crew-invite-modal-crews">
-            {userCrews.map((crew, index) => (
-              <Row className="crew-invite-single-crew" key={crew.id}>
-                <div className="crew-invite-selection">
-                  <div className="crew-invite-radio"></div>
-                  <p>{crew.name}</p>
-                </div>
+            {userCrews
+              .filter((crew) =>
+                crew.name.toLowerCase().includes(crewNameFilter.toLowerCase())
+              )
+              .map((crew) => (
+                <Row className="crew-invite-single-crew" key={crew.id}>
+                  <div className="crew-invite-selection">
+                    <div className="crew-invite-radio"></div>
+                    <p>{crew.name}</p>
+                  </div>
 
-                <div
-                  className="crew-invite-options"
-                  onClick={() => handleOpenCrewModals(index)}
-                >
-                  ...
-                </div>
-              </Row>
-            ))}
+                  <div
+                    className="crew-invite-options"
+                    onClick={() => handleOpenCrewModals(crew.id)}
+                  >
+                    ...
+                  </div>
+                </Row>
+              ))}
           </Row>
           <Row className="crew-modal-save-button-wrapper">
             <div>
@@ -95,22 +104,22 @@ const InviteCrewModal = ({
       <EditCrewModal
         showModal={showEditModal}
         handleClose={handleCloseModals}
-        crewName={selectedCrew.name}
-        crewColor={selectedCrew.color}
-        crewAdmin={selectedCrew.admin}
-        crewMembersProp={selectedCrew.membersArray}
+        crewName={crewToEdit.name}
+        crewColor={crewToEdit.color}
+        crewAdmin={crewToEdit.admin}
+        crewMembersProp={crewToEdit.membersArray}
         username={username}
-        crewId={selectedCrew.id}
+        crewId={crewToEdit.id}
       />
-      <SingleCrewModal 
+      <SingleCrewModal
         showModal={showSingleModal}
         handleClose={handleCloseModals}
-        crewName={selectedCrew.name}
-        crewAdmin={selectedCrew.admin}
-        crewMembersProp={selectedCrew.membersArray}
+        crewName={crewToEdit.name}
+        crewAdmin={crewToEdit.admin}
+        crewMembersProp={crewToEdit.membersArray}
         username={username}
         userEmail={userEmail}
-        crewId={selectedCrew.id}
+        crewId={crewToEdit.id}
       />
     </Rodal>
   );
