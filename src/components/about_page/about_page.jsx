@@ -193,15 +193,15 @@ const AboutPage = () => {
           <Row>
             <Col size={1}>
               <div className="about-preview-content">
-                <Row>
+                <Row className="header-row">
                   <Col size={1}>
-                    <span className="preview-content-header header-4">
+                    <span className="preview-content-header header-5">
                       Upcoming Shows
                     </span>
                   </Col>
                   <Col size={1}>
                     <NavLink to="/upcoming">
-                      <span className="view-all header-4">View All</span>
+                      <span className="view-all header-7">View All</span>
                     </NavLink>
                   </Col>
                 </Row>
