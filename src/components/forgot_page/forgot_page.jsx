@@ -15,6 +15,8 @@ import { useWindowDimensions } from "../custom_hooks";
 // Styles
 import "./forgot_styles.scss";
 
+import { createCrew, addUserToCrew } from "../../utils/crew";
+
 // Forgot Username Page
 const Forgot = () => {
   const [stage, setStage] = useState("first"); // first = email stage, second = verification code stage
@@ -81,6 +83,30 @@ const Forgot = () => {
       .catch((err) => setError(err.message));
   };
 
+  const examplefunc = async () => {
+    await createCrew(
+      [
+        "barkadosh1@gmail.com",
+        "vkk9@cornell.edu",
+        "yz2579@cornell.edu",
+        "sia8@cornell.edu",
+        "wangy184@newschool.edu",
+        "bk497@cornell.edu",
+      ],
+      "Onfour Crew",
+      "barkadosh",
+      "green"
+    );
+
+    // await addUserToCrew(
+    //   "3df6b226-e86c-48c1-90c0-1fb2bc1db6c0",
+    //   "onfour-bar",
+    //   "bk497@cornell.edu",
+    //   "green",
+    //   "barkadosh"
+    // );
+  };
+
   return (
     <div className="forgot-page-content">
       <Grid className="forgot-grid">
@@ -117,6 +143,16 @@ const Forgot = () => {
                       >
                         SEND VERIFICATION CODE
                       </button>
+                      <button onClick={examplefunc}>HI</button>
+                      <div className="App">
+                        <button
+                          onClick={() =>
+                            Auth.federatedSignIn({ provider: "Google" })
+                          }
+                        >
+                          Open Google
+                        </button>
+                      </div>
                     </Row>
                   </form>
                 ) : (
