@@ -430,6 +430,10 @@
   float: left;
 }
 
+.header-row {
+  margin-bottom: 17px;
+}
+
 .preview-content-header {
   float: left;
   color: white;
@@ -437,7 +441,7 @@
 
 .view-all {
   float: right;
-  color: white;
+  color: $on-surface-medium !important;
   &:hover {
     text-decoration: underline;
   }
