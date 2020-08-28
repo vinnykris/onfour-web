@@ -794,6 +794,17 @@ hr.break-modal {
       margin-top: 16px;
       margin-right: 20px;
       margin-left: 10px;
+      cursor: pointer;
+
+      & > svg {
+        width: 17px;
+        height: 17px;
+        margin-top: -6px;
+      }
+    }
+
+    & > .crew-invite-radio-active {
+      background-color: rgba(255, 255, 255, 0.87);
     }
 
     & > p {

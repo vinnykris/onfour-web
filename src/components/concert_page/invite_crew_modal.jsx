@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Rodal from "rodal";
 
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
+import CheckIcon from "@material-ui/icons/Check";
 
 import EditCrewModal from "../user_profile/edit_crew_modal";
 import SingleCrewModal from "../user_profile/single_crew_modal";
@@ -26,6 +27,8 @@ const InviteCrewModal = ({
     membersArray: [],
   });
   const [crewNameFilter, setCrewNameFilter] = useState("");
+  const [selectedCrewId, setSelectedCrewId] = useState("");
+  const [disableInviteButton, setDisableInviteButton] = useState(true);
 
   const handleCloseModals = (update = false) => {
     if (update === true) updateCrews();
@@ -35,13 +38,23 @@ const InviteCrewModal = ({
   };
 
   const handleOpenCrewModals = (currentCrewId) => {
-    const currentCrewToEdit = userCrews.filter(crew => crew.id === currentCrewId)[0];
-    
+    const currentCrewToEdit = userCrews.filter(
+      (crew) => crew.id === currentCrewId
+    )[0];
+
     setCrewToEdit(currentCrewToEdit);
 
     if (currentCrewToEdit.admin === username) setShowEditModal(true);
     else setShowSingleModal(true);
   };
+
+  const handleInviteSelectedCrew = () => {
+    console.log("Inviting crew ", selectedCrewId);
+  };
+
+  useEffect(() => {
+    if (selectedCrewId.length > 0) setDisableInviteButton(false);
+  }, [selectedCrewId]);
 
   return (
     <Rodal
@@ -80,7 +93,14 @@ const InviteCrewModal = ({
               .map((crew) => (
                 <Row className="crew-invite-single-crew" key={crew.id}>
                   <div className="crew-invite-selection">
-                    <div className="crew-invite-radio"></div>
+                    <div
+                      className={`${
+                        selectedCrewId === crew.id && "crew-invite-radio-active"
+                      } crew-invite-radio`}
+                      onClick={() => setSelectedCrewId(crew.id)}
+                    >
+                      {selectedCrewId === crew.id && <CheckIcon />}
+                    </div>
                     <p>{crew.name}</p>
                   </div>
 
@@ -96,7 +116,13 @@ const InviteCrewModal = ({
           <Row className="crew-modal-save-button-wrapper">
             <div>
               <button className="crew-modal-button-secondary">Cancel</button>
-              <button className="crew-modal-button-primary">Invite</button>
+              <button
+                className="crew-modal-button-primary"
+                onClick={handleInviteSelectedCrew}
+                disabled={disableInviteButton}
+              >
+                Invite
+              </button>
             </div>
           </Row>
         </Col>
