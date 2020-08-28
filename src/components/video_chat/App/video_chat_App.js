@@ -500,8 +500,7 @@ export default function VideoChatApp({
             <div className="enter-video-chat-prompt">
               {!artistView ? (
                 <div className="public-video-notice">
-                  Please use headphones to avoid audio feedback issues. This is
-                  a public room, so get ready to make some new friends!
+                  {"Please use headphones to avoid audio feedback issues. \nThis is a public room, so get ready to make some new friends!"}
                 </div>
               ) : null}
               <StartButton
@@ -523,6 +522,9 @@ export default function VideoChatApp({
           // />
           isRoomCreated ? (
             <div className="enter-video-chat-prompt">
+              <div className="public-video-notice">
+                {"Rejoin the private room I was in! \nTo create a new room, refresh on this page"}
+              </div>
               <StartButton
                 create_room={false}
                 disabled={!enableStartButton}
