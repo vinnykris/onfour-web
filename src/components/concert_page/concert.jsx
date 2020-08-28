@@ -79,6 +79,7 @@ const Concert = (props) => {
   const [total, setTotal] = useState(0);
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [show_stub, setShowStub] = useState(false);
   const [general_price, setGeneralPrice] = useState(0);
   const [backstage_price, setBackstagePrice] = useState(0);
@@ -93,6 +94,14 @@ const Concert = (props) => {
   const [calender_added, setCalenderAdded] = useState(false);
   const [calendar_button_clicked, setCalendarBtnClicked] = useState(false);
   const [userCrews, setUserCrews] = useState([]);
+  const [availableColors, setAvailableColors] = useState([
+    "D1AE53",
+    "04ADC0",
+    "BF8AF4",
+    "49BDFE",
+    "444DF2",
+    "E26A6A",
+  ]);
 
   let location = useLocation();
 
@@ -128,7 +137,13 @@ const Concert = (props) => {
     setScroll(false);
   }
 
+  /**
+   * Gets and formats the user crews data and sets them in the local state.
+   * @param {string} currentUsername Name of the user to get the crews from
+   * @returns {void}
+   */
   const getUserCrews = async (currentUsername = username) => {
+    if (!currentUsername) return;
     const userCrews = await getCrewsByUsername(currentUsername);
 
     if (userCrews) {
@@ -141,15 +156,61 @@ const Concert = (props) => {
 
       const crewData = await Promise.all(crewsDataPromises);
 
+      crewData.forEach((crew, crewIndex) => {
+        const crewMembersArray = [];
+        const crewMembersEntries = Object.entries(JSON.parse(crew.members));
+
+        crewMembersEntries.forEach((member) => {
+          const processedMember = {
+            email: member[0],
+            username: member[1] || member[0],
+            initial: member[1]
+              ? member[1][0].toUpperCase()
+              : member[0][0].toUpperCase(),
+            color:
+              availableColors[
+                Math.floor(Math.random() * Math.floor(availableColors.length))
+              ],
+          };
+
+          crewMembersArray.push(processedMember);
+        });
+
+        let adminLocation = 0;
+        crewMembersArray.forEach((member, memberIndex) => {
+          if (member.username === crew.admin) {
+            adminLocation = memberIndex;
+          }
+        });
+
+        if (adminLocation !== 0) {
+          const tempMember = crewMembersArray[0];
+          crewMembersArray[0] = crewMembersArray[adminLocation];
+          crewMembersArray[adminLocation] = tempMember;
+        }
+
+        crewData[crewIndex].color = userCrews[crew.id];
+        crewData[crewIndex].membersArray = crewMembersArray;
+      });
+
       crewData.sort((crewA, crewB) => {
         if (crewA.name < crewB.name) return -1;
         if (crewA.name > crewB.name) return 1;
         return 0;
       });
 
-      console.log({ crewData });
       setUserCrews(crewData);
     }
+  };
+
+  /**
+   * Handles the close of the invite crew modal.
+   * @param {boolean} update Determines if the user crews needs to be updated
+   * @returns {void}
+   */
+  const handleCloseInviteModal = (update = false) =>{
+    if (update) getUserCrews();
+    setShowInviteModal(false);
   };
 
   const fetchUserData = async (name) => {
@@ -172,6 +233,7 @@ const Concert = (props) => {
       .then(async (user) => {
         setAuth(true);
         setUsername(user.username);
+        setUserEmail(user.email);
         console.log(user.username);
         await fetchData(user.username);
         setLoading(false);
@@ -1534,7 +1596,10 @@ const Concert = (props) => {
       <InviteCrewModal
         showModal={showInviteModal}
         userCrews={userCrews}
-        handleClose={() => setShowInviteModal(false)}
+        handleClose={handleCloseInviteModal}
+        username={username}
+        userEmail={userEmail}
+        updateCrews={getUserCrews}
       />
     </div>
   );

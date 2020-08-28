@@ -1,19 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import Rodal from "rodal";
 
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 
+import EditCrewModal from "../user_profile/edit_crew_modal";
+import SingleCrewModal from "../user_profile/single_crew_modal";
+
 import { Row, Col } from "../grid";
 
-const crews = [
-  "Jazz Head",
-  "Ravers",
-  "Taylor Swift's squad",
-  "The Avengers",
-  "The meme team",
-];
+const InviteCrewModal = ({
+  showModal,
+  userCrews,
+  handleClose,
+  username,
+  userEmail,
+  updateCrews,
+}) => {
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showSingleModal, setShowSingleModal] = useState(false);
+  const [selectedCrew, setSelectedCrew] = useState({
+    name: "",
+    id: "",
+    admin: "",
+    color: "",
+    membersArray: [],
+  });
 
-const InviteCrewModal = ({ showModal, userCrews, handleClose }) => {
+  const handleCloseModals = (update = false) => {
+    if (update === true) updateCrews();
+
+    setShowEditModal(false);
+    setShowSingleModal(false);
+  };
+
+  const handleOpenCrewModals = (crewIndex) => {
+    setSelectedCrew(userCrews[crewIndex]);
+
+    if (userCrews[crewIndex].admin === username) setShowEditModal(true);
+    else setShowSingleModal(true);
+  };
+
   return (
     <Rodal
       visible={showModal}
@@ -42,14 +68,19 @@ const InviteCrewModal = ({ showModal, userCrews, handleClose }) => {
             <SearchOutlinedIcon />
           </Row>
           <Row className="crew-modal-stacked-row crew-invite-modal-crews">
-            {userCrews.map((crew) => (
+            {userCrews.map((crew, index) => (
               <Row className="crew-invite-single-crew" key={crew.id}>
                 <div className="crew-invite-selection">
                   <div className="crew-invite-radio"></div>
                   <p>{crew.name}</p>
                 </div>
 
-                <div className="crew-invite-options">...</div>
+                <div
+                  className="crew-invite-options"
+                  onClick={() => handleOpenCrewModals(index)}
+                >
+                  ...
+                </div>
               </Row>
             ))}
           </Row>
@@ -61,6 +92,26 @@ const InviteCrewModal = ({ showModal, userCrews, handleClose }) => {
           </Row>
         </Col>
       </Row>
+      <EditCrewModal
+        showModal={showEditModal}
+        handleClose={handleCloseModals}
+        crewName={selectedCrew.name}
+        crewColor={selectedCrew.color}
+        crewAdmin={selectedCrew.admin}
+        crewMembersProp={selectedCrew.membersArray}
+        username={username}
+        crewId={selectedCrew.id}
+      />
+      <SingleCrewModal 
+        showModal={showSingleModal}
+        handleClose={handleCloseModals}
+        crewName={selectedCrew.name}
+        crewAdmin={selectedCrew.admin}
+        crewMembersProp={selectedCrew.membersArray}
+        username={username}
+        userEmail={userEmail}
+        crewId={selectedCrew.id}
+      />
     </Rodal>
   );
 };
