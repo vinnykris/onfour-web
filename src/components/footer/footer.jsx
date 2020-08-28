@@ -29,7 +29,7 @@ const Footer = () => {
       location.pathname === "/stream" ||
       location.pathname === "/profile" ||
       location.pathname === "/soundcheck" ||
-      location.pathname === "/artiststream"
+      location.pathname === "/artist-stream"
       // ||
       // location.pathname.includes("/upcoming/")
     ) {
