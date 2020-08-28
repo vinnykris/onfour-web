@@ -35,6 +35,7 @@ import { Checkbox2, useCheckboxState } from "pretty-checkbox-react";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
 import TicketBox from "../payment/ticket_box";
 import InviteCrewModal from "./invite_crew_modal";
+import CreateCrewModal from "../user_profile/create_crew_modal";
 
 // Module imports
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -94,6 +95,7 @@ const Concert = (props) => {
   const [calender_added, setCalenderAdded] = useState(false);
   const [calendar_button_clicked, setCalendarBtnClicked] = useState(false);
   const [userCrews, setUserCrews] = useState([]);
+  const [showCreateCrewModal, setShowCreateCrewModal] = useState(false);
   const [availableColors, setAvailableColors] = useState([
     "D1AE53",
     "04ADC0",
@@ -208,9 +210,10 @@ const Concert = (props) => {
    * @param {boolean} update Determines if the user crews needs to be updated
    * @returns {void}
    */
-  const handleCloseInviteModal = (update = false) =>{
+  const handleCloseModals = (update = false) => {
     if (update) getUserCrews();
     setShowInviteModal(false);
+    setShowCreateCrewModal(false);
   };
 
   const fetchUserData = async (name) => {
@@ -1479,12 +1482,21 @@ const Concert = (props) => {
                     {has_ticket || ( // @TODO: Move this to only be shown when the user has a ticket
                       <Row>
                         <div className="button-container">
-                          <button
-                            className="primary-button button-text invite-crew-button"
-                            onClick={() => setShowInviteModal(true)}
-                          >
-                            <span>Invite Crew</span>
-                          </button>
+                          {userCrews.length > 0 ? (
+                            <button
+                              className="primary-button button-text invite-crew-button"
+                              onClick={() => setShowInviteModal(true)}
+                            >
+                              <span>Invite Crew</span>
+                            </button>
+                          ) : (
+                            <button
+                              className="primary-button button-text invite-crew-button"
+                              onClick={() => setShowCreateCrewModal(true)}
+                            >
+                              <span>Create a Crew</span>
+                            </button>
+                          )}
                         </div>
                       </Row>
                     )}
@@ -1596,10 +1608,16 @@ const Concert = (props) => {
       <InviteCrewModal
         showModal={showInviteModal}
         userCrews={userCrews}
-        handleClose={handleCloseInviteModal}
+        handleClose={handleCloseModals}
         username={username}
         userEmail={userEmail}
         updateCrews={getUserCrews}
+      />
+      <CreateCrewModal
+        showCrewModal={showCreateCrewModal}
+        closeModal={handleCloseModals}
+        currentUsername={username}
+        currentUserEmail={userEmail}
       />
     </div>
   );

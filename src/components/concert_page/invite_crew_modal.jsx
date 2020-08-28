@@ -115,7 +115,12 @@ const InviteCrewModal = ({
           </Row>
           <Row className="crew-modal-save-button-wrapper">
             <div>
-              <button className="crew-modal-button-secondary">Cancel</button>
+              <button
+                className="crew-modal-button-secondary"
+                onClick={handleClose}
+              >
+                Cancel
+              </button>
               <button
                 className="crew-modal-button-primary"
                 onClick={handleInviteSelectedCrew}
