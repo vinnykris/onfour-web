@@ -29,7 +29,7 @@ import SocialBar from "../social_bar/social_bar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Rodal from "rodal";
 import { Grid, Row, Col } from "../grid";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { Checkbox2, useCheckboxState } from "pretty-checkbox-react";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
 import TicketBox from "../payment/ticket_box";
@@ -470,10 +470,10 @@ const Concert = (props) => {
           ) : null}
           {!concert_info ? (
             <div className="overlay-box">
-              <PulseLoader
+              <ScaleLoader
                 sizeUnit={"px"}
                 size={18}
-                color={"#7b6dac"}
+                color={"#E465A2"}
                 loading={loading}
               />
             </div>
@@ -953,10 +953,10 @@ const Concert = (props) => {
           ) : null}
           {!concert_info ? (
             <div className="overlay-box">
-              <PulseLoader
+              <ScaleLoader
                 sizeUnit={"px"}
                 size={18}
-                color={"#7b6dac"}
+                color={"#E465A2"}
                 loading={!concert_info}
               />
             </div>

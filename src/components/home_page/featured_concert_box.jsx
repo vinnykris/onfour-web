@@ -19,7 +19,9 @@ const FeaturedConcertBox = ({ artist_info, concert_info }) => {
     const concert_date_object = moment(
       concert_date + " " + concert_time + "-0400"
     );
-    setDaysLeft(concert_date_object.endOf("day").fromNow());
+    // setDaysLeft(concert_date_object.endOf("day").fromNow());
+    const time_left = +new Date(concert_date + "T24:00:00.000-04:00") - +new Date();
+    setDaysLeft(Math.floor(time_left / (1000 * 60 * 60 * 24)));
     setDay(concert_date_object.format("dddd"));
     setDate(concert_date_object.format("DD MMMM YYYY"));
     if (Math.floor(parseInt(concert_time.slice(0, 2)) / 12) > 0) {
@@ -55,7 +57,7 @@ const FeaturedConcertBox = ({ artist_info, concert_info }) => {
       {/* {loaded ? () : ()} */}
       <Row>
         <Col className="tag-container">
-          <Tag content={days_left} />
+          <Tag content= {"In " + days_left + " days"} />
         </Col>
       </Row>
       <Row className="featured-concert-box-row">
