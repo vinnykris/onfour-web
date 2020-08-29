@@ -159,6 +159,7 @@ const Concert = (props) => {
       const crewData = await Promise.all(crewsDataPromises);
 
       crewData.forEach((crew, crewIndex) => {
+        if (!crew) return;
         const crewMembersArray = [];
         const crewMembersEntries = Object.entries(JSON.parse(crew.members));
 
@@ -193,6 +194,10 @@ const Concert = (props) => {
 
         crewData[crewIndex].color = userCrews[crew.id];
         crewData[crewIndex].membersArray = crewMembersArray;
+      });
+
+      crewData.forEach((crew, crewIndex) => {
+        if (!crew) crewData.splice(crewIndex, 1);
       });
 
       crewData.sort((crewA, crewB) => {

@@ -38,63 +38,75 @@ const DashboardPage = ({
   };
 
   const getUserCrews = async () => {
-    setLoadingCrews(true);
-    const userCrews = await getCrewsByUsername(username);
+    try {
+      setLoadingCrews(true);
+      const userCrews = await getCrewsByUsername(username);
 
-    if (userCrews) {
-      const crewsIdArray = Object.keys(userCrews);
-      const crewsDataPromises = [];
+      if (userCrews) {
+        const crewsIdArray = Object.keys(userCrews);
+        const crewsDataPromises = [];
 
-      crewsIdArray.forEach((crewId) => {
-        crewsDataPromises.push(getCrewObject(crewId));
-      });
-
-      const crewData = await Promise.all(crewsDataPromises);
-
-      crewData.forEach((crew, crewIndex) => {
-        const crewMembersArray = [];
-        const crewMembersEntries = Object.entries(JSON.parse(crew.members));
-
-        crewMembersEntries.forEach((member) => {
-          const processedMember = {
-            email: member[0],
-            username: member[1] || member[0],
-            initial: member[1]
-              ? member[1][0].toUpperCase()
-              : member[0][0].toUpperCase(),
-            color:
-              availableColors[
-                Math.floor(Math.random() * Math.floor(availableColors.length))
-              ],
-          };
-
-          crewMembersArray.push(processedMember);
+        crewsIdArray.forEach((crewId) => {
+          crewsDataPromises.push(getCrewObject(crewId));
         });
 
-        let adminLocation = 0;
-        crewMembersArray.forEach((member, memberIndex) => {
-          if (member.username === crew.admin) {
-            adminLocation = memberIndex;
+        const crewData = await Promise.all(crewsDataPromises);
+        console.log({ crewData });
+
+        crewData.forEach((crew, crewIndex) => {
+          if (!crew) return;
+
+          const crewMembersArray = [];
+          const crewMembersEntries = Object.entries(JSON.parse(crew.members));
+
+          crewMembersEntries.forEach((member) => {
+            const processedMember = {
+              email: member[0],
+              username: member[1] || member[0],
+              initial: member[1]
+                ? member[1][0].toUpperCase()
+                : member[0][0].toUpperCase(),
+              color:
+                availableColors[
+                  Math.floor(Math.random() * Math.floor(availableColors.length))
+                ],
+            };
+
+            crewMembersArray.push(processedMember);
+          });
+
+          let adminLocation = 0;
+          crewMembersArray.forEach((member, memberIndex) => {
+            if (member.username === crew.admin) {
+              adminLocation = memberIndex;
+            }
+          });
+
+          if (adminLocation !== 0) {
+            const tempMember = crewMembersArray[0];
+            crewMembersArray[0] = crewMembersArray[adminLocation];
+            crewMembersArray[adminLocation] = tempMember;
           }
+
+          crewData[crewIndex].color = userCrews[crew.id];
+          crewData[crewIndex].membersArray = crewMembersArray;
         });
 
-        if (adminLocation !== 0) {
-          const tempMember = crewMembersArray[0];
-          crewMembersArray[0] = crewMembersArray[adminLocation];
-          crewMembersArray[adminLocation] = tempMember;
-        }
+        crewData.forEach((crew, crewIndex) => {
+          if (!crew) crewData.splice(crewIndex, 1);
+        });
 
-        crewData[crewIndex].color = userCrews[crew.id];
-        crewData[crewIndex].membersArray = crewMembersArray;
-      });
+        crewData.sort((crewA, crewB) => {
+          if (crewA.name < crewB.name) return -1;
+          if (crewA.name > crewB.name) return 1;
+          return 0;
+        });
 
-      crewData.sort((crewA, crewB) => {
-        if (crewA.name < crewB.name) return -1;
-        if (crewA.name > crewB.name) return 1;
-        return 0;
-      });
-
-      setUserCrews(crewData);
+        setUserCrews(crewData);
+        setLoadingCrews(false);
+      }
+    } catch (errorMessage) {
+      console.warn("There was an error getting the user crews: ", errorMessage);
       setLoadingCrews(false);
     }
   };
