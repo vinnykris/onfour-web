@@ -79,3 +79,23 @@ img.info-card {
   left: 50%;
   transform: translateX(-50%);
 }
+
+.step-card-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 36px 150px 0px 150px;
+}
+
+.feature-card-section {
+  display: flex;
+  margin: 0px 144px 0px 144px;
+  flex-direction: column;
+}
+
+.feature-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 68px;
+}

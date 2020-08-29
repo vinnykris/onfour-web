@@ -16,12 +16,15 @@ import wave_blue from "../../images/backgrounds/wave_1.svg";
 import artist_background from "../../images/backgrounds/artist_info.png";
 import fan_background from "../../images/backgrounds/fan_info.png";
 import ReactPlayer from "react-player";
+import StepCard from "./step_card";
+import FeatureCard from "./feature_card";
 
 //Amplify.configure(awsmobile);
 
 // AboutPage component that contains all the about page layout
 const LandingPage = () => {
   const [show_artist, setShowArtist] = useState(true);
+
   return (
     <div className="about-page-content">
       <div className="about-section">
@@ -76,22 +79,111 @@ const LandingPage = () => {
       </div>
       <div className="about-section how-it-works-section">
         <div className="header-2">How It Works</div>
-        <div className="step-card-container">
-          <div className="step-card"></div>
-          <div className="step-card"></div>
-          <div className="step-card"></div>
-        </div>
+        {show_artist ? (
+          <div className="step-card-section">
+            <StepCard
+              title="Schedule"
+              description="Pick a date, set your ticket price, and promote with an RSVP link."
+            />
+            <StepCard
+              title="Soundcheck"
+              description="Plug in and join our greenroom with tech support the whole way."
+            />
+            <StepCard
+              title="Perform"
+              description="See and interact with your fans as if they were in the room with you."
+            />
+          </div>
+        ) : (
+          <div className="step-card-section">
+            <StepCard
+              title="Create a Crew"
+              description="Invite your friends to join your crew and attend shows with them."
+            />
+            <StepCard
+              title="Pick a Show"
+              description="RSVP, add it to your calendar, and invite your crew to join you."
+            />
+            <StepCard
+              title="Enjoy the Show"
+              description="Interact with your crew while watching your favorite artist live."
+            />
+          </div>
+        )}
       </div>
 
       <div className="about-section feature-section">
-        <div className="header-2">This Isn't Just Another Livestream</div>
-        <div className="feature-card-container">
-          <div className="feature-row">
-            <div className="feature-card"></div>
-            <div className="feature-card"></div>
-            <div className="feature-card"></div>
+        {show_artist ? (
+          <div>
+            <div className="header-2">This Isn't Just Another Livestream</div>
+            <div className="feature-card-section">
+              <div className="feature-row">
+                <FeatureCard
+                  title="Perform for Your Fans, Not Your Camera"
+                  description="No more isolation! See your fans dance and sing along as you perform."
+                />
+                <FeatureCard
+                  title="Personalized Setup and Support"
+                  description="We'll handle the dirty work so you can focus on what matters most: the music."
+                />
+                <FeatureCard
+                  title="Virtual Meet & Greets"
+                  description="Connect with your biggest fans after the show, either 1-to-1 or in small groups."
+                />
+              </div>
+              <div className="feature-row">
+                <FeatureCard
+                  title="Your Ticket, Your Price"
+                  description="Set your ticket price and get paid for your performance like you deserve."
+                />
+                <FeatureCard
+                  title="Sell More Merch"
+                  description="No more long lines. Direct your fans to your merch 'table' at the click of a button."
+                />
+                <FeatureCard
+                  title="Create Your Own Lineup"
+                  description="Cross-promote by inviting your friends and other artists to perform with you."
+                />
+              </div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div>
+            <div className="header-2">
+              The Ultimate Digital Concert Experience
+            </div>
+            <div className="feature-card-section">
+              <div className="feature-row">
+                <FeatureCard
+                  title="Watch with Friends, Meet New Ones"
+                  description="Enjoy the show with your crew or head into the crowd to chat with other fans."
+                />
+                <FeatureCard
+                  title="Be Seen on the Jumbotron"
+                  description="Artists can see and hear their fans, one crew at a time."
+                />
+                <FeatureCard
+                  title="A New Kind of Backstage Pass"
+                  description="Meet your favorite artists after the show, either with your crew or 1-to-1."
+                />
+              </div>
+              <div className="feature-row">
+                <FeatureCard
+                  title="Quality Worth Plugging In For"
+                  description="Put on your headphones or plug in your favorite speakers. Your ears will thank you."
+                />
+                <FeatureCard
+                  title="Now That's a Fire Pregame"
+                  description="Jam out to our featured playlist before the artist takes the stage."
+                />
+                <FeatureCard
+                  title="Thanks for the Memories"
+                  description="Collect ticket stubs for each show that you attend. Relive your favorites with recordings."
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
