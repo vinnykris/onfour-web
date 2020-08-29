@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Rodal from "rodal";
 
-import { leaveOrRemoveFromCrew } from '../../utils/crew';
+import { leaveOrRemoveFromCrew, deleteCrew } from "../../utils/crew";
 
 import { Row, Col } from "../grid";
 
@@ -22,7 +22,11 @@ const SingleCrewModal = ({
   };
 
   const handleConfirmLeave = async () => {
-    await leaveOrRemoveFromCrew(userEmail, username, crewId);
+    if (crewMembersProp.length < 3) {
+      await deleteCrew(crewId);
+    } else {
+      await leaveOrRemoveFromCrew(userEmail, username, crewId);
+    }
     setShowConfirmationModal(false);
     handleClose(true);
   };
