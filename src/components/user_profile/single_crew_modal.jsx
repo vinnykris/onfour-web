@@ -17,10 +17,18 @@ const SingleCrewModal = ({
 }) => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
+  /**
+   * Closes the confirmation modal.
+   * @returns {void}
+   */
   const handleCloseConfirmationModal = () => {
     setShowConfirmationModal(false);
   };
 
+  /**
+   * Removes a user from a crew or deletes the crew if there were just two users in it.
+   * @returns {void}
+   */
   const handleConfirmLeave = async () => {
     if (crewMembersProp.length < 3) {
       await deleteCrew(crewId);

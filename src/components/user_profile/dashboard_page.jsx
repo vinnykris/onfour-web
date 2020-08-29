@@ -40,13 +40,37 @@ const DashboardPage = ({
 
   const sliderContainerRef = useRef(null);
 
-  const closeModal = (update) => {
+  /**
+   * Closes the Create Crew Modal and updates the user data if needed.
+   * @param {boolean} update Determines if the getUserCrews function will be called to update the crew information
+   * @returns {void}
+   */
+  const closeModal = (update = false) => {
     if (update === true) getUserCrews();
     setShowCrewModal(false);
   };
 
+  /**
+   * Gets the user crews and orders the data to make it render ready.
+   * This method will automatically set the crew data into the local state.
+   * @returns {void}
+   * @example [{
+   *    admin: "admin.user",
+   *    color: "FFF",
+   *    id: "crew-id",
+   *    members: "{'unknown[at]email.com': '', 'registered[at]user.com': 'admin.user'}",
+   *    membersArray: [{
+   *      color: "AAA",
+   *      email: "registered[at]user.com",
+   *      initial: "A",
+   *      username: "admin.user",
+   *    }],
+   *    name: "Crew Name",
+   * }]
+   */
   const getUserCrews = async () => {
     try {
+      // Shows a loading screen while we're getting the crews information.
       setLoadingCrews(true);
       const userCrews = await getCrewsByUsername(username);
 
@@ -54,18 +78,22 @@ const DashboardPage = ({
         const crewsIdArray = Object.keys(userCrews);
         const crewsDataPromises = [];
 
+        // Moving all the crew ids input a promise which will return the complete crew structure.
         crewsIdArray.forEach((crewId) => {
           crewsDataPromises.push(getCrewObject(crewId));
         });
 
+        // Resolving the crew promises to get an array of crews.
         const crewData = await Promise.all(crewsDataPromises);
 
         crewData.forEach((crew, crewIndex) => {
+          // Check if the crew contains data, this prevents issues when a crew id doesn't exist.
           if (!crew) return;
 
           const crewMembersArray = [];
           const crewMembersEntries = Object.entries(JSON.parse(crew.members));
 
+          // Creating the structure for the membersArray for each crew member.
           crewMembersEntries.forEach((member) => {
             const processedMember = {
               email: member[0],
@@ -82,6 +110,7 @@ const DashboardPage = ({
             crewMembersArray.push(processedMember);
           });
 
+          // Looks for the location of the crew adming in the membersArray and moves them to the top of the list.
           let adminLocation = 0;
           crewMembersArray.forEach((member, memberIndex) => {
             if (member.username === crew.admin) {
@@ -99,16 +128,19 @@ const DashboardPage = ({
           crewData[crewIndex].membersArray = crewMembersArray;
         });
 
+        // Looks for crews that are empty and removes them from the crewsData array to prevent issues while rendering.
         crewData.forEach((crew, crewIndex) => {
           if (!crew) crewData.splice(crewIndex, 1);
         });
 
+        // Orders the crews by their name in descending order.
         crewData.sort((crewA, crewB) => {
           if (crewA.name < crewB.name) return -1;
           if (crewA.name > crewB.name) return 1;
           return 0;
         });
 
+        // Sets the parsed crew data in the local state and stops the loading animation.
         setUserCrews(crewData);
         setLoadingCrews(false);
       }
@@ -118,6 +150,10 @@ const DashboardPage = ({
     }
   };
 
+  /**
+   * Checks if the crews slider container is overflowing.
+   * @returns {boolean} true if there's overflow and false if not.
+   */
   const checkIfSliderIsOverflowing = () => {
     if (
       sliderContainerRef.current.clientWidth <
@@ -127,6 +163,10 @@ const DashboardPage = ({
     return false;
   };
 
+  /**
+   * Moves the crews slider container forward using an element reference.
+   * @returns {void}
+   */
   const handleForwardScroll = () => {
     sliderContainerRef.current.scrollTo({
       top: 0,
@@ -135,6 +175,10 @@ const DashboardPage = ({
     });
   };
 
+  /**
+   * Moves the crews slider container backwards using an element reference.
+   * @returns {void}
+   */
   const handleBackwardScroll = () => {
     sliderContainerRef.current.scrollTo({
       top: 0,
@@ -143,6 +187,11 @@ const DashboardPage = ({
     });
   };
 
+  /**
+   * Determines when to show or hide the back and forward sliders buttons based on the available scrolling space.
+   * @param {object} event The event sent back when a scroll event happens in a specified element.
+   * @returns {void}
+   */
   const handleSliderScroll = (event) => {
     const crewSlider = event.currentTarget;
     const scrollPosition = crewSlider.scrollLeft;
@@ -162,6 +211,10 @@ const DashboardPage = ({
     }
   };
 
+  /**
+   * Handles the window resize and helps the crew slider to show or hide the forward button if the container is overflowing.
+   * @return {void}
+   */
   const handleWindowResize = () => {
     if (sliderContainerRef.current && userCrews.length > 0)
       console.log("checking if overflowing!");

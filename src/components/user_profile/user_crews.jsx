@@ -15,15 +15,26 @@ const UserCrews = ({
   const [showSingleCrewModal, setShowSingleCrewModal] = useState(false);
   const [selectedCrew, setSelectedCrew] = useState(userCrews[0]);
 
+  /**
+   * Shows either an edit or view crew modal based on the index of the user crews.
+   * @param {number} crewIndex The index number of the crew to open in the modal.
+   * @returns {void}
+   */
   const handleCrewSelection = (crewIndex) => {
     const userSelectedCrew = userCrews[crewIndex];
     setSelectedCrew(userSelectedCrew);
 
+    // If current user if the admin open the edit modal if not then open the view modal.
     if (userSelectedCrew.admin === username) setshowEditCrewModal(true);
     else setShowSingleCrewModal(true);
   };
 
-  const handleCloseCrewModal = (update) => {
+  /**
+   * Closes both the edit and the view crew modals and updates the users crews if requested.
+   * @param {boolean} update Determines if the user crews should be updated.
+   * @returns {void}
+   */
+  const handleCloseCrewModal = (update = false) => {
     if (update === true) updateCrews();
     setShowSingleCrewModal(false);
     setshowEditCrewModal(false);

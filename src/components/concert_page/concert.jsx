@@ -216,7 +216,7 @@ const Concert = (props) => {
    * @returns {void}
    */
   const handleCloseModals = (update = false) => {
-    if (update) getUserCrews();
+    if (update === true) getUserCrews();
     setShowInviteModal(false);
     setShowCreateCrewModal(false);
   };
@@ -1484,7 +1484,7 @@ const Concert = (props) => {
                       )}
                       {/* </div> */}
                     </Row>
-                    {has_ticket || ( // @TODO: Move this to only be shown when the user has a ticket
+                    {has_ticket && (
                       <Row>
                         <div className="button-container">
                           {userCrews.length > 0 ? (

@@ -30,6 +30,11 @@ const InviteCrewModal = ({
   const [selectedCrewId, setSelectedCrewId] = useState("");
   const [disableInviteButton, setDisableInviteButton] = useState(true);
 
+  /**
+   * Closes both the edit and the view crew modals and updates the users crews if requested.
+   * @param {boolean} update Determines if the user crews should be updated.
+   * @returns {void}
+   */
   const handleCloseModals = (update = false) => {
     if (update === true) updateCrews();
 
@@ -37,6 +42,11 @@ const InviteCrewModal = ({
     setShowSingleModal(false);
   };
 
+  /**
+   * Shows either an edit or view crew modal based on the index of the user crews.
+   * @param {number} crewIndex The index number of the crew to open in the modal.
+   * @returns {void}
+   */
   const handleOpenCrewModals = (currentCrewId) => {
     const currentCrewToEdit = userCrews.filter(
       (crew) => crew.id === currentCrewId
@@ -44,11 +54,13 @@ const InviteCrewModal = ({
 
     setCrewToEdit(currentCrewToEdit);
 
+    // If current user if the admin open the edit modal if not then open the view modal.
     if (currentCrewToEdit.admin === username) setShowEditModal(true);
     else setShowSingleModal(true);
   };
 
   const handleInviteSelectedCrew = () => {
+    // @TODO: It should invite the crew to the concert.
     console.log("Inviting crew ", selectedCrewId);
   };
 
