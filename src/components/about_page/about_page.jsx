@@ -15,6 +15,7 @@ import "./about_styles.scss";
 import wave_blue from "../../images/backgrounds/wave_1.svg";
 import artist_background from "../../images/backgrounds/artist_info.png";
 import fan_background from "../../images/backgrounds/fan_info.png";
+import features_background from "../../images/backgrounds/features_background.png";
 import ReactPlayer from "react-player";
 import StepCard from "./step_card";
 import FeatureCard from "./feature_card";
@@ -113,8 +114,11 @@ const LandingPage = () => {
       </div>
 
       <div className="about-section feature-section">
+        <div className="background-about-container">
+          <img src={features_background} className="wave-2" />
+        </div>
         {show_artist ? (
-          <div>
+          <div className="feature-content-container">
             <div className="header-2">This Isn't Just Another Livestream</div>
             <div className="feature-card-section">
               <div className="feature-row">
@@ -148,7 +152,7 @@ const LandingPage = () => {
             </div>
           </div>
         ) : (
-          <div>
+          <div className="feature-content-container">
             <div className="header-2">
               The Ultimate Digital Concert Experience
             </div>
