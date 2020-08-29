@@ -18,7 +18,17 @@
   border-radius: 2px;
   height: 25px;
   padding: 0px 10px;
-  background-color: #3a3a3d;
+  background-color:#E465A2;
+  color: $on-background;
+}
+
+.artist-mute-all-button:hover {
+  background: #EA91BD;
+}
+
+.artist-mute-all-button:disabled {
+  background: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.38);
 }
 
 .range-slider__wrap {

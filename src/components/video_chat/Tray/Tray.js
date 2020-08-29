@@ -301,7 +301,7 @@ export default function Tray(props) {
       ) : (
         <button
           type="unmute-all"
-          className="artist-mute-all-button"
+          className="artist-mute-all-button segmented-button-text"
           disabled={props.disabled}
           highlighted={props.button_message === "MUTE ALL"}
           onClick={props.mute_function}
