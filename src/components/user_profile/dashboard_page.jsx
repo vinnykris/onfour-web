@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
 
 import { Row, Col } from "../grid";
@@ -31,6 +31,10 @@ const DashboardPage = ({
     "E26A6A",
   ]);
   const [loadingCrews, setLoadingCrews] = useState(false);
+  const [showBackSliderButton, setShowBackSliderButton] = useState(false);
+  const [showForwardSliderButton, setShowForwardSliderButton] = useState(false);
+
+  const sliderContainerRef = useRef(null);
 
   const closeModal = (update) => {
     if (update === true) getUserCrews();
@@ -51,7 +55,6 @@ const DashboardPage = ({
         });
 
         const crewData = await Promise.all(crewsDataPromises);
-        console.log({ crewData });
 
         crewData.forEach((crew, crewIndex) => {
           if (!crew) return;
@@ -108,6 +111,45 @@ const DashboardPage = ({
     } catch (errorMessage) {
       console.warn("There was an error getting the user crews: ", errorMessage);
       setLoadingCrews(false);
+    }
+  };
+
+  const handleForwardScroll = () => {
+    sliderContainerRef.current.scrollTo({
+      top: 0,
+      left: sliderContainerRef.current.scrollLeft + 400,
+      behavior: "smooth",
+    });
+  };
+
+  const handleBackwardScroll = () => {
+    sliderContainerRef.current.scrollTo({
+      top: 0,
+      left: sliderContainerRef.current.scrollLeft - 400,
+      behavior: "smooth",
+    });
+  };
+
+  const handleSliderScroll = (event) => {
+    const crewSlider = event.currentTarget;
+    const scrollPosition = crewSlider.scrollLeft;
+    const maxScrollWidth = crewSlider.scrollWidth - crewSlider.clientWidth;
+
+    if (scrollPosition === 0) {
+      console.log("hiding the back button.");
+      setShowBackSliderButton(false);
+    }
+    if (scrollPosition === maxScrollWidth) {
+      console.log("Hiding the forward button.");
+      setShowForwardSliderButton(false);
+    }
+    if (scrollPosition > 0) {
+      console.log("Showing the back button.");
+      setShowBackSliderButton(true);
+    }
+    if (scrollPosition < maxScrollWidth) {
+      console.log("Showing forward button.");
+      setShowForwardSliderButton(true);
     }
   };
 
@@ -305,13 +347,22 @@ const DashboardPage = ({
             </Row>
             <Row className="user-crew-wrapper">
               {loadingCrews !== true ? (
-                <Col size={1} className="user-crews-column">
+                <Col
+                  size={1}
+                  className="user-crews-column"
+                  ref={sliderContainerRef}
+                  onScroll={(e) => handleSliderScroll(e)}
+                >
                   {userCrews.length > 0 ? (
                     <UserCrews
                       userCrews={userCrews}
                       username={username}
                       userEmail={userEmail}
                       updateCrews={getUserCrews}
+                      slideForward={handleForwardScroll}
+                      slideBack={handleBackwardScroll}
+                      showBackButton={showBackSliderButton}
+                      showForwardButton={showForwardSliderButton}
                     />
                   ) : (
                     <div

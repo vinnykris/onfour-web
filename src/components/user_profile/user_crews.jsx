@@ -8,7 +8,16 @@ import { Row, Col } from "../grid";
 import EditCrewModal from "./edit_crew_modal";
 import SingleCrewModal from "./single_crew_modal";
 
-const UserCrews = ({ userCrews, username, userEmail, updateCrews }) => {
+const UserCrews = ({
+  userCrews,
+  username,
+  userEmail,
+  updateCrews,
+  slideForward,
+  slideBack,
+  showBackButton,
+  showForwardButton,
+}) => {
   const [showEditCrewModal, setshowEditCrewModal] = useState(false);
   const [showSingleCrewModal, setShowSingleCrewModal] = useState(false);
   const [selectedCrew, setSelectedCrew] = useState(userCrews[0]);
@@ -29,6 +38,15 @@ const UserCrews = ({ userCrews, username, userEmail, updateCrews }) => {
 
   return (
     <Row className="crews-container">
+      <div
+        className={`fixed-crew-navigation-button-left ${
+          !showBackButton && "hide-button"
+        }`}
+        onClick={slideBack}
+      >
+        <ArrowBackIosIcon />
+      </div>
+
       <Col size={1}>
         <Row>
           {userCrews.map((crew, index) => (
@@ -67,11 +85,13 @@ const UserCrews = ({ userCrews, username, userEmail, updateCrews }) => {
         </Row>
       </Col>
 
-      <div className="fixed-crew-navigation-button">
+      <div
+        onClick={slideForward}
+        className={`fixed-crew-navigation-button ${
+          !showForwardButton && "hide-button"
+        }`}
+      >
         <ArrowForwardIosIcon />
-      </div>
-      <div className="fixed-crew-navigation-button">
-        <ArrowBackIosIcon />
       </div>
 
       <EditCrewModal

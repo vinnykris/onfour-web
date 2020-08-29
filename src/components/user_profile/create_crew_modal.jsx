@@ -96,7 +96,7 @@ const CreateCrewModal = ({
   const handleDiscardData = () => {
     setCrewMembers([]);
     setCrewName("");
-    closeModal();
+    setEmailValue("");
   };
 
   const handleCrewCreation = async () => {
@@ -105,6 +105,7 @@ const CreateCrewModal = ({
 
     await createCrew(emailsToSave, crewName, currentUsername, selectedColor);
 
+    handleDiscardData();
     closeModal(true);
   };
 
