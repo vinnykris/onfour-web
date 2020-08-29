@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-
 import { Row, Col } from "../grid";
 
 import EditCrewModal from "./edit_crew_modal";
@@ -13,10 +10,6 @@ const UserCrews = ({
   username,
   userEmail,
   updateCrews,
-  slideForward,
-  slideBack,
-  showBackButton,
-  showForwardButton,
 }) => {
   const [showEditCrewModal, setshowEditCrewModal] = useState(false);
   const [showSingleCrewModal, setShowSingleCrewModal] = useState(false);
@@ -38,15 +31,6 @@ const UserCrews = ({
 
   return (
     <Row className="crews-container">
-      <div
-        className={`fixed-crew-navigation-button-left ${
-          !showBackButton && "hide-button"
-        }`}
-        onClick={slideBack}
-      >
-        <ArrowBackIosIcon />
-      </div>
-
       <Col size={1}>
         <Row>
           {userCrews.map((crew, index) => (
@@ -84,15 +68,6 @@ const UserCrews = ({
           ))}
         </Row>
       </Col>
-
-      <div
-        onClick={slideForward}
-        className={`fixed-crew-navigation-button ${
-          !showForwardButton && "hide-button"
-        }`}
-      >
-        <ArrowForwardIosIcon />
-      </div>
 
       <EditCrewModal
         showModal={showEditCrewModal}

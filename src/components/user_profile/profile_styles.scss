@@ -962,6 +962,7 @@ p {
 .user-crew-wrapper {
   width: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .user-crews-column {
@@ -978,51 +979,6 @@ p {
 .crews-container {
   position: relative;
   max-width: 100%;
-
-  .fixed-crew-navigation-button {
-    cursor: pointer;
-    position: sticky;
-    right: 0px;
-    height: 264px;
-    background: rgb(2, 0, 36);
-    background: linear-gradient(
-      90deg,
-      rgba(2, 0, 36, 0) 0%,
-      rgba(0, 0, 0, 1) 100%
-    );
-
-    & > svg {
-      font-size: 50px !important;
-      margin-top: 107px;
-
-      & > path {
-        color: white;
-      }
-    }
-  }
-
-  .fixed-crew-navigation-button-left {
-    cursor: pointer;
-    position: sticky;
-    height: 264px;
-    left: 0px !important;
-    background: rgb(2, 0, 36);
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(2, 0, 36, 0) 100%
-    ) !important;
-    z-index: 1;
-
-    & > svg {
-      font-size: 50px !important;
-      margin-top: 107px;
-
-      & > path {
-        color: white;
-      }
-    }
-  }
 }
 
 .user-crews-loader {
@@ -1030,5 +986,56 @@ p {
 }
 
 .hide-button {
-  display: none;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 300ms, visibility 300ms;
+}
+
+.fixed-crew-navigation-button {
+  visibility: visible;
+  opacity: 1;
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  height: 264px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+
+  & > svg {
+    font-size: 50px !important;
+    margin-top: 107px;
+
+    & > path {
+      color: white;
+    }
+  }
+}
+
+.fixed-crew-navigation-button-left {
+  visibility: visible;
+  opacity: 1;
+  cursor: pointer;
+  position: absolute;
+  height: 264px;
+  left: 0px !important;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(2, 0, 36, 0) 100%
+  ) !important;
+  z-index: 1;
+
+  & > svg {
+    font-size: 50px !important;
+    margin-top: 107px;
+
+    & > path {
+      color: white;
+    }
+  }
 }

@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import PulseLoader from "react-spinners/PulseLoader";
 
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+
 import { Row, Col } from "../grid";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.png";
@@ -33,6 +36,7 @@ const DashboardPage = ({
   const [loadingCrews, setLoadingCrews] = useState(false);
   const [showBackSliderButton, setShowBackSliderButton] = useState(false);
   const [showForwardSliderButton, setShowForwardSliderButton] = useState(false);
+  const [sliderCalcFirstRun, setSliderCalcFirstRun] = useState(false);
 
   const sliderContainerRef = useRef(null);
 
@@ -114,6 +118,15 @@ const DashboardPage = ({
     }
   };
 
+  const checkIfSliderIsOverflowing = () => {
+    if (
+      sliderContainerRef.current.clientWidth <
+      sliderContainerRef.current.scrollWidth
+    )
+      return true;
+    return false;
+  };
+
   const handleForwardScroll = () => {
     sliderContainerRef.current.scrollTo({
       top: 0,
@@ -136,26 +149,45 @@ const DashboardPage = ({
     const maxScrollWidth = crewSlider.scrollWidth - crewSlider.clientWidth;
 
     if (scrollPosition === 0) {
-      console.log("hiding the back button.");
       setShowBackSliderButton(false);
     }
     if (scrollPosition === maxScrollWidth) {
-      console.log("Hiding the forward button.");
       setShowForwardSliderButton(false);
     }
     if (scrollPosition > 0) {
-      console.log("Showing the back button.");
       setShowBackSliderButton(true);
     }
     if (scrollPosition < maxScrollWidth) {
-      console.log("Showing forward button.");
       setShowForwardSliderButton(true);
+    }
+  };
+
+  const handleWindowResize = () => {
+    if (sliderContainerRef.current && userCrews.length > 0)
+      console.log("checking if overflowing!");
+    if (checkIfSliderIsOverflowing()) {
+      setShowForwardSliderButton(true);
+    } else {
+      setShowForwardSliderButton(false);
     }
   };
 
   useEffect(() => {
     getUserCrews();
+    window.addEventListener("resize", handleWindowResize);
   }, []);
+
+  useEffect(() => {
+    if (
+      !sliderCalcFirstRun &&
+      sliderContainerRef.current &&
+      userCrews.length > 0
+    )
+      if (checkIfSliderIsOverflowing()) {
+        setShowForwardSliderButton(true);
+        setSliderCalcFirstRun(true);
+      }
+  });
 
   return (
     <Col size={7} style={{ width: "90%" }}>
@@ -347,32 +379,46 @@ const DashboardPage = ({
             </Row>
             <Row className="user-crew-wrapper">
               {loadingCrews !== true ? (
-                <Col
-                  size={1}
-                  className="user-crews-column"
-                  ref={sliderContainerRef}
-                  onScroll={(e) => handleSliderScroll(e)}
-                >
-                  {userCrews.length > 0 ? (
-                    <UserCrews
-                      userCrews={userCrews}
-                      username={username}
-                      userEmail={userEmail}
-                      updateCrews={getUserCrews}
-                      slideForward={handleForwardScroll}
-                      slideBack={handleBackwardScroll}
-                      showBackButton={showBackSliderButton}
-                      showForwardButton={showForwardSliderButton}
-                    />
-                  ) : (
-                    <div
-                      className="create-crew-wrapper"
-                      onClick={() => setShowCrewModal(true)}
-                    >
-                      <p>Create Crew +</p>
-                    </div>
-                  )}
-                </Col>
+                <>
+                  <div
+                    className={`fixed-crew-navigation-button-left ${
+                      !showBackSliderButton && "hide-button"
+                    }`}
+                    onClick={handleBackwardScroll}
+                  >
+                    <ArrowBackIosIcon />
+                  </div>
+                  <Col
+                    size={1}
+                    className="user-crews-column"
+                    ref={sliderContainerRef}
+                    onScroll={(e) => handleSliderScroll(e)}
+                  >
+                    {userCrews.length > 0 ? (
+                      <UserCrews
+                        userCrews={userCrews}
+                        username={username}
+                        userEmail={userEmail}
+                        updateCrews={getUserCrews}
+                      />
+                    ) : (
+                      <div
+                        className="create-crew-wrapper"
+                        onClick={() => setShowCrewModal(true)}
+                      >
+                        <p>Create Crew +</p>
+                      </div>
+                    )}
+                  </Col>
+                  <div
+                    onClick={handleForwardScroll}
+                    className={`fixed-crew-navigation-button ${
+                      !showForwardSliderButton && "hide-button"
+                    }`}
+                  >
+                    <ArrowForwardIosIcon />
+                  </div>
+                </>
               ) : (
                 <Col size={1} className="user-crews-column">
                   <div className="user-crews-loader">
