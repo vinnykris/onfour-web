@@ -225,17 +225,17 @@ export default function VideoChatApp({
   };
 
   const activateVideoRoulette = () => {
-    if (document.getElementById("roulette-button")) {
+    
       if (start_auto_roulette) {
         setStartAutoRoulette(false);
-        document.getElementById("roulette-button").style.background = "transparent";
-        document.getElementById("roulette-button").style.color = "#E465A2";
+        // document.getElementById("roulette-button").style.background = "transparent";
+        // document.getElementById("roulette-button").style.color = "#E465A2";
       } else {
         setStartAutoRoulette(true);
-        document.getElementById("roulette-button").style.background = "#E465A2";
-        document.getElementById("roulette-button").style.color = "rgba(255, 255, 255, 0.87)";
+        // document.getElementById("roulette-button").style.background = "#E465A2";
+        // document.getElementById("roulette-button").style.color = "rgba(255, 255, 255, 0.87)";
       }
-    }
+    
   };
 
   useEffect(() => {
@@ -255,13 +255,25 @@ export default function VideoChatApp({
 
   return (
     <div className={(artistView ? "artist-" : "") + "app"} id="video-chat-main">
-      <button
-        className="auto-roulette-button"
-        id="roulette-button"
-        onClick={activateVideoRoulette}
-      >
-        {start_auto_roulette ? "End Auto-Roulette" : "Start Auto-Roulette"}
-      </button>
+      <div className="room-name-row">
+        <div className="artist-box-header video-chat-box-header header-7">
+          Video Chat
+        </div>
+        <label class="auto-roulette-switch">
+          <input type="checkbox" onChange={activateVideoRoulette}/>
+          <span class="auto-roulette-slider round"></span>
+        </label>
+        <div className="auto-roulette-text header-8">
+          auto-rotate rooms
+        </div>
+        {/* <button
+          className="auto-roulette-button"
+          id="roulette-button"
+          onClick={activateVideoRoulette}
+        >
+          {start_auto_roulette ? "End Auto-Roulette" : "Start Auto-Roulette"}
+        </button> */}
+      </div>
       {showCall ? (
         // NOTE: for an app this size, it's not obvious that using a Context
         // is the best choice. But for larger apps with deeply-nested components
@@ -297,17 +309,26 @@ export default function VideoChatApp({
         </CallObjectContext.Provider>
       ) : (
         <div className="video-chat-prompt-container">
-          <div className="enter-video-chat-prompt">
-            <StartButton
-              create_room={false}
-              disabled={!enableStartButton}
-              onClick={() => {
-                createPublicCall().then((url) => startJoiningPublicCall(url));
-              }}
-              artistView={artistView}
-            />
-            <p className="create-room-error">{error_msg}</p>
+          {start_auto_roulette? (
+            <div className="enter-video-chat-prompt">
+              <div className="public-video-notice message-text">
+                auto-rotating rooms....
+              </div>
+            </div>
+          ): (
+            <div className="enter-video-chat-prompt">
+              <StartButton
+                create_room={false}
+                disabled={!enableStartButton}
+                onClick={() => {
+                  createPublicCall().then((url) => startJoiningPublicCall(url));
+                }}
+                artistView={artistView}
+              />
+              <p className="create-room-error">{error_msg}</p>
           </div>
+          )}
+          
         </div>
       )}
     </div>

@@ -11,7 +11,8 @@ export default function StartButton(props) {
     <button
       className={
         "start-button" +
-        (props.create_room ? " create-room-start-button" : "")
+        (props.create_room ? " create-room-start-button" : "") + 
+        (props.artistView ? " artist-start-button" : "")
       }
       disabled={props.disabled}
       onClick={props.onClick}

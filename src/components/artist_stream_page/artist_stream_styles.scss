@@ -67,7 +67,7 @@
 
 // CHAT STYLING
 .artist-chat-main {
-  height: calc(-49px + 100vh);
+  height: 100%;
   // height: 100vh;
   width: 100%;
   // position: -webkit-sticky;
@@ -126,9 +126,14 @@
   border-bottom: 2px solid black;
 }
 
-.full-width {
+.full-width-video {
   width: 100%;
-  height: 50%;
+  height: 200px;
+}
+
+.full-width-chat {
+  width: 100%;
+  height: calc(-249px + 100vh);
 }
 
 .main-column {
@@ -269,15 +274,24 @@
 .artist-stream-wrapper {
   margin: auto;
   width: 100%;
+  height: 200px;
   position: relative;
+}
+
+.viewer-number-overlay {
+  display: flex;
+  position: absolute;
+  top: 5px;
+  left: 25px;
+  z-index: 2;
 }
 
 .artist-player-wrapper {
   display: inline-block;
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
+  // padding-bottom: 56.25%; /* 16:9 */
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .video-player {
@@ -633,20 +647,16 @@
   height: 30px;
   width: 100%;
   background-color: #17171b;
-  color: #dddddd;
-  text-align: left;
-  line-height: 30px;
+  // color: #dddddd;
+  // text-align: left;
+  line-height: 30px !important;
   border-bottom: 1px solid #454242;
-  font-family: Helvetica;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 0.8rem;
-  letter-spacing: 0.045em;
-  padding-left: 10px;
+  // padding-left: 10px;
 }
 
 .video-chat-box-header {
-  padding-left: 30px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 
 .player-inner-container {

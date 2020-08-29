@@ -336,7 +336,7 @@ export default function Tray(props) {
       )}
       <button
         type={TYPE_LEAVE}
-        className={"tray-button" + props.artistView? " artist-leave-button" : null}
+        className={"tray-button" + (props.artistView? " artist-leave-button" : "")}
         onClick={leaveCall}
         disabled={props.disabled}
         id="leave-video-chat-button"

@@ -2,7 +2,7 @@
   /* padding: 20px 30px; */
   margin: 0 auto;
   position: absolute;
-  bottom: 10px;
+  bottom: -15px;
   width: 93%;
   color: #000000;
   font-family: "Montserrat", sans-serif;
@@ -16,6 +16,13 @@
   transform: translate(-50%, -50%); */
   background: #E465A2;
   border-radius: 4px;
+}
+
+.artist-start-button {
+  top: 50%;
+  transform: translateY(-50%);
+  height: 45px;
+  width: 300px;
 }
 
 .start-button:hover {

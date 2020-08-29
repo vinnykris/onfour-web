@@ -499,7 +499,7 @@ export default function VideoChatApp({
           {isPublic ? (
             <div className="enter-video-chat-prompt">
               {!artistView ? (
-                <div className="public-video-notice">
+                <div className="public-video-notice message-text">
                   {"Please use headphones to avoid audio feedback issues. \nThis is a public room, so get ready to make some new friends!"}
                 </div>
               ) : null}
@@ -522,7 +522,7 @@ export default function VideoChatApp({
           // />
           isRoomCreated ? (
             <div className="enter-video-chat-prompt">
-              <div className="public-video-notice">
+              <div className="public-video-notice message-text">
                 {"Rejoin the private room I was in! \nTo create a new room, refresh on this page"}
               </div>
               <StartButton
@@ -543,7 +543,7 @@ export default function VideoChatApp({
                 placeholder="room name"
                 {...self_create_room_name}
               /> */}
-              <div className="public-video-notice">
+              <div className="public-video-notice message-text">
                 Create my own private room and invite my friends!
               </div>
               <StartButton
@@ -563,9 +563,9 @@ export default function VideoChatApp({
                 artistView={artistView}
               />
               {error_msg ? (
-                <p className="create-room-error">{error_msg}</p>
+                <p className="create-room-error message-text">{error_msg}</p>
               ) : (
-                <p className="room-max-msg">{error_msg}</p>
+                <p className="room-max-msg message-text">{error_msg}</p>
               )}
             </div>
           )}
