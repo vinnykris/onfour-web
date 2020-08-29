@@ -9,11 +9,19 @@ import "./StartButton.css";
 export default function StartButton(props) {
   return (
     <button
-      className="primary-button button-text"
+      className={
+        "start-button" +
+        (props.create_room ? " create-room-start-button" : "") + 
+        (props.artistView ? " artist-start-button" : "")
+      }
       disabled={props.disabled}
       onClick={props.onClick}
     >
-      {props.artistView ? "See And Hear The Fans" : "Join Video Call"}
+      {props.artistView
+        ? "Join One Random Fan Room"
+        : props.create_room
+        ? "Create Room"
+        : "Join Video Call"}
     </button>
   );
 }

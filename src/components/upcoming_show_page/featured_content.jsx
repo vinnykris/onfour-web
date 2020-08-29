@@ -34,7 +34,7 @@ const FeaturedContent = (props) => {
             <Row>
               <div className="show-content-bar">
                 <div className="tag-container featured-content-tag">
-                  <Tag content="In x days" />
+                  <Tag content={"In " + props.days_left + " days"} />
                 </div>
                 <Row>
                   <Col size={1}>
