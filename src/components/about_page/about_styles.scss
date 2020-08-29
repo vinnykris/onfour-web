@@ -1,0 +1,81 @@
+@import "../../styles";
+
+.about-page-content {
+  max-width: 100vw;
+  width: 100vw;
+}
+
+.about-section {
+  max-width: 100%;
+  width: 100%;
+}
+
+.background-about-container {
+  max-width: 100%;
+  width: 100%;
+}
+
+img.wave {
+  max-width: 100%;
+  width: 100%;
+  height: calc(100vw * 0.40441);
+  object-fit: cover;
+}
+
+img.info-card {
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+.how-it-works-section {
+  margin-top: -56px;
+}
+
+.feature-section {
+  margin-top: 122px;
+}
+
+.background-about-inner {
+  position: relative;
+  display: flex;
+}
+
+.tab-title {
+  position: absolute;
+  top: 42px;
+  cursor: pointer;
+}
+
+.artist-tab {
+  right: calc(100vw * 0.2194444);
+}
+
+.fan-tab {
+  left: calc(100vw * 0.2194444);
+}
+
+.not-selected {
+  color: $on-surface-medium !important;
+}
+
+.experience-section {
+  padding-top: 28px;
+}
+
+.experience-video-wrapper {
+  position: absolute;
+  display: flex;
+  top: calc(100vw * 0.10277778);
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+.experience-video {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
