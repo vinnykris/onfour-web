@@ -18,7 +18,7 @@ export default function StartButton(props) {
       onClick={props.onClick}
     >
       {props.artistView
-        ? "See And Hear The Fans"
+        ? "Join One Random Fan Room"
         : props.create_room
         ? "Create Room"
         : "Join Video Call"}
