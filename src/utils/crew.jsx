@@ -302,7 +302,7 @@ export const sendCrewInvites = async (user_name, emails, crew_name) => {
       reply_to: "onfour.box@gmail.com",
       friend_name: user_name,
       crew_name: crew_name,
-      concert_link: "onfour.live/profile",
+      concert_link: "https://www.onfour.live/profile/",
     };
     setTimeout(() => {
       emailjs.send(service_id, crew_template_id, template_params, user_id);

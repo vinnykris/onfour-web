@@ -14,14 +14,6 @@ Amplify.configure({
 
     // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
     userPoolWebClientId: "11os48ai0lk5uo63gc0gnfdtl0",
-
-    // OPTIONAL - Hosted UI configuration
-    oauth: {
-      domain: "onfourpool.auth.us-east-1.amazoncognito.com",
-      redirectSignIn: "http://localhost:3000/",
-      redirectSignOut: "http://localhost:3000/",
-      responseType: "code", // or 'token', note that REFRESH token will only be generated when the responseType is code
-    },
   },
 });
 
