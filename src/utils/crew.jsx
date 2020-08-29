@@ -217,7 +217,7 @@ export const addUserToCrew = async (
   color,
   inviter
 ) => {
-  // fetch the first name of the user creating the crew
+  // fetch the first name of the user inviting someone else to the crew
   const user_data = await API.graphql(
     graphqlOperation(queries.get_user_data, {
       input: inviter,
