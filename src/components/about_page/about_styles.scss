@@ -11,8 +11,34 @@
 }
 
 .background-about-container {
+  // position: absolute;
   max-width: 100%;
   width: 100%;
+}
+
+.about-main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vw * 0.40441);
+  background: url("../../images/backgrounds/wave_1.svg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.about-text-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-main-subheading {
+  margin-top: 16px;
 }
 
 img.wave {
@@ -116,4 +142,10 @@ img.wave-2 {
   position: absolute;
   top: 0;
   margin-top: -56px;
+}
+
+.sign-up-button {
+  margin: auto;
+  height: 57px;
+  width: 167px;
 }

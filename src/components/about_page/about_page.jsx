@@ -1,5 +1,6 @@
 // Main Imports
 import React, { useState, useEffect } from "react";
+import history from "../../history";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -29,8 +30,18 @@ const LandingPage = () => {
   return (
     <div className="about-page-content">
       <div className="about-section">
-        <div className="background-about-container">
+        {/* <div className="background-about-container">
           <img src={wave_blue} className="wave" />
+        </div> */}
+        <div className="about-main-container">
+          <div className="about-text-container">
+            <div className="about-main-header header-2">
+              Experience music, together.
+            </div>
+            <div className="about-main-subheading header-4">
+              Interactive live-streamed concerts with your
+            </div>
+          </div>
         </div>
       </div>
       <div className="about-section experience-section">
@@ -188,6 +199,17 @@ const LandingPage = () => {
             </div>
           </div>
         )}
+      </div>
+
+      <div className="about-section sign-up-section">
+        <div className="sign-up-container">
+          <button
+            className="primary-button button-text sign-up-button"
+            onClick={() => history.push("/register")}
+          >
+            SIGN UP
+          </button>
+        </div>
       </div>
     </div>
   );
