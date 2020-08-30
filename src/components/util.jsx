@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import moment from "moment-timezone/builds/moment-timezone-with-data";
 // Component Imports
 import FeaturedContent from "../components/upcoming_show_page/featured_content";
 import ArchiveVideo from "../components/archive_page/archive_video";
@@ -14,9 +14,9 @@ const month_map = {
   "07": "JUL",
   "08": "AUG",
   "09": "SEP",
-  "10": "OCT",
-  "11": "NOV",
-  "12": "DEC",
+  10: "OCT",
+  11: "NOV",
+  12: "DEC",
 };
 
 // Splits the input array into smaller chunks of equal size
@@ -43,6 +43,9 @@ export const createChunks = (array, chunk_size) => {
 export const createUpcomingObject = (data, artist_data) => {
   const time_left = +new Date(data.date + "T24:00:00.000-04:00") - +new Date();
   const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
+  const formatted_time = moment
+    .tz(data.date + "T" + data.time + ".000-04:00", moment.tz.guess())
+    .format("h:mm A z");
 
   return {
     // id: data.id,
@@ -60,7 +63,7 @@ export const createUpcomingObject = (data, artist_data) => {
       data.date.slice(0, 4),
     // moment(data.date).format('LL')
     time: data.time,
-    formatted_time: moment(data.time, "HH:mm:ss").format("h:mm A"),
+    formatted_time: formatted_time,
     month: month_map[data.date.slice(5, 7)],
     day: data.date.slice(8, 10),
     price: data.general_price,
@@ -81,6 +84,15 @@ export const formatUpcomingShow = (data, width) => {
   // FeaturedContent to concerts
   const time_left = +new Date(data.date + "T24:00:00.000-04:00") - +new Date();
   const days_left = Math.floor(time_left / (1000 * 60 * 60 * 24));
+  // console.log(data.date + "T" + data.time + ".000-04:00");
+  // console.log(
+  //   moment
+  //     .tz(data.date + "T" + data.time + ".000-04:00", moment.tz.guess())
+  //     .format("h:mm A z")
+  // );
+  const formatted_time = moment
+    .tz(data.date + "T" + data.time + ".000-04:00", moment.tz.guess())
+    .format("h:mm A z");
   return (
     <FeaturedContent
       id={data.id}
@@ -99,7 +111,7 @@ export const formatUpcomingShow = (data, width) => {
         // moment(data.date).format('LL')
       }
       time={data.time}
-      formatted_time={moment(data.time, "HH:mm:ss").format("h:mm A")}
+      formatted_time={formatted_time}
       month={month_map[data.date.slice(5, 7)]}
       day={data.date.slice(8, 10)}
       price={data.general_price}

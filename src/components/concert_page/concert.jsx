@@ -172,6 +172,8 @@ const Concert = (props) => {
       console.log("fetch data is done");
     };
 
+    // console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
+
     // fetchData();
 
     setTooltipText("Copy to clipboard");
@@ -262,8 +264,7 @@ const Concert = (props) => {
           ", ",
           concert_info.formatted_date,
           " @ ",
-          concert_info.formatted_time,
-          " EST"
+          concert_info.formatted_time
         ),
         buy_or_rsvp: "RSVP",
         concert_link: "https://www.onfour.live/upcoming/".concat(concert_id),
@@ -510,7 +511,7 @@ const Concert = (props) => {
                           <p className="concert-date-info">
                             {concert_info.week_day}{" "}
                             {concert_info.formatted_date}{" "}
-                            {concert_info.formatted_time} EST
+                            {concert_info.formatted_time}
                           </p>
                         </div>
                         <div className="ticket-types">
@@ -781,7 +782,7 @@ const Concert = (props) => {
                 <Col size={1} className="no-stretch-column">
                   <span className="logistics-text">
                     {concert_info.week_day} | {concert_info.formatted_date} |{" "}
-                    {concert_info.formatted_time} EST
+                    {concert_info.formatted_time}
                   </span>
                 </Col>
               </Row>
@@ -995,7 +996,7 @@ const Concert = (props) => {
                               <p className="concert-date-info">
                                 {concert_info.week_day}{" "}
                                 {concert_info.formatted_date}{" "}
-                                {concert_info.formatted_time} EST
+                                {concert_info.formatted_time}
                               </p>
                             </div>
                             <hr className="break-modal" />
@@ -1270,7 +1271,7 @@ const Concert = (props) => {
                     <hr className="solid" />
                     <Row className="logistics-row">
                       <span className="logistics-text">
-                        {concert_info.formatted_time} EST
+                        {concert_info.formatted_time}
                       </span>
                     </Row>
                     <hr className="solid" />
