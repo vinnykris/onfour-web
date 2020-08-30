@@ -1,8 +1,6 @@
 // Main Imports
 import React, { useState, useEffect } from "react";
-import { Grid, Row, Col } from "../grid";
 import history from "../../history";
-import { NavLink } from "react-router-dom";
 
 // AWS Imports
 import { API, graphqlOperation } from "aws-amplify";
@@ -11,367 +9,209 @@ import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
 import Auth from "../../apis/UserPool";
 
-// Component Imports
-import FlexibleGrid from "../flexible_grid/flexible_grid";
-import { useWindowDimensions } from "../custom_hooks";
-import PulseLoader from "react-spinners/PulseLoader";
-
-// API Imports
-import {
-  getConcertInfo,
-  getArchiveInfo,
-  getMostRecentUpcomingInfo,
-  getArtistInfo,
-} from "../../apis/get_concert_data";
-
-import { formatArchiveVideos, formatUpcomingShow } from "../util";
-
-// Image Imports
-// import gradient_header from "../../images/mobile_gradient.png";
-import home_background from "../../images/backgrounds/home-page-background.jpeg";
-
 // Styling Imports
 import "./about_styles.scss";
-import FeaturedConcertBox from "./featured_concert_box";
 
-Amplify.configure(awsmobile);
+// Image imports
+import wave_blue from "../../images/backgrounds/wave_1.svg";
+import artist_background from "../../images/backgrounds/artist_info.png";
+import fan_background from "../../images/backgrounds/fan_info.png";
+import features_background from "../../images/backgrounds/features_background.png";
+import ReactPlayer from "react-player";
+import StepCard from "./step_card";
+import FeatureCard from "./feature_card";
+
+//Amplify.configure(awsmobile);
 
 // AboutPage component that contains all the about page layout
-const AboutPage = () => {
-  const [email, setEmail] = useState(""); // Variable to store input emails for subscribtion form
-  const [clicked, setClicked] = useState(false); // Variable to show hide the subscribtion form
-  // concerts is a list of FeaturedContent objects with upcoming show information
-  const [concerts, setConcerts] = useState([]);
-  const [most_recent_concert, setMostRecentConcert] = useState("");
-  const [most_recent_concert_artist, setMostRecentConcertArtist] = useState("");
-  const [videos, setVideos] = useState([]); // List of video objects with past show information
-
-  // DETERMINE MOBILE VERSION OR NOT
-  const { height, width } = useWindowDimensions(); // Dimensions of screen
-
-  // AUTO-SCROLL SECTION
-  // Auto-scrolls on first navigation
-  const [scroll, setScroll] = useState(true); // Auto-scroll
-  if (scroll) {
-    window.scrollTo({ top: "10px", behavior: "smooth" });
-    setScroll(false);
-  }
-
-  const scrollDown = (section_number) => {
-    window.scroll({ top: height * section_number, behavior: "smooth" });
-  };
-
-  // Add in Analytics that about page was visited
-  useEffect(() => {
-    aboutPageVisit();
-    Auth.currentAuthenticatedUser({}).then((user) => {
-      authenticatedAboutPageVisit();
-    });
-  }, []);
-  const aboutPageVisit = () => {
-    Analytics.record({ name: "totalaboutPageVisits" });
-  };
-  // Record in analytics that about page was visited only if user is logged in
-  const authenticatedAboutPageVisit = () => {
-    Analytics.record({ name: "totalAuthenticatedAboutPageVisits" });
-  };
-
-  // This function gets called when the email subscribtion form is submitted
-  // It calls the appsync API to send the input email to backend database
-  const emailSubmit = (event) => {
-    event.preventDefault();
-
-    const payload = {
-      email: email,
-      paid: false, //paid is initialized to be false
-    };
-
-    API.graphql(
-      graphqlOperation(mutations.create_email_subscription, { input: payload })
-    );
-
-    setEmail("");
-    setClicked(true);
-  };
-
-  // This function gets called when user clicked the "Send us an email"
-  // It will open a mailbox with onfour.box@gmail.com as the receiver
-  const sendEmail = () => {
-    const url = "mailto:onfour.box@gmail.com";
-    window.open(url, "_blank");
-  };
-
-  const getUpcomingFull = async (data) => {
-    const artist_id = data.artist_id;
-    const artist_info = await getArtistInfo(artist_id);
-    let merged = { ...data, ...artist_info };
-    return merged;
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      // Upcoming shows
-      var full_concerts = [];
-      const upcoming_result = await getConcertInfo();
-      for await (const data of upcoming_result.slice(0, 4)) {
-        full_concerts.push(formatUpcomingShow(await getUpcomingFull(data)));
-      }
-      setConcerts(full_concerts);
-
-      // Archive videos (sorting from most recent -> oldest)
-      const archive_result = await getArchiveInfo();
-      setVideos(formatArchiveVideos(archive_result.slice(0, 4)));
-
-      const recent_concert = await getMostRecentUpcomingInfo();
-      setMostRecentConcert(recent_concert);
-
-      const artist_info = await getArtistInfo(recent_concert.artist_id);
-      setMostRecentConcertArtist(artist_info);
-    };
-    fetchData();
-  }, []);
-
-  // ADD ANIMATION TO CSS BASED ON SCROLL AMOUNT
-  useEffect(() => {
-    document.addEventListener("scroll", () => {
-      if (document.getElementById("section2-text")) {
-        const scrollCheck_top_section2 = window.scrollY > height / 2;
-        const scrollCheck_bottom_section2 = window.scrollY > height;
-
-        if (scrollCheck_top_section2 && !scrollCheck_bottom_section2) {
-          // if the scroll amount is larger than view height to increase opacity
-          document.getElementById("section2-text").style.opacity =
-            ((window.scrollY - height / 2) / height) * 2;
-        } else if (scrollCheck_bottom_section2 && window.scrollY < height * 2) {
-          document.getElementById("section2-text").style.opacity =
-            1 - ((window.scrollY - height) / height) * 2;
-          document.getElementById("why-perform-text-container").style.left =
-            -34 + 54 / ((window.scrollY - height) / height) + "%";
-          document.getElementById("why-perform-text-container").style.opacity =
-            (window.scrollY - height) / height;
-        }
-      }
-    });
-  });
-
-  // Analytics and redirect for clicking "go to venue" button
-  const goToVenue = (event) => {
-    Analytics.record({ name: "goToVenue" });
-    history.push("/stream");
-  };
-
-  // Analytics and redirect for clicking "learn more" button
-  const learnMore = (event) => {
-    Analytics.record({ name: "learnMoreClicked" });
-    history.push("/artists");
-  };
+const LandingPage = () => {
+  const [show_artist, setShowArtist] = useState(true);
 
   return (
     <div className="about-page-content">
-      {width > 600 ? (
-        // {/* DESKTOP LAYOUT */}
-        <Grid className="desktop-grid-about">
-          {/* BANNER ROW */}
-          <Row className="banner-row">
-            <div className="banner-container">
-              <img
-                src={most_recent_concert.poster_url}
-                className="home-page-featured"
-              />
-              <div className="home-page-overlay" />
-              <div className="featured-concert-container">
-                <Row className="upcoming-row">
-                  <FeaturedConcertBox
-                    artist_info={most_recent_concert_artist}
-                    concert_info={most_recent_concert}
-                  />
-                </Row>
-              </div>
+      <div className="about-section">
+        {/* <div className="background-about-container">
+          <img src={wave_blue} className="wave" />
+        </div> */}
+        <div className="about-main-container">
+          <div className="about-text-container">
+            <div className="about-main-header header-2">
+              Experience music, together.
             </div>
-          </Row>
-
-          <Row>
-            <Col size={1}>
-              <div className="about-preview-content">
-                <Row className="header-row">
-                  <Col size={1}>
-                    <span className="preview-content-header header-5">
-                      Upcoming Shows
-                    </span>
-                  </Col>
-                  <Col size={1}>
-                    <NavLink to="/upcoming">
-                      <span className="view-all header-7">View All</span>
-                    </NavLink>
-                  </Col>
-                </Row>
-                <Row>
-                  {/* {width <= 1024 ? (
-                    <FlexibleGrid
-                      className="preview-flex-row"
-                      content_list={concerts}
-                      num_cols={4}
-                    />
-                  ) : (
-                      <FlexibleGrid
-                        className="preview-flex-row"
-                        content_list={concerts}
-                        num_cols={5}
-                      />
-                    )} */}
-                  <FlexibleGrid
-                    className="preview-flex-row"
-                    content_list={concerts}
-                    num_cols={4}
-                  />
-                </Row>
-                {/* <Row className="archive-preview-row">
-                  <Col size={1}>
-                    <span className="preview-content-header header-4">
-                      Past Shows
-                    </span>
-                  </Col>
-                  <Col size={1}>
-                    <NavLink to="/archive">
-                      <span className="view-all header-4">View All</span>
-                    </NavLink>
-                  </Col>
-                </Row>
-                <Row>
-                  <FlexibleGrid content_list={videos} num_cols={4} />
-                </Row> */}
-              </div>
-            </Col>
-          </Row>
-        </Grid>
-      ) : (
-        // {/* MOBILE LAYOUT */}
-        <Grid className="mobile-grid-about">
-          <div className="main-content-mobile">
-            {/* MISSION ROW */}
-            <div className="mobile-section">
-              <Row>
-                <Col size={1}>
-                  <h3 className="header-mobile"> Our Mission </h3>
-                </Col>
-              </Row>
-              <Row>
-                <Col size={1}>
-                  <p className="description-text-mobile">
-                    Onfour is the premier live-streaming concert platform. We
-                    are redefining what it means to experience live music
-                    digitally and are dedicated to empowering artists to connect
-                    with fans in new, meaningful ways.
-                  </p>
-                </Col>
-              </Row>
-            </div>
-
-            {/* SUBSCRIBE ROW */}
-            <div className="mobile-section">
-              <Row>
-                <Col size={1}>
-                  <h3 className="header-mobile">Subscribe</h3>
-                </Col>
-              </Row>
-              <Row>
-                <Col size={1}>
-                  <p className="description-text-mobile">
-                    To stay informed about upcoming events,<br></br> subscribe
-                    to our mailing list:
-                  </p>
-                </Col>
-              </Row>
-              <Row>
-                <Col size={1}>
-                  {(() => {
-                    if (clicked) {
-                      return (
-                        <p className="subscribe-success about-success">
-                          Thank you and stay tuned!
-                        </p>
-                      );
-                    } else {
-                      return (
-                        <form
-                          className="inline-form-2"
-                          action="/"
-                          id="newsletter"
-                          onSubmit={emailSubmit}
-                        >
-                          <Row>
-                            <Col size={4}>
-                              <input
-                                type="email"
-                                placeholder="Enter email here..."
-                                name="email"
-                                required
-                                value={email}
-                                className="email-input"
-                                onChange={(event) =>
-                                  setEmail(event.target.value)
-                                }
-                              />
-                            </Col>
-                            <Col size={1}>
-                              <button
-                                type="submit"
-                                form="newsletter"
-                                value="Submit"
-                                className="submit-button button-border button-height"
-                              >
-                                Submit
-                              </button>
-                            </Col>
-                          </Row>
-                        </form>
-                      );
-                    }
-                  })()}
-                </Col>
-              </Row>
-            </div>
-
-            {/* PERFORM ROW */}
-            <div className="mobile-section">
-              <Row>
-                <Col size={1}>
-                  <Row>
-                    <Col size={1}>
-                      <h3 className="header-mobile">Perform</h3>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col size={1}>
-                      <p className="description-text-mobile">
-                        Want to perform a livestream concert with Onfour?{" "}
-                        <br></br>
-                        Send us an email and we will get back to you soon!
-                      </p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col size={1}>
-                      <button
-                        type="submit"
-                        form="newsletter"
-                        value="Submit"
-                        className="email-button-mobile button-border button-height"
-                        onClick={sendEmail}
-                      >
-                        Send us an email
-                      </button>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
+            <div className="about-main-subheading header-4">
+              Interactive live-streamed concerts with your
             </div>
           </div>
-        </Grid>
-      )}
-      {/* //   </div>
-    // )} */}
+        </div>
+      </div>
+      <div className="about-section experience-section">
+        <div className="background-about-container">
+          {show_artist ? (
+            <div className="background-about-inner">
+              <img src={artist_background} className="info-card" />
+              <span className="header-4 tab-title artist-tab">
+                I'm an artist
+              </span>
+              <span
+                className="header-4 tab-title fan-tab not-selected"
+                onClick={() => setShowArtist(!show_artist)}
+              >
+                I'm a fan
+              </span>
+              <div className="experience-video-wrapper">
+                <ReactPlayer
+                  className="experience-video"
+                  url="https://youtu.be/82UqPEJyxZQ"
+                  width="88.333%"
+                  height="88.333%"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="background-about-inner">
+              <img src={fan_background} className="info-card" />
+              <span
+                className="header-4 tab-title artist-tab not-selected"
+                onClick={() => setShowArtist(!show_artist)}
+              >
+                I'm an artist
+              </span>
+              <span className="header-4 tab-title fan-tab">I'm a fan</span>
+              <div className="experience-video-wrapper">
+                <ReactPlayer
+                  className="experience-video"
+                  url="https://youtu.be/82UqPEJyxZQ"
+                  width="88.333%"
+                  height="88.333%"
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="about-section how-it-works-section">
+        <div className="header-2">How It Works</div>
+        {show_artist ? (
+          <div className="step-card-section">
+            <StepCard
+              title="Schedule"
+              description="Pick a date, set your ticket price, and promote with an RSVP link."
+            />
+            <StepCard
+              title="Soundcheck"
+              description="Plug in and join our greenroom with tech support the whole way."
+            />
+            <StepCard
+              title="Perform"
+              description="See and interact with your fans as if they were in the room with you."
+            />
+          </div>
+        ) : (
+          <div className="step-card-section">
+            <StepCard
+              title="Create a Crew"
+              description="Invite your friends to join your crew and attend shows with them."
+            />
+            <StepCard
+              title="Pick a Show"
+              description="RSVP, add it to your calendar, and invite your crew to join you."
+            />
+            <StepCard
+              title="Enjoy the Show"
+              description="Interact with your crew while watching your favorite artist live."
+            />
+          </div>
+        )}
+      </div>
+
+      <div className="about-section feature-section">
+        <div className="background-about-container">
+          <img src={features_background} className="wave-2" />
+        </div>
+        {show_artist ? (
+          <div className="feature-content-container">
+            <div className="header-2">This Isn't Just Another Livestream</div>
+            <div className="feature-card-section">
+              <div className="feature-row">
+                <FeatureCard
+                  title="Perform for Your Fans, Not Your Camera"
+                  description="No more isolation! See your fans dance and sing along as you perform."
+                />
+                <FeatureCard
+                  title="Personalized Setup and Support"
+                  description="We'll handle the dirty work so you can focus on what matters most: the music."
+                />
+                <FeatureCard
+                  title="Virtual Meet & Greets"
+                  description="Connect with your biggest fans after the show, either 1-to-1 or in small groups."
+                />
+              </div>
+              <div className="feature-row">
+                <FeatureCard
+                  title="Your Ticket, Your Price"
+                  description="Set your ticket price and get paid for your performance like you deserve."
+                />
+                <FeatureCard
+                  title="Sell More Merch"
+                  description="No more long lines. Direct your fans to your merch 'table' at the click of a button."
+                />
+                <FeatureCard
+                  title="Create Your Own Lineup"
+                  description="Cross-promote by inviting your friends and other artists to perform with you."
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="feature-content-container">
+            <div className="header-2">
+              The Ultimate Digital Concert Experience
+            </div>
+            <div className="feature-card-section">
+              <div className="feature-row">
+                <FeatureCard
+                  title="Watch with Friends, Meet New Ones"
+                  description="Enjoy the show with your crew or head into the crowd to chat with other fans."
+                />
+                <FeatureCard
+                  title="Be Seen on the Jumbotron"
+                  description="Artists can see and hear their fans, one crew at a time."
+                />
+                <FeatureCard
+                  title="A New Kind of Backstage Pass"
+                  description="Meet your favorite artists after the show, either with your crew or 1-to-1."
+                />
+              </div>
+              <div className="feature-row">
+                <FeatureCard
+                  title="Quality Worth Plugging In For"
+                  description="Put on your headphones or plug in your favorite speakers. Your ears will thank you."
+                />
+                <FeatureCard
+                  title="Now That's a Fire Pregame"
+                  description="Jam out to our featured playlist before the artist takes the stage."
+                />
+                <FeatureCard
+                  title="Thanks for the Memories"
+                  description="Collect ticket stubs for each show that you attend. Relive your favorites with recordings."
+                />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="about-section sign-up-section">
+        <div className="sign-up-container">
+          <button
+            className="primary-button button-text sign-up-button"
+            onClick={() => history.push("/register")}
+          >
+            SIGN UP
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
-export default AboutPage;
+export default LandingPage;

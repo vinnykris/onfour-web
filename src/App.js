@@ -4,6 +4,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import history from "./history";
 
 // Component imports
+import Home from "./components/home_page/home_page";
 import ArtistStream from "./components/artist_stream_page/artist_stream_page";
 import NotFoundPage from "./components/not_found_page/not_found_page";
 import NavBar from "./components/navbar/navbar";
@@ -47,7 +48,8 @@ function App() {
       <Router history={history}>
         <NavBar />
         <Switch>
-          <Route exact path="/" component={About} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
           <Route exact path="/archive" component={ArchivePage} />
           <Route
             exact
@@ -67,7 +69,7 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/form" component={ArtistForm} />
-          <Route exact path="/artiststream" component={ArtistStream} />
+          <Route exact path="/artist-stream" component={ArtistStream} />
           <Route exact path="/privacy-policy" component={PrivacyPage} />
           <Route exact path="/terms-of-service" component={TermsOfService} />
           <Route exact path="/ticket-agreement" component={PaymentAgreement} />
