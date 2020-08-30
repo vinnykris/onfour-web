@@ -2,14 +2,14 @@
 @import "../../styles";
 
 .upcoming-show-page-content {
-  background-color: black;
+  background-color: #07070F;
   margin-top: -1px;
   min-height: calc(-49px + 100vh);
   // padding-top: 126px;
 }
 
 .upcoming-show-grid {
-  background: black;
+  background: #07070F;
   padding-left: 3%;
   padding-right: 3%;
   padding-top: 40px;
@@ -192,7 +192,7 @@ a.link-style {
 }
 
 .genre-box {
-  background-color: black;
+  background-color: #07070F;
   color: white;
   margin-left: 10px;
   margin-top: 5px;
@@ -386,7 +386,7 @@ a.link-style {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  background-color: black;
+  background-color: #07070F;
   height: 0.2px;
   margin-top: 100px;
 }
@@ -397,7 +397,7 @@ a.link-style {
 
 .search-box {
   background: white;
-  border-color: black;
+  border-color: #07070F;
   height: 40px;
   border: 1px;
   padding: 10px;
@@ -414,7 +414,7 @@ a.link-style {
   border: none;
   background: none;
   padding: 0;
-  color: black;
+  color: #07070F;
   font-size: 14px;
   line-height: 40px;
   width: 240px;
@@ -443,7 +443,7 @@ a.link-style {
 
 .email-input-upcoming {
   width: 280px;
-  color: black;
+  color: #07070F;
 }
 
 .concert-form {
@@ -456,7 +456,7 @@ a.link-style {
   // box-shadow: 0px 3px 5px rgb(238, 237, 237);
   overflow: auto;
   @include respond-to("small") {
-    background-color: black;
+    background-color: #07070F;
     width: 100vw;
     height: 100vh;
     padding: 2vh 2vw 2vh 2vw;
@@ -532,14 +532,14 @@ a.link-style {
 .modal-date {
   font-size: 0.7rem;
   width: auto;
-  background-color: black;
+  background-color: #07070F;
   color: white;
   font-weight: bold;
   padding: 2px 10px 2px 10px;
 
   @include respond-to("small") {
     background-color: white;
-    color: black;
+    color: #07070F;
   }
 }
 
@@ -556,7 +556,7 @@ a.link-style {
   font-style: normal;
   font-weight: bold;
   font-size: 100%;
-  color: #000000;
+  color: #07070F;
   text-align: left;
 
   @include respond-to("small") {
@@ -572,7 +572,7 @@ a.link-style {
   font-style: normal;
   font-weight: normal;
   font-size: 0.8rem;
-  color: #000000;
+  color: #07070F;
   text-align: justify;
   white-space: pre-wrap;
   scrollbar-width: none; /* Firefox */
@@ -654,7 +654,7 @@ a.link-style {
   font-style: normal;
   font-weight: bold;
   font-size: 0.85rem;
-  color: #000000;
+  color: #07070F;
   text-align: left;
   @include respond-to("small") {
     font-size: 0.4rem;
@@ -681,7 +681,7 @@ a.link-style {
 
 .modal-ticket-button {
   width: 100%;
-  background-color: black;
+  background-color: #07070F;
   color: white;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -691,7 +691,7 @@ a.link-style {
 
 .modal-free-button {
   width: 100%;
-  background-color: black;
+  background-color: #07070F;
   color: white;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -727,7 +727,7 @@ a.link-style {
   font-style: normal;
   font-weight: normal;
   font-size: 0.7rem;
-  color: #000000;
+  color: #07070F;
   text-align: justify;
   white-space: pre-wrap;
   scrollbar-width: none; /* Firefox */
@@ -756,7 +756,7 @@ a.link-style {
   font-style: italic;
   font-weight: bold;
   font-size: 0.85rem;
-  color: #000000;
+  color: #07070F;
   text-align: left;
   @include respond-to("small") {
     color: white;
@@ -797,7 +797,7 @@ a.link-style {
   font-style: normal;
   font-weight: normal;
   font-size: 0.8rem;
-  color: #000000;
+  color: #07070F;
   text-align: justify;
   white-space: pre-wrap;
 
@@ -811,7 +811,7 @@ a.link-style {
   font-style: normal;
   font-weight: bold;
   font-size: 0.85rem;
-  color: #000000;
+  color: #07070F;
   text-align: left;
   white-space: pre-wrap;
   margin-bottom: -10px;
@@ -855,7 +855,7 @@ a.link-style {
 .mobile-modal-ticket-button {
   width: 100%;
   height: 3vh;
-  background-color: black;
+  background-color: #07070F;
   color: white;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -866,7 +866,7 @@ a.link-style {
 .mobile-modal-free-button {
   width: 100%;
   height: 3vh;
-  background-color: black;
+  background-color: #07070F;
   color: white;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -879,7 +879,7 @@ a.link-style {
 }
 
 .overlay-box {
-  background: black;
+  background: #07070F;
   padding-top: 40vh;
   height: 71vh;
   width: 100%;
@@ -889,7 +889,7 @@ a.link-style {
 }
 
 .google-signin {
-  background-color: black;
+  background-color: #07070F;
   color: white;
   &:hover {
     cursor: pointer;

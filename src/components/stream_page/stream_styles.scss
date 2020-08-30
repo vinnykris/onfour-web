@@ -15,7 +15,7 @@
 
 .stream-page-content {
   //margin-top: -1px;
-  background-color: black;
+  background-color: #07070F;
   //height: auto;
   height: 100%;
   width: 100%;
@@ -56,7 +56,7 @@
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  border-left: 3px solid black;
+  border-left: 3px solid #07070F;
 }
 
 .payment-row-mobile {
@@ -101,7 +101,7 @@
   height: 60%;
   width: 100%;
   position: relative;
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid #07070F;
 }
 
 .chat-row {
@@ -310,7 +310,7 @@
   width: 100%;
   height: 100px;
   background-color: #1a1919;
-  border-top: 3px solid black;
+  border-top: 3px solid #07070F;
 }
 
 .stream-wrapper-mobile {
@@ -598,7 +598,7 @@
   width: auto;
   border-radius: 4px;
   background-color: white;
-  color: black;
+  color: #07070F;
   // margin-right: 50%;
   //margin-top: 5px;
   cursor: pointer;
@@ -709,7 +709,7 @@
   display: flex;
   border-radius: 4px;
   background-color: white;
-  color: black;
+  color: #07070F;
   width: 104px;
   height: 33px;
   align-items: center;
@@ -743,7 +743,7 @@
 }
 
 .stream-action-button-icon {
-  color: black;
+  color: #07070F;
   padding-right: 10%;
 }
 
@@ -940,7 +940,7 @@
 }
 
 .parentDisable {
-  background: black;
+  background: #07070F;
   z-index: 998;
   padding-top: 20vh;
   height: calc(-53px + 100vh);
@@ -948,7 +948,7 @@
 }
 
 .overlay-box {
-  background: black;
+  background: #07070F;
   padding-top: 40vh;
   height: calc(-49px + 100vh);
   width: 100%;

@@ -12,7 +12,7 @@
 }
 
 .overlay-box {
-  background: black;
+  background: #07070F;
   // padding-top: 20vh;
   height: calc(-49px + 100vh);
   width: 100%;
@@ -23,7 +23,7 @@
 
 .artist-stream-page-content {
   // margin-top: -1px;
-  background-color: black;
+  background-color: #07070F;
   height: 100%;
   width: 100%;
   @include respond-to("small") {
@@ -76,10 +76,10 @@
   top: 0px;
   justify-content: center;
   align-items: center;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-  border-right: 1.5px solid black;
-  border-left: 1.5px solid black;
+  border-top: 2px solid #07070F;
+  border-bottom: 2px solid #07070F;
+  border-right: 1.5px solid #07070F;
+  border-left: 1.5px solid #07070F;
 }
 
 .artist-video-main {
@@ -93,10 +93,10 @@
   top: 0;
   justify-content: center;
   align-items: center;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-  border-right: 1.5px solid black;
-  border-left: 1.5px solid black;
+  border-top: 2px solid #07070F;
+  border-bottom: 2px solid #07070F;
+  border-right: 1.5px solid #07070F;
+  border-left: 1.5px solid #07070F;
 }
 
 .artist-control-main {
@@ -105,9 +105,9 @@
   height: 50%;
   justify-content: center;
   align-items: center;
-  border-right: 1.5px solid black;
-  border-left: 1.5px solid black;
-  border-top: 2px solid black;
+  border-right: 1.5px solid #07070F;
+  border-left: 1.5px solid #07070F;
+  border-top: 2px solid #07070F;
 }
 
 .artist-timer-wrapper {
@@ -121,9 +121,9 @@
   height: 50%;
   justify-content: center;
   align-items: center;
-  border-right: 1.5px solid black;
-  border-left: 1.5px solid black;
-  border-bottom: 2px solid black;
+  border-right: 1.5px solid #07070F;
+  border-left: 1.5px solid #07070F;
+  border-bottom: 2px solid #07070F;
 }
 
 .full-width-video {
@@ -255,10 +255,10 @@
   height: 50%;
   width: 100%;
   background-color: #17171b;
-  border-right: 1.5px solid black;
-  border-left: 1.5px solid black;
-  border-bottom: 2px solid black;
-  border-top: 2px solid black;
+  border-right: 1.5px solid #07070F;
+  border-left: 1.5px solid #07070F;
+  border-bottom: 2px solid #07070F;
+  border-top: 2px solid #07070F;
 }
 
 .stream-main-mobile {
@@ -406,7 +406,7 @@
 }
 
 .parentDisable {
-  background: black;
+  background: #07070F;
   z-index: 998;
   padding-top: 20vh;
   height: 71vh;
@@ -414,7 +414,7 @@
 }
 
 .overlay-box {
-  background: black;
+  background: #07070F;
   padding-top: 20vh;
   height: 71vh;
   width: 100%;

@@ -15,6 +15,7 @@ import Auth from "../../apis/UserPool";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import { useWindowDimensions } from "../custom_hooks";
 import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 // API Imports
 import {
@@ -170,6 +171,7 @@ const AboutPage = () => {
     <div className="about-page-content">
       {width > 600 ? (
         // {/* DESKTOP LAYOUT */}
+        most_recent_concert_artist ? (
         <Grid className="desktop-grid-about">
           {/* BANNER ROW */}
           <Row className="banner-row">
@@ -244,6 +246,16 @@ const AboutPage = () => {
             </Col>
           </Row>
         </Grid>
+        ) : (
+          <div className="overlay-box">
+            <ScaleLoader
+              sizeUnit={"px"}
+              size={18}
+              color={"#E465A2"}
+              loading={!most_recent_concert_artist}
+            />
+          </div>
+        )
       ) : (
         // {/* MOBILE LAYOUT */}
         <Grid className="mobile-grid-about">

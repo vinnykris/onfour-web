@@ -12,7 +12,7 @@
   width: 100%;
   height: 100vh;
   margin-top: -176px;
-  background-color: black;
+  background-color: #07070F;
   position: relative;
 
   @include respond-to("large") {
@@ -141,15 +141,16 @@
   position: absolute;
   top: 49px;
   display: flex;
+  // background: #07070F;
   align-items: center;
 }
 
 .upcoming-row {
-  width: auto;
-  height: auto;
+  width: 500px;
+  height: 260px;
   padding: 2.5vw;
   position: absolute;
-  right: calc(149px - 2.5vw);
+  right: calc(149px - 5vw);
 }
 
 .upcoming-col {
@@ -312,12 +313,7 @@
 }
 
 .about-page-content {
-  background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.05),
-      rgba(255, 255, 255, 0.05)
-    ),
-    #07070f;
+  background:#07070f;
   margin-top: -1px;
 }
 

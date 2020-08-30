@@ -56,7 +56,7 @@ const dashboardPage = ({ width, upcoming_concerts, memories, history }) => {
                       ) : (
                         <FlexibleGrid
                           content_list={upcoming_concerts}
-                          num_cols={5}
+                          num_cols={4}
                         />
                       )}
                     </div>
@@ -95,7 +95,7 @@ const dashboardPage = ({ width, upcoming_concerts, memories, history }) => {
                           ) : (
                             <FlexibleGrid
                               content_list={memories}
-                              num_cols={5}
+                              num_cols={4}
                             />
                           )}
                         </div>
@@ -163,7 +163,7 @@ const dashboardPage = ({ width, upcoming_concerts, memories, history }) => {
                           ) : (
                             <FlexibleGrid
                               content_list={memories}
-                              num_cols={5}
+                              num_cols={4}
                             />
                           )}
                         </div>
