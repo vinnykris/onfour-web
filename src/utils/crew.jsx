@@ -295,6 +295,12 @@ export const deleteCrew = async (crew_id) => {
   );
 };
 
+// This function sends an invite email to the users invited to the crew,
+// either all crew members except the crew creator (during creation) or to
+// just one added user (during an update/adding user to an existing crew)
+// user_name: the first name of the user creating the crew or adding to the crew
+// emails: a list of emails to send invites to
+// crew_name: the name of the crew being created or added to
 export const sendCrewInvites = async (user_name, emails, crew_name) => {
   for (let i = 0; i < emails.length; i++) {
     const template_params = {
@@ -308,4 +314,56 @@ export const sendCrewInvites = async (user_name, emails, crew_name) => {
       emailjs.send(service_id, crew_template_id, template_params, user_id);
     }, 1000);
   }
+};
+
+// This function is used in concertInvitationsLimitReached and incrementUsersInvitedCrewCount
+// It takes in a user's username and returns the associated 'concert_invitations' object
+export const getUsersConcertCrewInvites = async (username) => {
+  const user_data = await API.graphql(
+    graphqlOperation(queries.get_user_data, {
+      input: username,
+    })
+  );
+  return user_data.data.getCreateOnfourRegistration.concert_invitations;
+};
+
+// This function checks if a user has reached their limit for crew invitations for
+// a given concert
+// username: username of the currently logged in user
+// concert_id: the id of the current concert / concert of interest
+// It returns true if the user has reached their limit and false otherwise
+export const concertInvitationsLimitReached = async (username, concert_id) => {
+  const invitations_limit = 1;
+  let concert_invites = await getUsersConcertCrewInvites(username);
+  if (concert_invites) {
+    concert_invites = await parseObjectJSON(concert_invites);
+    if (!concert_invites[concert_id]) return false;
+    else if (concert_invites[concert_id] >= invitations_limit) return true;
+    else return false;
+  } else return false;
+};
+
+// This function currently sets the user's invitations count for a concert to 1
+// Eventually it might increment the number of invitations instead
+// If the user has already invited a crew, the value is left unchanged
+export const incrementUsersInvitedCrewCount = async (username, concert_id) => {
+  let concert_invites = await getUsersConcertCrewInvites(username);
+  if (concert_invites) {
+    concert_invites = await parseObjectJSON(concert_invites);
+    if (!concert_invites[concert_id]) {
+      concert_invites[concert_id] = 1;
+    }
+  } else {
+    concert_invites = {};
+    concert_invites[concert_id] = 1;
+  }
+  const payload = {
+    username,
+    concert_invitations: JSON.stringify(concert_invites),
+  };
+  await API.graphql(
+    graphqlOperation(mutations.update_user, {
+      input: payload,
+    })
+  );
 };
