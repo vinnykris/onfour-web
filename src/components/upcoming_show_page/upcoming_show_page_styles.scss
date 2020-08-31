@@ -5,13 +5,14 @@
   background-color: black;
   margin-top: -1px;
   min-height: calc(-49px + 100vh);
-  padding-top: 126px;
+  // padding-top: 126px;
 }
 
 .upcoming-show-grid {
   background: black;
   padding-left: 3%;
   padding-right: 3%;
+  padding-top: 40px;
   @include respond-to("small") {
     padding-left: 4%;
     padding-right: 4%;
@@ -77,6 +78,50 @@
       z-index: 0;
     }
   }
+}
+
+.featured-content-memory {
+  text-decoration: none !important;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.09)
+    ),
+    #07070f;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12),
+    0px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  position: relative;
+  height: 0;
+  width: 100%;
+  padding-bottom: 100%;
+  &:hover {
+    cursor: pointer;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.12)
+      ),
+      #07070f;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
+      0px 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  &:active {
+    border: 1.5px solid $border-focus-card;
+  }
+
+  @include respond-to("small") {
+    &:hover {
+      opacity: 1;
+    }
+    .more-info {
+      z-index: 0;
+    }
+  }
+}
+
+a.link-style {
+  text-decoration: none !important;
 }
 
 .more-info {
@@ -835,13 +880,14 @@
 
 .overlay-box {
   background: black;
-  padding-top: 20vh;
+  padding-top: 40vh;
   height: 71vh;
   width: 100%;
   @include respond-to("small") {
     height: 100vh;
   }
 }
+
 .google-signin {
   background-color: black;
   color: white;

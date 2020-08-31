@@ -1,7 +1,7 @@
 // React Imports
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 // import { Prompt } from "react-router";
 
 // AWS Imports
@@ -21,8 +21,10 @@ import Chat from "../chat/stream_chat";
 import { Grid, Row, Col } from "../grid";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
-import VideoChat from "../video_chat/App/video_chat_App";
+import VideoChat from "../video_chat/App/artist_video_chat";
 import CountdownTimer from "../countdown_timer/countdown_timer";
+
+import viewers_icon from "../../images/icons/stream_icons/viewers_icon.png";
 
 // Styles Imports
 import "./artist_stream_styles.scss";
@@ -160,27 +162,7 @@ const StreamPage = () => {
             <Grid>
               <Row>
                 {/* <Col size={0.5}></Col> */}
-                <Col size={2} id="artist-stream-col">
-                  <div className="artist-stream-main">
-                    <div className="artist-stream-wrapper" id="video_player">
-                      <div className="artist-box-header">Stream Preview</div>
-                      <VideoPlayer
-                        url={
-                          "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                        }
-                        is_live={is_live}
-                      />
-                      <div className="artist-timer-wrapper">
-                        <CountdownTimer
-                          // start_date={start_date}
-                          // start_time={start_time}
-                          start_date={"2020-08-01"}
-                          start_time={"12:00:00"}
-                          time_up_message={"You Reached Your Scheduled Time!"}
-                        />
-                      </div>
-                    </div>
-                  </div>
+                {/* <Col size={2} id="artist-stream-col">
                   <div className="artist-control-main">
                     <div className="artist-box-header">Control</div>
                     <button
@@ -190,17 +172,71 @@ const StreamPage = () => {
                       {go_live_message}
                     </button>
                   </div>
-                </Col>
-                <Col size={2} id="chat_container">
-                  <Row className="full-width">
-                    <div className="artist-activity-main">
-                      <div className="artist-box-header">Activity Monitor</div>
-                      <h5 className="artist-show-time">
-                        {viewers} watching now
-                      </h5>
+                  <div className="artist-activity-main">
+                    <div className="artist-box-header">Activity Monitor</div>
+                    <h5 className="artist-show-time">{viewers} watching now</h5>
+                  </div>
+                </Col> */}
+                <Col
+                  size={2}
+                  id="chat_container"
+                  className="artist-sticky-container"
+                >
+                  <div className="artist-video-main">
+                    <div className="artist-video-wrapper">
+                      {/* <div className="artist-box-header video-chat-box-header header-7">
+                        Video Chat
+                      </div> */}
+                      <VideoChat
+                        user_name={username ? username : "GUEST"}
+                        artist_name={username}
+                        artistView={true}
+                        colNum={video_col_num}
+                        isReady={show_start_time}
+                      ></VideoChat>
+                      {/* <div className="artist-toggle-chat">
+                        <button
+                          className="artist-toggle-chat-button"
+                          onClick={toggleChat}
+                        >
+                          <i className={button_icon}></i>
+                        </button>
+                      </div> */}
                     </div>
+                  </div>
+                </Col>
+                <Col size={1} id="chat_container">
+                  <Row className="full-width-video">
+                      <div className="artist-stream-wrapper" id="video_player">
+                        <VideoPlayer
+                          url={
+                            "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                          }
+                          is_live={is_live}
+                        />
+                        <div className="viewer-number-overlay">
+                          <div className="viewers-container">
+                            <img
+                              src={viewers_icon}
+                              className="stream-action-viewers"
+                            />
+                            <div className="segmented-button-text viewer-count">
+                              {viewers}
+                            </div>
+                          </div>
+                        </div>
+                        {/* <div className="artist-timer-wrapper">
+                        <CountdownTimer
+                          // start_date={start_date}
+                          // start_time={start_time}
+                          start_date={"2020-08-01"}
+                          start_time={"12:00:00"}
+                          time_up_message={"You Reached Your Scheduled Time!"}
+                        />
+                      </div> */}
+                      </div>
                   </Row>
-                  <Row className="full-width">
+                  <Row className="full-width-chat">
                     <div className="artist-chat-main" id="chat_main">
                       <div className="artist-chat-wrapper">
                         <Chat
@@ -213,29 +249,6 @@ const StreamPage = () => {
                     </div>
                   </Row>
                 </Col>
-                <Col size={4} id="chat_container" className="artist-sticky-container">
-                  <div className="artist-video-main">
-                    <div className="artist-video-wrapper">
-                      <div className="artist-box-header video-chat-box-header">Video Roulette</div>
-                      <VideoChat 
-                        user_name={username ? username : "GUEST"} 
-                        artist_name={username}
-                        artistView={true} 
-                        colNum={video_col_num} 
-                        isReady={show_start_time}
-                      ></VideoChat>
-                      <div className="artist-toggle-chat">
-                        <button
-                          className="artist-toggle-chat-button"
-                          onClick={toggleChat}
-                        >
-                          <i className={button_icon}></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-
                 {/* <Col size={0.5}></Col> */}
               </Row>
               {/* BELOW IS THE CODE FOR THE ARTIST INFORMATION*/}
@@ -289,10 +302,10 @@ const StreamPage = () => {
       ) : (
         // <div className={!show_start_time ? 'parentDisable' : ''} width="100%">
         <div className="overlay-box">
-          <PulseLoader
+          <ScaleLoader
             sizeUnit={"px"}
             size={18}
-            color={"#7b6dac"}
+            color={"#E465A2"}
             loading={!show_start_time}
           />
         </div>

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import SharePopup from "./share_popup";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import moment from "moment";
@@ -201,7 +202,7 @@ const StreamPage = ({ is_soundcheck }) => {
       })
     );
     const artist_info_list = artist_info.data.getCreateOnfourRegistration;
-    setArtistName("Anjali Taneja");
+    setArtistName(artist_info_list.artist_name);
     setArtistBio(artist_info_list.artist_bio);
     setArtistFB(artist_info_list.facebook);
     setArtistIG(artist_info_list.instagram);
@@ -268,21 +269,21 @@ const StreamPage = ({ is_soundcheck }) => {
       document
         .getElementById("artist_bio")
         .classList.remove("artist-bio-row-expanded");
-      document.getElementById("stream_info_section").style.height = "126px";
+      document.getElementById("stream_info_section").style.height = "103px";
       document.getElementById("stream_main_section").style.height =
-        "calc(100vh - 126px - 49px)";
-      document.getElementById("description_toggle_button").style.bottom =
-        "-3px";
+        "calc(100vh - 103px - 49px)";
+      // document.getElementById("description_toggle_button").style.bottom =
+      //   "-3px";
     } else {
       setDescriptionButtonIcon("fa fa-chevron-down");
       document
         .getElementById("artist_bio")
         .classList.add("artist-bio-row-expanded");
       document.getElementById("artist_bio").classList.remove("artist-bio-row");
-      document.getElementById("stream_info_section").style.height = "320px";
+      document.getElementById("stream_info_section").style.height = "297px";
       document.getElementById("stream_main_section").style.height =
-        "calc(100vh - 320px - 49px)";
-      document.getElementById("description_toggle_button").style.bottom = "0px";
+        "calc(100vh - 297px - 49px)";
+      // document.getElementById("description_toggle_button").style.bottom = "0px";
     }
   };
 
@@ -560,7 +561,7 @@ const StreamPage = ({ is_soundcheck }) => {
                         <Row className="buttons-row" id="stream_info_top">
                           <Col size={2}>
                             <div className="artist-name-container">
-                              <span className="header-4 artist-name-stream">
+                              <span className="header-5 artist-name-stream">
                                 {artist_name}
                               </span>
                             </div>
@@ -946,10 +947,10 @@ const StreamPage = ({ is_soundcheck }) => {
       ) : (
         // <div className={!show_start_time ? 'parentDisable' : ''} width="100%">
         <div className="overlay-box">
-          <PulseLoader
+          <ScaleLoader
             sizeUnit={"px"}
             size={18}
-            color={"#7b6dac"}
+            color={"#E465A2"}
             loading={!artist_name}
           />
         </div>

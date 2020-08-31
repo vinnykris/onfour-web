@@ -1,4 +1,4 @@
-import getRoomUrl from "./getRoomUrl";
+import getAllRooms from "./getAllRooms";
 /**
  * - Create rooms by invoking the Daily.co REST API from your own backend server
  *   (or from the Daily.co dashboard if you're OK with creating rooms manually).
@@ -8,23 +8,21 @@ import getRoomUrl from "./getRoomUrl";
  * See https://docs.daily.co/reference#create-room for more information on how
  * to use the Daily.co REST API to create rooms.
  */
-async function createRoom(room_name, is_created) {
+async function createRoom() {
   // let response = await fetch(newRoomEndpoint),
   //     room = await response.json();
   // return room;
 
-  // public_rooms stores the names of all existing public rooms
-  const public_rooms = ["room1", "room2", "room3", "room4", "room5"];
-
-  if (public_rooms.includes(room_name) || is_created) {
-    return { url: "https://onfour.daily.co/" + room_name };
-  } else {
-    const random_id = Math.random();
-    const random_room_id = "room" + random_id.toString(16).slice(2);
-    
-    let response_json = await getRoomUrl(random_room_id);
-    return response_json;
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
   }
+
+  let room_response = await getAllRooms();
+  const random_room_id = getRandomInt(room_response.total_count);
+  console.log(room_response.data[random_room_id].name);
+  return {
+    url: "https://onfour.daily.co/" + room_response.data[random_room_id].name,
+  };
 }
 
 export default { createRoom };

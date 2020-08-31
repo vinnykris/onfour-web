@@ -15,7 +15,7 @@ import ArchiveVideo from "../components/archive_page/archive_video";
 
 // API Imports
 import { getArtistInfo } from "./get_concert_data";
-import { formatUpcomingShow } from "../components/util";
+import { formatUpcomingShow, formatMemory } from "../components/util";
 
 Amplify.configure(awsmobile);
 
@@ -66,7 +66,7 @@ export const getTickets = async (username) => {
       return concerts_ids;
     }
   }
-}
+};
 
 // Function fetches an authenticated user's concerts JSON. It then
 // parses it and retrieves the concert_ids for each concert. It then
@@ -133,11 +133,11 @@ export const getUpcomingPurchasedShows = async (width, username) => {
     )
   );
   var upcoming_concerts = [];
-  // The past_concerts is not returned for this function 
-  // but later, both upcoming_concerts and past_concerts 
+  // The past_concerts is not returned for this function
+  // but later, both upcoming_concerts and past_concerts
   // can be returned by this one function
-  var past_concerts = []; 
-  var all_ticketstubs =[];
+  var past_concerts = [];
+  var all_ticketstubs = [];
 
   const getUpcomingFull = async (data) => {
     const artist_id = data.artist_id;
@@ -150,7 +150,7 @@ export const getUpcomingPurchasedShows = async (width, username) => {
     for await (const data of user_concerts) {
       if (data.data.getConcert.is_future) {
         upcoming_concerts.push(
-        formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
+          formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
         );
         all_ticketstubs.push(
           <ProfileStub
@@ -160,7 +160,7 @@ export const getUpcomingPurchasedShows = async (width, username) => {
         );
       } else {
         past_concerts.push(
-          formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
+          formatMemory(await getUpcomingFull(data.data.getConcert))
         );
         all_ticketstubs.push(
           <ProfileStub

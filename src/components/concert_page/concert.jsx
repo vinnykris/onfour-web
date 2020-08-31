@@ -30,7 +30,7 @@ import SocialBar from "../social_bar/social_bar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Rodal from "rodal";
 import { Grid, Row, Col } from "../grid";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { Checkbox2, useCheckboxState } from "pretty-checkbox-react";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
 import TicketBox from "../payment/ticket_box";
@@ -570,10 +570,10 @@ const Concert = (props) => {
           ) : null}
           {!concert_info ? (
             <div className="overlay-box">
-              <PulseLoader
+              <ScaleLoader
                 sizeUnit={"px"}
                 size={18}
-                color={"#7b6dac"}
+                color={"#E465A2"}
                 loading={loading}
               />
             </div>
@@ -1053,10 +1053,10 @@ const Concert = (props) => {
           ) : null}
           {!concert_info ? (
             <div className="overlay-box">
-              <PulseLoader
+              <ScaleLoader
                 sizeUnit={"px"}
                 size={18}
-                color={"#7b6dac"}
+                color={"#E465A2"}
                 loading={!concert_info}
               />
             </div>
@@ -1366,7 +1366,7 @@ const Concert = (props) => {
               <div className="concert-info">
                 <div className="tag-calendar">
                   <div className="tag-container concert-tag">
-                    <Tag content="In x days" />
+                    <Tag content={"In " + concert_info.days_left + " days"} />
                   </div>
                   <span className="secondary-button segmented-button-text add-to-calendar">
                     + Add to calendar

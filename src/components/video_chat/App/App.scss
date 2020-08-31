@@ -8,6 +8,7 @@
   /* top: 0px; */
   bottom: 0px;
   width: 100%;
+  position: relative;
 }
 
 .artist-app {
@@ -15,7 +16,7 @@
   background-color: #17171b;
   position: absolute;
   overflow: hidden;
-  top: 30px;
+  top: 0px;
   bottom: 0px;
   width: 100%;
 }
@@ -30,12 +31,13 @@
   width: 100%;
   position: relative;
   background-color: #1c1c1c;
-  border-top: 1px solid #3c3c3c;
+  // border-top: 1px solid #3c3c3c;
   border-bottom: 1px solid #3c3c3c;
 }
 
 .public-room {
   display: flex;
+  flex: 1;
   position: relative;
   height: auto;
   width: 20%;
@@ -83,15 +85,11 @@
 }
 
 .public-video-notice {
-  display: flex;
-  margin: 0 auto;
-  margin-top: 20px;
+  width: 100%;
   white-space: pre-wrap;
   /* margin-top: 50%; */
-  font-size: 0.7rem;
-  text-align: center;
-  color: $on-background;
-  position: relative;
+  // font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .video-form-input {
@@ -113,11 +111,141 @@
 .enter-video-chat-prompt {
   display: flex;
   margin: auto;
+  width: 90%;
   flex-direction: column;
   align-items: center;
 }
 
 .video-chat-prompt-container {
   display: flex;
-  height: 100%;
+  height: calc(100% - 60px);
+  position: relative;
+}
+
+.create-room-name-input {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), #07070F;
+  border-radius: 5px 5px 0px 0px;
+  border: none;
+  text-align: center; 
+  caret-color: #E465A2;
+  font-size: 0.8rem;
+  color:rgba(255, 255, 255, 0.87);
+}
+
+.create-room-name-input:focus {
+  border-bottom: 1px solid #E465A2;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.create-room-error {
+  font-size: 0.8rem;
+  padding: 5px 0px;
+  color: #fb5554;
+}
+
+.auto-roulette-button {
+  height: 30px;
+  margin-top: 5px !important;
+  border: 1px solid #E465A2;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: transparent;
+  color: #E465A2;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 16px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+  letter-spacing: 0.065em;
+}
+
+.auto-roulette-button:active {
+  background: #E465A2;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+/* The switch - the box around the slider */
+.auto-roulette-switch {
+  position: absolute;
+  display: flex;
+  width: 40px;
+  height: 22px;
+  margin-bottom: 0px !important;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+/* Hide default HTML checkbox */
+.auto-roulette-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.auto-roulette-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid #E465A2;
+  background-color: transparent;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.auto-roulette-slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3.5px;
+  bottom: 3.5px;
+  // border: 2px solid #E465A2;
+  background-color: rgba(255, 255, 255, 0.87);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .auto-roulette-slider {
+  background-color: #E465A2;
+}
+
+input:focus + .auto-roulette-slider {
+  box-shadow: 0 0 1px #E465A2;
+}
+
+input:checked + .auto-roulette-slider:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+  background-color: rgba(255, 255, 255, 0.87);
+}
+
+/* Rounded sliders */
+.auto-roulette-slider.round {
+  border-radius: 34px;
+}
+
+.auto-roulette-slider.round:before {
+  border-radius: 50%;
+}
+
+.auto-roulette-text {
+  position: absolute;
+  right: 55px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.87);
 }
