@@ -5,12 +5,7 @@
 
 .concert-page {
   margin-top: -1px;
-  background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.05),
-      rgba(255, 255, 255, 0.05)
-    ),
-    #07070f;
+  background:#07070f;
 
   min-height: calc(100vh - 250px);
 }
@@ -32,12 +27,8 @@
   left: 0;
   right: 0;
   height: calc(100vw * 0.38766);
-  background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.05),
-      rgba(255, 255, 255, 0.05)
-    ),
-    linear-gradient(180deg, rgba(7, 7, 15, 0) 0%, #07070f 89.06%);
+  background: 
+    linear-gradient(180deg, rgba(7, 7, 15, 0) 0%, #07070f 94.06%);
 }
 
 .concert-image-container {
