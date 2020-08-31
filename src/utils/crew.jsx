@@ -7,6 +7,10 @@ import awsmobile from "../apis/AppSync";
 import Amplify from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
 
+// EmailJS
+import emailjs from "emailjs-com";
+import { service_id, crew_template_id, user_id } from "../apis/email_js";
+
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 // Below is an example of the inputs to the createCrew function
@@ -141,6 +145,13 @@ export const updateCrewAdmin = async (crew_id, crew_admin) => {
 // It takes in emails, crew name, the admin username, and a color and
 // creates a crew object and adds the crew id to each user's list of crews
 export const createCrew = async (emails, crew_name, admin_user, color) => {
+  // fetch the first name of the user creating the crew
+  const user_data = await API.graphql(
+    graphqlOperation(queries.get_user_data, {
+      input: admin_user,
+    })
+  );
+  const user_name = user_data.data.getCreateOnfourRegistration.first;
   // added_users will contain all usernames in the form email : username
   // all users will have an email key, but for users that can not be found in
   // the DB using the email, an empty string will be used as the username. If a
@@ -150,6 +161,10 @@ export const createCrew = async (emails, crew_name, admin_user, color) => {
   // the getUsernameByEmail query (only valid users)
   let verified_usernames = [];
 
+  // creates a copy of the emails object. Later, the inviting user is removed from
+  // this list so they don't receive an email being invited by themselves
+  const emails_to_invite = [...emails];
+
   // for each email, get its associated username (or empty string if no associated
   // username) and add the combination to added_users. If it is a valid username
   // (meaning, non empty string), add that valued to verified_usernames
@@ -158,6 +173,7 @@ export const createCrew = async (emails, crew_name, admin_user, color) => {
     const current_username = await getUsernameByEmail(current_email);
     added_users[current_email] = current_username;
     if (current_username) verified_usernames.push(current_username);
+    if (current_username === admin_user) emails_to_invite.splice(i, 1);
   }
 
   // function creates the crew and returns its ID
@@ -172,6 +188,10 @@ export const createCrew = async (emails, crew_name, admin_user, color) => {
     crew_data[crew_id] = color;
     await updateUserCrews(current_username, crew_data);
   }
+
+  // Send emails to all of the emails added to the crew (excluding the user
+  // that created the crew)
+  await sendCrewInvites(user_name, emails_to_invite, crew_name);
 };
 
 // Returns a crew object. To access its components, use
@@ -189,8 +209,24 @@ export const getCrewObject = async (crew_id) => {
 // This function fetches the current crew object and a given user's current
 // list of crews. It adds the user to the crew object's members, and it adds
 // the crew to the user's list of crews
-export const addUserToCrew = async (crew_id, username, email, color) => {
+// inviter is the username of the user inviting someone to the crew
+export const addUserToCrew = async (
+  crew_id,
+  username,
+  email,
+  color,
+  inviter
+) => {
+  // fetch the first name of the user inviting someone else to the crew
+  const user_data = await API.graphql(
+    graphqlOperation(queries.get_user_data, {
+      input: inviter,
+    })
+  );
+  const user_name = user_data.data.getCreateOnfourRegistration.first;
+
   const crew_data = await getCrewObject(crew_id);
+  const crew_name = crew_data.data.getCrew.name;
   let crew_members = crew_data.data.getCrew.members;
   crew_members = await parseObjectJSON(crew_members);
   crew_members[email] = username;
@@ -200,6 +236,7 @@ export const addUserToCrew = async (crew_id, username, email, color) => {
 
   await updateCrewUsers(crew_id, crew_members);
   await updateUserCrews(username, users_crews);
+  await sendCrewInvites(user_name, [email], crew_name);
 };
 
 // This function will change the color of a given user's selected crew
@@ -254,6 +291,79 @@ export const deleteCrew = async (crew_id) => {
       input: {
         id: crew_id,
       },
+    })
+  );
+};
+
+// This function sends an invite email to the users invited to the crew,
+// either all crew members except the crew creator (during creation) or to
+// just one added user (during an update/adding user to an existing crew)
+// user_name: the first name of the user creating the crew or adding to the crew
+// emails: a list of emails to send invites to
+// crew_name: the name of the crew being created or added to
+export const sendCrewInvites = async (user_name, emails, crew_name) => {
+  for (let i = 0; i < emails.length; i++) {
+    const template_params = {
+      email_receipient: emails[i],
+      reply_to: "onfour.box@gmail.com",
+      friend_name: user_name,
+      crew_name: crew_name,
+      concert_link: "https://www.onfour.live/profile/",
+    };
+    setTimeout(() => {
+      emailjs.send(service_id, crew_template_id, template_params, user_id);
+    }, 1000);
+  }
+};
+
+// This function is used in concertInvitationsLimitReached and incrementUsersInvitedCrewCount
+// It takes in a user's username and returns the associated 'concert_invitations' object
+export const getUsersConcertCrewInvites = async (username) => {
+  const user_data = await API.graphql(
+    graphqlOperation(queries.get_user_data, {
+      input: username,
+    })
+  );
+  return user_data.data.getCreateOnfourRegistration.concert_invitations;
+};
+
+// This function checks if a user has reached their limit for crew invitations for
+// a given concert
+// username: username of the currently logged in user
+// concert_id: the id of the current concert / concert of interest
+// It returns true if the user has reached their limit and false otherwise
+export const concertInvitationsLimitReached = async (username, concert_id) => {
+  const invitations_limit = 1;
+  let concert_invites = await getUsersConcertCrewInvites(username);
+  if (concert_invites) {
+    concert_invites = await parseObjectJSON(concert_invites);
+    if (!concert_invites[concert_id]) return false;
+    else if (concert_invites[concert_id] >= invitations_limit) return true;
+    else return false;
+  } else return false;
+};
+
+// This function currently sets the user's invitations count for a concert to 1
+// Eventually it might increment the number of invitations instead
+// If the user has already invited a crew, the value is left unchanged
+export const incrementUsersInvitedCrewCount = async (username, concert_id) => {
+  let concert_invites = await getUsersConcertCrewInvites(username);
+  if (concert_invites) {
+    concert_invites = await parseObjectJSON(concert_invites);
+    if (!concert_invites[concert_id]) {
+      concert_invites[concert_id] = 1;
+    }
+  } else {
+    concert_invites = {};
+    concert_invites[concert_id] = 1;
+  }
+  const payload = {
+    username,
+    concert_invitations: JSON.stringify(concert_invites),
+  };
+  await API.graphql(
+    graphqlOperation(mutations.update_user, {
+      input: payload,
     })
   );
 };
