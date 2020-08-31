@@ -1,0 +1,24 @@
+@import "../../styles";
+
+.step-card-container {
+  width: 331px;
+  height: 223px;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.09)
+    ),
+    #07070f;
+  border-radius: 10px;
+  margin-left: 36.5px;
+  margin-right: 36.5px;
+  padding: 0px 10px;
+}
+
+.step-card-text {
+  margin-top: 96px;
+}
+
+.step-card-description {
+  margin-top: 9px;
+}

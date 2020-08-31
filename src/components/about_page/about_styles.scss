@@ -1,0 +1,152 @@
+@import "../../styles";
+
+.about-page-content {
+  max-width: 100%;
+  width: 100%;
+  background: #07070F;
+}
+
+.about-section {
+  max-width: 100%;
+  width: 100%;
+}
+
+.background-about-container {
+  // position: absolute;
+  max-width: 100%;
+  width: 100%;
+}
+
+.about-main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: url("../../images/backgrounds/wave_1.svg") top left;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: calc(100vw * 0.40441);
+}
+
+.about-text-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-main-subheading {
+  margin-top: 16px;
+}
+
+img.wave {
+  max-width: 100%;
+  width: 100%;
+  height: calc(100vw * 0.40441);
+  object-fit: cover;
+}
+
+img.info-card {
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+img.wave-2 {
+  max-width: 100%;
+  width: 100%;
+  height: calc(100vw * 0.47986111);
+  object-fit: cover;
+}
+
+.how-it-works-section {
+  margin-top: -56px;
+}
+
+.feature-section {
+  margin-top: 178px;
+  position: relative;
+}
+
+.background-about-inner {
+  position: relative;
+  display: flex;
+}
+
+.tab-title {
+  position: absolute;
+  top: 42px;
+  cursor: pointer;
+}
+
+.artist-tab {
+  right: calc(100vw * 0.2194444);
+}
+
+.fan-tab {
+  left: calc(100vw * 0.2194444);
+}
+
+.not-selected {
+  color: $on-surface-medium !important;
+}
+
+.experience-section {
+  padding-top: 28px;
+}
+
+.experience-video-wrapper {
+  position: absolute;
+  display: flex;
+  top: calc(100vw * 0.10277778);
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+.experience-video {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.step-card-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 36px 150px 0px 150px;
+}
+
+.feature-card-section {
+  display: flex;
+  margin: 0px 144px 0px 144px;
+  flex-direction: column;
+}
+
+.feature-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 68px;
+}
+
+.feature-content-container {
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  margin-top: -56px;
+}
+
+.sign-up-button {
+  margin: auto;
+  height: 57px;
+  width: 167px;
+}

@@ -160,7 +160,7 @@ const NavBar = () => {
                         className="nav-page-white mobile-link-text"
                         onClick={() => closeMenu("nav-menu")}
                       >
-                        ABOUT US
+                        ABOUT
                       </NavLink>
                     </Col>
                   </Row>
@@ -347,14 +347,14 @@ const NavBar = () => {
               className="nav-page-white header-7"
               onClick={leaveVideoChat}
             >
-              About Us
+              Home
             </NavLink>
             <NavLink
-              to="/artists"
+              to="/about"
               className="nav-page-white header-7"
               onClick={leaveVideoChat}
             >
-              For Artists
+              About
             </NavLink>
             <NavLink
               to="/stream"

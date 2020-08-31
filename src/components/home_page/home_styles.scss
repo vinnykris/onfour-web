@@ -8,7 +8,7 @@
   overflow: hidden;
 }
 
-.about-page-loading-background {
+.home-page-loading-background {
   width: 100%;
   height: 100vh;
   margin-top: -176px;
@@ -23,7 +23,7 @@
   }
 }
 
-.about-page-loader {
+.home-page-loader {
   margin: 0;
   position: absolute;
   top: 50%;
@@ -220,7 +220,7 @@
   opacity: 0;
 }
 
-.why-perform-about {
+.why-perform-home {
   background: linear-gradient(244.27deg, #3d3add 0%, #935af0 99.23%), #514eff;
 }
 
@@ -299,20 +299,20 @@
   height: 100%;
 }
 
-.desktop-grid-about {
+.desktop-grid-home {
   @include respond-to("small") {
     display: none;
   }
 }
 
-.mobile-grid-about {
+.mobile-grid-home {
   display: none;
   @include respond-to("small") {
     display: inline;
   }
 }
 
-.about-page-content {
+.home-page-content {
   background:#07070f;
   margin-top: -1px;
 }
@@ -368,7 +368,7 @@
   text-align: left;
 }
 
-.subscribe-description-about {
+.subscribe-description-home {
   font-size: 17px;
   font-weight: $medium-weight;
   color: white;
@@ -418,11 +418,11 @@
   width: 100%;
 }
 
-.subscribe-input-about {
+.subscribe-input-home {
   float: left;
 }
 
-.about-success {
+.home-success {
   float: left;
 }
 
@@ -443,7 +443,7 @@
   }
 }
 
-.about-preview-content {
+.home-preview-content {
   padding: 3%;
 }
 
