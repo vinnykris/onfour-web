@@ -39,12 +39,20 @@ const CheckoutForm = () => {
   // Style defination for card information input section
   const iframeStyles = {
     base: {
-      color: "#000000",
+      color: "rgba(255, 255, 255, 0.87)",
       backgrondColor: "#FFFFFF",
       fontSize: "16px",
-      iconColor: "#C4C4C4",
+      fontStyle: "normal",
+      fontWeight: "normal",
+      lineJeight: "26px",
+      letterSpacing: "0.05em",
+      caretColor: "#E465A2",
+      iconColor: "rgba(255, 255, 255, 0.28)",
       "::placeholder": {
-        color: "#C4C4C4",
+        color: "rgba(255, 255, 255, 0.28)",
+      },
+      "::focus": {
+        border: "2px solid #E465A2 !important",
       },
     },
     invalid: {
@@ -133,7 +141,7 @@ const CheckoutForm = () => {
                   <br></br>
                 )}
                 <NumberFormat
-                  className="donate-form-input short-width-input"
+                  className="donate-form-input body-1 short-width-input"
                   name="amount"
                   placeholder="Amount $0.00"
                   value={amount_value}
@@ -149,7 +157,7 @@ const CheckoutForm = () => {
                   label="Name"
                   type="name"
                   placeholder="Your Name"
-                  className="donate-form-input short-width-input"
+                  className="donate-form-input body-1 short-width-input"
                   required
                   {...name}
                 />
@@ -158,24 +166,27 @@ const CheckoutForm = () => {
                   label="Email"
                   type="email"
                   placeholder="Your Email"
-                  className="donate-form-input short-width-input"
+                  className="donate-form-input body-1 short-width-input"
                   required
                   {...email}
                 />
-                <div className="donate-form-input">
+                <div className="donate-form-input body-1">
                   <CardElement options={cardElementOpts} />
                 </div>
                 {need_confirm ? (
                   <div>
                     <br></br>
                     <button
-                      className="donate-button"
+                      className="donate-button button-text"
                       type="toConfirm"
                       disabled={!stripe}
                       onClick={needConfirmation}
                     >
                       Donate with Credit Card
                     </button>
+                    <p className="venmo-text segmented-button-text secure-msg">
+                      *The payment is secure
+                    </p>
                   </div>
                 ) : (
                   <div>

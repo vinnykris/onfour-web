@@ -9,7 +9,7 @@
   margin: auto;
   // padding: 25%;
   align-items: center;
-  background-color: #171717;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
 }
 
 .join-chat-grid {
@@ -96,7 +96,7 @@ button:focus {
   bottom: 0px;
   top: 0px;
   left: 0px;
-  background-color: #757575;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
 }
 
 .artist-view {
@@ -107,7 +107,7 @@ button:focus {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #17171b;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
   min-height: 0;
   height: 100%;
   max-height: 100%;
@@ -122,7 +122,7 @@ button:focus {
   align-items: center;
   justify-content: space-between;
   // background: #757575;
-  background: #17171b;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
   border-radius: 4px 4px 0 0;
   border-bottom: 1px solid rgba(136, 136, 136, 0.38);
   height: 30px;
@@ -132,7 +132,7 @@ button:focus {
 .onfour-title {
   height: 29px;
   width: 100%;
-  background-color: #17171b;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
   color: #dddddd;
   text-align: left;
   line-height: 30px;
@@ -409,7 +409,7 @@ button:focus {
   @include respond-to("small") {
     font-size: 1em;
   }
-  background-color: #17171b;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
 }
 
 .fa-send {

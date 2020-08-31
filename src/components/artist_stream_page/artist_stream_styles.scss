@@ -646,11 +646,11 @@
 .artist-box-header {
   height: 30px;
   width: 100%;
-  background-color: #17171b;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
   // color: #dddddd;
   // text-align: left;
   line-height: 30px !important;
-  border-bottom: 1px solid #454242;
+  border-bottom: 1px solid rgba(136, 136, 136, 0.38);
   // padding-left: 10px;
 }
 
