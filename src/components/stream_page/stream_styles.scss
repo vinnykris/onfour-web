@@ -858,12 +858,14 @@
   width: 100%;
   height: 100%;
   //padding-bottom: 56.25%; /* 16:9 */
-  background: linear-gradient(
-      240.7deg,
-      #8c4fdc 1.46%,
-      rgba(255, 255, 255, 0) 96.73%
-    ),
-    #497be0;
+  // background: linear-gradient(
+  //     240.7deg,
+  //     #8c4fdc 1.46%,
+  //     rgba(255, 255, 255, 0) 96.73%
+  //   ),
+  //   #497be0;
+  // background: linear-gradient(252.83deg, #E465A2 2.45%, #7BB3D3 96.72%), #C4C4C4;
+  background: linear-gradient(252.83deg, #EA91BD 2.45%, #A6AAFB 96.72%), #C4C4C4;
 
   @include respond-to("small") {
     height: 220px;
