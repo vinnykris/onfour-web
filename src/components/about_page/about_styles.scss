@@ -21,12 +21,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: url("../../images/backgrounds/wave_1.svg") top left;
+  background: url("../../images/backgrounds/wave_1.svg") center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: calc(100vw * 0.40441);
+  height: calc(100vw * 0.43441);
 }
 
 .about-text-container {
