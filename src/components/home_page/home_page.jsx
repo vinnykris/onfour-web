@@ -32,7 +32,7 @@ import { formatArchiveVideos, formatUpcomingShow } from "../util";
 import home_background from "../../images/backgrounds/home-page-background.jpeg";
 
 // Styling Imports
-import "./about_styles.scss";
+import "./home_styles.scss";
 import FeaturedConcertBox from "./featured_concert_box";
 
 Amplify.configure(awsmobile);

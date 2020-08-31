@@ -7,7 +7,7 @@ import history from "./history";
 import ArtistStream from "./components/artist_stream_page/artist_stream_page";
 import NotFoundPage from "./components/not_found_page/not_found_page";
 import NavBar from "./components/navbar/navbar";
-import About from "./components/about_page/about_page";
+import Home from "./components/home_page/home_page";
 import StreamPage from "./components/stream_page/stream_page";
 import UpcomingShowPage from "./components/upcoming_show_page/upcoming_show";
 import ArchivePage from "./components/archive_page/archive_page";
@@ -47,7 +47,7 @@ function App() {
       <Router history={history}>
         <NavBar />
         <Switch>
-          <Route exact path="/" component={About} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/archive" component={ArchivePage} />
           <Route
             exact
