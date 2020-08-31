@@ -15,6 +15,7 @@ import { useWindowDimensions } from "../custom_hooks";
 // Graphql Imports
 import * as queries from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
+import { getCrewsByUsername, getCrewObject } from "../../utils/crew";
 
 // AWS Imports
 import { Analytics } from "aws-amplify";
@@ -33,6 +34,8 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { Checkbox2, useCheckboxState } from "pretty-checkbox-react";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
 import TicketBox from "../payment/ticket_box";
+import InviteCrewModal from "./invite_crew_modal";
+import CreateCrewModal from "../user_profile/create_crew_modal";
 
 // Module imports
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -45,6 +48,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 // import CircleChecked from '@material-ui/icons/CheckCircleOutline';
 import CircleCheckedFilled from "@material-ui/icons/CheckCircle";
 import CircleUnchecked from "@material-ui/icons/RadioButtonUnchecked";
+import GroupAddOutlinedIcon from "@material-ui/icons/GroupAddOutlined";
 
 // EmailJS Import
 import emailjs from "emailjs-com";
@@ -76,6 +80,7 @@ const Concert = (props) => {
   const [total, setTotal] = useState(0);
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [show_stub, setShowStub] = useState(false);
   const [general_price, setGeneralPrice] = useState(0);
   const [backstage_price, setBackstagePrice] = useState(0);
@@ -86,8 +91,19 @@ const Concert = (props) => {
   const [loading, setLoading] = useState(true);
   const [enter_venue_status, setEnterVenueStatus] = useState(false);
   const [showPaymentBox, setShowPaymentBox] = useState(false);
+  const [showInviteModal, setShowInviteModal] = useState(false);
   const [calender_added, setCalenderAdded] = useState(false);
   const [calendar_button_clicked, setCalendarBtnClicked] = useState(false);
+  const [userCrews, setUserCrews] = useState([]);
+  const [showCreateCrewModal, setShowCreateCrewModal] = useState(false);
+  const [availableColors, setAvailableColors] = useState([
+    "D1AE53",
+    "04ADC0",
+    "BF8AF4",
+    "49BDFE",
+    "444DF2",
+    "E26A6A",
+  ]);
 
   let location = useLocation();
 
@@ -123,6 +139,88 @@ const Concert = (props) => {
     setScroll(false);
   }
 
+  /**
+   * Gets and formats the user crews data and sets them in the local state.
+   * @param {string} currentUsername Name of the user to get the crews from
+   * @returns {void}
+   */
+  const getUserCrews = async (currentUsername = username) => {
+    if (!currentUsername) return;
+    const userCrews = await getCrewsByUsername(currentUsername);
+
+    if (userCrews) {
+      const crewsIdArray = Object.keys(userCrews);
+      const crewsDataPromises = [];
+
+      crewsIdArray.forEach((crewId) => {
+        crewsDataPromises.push(getCrewObject(crewId));
+      });
+
+      const crewData = await Promise.all(crewsDataPromises);
+
+      crewData.forEach((crew, crewIndex) => {
+        if (!crew) return;
+        const crewMembersArray = [];
+        const crewMembersEntries = Object.entries(JSON.parse(crew.members));
+
+        crewMembersEntries.forEach((member) => {
+          const processedMember = {
+            email: member[0],
+            username: member[1] || member[0],
+            initial: member[1]
+              ? member[1][0].toUpperCase()
+              : member[0][0].toUpperCase(),
+            color:
+              availableColors[
+                Math.floor(Math.random() * Math.floor(availableColors.length))
+              ],
+          };
+
+          crewMembersArray.push(processedMember);
+        });
+
+        let adminLocation = 0;
+        crewMembersArray.forEach((member, memberIndex) => {
+          if (member.username === crew.admin) {
+            adminLocation = memberIndex;
+          }
+        });
+
+        if (adminLocation !== 0) {
+          const tempMember = crewMembersArray[0];
+          crewMembersArray[0] = crewMembersArray[adminLocation];
+          crewMembersArray[adminLocation] = tempMember;
+        }
+
+        crewData[crewIndex].color = userCrews[crew.id];
+        crewData[crewIndex].membersArray = crewMembersArray;
+      });
+
+      crewData.forEach((crew, crewIndex) => {
+        if (!crew) crewData.splice(crewIndex, 1);
+      });
+
+      crewData.sort((crewA, crewB) => {
+        if (crewA.name < crewB.name) return -1;
+        if (crewA.name > crewB.name) return 1;
+        return 0;
+      });
+
+      setUserCrews(crewData);
+    }
+  };
+
+  /**
+   * Handles the close of the invite crew modal.
+   * @param {boolean} update Determines if the user crews needs to be updated
+   * @returns {void}
+   */
+  const handleCloseModals = (update = false) => {
+    if (update === true) getUserCrews();
+    setShowInviteModal(false);
+    setShowCreateCrewModal(false);
+  };
+
   const fetchUserData = async (name) => {
     console.log(name);
     const user_concerts = await fetchUserConcertIDs(name);
@@ -131,6 +229,7 @@ const Concert = (props) => {
     if (user_concerts && user_concerts.includes(concert_id)) {
       setHasTicket(true);
     }
+    await getUserCrews(name);
   };
 
   // Runs on mount
@@ -142,6 +241,7 @@ const Concert = (props) => {
       .then(async (user) => {
         setAuth(true);
         setUsername(user.username);
+        setUserEmail(user.email);
         console.log(user.username);
         await fetchData(user.username);
         setLoading(false);
@@ -1384,14 +1484,27 @@ const Concert = (props) => {
                       )}
                       {/* </div> */}
                     </Row>
-                    <Row>
-                      <div className="button-container">
-                        <button className="primary-button button-text invite-crew-button">
-                          <span>Invite Crew</span>
-                        </button>
-                      </div>
-                    </Row>
-
+                    {has_ticket && (
+                      <Row>
+                        <div className="button-container">
+                          {userCrews.length > 0 ? (
+                            <button
+                              className="primary-button button-text invite-crew-button"
+                              onClick={() => setShowInviteModal(true)}
+                            >
+                              <span>Invite Crew</span>
+                            </button>
+                          ) : (
+                            <button
+                              className="primary-button button-text invite-crew-button"
+                              onClick={() => setShowCreateCrewModal(true)}
+                            >
+                              <span>Create a Crew</span>
+                            </button>
+                          )}
+                        </div>
+                      </Row>
+                    )}
                     <Row className="logistics-row">
                       <span className="header-6">
                         {concert_info.week_day}, {concert_info.formatted_date}
@@ -1496,6 +1609,21 @@ const Concert = (props) => {
           )}
         </div>
       )}
+
+      <InviteCrewModal
+        showModal={showInviteModal}
+        userCrews={userCrews}
+        handleClose={handleCloseModals}
+        username={username}
+        userEmail={userEmail}
+        updateCrews={getUserCrews}
+      />
+      <CreateCrewModal
+        showCrewModal={showCreateCrewModal}
+        closeModal={handleCloseModals}
+        currentUsername={username}
+        currentUserEmail={userEmail}
+      />
     </div>
   );
 };

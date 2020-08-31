@@ -203,7 +203,7 @@ export const getCrewObject = async (crew_id) => {
       input: crew_id,
     })
   );
-  return crew_data;
+  return crew_data.data.getCrew;
 };
 
 // This function fetches the current crew object and a given user's current
@@ -250,7 +250,7 @@ export const changeCrewColor = async (crew_id, username, color) => {
 // given email from the crew object
 export const removeUserFromCrew = async (email, crew_id) => {
   const crew_data = await getCrewObject(crew_id);
-  let crew_members = crew_data.data.getCrew.members;
+  let crew_members = crew_data.members;
   crew_members = await parseObjectJSON(crew_members);
   delete crew_members[email];
   await updateCrewUsers(crew_id, crew_members);
@@ -277,7 +277,7 @@ export const leaveOrRemoveFromCrew = async (email, username, crew_id) => {
 // user that was in the crew
 export const deleteCrew = async (crew_id) => {
   const crew_data = await getCrewObject(crew_id);
-  const crew_members = crew_data.data.getCrew.members;
+  const crew_members = crew_data.members;
   const crew_members_JSON = await parseObjectJSON(crew_members);
   const crew_members_keys = Object.keys(crew_members_JSON);
   for (let i = 0; i < crew_members_keys.length; i++) {
