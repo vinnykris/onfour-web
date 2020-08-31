@@ -33,7 +33,7 @@ const LandingPage = () => {
                 {/* <div className="background-about-container">
                     <img src={wave_blue} className="wave" />
                 </div> */}
-                <div className="about-main-container">
+                <div className={"about-main-container" + (show_artist ? "" : " fans-main-container-background")}>
                     <div className="about-text-container">
                         <div className="about-main-header header-2">
                             Experience music, together.
