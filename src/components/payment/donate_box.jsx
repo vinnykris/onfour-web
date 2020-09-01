@@ -45,7 +45,7 @@ const CheckoutForm = () => {
       fontFamily: '"Montserrat", sans-serif',
       fontStyle: "normal",
       fontWeight: "normal",
-      lineHeight: "26px",
+      // lineHeight: "26px",
       letterSpacing: "0.05em",
       caretColor: "#E465A2",
       iconColor: "rgba(255, 255, 255, 0.28)",
