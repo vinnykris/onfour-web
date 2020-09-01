@@ -23,8 +23,8 @@ const VenmoBox = () => {
       <div className="venmo-container">
         <img className="venmo-code" src={venmo_code} alt="venmo-qr"></img>
         <div className="venmo-text-container">
-          <p className="venmo-text">
-            Scan the bar code to tip. <br></br>onfour will ensure your money is
+          <p className="venmo-text segmented-button-text">
+            Scan the bar code to donate. <br></br>onfour will ensure your money is
             sent to the artist.
           </p>
         </div>

@@ -9,7 +9,7 @@
   // padding-top: 35vh;
   z-index: 10;
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F;
 }
 
 .payment-bar {
@@ -26,7 +26,7 @@
 }
 
 .donate-form {
-  background-color: #f5f6f7;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F;
   width: 100%;
   height: 100%;
   //max-width: 500px;
@@ -37,12 +37,16 @@
 .donate-process-text {
   margin: 0px;
   padding: 5px 0px;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .donate-form-input {
-  background-color: #ffffff;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.07)), #07070F;
   border-radius: 3px;
   height: 15%;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-sizing: border-box !important;
+  border-radius: 5px !important;
   // height: 20%;
   text-align: left;
   margin-left: 3%;
@@ -50,15 +54,20 @@
   margin-bottom: 2%;
   margin-right: 3%;
   border: none;
+  caret-color: #E465A2;
   font-size: 1rem;
   padding: 12px 24px;
-  color: #000000;
+  color: rgba(255, 255, 255, 0.87);
   &::placeholder {
-    color: #c4c4c4;
+    color: rgba(255, 255, 255, 0.28);
   }
   &:focus {
-    border: none;
+    border: 2px solid #E465A2 !important;
   }
+}
+
+.secure-msg {
+  margin-top: 10px;
 }
 
 .short-width-input {
@@ -66,10 +75,11 @@
 }
 
 .donate-button {
-  width: 60%;
+  width: 94%;
   // height: 20%;
-  background-color: #794d94;
-  color: white;
+  background: #E465A2;
+  border-radius: 4px;
+  color: #000000;
   align-items: center;
   font-weight: bold;
   line-height: 20px;
@@ -88,7 +98,7 @@
 }
 
 .error-msg {
-  color: red;
+  color: #BE7884;
   margin: 0px;
 }
 
@@ -107,7 +117,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f5f6f7;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.07)), #07070F;
   //bottom: 10%;
 }
 
@@ -122,22 +132,35 @@
   line-height: 25px;
   text-align: center;
   letter-spacing: 0.045em;
-
-  color: #959595;
+  color: rgba(255, 255, 255, 0.28);
 }
 
 .paypal-button {
-  margin-top: 152px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 325px;
-  height: 61px;
-
-  background-color: #794d94;
+  width: 78%;
+  // height: 20%;
+  background: #E465A2;
+  border-radius: 4px;
+  color: #000000;
+  align-items: center;
   font-weight: bold;
-  font-size: 17px;
   line-height: 20px;
   letter-spacing: 0.055em;
+  font-size: 0.9rem;
+  text-align: center;
+  // padding: 1.6vh 0.7vw;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-top: 40%;
+  margin-right: 10px;
+}
 
-  color: #ffffff;
+.wc-stripe-elements-field {
+  caret-color: #E465A2 !important;
+}
+.InputElement {
+  caret-color: #E465A2 !important;
+  &:focus {
+    border: 2px solid #E465A2 !important;
+  }
 }

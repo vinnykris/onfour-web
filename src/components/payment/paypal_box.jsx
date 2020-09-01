@@ -27,12 +27,12 @@ const PaypalBox = () => {
   return (
     <div className="donate-box-container">
       <div className="venmo-container">
-        <button className="paypal-button" onClick={donatePaypal}>
-          Tip with Paypal
+        <button className="paypal-button button-text" onClick={donatePaypal}>
+          Donate with Paypal
         </button>
         <div className="venmo-text-container">
-          <p className="venmo-text">
-            Click to tip with Paypal. <br></br>onfour will ensure your money is
+          <p className="venmo-text segmented-button-text">
+            Click to donate with Paypal. <br></br>onfour will ensure your money is
             sent to the artist.
           </p>
         </div>
