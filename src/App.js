@@ -5,14 +5,15 @@ import history from "./history";
 
 // Component imports
 import Home from "./components/home_page/home_page";
+import About from "./components/about_page/about_page";
 import ArtistStream from "./components/artist_stream_page/artist_stream_page";
 import NotFoundPage from "./components/not_found_page/not_found_page";
 import NavBar from "./components/navbar/navbar";
-import About from "./components/about_page/about_page";
 import StreamPage from "./components/stream_page/stream_page";
 import UpcomingShowPage from "./components/upcoming_show_page/upcoming_show";
 import ArchivePage from "./components/archive_page/archive_page";
 import ArtistsPage from "./components/artist_page/artist_page";
+import ArtistStreamPage from "./components/artist_stream_page/artist_stream_page";
 import Footer from "./components/footer/footer";
 import Forgot from "./components/forgot_page/forgot_page";
 import Concert from "./components/concert_page/concert";
@@ -73,6 +74,7 @@ function App() {
           <Route exact path="/privacy-policy" component={PrivacyPage} />
           <Route exact path="/terms-of-service" component={TermsOfService} />
           <Route exact path="/ticket-agreement" component={PaymentAgreement} />
+          <Route exact path="/artiststream" component={ArtistStreamPage}/>
           <Route path="*" component={NotFoundPage} />
         </Switch>
         <Footer />

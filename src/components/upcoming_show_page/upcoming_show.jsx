@@ -23,6 +23,9 @@ import { getArtistInfo, getConcertInfo } from "../../apis/get_concert_data";
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
 
+// Image Imports
+import background_img from "../../images/backgrounds/backgorund_image1-03-03.png";
+
 Amplify.configure(awsmobile);
 
 // The Upcoming Show Page component
@@ -76,6 +79,7 @@ const UpcomingShowPage = () => {
 
   return (
     <div className="upcoming-show-page-content">
+      <img className="upcoming-page-background-img" src={background_img}></img>
       {is_loaded ? (
         <div>
           {width <= 600 ? (

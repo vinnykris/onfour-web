@@ -407,14 +407,17 @@ const StreamPage = ({ is_soundcheck }) => {
                   padding: 0,
                   overflow: scroll,
                   maxHeight: "545px",
-                  maxWidth: "671px",
+                  maxWidth: "482px",
+                  background: "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                  boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                  borderRadius: "10px",
                 }}
                 className="rodal-custom"
               >
                 <Grid className="payment-modal-grid">
                   <Row className="payment-modal-header">
                     <Col size={1}>
-                      <h4 className="payment-modal-header-text">
+                      <h4 className="payment-modal-header-text header-5">
                         Donate to {artist_name}
                       </h4>
                     </Col>
@@ -427,7 +430,7 @@ const StreamPage = ({ is_soundcheck }) => {
                       onClick={() => paymentTabSelected(0)}
                     >
                       <span
-                        className="payment-modal-tab-text selected-tab"
+                        className="payment-modal-tab-text subtitle-1 selected-tab"
                         id="credit-tab-text"
                       >
                         Credit Card
@@ -440,7 +443,7 @@ const StreamPage = ({ is_soundcheck }) => {
                       onClick={() => paymentTabSelected(1)}
                     >
                       <span
-                        className="payment-modal-tab-text"
+                        className="payment-modal-tab-text subtitle-1"
                         id="venmo-tab-text"
                       >
                         Venmo
@@ -453,7 +456,7 @@ const StreamPage = ({ is_soundcheck }) => {
                       onClick={() => paymentTabSelected(2)}
                     >
                       <span
-                        className="payment-modal-tab-text"
+                        className="payment-modal-tab-text subtitle-1"
                         id="paypal-tab-text"
                       >
                         Paypal

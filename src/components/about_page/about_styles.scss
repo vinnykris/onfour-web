@@ -1,8 +1,9 @@
 @import "../../styles";
 
 .about-page-content {
-  max-width: 100vw;
-  width: 100vw;
+  max-width: 100%;
+  width: 100%;
+  background: #07070F;
 }
 
 .about-section {
@@ -20,12 +21,16 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(100vw * 0.40441);
-  background: url("../../images/backgrounds/wave_1.svg") no-repeat center center;
+  background: url("../../images/backgrounds/wave_1.svg") center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: calc(100vw * 0.43441);
+}
+
+.fans-main-container-background {
+    background: url("../../images/backgrounds/wave_2.svg") center center;
 }
 
 .about-text-container {

@@ -15,7 +15,7 @@
 
 .stream-page-content {
   //margin-top: -1px;
-  background-color: black;
+  background-color: #07070F;
   //height: auto;
   height: 100%;
   width: 100%;
@@ -56,7 +56,7 @@
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  border-left: 3px solid black;
+  border-left: 3px solid #07070F;
 }
 
 .payment-row-mobile {
@@ -101,7 +101,7 @@
   height: 60%;
   width: 100%;
   position: relative;
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid #07070F;
 }
 
 .chat-row {
@@ -163,14 +163,14 @@
 
 .toggle-chat-button {
   border-radius: 5px 0px 0px 5px;
-  background-color: #17171b;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
   padding: 3px;
   font-weight: bolder;
 }
 
 .toggle-description-button {
   border-radius: 0px 5px 0px 0px;
-  background-color: #17171b;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
   padding: 0px 8px;
   font-weight: bolder;
 }
@@ -225,8 +225,9 @@
 }
 
 .payment-modal-grid {
-  background-color: #e5e5e5;
+  background-color: transparent;
   height: 20%;
+  border-bottom: 2px solid rgba(136, 136, 136, 0.38);
 }
 
 .payment-modal-header {
@@ -241,35 +242,29 @@
   text-align: center;
   letter-spacing: 0.045em;
   margin-top: 23px;
-  color: #000000;
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 
 .payment-modal-tab {
   display: flex;
   cursor: pointer;
+  margin-bottom: -2px;
 }
 
 .payment-modal-tab.selected-tab {
-  border-bottom: 3px solid #794d94;
+  border-bottom: 3px solid #E465A2;
 }
 
 .payment-modal-tab-text {
   display: flex;
   margin: auto;
   margin-bottom: 15px;
-  font-family: Helvetica;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 19px;
-  line-height: 22px;
   text-align: center;
-  letter-spacing: 0.045em;
-
-  color: #929292;
+  color: rgba(255, 255, 255, 0.28) !important;
 }
 
 .payment-modal-tab-text.selected-tab {
-  color: #000000;
+  color:rgba(255, 255, 255, 0.87) !important;
   margin-bottom: 12px;
 }
 
@@ -309,8 +304,8 @@
 .stream-info-wrapper {
   width: 100%;
   height: 100px;
-  background-color: #1a1919;
-  border-top: 3px solid black;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  border-top: 3px solid #07070F;
 }
 
 .stream-wrapper-mobile {
@@ -326,7 +321,7 @@
     width: 100%;
     position: relative;
     padding-bottom: 55%;
-    background-color: #171717;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
   }
 }
 
@@ -522,6 +517,8 @@
 .stream-info-row {
   // padding-left: 10px;
   height: 100%;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+
 }
 
 .buttons-row {
@@ -598,7 +595,7 @@
   width: auto;
   border-radius: 4px;
   background-color: white;
-  color: black;
+  color: #07070F;
   // margin-right: 50%;
   //margin-top: 5px;
   cursor: pointer;
@@ -709,7 +706,7 @@
   display: flex;
   border-radius: 4px;
   background-color: white;
-  color: black;
+  color: #07070F;
   width: 104px;
   height: 33px;
   align-items: center;
@@ -743,7 +740,7 @@
 }
 
 .stream-action-button-icon {
-  color: black;
+  color: #07070F;
   padding-right: 10%;
 }
 
@@ -861,12 +858,14 @@
   width: 100%;
   height: 100%;
   //padding-bottom: 56.25%; /* 16:9 */
-  background: linear-gradient(
-      240.7deg,
-      #8c4fdc 1.46%,
-      rgba(255, 255, 255, 0) 96.73%
-    ),
-    #497be0;
+  // background: linear-gradient(
+  //     240.7deg,
+  //     #8c4fdc 1.46%,
+  //     rgba(255, 255, 255, 0) 96.73%
+  //   ),
+  //   #497be0;
+  // background: linear-gradient(252.83deg, #E465A2 2.45%, #7BB3D3 96.72%), #C4C4C4;
+  background: linear-gradient(252.83deg, #EA91BD 2.45%, #A6AAFB 96.72%), #C4C4C4;
 
   @include respond-to("small") {
     height: 220px;
@@ -940,7 +939,7 @@
 }
 
 .parentDisable {
-  background: black;
+  background: #07070F;
   z-index: 998;
   padding-top: 20vh;
   height: calc(-53px + 100vh);
@@ -948,7 +947,7 @@
 }
 
 .overlay-box {
-  background: black;
+  background: #07070F;
   padding-top: 40vh;
   height: calc(-49px + 100vh);
   width: 100%;
@@ -1153,8 +1152,8 @@
 }
 
 .controll-toolbar-row {
-  background-color: #17171b;
-  border-top: 1px solid #3c3c3c;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  border-top: 1px solid #07070F;
   height: 70px;
   position: absolute;
   width: 100%;
