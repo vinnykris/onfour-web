@@ -339,7 +339,8 @@ button:focus {
   padding: 0px;
   color: rgba(255, 255, 255, 0.87);;
   display: inline-block;
-  width: 100%;
+  width: auto;
+  max-width: 70%;
   text-align: left;
 }
 
@@ -394,6 +395,7 @@ button:focus {
   align-items: center;
   margin-bottom: 0px;
   padding: 0px;
+  width: auto;
   height: 21px !important;
   @include respond-to("xx-large") {
     font-size: 0.8em;
