@@ -30,6 +30,8 @@ const Message = ({ message: { user, text }, name }) => {
     "onfour-spencer",
   ];
 
+  const color_id = (user.length + user.charCodeAt(0)) % 5;
+
   // Setting booleans based on user
   if (user === trimmed_name) {
     is_sent_by_current_user = true;
@@ -54,12 +56,12 @@ const Message = ({ message: { user, text }, name }) => {
   //     };
 
   return is_sent_by_current_user ? (
-    <div className="message-container justify-end">
-      <p className="body-2 sent-text pr-10">{trimmed_name} </p>
-      <div className="message-box background-dark">
+    <div className="message-container justify-start">
+      <h5 className={"body-2 sent-text pr-10" + " username-color-" + color_id}>{trimmed_name + ":"} </h5>
+      <div className="message-box">
         {/* <Linkify Options={linkifyOptions}> */}
         <Linkify>
-          <p className="body-2 message-text color-white">
+          <p className="body-2 chat-message-text">
             {ReactEmoji.emojify(text)}
           </p>
         </Linkify>
@@ -67,7 +69,7 @@ const Message = ({ message: { user, text }, name }) => {
     </div>
   ) : is_admin ? (
     <div className="message-container justify-middle">
-      <div className="message-box-admin background-white">
+      <div className="message-box-admin">
         <Linkify>
           <p className="body-2 sent-text">{ReactEmoji.emojify(text)}</p>
         </Linkify>
@@ -75,25 +77,25 @@ const Message = ({ message: { user, text }, name }) => {
     </div>
   ) : is_staff ? (
     <div className="message-container justify-start">
-      <div className="message-box background-staff">
+      <h5 className={"body-2 sent-text pr-10" + " username-color-" + color_id}>{user + ":"} </h5>
+      <div className="message-box">
         <Linkify>
-          <p className="body-2 message-text color-white">
+          <p className="body-2 chat-message-text">
             {ReactEmoji.emojify(text)}
           </p>
         </Linkify>
       </div>
-      <p className="body-2 sent-text pl-10">{user} </p>
     </div>
   ) : (
     <div className="message-container justify-start">
-      <div className="message-box background-light">
+      <h5 className={"body-2 sent-text pr-10" + " username-color-" + color_id}>{user + ":"} </h5>
+      <div className="message-box">
         <Linkify>
-          <p className="body-2 message-text color-dark">
+          <p className="body-2 chat-message-text">
             {ReactEmoji.emojify(text)}
           </p>
         </Linkify>
       </div>
-      <p className="body-2 sent-text pl-10">{user} </p>
     </div>
   );
 };
