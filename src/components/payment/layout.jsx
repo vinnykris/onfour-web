@@ -14,14 +14,20 @@ import { loadStripe } from "@stripe/stripe-js";
 // called more times than it needs to
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
-
+const elFonts = [
+    {
+        cssSrc: 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap',
+        family: '"Montserrat", sans-serif',
+        style: 'normal',
+    }
+];
 
 // Layout is a wrapper conponent that loads Stripe only once
 // and passes the stripePromise conponent to every page of the website
 const Layout = ({ children }) => {
     return (
         <>
-            <Elements stripe={stripePromise}>{children}</Elements>
+            <Elements stripe={stripePromise} options={{ fonts: elFonts }}>{children}</Elements>
         </>
     );
 };

@@ -135,7 +135,7 @@
 }
 
 .paypal-button {
-  width: 94%;
+  width: 78%;
   // height: 20%;
   background: #E465A2;
   border-radius: 4px;
@@ -150,6 +150,16 @@
   border: none;
   cursor: pointer;
   margin-left: 10px;
-  margin-top: 50%;
+  margin-top: 40%;
   margin-right: 10px;
+}
+
+.wc-stripe-elements-field {
+  caret-color: #E465A2 !important;
+}
+.InputElement {
+  caret-color: #E465A2 !important;
+  &:focus {
+    border: 2px solid #E465A2 !important;
+  }
 }

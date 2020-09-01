@@ -42,16 +42,17 @@ const CheckoutForm = () => {
       color: "rgba(255, 255, 255, 0.87)",
       backgrondColor: "#FFFFFF",
       fontSize: "16px",
+      fontFamily: '"Montserrat", sans-serif',
       fontStyle: "normal",
       fontWeight: "normal",
-      lineJeight: "26px",
+      lineHeight: "26px",
       letterSpacing: "0.05em",
       caretColor: "#E465A2",
       iconColor: "rgba(255, 255, 255, 0.28)",
       "::placeholder": {
         color: "rgba(255, 255, 255, 0.28)",
       },
-      "::focus": {
+      "::after": {
         border: "2px solid #E465A2 !important",
       },
     },
