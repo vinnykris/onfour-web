@@ -290,8 +290,15 @@ a.nav-page-black {
 }
 
 .login-button {
-  margin: 10px;
-  background-color: green($color: #c4b1b1);
+  min-width: 110px;
+  min-height: 30px;
+  color: $on-primary !important;
+  cursor: pointer;
+  margin-left: 25px;
+}
+
+a.login-nav:hover {
+  text-decoration: none !important;
 }
 
 // mobile nav menu

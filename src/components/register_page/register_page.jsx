@@ -29,6 +29,7 @@ import {
   containsNumber,
   containsSpecialCharacter,
 } from "../../utils/register";
+import InputOne from "./input_one";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -301,13 +302,229 @@ const Register = (props) => {
                         id="register"
                         onSubmit={registerSubmit}
                       >
-                        <Row className="signup-header">
-                          <h6 className="signup-header-text">
-                            Sign up with your email and username below!
-                          </h6>
-                        </Row>
+                        <div className="login-form-container">
+                          <div className="signup-header">
+                            <div className="header-7">
+                              Sign up with your email and username below
+                            </div>
+                          </div>
+                          {/* <input
+                            className="register-input body-1"
+                            name="first"
+                            label="Full Name"
+                            required
+                            id="first_slot"
+                            value={first}
+                            placeholder="First Name"
+                            onChange={(event) => setFirst(event.target.value)}
+                            onFocus={(e) => (e.target.placeholder = "")}
+                            onBlur={(e) => (e.target.placeholder = "Name")}
+                          /> */}
+                          {/* <div className="register-input-container">
+                            <InputOne
+                              id="first_slot"
+                              type="text"
+                              name="full-name"
+                              is_required={true}
+                              placeholder="Full Name"
+                              value={first}
+                              onChange={(event) => setFirst(event.target.value)}
+                            />
+                          </div> */}
+                          <div className="register-input-container">
+                            <InputOne
+                              id="first_slot"
+                              type="text"
+                              name="full-name"
+                              is_required={true}
+                              placeholder="Full Name"
+                              value={first}
+                              onChange={(event) => setFirst(event.target.value)}
+                            />
+                          </div>
+                          <div className="register-input-container">
+                            <InputOne
+                              id="username_slot"
+                              type="text"
+                              name="username"
+                              is_required={true}
+                              placeholder="Username"
+                              value={username}
+                              onChange={(event) =>
+                                setUsername(event.target.value)
+                              }
+                            />
+                          </div>
+                          {/* <input
+                            className="register-input body-1"
+                            id="last_slot"
+                            name="last"
+                            value={last}
+                            placeholder="Last Name"
+                            onChange={(event) => setLast(event.target.value)}
+                            required
+                          /> */}
+                          {/* <input
+                            className="register-input body-1"
+                            type="username"
+                            name="username"
+                            value={username}
+                            id="username_slot"
+                            placeholder="Username"
+                            onChange={(event) =>
+                              setUsername(event.target.value)
+                            }
+                            required
+                          /> */}
+                          <div className="register-input-container">
+                            <InputOne
+                              id="email_slot"
+                              type="email"
+                              name="email"
+                              is_required={true}
+                              placeholder="Email"
+                              value={email}
+                              onChange={(event) => setEmail(event.target.value)}
+                            />
+                          </div>
+                          {/* <input
+                            className="register-input body-1"
+                            type="email"
+                            name="email"
+                            value={email}
+                            id="email_slot"
+                            placeholder="Email"
+                            onChange={(event) => setEmail(event.target.value)}
+                            required
+                          /> */}
+                          <div
+                            className="register-input-container"
+                            data-tip
+                            data-for="registerTip"
+                          >
+                            <InputOne
+                              id="password_slot"
+                              type="password"
+                              name="password"
+                              is_required={true}
+                              placeholder="Password"
+                              value={password}
+                              onChange={(event) =>
+                                setPassword(event.target.value)
+                              }
+                              // data-tip
+                              // data-for="registerTip"
+                            />
+                          </div>
+                          {/* <input
+                            className="register-input body-1"
+                            type="password"
+                            name="password"
+                            value={password}
+                            id="password_slot"
+                            placeholder="Password"
+                            onChange={(event) =>
+                              setPassword(event.target.value)
+                            }
+                            required
+                            data-tip
+                            data-for="registerTip"
+                          /> */}
+                          <ReactTooltip
+                            id="registerTip"
+                            place="left"
+                            effect="solid"
+                          >
+                            <p className="password-tooltip-white">
+                              Your password must contain the following:
+                            </p>
+                            <p className="password-suggestion-bullets">
+                              {password.length > 7 ? (
+                                <i className="fa fa-check green-password-suggestion"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion"></i>
+                              )}
+                              <text
+                                className={
+                                  password.length > 7
+                                    ? "green-password-suggestion"
+                                    : "red-password-suggestion"
+                                }
+                              >
+                                {" "}
+                                8 or more characters
+                              </text>
+                            </p>
+                            <br></br>
+                            <p className="password-suggestion-bullets">
+                              {containsUppercaseAndLowercase(password) ? (
+                                <i className="fa fa-check green-password-suggestion"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion"></i>
+                              )}
+                              <text
+                                className={
+                                  containsUppercaseAndLowercase(password)
+                                    ? "green-password-suggestion"
+                                    : "red-password-suggestion"
+                                }
+                              >
+                                {" "}
+                                Uppercase and lowercase letters
+                              </text>
+                            </p>
+                            <br></br>
+                            <p className="password-suggestion-bullets">
+                              {containsNumber(password) ? (
+                                <i className="fa fa-check green-password-suggestion"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion"></i>
+                              )}
+                              <text
+                                className={
+                                  containsNumber(password)
+                                    ? "green-password-suggestion"
+                                    : "red-password-suggestion"
+                                }
+                              >
+                                {" "}
+                                At least 1 number
+                              </text>
+                            </p>
+                            <br></br>
+                            <p className="password-suggestion-bullets">
+                              {containsSpecialCharacter(password) ? (
+                                <i className="fa fa-check green-password-suggestion"></i>
+                              ) : (
+                                <i className="fa fa-times red-password-suggestion"></i>
+                              )}
+                              <text
+                                className={
+                                  containsSpecialCharacter(password)
+                                    ? "green-password-suggestion"
+                                    : "red-password-suggestion"
+                                }
+                              >
+                                {" "}
+                                At least 1 special character
+                              </text>
+                            </p>
+                          </ReactTooltip>
+                          {/* <input
+                            className="register-input body-1"
+                            type="password"
+                            name="password"
+                            value={repeat_password}
+                            id="password_r_slot"
+                            placeholder="Repeat Password"
+                            onChange={(event) =>
+                              setRepeatPassword(event.target.value)
+                            }
+                            required
+                          /> */}
+                        </div>
 
-                        <Row className="register-input-row">
+                        {/* <Row className="register-input-row">
                           <input
                             className="register-input-left"
                             name="first"
@@ -326,8 +543,8 @@ const Register = (props) => {
                             onChange={(event) => setLast(event.target.value)}
                             required
                           />
-                        </Row>
-                        <Row className="register-input-row">
+                        </Row> */}
+                        {/* <Row className="register-input-row">
                           <input
                             className="register-input"
                             type="username"
@@ -340,8 +557,8 @@ const Register = (props) => {
                             }
                             required
                           />
-                        </Row>
-                        <Row className="register-input-row">
+                        </Row> */}
+                        {/* <Row className="register-input-row">
                           <input
                             className="register-input"
                             type="email"
@@ -352,8 +569,8 @@ const Register = (props) => {
                             onChange={(event) => setEmail(event.target.value)}
                             required
                           />
-                        </Row>
-                        <Row className="register-input-row">
+                        </Row> */}
+                        {/* <Row className="register-input-row">
                           <input
                             className="register-input-left"
                             type="password"
@@ -464,9 +681,9 @@ const Register = (props) => {
                         <PasswordStrengthBar
                           password={password}
                           minLength={8}
-                        />
-                        <br></br>
-                        <Row>
+                        /> */}
+                        {/* <br></br> */}
+                        {/* <Row>
                           <Col size={0.5}>
                             <input
                               className="email-unsubscribe-checkbox"
@@ -479,10 +696,23 @@ const Register = (props) => {
                           <Col size={10}>
                             <label className="email-unsubscribe-text">
                               I want to receive email updates about future
-                              Onfour shows.
+                              onfour shows.
                             </label>
                           </Col>
-                        </Row>
+                        </Row> */}
+                        <div className="email-subscribe-prompt">
+                          <input
+                            className="email-unsubscribe-checkbox"
+                            name="isGoing"
+                            type="checkbox"
+                            checked={checked}
+                            onChange={(event) => setChecked(!checked)}
+                          />
+                          <label className="body-1">
+                            I want to receive email updates about future onfour
+                            shows.
+                          </label>
+                        </div>
                         <div style={{ color: "red" }}>{error}</div>
                         <br></br>
                         <button
