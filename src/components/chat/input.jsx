@@ -97,7 +97,7 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
       ) : (
         <form className="text-chat-form">
           <input
-            className="text-chat-input"
+            className="body-2 text-chat-input"
             type="text"
             placeholder="Please sign in to send messages!"
             disabled

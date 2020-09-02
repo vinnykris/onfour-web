@@ -1268,7 +1268,10 @@ const Concert = (props) => {
                   <div className="tag-container concert-tag">
                     <Tag content={"In " + concert_info.days_left + " days"} />
                   </div>
-                  <span className="secondary-button segmented-button-text add-to-calendar">
+                  <span
+                    className="secondary-button segmented-button-text add-to-calendar"
+                    onClick={addToCalendar}
+                  >
                     + Add to calendar
                   </span>
                   {/* <div className="share-concert-container">
