@@ -36,6 +36,8 @@ import { ReactMultiEmail, isEmail } from "react-multi-email";
 import TicketBox from "../payment/ticket_box";
 import InviteCrewModal from "./invite_crew_modal";
 import CreateCrewModal from "../user_profile/create_crew_modal";
+import CheckoutBox from "./checkout_box";
+import PayTicketBox from "./pay_ticket_box";
 
 // Module imports
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -242,11 +244,11 @@ const Concert = (props) => {
         setAuth(true);
         setUsername(user.username);
         setUserEmail(user.email);
-        console.log(user.username);
+        // console.log(user.username);
         await fetchData(user.username);
         setLoading(false);
-        console.log(concert_info);
-        console.log(has_ticket);
+        // console.log(concert_info);
+        // console.log(has_ticket);
       })
       .catch(async (err) => {
         setAuth(false);
@@ -282,7 +284,7 @@ const Concert = (props) => {
     setTwitterLink(
       `https://twitter.com/intent/tweet?text=Come%20watch%20a%20concert%20with%20me&url=https%3A%2F%2Fonfour.live%2Fupcoming%2F${concert_id}`
     );
-    setTotal(general_price + backstage_price);
+    // setTotal(general_price + backstage_price);
   }, []);
 
   // Hook run when concert_info is received
@@ -290,22 +292,24 @@ const Concert = (props) => {
     if (concert_info) {
       price_map.general = concert_info.price;
       setGeneralPrice(concert_info.price);
+      setTotal(concert_info.price);
+      // setTotal(1);
       concert_date = concert_info.date;
       concert_time = concert_info.time;
     }
   }, [concert_info]);
 
   // Hook called when price updates or when user selects backstage pass
-  useEffect(() => {
-    if (backstage_checked) {
-      // WHAT HAPPENS IF BACKSTAGE CHECKBOX IS CHECKED
-      setTotal(general_price + backstage_price);
-      setBackstagePass(true);
-    } else {
-      setTotal(general_price);
-      setBackstagePass(false);
-    }
-  }, [general_price, backstage_price, backstage_checked]);
+  // useEffect(() => {
+  //   if (backstage_checked) {
+  //     // WHAT HAPPENS IF BACKSTAGE CHECKBOX IS CHECKED
+  //     setTotal(general_price + backstage_price);
+  //     setBackstagePass(true);
+  //   } else {
+  //     setTotal(general_price);
+  //     setBackstagePass(false);
+  //   }
+  // }, [general_price, backstage_price, backstage_checked]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -344,6 +348,7 @@ const Concert = (props) => {
   // Go to checkout page for paid concert
   const goToCheckout = () => {
     console.log("go to checkout");
+    console.log(total);
     setShowPaymentBox(true);
   };
 
@@ -418,8 +423,9 @@ const Concert = (props) => {
   // Shows the calendar button
   // Called after the animation is done
   const showCalendarButton = () => {
-    document.getElementById("add-to-calendar").style.visibility = "visible";
-
+    if (document.getElementById("add-to-calendar")) {
+      document.getElementById("add-to-calendar").style.visibility = "visible";
+    }
     // After 8 seconds, end the stub animation and go back to the concert page
     // setTimeout(() => {
     //   if (!stub_animation_done) animationEnd();
@@ -532,6 +538,7 @@ const Concert = (props) => {
                             >
                               We've got you covered! Check your{" "}
                               <a
+                                className="google-calendar-link-text calendar-redirect-msg"
                                 href={
                                   "https://calendar.google.com/calendar/b/0/r/week/" +
                                   concert_info.date.replace(/-/gi, "/")
@@ -554,10 +561,10 @@ const Concert = (props) => {
                           ) : (
                             <button
                               id="add-to-calendar"
-                              className="buy-ticket-button calendar-button"
+                              className="add-calendar-button segmented-button-text add-to-calendar"
                               onClick={addToCalendar}
                             >
-                              Add to Calendar
+                              + Add to Calendar
                             </button>
                           )}
                         </div>
@@ -585,7 +592,15 @@ const Concert = (props) => {
                 width={100}
                 height={100}
                 measure="%"
-                customStyles={{ padding: 0, overflow: scroll }}
+                customStyles={{ 
+                  padding: 0,
+                  overflow: scroll,
+                  maxHeight: "620px",
+                  maxWidth: "482px",
+                  background: "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                  boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                  borderRadius: "10px",  
+                }}
                 className="rodal-custom"
               >
                 <Grid className="modal-grid">
@@ -1015,6 +1030,7 @@ const Concert = (props) => {
                             >
                               We've got you covered! Check your{" "}
                               <a
+                                className="google-calendar-link-text calendar-redirect-msg"
                                 href={
                                   "https://calendar.google.com/calendar/b/0/r/week/" +
                                   concert_info.date.replace(/-/gi, "/")
@@ -1037,10 +1053,10 @@ const Concert = (props) => {
                           ) : (
                             <button
                               id="add-to-calendar"
-                              className="buy-ticket-button calendar-button"
+                              className="add-calendar-button segmented-button-text add-to-calendar"
                               onClick={addToCalendar}
                             >
-                              Add to Calendar
+                              + Add to Calendar
                             </button>
                           )}
                         </div>
@@ -1065,13 +1081,48 @@ const Concert = (props) => {
               <Rodal
                 visible={open_modal}
                 onClose={hideModal}
-                width={930}
-                height={514}
-                measure="px"
-                customStyles={{ padding: 0, overflow: scroll }}
+                width={50}
+                height={96}
+                measure="%"
+                customStyles={{
+                  padding: 0,
+                  overflow: scroll,
+                  maxHeight: "620px",
+                  maxWidth: "482px",
+                  background: "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                  boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                  borderRadius: "10px",
+                }}
                 className="rodal-custom"
               >
-                <Grid className="modal-grid">
+              {showPaymentBox ? (
+                  <PayTicketBox
+                    general_price = {general_price}
+                    backstage_price = {backstage_price}
+                    // backstage_price = {10}
+                    // general_price = {1}
+                    total = {total}
+                    goBackToModal= {goBackToModal}
+                    addTicket = {addTicket}
+                  ></PayTicketBox>
+                  ) : (
+                  <CheckoutBox
+                    username = {username}
+                    location = {location}
+                    artist_name = {concert_info.artist_name}
+                    concert_name = {concert_info.concert_name}
+                    concert_full_time = {concert_info.week_day + ", " + concert_info.formatted_date + ", " + concert_info.formatted_time}
+                    general_price = {general_price}
+                    backstage_price = {backstage_price}
+                    goToCheckout = {goToCheckout}
+                    // backstage_price = {10}
+                    // general_price = {1}
+                    addTicket = {addTicket}
+                    setTotal = {setTotal}
+                    total = {total}
+                  ></CheckoutBox>
+                )}
+                {/* <Grid className="modal-grid">
                   <Row className="modal-row">
                     {showPaymentBox ? (
                       <TicketBox
@@ -1344,7 +1395,7 @@ const Concert = (props) => {
                       </Row>
                     )}
                   </Row>
-                </Grid>
+                </Grid> */}
               </Rodal>
               <div className="banner-container">
                 <img
@@ -1368,9 +1419,36 @@ const Concert = (props) => {
                   <div className="tag-container concert-tag">
                     <Tag content={"In " + concert_info.days_left + " days"} />
                   </div>
-                  <span className="secondary-button segmented-button-text add-to-calendar">
-                    + Add to calendar
-                  </span>
+                    { calender_added ? (
+                      <p
+                        className="segmented-button-text no-padding"
+                      >
+                        Added to your{" "}
+                        <a
+                          className= "google-calendar-link-text segmented-button-text"
+                          href={
+                            "https://calendar.google.com/calendar/b/0/r/week/" +
+                            concert_info.date.replace(/-/gi, "/")
+                          }
+                          target="_blank"
+                        >
+                          Google Calendar
+                            </a>{" "}
+                      </p>
+                    ) : calendar_button_clicked ? (
+                      <div className="left-padding-20">
+                        <MoonLoader
+                          sizeUnit={"px"}
+                          size={18}
+                          color={"white"}
+                          loading={!calender_added}
+                        />
+                      </div>
+                    ) : (
+                      <span className="secondary-button segmented-button-text add-to-calendar" onClick = {addToCalendar}>
+                        + Add to calendar
+                      </span>
+                    ) }
                   {/* <div className="share-concert-container">
                       <Col size={1}>
                         <div>
@@ -1476,9 +1554,9 @@ const Concert = (props) => {
                           onClick={getTicket}
                         >
                           {total > 0 ? (
-                            <span>Buy Tickets</span>
+                            "Buy Tickets"
                           ) : (
-                            <span>RSVP</span>
+                            "RSVP"
                           )}
                         </button>
                       )}

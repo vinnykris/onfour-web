@@ -202,7 +202,7 @@ const CheckoutForm = () => {
                         </p>
                         <button
                           form="donate"
-                          className="donate-button"
+                          className="donate-button button-text"
                           type="submit"
                           disabled={!stripe}
                         >
