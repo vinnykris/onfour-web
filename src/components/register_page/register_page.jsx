@@ -29,7 +29,7 @@ import {
   containsNumber,
   containsSpecialCharacter,
 } from "../../utils/register";
-import InputOne from "./input_one";
+import InputOne from "../inputs/input_one";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 

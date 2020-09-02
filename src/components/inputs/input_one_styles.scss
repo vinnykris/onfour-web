@@ -62,6 +62,19 @@ input[type="email"]:not([value=""]):not(:valid) ~ .floating-label {
   }
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px black inset !important; /* Change the color to your own background color */
+  -webkit-text-fill-color: white;
+}
+
 .input-one {
   width: 100%;
   min-height: 56px;
@@ -71,7 +84,8 @@ input[type="email"]:not([value=""]):not(:valid) ~ .floating-label {
       rgba(255, 255, 255, 0.14),
       rgba(255, 255, 255, 0.14)
     ),
-    #07070f;
+    #07070f !important;
+  // background-color: #07070f !important;
   border-radius: 0px;
   border: none;
   caret-color: $primary-color;
