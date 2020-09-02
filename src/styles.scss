@@ -175,11 +175,12 @@ input {
   outline: none;
   transition: 0.3s;
   margin-right: 10px;
+  caret-color: #e465a2;
 }
 
-input:focus {
-  border: 2px solid #e465a2;
-}
+// input:focus {
+//   border: 1px solid #e465a2;
+// }
 
 button {
   background-color: #303096;
