@@ -1097,10 +1097,10 @@ const Concert = (props) => {
               >
               {showPaymentBox ? (
                   <PayTicketBox
-                    // general_price = {general_price}
-                    // backstage_price = {backstage_price}
-                    backstage_price = {10}
-                    general_price = {1}
+                    general_price = {general_price}
+                    backstage_price = {backstage_price}
+                    // backstage_price = {10}
+                    // general_price = {1}
                     total = {total}
                     goBackToModal= {goBackToModal}
                     addTicket = {addTicket}
@@ -1112,11 +1112,11 @@ const Concert = (props) => {
                     artist_name = {concert_info.artist_name}
                     concert_name = {concert_info.concert_name}
                     concert_full_time = {concert_info.week_day + ", " + concert_info.formatted_date + ", " + concert_info.formatted_time}
-                    // general_price = {general_price}
-                    // backstage_price = {backstage_price}
+                    general_price = {general_price}
+                    backstage_price = {backstage_price}
                     goToCheckout = {goToCheckout}
-                    backstage_price = {10}
-                    general_price = {1}
+                    // backstage_price = {10}
+                    // general_price = {1}
                     addTicket = {addTicket}
                     setTotal = {setTotal}
                     total = {total}
