@@ -43,18 +43,18 @@ const checkoutBox = (props) => {
             <Row className="checkout-modal-body">
                 <div className="checkout-modal-ticket-select-container">
                     <div className="checkout-modal-GA selected-style disabled-GA">
-                        <p className="subtitle-1 GA-text">
+                        <div className="subtitle-1 GA-text">
                             {"General Admission"} <p className="subtitle-2 text-color">{props.general_price ? ("$" + props.general_price.toString()) : "free"}</p>
-                        </p>
+                        </div>
                     </div>
                     <div 
                         id = "backstage-pass-div" 
                         className={"checkout-modal-GA" + (props.backstage_price ? "" : " disabled-backstage") + ((checked_backstage_pass && selectBackstagePass) ? " selected-style" : "")} 
                         onClick={selectBackstagePass}
                     >
-                        <p className="subtitle-1 GA-text">
+                        <div className="subtitle-1 GA-text">
                             {"Backstage Pass"} <p className="subtitle-2 text-color">{props.backstage_price ? ("$" + props.backstage_price.toString()) : "(not available)"}</p>
-                        </p>
+                        </div>
                     </div>
                 </div>
                 {props.username?(
