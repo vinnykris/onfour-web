@@ -5,7 +5,7 @@
 
 .concert-page {
   margin-top: -1px;
-  background:#07070f;
+  background: #07070f;
 
   min-height: calc(100vh - 250px);
 }
@@ -27,8 +27,7 @@
   left: 0;
   right: 0;
   height: calc(100vw * 0.38766);
-  background: 
-    linear-gradient(180deg, rgba(7, 7, 15, 0) 0%, #07070f 94.06%);
+  background: linear-gradient(180deg, rgba(7, 7, 15, 0) 0%, #07070f 94.06%);
 }
 
 .concert-image-container {
@@ -120,6 +119,7 @@
   line-height: 24px !important;
   padding-left: 8px;
   padding-right: 8px;
+  cursor: pointer;
 }
 
 .calendar-button {
