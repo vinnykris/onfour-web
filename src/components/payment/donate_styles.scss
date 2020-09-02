@@ -34,6 +34,15 @@
   border: none;
 }
 
+.ticket-form {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F;
+  width: 100%;
+  height: 100%;
+  //max-width: 500px;
+  padding: 0px;
+  border: none;
+}
+
 .donate-process-text {
   margin: 0px;
   padding: 5px 0px;
@@ -91,6 +100,9 @@
   cursor: pointer;
   margin-left: 10px;
   margin-right: 10px;
+  &:hover {
+    background: #EA91BD;
+  }
 }
 
 .pay-success-msg {
