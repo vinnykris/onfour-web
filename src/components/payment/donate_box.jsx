@@ -186,7 +186,7 @@ const CheckoutForm = () => {
                       Donate with Credit Card
                     </button>
                     <p className="venmo-text segmented-button-text secure-msg">
-                      *The payment is secure
+                      *Your payment is secured via Stripe.
                     </p>
                   </div>
                 ) : (

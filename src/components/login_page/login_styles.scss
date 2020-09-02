@@ -1,4 +1,5 @@
 // LOGIN PAGE COMPONENT STYLING
+@import "../../styles.scss";
 
 .login-page-content {
   background-color: black;
@@ -39,10 +40,11 @@
 
 .signin-submit-button {
   width: 100%;
-  color: white;
-  font-size: 14px;
-  font-weight: 420;
-  background-color: #794d94;
+  margin-top: 3px;
+}
+
+.signin-text-color {
+  color: $on-surface-medium !important;
 }
 
 .processing-message {

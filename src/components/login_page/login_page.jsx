@@ -8,6 +8,7 @@ import React, { useState, useEffect } from "react";
 // Components
 import { Grid, Row, Col } from "../grid";
 import PulseLoader from "react-spinners/PulseLoader";
+import InputOne from "../inputs/input_one";
 
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
@@ -82,11 +83,36 @@ const Login = (props) => {
                 onSubmit={loginSubmit}
               >
                 <Row className="signin-header">
-                  <h6 className="signin-header-text">
-                    Sign in with your email or username below!
-                  </h6>
+                  <div className="header-7 signin-text-color">
+                    Sign in with your email or username below
+                  </div>
                 </Row>
-                <Row className="login-input-row">
+                <div className="register-input-container">
+                  <InputOne
+                    id="email_slot"
+                    type="text"
+                    name="email"
+                    is_required={true}
+                    placeholder="Email Address or Username"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+                </div>
+                <div className="register-input-container">
+                  <InputOne
+                    id="password_slot"
+                    type="password"
+                    name="password"
+                    is_required={true}
+                    placeholder="Password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    is_password={true}
+                    // data-tip
+                    // data-for="registerTip"
+                  />
+                </div>
+                {/* <Row className="login-input-row">
                   <input
                     className="login-input"
                     // type="email"
@@ -97,8 +123,8 @@ const Login = (props) => {
                     onChange={(event) => setEmail(event.target.value)}
                     required
                   />
-                </Row>
-                <Row className="login-input-row">
+                </Row> */}
+                {/* <Row className="login-input-row">
                   <input
                     className="login-input"
                     type="password"
@@ -109,24 +135,23 @@ const Login = (props) => {
                     onChange={(event) => setPassword(event.target.value)}
                     required
                   />
-                </Row>
+                </Row> */}
                 <div style={{ color: "red" }}>{error}</div>
-                <br></br>
                 <button
-                  className="signin-submit-button"
+                  className="primary-button button-text signin-submit-button"
                   type="submit"
                   form="login"
                   value="Submit"
                 >
-                  SIGN IN
+                  LOG IN
                 </button>
               </form>
               <p className="forgot-footer">
-                <a href="/forgot" className="signup-link">
+                <a href="/forgot" className="header-7 signin-link">
                   Forgot Password?
                 </a>
               </p>
-              <p className="signin-footer">
+              <div className="header-7 signin-text-color">
                 Don't have an account?{" "}
                 {/* <a href="/register" className="signup-link">
                   Sign up
@@ -136,12 +161,12 @@ const Login = (props) => {
                     pathname: "/register",
                     state: { current: from_path },
                   }}
-                  className="signup-link"
+                  className="header-7 signin-link"
                 >
                   Sign up
                 </NavLink>
                 .
-              </p>
+              </div>
             </div>
           )}
         </Row>

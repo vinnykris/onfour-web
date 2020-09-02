@@ -1533,30 +1533,38 @@ const Concert = (props) => {
                           {enter_venue_status ? (
                             <NavLink to="/stream">
                               {" "}
-                              <button className="primary-button button-text concert-ticket-button">
-                                <span>Enter Venue</span>
+                              <button className="primary-button concert-ticket-button">
+                                <span className="button-text concert-button-text">
+                                  Enter Venue
+                                </span>
                               </button>
                             </NavLink>
                           ) : (
                             <Tooltip title="Please try again 30 minutes before the show!">
                               <button
-                                className="primary-button button-text concert-ticket-button"
+                                className="primary-button concert-ticket-button"
                                 disabled
                               >
-                                <span>Enter Venue</span>
+                                <span className="button-text concert-button-text">
+                                  Enter Venue
+                                </span>
                               </button>
                             </Tooltip>
                           )}
                         </div>
                       ) : (
                         <button
-                          className="primary-button button-text concert-ticket-button"
+                          className="primary-button concert-ticket-button"
                           onClick={getTicket}
                         >
                           {total > 0 ? (
-                            "Buy Tickets"
+                            <span className="button-text concert-button-text">
+                              Buy Tickets
+                            </span>
                           ) : (
-                            "RSVP"
+                            <span className="button-text concert-button-text">
+                              RSVP
+                            </span>
                           )}
                         </button>
                       )}
@@ -1567,35 +1575,39 @@ const Concert = (props) => {
                         <div className="button-container">
                           {userCrews.length > 0 ? (
                             <button
-                              className="primary-button button-text invite-crew-button"
+                              className="primary-button invite-crew-button"
                               onClick={() => setShowInviteModal(true)}
                             >
-                              <span>Invite Crew</span>
+                              <span className="button-text invite-button-text">
+                                Invite Crew
+                              </span>
                             </button>
                           ) : (
                             <button
-                              className="primary-button button-text invite-crew-button"
+                              className="primary-button invite-crew-button"
                               onClick={() => setShowCreateCrewModal(true)}
                             >
-                              <span>Create a Crew</span>
+                              <span className="button-text invite-button-text">
+                                Create a Crew
+                              </span>
                             </button>
                           )}
                         </div>
                       </Row>
                     )}
-                    <Row className="logistics-row">
+                    <Row className="logistics-top">
                       <span className="header-6">
                         {concert_info.week_day}, {concert_info.formatted_date}
                       </span>
                     </Row>
                     <hr className="solid" />
-                    <Row className="logistics-row">
+                    <Row>
                       <span className="header-6">
                         {concert_info.formatted_time} EST
                       </span>
                     </Row>
                     <hr className="solid" />
-                    <Row className="logistics-row">
+                    <Row>
                       <span className="header-6">
                         Streamed from {concert_info.location}
                       </span>
