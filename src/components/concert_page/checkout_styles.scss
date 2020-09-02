@@ -157,6 +157,10 @@
     transform: translateX(-50%);
     background: #E465A2;
     border-radius: 4px;
+    color: #000000 !important;
+    &:hover {
+        background: #EA91BD;
+    }
 }
 
 
