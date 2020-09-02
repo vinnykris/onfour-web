@@ -344,45 +344,45 @@ const NavBar = () => {
             <NavLink
               exact
               to="/"
-              className="nav-page-white header-7"
+              className="nav-page-white header-8"
               onClick={leaveVideoChat}
             >
               Home
             </NavLink>
             <NavLink
               to="/about"
-              className="nav-page-white header-7"
+              className="nav-page-white header-8"
               onClick={leaveVideoChat}
             >
               About
             </NavLink>
             <NavLink
               to="/stream"
-              className="nav-page-white header-7"
+              className="nav-page-white header-8"
               onClick={leaveVideoChat}
             >
               Stream
             </NavLink>
             <NavLink
               to="/upcoming"
-              className="nav-page-white header-7"
+              className="nav-page-white header-8"
               onClick={leaveVideoChat}
             >
               Upcoming
             </NavLink>
             {!auth ? (
-              <div className="login-link-container">
-                <NavLink
-                  to={{
-                    pathname: "/login",
-                    state: { current: location },
-                  }}
-                  className="nav-page-white header-7"
-                  onClick={leaveVideoChat}
-                >
+              <NavLink
+                to={{
+                  pathname: "/login",
+                  state: { current: location },
+                }}
+                className="login-nav"
+                onClick={leaveVideoChat}
+              >
+                <div className="primary-button login-button segmented-button-text">
                   Log In
-                </NavLink>
-              </div>
+                </div>
+              </NavLink>
             ) : (
               <div className="login-link-container logged-in header-7">
                 <Dropdown
