@@ -9,7 +9,12 @@
   margin: auto;
   // padding: 25%;
   align-items: center;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
 }
 
 .join-chat-grid {
@@ -29,7 +34,7 @@
 
   width: 100%;
   // color: #4d4d4d;
-  color: rgba(255, 255, 255, 0.87);;
+  color: rgba(255, 255, 255, 0.87);
   border: 0;
   margin: auto;
 
@@ -59,7 +64,7 @@
   width: 100%;
   letter-spacing: 2px;
   background-color: #303096;
-  color: rgba(255, 255, 255, 0.87);;
+  color: rgba(255, 255, 255, 0.87);
   font-size: 15px;
   padding: 12px 24px;
   border: none;
@@ -96,7 +101,12 @@ button:focus {
   bottom: 0px;
   top: 0px;
   left: 0px;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
 }
 
 .artist-view {
@@ -107,7 +117,12 @@ button:focus {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
   min-height: 0;
   height: 100%;
   max-height: 100%;
@@ -122,7 +137,12 @@ button:focus {
   align-items: center;
   justify-content: space-between;
   // background: #757575;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
   border-radius: 4px 4px 0 0;
   border-bottom: 1px solid rgba(136, 136, 136, 0.38);
   height: 30px;
@@ -132,7 +152,12 @@ button:focus {
 .onfour-title {
   height: 29px;
   width: 100%;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
   color: #dddddd;
   text-align: left;
   line-height: 30px;
@@ -174,7 +199,7 @@ button:focus {
   height: 100%;
   width: 100%;
   flex-flow: row;
-  color: rgba(255, 255, 255, 0.87);;
+  color: rgba(255, 255, 255, 0.87);
   @include respond-to("small") {
     margin: auto;
   }
@@ -198,7 +223,7 @@ button:focus {
   flex: 0.5;
   justify-content: flex-end;
   margin-right: 5%;
-  color: rgba(255, 255, 255, 0.87);;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .online-icon {
@@ -229,7 +254,7 @@ button:focus {
   padding: 3% 12px;
   width: 70%;
   font-size: 1.2em;
-  color: rgba(255, 255, 255, 0.87);;
+  color: rgba(255, 255, 255, 0.87);
   @include respond-to("x-large") {
     font-size: 0.9em;
   }
@@ -244,14 +269,24 @@ button:focus {
     font-size: 1em;
     padding: 2% 10px;
   }
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.14)
+    ),
+    #07070f;
 }
 
 .send-button {
   color: #fff !important;
   text-transform: none;
   text-decoration: none;
-  background:  linear-gradient(0deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.14)
+    ),
+    #07070f;
   padding: 1px;
   display: inline-block;
   border: none;
@@ -337,7 +372,7 @@ button:focus {
   background: transparent;
   border-radius: 0px;
   padding: 0px;
-  color: rgba(255, 255, 255, 0.87);;
+  color: rgba(255, 255, 255, 0.87);
   display: inline-block;
   width: auto;
   max-width: 70%;
@@ -349,7 +384,7 @@ button:focus {
   align-items: center;
   // border-radius: 20px;
   padding: 0px 0px;
-  color: rgba(255, 255, 255, 0.87);;
+  color: rgba(255, 255, 255, 0.87);
   display: inline-block;
   max-width: 80%;
   text-align: center;
@@ -409,7 +444,38 @@ button:focus {
   @include respond-to("small") {
     font-size: 1em;
   }
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
+}
+
+.admin-sent-text {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0px;
+  padding: 0px;
+  width: auto;
+  @include respond-to("xx-large") {
+    font-size: 0.8em;
+  }
+  @include respond-to("x-large") {
+    font-size: 0.7em;
+  }
+  @include respond-to("large") {
+    font-size: 0.6em;
+  }
+  @include respond-to("small") {
+    font-size: 1em;
+  }
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
 }
 
 .fa-send {
@@ -437,7 +503,7 @@ button:focus {
 }
 
 .color-white {
-  color: rgba(255, 255, 255, 0.87);;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .color-dark {
@@ -456,7 +522,7 @@ button:focus {
 }
 
 .background-white {
-  background: rgba(255, 255, 255, 0.87);;
+  background: rgba(255, 255, 255, 0.87);
 }
 
 // TEXT CONTAINER
@@ -465,7 +531,7 @@ button:focus {
   display: flex;
   flex-direction: column;
   margin-left: 100px;
-  color: rgba(255, 255, 255, 0.87);;
+  color: rgba(255, 255, 255, 0.87);
   height: 60%;
   justify-content: space-between;
 }
@@ -493,7 +559,12 @@ button:focus {
   color: #fff !important;
   text-transform: none;
   text-decoration: none;
-  background:  linear-gradient(0deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.14)
+    ),
+    #07070f;
   cursor: pointer;
   border: none;
   letter-spacing: 1px;
@@ -536,21 +607,21 @@ button:focus {
 }
 
 .username-color-0 {
-  color: #D1AE53 !important;
+  color: #d1ae53 !important;
 }
 
 .username-color-1 {
-  color: #49BDFE !important;
+  color: #49bdfe !important;
 }
 
 .username-color-2 {
-  color: #04ADC0 !important;
+  color: #04adc0 !important;
 }
 
 .username-color-3 {
-  color: #E26A6A !important;
+  color: #e26a6a !important;
 }
 
 .username-color-4 {
-  color: #BF8AF4 !important;
+  color: #bf8af4 !important;
 }
