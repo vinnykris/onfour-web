@@ -79,7 +79,7 @@ const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
 
     if (result.error) {
       // Show error to your customer.
-      console.log(result.error.message);
+      // console.log(result.error.message);
       setWaiting(false);
       setMessage(result.error.message);
       setDisplayErr(true);

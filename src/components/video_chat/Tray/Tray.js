@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import speak_icon from "../../../images/video_chat_icons/radio_button_checked_24px.png";
+// import speak_icon from "../../../images/video_chat_icons/radio_button_checked_24px.png";
 import "./Tray.scss";
 import TrayButton, {
   TYPE_MUTE_CAMERA,
@@ -154,7 +154,7 @@ export default function Tray(props) {
   }
 
   function doSomething(e) {
-    console.log("setting volume");
+    // console.log("setting volume");
     callObject.setLocalAudio(true);
     props.stream_vol_adjust(0.25);
   }
@@ -190,12 +190,12 @@ export default function Tray(props) {
 
   function switchCameraIcon() {
     if (camera_icon == "fas fa-video-slash muted") {
-      console.log("camera should be on");
+      // console.log("camera should be on");
       setCameraIcon("fas fa-video unmuted");
       setCameraMuted(false);
       toggleCamera();
     } else {
-      console.log("camera should be off");
+      // console.log("camera should be off");
       setCameraIcon("fas fa-video-slash muted");
       setCameraMuted(true);
       toggleCamera();
@@ -220,7 +220,7 @@ export default function Tray(props) {
       props.adjust_volume(current_volume);
     } else {
       setVolumeIcon("fas fa-volume-mute volume-icon muted");
-      console.log(props.volume);
+      // console.log(props.volume);
       setCurrentVol(props.volume);
       props.adjust_volume(0);
     }

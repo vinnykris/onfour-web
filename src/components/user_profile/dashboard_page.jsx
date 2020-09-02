@@ -217,7 +217,7 @@ const DashboardPage = ({
    */
   const handleWindowResize = () => {
     if (sliderContainerRef.current && userCrews.length > 0)
-      console.log("checking if overflowing!");
+      // console.log("checking if overflowing!");
     if (checkIfSliderIsOverflowing()) {
       setShowForwardSliderButton(true);
     } else {

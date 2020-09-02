@@ -69,11 +69,11 @@ const Profile = (props) => {
   // };
 
   useEffect(() => {
-    console.log(variables);
+    // console.log(variables);
     const fetchData = async () => {
       // RSVP'd Upcoming shows
       const results = await getUpcomingPurchasedShows(width, username);
-      console.log(results);
+      // console.log(results);
       const upcoming_result = results[0];
       const memories_result = results[1];
       const ticket_stubs = results[2];

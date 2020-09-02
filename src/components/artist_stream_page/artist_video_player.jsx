@@ -1,6 +1,5 @@
 // React Imports
 import React, { useEffect, useRef }from "react";
-import ReactPlayer from "react-player";
 
 // Styling Imports
 import "./artist_stream_styles.scss";

@@ -22,7 +22,7 @@ import { Grid, Row, Col } from "../grid";
 import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/artist_video_chat";
-import CountdownTimer from "../countdown_timer/countdown_timer";
+// import CountdownTimer from "../countdown_timer/countdown_timer";
 
 import viewers_icon from "../../images/icons/stream_icons/viewers_icon.png";
 
@@ -41,7 +41,7 @@ const StreamPage = () => {
 
   // CHAT SECTION
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
-  const [chat_name, setChatName] = useState(""); // Sets user name for chat
+  // const [chat_name, setChatName] = useState(""); // Sets user name for chat
   const [viewers, setViewers] = useState(0); // Sets number of live viewers on page
   // Function passed as prop to join chat
   // const joinSubmit = (name, mode) => {

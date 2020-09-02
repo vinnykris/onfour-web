@@ -224,10 +224,10 @@ const Concert = (props) => {
   };
 
   const fetchUserData = async (name) => {
-    console.log(name);
+    // console.log(name);
     const user_concerts = await fetchUserConcertIDs(name);
-    console.log("fetching user data");
-    console.log(user_concerts);
+    // console.log("fetching user data");
+    // console.log(user_concerts);
     if (user_concerts && user_concerts.includes(concert_id)) {
       setHasTicket(true);
     }
@@ -238,7 +238,7 @@ const Concert = (props) => {
   useEffect(() => {
     // Check is user is logged in
     // (async () => {
-    console.log("mounting");
+    // console.log("mounting");
     Auth.currentAuthenticatedUser({})
       .then(async (user) => {
         setAuth(true);
@@ -272,7 +272,7 @@ const Concert = (props) => {
         };
         fetchConcert(concert_id);
       }
-      console.log("fetch data is done");
+      // console.log("fetch data is done");
     };
 
     // fetchData();
@@ -347,8 +347,8 @@ const Concert = (props) => {
 
   // Go to checkout page for paid concert
   const goToCheckout = () => {
-    console.log("go to checkout");
-    console.log(total);
+    // console.log("go to checkout");
+    // console.log(total);
     setShowPaymentBox(true);
   };
 
@@ -498,7 +498,7 @@ const Concert = (props) => {
         if (result.status === 200) {
           setCalenderAdded(true);
           setCalendarBtnClicked(false);
-          console.log(concert_info.date);
+          // console.log(concert_info.date);
           // animationEnd();
         }
       })
@@ -544,6 +544,7 @@ const Concert = (props) => {
                                   concert_info.date.replace(/-/gi, "/")
                                 }
                                 target="_blank"
+                                rel="noopener noreferrer"
                               >
                                 Google Calendar
                               </a>{" "}
@@ -1036,6 +1037,7 @@ const Concert = (props) => {
                                   concert_info.date.replace(/-/gi, "/")
                                 }
                                 target="_blank"
+                                rel="noopener noreferrer"
                               >
                                 Google Calendar
                               </a>{" "}
@@ -1431,6 +1433,7 @@ const Concert = (props) => {
                             concert_info.date.replace(/-/gi, "/")
                           }
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Google Calendar
                             </a>{" "}

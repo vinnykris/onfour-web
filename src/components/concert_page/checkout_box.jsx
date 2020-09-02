@@ -18,7 +18,7 @@ const checkoutBox = (props) => {
     const selectBackstagePass = () => {
         if (document.getElementById("backstage-pass-div")) {
             if (document.getElementById("backstage-pass-div").classList.contains("selected-style")) {
-                console.log(document.getElementById("backstage-pass-div").classList);
+                // console.log(document.getElementById("backstage-pass-div").classList);
                 document.getElementById("backstage-pass-div").classList.remove('selected-style');
                 props.setTotal(props.general_price);
             } else {

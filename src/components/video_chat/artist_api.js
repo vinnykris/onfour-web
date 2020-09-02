@@ -19,7 +19,7 @@ async function createRoom() {
 
   let room_response = await getAllRooms();
   const random_room_id = getRandomInt(room_response.total_count);
-  console.log(room_response.data[random_room_id].name);
+  // console.log(room_response.data[random_room_id].name);
   return {
     url: "https://onfour.daily.co/" + room_response.data[random_room_id].name,
   };

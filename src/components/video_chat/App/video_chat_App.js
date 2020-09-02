@@ -58,7 +58,7 @@ export default function VideoChatApp({
    */
   const createPublicCall = useCallback(async (room_name, is_created) => {
     setAppState(STATE_CREATING);
-    console.log(is_created);
+    // console.log(is_created);
     let response = await api.createRoom(room_name, is_created);
     if (response.url) {
       return response.url
@@ -118,7 +118,7 @@ export default function VideoChatApp({
   const startJoiningPrivateCall = useCallback(async (url) => {
     if (owner_name.indexOf(user_name) >= 0) {
       const newToken = await getToken(user_name);
-      console.log(newToken);
+      // console.log(newToken);
       const newCallObject = DailyIframe.createCallObject({
         userName: user_name,
         token: newToken,
@@ -270,7 +270,7 @@ export default function VideoChatApp({
               setAppState(STATE_IDLE);
             });
           }, 3000);
-          console.log(appState);
+          // console.log(appState);
           break;
         default:
           break;
