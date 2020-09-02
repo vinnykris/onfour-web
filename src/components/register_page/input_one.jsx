@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import "./input_one_styles.scss";
+import eye from "../../images/icons/eye.png";
 
 const InputOne = ({
   id,
@@ -10,19 +11,43 @@ const InputOne = ({
   value,
   placeholder,
   onChange,
+  is_password,
 }) => {
+  const [hidden, setHidden] = useState("true");
   return (
-    <div className="input-one-container">
-      <input
-        type={type}
-        name={name}
-        id={id}
-        required={is_required}
-        value={value}
-        onChange={onChange}
-        className="input-one body-1"
-      />
-      <span className="floating-label body-1">{placeholder}</span>
+    <div>
+      {is_password ? (
+        <div className="input-one-container">
+          <input
+            type={hidden ? "password" : "text"}
+            name={name}
+            id={id}
+            required={is_required}
+            value={value}
+            onChange={onChange}
+            className="input-one body-1"
+          />
+          <img
+            src={eye}
+            className="view-password"
+            onClick={() => setHidden(!hidden)}
+          />
+          <span className="floating-label body-1">{placeholder}</span>
+        </div>
+      ) : (
+        <div className="input-one-container">
+          <input
+            type={type}
+            name={name}
+            id={id}
+            required={is_required}
+            value={value}
+            onChange={onChange}
+            className="input-one body-1"
+          />
+          <span className="floating-label body-1">{placeholder}</span>
+        </div>
+      )}
     </div>
   );
 };

@@ -412,6 +412,7 @@ const Register = (props) => {
                               onChange={(event) =>
                                 setPassword(event.target.value)
                               }
+                              is_password={true}
                               // data-tip
                               // data-for="registerTip"
                             />
