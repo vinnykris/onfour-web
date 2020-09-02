@@ -248,10 +248,10 @@ const Register = (props) => {
                         onSubmit={registerSubmitPin}
                       >
                         <Row className="signup-header">
-                          <h6 className="signup-header-text">
+                          <div className="header-7 register-text-color">
                             Welcome {name}. Please provide the verification code
                             sent to your email to complete registration!
-                          </h6>
+                          </div>
                         </Row>
                         <Row className="register-input-row">
                           <input
@@ -304,8 +304,8 @@ const Register = (props) => {
                       >
                         <div className="login-form-container">
                           <div className="signup-header">
-                            <div className="header-7">
-                              Sign up with your email and username below
+                            <div className="header-7 register-text-color">
+                              Join the onfour experience below
                             </div>
                           </div>
                           {/* <input
@@ -709,15 +709,14 @@ const Register = (props) => {
                             checked={checked}
                             onChange={(event) => setChecked(!checked)}
                           />
-                          <label className="body-1">
+                          <label className="header-8 register-text-color">
                             I want to receive email updates about future onfour
                             shows.
                           </label>
                         </div>
                         <div style={{ color: "red" }}>{error}</div>
-                        <br></br>
                         <button
-                          className="fan-register-submit-button"
+                          className="primary-button button-text register-submit-button fan-submit-button"
                           type="submit"
                           form="register"
                           value="FanSubmit"
@@ -726,7 +725,7 @@ const Register = (props) => {
                           I'M A FAN
                         </button>
                         <button
-                          className="artist-register-submit-button"
+                          className="primary-button button-text register-submit-button artist-submit-button"
                           type="submit"
                           form="register"
                           value="ArtistSubmit"
@@ -735,13 +734,13 @@ const Register = (props) => {
                           I'M AN ARTIST
                         </button>
                       </form>
-                      <p className="signup-footer">
+                      <div className="header-7 signup-footer register-text-color">
                         Already have an account?{" "}
-                        <a href="/login" className="signin-link">
-                          Sign in
+                        <a href="/login" className="header-7 signin-link">
+                          Log in
                         </a>
                         .
-                      </p>
+                      </div>
                     </div>
                   )}
                 </div>

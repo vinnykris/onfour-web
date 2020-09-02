@@ -3,8 +3,13 @@
 
 .register-page-content {
   background-color: black;
-  height: 50%;
+  //height: 50%;
   width: 100%;
+  background: url("../../images/backgrounds/wave_2.svg") center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .form-section {
@@ -13,7 +18,7 @@
 
 .register-form {
   margin-top: 8.5%;
-  width: 29%;
+  width: 360px;
   padding-bottom: 2%;
 }
 
@@ -57,21 +62,30 @@
   padding-bottom: 2.5%;
 }
 
-.fan-register-submit-button {
-  width: 47%;
-  color: white;
-  font-size: 14px;
-  font-weight: 420;
-  background-color: #794d94;
+.register-submit-button {
+  width: 167px;
+  height: 45px;
+  margin: 0;
+  padding: 0;
+  margin-top: 28px;
+}
+
+.fan-submit-button {
+  //width: 47%;
+  // width: 167px;
+  // color: white;
+  // font-size: 14px;
+  // font-weight: 420;
+  // background-color: #794d94;
   float: left;
 }
 
-.artist-register-submit-button {
-  width: 47%;
-  color: white;
-  font-size: 14px;
-  font-weight: 420;
-  background-color: #794d94;
+.artist-submit-button {
+  //width: 47%;
+  // color: white;
+  // font-size: 14px;
+  // font-weight: 420;
+  // background-color: #794d94;
   float: right;
 }
 
@@ -109,7 +123,7 @@
 }
 
 .signup-header {
-  padding-bottom: 3%;
+  padding-bottom: 20px;
   text-align: center;
 }
 
@@ -119,12 +133,15 @@
 }
 
 .signin-link {
-  color: #794d94;
-  text-decoration: underline;
+  color: $primary-color !important;
+  //text-decoration: underline;
+}
+
+.register-text-color {
+  color: $on-surface-medium !important;
 }
 
 .signup-footer {
-  color: white;
   padding-bottom: 5%;
 }
 
