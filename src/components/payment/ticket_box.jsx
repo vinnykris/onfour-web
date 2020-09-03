@@ -1,5 +1,6 @@
 // React Imports
 import React, { useState } from "react";
+import NumberFormat from "react-number-format";
 
 // Stripe Imports
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
@@ -220,3 +221,4 @@ const TicketBox = (props) => {
 };
 
 export default TicketBox;
+

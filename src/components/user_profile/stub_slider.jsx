@@ -13,7 +13,7 @@ import ProfileStub from "./profile_stub";
 
 const StubSlider = ({ stubs }) => {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
-  console.log(stubs);
+  // console.log(stubs);
 
     // $(".centered-stubs").slick({
     //   centerMode: true,

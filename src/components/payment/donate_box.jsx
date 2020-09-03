@@ -102,7 +102,7 @@ const CheckoutForm = () => {
 
     if (result.error) {
       // Show error to your customer.
-      console.log(result.error.message);
+      // console.log(result.error.message);
       setWaiting(false);
       setDisplayErr(true);
       setMessage(result.error.message);

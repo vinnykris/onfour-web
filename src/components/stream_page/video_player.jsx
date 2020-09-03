@@ -167,7 +167,7 @@ function VideoPlayer({
   // this function asks Amplify analytics to record the streamVisit event
   const recordEvent = () => {
     Analytics.record({ name: "streamVisit" });
-    console.log("event recorded for Analytics");
+    // console.log("event recorded for Analytics");
   };
 
   // Showing the user either the logged in waiting page or the

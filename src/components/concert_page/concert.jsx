@@ -37,6 +37,8 @@ import TicketBox from "../payment/ticket_box";
 import CheckoutBox from "../payment/checkout_box";
 import InviteCrewModal from "./invite_crew_modal";
 import CreateCrewModal from "../user_profile/create_crew_modal";
+import CheckoutBox from "./checkout_box";
+import PayTicketBox from "./pay_ticket_box";
 
 // Module imports
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -223,10 +225,10 @@ const Concert = (props) => {
   };
 
   const fetchUserData = async (name) => {
-    console.log(name);
+    // console.log(name);
     const user_concerts = await fetchUserConcertIDs(name);
-    console.log("fetching user data");
-    console.log(user_concerts);
+    // console.log("fetching user data");
+    // console.log(user_concerts);
     if (user_concerts && user_concerts.includes(concert_id)) {
       setHasTicket(true);
     }
@@ -237,17 +239,17 @@ const Concert = (props) => {
   useEffect(() => {
     // Check is user is logged in
     // (async () => {
-    console.log("mounting");
+    // console.log("mounting");
     Auth.currentAuthenticatedUser({})
       .then(async (user) => {
         setAuth(true);
         setUsername(user.username);
         setUserEmail(user.email);
-        console.log(user.username);
+        // console.log(user.username);
         await fetchData(user.username);
         setLoading(false);
-        console.log(concert_info);
-        console.log(has_ticket);
+        // console.log(concert_info);
+        // console.log(has_ticket);
       })
       .catch(async (err) => {
         setAuth(false);
@@ -271,7 +273,7 @@ const Concert = (props) => {
         };
         fetchConcert(concert_id);
       }
-      console.log("fetch data is done");
+      // console.log("fetch data is done");
     };
 
     // fetchData();
@@ -296,7 +298,6 @@ const Concert = (props) => {
       concert_time = concert_info.time;
     }
   }, [concert_info]);
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -334,7 +335,8 @@ const Concert = (props) => {
 
   // Go to checkout page for paid concert
   const goToCheckout = () => {
-    console.log("go to checkout");
+    // console.log("go to checkout");
+    // console.log(total);
     setShowPaymentBox(true);
   };
 
@@ -412,7 +414,6 @@ const Concert = (props) => {
     if (document.getElementById("add-to-calendar")) {
       document.getElementById("add-to-calendar").style.visibility = "visible";
     }
-
     // After 8 seconds, end the stub animation and go back to the concert page
     // setTimeout(() => {
     //   if (!stub_animation_done) animationEnd();
@@ -485,7 +486,7 @@ const Concert = (props) => {
         if (result.status === 200) {
           setCalenderAdded(true);
           setCalendarBtnClicked(false);
-          console.log(concert_info.date);
+          // console.log(concert_info.date);
           // animationEnd();
         }
       })
@@ -531,6 +532,7 @@ const Concert = (props) => {
                                   concert_info.date.replace(/-/gi, "/")
                                 }
                                 target="_blank"
+                                rel="noopener noreferrer"
                               >
                                 Google Calendar
                               </a>{" "}
@@ -1023,6 +1025,7 @@ const Concert = (props) => {
                                   concert_info.date.replace(/-/gi, "/")
                                 }
                                 target="_blank"
+                                rel="noopener noreferrer"
                               >
                                 Google Calendar
                               </a>{" "}
@@ -1082,7 +1085,34 @@ const Concert = (props) => {
                 }}
                 className="rodal-custom"
               >
-                <Grid className="modal-grid">
+              {showPaymentBox ? (
+                  <PayTicketBox
+                    general_price = {general_price}
+                    backstage_price = {backstage_price}
+                    // backstage_price = {10}
+                    // general_price = {1}
+                    total = {total}
+                    goBackToModal= {goBackToModal}
+                    addTicket = {addTicket}
+                  ></PayTicketBox>
+                  ) : (
+                  <CheckoutBox
+                    username = {username}
+                    location = {location}
+                    artist_name = {concert_info.artist_name}
+                    concert_name = {concert_info.concert_name}
+                    concert_full_time = {concert_info.week_day + ", " + concert_info.formatted_date + ", " + concert_info.formatted_time}
+                    general_price = {general_price}
+                    backstage_price = {backstage_price}
+                    goToCheckout = {goToCheckout}
+                    // backstage_price = {10}
+                    // general_price = {1}
+                    addTicket = {addTicket}
+                    setTotal = {setTotal}
+                    total = {total}
+                  ></CheckoutBox>
+                )}
+                {/* <Grid className="modal-grid">
                   <Row className="modal-row">
                     {showPaymentBox ? (
                       <TicketBox
@@ -1355,7 +1385,7 @@ const Concert = (props) => {
                       </Row>
                     )}
                   </Row>
-                </Grid>
+                </Grid> */}
               </Rodal>
               <div className="banner-container">
                 <img

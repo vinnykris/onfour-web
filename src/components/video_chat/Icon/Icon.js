@@ -1,9 +1,9 @@
 import React from "react";
 import "./icon.css";
 
-import speak_icon from "../../../images/video_chat_icons/radio_button_checked_24px.png";
-import mic_icon from "../../../images/video_chat_icons/mic_off_24pxoff_mic.png";
-import volume_icon from "../../../images/video_chat_icons/volume_down_24px.png";
+// import speak_icon from "../../../images/video_chat_icons/radio_button_checked_24px.png";
+// import mic_icon from "../../../images/video_chat_icons/mic_off_24pxoff_mic.png";
+// import volume_icon from "../../../images/video_chat_icons/volume_down_24px.png";
 
 const TYPE_MUTE_CAMERA = "camera";
 const TYPE_MUTE_MIC = "mute-mic";
@@ -26,7 +26,7 @@ export default function Icon(props) {
   }
 
   function switchCameraIcon() {
-    console.log("switch icon");
+    // console.log("switch icon");
     if (camera_icon == "fa fa-microphone-slash") {
       camera_icon = "fa fa-microphone";
     } else {

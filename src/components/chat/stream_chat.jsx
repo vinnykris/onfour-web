@@ -35,7 +35,7 @@ const Chat = ({ chat_name, chatStatus, setViewers, artistView }) => {
 
   // Function called on mount
   useEffect(() => {
-    console.log(name);
+    // console.log(name);
     socket = io(ENDPOINT); // Connect socket to server
 
     setName(name);
@@ -80,7 +80,7 @@ const Chat = ({ chat_name, chatStatus, setViewers, artistView }) => {
         "You cannot send messages as a guest. Please log in to send messages!"
       );
     } else {
-      console.log(name);
+      // console.log(name);
       if (message) {
         if (message.length > 250) {
           alert("Message cannot be longer than 250 characters.");

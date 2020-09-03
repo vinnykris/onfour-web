@@ -325,7 +325,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const getIsLive = async () => {
     // Calling the API, using async and await is necessary
     if (concert_id) {
-      console.log("calling api");
+      // console.log("calling api");
       await API.graphql(
         graphqlOperation(queries.get_concert_is_live, {
           id: concert_id,

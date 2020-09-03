@@ -47,7 +47,7 @@ export default function Call(props) {
         type: PARTICIPANTS_CHANGE,
         participants: callObject.participants(),
       });
-      console.log(callObject.participants());
+      // console.log(callObject.participants());
     }
 
     // Use initial state
