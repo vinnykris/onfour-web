@@ -11,6 +11,8 @@
     display: flex;
     flex: 1 1 auto;
     flex-flow: column;
+    height: calc(100vh - 131px);
+    max-height: calc(100vh - 131px);
   }
 }
 
@@ -36,7 +38,6 @@
   height: 100%;
   width: 100%;
 }
-
 
 .mobile-grid-stream {
   display: inline;

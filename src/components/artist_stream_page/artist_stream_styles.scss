@@ -2,7 +2,6 @@
 
 @import "../../styles";
 
-
 .artist-stream-container {
   height: calc(-53px + 100vh);
   @include respond-to("small") {
@@ -58,7 +57,7 @@
 
 // CHAT STYLING
 .artist-chat-main {
-  height: calc((-53px + 100vh)/2);
+  height: calc((-53px + 100vh) / 2);
   // height: 100vh;
   width: 100%;
   // position: -webkit-sticky;
@@ -114,7 +113,7 @@
   border-bottom: 3px solid black;
 }
 
-.full-width{
+.full-width {
   width: 100%;
   height: 50%;
 }
@@ -179,7 +178,6 @@
   top: 0px;
 }
 
-
 .artist-toggle-chat-button {
   border-radius: 5px 0px 0px 5px;
   background-color: transparent;
@@ -209,7 +207,6 @@
   width: 100%;
   height: 100%;
 }
-
 
 .artist-video-wrapper {
   display: inline-block;
@@ -250,11 +247,6 @@
   height: auto;
 }
 
-.stream-wrapper-mobile {
-  width: 100%;
-  height: 55%;
-}
-
 .artist-stream-wrapper {
   margin: auto;
   width: 100%;
@@ -289,7 +281,7 @@
   height: 30px;
   width: 100%;
   background-color: #17171b;
-  color: #DDDDDD;
+  color: #dddddd;
   text-align: left;
   line-height: 30px;
   border-bottom: 1px solid #454242;
@@ -317,7 +309,7 @@
   top: 2px;
   height: 30px;
   width: auto;
-  color: #DDDDDD;
+  color: #dddddd;
   font-family: Helvetica;
   font-style: normal;
   font-weight: normal;
