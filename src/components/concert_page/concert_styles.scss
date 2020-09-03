@@ -129,6 +129,24 @@
   cursor: pointer;
 }
 
+.add-calendar-button {
+  min-width: 94px;
+  min-height: 30px;
+  // width: 94px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-sizing: border-box;
+  border-radius: 3px;
+  background-color: transparent;
+  text-align: center;
+  padding: 0px 10px;
+  color: rgba(255, 255, 255, 0.6) !important;
+  &:hover {
+    color: #626BF7 !important;
+    border: none;
+  }
+}
+
 .calendar-button {
   margin: 2%;
   visibility: hidden;

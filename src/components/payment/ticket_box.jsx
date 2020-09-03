@@ -137,8 +137,8 @@ const CheckoutForm = (props) => {
                 {display_err ? (
                   <p className="error-msg">{payment_message}</p>
                 ) : (
-                  <br></br>
-                )}
+                    <br></br>
+                  )}
                 <input
                   name="name"
                   label="Name"
@@ -176,28 +176,28 @@ const CheckoutForm = (props) => {
                     </p>
                   </div>
                 ) : (
-                  <div>
-                    {waiting ? (
-                      <div>
-                        <p className="donate-process-text">Processing</p>
-                      </div>
-                    ) : (
-                      <div>
-                        <p className="donate-process-text">
-                          Please confirm you are paying ${props.amount_value}
-                        </p>
-                        <button
-                          form="ticket"
-                          className="donate-button button-text"
-                          type="submit"
-                          disabled={!stripe}
-                        >
-                          Confirm
+                    <div>
+                      {waiting ? (
+                        <div>
+                          <p className="donate-process-text">Processing</p>
+                        </div>
+                      ) : (
+                          <div>
+                            <p className="donate-process-text">
+                              Please confirm you are paying ${props.amount_value}
+                            </p>
+                            <button
+                              form="ticket"
+                              className="donate-button button-text"
+                              type="submit"
+                              disabled={!stripe}
+                            >
+                              Confirm
                         </button>
-                      </div>
-                    )}
-                  </div>
-                )}
+                          </div>
+                        )}
+                    </div>
+                  )}
               </div>
             );
           } else {
@@ -217,7 +217,8 @@ const CheckoutForm = (props) => {
 // donateBox is a wrapper component for CheckoutForm
 // It is used for cleaner layout
 const TicketBox = (props) => {
-  return <CheckoutForm amount_value = {props.amount_value} addTicket = {props.addTicket}/>;
+  return <CheckoutForm amount_value={props.amount_value} addTicket={props.addTicket} />;
 };
 
 export default TicketBox;
+

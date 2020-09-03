@@ -31,9 +31,10 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Rodal from "rodal";
 import { Grid, Row, Col } from "../grid";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { Checkbox2, useCheckboxState } from "pretty-checkbox-react";
+// import { Checkbox2, useCheckboxState } from "pretty-checkbox-react";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
 import TicketBox from "../payment/ticket_box";
+import CheckoutBox from "../payment/checkout_box";
 import InviteCrewModal from "./invite_crew_modal";
 import CreateCrewModal from "../user_profile/create_crew_modal";
 import CheckoutBox from "./checkout_box";
@@ -42,14 +43,14 @@ import PayTicketBox from "./pay_ticket_box";
 // Module imports
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { motion, AnimatePresence } from "framer-motion";
-import { withStyles } from "@material-ui/core/styles";
-import { green } from "@material-ui/core/colors";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+// import { withStyles } from "@material-ui/core/styles";
+// import { green } from "@material-ui/core/colors";
+// import FormGroup from "@material-ui/core/FormGroup";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import Checkbox from "@material-ui/core/Checkbox";
 // import CircleChecked from '@material-ui/icons/CheckCircleOutline';
-import CircleCheckedFilled from "@material-ui/icons/CheckCircle";
-import CircleUnchecked from "@material-ui/icons/RadioButtonUnchecked";
+// import CircleCheckedFilled from "@material-ui/icons/CheckCircle";
+// import CircleUnchecked from "@material-ui/icons/RadioButtonUnchecked";
 import GroupAddOutlinedIcon from "@material-ui/icons/GroupAddOutlined";
 
 // EmailJS Import
@@ -88,7 +89,7 @@ const Concert = (props) => {
   const [backstage_price, setBackstagePrice] = useState(0);
   const [stub_animation_done, setStubAnimationDone] = useState(false);
   const [general_checked, setGeneralChecked] = useState(true);
-  const [backstage_checked, setBackstageChecked] = useState(false);
+  // const [backstage_checked, setBackstageChecked] = useState(false);
   const [has_ticket, setHasTicket] = useState(false);
   const [loading, setLoading] = useState(true);
   const [enter_venue_status, setEnterVenueStatus] = useState(false);
@@ -119,7 +120,7 @@ const Concert = (props) => {
     backstage: 10,
   };
 
-  const backstage_checkbox = useCheckboxState();
+  // const backstage_checkbox = useCheckboxState();
 
   // Concert-specific info
   const concert_id = props.match.params.showID; // Passed from URL
@@ -293,23 +294,10 @@ const Concert = (props) => {
       price_map.general = concert_info.price;
       setGeneralPrice(concert_info.price);
       setTotal(concert_info.price);
-      // setTotal(1);
       concert_date = concert_info.date;
       concert_time = concert_info.time;
     }
   }, [concert_info]);
-
-  // Hook called when price updates or when user selects backstage pass
-  // useEffect(() => {
-  //   if (backstage_checked) {
-  //     // WHAT HAPPENS IF BACKSTAGE CHECKBOX IS CHECKED
-  //     setTotal(general_price + backstage_price);
-  //     setBackstagePass(true);
-  //   } else {
-  //     setTotal(general_price);
-  //     setBackstagePass(false);
-  //   }
-  // }, [general_price, backstage_price, backstage_checked]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -462,9 +450,9 @@ const Concert = (props) => {
     setGeneralChecked(true);
   };
 
-  const handleBackstageClicked = () => {
-    setBackstageChecked(!backstage_checked);
-  };
+  // const handleBackstageClicked = () => {
+  //   setBackstageChecked(!backstage_checked);
+  // };
   const addEvent = async () => {
     const eventLoad = {
       summary:
@@ -633,7 +621,7 @@ const Concert = (props) => {
                         <div className="ticket-types">
                           <Row className="ticket-row">
                             <Col size={1}>
-                              <FormControlLabel
+                              {/* <FormControlLabel
                                 control={
                                   <Checkbox
                                     icon={<CircleUnchecked />}
@@ -644,12 +632,12 @@ const Concert = (props) => {
                                   />
                                 }
                                 label="General Admission"
-                              />
+                              /> */}
                             </Col>
                           </Row>
                           <Row className="ticket-row">
                             <Col size={1}>
-                              <FormControlLabel
+                              {/* <FormControlLabel
                                 control={
                                   <Checkbox
                                     icon={<CircleUnchecked />}
@@ -658,7 +646,7 @@ const Concert = (props) => {
                                     checked={backstage_checked}
                                     onChange={handleBackstageClicked}
                                     disabled
-                                  />
+                                  /> */}
                                 }
                                 label="Backstage Pass"
                               />
@@ -1156,7 +1144,7 @@ const Concert = (props) => {
                             <div className="ticket-types">
                               <Row className="ticket-row">
                                 <Col size={3}>
-                                  <FormControlLabel
+                                  {/* <FormControlLabel
                                     control={
                                       <Checkbox
                                         icon={<CircleUnchecked />}
@@ -1167,12 +1155,12 @@ const Concert = (props) => {
                                       />
                                     }
                                     label="General Admission"
-                                  />
+                                  /> */}
                                 </Col>
                               </Row>
                               <Row className="ticket-row">
                                 <Col size={3}>
-                                  <FormControlLabel
+                                  {/* <FormControlLabel
                                     control={
                                       <Checkbox
                                         icon={<CircleUnchecked />}
@@ -1184,7 +1172,7 @@ const Concert = (props) => {
                                       />
                                     }
                                     label="Backstage Pass"
-                                  />
+                                  /> */}
                                 </Col>
                               </Row>
                             </div>
@@ -1421,37 +1409,37 @@ const Concert = (props) => {
                   <div className="tag-container concert-tag">
                     <Tag content={"In " + concert_info.days_left + " days"} />
                   </div>
-                    { calender_added ? (
-                      <p
-                        className="segmented-button-text no-padding"
+                  {calender_added ? (
+                    <p
+                      className="segmented-button-text no-padding"
+                    >
+                      Added to your{" "}
+                      <a
+                        className="google-calendar-link-text segmented-button-text"
+                        href={
+                          "https://calendar.google.com/calendar/b/0/r/week/" +
+                          concert_info.date.replace(/-/gi, "/")
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        Added to your{" "}
-                        <a
-                          className= "google-calendar-link-text segmented-button-text"
-                          href={
-                            "https://calendar.google.com/calendar/b/0/r/week/" +
-                            concert_info.date.replace(/-/gi, "/")
-                          }
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Google Calendar
-                            </a>{" "}
-                      </p>
-                    ) : calendar_button_clicked ? (
-                      <div className="left-padding-20">
-                        <MoonLoader
-                          sizeUnit={"px"}
-                          size={18}
-                          color={"white"}
-                          loading={!calender_added}
-                        />
-                      </div>
-                    ) : (
-                      <span className="secondary-button segmented-button-text add-to-calendar" onClick = {addToCalendar}>
-                        + Add to calendar
-                      </span>
-                    ) }
+                        Google Calendar
+                        </a>{" "}
+                    </p>
+                  ) : calendar_button_clicked ? (
+                    <div className="left-padding-20">
+                      <MoonLoader
+                        sizeUnit={"px"}
+                        size={18}
+                        color={"white"}
+                        loading={!calender_added}
+                      />
+                    </div>
+                  ) : (
+                        <span className="secondary-button segmented-button-text add-to-calendar" onClick={addToCalendar}>
+                          + Add to calendar
+                        </span>
+                      )}
                   {/* <div className="share-concert-container">
                       <Col size={1}>
                         <div>
