@@ -35,6 +35,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
 import TicketBox from "../payment/ticket_box";
 import CheckoutBox from "../payment/checkout_box";
+import PayTicketBox from "../payment/pay_ticket_box";
 import InviteCrewModal from "./invite_crew_modal";
 import CreateCrewModal from "../user_profile/create_crew_modal";
 
@@ -578,79 +579,53 @@ const Concert = (props) => {
                 width={100}
                 height={100}
                 measure="%"
-                customStyles={{ 
+                customStyles={{
                   padding: 0,
                   overflow: scroll,
                   maxHeight: "620px",
                   maxWidth: "482px",
-                  background: "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
-                  boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
-                  borderRadius: "10px",  
+                  background:
+                    "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                  boxShadow:
+                    "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                  borderRadius: "10px",
                 }}
                 className="rodal-custom"
               >
-                <Grid className="modal-grid">
-                  {showPaymentBox ? (
-                    <TicketBox
-                      amount_value={total}
-                      onClick={goBackToModal}
-                      registerConcert={addTicket}
-                      header={
-                        concert_info.artist_name +
-                        ": " +
-                        concert_info.concert_name
-                      }
-                    ></TicketBox>
-                  ) : (
-                    <div className="mobile-rodal">
-                      <div className="purchase-main">
-                        <div className="modal-concert-info">
-                          <h3 className="concert-info-modal-header">
-                            {concert_info.artist_name}:{" "}
-                            {concert_info.concert_name}
-                          </h3>
-                          <p className="concert-date-info">
-                            {concert_info.week_day}{" "}
-                            {concert_info.formatted_date}{" "}
-                            {concert_info.formatted_time} EST
-                          </p>
-                        </div>
-                        <div className="ticket-types">
-                          <Row className="ticket-row">
-                            <Col size={1}>
-                              {/* <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    icon={<CircleUnchecked />}
-                                    checkedIcon={<CircleCheckedFilled />}
-                                    name="general-checked"
-                                    checked={true}
-                                    onChange={handleGeneralClicked}
-                                  />
-                                }
-                                label="General Admission"
-                              /> */}
-                            </Col>
-                          </Row>
-                          <Row className="ticket-row">
-                            <Col size={1}>
-                              {/* <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    icon={<CircleUnchecked />}
-                                    checkedIcon={<CircleCheckedFilled />}
-                                    name="backstage-checked"
-                                    checked={backstage_checked}
-                                    onChange={handleBackstageClicked}
-                                    disabled
-                                  />
-                                }
-                                label="Backstage Pass"
-                              /> */}
-                            </Col>
-                          </Row>
-                        </div>
-                        <div className="invite-friends">
+                {showPaymentBox ? (
+                  <PayTicketBox
+                    general_price={general_price}
+                    backstage_price={backstage_price}
+                    // backstage_price = {10}
+                    // general_price = {1}
+                    total={total}
+                    goBackToModal={goBackToModal}
+                    addTicket={addTicket}
+                  ></PayTicketBox>
+                ) : (
+                  <CheckoutBox
+                    username={username}
+                    location={location}
+                    artist_name={concert_info.artist_name}
+                    concert_name={concert_info.concert_name}
+                    concert_full_time={
+                      concert_info.week_day +
+                      ", " +
+                      concert_info.formatted_date +
+                      ", " +
+                      concert_info.formatted_time
+                    }
+                    general_price={general_price}
+                    backstage_price={backstage_price}
+                    goToCheckout={goToCheckout}
+                    // backstage_price = {10}
+                    // general_price = {1}
+                    addTicket={addTicket}
+                    setTotal={setTotal}
+                    total={total}
+                  ></CheckoutBox>
+                )}
+                {/* <div className="invite-friends">
                           <Row>
                             <Col size={1}>
                               <span className="invite-prompt">
@@ -711,147 +686,7 @@ const Concert = (props) => {
                               </div>
                             </Col>
                           </Row>
-                        </div>
-                      </div>
-                      <div className="purchase-review">
-                        <div className="order-summary">
-                          <Row>
-                            <span className="summary-header">
-                              Order Summary
-                            </span>
-                          </Row>
-                          <div className="ticket-selections">
-                            <Row>
-                              <Col size={4}>
-                                <span className="item-name">
-                                  1x General Admission
-                                </span>
-                              </Col>
-                              {general_price > 0 ? (
-                                <Col size={1}>
-                                  <span className="item-price">
-                                    ${general_price}
-                                  </span>
-                                </Col>
-                              ) : (
-                                <Col size={1}>
-                                  <span className="item-price">FREE</span>
-                                </Col>
-                              )}
-                            </Row>
-                            {backstage_pass ? (
-                              <Row>
-                                <Col size={4}>
-                                  <span className="item-name">
-                                    1x Backstage Pass
-                                  </span>
-                                </Col>
-                                {backstage_price > 0 ? (
-                                  <Col size={1}>
-                                    <span className="item-price">
-                                      ${backstage_price}
-                                    </span>
-                                  </Col>
-                                ) : (
-                                  <Col size={1}>
-                                    <span className="item-price">FREE</span>
-                                  </Col>
-                                )}
-                              </Row>
-                            ) : (
-                              <Row>
-                                <Col size={1}>
-                                  <div className="backstage-hidden-text">
-                                    NO BACKSTAGE PASS
-                                  </div>
-                                </Col>
-                              </Row>
-                            )}
-                          </div>
-                        </div>
-                        <div className="total-purchase">
-                          <Row>
-                            <Col size={4}>
-                              <span className="item-name total-item">
-                                Total
-                              </span>
-                            </Col>
-                            {total > 0 ? (
-                              <Col size={1}>
-                                <span className="item-price total-item">
-                                  ${total}
-                                </span>
-                              </Col>
-                            ) : (
-                              <Col size={1}>
-                                <span className="item-price total-item">
-                                  FREE
-                                </span>
-                              </Col>
-                            )}
-                          </Row>
-                        </div>
-                        <div className="checkout-button-container">
-                          <Row>
-                            <Col size={1}>
-                              <div>
-                                {username ? (
-                                  <div>
-                                    {total > 0 ? (
-                                      <div>
-                                        <button
-                                          className="checkout-button"
-                                          onClick={goToCheckout}
-                                          disabled={!username}
-                                        >
-                                          CHECKOUT
-                                        </button>
-                                      </div>
-                                    ) : (
-                                      <button
-                                        className="checkout-button"
-                                        onClick={addTicket}
-                                        disabled={!username}
-                                      >
-                                        GET TICKET
-                                      </button>
-                                    )}
-                                  </div>
-                                ) : (
-                                  <div>
-                                    {total > 0 ? (
-                                      <NavLink
-                                        to={{
-                                          pathname: "/login",
-                                          state: { current: location },
-                                        }}
-                                      >
-                                        <button className="checkout-button">
-                                          CHECKOUT
-                                        </button>
-                                      </NavLink>
-                                    ) : (
-                                      <NavLink
-                                        to={{
-                                          pathname: "/login",
-                                          state: { current: location },
-                                        }}
-                                      >
-                                        <button className="checkout-button">
-                                          GET TICKET
-                                        </button>
-                                      </NavLink>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-                            </Col>
-                          </Row>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </Grid>
+                        </div> */}
               </Rodal>
               <Row className="concert-row-mobile">
                 <Col size={1} className="no-stretch-column">
@@ -1076,286 +911,47 @@ const Concert = (props) => {
                   overflow: scroll,
                   maxHeight: "620px",
                   maxWidth: "482px",
-                  background: "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
-                  boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                  background:
+                    "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                  boxShadow:
+                    "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
                   borderRadius: "10px",
                 }}
                 className="rodal-custom"
               >
-                <Grid className="modal-grid">
-                  <Row className="modal-row">
-                    {showPaymentBox ? (
-                      <TicketBox
-                        amount_value={total}
-                        onClick={goBackToModal}
-                        registerConcert={addTicket}
-                        header={
-                          concert_info.artist_name +
-                          ": " +
-                          concert_info.concert_name
-                        }
-                      ></TicketBox>
-                    ) : (
-                      <Row className="modal-row">
-                        <Col size={4} className="modal-left-col">
-                          <div className="purchase-main">
-                            <div className="modal-concert-info">
-                              <h3 className="concert-info-modal-header">
-                                {concert_info.artist_name}:{" "}
-                                {concert_info.concert_name}
-                              </h3>
-                              <p className="concert-date-info">
-                                {concert_info.week_day}{" "}
-                                {concert_info.formatted_date}{" "}
-                                {concert_info.formatted_time} EST
-                              </p>
-                            </div>
-                            <hr className="break-modal" />
-                            <div className="ticket-types">
-                              <Row className="ticket-row">
-                                <Col size={3}>
-                                  {/* <FormControlLabel
-                                    control={
-                                      <Checkbox
-                                        icon={<CircleUnchecked />}
-                                        checkedIcon={<CircleCheckedFilled />}
-                                        name="general-checked"
-                                        checked={general_checked}
-                                        onChange={handleGeneralClicked}
-                                      />
-                                    }
-                                    label="General Admission"
-                                  /> */}
-                                </Col>
-                              </Row>
-                              <Row className="ticket-row">
-                                <Col size={3}>
-                                  {/* <FormControlLabel
-                                    control={
-                                      <Checkbox
-                                        icon={<CircleUnchecked />}
-                                        checkedIcon={<CircleCheckedFilled />}
-                                        name="backstage-checked"
-                                        checked={backstage_checked}
-                                        onChange={handleBackstageClicked}
-                                        disabled
-                                      />
-                                    }
-                                    label="Backstage Pass"
-                                  /> */}
-                                </Col>
-                              </Row>
-                            </div>
-                            <hr className="break-modal" />
-                            <div className="invite-friends">
-                              <Row>
-                                <Col size={1}>
-                                  <span className="invite-prompt">
-                                    <span className="fa-stack">
-                                      <i className="fa fa-circle fa-stack-2x icon-background"></i>
-                                      <i
-                                        className="fa fa-stack-1x fa-user-plus add-user-icon"
-                                        aria-hidden="true"
-                                      ></i>
-                                    </span>
-
-                                    <p className="invite-text">
-                                      Invite Your Friends
-                                    </p>
-                                  </span>
-                                </Col>
-                              </Row>
-                              <Row>
-                                <Col size={1}>
-                                  <div className="email-input-field">
-                                    {" "}
-                                    <ReactMultiEmail
-                                      placeholder="Please separate emails with commas"
-                                      style={{ background: "#EEEEEE" }}
-                                      emails={emails}
-                                      onChange={(_emails) => {
-                                        setEmails(_emails);
-                                      }}
-                                      validateEmail={(email) => {
-                                        return (
-                                          isEmail(email) && emails.length < 10
-                                        ); // return boolean
-                                      }}
-                                      getLabel={(email, index, removeEmail) => {
-                                        return (
-                                          <div data-tag key={index}>
-                                            {email}
-                                            <span
-                                              data-tag-handle
-                                              onClick={() => removeEmail(index)}
-                                            >
-                                              ×
-                                            </span>
-                                          </div>
-                                        );
-                                      }}
-                                    />
-                                  </div>
-                                  <div>
-                                    {emails.length >= 10 ? (
-                                      <p className="emails-warning">
-                                        You have reached the maximum number of
-                                        invites!
-                                      </p>
-                                    ) : (
-                                      <p className="emails-warning backstage-hidden-text">
-                                        Input validated
-                                      </p>
-                                    )}
-                                  </div>
-                                </Col>
-                              </Row>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col size={3} className="modal-right-col">
-                          <div className="purchase-review">
-                            <div className="order-summary">
-                              <Row>
-                                <span className="summary-header">
-                                  Order Summary
-                                </span>
-                              </Row>
-                              <div className="ticket-selections">
-                                <Row>
-                                  <Col size={4}>
-                                    <span className="item-name">
-                                      1x General Admission
-                                    </span>
-                                  </Col>
-                                  {general_price > 0 ? (
-                                    <Col size={1}>
-                                      <span className="item-price">
-                                        ${general_price}
-                                      </span>
-                                    </Col>
-                                  ) : (
-                                    <Col size={1}>
-                                      <span className="item-price">FREE</span>
-                                    </Col>
-                                  )}
-                                </Row>
-                                {backstage_pass ? (
-                                  <Row>
-                                    <Col size={4}>
-                                      <span className="item-name">
-                                        1x Backstage Pass
-                                      </span>
-                                    </Col>
-                                    {backstage_price > 0 ? (
-                                      <Col size={1}>
-                                        <span className="item-price">
-                                          ${backstage_price}
-                                        </span>
-                                      </Col>
-                                    ) : (
-                                      <Col size={1}>
-                                        <span className="item-price">FREE</span>
-                                      </Col>
-                                    )}
-                                  </Row>
-                                ) : (
-                                  <Row>
-                                    <Col size={1}>
-                                      <div className="backstage-hidden-text">
-                                        NO BACKSTAGE PASS
-                                      </div>
-                                    </Col>
-                                  </Row>
-                                )}
-                              </div>
-                            </div>
-                            <hr className="break-modal right-col-break" />
-                            <div className="total-purchase">
-                              <Row>
-                                <Col size={4}>
-                                  <span className="item-name total-item">
-                                    Total
-                                  </span>
-                                </Col>
-                                {total > 0 ? (
-                                  <Col size={1}>
-                                    <span className="item-price total-item">
-                                      ${total}
-                                    </span>
-                                  </Col>
-                                ) : (
-                                  <Col size={1}>
-                                    <span className="item-price total-item">
-                                      FREE
-                                    </span>
-                                  </Col>
-                                )}
-                              </Row>
-                            </div>
-                            <div className="checkout-button-container">
-                              <Row>
-                                <Col size={1}>
-                                  <div>
-                                    {username ? (
-                                      <div>
-                                        {total > 0 ? (
-                                          <div>
-                                            <button
-                                              className="checkout-button"
-                                              onClick={goToCheckout}
-                                              disabled={!username}
-                                            >
-                                              CHECKOUT
-                                            </button>
-                                          </div>
-                                        ) : (
-                                          <button
-                                            className="checkout-button"
-                                            onClick={addTicket}
-                                            disabled={!username}
-                                          >
-                                            GET TICKET
-                                          </button>
-                                        )}
-                                      </div>
-                                    ) : (
-                                      <div>
-                                        {total > 0 ? (
-                                          <NavLink
-                                            to={{
-                                              pathname: "/login",
-                                              state: { current: location },
-                                            }}
-                                          >
-                                            <button className="checkout-button">
-                                              CHECKOUT
-                                            </button>
-                                          </NavLink>
-                                        ) : (
-                                          <NavLink
-                                            to={{
-                                              pathname: "/login",
-                                              state: { current: location },
-                                            }}
-                                          >
-                                            <button className="checkout-button">
-                                              GET TICKET
-                                            </button>
-                                          </NavLink>
-                                        )}
-                                      </div>
-                                    )}
-                                  </div>
-                                </Col>
-                              </Row>
-                            </div>
-                          </div>
-                        </Col>
-                      </Row>
-                    )}
-                  </Row>
-                </Grid>
+                {showPaymentBox ? (
+                  <PayTicketBox
+                    general_price={general_price}
+                    backstage_price={backstage_price}
+                    // backstage_price = {10}
+                    // general_price = {1}
+                    total={total}
+                    goBackToModal={goBackToModal}
+                    addTicket={addTicket}
+                  ></PayTicketBox>
+                ) : (
+                  <CheckoutBox
+                    username={username}
+                    location={location}
+                    artist_name={concert_info.artist_name}
+                    concert_name={concert_info.concert_name}
+                    concert_full_time={
+                      concert_info.week_day +
+                      ", " +
+                      concert_info.formatted_date +
+                      ", " +
+                      concert_info.formatted_time
+                    }
+                    general_price={general_price}
+                    backstage_price={backstage_price}
+                    goToCheckout={goToCheckout}
+                    // backstage_price = {10}
+                    // general_price = {1}
+                    addTicket={addTicket}
+                    setTotal={setTotal}
+                    total={total}
+                  ></CheckoutBox>
+                )}
               </Rodal>
               <div className="banner-container">
                 <img
@@ -1380,9 +976,7 @@ const Concert = (props) => {
                     <Tag content={"In " + concert_info.days_left + " days"} />
                   </div>
                   {calender_added ? (
-                    <p
-                      className="segmented-button-text no-padding"
-                    >
+                    <p className="segmented-button-text no-padding">
                       Added to your{" "}
                       <a
                         className="google-calendar-link-text segmented-button-text"
@@ -1394,7 +988,7 @@ const Concert = (props) => {
                         rel="noopener noreferrer"
                       >
                         Google Calendar
-                        </a>{" "}
+                      </a>{" "}
                     </p>
                   ) : calendar_button_clicked ? (
                     <div className="left-padding-20">
@@ -1406,10 +1000,13 @@ const Concert = (props) => {
                       />
                     </div>
                   ) : (
-                        <span className="secondary-button segmented-button-text add-to-calendar" onClick={addToCalendar}>
-                          + Add to calendar
-                        </span>
-                      )}
+                    <span
+                      className="secondary-button segmented-button-text add-to-calendar"
+                      onClick={addToCalendar}
+                    >
+                      + Add to calendar
+                    </span>
+                  )}
                   {/* <div className="share-concert-container">
                       <Col size={1}>
                         <div>
