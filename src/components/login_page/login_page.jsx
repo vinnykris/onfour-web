@@ -74,7 +74,6 @@ const Login = (props) => {
               />
             </div>
           ) : (
-            // <p className="processing-message">Loading...</p>
             <div className="form-section">
               <form
                 className="signin-form"
@@ -82,11 +81,10 @@ const Login = (props) => {
                 id="login"
                 onSubmit={loginSubmit}
               >
-                <Row className="signin-header">
-                  <div className="header-7 signin-text-color">
-                    Sign in with your email or username below
-                  </div>
-                </Row>
+                <div className="header-3 signin-header-color">Log In</div>
+                <div className="header-7 signin-text-color">
+                  Log in with your email or username
+                </div>
                 <div className="register-input-container">
                   <InputOne
                     id="email_slot"
@@ -108,34 +106,8 @@ const Login = (props) => {
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                     is_password={true}
-                    // data-tip
-                    // data-for="registerTip"
                   />
                 </div>
-                {/* <Row className="login-input-row">
-                  <input
-                    className="login-input"
-                    // type="email"
-                    name="email"
-                    id="email_slot"
-                    value={email}
-                    placeholder="Email Address or Username"
-                    onChange={(event) => setEmail(event.target.value)}
-                    required
-                  />
-                </Row> */}
-                {/* <Row className="login-input-row">
-                  <input
-                    className="login-input"
-                    type="password"
-                    name="password"
-                    id="password_slot"
-                    value={password}
-                    placeholder="Password"
-                    onChange={(event) => setPassword(event.target.value)}
-                    required
-                  />
-                </Row> */}
                 <div style={{ color: "red" }}>{error}</div>
                 <button
                   className="primary-button button-text signin-submit-button"
@@ -145,28 +117,25 @@ const Login = (props) => {
                 >
                   LOG IN
                 </button>
+                <p className="forgot-footer">
+                  <a href="/forgot" className="header-7 signin-link">
+                    Forgot Password?
+                  </a>
+                </p>
+                <div className="header-7 signin-text-color">
+                  Don't have an account?{" "}
+                  <NavLink
+                    to={{
+                      pathname: "/register",
+                      state: { current: from_path },
+                    }}
+                    className="header-7 signin-link"
+                  >
+                    Sign up
+                  </NavLink>
+                  .
+                </div>
               </form>
-              <p className="forgot-footer">
-                <a href="/forgot" className="header-7 signin-link">
-                  Forgot Password?
-                </a>
-              </p>
-              <div className="header-7 signin-text-color">
-                Don't have an account?{" "}
-                {/* <a href="/register" className="signup-link">
-                  Sign up
-                </a> */}
-                <NavLink
-                  to={{
-                    pathname: "/register",
-                    state: { current: from_path },
-                  }}
-                  className="header-7 signin-link"
-                >
-                  Sign up
-                </NavLink>
-                .
-              </div>
             </div>
           )}
         </Row>

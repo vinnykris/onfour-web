@@ -3,12 +3,16 @@
 
 .register-page-content {
   background-color: black;
-  //height: 50%;
+  min-height: 65vh;
   width: 100%;
+  margin-top: -1px;
+  height: calc(100vh - 49px);
 }
 
 .form-section {
+  display: flex;
   width: 100%;
+  height: 100%;
   background: url("../../images/backgrounds/wave_2.svg") center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -16,10 +20,24 @@
   background-size: cover;
 }
 
+.register-form-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
 .register-form {
-  margin-top: 8.5%;
+  display: flex;
+  flex-direction: column;
   width: 360px;
-  padding-bottom: 2%;
+  margin: auto;
+}
+
+.register-button-container {
+  width: 100%;
+  margin-bottom: 35px;
+  // display: flex;
+  // flex-direction: row;
 }
 
 .register-fields-section {
