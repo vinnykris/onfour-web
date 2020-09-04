@@ -32,7 +32,7 @@ import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/video_chat_App";
 
 import { getTickets } from "../../apis/get_user_data";
-import PaymentBox from "../payment/donate_box";
+import DonateCardBox from "../payment/donate_box";
 import VenmoBox from "../payment/venmo_box";
 import PaypalBox from "../payment/paypal_box";
 import PrimaryButton from "../primary_button";
@@ -56,7 +56,7 @@ Amplify.configure(awsmobile);
 const StreamPage = ({ is_soundcheck }) => {
   // DETERMINE MOBILE VERSION OR NOT
   const { height, width } = useWindowDimensions(); // Dimensions of screen
-  const tip_based = true; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
+  // const tip_based = false; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat
   const [viewers, setViewers] = useState(0); // Sets number of live viewers on page
@@ -408,8 +408,10 @@ const StreamPage = ({ is_soundcheck }) => {
                   overflow: scroll,
                   maxHeight: "545px",
                   maxWidth: "482px",
-                  background: "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
-                  boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                  background:
+                    "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                  boxShadow:
+                    "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
                   borderRadius: "10px",
                 }}
                 className="rodal-custom"
@@ -466,14 +468,14 @@ const StreamPage = ({ is_soundcheck }) => {
                 </Grid>
                 {(() => {
                   if (credit_selected) {
-                    return <PaymentBox />;
+                    return <DonateCardBox is_mobile={false} />;
                   } else if (venmo_selected) {
-                    return <VenmoBox />;
+                    return <VenmoBox is_mobile={false} />;
                   } else {
-                    return <PaypalBox />;
+                    return <PaypalBox is_mobile={false} />;
                   }
                 })()}
-                {/* <PaymentBox /> */}
+                {/* <DonateCardBox /> */}
               </Rodal>
               {/* <Modal is_open={open_modal}></Modal> */}
               <Row className="desktop-stream-row">
@@ -838,20 +840,83 @@ const StreamPage = ({ is_soundcheck }) => {
               <Rodal
                 visible={open_modal}
                 onClose={closeModal}
-                width={100}
+                width={96}
                 height={100}
                 measure="%"
                 customStyles={{
                   padding: 0,
                   overflow: scroll,
-                  // maxHeight: "400px",
-                  // maxWidth: "600px",
+                  maxHeight: "400px",
+                  maxWidth: "350px",
+                  background:
+                    "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                  boxShadow:
+                    "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                  borderRadius: "10px",
                 }}
                 className="rodal-custom"
               >
-                <PaymentBox />
+                <Grid className="payment-modal-grid">
+                  <Row className="payment-modal-header">
+                    <Col size={1}>
+                      <h4 className="payment-modal-header-text header-8">
+                        Donate to {artist_name}
+                      </h4>
+                    </Col>
+                  </Row>
+                  <Row className="payment-modal-header">
+                    <Col
+                      size={1}
+                      className="payment-modal-tab selected-tab"
+                      id="credit-tab"
+                      onClick={() => paymentTabSelected(0)}
+                    >
+                      <span
+                        className="payment-modal-tab-text subtitle-3 selected-tab"
+                        id="credit-tab-text"
+                      >
+                        Credit Card
+                      </span>
+                    </Col>
+                    <Col
+                      size={1}
+                      className="payment-modal-tab"
+                      id="venmo-tab"
+                      onClick={() => paymentTabSelected(1)}
+                    >
+                      <span
+                        className="payment-modal-tab-text subtitle-3"
+                        id="venmo-tab-text"
+                      >
+                        Venmo
+                      </span>
+                    </Col>
+                    <Col
+                      size={1}
+                      className="payment-modal-tab"
+                      id="paypal-tab"
+                      onClick={() => paymentTabSelected(2)}
+                    >
+                      <span
+                        className="payment-modal-tab-text subtitle-3"
+                        id="paypal-tab-text"
+                      >
+                        Paypal
+                      </span>
+                    </Col>
+                  </Row>
+                </Grid>
+                {(() => {
+                  if (credit_selected) {
+                    return <DonateCardBox is_mobile={true} />;
+                  } else if (venmo_selected) {
+                    return <VenmoBox is_mobile={true} />;
+                  } else {
+                    return <PaypalBox is_mobile={true} />;
+                  }
+                })()}
               </Rodal>
-              <div className="main-column">
+              <div className="main-column-mobile">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
                     {is_free ||
@@ -913,25 +978,15 @@ const StreamPage = ({ is_soundcheck }) => {
                     )}
                   </div>
                 </div>
-                <div className="mobile-row payment-row-mobile">
-                  {tip_based ? (
-                    <button
-                      className="stripe-button-border mobile-payment-button"
-                      // data-toggle="modal"
-                      // data-target="#paymentModal"
-                      onClick={donateModal}
-                    >
-                      Tip {artist_name}
-                    </button>
-                  ) : (
-                    <button
-                      className="stripe-button-border mobile-payment-button"
-                      data-toggle="modal"
-                      data-target="#paymentModal"
-                    >
-                      Donate
-                    </button>
-                  )}
+                <div className="payment-row-mobile">
+                  <button
+                    className="stripe-button-border mobile-payment-button button-text"
+                    // data-toggle="modal"
+                    // data-target="#paymentModal"
+                    onClick={donateModal}
+                  >
+                    DONATE
+                  </button>
                   {/* <Modal isOpen={false}></Modal> */}
                 </div>
                 <div className="chat-main-mobile">

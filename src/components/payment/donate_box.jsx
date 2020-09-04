@@ -17,7 +17,7 @@ import "./donate_styles.scss";
 
 // The CheckoutForm component defines the userflow and layout of the payment form
 // It contains function that calls the Stripe backend with AWS lambda function
-const CheckoutForm = () => {
+const CheckoutForm = (props) => {
   // Stripe constants
   const stripe = useStripe();
   const elements = useElements();
@@ -41,12 +41,11 @@ const CheckoutForm = () => {
     base: {
       color: "rgba(255, 255, 255, 0.87)",
       backgrondColor: "#FFFFFF",
-      fontSize: "16px",
+      fontSize: props.is_mobile ? "11px" : "16px",
       fontFamily: '"Montserrat", sans-serif',
       fontStyle: "normal",
       fontWeight: "normal",
-      // lineHeight: "26px",
-      letterSpacing: "0.05em",
+      letterSpacing: props.is_mobile ? "0.02em" : "0.05em",
       caretColor: "#E465A2",
       iconColor: "rgba(255, 255, 255, 0.28)",
       "::placeholder": {
@@ -131,107 +130,207 @@ const CheckoutForm = () => {
 
   return (
     <div className="donate-box-container">
-      <form id="donate" className="donate-form" onSubmit={submitPayment}>
-        {(() => {
-          if (!payed) {
-            return (
-              <div>
-                {display_err ? (
-                  <p className="error-msg">{payment_message}</p>
-                ) : (
-                  <br></br>
-                )}
-                <NumberFormat
-                  className="donate-form-input body-1 short-width-input"
-                  name="amount"
-                  placeholder="Amount $0.00"
-                  value={amount_value}
-                  onChange={(event) =>
-                    setAmount(event.target.value.substring(1))
-                  }
-                  prefix="$"
-                  decimalScale={2}
-                  required
-                />
-                <input
-                  name="name"
-                  label="Name"
-                  type="name"
-                  placeholder="Your Name"
-                  className="donate-form-input body-1 short-width-input"
-                  required
-                  {...name}
-                />
-                <input
-                  name="email"
-                  label="Email"
-                  type="email"
-                  placeholder="Your Email"
-                  className="donate-form-input body-1 short-width-input"
-                  required
-                  {...email}
-                />
-                <div className="donate-form-input body-1">
-                  <CardElement options={cardElementOpts} />
-                </div>
-                {need_confirm ? (
-                  <div>
+      {props.is_mobile ? (
+        <form id="donate" className="donate-form" onSubmit={submitPayment}>
+          {(() => {
+            if (!payed) {
+              return (
+                <div>
+                  {display_err ? (
+                    <p className="error-msg">{payment_message}</p>
+                  ) : (
                     <br></br>
-                    <button
-                      className="donate-button button-text"
-                      type="toConfirm"
-                      disabled={!stripe}
-                      onClick={needConfirmation}
-                    >
-                      Donate with Credit Card
-                    </button>
-                    <p className="venmo-text segmented-button-text secure-msg">
-                      *Your payment is secured via Stripe.
-                    </p>
+                  )}
+                  <NumberFormat
+                    className="donate-form-input body-3 short-width-input"
+                    name="amount"
+                    placeholder="Amount $0.00"
+                    value={amount_value}
+                    onChange={(event) =>
+                      setAmount(event.target.value.substring(1))
+                    }
+                    prefix="$"
+                    decimalScale={2}
+                    required
+                  />
+                  <input
+                    name="name"
+                    label="Name"
+                    type="name"
+                    placeholder="Your Name"
+                    className="donate-form-input body-3 short-width-input"
+                    required
+                    {...name}
+                  />
+                  <input
+                    name="email"
+                    label="Email"
+                    type="email"
+                    placeholder="Your Email"
+                    className="donate-form-input body-3 short-width-input"
+                    required
+                    {...email}
+                  />
+                  <div className="donate-form-input">
+                    <CardElement options={cardElementOpts} />
                   </div>
-                ) : (
-                  <div>
-                    {waiting ? (
-                      <div>
-                        <p className="donate-process-text">Processing</p>
-                      </div>
-                    ) : (
-                      <div>
-                        <p className="donate-process-text">
-                          Please confirm you are donating ${amount_value}
-                        </p>
-                        <button
-                          form="donate"
-                          className="donate-button button-text"
-                          type="submit"
-                          disabled={!stripe}
-                        >
-                          Confirm
-                        </button>
-                      </div>
-                    )}
+                  {need_confirm ? (
+                    <div>
+                      <br></br>
+                      <button
+                        className="donate-button mobile-button-text"
+                        type="toConfirm"
+                        disabled={!stripe}
+                        onClick={needConfirmation}
+                      >
+                        DONATE NOW
+                      </button>
+                      <p className="grayout-text tag-text secure-msg">
+                        *Your payment is secured via Stripe.
+                      </p>
+                    </div>
+                  ) : (
+                    <div>
+                      {waiting ? (
+                        <div>
+                          <p className="donate-process-text mobile-button-text">
+                            Processing
+                          </p>
+                        </div>
+                      ) : (
+                        <div>
+                          <p className="donate-process-text mobile-button-text">
+                            Please confirm you are donating ${amount_value}
+                          </p>
+                          <button
+                            form="donate"
+                            className="donate-button mobile-button-text"
+                            type="submit"
+                            disabled={!stripe}
+                          >
+                            Confirm
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            } else {
+              return (
+                <div>
+                  <br></br>
+                  <div className="pay_sucess_msg mobile-button-text">
+                    Payment Successful!
                   </div>
-                )}
-              </div>
-            );
-          } else {
-            return (
-              <div>
-                <br></br>
-                <div className="pay_sucess_msg">Payment Successful!</div>
-              </div>
-            );
-          }
-        })()}
-      </form>
+                </div>
+              );
+            }
+          })()}
+        </form>
+      ) : (
+        <form id="donate" className="donate-form" onSubmit={submitPayment}>
+          {(() => {
+            if (!payed) {
+              return (
+                <div>
+                  {display_err ? (
+                    <p className="error-msg">{payment_message}</p>
+                  ) : (
+                    <br></br>
+                  )}
+                  <NumberFormat
+                    className="donate-form-input body-1 short-width-input"
+                    name="amount"
+                    placeholder="Amount $0.00"
+                    value={amount_value}
+                    onChange={(event) =>
+                      setAmount(event.target.value.substring(1))
+                    }
+                    prefix="$"
+                    decimalScale={2}
+                    required
+                  />
+                  <input
+                    name="name"
+                    label="Name"
+                    type="name"
+                    placeholder="Your Name"
+                    className="donate-form-input body-1 short-width-input"
+                    required
+                    {...name}
+                  />
+                  <input
+                    name="email"
+                    label="Email"
+                    type="email"
+                    placeholder="Your Email"
+                    className="donate-form-input body-1 short-width-input"
+                    required
+                    {...email}
+                  />
+                  <div className="donate-form-input">
+                    <CardElement options={cardElementOpts} />
+                  </div>
+                  {need_confirm ? (
+                    <div>
+                      <br></br>
+                      <button
+                        className="donate-button button-text"
+                        type="toConfirm"
+                        disabled={!stripe}
+                        onClick={needConfirmation}
+                      >
+                        DONATE NOW
+                      </button>
+                      <p className="venmo-text segmented-button-text secure-msg">
+                        *Your payment is secured via Stripe.
+                      </p>
+                    </div>
+                  ) : (
+                    <div>
+                      {waiting ? (
+                        <div>
+                          <p className="donate-process-text">Processing</p>
+                        </div>
+                      ) : (
+                        <div>
+                          <p className="donate-process-text">
+                            Please confirm you are donating ${amount_value}
+                          </p>
+                          <button
+                            form="donate"
+                            className="donate-button button-text"
+                            type="submit"
+                            disabled={!stripe}
+                          >
+                            Confirm
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            } else {
+              return (
+                <div>
+                  <br></br>
+                  <div className="pay_sucess_msg">Payment Successful!</div>
+                </div>
+              );
+            }
+          })()}
+        </form>
+      )}
     </div>
   );
 };
 
 // donateBox is a wrapper component for CheckoutForm
 // It is used for cleaner layout
-const DonateBox = () => {
-  return <CheckoutForm />;
+const DonateBox = (props) => {
+  return <CheckoutForm is_mobile={props.is_mobile} />;
 };
 
 export default DonateBox;
