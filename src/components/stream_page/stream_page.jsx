@@ -1,7 +1,6 @@
 // React Imports
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
-import PulseLoader from "react-spinners/PulseLoader";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import SharePopup from "./share_popup";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";

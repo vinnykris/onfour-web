@@ -8,7 +8,7 @@ import ReactTooltip from "react-tooltip";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 // GraphQL
 import * as mutations from "../../graphql/mutations";
@@ -230,10 +230,10 @@ const Register = (props) => {
                 <div className="form-section">
                   {auto_signup ? (
                     <div className="login-loader-container">
-                      <PulseLoader
+                      <ScaleLoader
                         sizeUnit={"px"}
-                        size={15}
-                        color={"#7b6dac"}
+                        size={18}
+                        color={"#E465A2"}
                         loading={auto_signup}
                       />
                     </div>
@@ -284,10 +284,10 @@ const Register = (props) => {
                 <div className="form-section">
                   {is_processing ? (
                     <div className="login-loader-container">
-                      <PulseLoader
+                      <ScaleLoader
                         sizeUnit={"px"}
-                        size={15}
-                        color={"#7b6dac"}
+                        size={18}
+                        color={"#E465A2"}
                         loading={is_processing}
                       />
                     </div>

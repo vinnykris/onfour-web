@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import InputOne from "../inputs/input_one";
 
 // APIs/Amplify
@@ -66,10 +66,10 @@ const Login = (props) => {
         <Row className="login-fields-section">
           {is_processing ? (
             <div className="login-loader-container">
-              <PulseLoader
+              <ScaleLoader
                 sizeUnit={"px"}
-                size={15}
-                color={"#7b6dac"}
+                size={18}
+                color={"#E465A2"}
                 loading={is_processing}
               />
             </div>

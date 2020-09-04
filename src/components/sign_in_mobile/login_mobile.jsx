@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
@@ -54,10 +54,10 @@ const LoginMobile = ({ toggleRegister }) => {
         <Row className="login-fields-section">
           {is_processing ? (
             <div className="login-loader-container">
-              <PulseLoader
+              <ScaleLoader
                 sizeUnit={"px"}
-                size={15}
-                color={"#7b6dac"}
+                size={18}
+                color={"#E465A2"}
                 loading={is_processing}
               />
             </div>

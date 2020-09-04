@@ -14,7 +14,6 @@ import Auth from "../../apis/UserPool";
 // Component Imports
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 import { useWindowDimensions } from "../custom_hooks";
-import PulseLoader from "react-spinners/PulseLoader";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 // API Imports
