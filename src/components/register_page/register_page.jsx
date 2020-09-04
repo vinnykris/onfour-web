@@ -240,20 +240,20 @@ const Register = (props) => {
                       />
                     </div>
                   ) : (
-                    <div>
+                    <div className="register-form-container">
                       <form
                         className="register-form"
                         action="/"
                         id="register-pin"
                         onSubmit={registerSubmitPin}
                       >
-                        <Row className="signup-header">
+                        <div className="signup-header">
                           <div className="header-7 register-text-color">
                             Welcome {name}. Please provide the verification code
                             sent to your email to complete registration!
                           </div>
-                        </Row>
-                        <Row className="register-input-row">
+                        </div>
+                        <div className="register-input-row">
                           <input
                             className="register-input"
                             type="pin"
@@ -264,19 +264,18 @@ const Register = (props) => {
                             onChange={(event) => setPin(event.target.value)}
                             required
                           />
-                        </Row>
+                        </div>
                         <div style={{ color: "red" }}>{error}</div>
-                        <br></br>
-                        <Row className="verification-footer">
+                        <div className="verification-footer">
                           <button
-                            className="register-verification-submit-button"
+                            className="primary-button button-text register-verification-submit-button"
                             type="submit"
                             form="register-pin"
                             value="Submit"
                           >
                             COMPLETE REGISTRATION
                           </button>
-                        </Row>
+                        </div>
                       </form>
                     </div>
                   )}
@@ -295,7 +294,7 @@ const Register = (props) => {
                       />
                     </div>
                   ) : (
-                    <div>
+                    <div className="register-form-container">
                       <form
                         className="register-form"
                         action="/"
@@ -303,34 +302,14 @@ const Register = (props) => {
                         onSubmit={registerSubmit}
                       >
                         <div className="login-form-container">
+                          <div className="header-3 signin-header-color">
+                            Sign Up
+                          </div>
                           <div className="signup-header">
                             <div className="header-7 register-text-color">
                               Join the onfour experience below
                             </div>
                           </div>
-                          {/* <input
-                            className="register-input body-1"
-                            name="first"
-                            label="Full Name"
-                            required
-                            id="first_slot"
-                            value={first}
-                            placeholder="First Name"
-                            onChange={(event) => setFirst(event.target.value)}
-                            onFocus={(e) => (e.target.placeholder = "")}
-                            onBlur={(e) => (e.target.placeholder = "Name")}
-                          /> */}
-                          {/* <div className="register-input-container">
-                            <InputOne
-                              id="first_slot"
-                              type="text"
-                              name="full-name"
-                              is_required={true}
-                              placeholder="Full Name"
-                              value={first}
-                              onChange={(event) => setFirst(event.target.value)}
-                            />
-                          </div> */}
                           <div className="register-input-container">
                             <InputOne
                               id="first_slot"
@@ -355,27 +334,6 @@ const Register = (props) => {
                               }
                             />
                           </div>
-                          {/* <input
-                            className="register-input body-1"
-                            id="last_slot"
-                            name="last"
-                            value={last}
-                            placeholder="Last Name"
-                            onChange={(event) => setLast(event.target.value)}
-                            required
-                          /> */}
-                          {/* <input
-                            className="register-input body-1"
-                            type="username"
-                            name="username"
-                            value={username}
-                            id="username_slot"
-                            placeholder="Username"
-                            onChange={(event) =>
-                              setUsername(event.target.value)
-                            }
-                            required
-                          /> */}
                           <div className="register-input-container">
                             <InputOne
                               id="email_slot"
@@ -387,16 +345,6 @@ const Register = (props) => {
                               onChange={(event) => setEmail(event.target.value)}
                             />
                           </div>
-                          {/* <input
-                            className="register-input body-1"
-                            type="email"
-                            name="email"
-                            value={email}
-                            id="email_slot"
-                            placeholder="Email"
-                            onChange={(event) => setEmail(event.target.value)}
-                            required
-                          /> */}
                           <div
                             className="register-input-container"
                             data-tip
@@ -413,24 +361,8 @@ const Register = (props) => {
                                 setPassword(event.target.value)
                               }
                               is_password={true}
-                              // data-tip
-                              // data-for="registerTip"
                             />
                           </div>
-                          {/* <input
-                            className="register-input body-1"
-                            type="password"
-                            name="password"
-                            value={password}
-                            id="password_slot"
-                            placeholder="Password"
-                            onChange={(event) =>
-                              setPassword(event.target.value)
-                            }
-                            required
-                            data-tip
-                            data-for="registerTip"
-                          /> */}
                           <ReactTooltip
                             id="registerTip"
                             place="left"
@@ -511,196 +443,7 @@ const Register = (props) => {
                               </text>
                             </p>
                           </ReactTooltip>
-                          {/* <input
-                            className="register-input body-1"
-                            type="password"
-                            name="password"
-                            value={repeat_password}
-                            id="password_r_slot"
-                            placeholder="Repeat Password"
-                            onChange={(event) =>
-                              setRepeatPassword(event.target.value)
-                            }
-                            required
-                          /> */}
                         </div>
-
-                        {/* <Row className="register-input-row">
-                          <input
-                            className="register-input-left"
-                            name="first"
-                            required
-                            id="first_slot"
-                            value={first}
-                            placeholder="First Name"
-                            onChange={(event) => setFirst(event.target.value)}
-                          />
-                          <input
-                            className="register-input-right"
-                            id="last_slot"
-                            name="last"
-                            value={last}
-                            placeholder="Last Name"
-                            onChange={(event) => setLast(event.target.value)}
-                            required
-                          />
-                        </Row> */}
-                        {/* <Row className="register-input-row">
-                          <input
-                            className="register-input"
-                            type="username"
-                            name="username"
-                            value={username}
-                            id="username_slot"
-                            placeholder="Username"
-                            onChange={(event) =>
-                              setUsername(event.target.value)
-                            }
-                            required
-                          />
-                        </Row> */}
-                        {/* <Row className="register-input-row">
-                          <input
-                            className="register-input"
-                            type="email"
-                            name="email"
-                            value={email}
-                            id="email_slot"
-                            placeholder="Email"
-                            onChange={(event) => setEmail(event.target.value)}
-                            required
-                          />
-                        </Row> */}
-                        {/* <Row className="register-input-row">
-                          <input
-                            className="register-input-left"
-                            type="password"
-                            name="password"
-                            value={password}
-                            id="password_slot"
-                            placeholder="Password"
-                            onChange={(event) =>
-                              setPassword(event.target.value)
-                            }
-                            required
-                            data-tip
-                            data-for="registerTip"
-                          />
-                          <ReactTooltip
-                            id="registerTip"
-                            place="left"
-                            effect="solid"
-                          >
-                            <p className="password-tooltip-white">
-                              Your password must contain the following:
-                            </p>
-                            <p className="password-suggestion-bullets">
-                              {password.length > 7 ? (
-                                <i className="fa fa-check green-password-suggestion"></i>
-                              ) : (
-                                <i className="fa fa-times red-password-suggestion"></i>
-                              )}
-                              <text
-                                className={
-                                  password.length > 7
-                                    ? "green-password-suggestion"
-                                    : "red-password-suggestion"
-                                }
-                              >
-                                {" "}
-                                8 or more characters
-                              </text>
-                            </p>
-                            <br></br>
-                            <p className="password-suggestion-bullets">
-                              {containsUppercaseAndLowercase(password) ? (
-                                <i className="fa fa-check green-password-suggestion"></i>
-                              ) : (
-                                <i className="fa fa-times red-password-suggestion"></i>
-                              )}
-                              <text
-                                className={
-                                  containsUppercaseAndLowercase(password)
-                                    ? "green-password-suggestion"
-                                    : "red-password-suggestion"
-                                }
-                              >
-                                {" "}
-                                Uppercase and lowercase letters
-                              </text>
-                            </p>
-                            <br></br>
-                            <p className="password-suggestion-bullets">
-                              {containsNumber(password) ? (
-                                <i className="fa fa-check green-password-suggestion"></i>
-                              ) : (
-                                <i className="fa fa-times red-password-suggestion"></i>
-                              )}
-                              <text
-                                className={
-                                  containsNumber(password)
-                                    ? "green-password-suggestion"
-                                    : "red-password-suggestion"
-                                }
-                              >
-                                {" "}
-                                At least 1 number
-                              </text>
-                            </p>
-                            <br></br>
-                            <p className="password-suggestion-bullets">
-                              {containsSpecialCharacter(password) ? (
-                                <i className="fa fa-check green-password-suggestion"></i>
-                              ) : (
-                                <i className="fa fa-times red-password-suggestion"></i>
-                              )}
-                              <text
-                                className={
-                                  containsSpecialCharacter(password)
-                                    ? "green-password-suggestion"
-                                    : "red-password-suggestion"
-                                }
-                              >
-                                {" "}
-                                At least 1 special character
-                              </text>
-                            </p>
-                          </ReactTooltip>
-                          <input
-                            className="register-input-right"
-                            type="password"
-                            name="password"
-                            value={repeat_password}
-                            id="password_r_slot"
-                            placeholder="Repeat Password"
-                            onChange={(event) =>
-                              setRepeatPassword(event.target.value)
-                            }
-                            required
-                          />
-                        </Row>
-                        <PasswordStrengthBar
-                          password={password}
-                          minLength={8}
-                        /> */}
-                        {/* <br></br> */}
-                        {/* <Row>
-                          <Col size={0.5}>
-                            <input
-                              className="email-unsubscribe-checkbox"
-                              name="isGoing"
-                              type="checkbox"
-                              checked={checked}
-                              onChange={(event) => setChecked(!checked)}
-                            />
-                          </Col>
-                          <Col size={10}>
-                            <label className="email-unsubscribe-text">
-                              I want to receive email updates about future
-                              onfour shows.
-                            </label>
-                          </Col>
-                        </Row> */}
                         <div className="email-subscribe-prompt">
                           <input
                             className="email-unsubscribe-checkbox"
@@ -715,32 +458,35 @@ const Register = (props) => {
                           </label>
                         </div>
                         <div style={{ color: "red" }}>{error}</div>
-                        <button
-                          className="primary-button button-text register-submit-button fan-submit-button"
-                          type="submit"
-                          form="register"
-                          value="FanSubmit"
-                          onClick={setFanOption}
-                        >
-                          I'M A FAN
-                        </button>
-                        <button
-                          className="primary-button button-text register-submit-button artist-submit-button"
-                          type="submit"
-                          form="register"
-                          value="ArtistSubmit"
-                          onClick={setArtistOption}
-                        >
-                          I'M AN ARTIST
-                        </button>
+                        <div className="register-button-container">
+                          <button
+                            className="primary-button button-text register-submit-button fan-submit-button"
+                            type="submit"
+                            form="register"
+                            value="FanSubmit"
+                            onClick={setFanOption}
+                          >
+                            I'M A FAN
+                          </button>
+                          <button
+                            className="primary-button button-text register-submit-button artist-submit-button"
+                            type="submit"
+                            form="register"
+                            value="ArtistSubmit"
+                            onClick={setArtistOption}
+                          >
+                            I'M AN ARTIST
+                          </button>
+                        </div>
+
+                        <div className="header-7 signup-footer register-text-color">
+                          Already have an account?{" "}
+                          <a href="/login" className="header-7 signin-link">
+                            Log in
+                          </a>
+                          .
+                        </div>
                       </form>
-                      <div className="header-7 signup-footer register-text-color">
-                        Already have an account?{" "}
-                        <a href="/login" className="header-7 signin-link">
-                          Log in
-                        </a>
-                        .
-                      </div>
                     </div>
                   )}
                 </div>

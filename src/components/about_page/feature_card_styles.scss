@@ -2,11 +2,12 @@
 
 .feature-card-container {
   display: flex;
+  flex-direction: column;
   position: relative;
-  width: 328px;
-  height: 208px;
-  margin-left: 10px;
-  margin-right: 10px;
+  width: 329px;
+  height: 146px;
+  margin-left: 19px;
+  margin-right: 19px;
   background: linear-gradient(
       0deg,
       rgba(255, 255, 255, 0.09),
@@ -19,20 +20,31 @@
   //padding: 0px 20px;
 }
 
+.feature-card-container:first-child {
+  margin-left: 0;
+}
+
+.feature-card-container:last-child {
+  margin-right: 0;
+}
+
 .feature-card-title {
-  position: absolute;
-  top: 43px;
-  text-align: left;
-  padding: 0px 20px;
+  //position: absolute;
+  //top: 43px;
+  text-align: center;
+  margin-top: 33px;
+  // padding: 0px 20px;
 }
 
 .feature-card-description-container {
-  position: absolute;
-  top: 119px;
+  // position: absolute;
+  // top: 119px;
   padding: 0px 20px;
+  // text-align: center;
+  margin-top: 24px;
 }
 
 .feature-card-description {
   position: relative;
-  text-align: left;
+  text-align: center;
 }

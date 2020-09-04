@@ -12,6 +12,7 @@ const InputOne = ({
   placeholder,
   onChange,
   is_password,
+  is_disabled,
 }) => {
   const [hidden, setHidden] = useState("true");
   return (
@@ -26,6 +27,7 @@ const InputOne = ({
             value={value}
             onChange={onChange}
             className="input-one body-1"
+            disabled={is_disabled}
           />
           <img
             src={eye}
@@ -43,6 +45,7 @@ const InputOne = ({
             required={is_required}
             value={value}
             onChange={onChange}
+            disabled={is_disabled}
             className="input-one body-1"
           />
           <span className="floating-label body-1">{placeholder}</span>
