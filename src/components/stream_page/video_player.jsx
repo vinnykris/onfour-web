@@ -288,10 +288,10 @@ function VideoPlayer({
             </div>
           ) : (
             <div className="waiting-message-container">
-              <h3 className="header-3 no-show-waiting-msg">
-                {"No scheduled shows at the moment,\nbut stay tuned!"}
+              <h3 className="header-4 no-show-waiting-msg">
+                {"No scheduled shows at the moment, but stay tuned!"}
               </h3>
-              <h5 className="header-5">
+              <h5 className="header-6">
                 For updates, follow us on Instagram @_onfour
               </h5>
             </div>
