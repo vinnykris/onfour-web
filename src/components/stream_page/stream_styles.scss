@@ -10,6 +10,8 @@
     display: flex;
     flex: 1 1 auto;
     flex-flow: column;
+    height: calc(100vh - 131px);
+    max-height: calc(100vh - 131px);
   }
 }
 
