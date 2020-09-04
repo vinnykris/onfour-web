@@ -371,18 +371,27 @@ const NavBar = () => {
               Upcoming
             </NavLink>
             {!auth ? (
-              <NavLink
-                to={{
-                  pathname: "/login",
-                  state: { current: location },
-                }}
-                className="login-nav"
-                onClick={leaveVideoChat}
-              >
-                <div className="primary-button login-button segmented-button-text">
+              <div className="login-signup-container">
+                <NavLink
+                  to="/login"
+                  className="nav-page-white header-8 login-text"
+                  onClick={leaveVideoChat}
+                >
                   Log In
-                </div>
-              </NavLink>
+                </NavLink>
+                <NavLink
+                  to={{
+                    pathname: "/register",
+                    state: { current: location },
+                  }}
+                  className="login-nav"
+                  onClick={leaveVideoChat}
+                >
+                  <div className="primary-button login-button segmented-button-text">
+                    Sign Up
+                  </div>
+                </NavLink>
+              </div>
             ) : (
               <div className="login-link-container logged-in header-7">
                 <Dropdown

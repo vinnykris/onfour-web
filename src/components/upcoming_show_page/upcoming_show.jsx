@@ -108,10 +108,17 @@ const UpcomingShowPage = () => {
                 </div>
               ) : (
                 <div className="upcoming-show-grid">
-                  <FlexibleGrid
-                    content_list={formatted_concerts}
-                    num_cols={4}
-                  />
+                  {formatted_concerts.length > 0 ? (
+                    <FlexibleGrid
+                      content_list={formatted_concerts}
+                      num_cols={4}
+                    />
+                  ) : (
+                    <div className="header-5 empty-upcoming">
+                      We don't have any scheduled shows at the moment, but stay
+                      tuned!
+                    </div>
+                  )}
                 </div>
               )}
             </div>

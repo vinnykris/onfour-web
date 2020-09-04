@@ -289,6 +289,17 @@ a.nav-page-black {
   }
 }
 
+.login-signup-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+}
+
+.login-text {
+  color: $primary-color !important;
+}
+
 .login-button {
   min-width: 110px;
   min-height: 30px;

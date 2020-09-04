@@ -184,9 +184,7 @@ function VideoPlayer({
         player_ref.current,
         { autoplay: true, muted: false, controls: true, liveui: true },
         () => {
-          player.src(
-            "https://onfour-concert-archive.s3.amazonaws.com/delivery/clipped/justice_speaks_1/individual_clips/anjali.mp4"
-          );
+          player.src(url);
         }
       );
       // configure plugins

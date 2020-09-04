@@ -12,7 +12,7 @@
   width: 100%;
   height: 100vh;
   margin-top: -176px;
-  background-color: #07070F;
+  background-color: #07070f;
   position: relative;
 
   @include respond-to("large") {
@@ -143,6 +143,11 @@
   display: flex;
   // background: #07070F;
   align-items: center;
+}
+
+.empty-upcoming {
+  width: 100%;
+  text-align: center;
 }
 
 .upcoming-row {
@@ -313,7 +318,7 @@
 }
 
 .home-page-content {
-  background:#07070f;
+  background: #07070f;
   margin-top: -1px;
 }
 
