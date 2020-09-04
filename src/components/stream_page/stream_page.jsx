@@ -91,6 +91,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [credit_selected, setCreditSelected] = useState(true);
   const [paypal_selected, setPaypalSelected] = useState(false);
   const [stream_volume, setStreamVolume] = useState(1.0);
+  const [have_upcoming_concert, setHaveUpcomingConcert] = useState(false);
 
   const history = useHistory();
 
@@ -169,30 +170,35 @@ const StreamPage = ({ is_soundcheck }) => {
         filter: { is_future: { eq: true }, is_confirmed: { eq: true } },
       })
     );
-    const info_list = info.data.listConcerts.items; // Stores the items in database
-    info_list.sort((a, b) =>
-      moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time))
-    );
+    if (info.data.listConcerts.items.length) {
+      setHaveUpcomingConcert(true);
+      const info_list = info.data.listConcerts.items; // Stores the items in database
+      info_list.sort((a, b) =>
+        moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time))
+      );
 
-    const hour = parseInt(info_list[0].time.slice(0, 2));
-    const minutes = info_list[0].time.slice(2, 5);
+      const hour = parseInt(info_list[0].time.slice(0, 2));
+      const minutes = info_list[0].time.slice(2, 5);
 
-    setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
-    setShowTime(
-      info_list[0].date +
-        " " +
-        (hour > 12
-          ? (hour - 12).toString() + minutes + "PM"
-          : hour < 12
-          ? info_list[0].time.slice(0, 5) + "AM"
-          : info_list[0].time.slice(0, 5) + "PM")
-    );
-    setConcertName(info_list[0].concert_name);
-    getArtistInfo(info_list[0].artist_id);
-    setConcertID(info_list[0].id);
-    // setIsLive(info_list[0].is_live);
-    setIsFree(info_list[0].general_price === 0);
-    setConcertCrews(JSON.parse(info_list[0].crew_list));
+      setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
+      setShowTime(
+        info_list[0].date +
+          " " +
+          (hour > 12
+            ? (hour - 12).toString() + minutes + "PM"
+            : hour < 12
+            ? info_list[0].time.slice(0, 5) + "AM"
+            : info_list[0].time.slice(0, 5) + "PM")
+      );
+      setConcertName(info_list[0].concert_name);
+      getArtistInfo(info_list[0].artist_id);
+      setConcertID(info_list[0].id);
+      // setIsLive(info_list[0].is_live);
+      setIsFree(info_list[0].general_price === 0);
+      setConcertCrews(JSON.parse(info_list[0].crew_list));
+    } else {
+      console.log("no upcoming concert!");
+    }
   };
 
   const getArtistInfo = async (artist_id) => {
@@ -393,7 +399,7 @@ const StreamPage = ({ is_soundcheck }) => {
   // RENDERING SECTION
   return (
     <div className="stream-container">
-      {artist_name ? (
+      {artist_name || !have_upcoming_concert ? (
         <div className="stream-page-content">
           {width > 600 ? (
             <Grid className="desktop-stream-grid">
@@ -408,8 +414,10 @@ const StreamPage = ({ is_soundcheck }) => {
                   overflow: scroll,
                   maxHeight: "545px",
                   maxWidth: "482px",
-                  background: "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
-                  boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                  background:
+                    "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                  boxShadow:
+                    "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
                   borderRadius: "10px",
                 }}
                 className="rodal-custom"
@@ -741,6 +749,7 @@ const StreamPage = ({ is_soundcheck }) => {
                               <button
                                 //content="DONATE"
                                 onClick={donateModal}
+                                disabled={!have_upcoming_concert}
                                 className="primary-button stream-donate-button segmented-button-text"
                               >
                                 DONATE
@@ -920,6 +929,7 @@ const StreamPage = ({ is_soundcheck }) => {
                       // data-toggle="modal"
                       // data-target="#paymentModal"
                       onClick={donateModal}
+                      disabled={!have_upcoming_concert}
                     >
                       Tip {artist_name}
                     </button>
