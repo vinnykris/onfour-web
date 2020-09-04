@@ -232,46 +232,13 @@ const HomePage = () => {
                 <Row className="banner-row">
                   <div className="banner-container">
                     <img src={no_concert_img} className="home-page-featured" />
-                    {/* <div className="home-page-overlay" />
-                    <div className="featured-concert-container">
-                      <Row className="upcoming-row">
-                        <FeaturedConcertBox
-                          artist_info={most_recent_concert_artist}
-                          concert_info={most_recent_concert}
-                        />
-                      </Row>
-                    </div> */}
-                  </div>
-                </Row>
-
-                <Row>
-                  <Col size={1}>
-                    <div className="home-preview-content">
-                      {/* <Row className="header-row">
-                        <Col size={1}>
-                          <span className="preview-content-header header-5">
-                            Upcoming Shows
-                          </span>
-                        </Col>
-                        <Col size={1}>
-                          <NavLink to="/upcoming">
-                            <span className="view-all header-7">View All</span>
-                          </NavLink>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <FlexibleGrid
-                          className="preview-flex-row"
-                          content_list={concerts}
-                          num_cols={4}
-                        />
-                      </Row> */}
+                    <div className="empty-upcoming-container">
                       <span className="preview-content-header header-5 empty-upcoming">
                         We don't have any scheduled shows at the moment, but
                         stay tuned!
                       </span>
                     </div>
-                  </Col>
+                  </div>
                 </Row>
               </Grid>
             ) : (
