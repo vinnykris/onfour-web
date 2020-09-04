@@ -15,6 +15,14 @@
   padding: 0px 10px;
 }
 
+.step-card-container:first-child {
+  margin-left: 0;
+}
+
+.step-card-container:last-child {
+  margin-right: 0;
+}
+
 .step-card-text {
   margin-top: 96px;
 }
