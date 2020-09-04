@@ -1,4 +1,5 @@
 // PAYMENT COMPONENT STYLING
+@import "../../styles";
 
 // card payment section
 .payment-modal {
@@ -32,6 +33,9 @@
   //max-width: 500px;
   padding: 20px 40px 20px 40px;
   border: none;
+  @include respond-to("small") {
+    padding: 10px;
+  }
 }
 
 .ticket-form {
@@ -46,7 +50,7 @@
 .donate-process-text {
   margin: 0px;
   padding: 5px 0px;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(255, 255, 255, 0.87) !important;
 }
 
 .donate-form-input {
@@ -73,10 +77,18 @@
   &:focus {
     border: 2px solid #E465A2 !important;
   }
+  @include respond-to("small") {
+    padding: 8px 12px;
+    margin-top: 4%;
+    margin-bottom: 4%;
+  }
 }
 
 .secure-msg {
-  margin-top: 10px;
+  margin-top: 10px !important;
+  @include respond-to("small") {
+    margin-top: 8px !important;
+  }
 }
 
 .short-width-input {
@@ -106,12 +118,12 @@
 }
 
 .pay-success-msg {
-  color: #4d4d4d;
+  color: #4d4d4d !important;
 }
 
 .error-msg {
-  color: #BE7884;
-  margin: 0px;
+  color: #BE7884 !important;
+  margin: 0px !important;
 }
 
 .venmo-code {
@@ -121,6 +133,11 @@
   width: 280px;
   height: 221px;
   margin-top: 66px;
+  @include respond-to("small") {
+    width: 250px;
+    height: 221px;
+    margin-top: 30px;
+  }
 }
 
 .venmo-container {
@@ -135,6 +152,9 @@
 
 .venmo-text-container {
   margin-top: 48px;
+  @include respond-to("small") {
+    margin-top: 30px;
+  }
 }
 
 .venmo-text {
@@ -144,7 +164,11 @@
   line-height: 25px;
   text-align: center;
   letter-spacing: 0.045em;
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.28) !important;
+}
+
+.grayout-text {
+  color: rgba(255, 255, 255, 0.28) !important;
 }
 
 .paypal-button {

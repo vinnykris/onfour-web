@@ -2,9 +2,9 @@
 @import "../../styles";
 
 .stream-container {
-  height: calc(100vh - 49px);
+  // height: calc(100vh - 49px);
   max-height: calc(100vh - 49px);
-  width: 100vw;
+  // width: 100vw;
   max-width: 100vw;
   @include respond-to("small") {
     display: flex;
@@ -45,11 +45,6 @@
   }
 }
 
-.mobile-row {
-  display: flex;
-  flex: 1 1 auto;
-  // flex-flow: column;
-}
 
 .sticky-container {
   height: auto;
@@ -60,7 +55,9 @@
 }
 
 .payment-row-mobile {
-  flex: 0 1 60px;
+  flex: 0 1;
+  height: 60px;
+  display: flex;
 }
 
 .chat-row-mobile {
@@ -261,11 +258,17 @@
   margin-bottom: 15px;
   text-align: center;
   color: rgba(255, 255, 255, 0.28) !important;
+  @include respond-to("small") {
+    margin-bottom: 5px;
+  }
 }
 
 .payment-modal-tab-text.selected-tab {
   color:rgba(255, 255, 255, 0.87) !important;
   margin-bottom: 12px;
+  @include respond-to("small") {
+    margin-bottom: 3px;
+  }
 }
 
 // STREAM VIDEO STYLING
@@ -1081,7 +1084,14 @@
 }
 
 .mobile-payment-button {
-  height: 60px;
+  margin: 11px 8px;
+  background: #E465A2;
+  border-radius: 4px !important;
+  padding: 0px !important;
+  color: #000000 !important;
+  &:hover {
+    background: #EA91BD !important;
+  }
 }
 
 .stripe-button-border {

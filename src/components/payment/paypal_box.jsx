@@ -23,20 +23,34 @@ const donatePaypal = () => {
   window.open(url, "_blank");
 };
 
-const PaypalBox = () => {
+const PaypalBox = (props) => {
   return (
     <div className="donate-box-container">
-      <div className="venmo-container">
-        <button className="paypal-button button-text" onClick={donatePaypal}>
-          Donate with Paypal
-        </button>
-        <div className="venmo-text-container">
-          <p className="venmo-text segmented-button-text">
-            Click to donate with Paypal. <br></br>onfour will ensure your money is
-            sent to the artist.
-          </p>
+      {props.is_mobile ? (
+        <div className="venmo-container">
+          <button className="paypal-button mobile-button-text" onClick={donatePaypal}>
+            Donate with Paypal
+          </button>
+          <div className="venmo-text-container">
+            <p className="venmo-text mobile-button-text">
+              Click to donate with Paypal. <br></br>onfour will ensure your
+              money is sent to the artist.
+            </p>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="venmo-container">
+          <button className="paypal-button button-text" onClick={donatePaypal}>
+            Donate with Paypal
+          </button>
+          <div className="venmo-text-container">
+            <p className="venmo-text segmented-button-text">
+              Click to donate with Paypal. <br></br>onfour will ensure your
+              money is sent to the artist.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

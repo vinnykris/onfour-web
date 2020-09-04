@@ -163,6 +163,20 @@
   color: #ffffff;
 }
 
+.body-3 {
+  /* Body 3 - 11pt Regular Montserrat */
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 149.9%;
+  /* or 16px */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.02em;
+}
+
 // BUTTON TEXT
 .button-text {
   font-family: "Montserrat", sans-serif;
