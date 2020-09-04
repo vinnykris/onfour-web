@@ -97,26 +97,24 @@ const Register = (props) => {
     // If the registration fails, display the error message to the user and remove the
     // text from the password field so that the user can enter a new password
     if (password.length > 7) {
-      if (password !== repeat_password) {
-        setProcessing(false);
-        setRepeatPassword("");
-        setError("Passwords do not match");
-      } else {
-        Auth.signUp(signup_payload)
-          .then((data) => registerUser())
-          .catch((err) => {
-            setProcessing(false);
-            setError(err.message);
-            setPassword("");
-            setRepeatPassword("");
-          });
-      }
-    }
-    // If the password is not long enough, display a message for the user
-    else {
+      // if (password !== repeat_password) {
+      //   setProcessing(false);
+      //   setRepeatPassword("");
+      //   setError("Passwords do not match");
+      // } else {
+      Auth.signUp(signup_payload)
+        .then((data) => registerUser())
+        .catch((err) => {
+          setProcessing(false);
+          setError(err.message);
+          setPassword("");
+          setRepeatPassword("");
+        });
+      //}
+    } else {
       setProcessing(false);
       setPassword("");
-      setRepeatPassword("");
+      // setRepeatPassword("");
       setError("Password must be of at least length 8.");
     }
 
@@ -182,7 +180,7 @@ const Register = (props) => {
     setEmail("");
     setUsername("");
     setPassword("");
-    setRepeatPassword("");
+    // setRepeatPassword("");
     if (is_artist) {
       history.push("/form");
     } else if (from_path) {

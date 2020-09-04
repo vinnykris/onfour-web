@@ -20,7 +20,8 @@ const FeaturedConcertBox = ({ artist_info, concert_info }) => {
       concert_date + " " + concert_time + "-0400"
     );
     // setDaysLeft(concert_date_object.endOf("day").fromNow());
-    const time_left = +new Date(concert_date + "T24:00:00.000-04:00") - +new Date();
+    const time_left =
+      +new Date(concert_date + "T24:00:00.000-04:00") - +new Date();
     setDaysLeft(Math.floor(time_left / (1000 * 60 * 60 * 24)));
     setDay(concert_date_object.format("dddd"));
     setDate(concert_date_object.format("DD MMMM YYYY"));
@@ -54,38 +55,68 @@ const FeaturedConcertBox = ({ artist_info, concert_info }) => {
 
   return (
     <Grid>
-      {/* {loaded ? () : ()} */}
-      <Row>
-        <Col className="tag-container">
-          <Tag content= {"In " + days_left + " days"} />
-        </Col>
-      </Row>
-      <Row className="featured-concert-box-row">
-        <Col>
-          <div className="header-3">{artist_name}</div>
-        </Col>
-      </Row>
-      <Row className="featured-concert-box-row">
-        <Col>
-          <div className="subtitle-1">
-            {day} | {date} | {time}
-          </div>
-        </Col>
-      </Row>
-      <Row className="featured-concert-box-row">
-        <Col>
-          {/* <PrimaryButton
+      {loaded ? (
+        <div>
+          <Row>
+            <Col className="tag-container">
+              <Tag content={"In " + days_left + " days"} />
+            </Col>
+          </Row>
+          <Row className="featured-concert-box-row">
+            <Col>
+              <div className="header-3">{artist_name}</div>
+            </Col>
+          </Row>
+          <Row className="featured-concert-box-row">
+            <Col>
+              <div className="subtitle-1">
+                {day} | {date} | {time}
+              </div>
+            </Col>
+          </Row>
+          <Row className="featured-concert-box-row">
+            <Col>
+              {/* <PrimaryButton
             content="PEEK INSIDE"
             action={() => history.push("/upcoming/" + concert_id)}
           /> */}
-          <button
-            className="primary-button button-text featured-concert-action-button"
-            onClick={() => history.push("/upcoming/" + concert_id)}
-          >
-            PEEK INSIDE
-          </button>
-        </Col>
-      </Row>
+              <button
+                className="primary-button button-text featured-concert-action-button"
+                onClick={() => history.push("/upcoming/" + concert_id)}
+              >
+                PEEK INSIDE
+              </button>
+            </Col>
+          </Row>
+        </div>
+      ) : (
+        <Row className="featured-concert-box-row">
+          <Col>
+            <div className="header-3">Next Show Coming Soon</div>
+          </Col>
+        </Row>
+        // <Row className="featured-concert-box-row">
+        //   <Col>
+        //     <div className="subtitle-1">
+        //       {day} | {date} | {time}
+        //     </div>
+        //   </Col>
+        // </Row>
+        // <Row className="featured-concert-box-row">
+        //   <Col>
+        //     {/* <PrimaryButton
+        //       content="PEEK INSIDE"
+        //       action={() => history.push("/upcoming/" + concert_id)}
+        //     /> */}
+        //     <button
+        //       className="primary-button button-text featured-concert-action-button"
+        //       onClick={() => history.push("/upcoming/" + concert_id)}
+        //     >
+        //       PEEK INSIDE
+        //     </button>
+        //   </Col>
+        // </Row>)
+      )}
     </Grid>
   );
 };

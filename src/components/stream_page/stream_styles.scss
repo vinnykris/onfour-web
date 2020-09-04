@@ -696,6 +696,10 @@
 .stream-donate-button {
   height: 33px !important;
   width: 104px !important;
+  &:disabled {
+    background: rgba(255, 255, 255, 0.6) !important;
+    cursor: initial;
+  }
 }
 
 .donate-button-column {
@@ -969,8 +973,10 @@
   transform: translate(-50%, -50%);
   @include respond-to("small") {
     top: 30%;
+    transform: translate(-50%, -30%);
   }
 }
+
 
 .waiting-message1 {
   color: white;
@@ -1092,6 +1098,10 @@
   &:hover {
     background: #EA91BD !important;
   }
+  &:disabled {
+    background: rgba(255, 255, 255, 0.6) !important;
+    cursor: initial;
+  }
 }
 
 .stripe-button-border {
@@ -1190,4 +1200,13 @@
 
 .video-chat-main {
   display: none;
+}
+
+.no-show-waiting-msg {
+  white-space: pre-wrap;
+}
+
+.mobile-no-show-waiting-msg {
+  white-space: pre-wrap;
+  line-height: 18px !important;
 }
