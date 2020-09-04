@@ -38,6 +38,7 @@ function VideoPlayer({
   concert_id,
   is_live,
   stream_volume,
+  have_upcoming_concert
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   var player = null;
@@ -74,9 +75,11 @@ function VideoPlayer({
 
   // This is a React Hook function that gets called every second
   useEffect(() => {
-    setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
+    if (have_upcoming_concert) {
+      setTimeout(() => {
+        setTimeLeft(calculateTimeLeft());
+      }, 1000);
+    }
   });
 
   const timer_components = []; // Stores the countdown message
@@ -88,22 +91,45 @@ function VideoPlayer({
 
   // This function loops through date, hours, minutes and seconds in
   // timeLeft and combine those together to render in React
-  Object.keys(time_left).forEach((interval) => {
-    if (!time_left[interval]) {
-      // return;
-      timer_components.push(
-        <Col size={1} className="timer-block">
-          <Row>
-            <span className="timer-number">00</span>
-          </Row>
-          <Row>
-            <span className="timer-label">{interval} </span>
-          </Row>
-        </Col>
-      );
-    } else {
-      if (time_left[interval] > 9) {
+  if (have_upcoming_concert) {
+    Object.keys(time_left).forEach((interval) => {
+      if (!time_left[interval]) {
+        // return;
         timer_components.push(
+          <Col size={1} className="timer-block">
+            <Row>
+              <span className="timer-number">00</span>
+            </Row>
+            <Row>
+              <span className="timer-label">{interval} </span>
+            </Row>
+          </Col>
+        );
+      } else {
+        if (time_left[interval] > 9) {
+          timer_components.push(
+            <Col size={1} className="timer-block">
+              <Row>
+                <span className="timer-number">{time_left[interval]}</span>
+              </Row>
+              <Row>
+                <span className="timer-label">{interval} </span>
+              </Row>
+            </Col>
+          );
+        } else {
+          timer_components.push(
+            <Col size={1} className="timer-block">
+              <Row>
+                <span className="timer-number">0{time_left[interval]}</span>
+              </Row>
+              <Row>
+                <span className="timer-label">{interval} </span>
+              </Row>
+            </Col>
+          );
+        }
+        timer_placeholder.push(
           <Col size={1} className="timer-block">
             <Row>
               <span className="timer-number">{time_left[interval]}</span>
@@ -113,30 +139,9 @@ function VideoPlayer({
             </Row>
           </Col>
         );
-      } else {
-        timer_components.push(
-          <Col size={1} className="timer-block">
-            <Row>
-              <span className="timer-number">0{time_left[interval]}</span>
-            </Row>
-            <Row>
-              <span className="timer-label">{interval} </span>
-            </Row>
-          </Col>
-        );
       }
-      timer_placeholder.push(
-        <Col size={1} className="timer-block">
-          <Row>
-            <span className="timer-number">{time_left[interval]}</span>
-          </Row>
-          <Row>
-            <span className="timer-label">{interval} </span>
-          </Row>
-        </Col>
-      );
-    }
-  });
+    });
+  }
 
   // THIS SHOULD ALSO ADD THE CONCERT TO THE USER IN THE DATABASE
 
@@ -179,23 +184,25 @@ function VideoPlayer({
   const [global_player, setGlobalPlayer] = useState();
 
   useEffect(() => {
-    if (!timer_placeholder.length && is_live) {
-      player = videojs(
-        player_ref.current,
-        { autoplay: true, muted: false, controls: true, liveui: true },
-        () => {
-          player.src(url);
-        }
-      );
-      // configure plugins
-      player.landscapeFullscreen({
-        fullscreen: {
-          enterOnRotate: true,
-          alwaysInLandscapeMode: true,
-          iOS: true,
-        },
-      });
-      setGlobalPlayer(player);
+    if (have_upcoming_concert) {
+      if (!timer_placeholder.length && is_live) {
+        player = videojs(
+          player_ref.current,
+          { autoplay: true, muted: false, controls: true, liveui: true },
+          () => {
+            player.src(url);
+          }
+        );
+        // configure plugins
+        player.landscapeFullscreen({
+          fullscreen: {
+            enterOnRotate: true,
+            alwaysInLandscapeMode: true,
+            iOS: true,
+          },
+        });
+        setGlobalPlayer(player);
+      }
     }
   }, [timer_placeholder.length, is_live]);
 
@@ -232,7 +239,7 @@ function VideoPlayer({
             </Grid>
           </div>
         </div>
-      ) : (
+      ) : have_upcoming_concert ? (
         <div className="player-wrapper">
           {is_live ? (
             <div data-vjs-player>
@@ -267,11 +274,28 @@ function VideoPlayer({
               </div>
             </div>
           )}
-          {/* I try to call this function here and thought it would only be called only once when the user 
-                go to the stream page AND the show is starting. However, if you look at the console logs, 
-                this function gets called for infinite times. Maybe we need to figure out a better place to 
-                call this function*/}
-          {/* {recordEvent()}  */}
+        </div>
+      ) : (
+        <div className="waiting-screen">
+          {width <= 600 ? (
+            <div className="waiting-message-container">
+              <h3 className="header-6 mobile-no-show-waiting-msg">
+                {"No scheduled shows at the moment,\nbut stay tuned!"}
+              </h3>
+              <h5 className="header-8">
+                For updates, follow us on Instagram @_onfour
+              </h5>
+            </div>
+          ) : (
+            <div className="waiting-message-container">
+              <h3 className="header-3 no-show-waiting-msg">
+                {"No scheduled shows at the moment,\nbut stay tuned!"}
+              </h3>
+              <h5 className="header-5">
+                For updates, follow us on Instagram @_onfour
+              </h5>
+            </div>
+          )}
         </div>
       )}
     </div>

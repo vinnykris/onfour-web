@@ -33,21 +33,6 @@
   }
 }
 
-.mobile-grid-stream {
-  display: inline;
-  @include respond-to("small") {
-    display: flex;
-    flex: 1 1 auto;
-    flex-flow: column;
-  }
-}
-
-.mobile-row {
-  display: flex;
-  flex: 1 1 auto;
-  // flex-flow: column;
-}
-
 .artist-sticky-container {
   height: auto;
   display: flex;
@@ -55,15 +40,7 @@
   align-items: flex-start;
 }
 
-.payment-row-mobile {
-  flex: 0 1 60px;
-}
 
-.chat-row-mobile {
-  flex-flow: column;
-  flex: 1 0 auto;
-  overflow-y: auto;
-}
 
 // CHAT STYLING
 .artist-chat-main {
@@ -153,43 +130,6 @@
   flex-flow: column;
 }
 
-.chat-main-mobile {
-  height: calc(100vh - 411px);
-  max-height: calc(100vh - 411px);
-  // height: 400px;
-  display: flex;
-  flex-flow: column;
-  // flex: 1 1 auto;
-  overflow-y: auto;
-  flex-grow: 1;
-  // height: 60vh;
-  min-width: 0;
-  max-width: 100vh;
-  // position: relative;
-  justify-content: center;
-  align-items: center;
-  // height: 100%;
-  // // overflow: hidden;
-  // display: flex;
-  // flex: 1;
-
-  // @media only screen and (max-height: 750px) {
-  //   height: 300px;
-  // }
-  // @media only screen and (max-height: 700px) {
-  //   height: 300px;
-  // }
-  // @media only screen and (max-height: 680px) {
-  //   height: 250px;
-  // }
-  // @media only screen and (max-height: 650px) {
-  //   height: 230px;
-  // }
-  // @media only screen and (max-height: 580px) {
-  //   height: 150px;
-  // }
-}
-
 .artist-toggle-chat {
   position: absolute;
   left: 0px;
@@ -233,13 +173,6 @@
   height: 100%;
 }
 
-.chat-wrapper-mobile {
-  display: inline-block;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  // margin: auto;
-}
 
 // STREAM VIDEO STYLING
 .stream-main {
@@ -261,15 +194,6 @@
   border-top: 2px solid #07070F;
 }
 
-.stream-main-mobile {
-  width: 100%;
-  height: auto;
-}
-
-.stream-wrapper-mobile {
-  width: 100%;
-  height: 55%;
-}
 
 .artist-stream-wrapper {
   margin: auto;
@@ -464,19 +388,6 @@
   }
 }
 
-.popup-mobile {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  z-index: 10;
-  margin: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  @include respond-to("small") {
-    display: inline;
-  }
-}
-
 .waiting-msg-box {
   background-color: whitesmoke;
   width: 100%;
@@ -545,9 +456,6 @@
 //   // padding-top: 3%;
 // }
 
-.mobile-payment-button {
-  height: 60px;
-}
 
 .stripe-button-border {
   border-radius: 3px;
@@ -560,14 +468,6 @@
   }
 }
 
-.social-bar-mobile {
-  margin-top: 5%;
-}
-
-.main-content-mobile-stream {
-  padding: 5%;
-  padding-bottom: 0;
-}
 
 // .modal-backdrop {
 //   z-index: -1;
