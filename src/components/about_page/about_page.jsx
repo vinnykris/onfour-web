@@ -44,7 +44,7 @@ const LandingPage = () => {
               Experience music, together.
             </div>
             <div className="about-main-subheading header-4">
-              Interactive live-streamed concerts with your
+              Interactive live-streamed concerts with your friends.
             </div>
           </div>
         </div>
@@ -101,14 +101,17 @@ const LandingPage = () => {
             <StepCard
               title="Schedule"
               description="Pick a date, set your ticket price, and promote with an RSVP link."
+              step_num="1"
             />
             <StepCard
               title="Soundcheck"
               description="Plug in and join our greenroom with tech support the whole way."
+              step_num="2"
             />
             <StepCard
               title="Perform"
               description="See and interact with your fans as if they were in the room with you."
+              step_num="3"
             />
           </div>
         ) : (
@@ -116,14 +119,17 @@ const LandingPage = () => {
             <StepCard
               title="Create a Crew"
               description="Invite your friends to join your crew and attend shows with them."
+              step_num="1"
             />
             <StepCard
               title="Pick a Show"
               description="RSVP, add it to your calendar, and invite your crew to join you."
+              step_num="2"
             />
             <StepCard
               title="Enjoy the Show"
               description="Interact with your crew while watching your favorite artist live."
+              step_num="3"
             />
           </div>
         )}
