@@ -246,7 +246,7 @@ const DashboardPage = ({
     <Col size={7} style={{ width: "90%" }}>
       <Row className="header-section">
         <img src={dashboardIcon} className="profile-header-icon"></img>
-        <h4 className="profile-preview-content-header username-header">
+        <h4 className="profile-preview-content-header username-header header-5">
           Dashboard
         </h4>
         {/* <h4 className="profile-preview-content-header dashboard-header">
@@ -260,7 +260,7 @@ const DashboardPage = ({
             <div>
               <Row>
                 <Col size={1}>
-                  <h4 className="profile-preview-content-header">
+                  <h4 className="profile-preview-content-header header-5">
                     MY UPCOMING SHOWS
                   </h4>
                 </Col>
@@ -302,7 +302,7 @@ const DashboardPage = ({
                 <div className="memories-container">
                   <Row>
                     <Col size={1}>
-                      <h4 className="profile-preview-content-header">
+                      <h4 className="profile-preview-content-header header-5">
                         MY MEMORIES
                       </h4>
                     </Col>
@@ -344,22 +344,22 @@ const DashboardPage = ({
             <div className="profile-empty-state">
               <Row>
                 <Col size={1}>
-                  <h4 className="profile-preview-content-header">
+                  <h4 className="profile-preview-content-header header-5">
                     MY UPCOMING SHOWS
                   </h4>
                 </Col>
               </Row>
               <Row>
                 <Col size={1} className="empty-upcoming-concert-container">
-                  <h4 className="empty-state-message">
+                  <h4 className="empty-state-message body-1">
                     Oops... it looks like you aren't going to any upcoming
                     shows.
                   </h4>
-                  <h5 className="empty-state-message">
+                  <h5 className="empty-state-message body-1">
                     Get your ticket to a show below!
                   </h5>
                   <button
-                    className="upcoming-prompt-button"
+                    className="upcoming-prompt-button primary-button button-text"
                     onClick={() => history.push("/upcoming")}
                   >
                     View Upcoming Shows
@@ -370,7 +370,7 @@ const DashboardPage = ({
                 <div>
                   <Row>
                     <Col size={1}>
-                      <h4 className="profile-preview-content-header">
+                      <h4 className="profile-preview-content-header header-5">
                         MY MEMORIES
                       </h4>
                     </Col>
@@ -413,7 +413,7 @@ const DashboardPage = ({
           <div className="user-crews-container profile-empty-state">
             <Row className="user-crews-title">
               <Col size={1}>
-                <h4 className="profile-preview-content-header">
+                <h4 className="profile-preview-content-header header-5">
                   My Crews{" "}
                   {userCrews.length > 0 && (
                     <span
