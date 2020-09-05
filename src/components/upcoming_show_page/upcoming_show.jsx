@@ -1,6 +1,5 @@
 // React Imports
 import React, { useState, useEffect } from "react";
-import PulseLoader from "react-spinners/PulseLoader";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 // Component Imports
@@ -34,6 +33,7 @@ const UpcomingShowPage = () => {
   const [formatted_concerts, setFormattedConcerts] = useState([]);
   const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
   const [is_loaded, setIsLoaded] = useState(false);
+  const [have_upcoming_concert, setHaveUpcomingConcert] = useState(false);
   // Auto scroll to the top on page load
   if (scroll) {
     window.scrollTo({ top: 0 });

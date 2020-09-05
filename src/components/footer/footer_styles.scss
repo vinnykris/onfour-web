@@ -98,14 +98,14 @@
   // height: 80px;
   // float: left;
   @include respond-to("medium") {
-    height: 50px;
+    height: 43px;
   }
   @include respond-to("x-small") {
-    height: 35px;
+    height: 30px;
   }
   position: absolute;
   top: 50%;
-  height: 80px;
+  height: 43px;
   // left: -25%;
 }
 

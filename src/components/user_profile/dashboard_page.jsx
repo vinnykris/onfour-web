@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -475,7 +475,7 @@ const DashboardPage = ({
               ) : (
                 <Col size={1} className="user-crews-column">
                   <div className="user-crews-loader">
-                    <PulseLoader
+                    <ScaleLoader
                       sizeUnit="px"
                       size={18}
                       color="#7b6dac"

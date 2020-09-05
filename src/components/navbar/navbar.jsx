@@ -26,6 +26,7 @@ import history from "../../history";
 import new_logo_white from "../../images/logos/new_logo_white.png";
 import login_icon from "../../images/icons/login.png";
 import desktop_icon from "../../images/logos/navbar-logo-pink.png";
+import mobile_icon from "../../images/logos/logo-pink.png";
 
 // Styles imports
 import "./navbar_styles.scss";
@@ -39,6 +40,7 @@ const NavBar = () => {
   let style = "nav-page-white"; // Default navbar color style
   let icon = new_logo_white; // Default navbar icon
   let desktop_logo = desktop_icon; // New Navbar Desktop icon
+  let mobile_logo = mobile_icon; // New Navbar Mobile icon
   let location = useLocation(); // Get location of user navigation
 
   const [dropdown_open, setDropdownOpen] = useState(false); // Tracks drop down menu
@@ -295,7 +297,7 @@ const NavBar = () => {
                 <NavLink exact to="/">
                   <img
                     className="onfour-logo-mobile"
-                    src={new_logo_white}
+                    src={mobile_logo}
                     width="auto"
                     alt="nav-logo"
                   ></img>

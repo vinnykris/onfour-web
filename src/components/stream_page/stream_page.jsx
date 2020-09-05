@@ -1,7 +1,6 @@
 // React Imports
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
-import PulseLoader from "react-spinners/PulseLoader";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import SharePopup from "./share_popup";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -91,7 +90,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [credit_selected, setCreditSelected] = useState(true);
   const [paypal_selected, setPaypalSelected] = useState(false);
   const [stream_volume, setStreamVolume] = useState(1.0);
-  const [have_upcoming_concert, setHaveUpcomingConcert] = useState(false);
+  const [have_upcoming_concert, setHaveUpcomingConcert] = useState(true);
 
   const history = useHistory();
 
@@ -197,7 +196,7 @@ const StreamPage = ({ is_soundcheck }) => {
       setIsFree(info_list[0].general_price === 0);
       setConcertCrews(JSON.parse(info_list[0].crew_list));
     } else {
-      console.log("no upcoming concert!");
+      setHaveUpcomingConcert(false);
     }
   };
 

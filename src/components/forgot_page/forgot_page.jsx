@@ -10,7 +10,7 @@ import Auth from "../../apis/UserPool";
 // Components
 import { Grid, Row, Col } from "../grid";
 import InputOne from ".././inputs/input_one";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { useWindowDimensions } from "../custom_hooks";
 
 // Styles
@@ -370,10 +370,10 @@ const Forgot = () => {
                       }
                     </p>
                     <div className="loader-container">
-                      <PulseLoader
+                      <ScaleLoader
                         sizeUnit={"px"}
-                        size={15}
-                        color={"#7b6dac"}
+                        size={18}
+                        color={"#E465A2"}
                         loading={success}
                       />
                     </div>
