@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import speak_icon from "../../../images/video_chat_icons/radio_button_checked_24px.png";
-import "./Tray.css";
+// import speak_icon from "../../../images/video_chat_icons/radio_button_checked_24px.png";
+import "./Tray.scss";
 import TrayButton, {
   TYPE_MUTE_CAMERA,
   TYPE_MUTE_MIC,
@@ -11,6 +11,7 @@ import CallObjectContext from "../CallObjectContext";
 import { logDailyEvent } from "../logUtils";
 //import DailyIframe from "@daily-co/daily-js";
 import RangeSlider from "react-bootstrap-range-slider";
+import exit_icon from "../../../images/video_chat_icons/exit.png";
 
 /**
  * Gets [isCameraMuted, isMicMuted, isSharingScreen].
@@ -153,7 +154,7 @@ export default function Tray(props) {
   }
 
   function doSomething(e) {
-    console.log("setting volume");
+    // console.log("setting volume");
     callObject.setLocalAudio(true);
     props.stream_vol_adjust(0.25);
   }
@@ -189,12 +190,12 @@ export default function Tray(props) {
 
   function switchCameraIcon() {
     if (camera_icon == "fas fa-video-slash muted") {
-      console.log("camera should be on");
+      // console.log("camera should be on");
       setCameraIcon("fas fa-video unmuted");
       setCameraMuted(false);
       toggleCamera();
     } else {
-      console.log("camera should be off");
+      // console.log("camera should be off");
       setCameraIcon("fas fa-video-slash muted");
       setCameraMuted(true);
       toggleCamera();
@@ -219,7 +220,7 @@ export default function Tray(props) {
       props.adjust_volume(current_volume);
     } else {
       setVolumeIcon("fas fa-volume-mute volume-icon muted");
-      console.log(props.volume);
+      // console.log(props.volume);
       setCurrentVol(props.volume);
       props.adjust_volume(0);
     }
@@ -296,19 +297,11 @@ export default function Tray(props) {
               variant="dark"
             />
           </div>
-          <button
-            id="press-to-talk"
-            type="unmute-all"
-            className="tray-button press-to-talk-btn"
-            disabled={props.disabled}
-          >
-            Press & hold to talk
-          </button>
         </div>
       ) : (
         <button
           type="unmute-all"
-          className="artist-mute-all-button"
+          className="artist-mute-all-button segmented-button-text"
           disabled={props.disabled}
           highlighted={props.button_message === "MUTE ALL"}
           onClick={props.mute_function}
@@ -331,13 +324,33 @@ export default function Tray(props) {
           onClick={toggleSharingScreen}
         />
       )} */}
-      <TrayButton
+      {props.artistView ? null : (
+        <button
+          id="press-to-talk"
+          type="unmute-all"
+          className="tray-button press-to-talk-btn segmented-button-text"
+          disabled={props.disabled}
+        >
+          Press and hold to talk
+        </button>
+      )}
+      <button
+        type={TYPE_LEAVE}
+        className={"tray-button" + (props.artistView? " artist-leave-button" : "")}
+        onClick={leaveCall}
+        disabled={props.disabled}
+        id="leave-video-chat-button"
+      >
+        <img className="tray-button exit-button" src={exit_icon}></img>
+      </button>
+      {/* <TrayButton
         type={TYPE_LEAVE}
         disabled={props.disabled}
         newButtonGroup={true}
         highlighted={true}
         onClick={leaveCall}
-      />
+        id = "leave-video-chat-button"
+      /> */}
     </div>
   );
 }

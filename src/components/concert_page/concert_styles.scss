@@ -1,13 +1,33 @@
 // CONCERT COMPONENT STYLING
-
 @import "../../styles";
+
 // @import "pretty-checkbox.scss";
 
 .concert-page {
   margin-top: -1px;
-  background-color: black;
-  padding: 2.5%;
+  background: #07070f;
+
   min-height: calc(100vh - 250px);
+}
+
+.desktop-concert-page {
+  position: relative;
+}
+
+.concert-page-featured {
+  width: 100%;
+  object-fit: cover;
+  height: calc(100vw * 0.38766);
+}
+
+.concert-page-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(100vw * 0.38766);
+  background: linear-gradient(180deg, rgba(7, 7, 15, 0) 0%, #07070f 94.06%);
 }
 
 .concert-image-container {
@@ -28,6 +48,32 @@
 
 .countdown-and-buttons {
   margin-bottom: 8%;
+}
+
+.button-container {
+  width: 100%;
+}
+
+.concert-ticket-button {
+  width: 100%;
+  height: 48px;
+  margin-bottom: 15px;
+}
+
+.concert-button-text {
+  color: $on-primary;
+}
+
+.invite-button-text {
+  color: $on-background;
+}
+
+.invite-crew-button {
+  width: 100%;
+  height: 49px;
+  margin-top: 14px;
+  background-color: $secondary-color !important;
+  color: $on-background !important;
 }
 
 .buy-ticket {
@@ -75,6 +121,32 @@
   }
 }
 
+.add-to-calendar {
+  color: $on-surface-medium;
+  line-height: 24px !important;
+  padding-left: 8px;
+  padding-right: 8px;
+  cursor: pointer;
+}
+
+.add-calendar-button {
+  min-width: 94px;
+  min-height: 30px;
+  // width: 94px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-sizing: border-box;
+  border-radius: 3px;
+  background-color: transparent;
+  text-align: center;
+  padding: 0px 10px;
+  color: rgba(255, 255, 255, 0.6) !important;
+  &:hover {
+    color: #626BF7 !important;
+    border: none;
+  }
+}
+
 .calendar-button {
   margin: 2%;
   visibility: hidden;
@@ -84,11 +156,51 @@
   }
 }
 
+.add-calendar-button {
+  min-width: 94px;
+  min-height: 30px;
+  // width: 94px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-sizing: border-box;
+  border-radius: 3px;
+  background-color: transparent;
+  text-align: center;
+  padding: 0px 10px;
+  color: rgba(255, 255, 255, 0.6) !important;
+  &:hover {
+    color: #626BF7 !important;
+    border: none;
+  }
+}
+
 .calendar-redirect-msg {
-  color: white;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 0.05em;
   visibility: visible;
-  font-weight: 500;
-  font-size: 20px;
+}
+
+.no-padding {
+  padding: 0px !important;
+  margin-bottom: 0px !important;
+  line-height: 24px !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.google-calendar-link-text {
+  color: #626BF7 !important;
+  &:hover{
+    color: #2D2ACE !important;
+  }
+}
+
+.left-padding-20 {
+  padding-left: 20px;;
 }
 
 .moonloader-container {
@@ -116,16 +228,13 @@
 
 .titles {
   text-align: left;
-  color: white;
-  font-size: 1.65rem;
   padding-bottom: 25px;
 }
 
 .artist-description-text {
   text-align: left;
-  color: white;
   white-space: pre-line;
-  font-size: 0.9rem;
+  //font-size: 0.9rem;
 }
 
 .main-info-col {
@@ -134,6 +243,19 @@
 
 .countdown-timer {
   float: left;
+}
+
+.countdown-box {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-top: calc(100vw * 0.38766 * -0.4119);
+  // top: 390px;
+}
+
+.countdown-inner {
+  display: flex;
+  margin: auto;
 }
 
 hr.solid {
@@ -157,6 +279,44 @@ hr.solid {
   }
 }
 
+.concert-info-absolute {
+  // position: absolute;
+  // display: flex;
+  // width: 100%;
+}
+
+.concert-info {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  max-width: 1440px;
+  margin: auto;
+  margin-top: 61px;
+}
+
+.concert-tag {
+  margin-right: 15px;
+}
+
+.tag-calendar {
+  display: flex;
+  flex-direction: row;
+  width: 948px;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.concert-info-inner {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.concert-main-info {
+  max-width: 602px;
+  margin-right: 60px;
+}
+
 .concert-info-modal-header {
   @include respond-to("xx-large") {
     font-size: 1.2rem;
@@ -176,12 +336,12 @@ hr.solid {
 }
 
 .concert-logistics {
-  margin-top: 5%;
-  width: 350px;
+  // margin-top: 5%;
+  width: 286px;
 }
 
-.logistics-row {
-  margin-top: 5%;
+.logistics-top {
+  margin-top: 22px;
 }
 
 .logistics-text {
@@ -195,23 +355,19 @@ hr.solid {
   font-size: 0.95rem;
 }
 
+.share-concert {
+  width: 948px;
+  margin: auto;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
 .share-concert-text {
-  font-size: 1rem;
-  margin-top: 20px;
-  color: white;
-  letter-spacing: 0.04em;
-  font-weight: bold;
-  line-height: 118.49%;
+  display: flex;
+  float: left;
   text-align: left;
-  padding: 0;
-  @include respond-to("small") {
-    margin-top: 0;
-    float: left;
-    line-height: 100%;
-    margin-bottom: 0;
-    display: flex;
-    align-self: center;
-  }
+  color: white;
+  margin-bottom: 10px;
 }
 
 .share-list-container {
@@ -606,4 +762,129 @@ hr.break-modal {
 
 .mobile-backstage {
   display: none !important;
+}
+
+.invite-crew-button {
+  height: 60px;
+
+  & > button {
+    background: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
+    & > span {
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 17px;
+      letter-spacing: 0.045em;
+      color: #ffffff;
+      margin-left: 10px;
+      line-height: 20px;
+    }
+
+    & > svg {
+      background: black;
+      border-radius: 50%;
+      padding: 3px;
+
+      & > path {
+        color: white;
+      }
+    }
+  }
+}
+
+.crew-modal-relative {
+  position: relative;
+
+  .crew-input-rounded {
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    box-sizing: border-box;
+    border-radius: 20px;
+    background: #222229;
+    color: rgba(255, 255, 255, 0.87);
+
+    &:placeholder {
+      font-family: $montserrat;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 26px;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.87);
+    }
+
+    &:focus {
+      border: 1.5px solid #e465a2 !important;
+    }
+  }
+  & > svg {
+    position: absolute;
+    right: 10px;
+    top: 11px;
+
+    & > path {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+}
+
+.crew-invite-single-crew {
+  border-bottom: 1px solid rgba(136, 136, 136, 0.38);
+  height: 50px;
+  justify-content: space-between;
+
+  & > .crew-invite-selection {
+    display: flex;
+
+    & > .crew-invite-radio {
+      height: 20px;
+      width: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.87);
+      border-radius: 50%;
+      margin-top: 16px;
+      margin-right: 20px;
+      margin-left: 10px;
+      cursor: pointer;
+
+      & > svg {
+        width: 17px;
+        height: 17px;
+        margin-top: -6px;
+      }
+    }
+
+    & > .crew-invite-radio-active {
+      background-color: rgba(255, 255, 255, 0.87);
+    }
+
+    & > p {
+      margin: 0px;
+      line-height: 50px;
+      font-family: $exo2;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.87);
+    }
+  }
+
+  & .crew-invite-options {
+    line-height: 40px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+}
+
+.crew-invite-modal-crews {
+  overflow: overlay;
+  max-height: 260px;
 }

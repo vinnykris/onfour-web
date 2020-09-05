@@ -49,10 +49,13 @@
 
 .social-list li {
   list-style: none;
-  font-size: 2rem;
+  //font-size: 2rem;
   color: #e2e2e2;
   border-radius: 50%;
   margin: auto;
+  &:first-child {
+    margin-left: 0;
+  }
 }
 
 .social-list li a {

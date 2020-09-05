@@ -1,7 +1,8 @@
-const getToken = async(user_name) => {
-    const DAILY_API_KEY = "862b3778cdf7f6961d4a936e6f594cfbb0e79602b152f49f5645745310d135dd";
+const getToken = async(user_name, room_name) => {
+    const DAILY_API_KEY =
+      "cf904922e02ef8957caba380503f4330c21f2fee04c125f5277cd80959e8ffc8";
     const fetch = require('isomorphic-fetch');
-
+    // console.log(user_name, room_name)
     let response = await fetch(
         'https://api.daily.co/v1/meeting-tokens',
         {
@@ -12,8 +13,8 @@ const getToken = async(user_name) => {
             },
             body: JSON.stringify({
                 "properties": {
-                    "room_name": "bar",
-                    "is_owner": (user_name==="takoyuxin"),
+                    "room_name": room_name,
+                    "is_owner": true,
                     "user_name": user_name
                 }
             })

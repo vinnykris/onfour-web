@@ -25,7 +25,8 @@ import history from "../../history";
 // Image imports
 import new_logo_white from "../../images/logos/new_logo_white.png";
 import login_icon from "../../images/icons/login.png";
-import desktop_icon from "../../images/logos/white-purple-logo.png";
+import desktop_icon from "../../images/logos/navbar-logo-pink.png";
+import mobile_icon from "../../images/logos/logo-pink.png";
 
 // Styles imports
 import "./navbar_styles.scss";
@@ -39,6 +40,7 @@ const NavBar = () => {
   let style = "nav-page-white"; // Default navbar color style
   let icon = new_logo_white; // Default navbar icon
   let desktop_logo = desktop_icon; // New Navbar Desktop icon
+  let mobile_logo = mobile_icon; // New Navbar Mobile icon
   let location = useLocation(); // Get location of user navigation
 
   const [dropdown_open, setDropdownOpen] = useState(false); // Tracks drop down menu
@@ -134,7 +136,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className={navbar_custom}>
+    <div className="navbar-black">
       {width <= 600 ? (
         <div className="main-content">
           {/* MOBILE CODE */}
@@ -160,7 +162,7 @@ const NavBar = () => {
                         className="nav-page-white mobile-link-text"
                         onClick={() => closeMenu("nav-menu")}
                       >
-                        ABOUT US
+                        ABOUT
                       </NavLink>
                     </Col>
                   </Row>
@@ -295,7 +297,7 @@ const NavBar = () => {
                 <NavLink exact to="/">
                   <img
                     className="onfour-logo-mobile"
-                    src={new_logo_white}
+                    src={mobile_logo}
                     width="auto"
                     alt="nav-logo"
                   ></img>
@@ -333,7 +335,7 @@ const NavBar = () => {
             <NavLink exact to="/" onClick={leaveVideoChat}>
               {" "}
               <img
-                className="white-purple-logo-desktop"
+                className="desktop-logo"
                 src={desktop_logo}
                 width="auto"
                 alt="nav-logo"
@@ -341,40 +343,70 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div className="nav-links-container">
-            <NavLink exact to="/" className={style} onClick={leaveVideoChat}>
-              About Us
+            <NavLink
+              exact
+              to="/"
+              className="nav-page-white header-8"
+              onClick={leaveVideoChat}
+            >
+              Home
             </NavLink>
-            <NavLink to="/artists" className={style} onClick={leaveVideoChat}>
-              For Artists
+            <NavLink
+              to="/about"
+              className="nav-page-white header-8"
+              onClick={leaveVideoChat}
+            >
+              About
             </NavLink>
-            <NavLink to="/stream" className={style} onClick={leaveVideoChat}>
+            <NavLink
+              to="/stream"
+              className="nav-page-white header-8"
+              onClick={leaveVideoChat}
+            >
               Stream
             </NavLink>
-            <NavLink to="/upcoming" className={style} onClick={leaveVideoChat}>
+            <NavLink
+              to="/upcoming"
+              className="nav-page-white header-8"
+              onClick={leaveVideoChat}
+            >
               Upcoming
             </NavLink>
             {!auth ? (
-              <div className="login-link-container">
+              <div className="login-signup-container">
                 <NavLink
-                  to={{
-                    pathname: "/login",
-                    state: { current: location },
-                  }}
-                  className="sign-in-link"
+                  to="/login"
+                  className="nav-page-white header-8 login-text"
                   onClick={leaveVideoChat}
                 >
                   Log In
                 </NavLink>
+                <NavLink
+                  to={{
+                    pathname: "/register",
+                    state: { current: location },
+                  }}
+                  className="login-nav"
+                  onClick={leaveVideoChat}
+                >
+                  <div className="primary-button login-button segmented-button-text">
+                    Sign Up
+                  </div>
+                </NavLink>
               </div>
             ) : (
-              <div className="login-link-container logged-in">
+              <div className="login-link-container logged-in header-7">
                 <Dropdown
                   isOpen={dropdown_open}
                   toggle={toggle}
                   className="dropdown-placement"
                 >
                   <div className="toggle-color">
-                    <DropdownToggle tag="a" caret>
+                    <DropdownToggle
+                      tag="a"
+                      caret
+                      className="nav-page-white header-7"
+                    >
                       <img
                         className="user-icon-desktop"
                         src={login_icon}

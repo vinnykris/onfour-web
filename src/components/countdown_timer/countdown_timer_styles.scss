@@ -1,5 +1,4 @@
 // STREAM COMPONENT STYLING
-
 @import "../../styles";
 
 .countdown-timer-wrapper {
@@ -25,37 +24,37 @@
 
 .countdown-timer-block {
   // padding-left: 5px;
-  padding-right: 10px;
+  //padding-right: 10px;
 }
 
 .countdown-timer-number {
-  color: white;
-  font-size: 2.5rem;
-  font-weight: bold;
+  // color: white;
+  // font-size: 2.5rem;
+  // font-weight: bold;
   margin-left: auto;
   margin-right: auto;
-  line-height: 3rem;
-  height: 40px;
-  @include respond-to("small") {
-    height: 1.5rem;
-    line-height: 1.5rem;
-    font-size: 1.5rem;
-  }
+  // line-height: 3rem;
+  // height: 40px;
+  // @include respond-to("small") {
+  //   height: 1.5rem;
+  //   line-height: 1.5rem;
+  //   font-size: 1.5rem;
+  // }
 }
 
 .countdown-timer-label {
   margin-top: 10px;
-  font-size: 0.8rem;
-  color: white;
+  // font-size: 0.8rem;
+  // color: white;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  line-height: 7px;
-  height: 8px;
+  // line-height: 7px;
+  // height: 8px;
   @include respond-to("small") {
     margin-top: 2px;
-    height: 0.6rem;
-    line-height: 0.6rem;
-    font-size: 0.6rem;
+    // height: 0.6rem;
+    // line-height: 0.6rem;
+    // font-size: 0.6rem;
   }
 }

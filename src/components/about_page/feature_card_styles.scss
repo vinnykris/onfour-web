@@ -1,0 +1,50 @@
+@import "../../styles";
+
+.feature-card-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 329px;
+  height: 146px;
+  margin-left: 19px;
+  margin-right: 19px;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.09)
+    ),
+    #07070f;
+  border-radius: 10px;
+  //   margin-left: 36.5px;
+  //   margin-right: 36.5px;
+  //padding: 0px 20px;
+}
+
+.feature-card-container:first-child {
+  margin-left: 0;
+}
+
+.feature-card-container:last-child {
+  margin-right: 0;
+}
+
+.feature-card-title {
+  //position: absolute;
+  //top: 43px;
+  text-align: center;
+  margin-top: 33px;
+  // padding: 0px 20px;
+}
+
+.feature-card-description-container {
+  // position: absolute;
+  // top: 119px;
+  padding: 0px 20px;
+  // text-align: center;
+  margin-top: 24px;
+}
+
+.feature-card-description {
+  position: relative;
+  text-align: center;
+}

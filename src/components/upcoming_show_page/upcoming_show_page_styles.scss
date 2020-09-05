@@ -1,17 +1,27 @@
 // UPCOMING SHOW COMPONENT STYLING
-
 @import "../../styles";
 
 .upcoming-show-page-content {
-  background-color: black;
-  // margin-top: -1px;
-  min-height: calc(-53px + 100vh);
+  background-color: #07070F;
+  margin-top: -1px;
+  min-height: calc(-49px + 100vh);
+  // padding-top: 126px;
+}
+
+.upcoming-page-background-img {
+  width: 100%;
+  max-width: 100%;
+  // object-fit: fill;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
 }
 
 .upcoming-show-grid {
-  background: black;
+  background: #07070F;
   padding-left: 3%;
   padding-right: 3%;
+  padding-top: 40px;
   @include respond-to("small") {
     padding-left: 4%;
     padding-right: 4%;
@@ -34,26 +44,39 @@
 }
 
 .featured-content {
-  background-color: white;
-  margin: 7% 3% 7% 3%;
+  text-decoration: none !important;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.09)
+    ),
+    #07070f;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12),
+    0px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
   position: relative;
-  border-radius: 8px 8px 7px 7px;
-  height: 90%;
+  height: 0;
+  width: 100%;
+  padding-bottom: 131%;
   &:hover {
-    color: #fff;
-    opacity: 0.18;
-    transition: all 0.2s;
-    -webkit-transition: all 0.2s;
-    cursor: pointer;
-    .more-info {
-      z-index: 50;
-    }
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.12)
+      ),
+      #07070f;
+    // opacity: 0.18;
+    // transition: all 0.2s;
+    // -webkit-transition: all 0.2s;
+    // cursor: pointer;
+    // .more-info {
+    //   z-index: 50;
+    // }
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
+      0px 1px 3px rgba(0, 0, 0, 0.2);
   }
-  &:hover:after {
-    opacity: 1;
-    .more-info {
-      z-index: 0;
-    }
+  &:active {
+    border: 1.5px solid $border-focus-card;
   }
 
   @include respond-to("small") {
@@ -64,6 +87,50 @@
       z-index: 0;
     }
   }
+}
+
+.featured-content-memory {
+  text-decoration: none !important;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.09)
+    ),
+    #07070f;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12),
+    0px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  position: relative;
+  height: 0;
+  width: 100%;
+  padding-bottom: 100%;
+  &:hover {
+    cursor: pointer;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.12)
+      ),
+      #07070f;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.12),
+      0px 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  &:active {
+    border: 1.5px solid $border-focus-card;
+  }
+
+  @include respond-to("small") {
+    &:hover {
+      opacity: 1;
+    }
+    .more-info {
+      z-index: 0;
+    }
+  }
+}
+
+a.link-style {
+  text-decoration: none !important;
 }
 
 .more-info {
@@ -86,23 +153,31 @@
 .poster-container {
   position: relative;
   width: 100%;
-  // height: 17vw;
-  height: 0px;
+  height: 0;
   padding-bottom: 100%;
+
   @include respond-to("small") {
     // height: 30vh;
     padding-bottom: 100%;
   }
 }
 
+// .poster-inner-container {
+//   display: flex;
+//   width: 100%;
+//   height: 100%;
+//   padding: 10%;
+// }
+
 .concert-poster {
   position: absolute;
   object-fit: cover;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 7px 7px 0px 0px;
+  left: 10px;
+  top: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border-radius: 10px;
+  //padding: 10px;
 }
 
 .featured-header {
@@ -115,12 +190,18 @@
 }
 
 .show-content-bar {
-  max-width: 100%;
+  width: 100%;
+  height: calc(100% - 76%);
   height: 100%;
+  padding: 0px 19px;
+}
+
+.featured-content-tag {
+  //margin-left: 19px;
 }
 
 .genre-box {
-  background-color: black;
+  background-color: #07070F;
   color: white;
   margin-left: 10px;
   margin-top: 5px;
@@ -160,6 +241,30 @@
   }
   @include respond-to("large") {
     margin-bottom: 50px;
+  }
+}
+
+.featured-content-info {
+  text-align: left;
+  margin-top: 9px;
+
+  @include respond-to("x-large") {
+    font-size: 12px !important;
+  }
+  @media (max-width: 1120px) {
+    font-size: 11px !important;
+  }
+  @media (max-width: 1045px) {
+    font-size: 10px !important;
+  }
+  @media (max-width: 970px) {
+    font-size: 9px !important;
+  }
+  @media (max-width: 900px) {
+    font-size: 7.75px !important;
+  }
+  @include respond-to("medium") {
+    font-size: 9px !important;
   }
 }
 
@@ -290,7 +395,7 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  background-color: black;
+  background-color: #07070F;
   height: 0.2px;
   margin-top: 100px;
 }
@@ -301,7 +406,7 @@
 
 .search-box {
   background: white;
-  border-color: black;
+  border-color: #07070F;
   height: 40px;
   border: 1px;
   padding: 10px;
@@ -318,7 +423,7 @@
   border: none;
   background: none;
   padding: 0;
-  color: black;
+  color: #07070F;
   font-size: 14px;
   line-height: 40px;
   width: 240px;
@@ -347,7 +452,7 @@
 
 .email-input-upcoming {
   width: 280px;
-  color: black;
+  color: #07070F;
 }
 
 .concert-form {
@@ -360,7 +465,7 @@
   // box-shadow: 0px 3px 5px rgb(238, 237, 237);
   overflow: auto;
   @include respond-to("small") {
-    background-color: black;
+    background-color: #07070F;
     width: 100vw;
     height: 100vh;
     padding: 2vh 2vw 2vh 2vw;
@@ -436,14 +541,14 @@
 .modal-date {
   font-size: 0.7rem;
   width: auto;
-  background-color: black;
+  background-color: #07070F;
   color: white;
   font-weight: bold;
   padding: 2px 10px 2px 10px;
 
   @include respond-to("small") {
     background-color: white;
-    color: black;
+    color: #07070F;
   }
 }
 
@@ -460,7 +565,7 @@
   font-style: normal;
   font-weight: bold;
   font-size: 100%;
-  color: #000000;
+  color: #07070F;
   text-align: left;
 
   @include respond-to("small") {
@@ -476,7 +581,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 0.8rem;
-  color: #000000;
+  color: #07070F;
   text-align: justify;
   white-space: pre-wrap;
   scrollbar-width: none; /* Firefox */
@@ -558,7 +663,7 @@
   font-style: normal;
   font-weight: bold;
   font-size: 0.85rem;
-  color: #000000;
+  color: #07070F;
   text-align: left;
   @include respond-to("small") {
     font-size: 0.4rem;
@@ -585,7 +690,7 @@
 
 .modal-ticket-button {
   width: 100%;
-  background-color: black;
+  background-color: #07070F;
   color: white;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -595,7 +700,7 @@
 
 .modal-free-button {
   width: 100%;
-  background-color: black;
+  background-color: #07070F;
   color: white;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -631,7 +736,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 0.7rem;
-  color: #000000;
+  color: #07070F;
   text-align: justify;
   white-space: pre-wrap;
   scrollbar-width: none; /* Firefox */
@@ -660,7 +765,7 @@
   font-style: italic;
   font-weight: bold;
   font-size: 0.85rem;
-  color: #000000;
+  color: #07070F;
   text-align: left;
   @include respond-to("small") {
     color: white;
@@ -701,7 +806,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 0.8rem;
-  color: #000000;
+  color: #07070F;
   text-align: justify;
   white-space: pre-wrap;
 
@@ -715,7 +820,7 @@
   font-style: normal;
   font-weight: bold;
   font-size: 0.85rem;
-  color: #000000;
+  color: #07070F;
   text-align: left;
   white-space: pre-wrap;
   margin-bottom: -10px;
@@ -759,7 +864,7 @@
 .mobile-modal-ticket-button {
   width: 100%;
   height: 3vh;
-  background-color: black;
+  background-color: #07070F;
   color: white;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -770,7 +875,7 @@
 .mobile-modal-free-button {
   width: 100%;
   height: 3vh;
-  background-color: black;
+  background-color: #07070F;
   color: white;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -783,16 +888,17 @@
 }
 
 .overlay-box {
-  background: black;
-  padding-top: 20vh;
+  background: #07070F;
+  padding-top: 40vh;
   height: 71vh;
   width: 100%;
   @include respond-to("small") {
     height: 100vh;
   }
 }
+
 .google-signin {
-  background-color: black;
+  background-color: #07070F;
   color: white;
   &:hover {
     cursor: pointer;

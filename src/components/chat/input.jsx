@@ -49,9 +49,9 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
   return (
     <div className="input-container">
       {auth ? (
-        <form className="form">
+        <form className="text-chat-form">
           <input
-            className="input"
+            className="body-2 text-chat-input"
             type="text"
             placeholder="Type a message..."
             value={message}
@@ -95,9 +95,9 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
           {/* </ChatTooltip> */}
         </form>
       ) : (
-        <form className="form">
+        <form className="text-chat-form">
           <input
-            className="input"
+            className="body-2 text-chat-input"
             type="text"
             placeholder="Please sign in to send messages!"
             disabled

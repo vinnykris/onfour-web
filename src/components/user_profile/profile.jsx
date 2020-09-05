@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { useHistory } from "react-router-dom";
 
 import { Grid, Row, Col } from "../grid";
@@ -40,12 +40,14 @@ const Profile = (props) => {
   const [username, setUsername] = useState("");
   const [currentPage, setCurrentPage] = useState("dashboard");
   const history = useHistory();
+  const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
     Auth.currentAuthenticatedUser({})
       .then((user) => {
         setAuth(true);
         setUsername(user.username);
+        setUserEmail(user.attributes.email);
       })
       .catch((err) => {
         setAuth(false);
@@ -67,20 +69,20 @@ const Profile = (props) => {
   // };
 
   useEffect(() => {
-    console.log(variables);
+    // console.log(variables);
     const fetchData = async () => {
       // RSVP'd Upcoming shows
       const results = await getUpcomingPurchasedShows(width, username);
-      console.log(results);
+      // console.log(results);
       const upcoming_result = results[0];
       const memories_result = results[1];
       const ticket_stubs = results[2];
-      await setUpcomingConcerts(upcoming_result.slice(0, 5));
+      setUpcomingConcerts(upcoming_result.slice(0, 5));
       // setStubs(getStubs);
-      await setStubs(ticket_stubs);
+      setStubs(ticket_stubs);
       // Archive videos (sorting from most recent -> oldest)
       // const memories_result = await getMemories(variables.username);
-      await setMemories(memories_result.slice(0, 4));
+      setMemories(memories_result.slice(0, 4));
       setIsLoaded(true);
     };
     fetchData();
@@ -159,6 +161,8 @@ const Profile = (props) => {
                 upcoming_concerts={upcoming_concerts}
                 memories={memories}
                 history={history}
+                username={username}
+                userEmail={userEmail}
               ></DashboardPage>
             ) : (
               <TicketPage
@@ -266,10 +270,10 @@ const Profile = (props) => {
         </Grid>
       ) : (
         <div className="overlay-box">
-          <PulseLoader
+          <ScaleLoader
             sizeUnit={"px"}
             size={18}
-            color={"#7b6dac"}
+            color={"#E465A2"}
             loading={!is_loaded}
           />
         </div>

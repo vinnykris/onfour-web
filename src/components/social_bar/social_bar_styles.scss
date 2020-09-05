@@ -1,7 +1,5 @@
 // SOCIAL BAR COMPONENT STYLING
-
-@import "../../styles";
-
+@import "../../styles.scss";
 .social-bar-container {
   margin-top: 3%;
 }
@@ -18,7 +16,7 @@
 .social-subscribe-description {
   margin: auto;
   font-size: 17px;
-  font-weight: $medium-weight;
+  font-weight: 600;
   color: #cacaca;
   text-align: center;
   padding-top: 10px;
@@ -37,7 +35,7 @@
   // margin: 10px 10px 0px 10px;
   // display: inline-block;
   // float: left;
-  font-size: 2.4rem;
+  //font-size: 2.4rem;
   color: #e2e2e2;
   border-radius: 50%;
 }

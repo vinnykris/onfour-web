@@ -1,6 +1,6 @@
 // React Imports
 import React, { useState, useEffect } from "react";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 // Component Imports
 // import FeaturedContent from "./featured_content";
@@ -22,6 +22,9 @@ import { getArtistInfo, getConcertInfo } from "../../apis/get_concert_data";
 // Styling Imports
 import "./upcoming_show_page_styles.scss";
 
+// Image Imports
+import background_img from "../../images/backgrounds/backgorund_image1-03-03.png";
+
 Amplify.configure(awsmobile);
 
 // The Upcoming Show Page component
@@ -30,6 +33,7 @@ const UpcomingShowPage = () => {
   const [formatted_concerts, setFormattedConcerts] = useState([]);
   const [scroll, setScroll] = useState(true); // State Variable for auto scroll to the top
   const [is_loaded, setIsLoaded] = useState(false);
+  const [have_upcoming_concert, setHaveUpcomingConcert] = useState(false);
   // Auto scroll to the top on page load
   if (scroll) {
     window.scrollTo({ top: 0 });
@@ -75,6 +79,7 @@ const UpcomingShowPage = () => {
 
   return (
     <div className="upcoming-show-page-content">
+      <img className="upcoming-page-background-img" src={background_img}></img>
       {is_loaded ? (
         <div>
           {width <= 600 ? (
@@ -85,7 +90,7 @@ const UpcomingShowPage = () => {
             <div>
               {width < 1280 ? (
                 <div>
-                  {width <= 768 ? (
+                  {width <= 800 ? (
                     <div className="upcoming-show-grid">
                       <FlexibleGrid
                         content_list={formatted_concerts}
@@ -103,10 +108,17 @@ const UpcomingShowPage = () => {
                 </div>
               ) : (
                 <div className="upcoming-show-grid">
-                  <FlexibleGrid
-                    content_list={formatted_concerts}
-                    num_cols={5}
-                  />
+                  {formatted_concerts.length > 0 ? (
+                    <FlexibleGrid
+                      content_list={formatted_concerts}
+                      num_cols={4}
+                    />
+                  ) : (
+                    <div className="header-5 empty-upcoming">
+                      We don't have any scheduled shows at the moment, but stay
+                      tuned!
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -114,10 +126,10 @@ const UpcomingShowPage = () => {
         </div>
       ) : (
         <div className="overlay-box">
-          <PulseLoader
+          <ScaleLoader
             sizeUnit={"px"}
             size={18}
-            color={"#7b6dac"}
+            color={"#E465A2"}
             loading={!is_loaded}
           />
         </div>

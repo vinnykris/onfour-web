@@ -20,7 +20,7 @@ let socket; // Socket declaration
 // Main chat component
 const Chat = ({ chat_name, chatStatus, setViewers, artistView }) => {
   const [name, setName] = useState(chat_name); // User's chat name
-  const [room, setRoom] = useState("Public Chat"); // Title of chat and room all users are in
+  const [room, setRoom] = useState("Chat"); // Title of chat and room all users are in
   const [users, setUsers] = useState(""); // List of users in chat room
   const [message, setMessage] = useState(""); // Holds inputted message
   const [messages, setMessages] = useState([]); // Holds list of messages
@@ -35,7 +35,7 @@ const Chat = ({ chat_name, chatStatus, setViewers, artistView }) => {
 
   // Function called on mount
   useEffect(() => {
-    console.log(name);
+    // console.log(name);
     socket = io(ENDPOINT); // Connect socket to server
 
     setName(name);
@@ -80,10 +80,10 @@ const Chat = ({ chat_name, chatStatus, setViewers, artistView }) => {
         "You cannot send messages as a guest. Please log in to send messages!"
       );
     } else {
-      console.log(name);
+      // console.log(name);
       if (message) {
-        if (message.length > 140) {
-          alert("Message cannot be longer than 140 characters.");
+        if (message.length > 250) {
+          alert("Message cannot be longer than 250 characters.");
         } else {
           Analytics.record({ name: "chatButtonPressed" }); // this record the chat button press
           socket.emit("sendMessage", message, (error) => {

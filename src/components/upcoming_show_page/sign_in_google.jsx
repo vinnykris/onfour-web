@@ -7,7 +7,7 @@ function GoogleSignIn() {
     const [need_sign_in, setNeedSignIn] = useState(true);
 
     const handleItemClick = (name) => {
-        console.log(name);
+        // console.log(name);
         if (name === 'sign-in') {
             ApiCalendar.handleAuthClick();
             setNeedSignIn(false)

@@ -125,6 +125,46 @@ export const formatUpcomingShow = (data, width) => {
       spotify={data.spotify}
       soundcloud={data.soundcloud}
       location={data.location}
+      upcoming={true}
+    />
+  );
+};
+
+export const formatMemory = (data, width) => {
+  // Iterate through each element in the list and add the created
+  // FeaturedContent to concerts
+  return (
+    <FeaturedContent
+      id={data.id}
+      img={data.poster_url}
+      stub_url={data.stub_url}
+      artist_name={data.artist_name}
+      concert_name={data.concert_name}
+      week_day={moment(data.date).format("dddd")}
+      date={data.date}
+      formatted_date={
+        data.date.slice(8, 10) +
+        " " +
+        month_map[data.date.slice(5, 7)] +
+        " " +
+        data.date.slice(0, 4)
+        // moment(data.date).format('LL')
+      }
+      time={data.time}
+      formatted_time={moment(data.time, "HH:mm:ss").format("h:mm A")}
+      month={month_map[data.date.slice(5, 7)]}
+      day={data.date.slice(8, 10)}
+      price={data.general_price}
+      description={data.artist_bio.toString()}
+      width={width}
+      genre={data.genre}
+      instagram={data.instagram}
+      facebook={data.facebook}
+      twitter={data.twitter}
+      spotify={data.spotify}
+      soundcloud={data.soundcloud}
+      location={data.location}
+      upcoming={false}
     />
   );
 };

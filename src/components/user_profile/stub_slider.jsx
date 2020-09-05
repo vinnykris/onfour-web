@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import Slider from "react-slick";
 
 import { Grid, Row, Col } from "../grid";
@@ -13,7 +13,7 @@ import ProfileStub from "./profile_stub";
 
 const StubSlider = ({ stubs }) => {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
-  console.log(stubs);
+  // console.log(stubs);
 
     // $(".centered-stubs").slick({
     //   centerMode: true,

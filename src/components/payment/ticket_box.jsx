@@ -1,5 +1,6 @@
 // React Imports
 import React, { useState } from "react";
+import NumberFormat from "react-number-format";
 
 // Stripe Imports
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
@@ -7,17 +8,16 @@ import stripeTokenHandler from "./stripe";
 
 // Component Imports
 import { useInputValue } from "../custom_hooks";
-import Tooltip from "@material-ui/core/Tooltip";
 
 // AWS Imports
 import { Analytics } from "aws-amplify";
 
 // Styles Imports
-import "./ticket_box_styles.scss";
+import "./donate_styles.scss";
 
-// PaymentBox is a wrapper component for CheckoutForm
-// It is used for cleaner layout
-const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
+// The CheckoutForm component defines the userflow and layout of the payment form
+// It contains function that calls the Stripe backend with AWS lambda function
+const CheckoutForm = (props) => {
   // Stripe constants
   const stripe = useStripe();
   const elements = useElements();
@@ -28,7 +28,6 @@ const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
   const [payment_message, setMessage] = useState(""); // Variable to store the payment error message
   const [display_err, setDisplayErr] = useState(false); // Variable to display error message
   const [waiting, setWaiting] = useState(false); // Variable to display processing message
-  const [checked, setChecked] = useState(false); // Tracks whether the agree to the terms box is checked
 
   // Input form values
   const name = useInputValue("");
@@ -37,12 +36,21 @@ const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
   // Style defination for card information input section
   const iframeStyles = {
     base: {
-      color: "#000000",
+      color: "rgba(255, 255, 255, 0.87)",
       backgrondColor: "#FFFFFF",
       fontSize: "16px",
-      iconColor: "#C4C4C4",
+      fontFamily: '"Montserrat", sans-serif',
+      fontStyle: "normal",
+      fontWeight: "normal",
+      // lineHeight: "26px",
+      letterSpacing: "0.05em",
+      caretColor: "#E465A2",
+      iconColor: "rgba(255, 255, 255, 0.28)",
       "::placeholder": {
-        color: "#C4C4C4",
+        color: "rgba(255, 255, 255, 0.28)",
+      },
+      "::after": {
+        border: "2px solid #E465A2 !important",
       },
     },
     invalid: {
@@ -59,6 +67,18 @@ const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
     iconStyle: "solid",
     style: iframeStyles,
     hidePostalCode: true,
+  };
+
+  // This function set needConfirm to false
+  // It is called after the user clicks the PAY button
+  const needConfirmation = (event) => {
+    event.preventDefault();
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
+    setNeedConfirm(false);
   };
 
   // This function gets called after user clicked the CONFIRM button
@@ -79,16 +99,16 @@ const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
 
     if (result.error) {
       // Show error to your customer.
-      console.log(result.error.message);
+      // console.log(result.error.message);
       setWaiting(false);
-      setMessage(result.error.message);
       setDisplayErr(true);
+      setMessage(result.error.message);
       Analytics.record({ name: "tokenPaymentError" });
     } else {
       // Send the token to AWS lambda function
       const payment_result = await stripeTokenHandler(
         result.token,
-        Math.round(amount_value * 100),
+        Math.round(props.amount_value * 100),
         name.value,
         email.value
       );
@@ -96,7 +116,7 @@ const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
       if (payment_result === "Charge processed successfully!") {
         // if payment succeeds, setPay to true to display the payment success message
         setPayed(true);
-        registerConcert();
+        props.addTicket();
       } else {
         // if there is an error, display the error and change the processing message back to the CONFIRM button
         Analytics.record({ name: "stripeError" });
@@ -108,103 +128,97 @@ const TicketBox = ({ amount_value, onClick, registerConcert, header }) => {
   };
 
   return (
-    <div className="ticket-bar">
-      <div className="ticket-inner-container">
-        <div className="ticket-checkout-header">
-          <div className="ticket-header-container">
-            <h5>{header}</h5>
-          </div>
-        </div>
-        <form id="ticket" className="ticket-form" onSubmit={submitPayment}>
-          {(() => {
-            if (!payed) {
-              return (
-                <div>
-                    {display_err ? (
-                        <p className="error-msg">{payment_message}</p>
-                    ) : (
-                        <br></br>
-                    )}
-                    <input
-                        name="name"
-                        label="Name"
-                        type="name"
-                        placeholder="Cardholder Name"
-                        className="ticket-form-input short-width-input"
-                        required
-                        {...name}
-                    />
-                    <input
-                        name="email"
-                        label="Email"
-                        type="email"
-                        placeholder="Email for the Receipt"
-                        className="ticket-form-input short-width-input"
-                        required
-                        {...email}
-                    />
-                    <div className="ticket-form-input">
-                        <CardElement options={cardElementOpts} />
-                    </div>
-                    <input
-                        className="term-agreement-checkbox"
-                        name="isConsent"
-                        type="checkbox"
-                        checked={checked}
-                        onChange={(event) => setChecked(!checked)}
-                    />
-                    <label className="term-agreement-text">
-                          I have read and agree to these <a href="/ticket-agreement" target="_blank">terms</a>
-                    </label>
-                  {waiting ? (
+    <div className="donate-box-container">
+      <form id="ticket" className="ticket-form" onSubmit={submitPayment}>
+        {(() => {
+          if (!payed) {
+            return (
+              <div>
+                {display_err ? (
+                  <p className="error-msg">{payment_message}</p>
+                ) : (
+                    <br></br>
+                  )}
+                <input
+                  name="name"
+                  label="Name"
+                  type="name"
+                  placeholder="Your Name"
+                  className="donate-form-input body-1 short-width-input"
+                  required
+                  {...name}
+                />
+                <input
+                  name="email"
+                  label="Email"
+                  type="email"
+                  placeholder="Your Email"
+                  className="donate-form-input body-1 short-width-input"
+                  required
+                  {...email}
+                />
+                <div className="donate-form-input body-1">
+                  <CardElement options={cardElementOpts} />
+                </div>
+                {need_confirm ? (
+                  <div>
+                    <br></br>
+                    <button
+                      className="donate-button button-text"
+                      type="toConfirm"
+                      disabled={!stripe}
+                      onClick={needConfirmation}
+                    >
+                      PAY NOW
+                    </button>
+                    <p className="venmo-text segmented-button-text secure-msg">
+                      *The payment is secure
+                    </p>
+                  </div>
+                ) : (
                     <div>
-                      <p className="process-text">Processing</p>
-                    </div>
-                  ) : (
-                    <div>
-                        <button
-                            form="none"
-                            className="ticket-button"
-                            onClick={onClick}
-                        >
-                            GO BACK
-                        </button>
-                        {checked? (
+                      {waiting ? (
+                        <div>
+                          <p className="donate-process-text">Processing</p>
+                        </div>
+                      ) : (
+                          <div>
+                            <p className="donate-process-text">
+                              Please confirm you are paying ${props.amount_value}
+                            </p>
                             <button
-                                form="ticket"
-                                className="ticket-button"
-                                type="submit"
-                                disabled={!stripe}
+                              form="ticket"
+                              className="donate-button button-text"
+                              type="submit"
+                              disabled={!stripe}
                             >
-                                PAY ${amount_value}
-                            </button>
-                        ) : (
-                            <Tooltip title="Please agree to the terms first">
-                                <button
-                                    form="placeholder"
-                                    className="ticket-button-disabled"
-                                >
-                                    PAY ${amount_value}
-                                </button>
-                            </Tooltip>
+                              Confirm
+                        </button>
+                          </div>
                         )}
                     </div>
                   )}
-                </div>
-              );
-            } else {
-              return (
-                <div>
-                  <br></br>
-                  <div className="pay_sucess_msg">Payment Successful!</div>
-                </div>
-              );
-            }
-          })()}
-        </form>
-      </div>
+              </div>
+            );
+          } else {
+            return (
+              <div>
+                <br></br>
+                <div className="pay_sucess_msg">Payment Successful!</div>
+              </div>
+            );
+          }
+        })()}
+      </form>
     </div>
   );
 };
 
+// donateBox is a wrapper component for CheckoutForm
+// It is used for cleaner layout
+const TicketBox = (props) => {
+  return <CheckoutForm amount_value={props.amount_value} addTicket={props.addTicket} />;
+};
+
 export default TicketBox;
+

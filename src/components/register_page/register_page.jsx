@@ -8,7 +8,7 @@ import ReactTooltip from "react-tooltip";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 // GraphQL
 import * as mutations from "../../graphql/mutations";
@@ -29,6 +29,7 @@ import {
   containsNumber,
   containsSpecialCharacter,
 } from "../../utils/register";
+import InputOne from "../inputs/input_one";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -96,26 +97,24 @@ const Register = (props) => {
     // If the registration fails, display the error message to the user and remove the
     // text from the password field so that the user can enter a new password
     if (password.length > 7) {
-      if (password !== repeat_password) {
-        setProcessing(false);
-        setRepeatPassword("");
-        setError("Passwords do not match");
-      } else {
-        Auth.signUp(signup_payload)
-          .then((data) => registerUser())
-          .catch((err) => {
-            setProcessing(false);
-            setError(err.message);
-            setPassword("");
-            setRepeatPassword("");
-          });
-      }
-    }
-    // If the password is not long enough, display a message for the user
-    else {
+      // if (password !== repeat_password) {
+      //   setProcessing(false);
+      //   setRepeatPassword("");
+      //   setError("Passwords do not match");
+      // } else {
+      Auth.signUp(signup_payload)
+        .then((data) => registerUser())
+        .catch((err) => {
+          setProcessing(false);
+          setError(err.message);
+          setPassword("");
+          setRepeatPassword("");
+        });
+      //}
+    } else {
       setProcessing(false);
       setPassword("");
-      setRepeatPassword("");
+      // setRepeatPassword("");
       setError("Password must be of at least length 8.");
     }
 
@@ -181,7 +180,7 @@ const Register = (props) => {
     setEmail("");
     setUsername("");
     setPassword("");
-    setRepeatPassword("");
+    // setRepeatPassword("");
     if (is_artist) {
       history.push("/form");
     } else if (from_path) {
@@ -231,28 +230,28 @@ const Register = (props) => {
                 <div className="form-section">
                   {auto_signup ? (
                     <div className="login-loader-container">
-                      <PulseLoader
+                      <ScaleLoader
                         sizeUnit={"px"}
-                        size={15}
-                        color={"#7b6dac"}
+                        size={18}
+                        color={"#E465A2"}
                         loading={auto_signup}
                       />
                     </div>
                   ) : (
-                    <div>
+                    <div className="register-form-container">
                       <form
                         className="register-form"
                         action="/"
                         id="register-pin"
                         onSubmit={registerSubmitPin}
                       >
-                        <Row className="signup-header">
-                          <h6 className="signup-header-text">
+                        <div className="signup-header">
+                          <div className="header-7 register-text-color">
                             Welcome {name}. Please provide the verification code
                             sent to your email to complete registration!
-                          </h6>
-                        </Row>
-                        <Row className="register-input-row">
+                          </div>
+                        </div>
+                        <div className="register-input-row">
                           <input
                             className="register-input"
                             type="pin"
@@ -263,19 +262,18 @@ const Register = (props) => {
                             onChange={(event) => setPin(event.target.value)}
                             required
                           />
-                        </Row>
+                        </div>
                         <div style={{ color: "red" }}>{error}</div>
-                        <br></br>
-                        <Row className="verification-footer">
+                        <div className="verification-footer">
                           <button
-                            className="register-verification-submit-button"
+                            className="primary-button button-text register-verification-submit-button"
                             type="submit"
                             form="register-pin"
                             value="Submit"
                           >
                             COMPLETE REGISTRATION
                           </button>
-                        </Row>
+                        </div>
                       </form>
                     </div>
                   )}
@@ -286,88 +284,83 @@ const Register = (props) => {
                 <div className="form-section">
                   {is_processing ? (
                     <div className="login-loader-container">
-                      <PulseLoader
+                      <ScaleLoader
                         sizeUnit={"px"}
-                        size={15}
-                        color={"#7b6dac"}
+                        size={18}
+                        color={"#E465A2"}
                         loading={is_processing}
                       />
                     </div>
                   ) : (
-                    <div>
+                    <div className="register-form-container">
                       <form
                         className="register-form"
                         action="/"
                         id="register"
                         onSubmit={registerSubmit}
                       >
-                        <Row className="signup-header">
-                          <h6 className="signup-header-text">
-                            Sign up with your email and username below!
-                          </h6>
-                        </Row>
-
-                        <Row className="register-input-row">
-                          <input
-                            className="register-input-left"
-                            name="first"
-                            required
-                            id="first_slot"
-                            value={first}
-                            placeholder="First Name"
-                            onChange={(event) => setFirst(event.target.value)}
-                          />
-                          <input
-                            className="register-input-right"
-                            id="last_slot"
-                            name="last"
-                            value={last}
-                            placeholder="Last Name"
-                            onChange={(event) => setLast(event.target.value)}
-                            required
-                          />
-                        </Row>
-                        <Row className="register-input-row">
-                          <input
-                            className="register-input"
-                            type="username"
-                            name="username"
-                            value={username}
-                            id="username_slot"
-                            placeholder="Username"
-                            onChange={(event) =>
-                              setUsername(event.target.value)
-                            }
-                            required
-                          />
-                        </Row>
-                        <Row className="register-input-row">
-                          <input
-                            className="register-input"
-                            type="email"
-                            name="email"
-                            value={email}
-                            id="email_slot"
-                            placeholder="Email"
-                            onChange={(event) => setEmail(event.target.value)}
-                            required
-                          />
-                        </Row>
-                        <Row className="register-input-row">
-                          <input
-                            className="register-input-left"
-                            type="password"
-                            name="password"
-                            value={password}
-                            id="password_slot"
-                            placeholder="Password"
-                            onChange={(event) =>
-                              setPassword(event.target.value)
-                            }
-                            required
+                        <div className="login-form-container">
+                          <div className="header-3 signin-header-color">
+                            Sign Up
+                          </div>
+                          <div className="signup-header">
+                            <div className="header-7 register-text-color">
+                              Join the onfour experience below
+                            </div>
+                          </div>
+                          <div className="register-input-container">
+                            <InputOne
+                              id="first_slot"
+                              type="text"
+                              name="full-name"
+                              is_required={true}
+                              placeholder="Full Name"
+                              value={first}
+                              onChange={(event) => setFirst(event.target.value)}
+                            />
+                          </div>
+                          <div className="register-input-container">
+                            <InputOne
+                              id="username_slot"
+                              type="text"
+                              name="username"
+                              is_required={true}
+                              placeholder="Username"
+                              value={username}
+                              onChange={(event) =>
+                                setUsername(event.target.value)
+                              }
+                            />
+                          </div>
+                          <div className="register-input-container">
+                            <InputOne
+                              id="email_slot"
+                              type="email"
+                              name="email"
+                              is_required={true}
+                              placeholder="Email"
+                              value={email}
+                              onChange={(event) => setEmail(event.target.value)}
+                            />
+                          </div>
+                          <div
+                            className="register-input-container"
                             data-tip
                             data-for="registerTip"
-                          />
+                          >
+                            <InputOne
+                              id="password_slot"
+                              type="password"
+                              name="password"
+                              is_required={true}
+                              placeholder="Password"
+                              value={password}
+                              onChange={(event) =>
+                                setPassword(event.target.value)
+                              }
+                              is_password={true}
+                            />
+                          </div>
                           <ReactTooltip
                             id="registerTip"
                             place="left"
@@ -448,69 +441,50 @@ const Register = (props) => {
                               </text>
                             </p>
                           </ReactTooltip>
+                        </div>
+                        <div className="email-subscribe-prompt">
                           <input
-                            className="register-input-right"
-                            type="password"
-                            name="password"
-                            value={repeat_password}
-                            id="password_r_slot"
-                            placeholder="Repeat Password"
-                            onChange={(event) =>
-                              setRepeatPassword(event.target.value)
-                            }
-                            required
+                            className="email-unsubscribe-checkbox"
+                            name="isGoing"
+                            type="checkbox"
+                            checked={checked}
+                            onChange={(event) => setChecked(!checked)}
                           />
-                        </Row>
-                        <PasswordStrengthBar
-                          password={password}
-                          minLength={8}
-                        />
-                        <br></br>
-                        <Row>
-                          <Col size={0.5}>
-                            <input
-                              className="email-unsubscribe-checkbox"
-                              name="isGoing"
-                              type="checkbox"
-                              checked={checked}
-                              onChange={(event) => setChecked(!checked)}
-                            />
-                          </Col>
-                          <Col size={10}>
-                            <label className="email-unsubscribe-text">
-                              I want to receive email updates about future
-                              Onfour shows.
-                            </label>
-                          </Col>
-                        </Row>
+                          <label className="header-8 register-text-color">
+                            I want to receive email updates about future onfour
+                            shows.
+                          </label>
+                        </div>
                         <div style={{ color: "red" }}>{error}</div>
-                        <br></br>
-                        <button
-                          className="fan-register-submit-button"
-                          type="submit"
-                          form="register"
-                          value="FanSubmit"
-                          onClick={setFanOption}
-                        >
-                          I'M A FAN
-                        </button>
-                        <button
-                          className="artist-register-submit-button"
-                          type="submit"
-                          form="register"
-                          value="ArtistSubmit"
-                          onClick={setArtistOption}
-                        >
-                          I'M AN ARTIST
-                        </button>
+                        <div className="register-button-container">
+                          <button
+                            className="primary-button button-text register-submit-button fan-submit-button"
+                            type="submit"
+                            form="register"
+                            value="FanSubmit"
+                            onClick={setFanOption}
+                          >
+                            I'M A FAN
+                          </button>
+                          <button
+                            className="primary-button button-text register-submit-button artist-submit-button"
+                            type="submit"
+                            form="register"
+                            value="ArtistSubmit"
+                            onClick={setArtistOption}
+                          >
+                            I'M AN ARTIST
+                          </button>
+                        </div>
+
+                        <div className="header-7 signup-footer register-text-color">
+                          Already have an account?{" "}
+                          <a href="/login" className="header-7 signin-link">
+                            Log in
+                          </a>
+                          .
+                        </div>
                       </form>
-                      <p className="signup-footer">
-                        Already have an account?{" "}
-                        <a href="/login" className="signin-link">
-                          Sign in
-                        </a>
-                        .
-                      </p>
                     </div>
                   )}
                 </div>

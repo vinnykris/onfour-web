@@ -1,7 +1,7 @@
 // React Imports
 import React, { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import SharePopup from "./share_popup";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import moment from "moment";
@@ -31,9 +31,10 @@ import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/video_chat_App";
 
 import { getTickets } from "../../apis/get_user_data";
-import PaymentBox from "../payment/donate_box";
+import DonateCardBox from "../payment/donate_box";
 import VenmoBox from "../payment/venmo_box";
 import PaypalBox from "../payment/paypal_box";
+import PrimaryButton from "../primary_button";
 // Styles Imports
 import "./stream_styles.scss";
 import "rodal/lib/rodal.css";
@@ -41,6 +42,9 @@ import "rodal/lib/rodal.css";
 // Image imports
 import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
 import ticket1 from "../../images/icons/ticket1.png";
+import feedback_icon from "../../images/icons/stream_icons/feedback_icon.png";
+import share_icon from "../../images/icons/stream_icons/share_icon.png";
+import viewers_icon from "../../images/icons/stream_icons/viewers_icon.png";
 
 // Utils
 import { getCrewsByUsername } from "../../utils/crew";
@@ -51,7 +55,7 @@ Amplify.configure(awsmobile);
 const StreamPage = ({ is_soundcheck }) => {
   // DETERMINE MOBILE VERSION OR NOT
   const { height, width } = useWindowDimensions(); // Dimensions of screen
-  const tip_based = true; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
+  // const tip_based = false; // DEFINES WHETHER SHOW IS TIP OR DONATION BASED
   const [show_chat, setShowChat] = useState(false); // If chat should be shown
   const [chat_name, setChatName] = useState(""); // Sets user name for chat
   const [viewers, setViewers] = useState(0); // Sets number of live viewers on page
@@ -86,6 +90,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [credit_selected, setCreditSelected] = useState(true);
   const [paypal_selected, setPaypalSelected] = useState(false);
   const [stream_volume, setStreamVolume] = useState(1.0);
+  const [have_upcoming_concert, setHaveUpcomingConcert] = useState(true);
 
   const history = useHistory();
 
@@ -128,44 +133,6 @@ const StreamPage = ({ is_soundcheck }) => {
     setScroll(false);
   }
 
-  // ADJUST CHAT HEIGHT BASED ON SCROLL AMOUNT
-  // useEffect(() => {
-  //   document.addEventListener("scroll", () => {
-  //     if (176 + (width / 100) * 41 - height > 0) {
-  //       if (document.getElementById("chat_main")) {
-  //         const scrollCheck_top =
-  //           window.scrollY > 176 + (width / 100) * 41 - height;
-  //         const scrollCheck_bottom = window.scrollY < 176;
-  //         if (!scrollCheck_top) {
-  //           // if the scroll is not larger than threshold to increase height
-  //           document.getElementById("chat_main").style.height =
-  //             (width / 100) * 41 + "px";
-  //         } else if (scrollCheck_bottom) {
-  //           // is scroll is larger than lower threshold but less than higher threshold
-  //           document.getElementById("chat_main").style.height =
-  //             window.scrollY - 176 + height + "px";
-  //         } else {
-  //           document.getElementById("chat_main").style.height = height + "px";
-  //         }
-  //       }
-  //     } else {
-  //       if (document.getElementById("chat_main")) {
-  //         const scrollCheck_top = window.scrollY === 0;
-  //         const scrollCheck_bottom = window.scrollY < 176;
-  //         if (scrollCheck_top) {
-  //           document.getElementById("chat_main").style.height =
-  //             (width / 100) * 41 + "px";
-  //         } else if (scrollCheck_bottom) {
-  //           document.getElementById("chat_main").style.height =
-  //             (width / 100) * 41 + window.scrollY + "px";
-  //         } else {
-  //           document.getElementById("chat_main").style.height = height + "px";
-  //         }
-  //       }
-  //     }
-  //   });
-  // });
-
   // POP_UP WARNING SECTION
   // const [show_alert, setShowAlert] = useState(true); // If pre-show alert should be shown
   // // Hides popup if closed
@@ -202,30 +169,35 @@ const StreamPage = ({ is_soundcheck }) => {
         filter: { is_future: { eq: true }, is_confirmed: { eq: true } },
       })
     );
-    const info_list = info.data.listConcerts.items; // Stores the items in database
-    info_list.sort((a, b) =>
-      moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time))
-    );
+    if (info.data.listConcerts.items.length) {
+      setHaveUpcomingConcert(true);
+      const info_list = info.data.listConcerts.items; // Stores the items in database
+      info_list.sort((a, b) =>
+        moment(a.date + "T" + a.time).diff(moment(b.date + "T" + b.time))
+      );
 
-    const hour = parseInt(info_list[0].time.slice(0, 2));
-    const minutes = info_list[0].time.slice(2, 5);
+      const hour = parseInt(info_list[0].time.slice(0, 2));
+      const minutes = info_list[0].time.slice(2, 5);
 
-    setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
-    setShowTime(
-      info_list[0].date +
-        " " +
-        (hour > 12
-          ? (hour - 12).toString() + minutes + "PM"
-          : hour < 12
-          ? info_list[0].time.slice(0, 5) + "AM"
-          : info_list[0].time.slice(0, 5) + "PM")
-    );
-    setConcertName(info_list[0].concert_name);
-    getArtistInfo(info_list[0].artist_id);
-    setConcertID(info_list[0].id);
-    // setIsLive(info_list[0].is_live);
-    setIsFree(info_list[0].general_price === 0);
-    setConcertCrews(JSON.parse(info_list[0].crew_list));
+      setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
+      setShowTime(
+        info_list[0].date +
+          " " +
+          (hour > 12
+            ? (hour - 12).toString() + minutes + "PM"
+            : hour < 12
+            ? info_list[0].time.slice(0, 5) + "AM"
+            : info_list[0].time.slice(0, 5) + "PM")
+      );
+      setConcertName(info_list[0].concert_name);
+      getArtistInfo(info_list[0].artist_id);
+      setConcertID(info_list[0].id);
+      // setIsLive(info_list[0].is_live);
+      setIsFree(info_list[0].general_price === 0);
+      setConcertCrews(JSON.parse(info_list[0].crew_list));
+    } else {
+      setHaveUpcomingConcert(false);
+    }
   };
 
   const getArtistInfo = async (artist_id) => {
@@ -242,28 +214,7 @@ const StreamPage = ({ is_soundcheck }) => {
     setArtistSpotify(artist_info_list.spotify);
     setArtistTwitter(artist_info_list.twitter);
     setArtistYoutube(artist_info_list.youtube);
-    // setArtistFB("https://instagram.com/superduperfriend");
-    // setArtistIG("https://instagram.com/superduperfriend");
-    // setArtistSpotify("https://instagram.com/superduperfriend");
-    // setArtistTwitter("https://instagram.com/superduperfriend");
-    // setArtistYoutube("https://instagram.com/superduperfriend");
   };
-
-  // If the first name for the logged in user's email has not been retrieved yet,
-  // query the registration database's table to retrieve the first name filtered
-  // for the specific email and assign that value to first
-  // if (first === "" && user_email !== "") {
-  //   API.graphql(
-  //     graphqlOperation(queries.query_name, {
-  //       filter: { email: { eq: user_email } },
-  //     })
-  //   ).then((data) => {
-  //     setUsername(data.data.listCreateOnfourRegistrations.items[0].username);
-  //     setFirst(data.data.listCreateOnfourRegistrations.items[0].first);
-  //     setUserID(data.data.listCreateOnfourRegistrations.items[0].id);
-  //     setShowChat(true);
-  //   });
-  // }
 
   // DONATION SECTION
   // Opens link to paypal account for musician
@@ -323,10 +274,9 @@ const StreamPage = ({ is_soundcheck }) => {
       document
         .getElementById("artist_bio")
         .classList.remove("artist-bio-row-expanded");
-      document.getElementById("stream_info_section").style.height = "15%";
-      document.getElementById("stream_main_section").style.height = "85%";
-      document.getElementById("stream_info_bottom").style.height = "50%";
-      document.getElementById("stream_info_top").style.height = "50%";
+      document.getElementById("stream_info_section").style.height = "103px";
+      document.getElementById("stream_main_section").style.height =
+        "calc(100vh - 103px - 49px)";
       // document.getElementById("description_toggle_button").style.bottom =
       //   "-3px";
     } else {
@@ -335,24 +285,12 @@ const StreamPage = ({ is_soundcheck }) => {
         .getElementById("artist_bio")
         .classList.add("artist-bio-row-expanded");
       document.getElementById("artist_bio").classList.remove("artist-bio-row");
-      document.getElementById("stream_info_section").style.height = "35%";
-      document.getElementById("stream_main_section").style.height = "65%";
-      document.getElementById("stream_info_bottom").style.height = "20%";
-      document.getElementById("stream_info_top").style.height = "20%";
+      document.getElementById("stream_info_section").style.height = "297px";
+      document.getElementById("stream_main_section").style.height =
+        "calc(100vh - 297px - 49px)";
       // document.getElementById("description_toggle_button").style.bottom = "0px";
     }
   };
-
-  // const StyledPopup = styled(Popup)`
-  //   // use your custom style for ".popup-overlay"
-  //   &-overlay {
-  //   }
-  //   // use your custom style for ".popup-content"
-  //   &-content {
-  //     top: 0;
-  //     background-color: yellow;
-  //   }
-  // `;
 
   // Social media sharing
 
@@ -392,7 +330,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const getIsLive = async () => {
     // Calling the API, using async and await is necessary
     if (concert_id) {
-      console.log("calling api");
+      // console.log("calling api");
       await API.graphql(
         graphqlOperation(queries.get_concert_is_live, {
           id: concert_id,
@@ -460,7 +398,7 @@ const StreamPage = ({ is_soundcheck }) => {
   // RENDERING SECTION
   return (
     <div className="stream-container">
-      {artist_name ? (
+      {artist_name || !have_upcoming_concert ? (
         <div className="stream-page-content">
           {width > 600 ? (
             <Grid className="desktop-stream-grid">
@@ -474,14 +412,19 @@ const StreamPage = ({ is_soundcheck }) => {
                   padding: 0,
                   overflow: scroll,
                   maxHeight: "545px",
-                  maxWidth: "671px",
+                  maxWidth: "482px",
+                  background:
+                    "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                  boxShadow:
+                    "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                  borderRadius: "10px",
                 }}
                 className="rodal-custom"
               >
                 <Grid className="payment-modal-grid">
                   <Row className="payment-modal-header">
                     <Col size={1}>
-                      <h4 className="payment-modal-header-text">
+                      <h4 className="payment-modal-header-text header-5">
                         Donate to {artist_name}
                       </h4>
                     </Col>
@@ -494,7 +437,7 @@ const StreamPage = ({ is_soundcheck }) => {
                       onClick={() => paymentTabSelected(0)}
                     >
                       <span
-                        className="payment-modal-tab-text selected-tab"
+                        className="payment-modal-tab-text subtitle-1 selected-tab"
                         id="credit-tab-text"
                       >
                         Credit Card
@@ -507,7 +450,7 @@ const StreamPage = ({ is_soundcheck }) => {
                       onClick={() => paymentTabSelected(1)}
                     >
                       <span
-                        className="payment-modal-tab-text"
+                        className="payment-modal-tab-text subtitle-1"
                         id="venmo-tab-text"
                       >
                         Venmo
@@ -520,7 +463,7 @@ const StreamPage = ({ is_soundcheck }) => {
                       onClick={() => paymentTabSelected(2)}
                     >
                       <span
-                        className="payment-modal-tab-text"
+                        className="payment-modal-tab-text subtitle-1"
                         id="paypal-tab-text"
                       >
                         Paypal
@@ -530,14 +473,14 @@ const StreamPage = ({ is_soundcheck }) => {
                 </Grid>
                 {(() => {
                   if (credit_selected) {
-                    return <PaymentBox />;
+                    return <DonateCardBox is_mobile={false} />;
                   } else if (venmo_selected) {
-                    return <VenmoBox />;
+                    return <VenmoBox is_mobile={false} />;
                   } else {
-                    return <PaypalBox />;
+                    return <PaypalBox is_mobile={false} />;
                   }
                 })()}
-                {/* <PaymentBox /> */}
+                {/* <DonateCardBox /> */}
               </Rodal>
               {/* <Modal is_open={open_modal}></Modal> */}
               <Row className="desktop-stream-row">
@@ -564,6 +507,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           concert_id={concert_id}
                           is_live={is_live}
                           stream_volume={stream_volume}
+                          have_upcoming_concert={have_upcoming_concert}
                         />
                       ) : (
                         <div className="buy-ticket-message-container">
@@ -628,16 +572,45 @@ const StreamPage = ({ is_soundcheck }) => {
                         <Row className="buttons-row" id="stream_info_top">
                           <Col size={2}>
                             <div className="artist-name-container">
-                              <h3 className="artist-name-stream">
+                              <span className="header-5 artist-name-stream">
                                 {artist_name}
-                              </h3>
+                              </span>
                             </div>
                           </Col>
                           <Col size={3}>
                             <Row className="stream-share-row">
+                              <div className="viewers">
+                                <div className="viewers-container">
+                                  <img
+                                    src={viewers_icon}
+                                    className="stream-action-viewers"
+                                  />
+                                  <div className="segmented-button-text viewer-count">
+                                    {viewers}
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="feedback-container">
+                                <a
+                                  onClick={() =>
+                                    Analytics.record({
+                                      name: "sendFeedbackClicked",
+                                    })
+                                  }
+                                  href="https://forms.gle/5rP8nXznckGCuRE77"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  <img
+                                    src={feedback_icon}
+                                    className="stream-action-feedback"
+                                  />
+                                </a>
+                              </div>
                               <ClickAwayListener onClickAway={closePopup}>
                                 <div className="stream-action-button-container">
-                                  <button
+                                  {/* <button
                                     className="stream-action-button"
                                     onClick={openPopup}
                                   >
@@ -646,31 +619,16 @@ const StreamPage = ({ is_soundcheck }) => {
                                       aria-hidden="true"
                                     ></i>
                                     Share
-                                  </button>
+                                  </button> */}
+                                  <img
+                                    src={share_icon}
+                                    className="stream-action-share"
+                                    onClick={openPopup}
+                                  />
 
                                   <SharePopup show={show_popup} />
                                 </div>
                               </ClickAwayListener>
-
-                              <div className="stream-action-button-container">
-                                <button
-                                  className="stream-action-button donate-stream-button"
-                                  onClick={donateModal}
-                                >
-                                  {" "}
-                                  <i
-                                    className="fa fa-usd fa-fw stream-action-button-icon"
-                                    aria-hidden="true"
-                                  ></i>
-                                  Donate
-                                </button>
-                              </div>
-
-                              <div className="viewers">
-                                <span className="viewer-count show-time">
-                                  {viewers} watching now
-                                </span>
-                              </div>
                             </Row>
                           </Col>
                         </Row>
@@ -681,7 +639,9 @@ const StreamPage = ({ is_soundcheck }) => {
                               show up)
                             </h5> */}
                             <div className="stream-artist-bio-container">
-                              <p className="stream-artist-bio">{artist_bio}</p>
+                              <p className="body-2 stream-artist-bio">
+                                {artist_bio}
+                              </p>
                             </div>
                           </Col>
                         </Row>
@@ -719,7 +679,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                         })
                                       }
                                       href={artist_spotify}
-                                      className="fa fa-spotify"
+                                      className="fab fa-spotify"
                                       target="_blank"
                                       rel="noopener noreferrer"
                                     >
@@ -755,7 +715,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                         })
                                       }
                                       href={artist_fb}
-                                      className="fa fa-facebook"
+                                      className="fab fa-facebook"
                                       target="_blank"
                                       rel="noopener noreferrer"
                                     >
@@ -784,22 +744,16 @@ const StreamPage = ({ is_soundcheck }) => {
                               </ul>
                             </div>
                           </Col>
-                          <Col size={1}>
-                            <div className="feedback-container">
-                              <a
-                                onClick={() =>
-                                  Analytics.record({
-                                    name: "sendFeedbackClicked",
-                                  })
-                                }
-                                href="https://forms.gle/5rP8nXznckGCuRE77"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                          <Col size={1} className="donate-button-column">
+                            <div className="stream-action-donate-container">
+                              <button
+                                //content="DONATE"
+                                onClick={donateModal}
+                                disabled={!have_upcoming_concert}
+                                className="primary-button stream-donate-button segmented-button-text"
                               >
-                                <h5 className="show-time feedback-link">
-                                  Share thoughts on your experience
-                                </h5>
-                              </a>
+                                DONATE
+                              </button>
                             </div>
                           </Col>
                         </Row>
@@ -893,20 +847,83 @@ const StreamPage = ({ is_soundcheck }) => {
               <Rodal
                 visible={open_modal}
                 onClose={closeModal}
-                width={100}
+                width={96}
                 height={100}
                 measure="%"
                 customStyles={{
                   padding: 0,
                   overflow: scroll,
-                  // maxHeight: "400px",
-                  // maxWidth: "600px",
+                  maxHeight: "400px",
+                  maxWidth: "350px",
+                  background:
+                    "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                  boxShadow:
+                    "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                  borderRadius: "10px",
                 }}
                 className="rodal-custom"
               >
-                <PaymentBox />
+                <Grid className="payment-modal-grid">
+                  <Row className="payment-modal-header">
+                    <Col size={1}>
+                      <h4 className="payment-modal-header-text header-8">
+                        Donate to {artist_name}
+                      </h4>
+                    </Col>
+                  </Row>
+                  <Row className="payment-modal-header">
+                    <Col
+                      size={1}
+                      className="payment-modal-tab selected-tab"
+                      id="credit-tab"
+                      onClick={() => paymentTabSelected(0)}
+                    >
+                      <span
+                        className="payment-modal-tab-text subtitle-3 selected-tab"
+                        id="credit-tab-text"
+                      >
+                        Credit Card
+                      </span>
+                    </Col>
+                    <Col
+                      size={1}
+                      className="payment-modal-tab"
+                      id="venmo-tab"
+                      onClick={() => paymentTabSelected(1)}
+                    >
+                      <span
+                        className="payment-modal-tab-text subtitle-3"
+                        id="venmo-tab-text"
+                      >
+                        Venmo
+                      </span>
+                    </Col>
+                    <Col
+                      size={1}
+                      className="payment-modal-tab"
+                      id="paypal-tab"
+                      onClick={() => paymentTabSelected(2)}
+                    >
+                      <span
+                        className="payment-modal-tab-text subtitle-3"
+                        id="paypal-tab-text"
+                      >
+                        Paypal
+                      </span>
+                    </Col>
+                  </Row>
+                </Grid>
+                {(() => {
+                  if (credit_selected) {
+                    return <DonateCardBox is_mobile={true} />;
+                  } else if (venmo_selected) {
+                    return <VenmoBox is_mobile={true} />;
+                  } else {
+                    return <PaypalBox is_mobile={true} />;
+                  }
+                })()}
               </Rodal>
-              <div className="main-column">
+              <div className="main-column-mobile">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
                     {is_free ||
@@ -927,6 +944,7 @@ const StreamPage = ({ is_soundcheck }) => {
                         username={username}
                         concert_id={concert_id}
                         is_live={is_live}
+                        have_upcoming_concert={have_upcoming_concert}
                       />
                     ) : (
                       <div className="buy-ticket-message-container">
@@ -968,25 +986,16 @@ const StreamPage = ({ is_soundcheck }) => {
                     )}
                   </div>
                 </div>
-                <div className="mobile-row payment-row-mobile">
-                  {tip_based ? (
-                    <button
-                      className="stripe-button-border mobile-payment-button"
-                      // data-toggle="modal"
-                      // data-target="#paymentModal"
-                      onClick={donateModal}
-                    >
-                      Tip {artist_name}
-                    </button>
-                  ) : (
-                    <button
-                      className="stripe-button-border mobile-payment-button"
-                      data-toggle="modal"
-                      data-target="#paymentModal"
-                    >
-                      Donate
-                    </button>
-                  )}
+                <div className="payment-row-mobile">
+                  <button
+                    className="stripe-button-border mobile-payment-button button-text"
+                    // data-toggle="modal"
+                    // data-target="#paymentModal"
+                    onClick={donateModal}
+                    disabled={!have_upcoming_concert}
+                  >
+                    DONATE
+                  </button>
                   {/* <Modal isOpen={false}></Modal> */}
                 </div>
                 <div className="chat-main-mobile">
@@ -1005,10 +1014,10 @@ const StreamPage = ({ is_soundcheck }) => {
       ) : (
         // <div className={!show_start_time ? 'parentDisable' : ''} width="100%">
         <div className="overlay-box">
-          <PulseLoader
+          <ScaleLoader
             sizeUnit={"px"}
             size={18}
-            color={"#7b6dac"}
+            color={"#E465A2"}
             loading={!artist_name}
           />
         </div>

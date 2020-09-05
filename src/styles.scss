@@ -4,6 +4,10 @@
 // Typeface
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&display=swap");
 $heebo: "Heebo", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600&display=swap');
+$exo2: "Exo 2", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+$montserrat: 'Montserrat', sans-serif;
 
 // Font Weights
 $regular-weight: 400;
@@ -54,6 +58,9 @@ $breakpoints: (
         + "Available breakpoints are: #{map-keys($breakpoints)}.";
   }
 }
+@import "colors";
+@import "./mixins";
+@import "./fonts";
 
 .custom-app {
   display: flex;
@@ -70,12 +77,72 @@ $breakpoints: (
 .button-border {
   border-radius: 3px;
   // box-shadow: 0px 3px 5px grey;
-  font-weight: $medium-weight;
+  //font-weight: $medium-weight;
   letter-spacing: 0.4px;
 }
 
 .button-height {
   height: 48px;
+}
+
+// PRIMARY BUTTON STYLES
+.primary-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary-color;
+  border-radius: 4px;
+  color: $on-primary;
+}
+
+.primary-button span {
+  display: flex;
+  margin: auto;
+}
+
+.primary-button:hover {
+  background-color: #ea91bd;
+}
+
+.primary-button:focus {
+  background-color: $primary-color;
+}
+
+.primary-button:disabled {
+  background-color: $primary-color;
+  color: rgba(0, 0, 0, 0.38) !important;
+}
+
+.secondary-button {
+  min-width: 94px;
+  min-height: 24px;
+  // width: 94px;
+  height: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-sizing: border-box;
+  border-radius: 3px;
+  background-color: transparent;
+  text-align: center;
+   &:hover {
+    cursor: pointer;
+    border: none;
+    color: #626BF7;
+   }
+}
+
+.tag-container {
+  width: 55px;
+  height: 24px;
+}
+
+// TAG STYLES
+.tag-body {
+  background-color: $on-background;
+  //padding: 5px;
+  height: 100%;
+  width: 100%;
+  display: flex;
 }
 
 // PAGE SPECIFIC STYLES
@@ -113,21 +180,25 @@ input {
   outline: none;
   transition: 0.3s;
   margin-right: 10px;
+  caret-color: #e465a2;
 }
 
-input:focus {
-  border: 2px solid #303096;
-}
+// input:focus {
+//   border: 1px solid #e465a2;
+// }
 
 button {
-  background-color: #303096;
-  color: white;
+  background: #E465A2;
+  color: #000000;
   font-size: 16px;
   padding: 12px 24px;
   border: none;
-  cursor: pointer;
-  border-radius: 3px;
+  border-radius: 4px;
   // box-shadow: 0px 3px 5px grey;
+  &:hover {
+    background: #EA91BD;
+    cursor: pointer;
+  }
 }
 
 h5 {
@@ -161,7 +232,7 @@ h5 {
   line-height: 2rem;
   text-align: left;
   font-size: 18px;
-  font-weight: $regular-weight;
+  font-weight: 400;
   color: white;
 }
 

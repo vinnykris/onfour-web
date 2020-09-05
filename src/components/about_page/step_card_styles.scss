@@ -1,0 +1,51 @@
+@import "../../styles";
+
+.step-card-container {
+  width: 331px;
+  height: 223px;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.09)
+    ),
+    #07070f;
+  border-radius: 10px;
+  margin-left: 36.5px;
+  margin-right: 36.5px;
+  padding: 0px 10px;
+}
+
+.step-card-container:first-child {
+  margin-left: 0;
+}
+
+.step-card-container:last-child {
+  margin-right: 0;
+}
+
+.step-card-number {
+  margin-top: 37px;
+}
+
+.step-num-text {
+  display: inline;
+  color: #07070f !important;
+  margin: auto;
+  text-align: center;
+}
+
+.ellipse {
+  height: 43px;
+  width: 43px;
+  border-radius: 43px;
+  margin: auto;
+  background-color: $on-background;
+}
+
+.step-card-text {
+  margin-top: 16px;
+}
+
+.step-card-description {
+  margin-top: 9px;
+}

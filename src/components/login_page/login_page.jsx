@@ -7,7 +7,8 @@ import React, { useState, useEffect } from "react";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import PulseLoader from "react-spinners/PulseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
+import InputOne from "../inputs/input_one";
 
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
@@ -65,15 +66,14 @@ const Login = (props) => {
         <Row className="login-fields-section">
           {is_processing ? (
             <div className="login-loader-container">
-              <PulseLoader
+              <ScaleLoader
                 sizeUnit={"px"}
-                size={15}
-                color={"#7b6dac"}
+                size={18}
+                color={"#E465A2"}
                 loading={is_processing}
               />
             </div>
           ) : (
-            // <p className="processing-message">Loading...</p>
             <div className="form-section">
               <form
                 className="signin-form"
@@ -81,67 +81,61 @@ const Login = (props) => {
                 id="login"
                 onSubmit={loginSubmit}
               >
-                <Row className="signin-header">
-                  <h6 className="signin-header-text">
-                    Sign in with your email or username below!
-                  </h6>
-                </Row>
-                <Row className="login-input-row">
-                  <input
-                    className="login-input"
-                    // type="email"
-                    name="email"
+                <div className="header-3 signin-header-color">Log In</div>
+                <div className="header-7 signin-text-color">
+                  Log in with your email or username
+                </div>
+                <div className="register-input-container">
+                  <InputOne
                     id="email_slot"
-                    value={email}
+                    type="text"
+                    name="email"
+                    is_required={true}
                     placeholder="Email Address or Username"
+                    value={email}
                     onChange={(event) => setEmail(event.target.value)}
-                    required
                   />
-                </Row>
-                <Row className="login-input-row">
-                  <input
-                    className="login-input"
+                </div>
+                <div className="register-input-container">
+                  <InputOne
+                    id="password_slot"
                     type="password"
                     name="password"
-                    id="password_slot"
-                    value={password}
+                    is_required={true}
                     placeholder="Password"
+                    value={password}
                     onChange={(event) => setPassword(event.target.value)}
-                    required
+                    is_password={true}
                   />
-                </Row>
+                </div>
                 <div style={{ color: "red" }}>{error}</div>
-                <br></br>
                 <button
-                  className="signin-submit-button"
+                  className="primary-button button-text signin-submit-button"
                   type="submit"
                   form="login"
                   value="Submit"
                 >
-                  SIGN IN
+                  LOG IN
                 </button>
+                <p className="forgot-footer">
+                  <a href="/forgot" className="header-7 signin-link">
+                    Forgot Password?
+                  </a>
+                </p>
+                <div className="header-7 signin-text-color">
+                  Don't have an account?{" "}
+                  <NavLink
+                    to={{
+                      pathname: "/register",
+                      state: { current: from_path },
+                    }}
+                    className="header-7 signin-link"
+                  >
+                    Sign up
+                  </NavLink>
+                  .
+                </div>
               </form>
-              <p className="forgot-footer">
-                <a href="/forgot" className="signup-link">
-                  Forgot Password?
-                </a>
-              </p>
-              <p className="signin-footer">
-                Don't have an account?{" "}
-                {/* <a href="/register" className="signup-link">
-                  Sign up
-                </a> */}
-                <NavLink
-                  to={{
-                    pathname: "/register",
-                    state: { current: from_path },
-                  }}
-                  className="signup-link"
-                >
-                  Sign up
-                </NavLink>
-                .
-              </p>
             </div>
           )}
         </Row>

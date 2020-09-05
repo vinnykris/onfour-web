@@ -1,9 +1,8 @@
 // FOOTER COMPONENT STYLING
-
 @import "../../styles";
 
 .footer-container {
-  background-color: black;
+  background:#07070f;
   width: 100%;
   padding: 60px 10px 10px 10px;
   margin-top: -1px;
@@ -76,7 +75,7 @@
   margin: 0px 10px;
   display: inline-block;
   font-size: 26px;
-  color: black;
+  color: #07070F;
   @include respond-to("small") {
     margin-right: 12px;
     margin-left: 0;
@@ -99,14 +98,14 @@
   // height: 80px;
   // float: left;
   @include respond-to("medium") {
-    height: 50px;
+    height: 43px;
   }
   @include respond-to("x-small") {
-    height: 35px;
+    height: 30px;
   }
   position: absolute;
   top: 50%;
-  height: 80px;
+  height: 43px;
   // left: -25%;
 }
 

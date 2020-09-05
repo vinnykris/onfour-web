@@ -9,7 +9,8 @@ import Auth from "../../apis/UserPool";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import PulseLoader from "react-spinners/PulseLoader";
+import InputOne from ".././inputs/input_one";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { useWindowDimensions } from "../custom_hooks";
 
 // Styles
@@ -57,19 +58,19 @@ const Forgot = () => {
     event.preventDefault();
 
     // Set passworth length error
-    if (password.length < 8 && confirm_password.length < 8) {
+    if (password.length < 8) {
       setPassword("");
-      setConfirmPassword("");
+      // setConfirmPassword("");
       setError("Password must be of at least length 8.");
       return;
     }
 
-    // Set passwords not matching error
-    if (password !== confirm_password) {
-      setConfirmPassword("");
-      setError("Passwords are not the same");
-      return;
-    }
+    // // Set passwords not matching error
+    // if (password !== confirm_password) {
+    //   setConfirmPassword("");
+    //   setError("Passwords are not the same");
+    //   return;
+    // }
 
     // If everything passes, call the accepPasswordChange function
     // Otherwise, display the error message
@@ -91,24 +92,24 @@ const Forgot = () => {
                 {width > 600 ? (
                   <form onSubmit={sendCode} className="forgot-form" id="forgot">
                     <Row className="forgot-header">
-                      <h6 className="forgot-header-text">
-                        Please enter your email or username below to receive a
-                        verification email!
-                      </h6>
+                      <div className="header-7 signin-text-color">
+                        Enter your email or username below and we'll help you
+                        reset your password.
+                      </div>
                     </Row>
-                    <Row className="forgot-input-row">
-                      <input
-                        className="forgot-input"
-                        name="email"
+                    <div className="register-input-container">
+                      <InputOne
                         id="email_slot"
-                        value={email}
+                        type="text"
+                        name="email"
+                        is_required={true}
                         placeholder="Email Address or Username"
+                        value={email}
                         onChange={(event) => setEmail(event.target.value)}
-                        required
                       />
-                    </Row>
-                    <br></br>
-                    <Row className="forgot-verification-footer">
+                    </div>
+
+                    {/* <Row className="forgot-verification-footer">
                       <button
                         className="forgot-submit-button"
                         type="submit"
@@ -116,8 +117,16 @@ const Forgot = () => {
                         value="Submit"
                       >
                         SEND VERIFICATION CODE
-                      </button>
-                    </Row>
+                      </button> */}
+                    <button
+                      className="primary-button button-text forgot-submit-button"
+                      type="submit"
+                      form="forgot"
+                      value="Submit"
+                    >
+                      SEND VERIFICATION CODE
+                    </button>
+                    {/* </Row> */}
                   </form>
                 ) : (
                   <form
@@ -126,10 +135,10 @@ const Forgot = () => {
                     id="forgot"
                   >
                     <Row className="forgot-header">
-                      <h6 className="forgot-header-text-mobile">
-                        Please enter your email or username below to receive a
-                        verification email!
-                      </h6>
+                      <div className="forgot-header-text-mobile">
+                        Enter your email or username below and we'll help you
+                        reset your password.
+                      </div>
                     </Row>
                     <Row className="forgot-input-row">
                       <input
@@ -166,11 +175,12 @@ const Forgot = () => {
                     id="forgot"
                   >
                     <Row className="forgot-header">
-                      <h6 className="forgot-header-text">
-                        Please enter your verification and new password below!
-                      </h6>
+                      <div className="header-7 signin-text-color">
+                        Please check your email for your verification code.
+                        Enter your code and new password below.
+                      </div>
                     </Row>
-                    <Row className="forgot-input-row">
+                    {/* <Row className="forgot-input-row">
                       <input
                         className="forgot-input"
                         name="email"
@@ -180,8 +190,32 @@ const Forgot = () => {
                         onChange={(event) => setEmail(event.target.value)}
                         required
                       />
-                    </Row>
-                    <Row className="forgot-input-row">
+                    </Row> */}
+                    <div className="register-input-container">
+                      <InputOne
+                        id="email_slot"
+                        type="text"
+                        name="email"
+                        is_required={true}
+                        placeholder=""
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                        is_disabled={true}
+                      />
+                    </div>
+                    <div className="register-input-container">
+                      <InputOne
+                        id="verification_code"
+                        type="text"
+                        name="code"
+                        is_required={true}
+                        placeholder="Verification Code"
+                        value={code}
+                        onChange={(event) => setCode(event.target.value)}
+                        //is_disabled={false}
+                      />
+                    </div>
+                    {/* <Row className="forgot-input-row">
                       <input
                         className="forgot-input"
                         name="code"
@@ -191,8 +225,8 @@ const Forgot = () => {
                         onChange={(event) => setCode(event.target.value)}
                         required
                       />
-                    </Row>
-                    <Row className="forgot-input-row">
+                    </Row> */}
+                    {/* <Row className="forgot-input-row">
                       <input
                         className="forgot-input"
                         type="password"
@@ -203,8 +237,20 @@ const Forgot = () => {
                         onChange={(event) => setPassword(event.target.value)}
                         required
                       />
-                    </Row>
-                    <Row className="forgot-input-row">
+                    </Row> */}
+                    <div className="register-input-container">
+                      <InputOne
+                        id="password_slot"
+                        type="password"
+                        name="password"
+                        is_required={true}
+                        placeholder="New Password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                        is_password={true}
+                      />
+                    </div>
+                    {/* <Row className="forgot-input-row">
                       <input
                         className="forgot-input"
                         type="password"
@@ -219,8 +265,8 @@ const Forgot = () => {
                       />
                     </Row>
                     <div style={{ color: "red" }}>{error}</div>
-                    <br></br>
-                    <Row className="forgot-verification-footer">
+                    <br></br> */}
+                    {/* <Row className="forgot-verification-footer">
                       <button
                         className="forgot-submit-button"
                         type="submit"
@@ -229,7 +275,15 @@ const Forgot = () => {
                       >
                         CHANGE PASSWORD
                       </button>
-                    </Row>
+                    </Row> */}
+                    <button
+                      className="primary-button button-text forgot-submit-button"
+                      type="submit"
+                      form="forgot"
+                      value="Submit"
+                    >
+                      CHANGE PASSWORD
+                    </button>
                   </form>
                 ) : (
                   <form
@@ -310,16 +364,16 @@ const Forgot = () => {
               <div>
                 {width > 600 ? (
                   <div className="success-container">
-                    <p className="success-message-forgot">
+                    <p className="header-7 signin-text-color">
                       {
                         "Password successfully changed!\n Please wait for the page to be reloaded"
                       }
                     </p>
                     <div className="loader-container">
-                      <PulseLoader
+                      <ScaleLoader
                         sizeUnit={"px"}
-                        size={15}
-                        color={"#7b6dac"}
+                        size={18}
+                        color={"#E465A2"}
                         loading={success}
                       />
                     </div>

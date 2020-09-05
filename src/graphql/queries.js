@@ -118,6 +118,7 @@ getCreateOnfourRegistration(username: $input) {
   first
   concert
   crew
+  concert_invitations
 }
 }`;
 

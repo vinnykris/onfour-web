@@ -1,10 +1,16 @@
 // React Imports
-import React from "react";
-import ReactPlayer from "react-player";
+import React, { useEffect, useRef }from "react";
 
 // Styling Imports
 import "./artist_stream_styles.scss";
 import { useWindowDimensions } from "../custom_hooks";
+
+// VideoJS Imports
+import videojs from "video.js";
+import "video.js/dist/video-js.css";
+import "./artist_video_js_styles.scss";
+import "videojs-landscape-fullscreen";
+
 
 // AWS Imports
 import Amplify from "aws-amplify";
@@ -16,22 +22,45 @@ Amplify.configure(awsmobile);
 // of the upcoming concert. When the time is up, it will display the stream video instead
 function VideoPlayer({ url, is_live }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
+  var player = null;
+  const player_ref = useRef();
 
+  useEffect(() => {
+    player = videojs(
+      player_ref.current,
+      { autoplay: true, muted: false, controls: true, liveui: true },
+      () => {
+        player.src(url);
+      }
+    );
+    // configure plugins
+    player.landscapeFullscreen({
+      fullscreen: {
+        enterOnRotate: true,
+        alwaysInLandscapeMode: true,
+        iOS: true,
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (player) player.dispose();
+    };
+  }, []);
   // Showing the stream
   return (
     <div className="artist-player-wrapper">
       {width <= 600 ? (
         <div className="player-inner-container">
-          <ReactPlayer
-            className="video-player"
-            url={url}
-            width="100%"
-            height="100%"
-            playing
-            controls
-            playsinline
-            muted={is_live}
-          />
+          <div data-vjs-player>
+            <div className="vjs-control-bar control-bar-top">
+              <div className="live-indicator">
+                <span className="live-indicator-text">LIVE</span>
+              </div>
+            </div>
+            <video ref={player_ref} className="video-js" />
+          </div>
           {is_live ? (
             <div className="is-live-tag">LIVE</div>
           ) : (
@@ -40,23 +69,22 @@ function VideoPlayer({ url, is_live }) {
         </div>
       ) : (
         <div className="player-inner-container">
-          <ReactPlayer
-            className="video-player"
-            url={url}
-            width="100%"
-            height="100%"
-            playing
-            controls
-            muted={is_live}
-          />
-          {is_live ? (
+          <div data-vjs-player>
+            <div className="vjs-control-bar control-bar-top">
+              <div className="live-indicator">
+                <span className="live-indicator-text">LIVE</span>
+              </div>
+            </div>
+            <video ref={player_ref} className="video-js" />
+          </div>
+          {/* {is_live ? (
             <div className="is-live-tag">
               <i className="fa fa-circle live-circle"></i>
               LIVE
             </div>
           ) : (
             <div className="is-live-tag">OFFLINE</div>
-          )}
+          )} */}
         </div>
       )}
     </div>

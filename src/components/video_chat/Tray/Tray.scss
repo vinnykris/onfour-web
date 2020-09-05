@@ -1,0 +1,129 @@
+@import "../../../styles.scss";
+
+.tray {
+  flex: none;
+  height: 35px;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 5px;
+}
+
+.artist-mute-all-button {
+  font-size: 0.7rem;
+  margin-left: 20px;
+  border-radius: 2px;
+  height: 25px;
+  padding: 0px 10px;
+  background-color:#E465A2;
+  color: $on-background;
+}
+
+.artist-mute-all-button:hover {
+  background: #EA91BD;
+}
+
+.artist-mute-all-button:disabled {
+  background: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.range-slider__wrap {
+  position: absolute;
+  transform: rotate(-90deg);
+
+  /* display: block; */
+  /* display: inline-flex; */
+  left: -15px;
+  top: -55px;
+  height: 30px;
+  width: 80px;
+}
+
+.range-slider__tooltip {
+  display: none !important;
+}
+
+.range-slider--primary {
+  height: 100% !important;
+  padding: 0px !important;
+}
+
+.volume-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.volume-container:hover .volume-slider {
+  opacity: 100;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+}
+
+.volume-container:hover:after .volume-slider {
+  opacity: 0;
+  transition: all 1s;
+  -webkit-transition: all 1s;
+}
+
+.volume-slider {
+  opacity: 0;
+  height: 30px !important;
+  padding: 0px 0 !important;
+}
+
+.volume-icon:hover {
+  cursor: pointer;
+}
+.tray-icon-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.press-to-talk-btn {
+  background-color: transparent !important;
+  width: 100% !important;
+  height: 35px;
+  color: #E465A2 !important;
+  border: 1px solid #E465A2 !important;
+  box-sizing: border-box !important;
+  border-radius: 10px !important;
+  /* font-size: 0.8rem !important; */
+  /* line-height: 30px !important; */
+  /* margin: 2px !important; */
+  // margin-left: 20px !important;
+  // color: #17171b !important;
+  /* font-family: 'Exo 2', sans-serif; */
+}
+
+.press-to-talk-btn:active {
+  background-color: #E465A2 !important;
+  color: rgba(255, 255, 255, 0.87) !important;
+}
+/* .new-tray-button {
+  width: 48px;
+  height: 30px;
+  color: white;
+  z-index: 10;
+} */
+
+.exit-button {
+  height: 20px !important;
+  width: 20px !important;
+}
+
+.artist-leave-button {
+  position: absolute !important;
+  right: 10px;
+}
+
+.unmuted {
+  color: white;
+}
+
+.muted {
+  color: #fb5554;
+}

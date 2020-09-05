@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
+//Component imports
+import { useInputValue } from "../../custom_hooks";
 import Call from "../Call/Call";
 import StartButton from "../StartButton/StartButton";
 import api from "../api";
-import "./App.css";
+import "./App.scss";
+// import "../../../styles.scss";
 import Tray from "../Tray/Tray";
 import CallObjectContext from "../CallObjectContext";
 import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from "../urlUtils";
@@ -34,31 +37,47 @@ export default function VideoChatApp({
   artist_name,
   artistView,
   colNum,
-  stream_vol_adjust
+  stream_vol_adjust,
 }) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
-  const [isPublic, setIsPublic] = useState(true);
+  const [isPublic, setIsPublic] = useState(false);
   const [mute_all, setMuteAll] = useState(true);
   const [mute_button_msg, setMuteButtonMsg] = useState("UNMUTE ALL");
   const [volume, setVolume] = useState(1);
-  const [current_room, setCurrentRoom] = useState("room1");
+  const [current_room, setCurrentRoom] = useState("");
   const isInCrew = owner_name.indexOf(user_name) >= 0;
+  // const self_create_room_name = useInputValue(roomUrl ? roomUrl : "");
+  const [already_created_room_name, setCreatedRoomName] = useState("");
+  const [isRoomCreated, setIsRoomCreated] = useState(false);
+  const [error_msg, setErrorMsg] = useState('');
 
   /**
    * Creates a new call room.
    */
-  const createPublicCall = useCallback((room_name) => {
+  const createPublicCall = useCallback(async (room_name, is_created) => {
     setAppState(STATE_CREATING);
-    return api
-      .createRoom(room_name)
-      .then((room) => room.url)
-      .catch((error) => {
-        console.log("Error creating room", error);
-        setRoomUrl(null);
-        setAppState(STATE_IDLE);
-      });
+    // console.log(is_created);
+    let response = await api.createRoom(room_name, is_created);
+    if (response.url) {
+      return response.url
+    } else if (response.error) {
+      setErrorMsg(response.info);
+      setRoomUrl(null);
+      setAppState(STATE_IDLE);
+      throw "error creating room";
+    }
+    // return api
+    //   .createRoom(room_name, is_created)
+    //   .then((room) => {
+    //     room.url
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error creating room", error);
+    //     setRoomUrl(null);
+    //     setAppState(STATE_IDLE);
+    //   });
   }, []);
 
   // const createPrivateCall = useCallback(() => {
@@ -82,11 +101,14 @@ export default function VideoChatApp({
    * be done with the call object for a while and you're no longer listening to its
    * events.
    */
-  const startJoiningPublicCall = useCallback((url) => {
+  const startJoiningPublicCall = useCallback(async (url) => {
+    const newToken = await getToken(user_name, url.split("/").pop());
     const newCallObject = DailyIframe.createCallObject({
       userName: user_name,
+      token: newToken,
     });
     setRoomUrl(url.split("/").pop());
+    // console.log("joining_video_call!");
     // setRoomUrl("public");
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
@@ -96,7 +118,7 @@ export default function VideoChatApp({
   const startJoiningPrivateCall = useCallback(async (url) => {
     if (owner_name.indexOf(user_name) >= 0) {
       const newToken = await getToken(user_name);
-      console.log(newToken);
+      // console.log(newToken);
       const newCallObject = DailyIframe.createCallObject({
         userName: user_name,
         token: newToken,
@@ -119,17 +141,19 @@ export default function VideoChatApp({
     // }
   }, []);
 
-                 /**
-                  * Starts leaving the current call.
-                  */
-                 const startLeavingCall = useCallback(() => {
-                   if (!callObject) return;
-                   setAppState(STATE_LEAVING);
-                   callObject.leave();
-                 }, [callObject]);
+  /**
+  * Starts leaving the current call.
+  */
+  const startLeavingCall = useCallback(() => {
+    if (!callObject) return;
+    setAppState(STATE_LEAVING);
+    callObject.leave();
+  }, [callObject]);
 
   const completelyLeaveVideoChat = useCallback(async () => {
-    if (!callObject) return;
+    if (!callObject) {
+      return;
+    }
     setAppState(STATE_LEAVING);
     await callObject.leave();
     callObject.destroy().then(() => {
@@ -148,24 +172,26 @@ export default function VideoChatApp({
       url && startJoiningPublicCall("https://onfour.daily.co/room1");
       switchRoom(0);
       setCurrentRoom("room1");
+      setIsPublic(true);
     } else if (url === "room2") {
       url && startJoiningPublicCall("https://onfour.daily.co/room2");
       switchRoom(1);
       setCurrentRoom("room2");
+      setIsPublic(true);
     } else if (url === "room3") {
       url && startJoiningPublicCall("https://onfour.daily.co/room3");
       switchRoom(2);
       setCurrentRoom("room3");
-    } else if (url === "room4") {
-      url && startJoiningPublicCall("https://onfour.daily.co/room4");
+      setIsPublic(true);
+    } else if (url) {
+      url && startJoiningPublicCall("https://onfour.daily.co/" + url);
       switchRoom(3);
-      setCurrentRoom("room4");
-    } else if (url === "room5") {
-      url && startJoiningPublicCall("https://onfour.daily.co/room5");
-      switchRoom(4);
-      setCurrentRoom("room5");
+      setCurrentRoom(url);
+      setCreatedRoomName(url);
+      setIsRoomCreated(true);
+      setIsPublic(false);
     }
-  
+
     // if (url === "public") {
     //   url && startJoiningPublicCall("https://onfour.daily.co/room1");
     //   if (isInCrew) {
@@ -244,6 +270,7 @@ export default function VideoChatApp({
               setAppState(STATE_IDLE);
             });
           }, 3000);
+          // console.log(appState);
           break;
         default:
           break;
@@ -291,25 +318,25 @@ export default function VideoChatApp({
   const enableCallButtons = [STATE_JOINED].includes(appState);
   // const enableCallButtons = [STATE_JOINED, STATE_ERROR].includes(appState);
 
-                 /**
-                  * Only enable the start button if we're in an idle state (i.e. not creating,
-                  * joining, etc.).
-                  *
-                  * !!!
-                  * IMPORTANT: only one call object is meant to be used at a time. Creating a
-                  * new call object with DailyIframe.createCallObject() *before* your previous
-                  * callObject.destroy() completely finishes can result in unexpected behavior.
-                  * Disabling the start button until then avoids that scenario.
-                  * !!!
-                  */
-                 const enableStartButton = appState === STATE_IDLE;
+  /**
+  * Only enable the start button if we're in an idle state (i.e. not creating,
+  * joining, etc.).
+  *
+  * !!!
+  * IMPORTANT: only one call object is meant to be used at a time. Creating a
+  * new call object with DailyIframe.createCallObject() *before* your previous
+  * callObject.destroy() completely finishes can result in unexpected behavior.
+  * Disabling the start button until then avoids that scenario.
+  * !!!
+  */
+  const enableStartButton = appState === STATE_IDLE;
 
   const room_ids = [
     "public-room-1",
     "public-room-2",
     "public-room-3",
-    "public-room-4",
-    "public-room-5",
+    // isRoomCreated? already_created_room_name : "create-room",
+    "create-room"
   ];
 
   const switchRoom = (room_number) => {
@@ -322,27 +349,39 @@ export default function VideoChatApp({
     // }
     startLeavingCall();
     setCurrentRoom("room" + (room_number + 1));
+    if (room_number === 3) {
+      setIsPublic(false);
+      setCurrentRoom(already_created_room_name);
+    } else {
+      setIsPublic(true);
+    }
     const selected = room_ids[room_number];
     for (const index in room_ids) {
       if (room_ids[index] != selected) {
         //const element = object[key];
-        document.getElementById(room_ids[index]).style.color =
-          "rgb(173, 173, 173)";
+        // document.getElementById(room_ids[index]).style.color =
+        //   "rgb(173, 173, 173) !important";
+        document.getElementById(room_ids[index]).classList.add("room-others");
+        document
+          .getElementById(room_ids[index])
+          .classList.remove("room-selected");
       }
     }
-    document.getElementById(selected).style.color = "white";
+    // document.getElementById(selected).style.color = "white !important";
+    document.getElementById(selected).classList.add("room-selected");
+    document.getElementById(selected).classList.remove("room-others");
   };
 
-                 const switchToPrivateVideoChat = () => {
-                   if (document.getElementById("public-room")) {
-                     document.getElementById("public-room").style.color =
-                       "rgb(173, 173, 173)";
-                     document.getElementById("private-room").style.color =
-                       "white";
-                     setIsPublic(false);
-                     startLeavingCall();
-                   }
-                 };
+  const switchToPrivateVideoChat = () => {
+    if (document.getElementById("public-room")) {
+      document.getElementById("public-room").style.color =
+        "rgb(173, 173, 173)";
+      document.getElementById("private-room").style.color =
+        "white";
+      setIsPublic(false);
+      startLeavingCall();
+    }
+  };
 
   const toggle_mute_unmute_all = () => {
     if (mute_all) {
@@ -352,6 +391,12 @@ export default function VideoChatApp({
       setMuteAll(true);
       setMuteButtonMsg("UNMUTE ALL");
     }
+  };
+
+  const room_max_map = {
+    "room1": 4,
+    "room2": 6,
+    "room3": 10
   };
   
   return (
@@ -367,10 +412,26 @@ export default function VideoChatApp({
           ) : ( */}
           <div className="room-name-row">
             <div
+              className="body-2 public-room click-active"
+              onClick={() => switchRoom(3)}
+            >
+              <div
+                // id={isRoomCreated ? already_created_room_name : "create-room"}
+                id="create-room"
+                className="body-2 room-tab-text room1"
+              >
+                {/* {isRoomCreated ? already_created_room_name : "Create Room"} */}
+                My Room
+              </div>
+            </div>
+            <div
               className="public-room click-active"
               onClick={() => switchRoom(0)}
             >
-              <div id="public-room-1" className="room-tab-text room1">
+              <div
+                id="public-room-1"
+                className="body-2 room-tab-text room-others"
+              >
                 Room 1
               </div>
             </div>
@@ -378,7 +439,10 @@ export default function VideoChatApp({
               className="public-room click-active"
               onClick={() => switchRoom(1)}
             >
-              <div id="public-room-2" className="room-tab-text room-others">
+              <div
+                id="public-room-2"
+                className="body-2 room-tab-text room-others"
+              >
                 Room 2
               </div>
             </div>
@@ -386,24 +450,11 @@ export default function VideoChatApp({
               className="public-room click-active"
               onClick={() => switchRoom(2)}
             >
-              <div id="public-room-3" className="room-tab-text room-others">
+              <div
+                id="public-room-3"
+                className="body-2 room-tab-text room-others"
+              >
                 Room 3
-              </div>
-            </div>
-            <div
-              className="public-room click-active"
-              onClick={() => switchRoom(3)}
-            >
-              <div id="public-room-4" className="room-tab-text room-others">
-                Room 4
-              </div>
-            </div>
-            <div
-              className="public-room click-active"
-              onClick={() => switchRoom(4)}
-            >
-              <div id="public-room-5" className="room-tab-text room-others">
-                Room 5
               </div>
             </div>
           </div>
@@ -447,38 +498,76 @@ export default function VideoChatApp({
         <div className="video-chat-prompt-container">
           {isPublic ? (
             <div className="enter-video-chat-prompt">
+              {!artistView ? (
+                <div className="public-video-notice message-text">
+                  {"Please use headphones to avoid audio feedback issues. \nThis is a public room, so get ready to make some new friends!"}
+                </div>
+              ) : null}
               <StartButton
+                create_room={false}
                 disabled={!enableStartButton}
                 onClick={() => {
-                  createPublicCall(current_room).then((url) =>
+                  createPublicCall(current_room, isRoomCreated).then((url) =>
                     startJoiningPublicCall(url)
                   );
                 }}
                 artistView={artistView}
               />
-              {!artistView ? (
-                <div className="public-video-notice">
-                  Please use headphones to avoid audio feedback issues.{" "}
-                  <br></br>This is a public room, so get ready to make some new
-                  friends!
-                </div>
-              ) : null}
+            </div>
+          ) : // <StartButton
+          //   disabled={!enableStartButton}
+          //   onClick={() => {
+          //     createPrivateCall().then((url) => startJoiningPrivateCall(url));
+          //   }}
+          // />
+          isRoomCreated ? (
+            <div className="enter-video-chat-prompt">
+              <div className="public-video-notice message-text">
+                {"Rejoin the private room I was in! \nTo create a new room, refresh on this page"}
+              </div>
+              <StartButton
+                create_room={false}
+                disabled={!enableStartButton}
+                onClick={() => {
+                  createPublicCall(current_room, isRoomCreated).then((url) =>
+                    startJoiningPublicCall(url)
+                  );
+                }}
+                artistView={artistView}
+              />
             </div>
           ) : (
-            // <StartButton
-            //   disabled={!enableStartButton}
-            //   onClick={() => {
-            //     createPrivateCall().then((url) => startJoiningPrivateCall(url));
-            //   }}
-            // />
-            <StartButton
-              disabled={!enableStartButton}
-              onClick={() => {
-                createPublicCall("room2").then((url) =>
-                  startJoiningPublicCall(url)
-                );
-              }}
-            />
+            <div className="enter-video-chat-prompt">
+              {/* <input
+                className="create-room-name-input"
+                placeholder="room name"
+                {...self_create_room_name}
+              /> */}
+              <div className="public-video-notice message-text">
+                Create my own private room and invite my friends!
+              </div>
+              <StartButton
+                create_room={true}
+                disabled={!enableStartButton}
+                onClick={() => {
+                  createPublicCall("my room", isRoomCreated)
+                    .then((url) => {
+                      startJoiningPublicCall(url);
+                      setIsRoomCreated(true);
+                      setCreatedRoomName(url.split("/").pop());
+                      // setCreatedRoomName(self_create_room_name.value);
+                      setCurrentRoom(url.split("/").pop());
+                    })
+                    .catch((err) => console.log(err));
+                }}
+                artistView={artistView}
+              />
+              {error_msg ? (
+                <p className="create-room-error message-text">{error_msg}</p>
+              ) : (
+                <p className="room-max-msg message-text">{error_msg}</p>
+              )}
+            </div>
           )}
         </div>
       )}

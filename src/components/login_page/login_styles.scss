@@ -1,22 +1,25 @@
 // LOGIN PAGE COMPONENT STYLING
-
-@import "../../styles";
+@import "../../styles.scss";
 
 .login-page-content {
   background-color: black;
   min-height: 65vh;
   width: 100%;
   margin-top: -1px;
+  height: calc(100vh - 49px);
 }
 
 .signin-form {
-  margin-top: 8.5%;
-  width: 29%;
-  padding-bottom: 2%;
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  margin: auto;
 }
 
 .form-section {
+  display: flex;
   width: 100%;
+  height: 100%;
 }
 
 .login-fields-section {
@@ -41,10 +44,20 @@
 
 .signin-submit-button {
   width: 100%;
-  color: white;
-  font-size: 14px;
-  font-weight: 420;
-  background-color: #794d94;
+  margin-top: 3px;
+}
+
+.signin-text-color {
+  // display: flex;
+  // text-align: center;
+  color: $on-surface-medium !important;
+  margin-bottom: 16px;
+}
+
+.signin-header-color {
+  // display: flex;
+  color: $primary-color !important;
+  margin-bottom: 16px;
 }
 
 .processing-message {
@@ -63,6 +76,7 @@
 .signin-header {
   padding-bottom: 3%;
   text-align: center;
+  align-items: center;
 }
 
 .signin-header-text {
@@ -82,5 +96,6 @@
 
 .forgot-footer {
   color: white;
-  padding-bottom: 5%;
+  margin-bottom: 25px;
+  margin-top: 25px;
 }
