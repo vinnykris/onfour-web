@@ -178,6 +178,7 @@
   color: black;
   text-transform: uppercase;
   font-weight: bold;
+  margin: auto;
   letter-spacing: 0.045em;
   @include respond-to("small") {
     margin: 8% 0%;
@@ -185,16 +186,6 @@
   }
 }
 
-.upcoming-prompt-button:hover:not([disabled]) {
-  background-color: #2c28f8;
-  color: white;
-}
-
-.upcoming-prompt-button:focus:not([disabled]) {
-  background-color: black;
-  border: 1px solid #2c28f8;
-  color: #cfc8c4;
-}
 
 .user-crews-container {
   margin: 32px 0px;
