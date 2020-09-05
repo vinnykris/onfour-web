@@ -188,14 +188,17 @@ input {
 // }
 
 button {
-  background-color: #303096;
-  color: white;
+  background: #E465A2;
+  color: #000000;
   font-size: 16px;
   padding: 12px 24px;
   border: none;
-  cursor: pointer;
-  border-radius: 3px;
+  border-radius: 4px;
   // box-shadow: 0px 3px 5px grey;
+  &:hover {
+    background: #EA91BD;
+    cursor: pointer;
+  }
 }
 
 h5 {

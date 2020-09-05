@@ -10,7 +10,7 @@ import { useWindowDimensions } from "../custom_hooks";
 import "./footer_styles.scss";
 
 // Images
-import white_logo from "../../images/logos/logo_blackbackground.png";
+import white_logo from "../../images/logos/white-full-logo.png";
 
 //AWS
 import { Analytics } from "aws-amplify";

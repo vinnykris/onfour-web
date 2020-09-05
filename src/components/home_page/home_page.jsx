@@ -326,7 +326,7 @@ const HomePage = () => {
                                 type="submit"
                                 form="newsletter"
                                 value="Submit"
-                                className="submit-button button-border button-height"
+                                className="submit-button button-border button-height mobile-button-text"
                               >
                                 Submit
                               </button>
@@ -364,7 +364,7 @@ const HomePage = () => {
                         type="submit"
                         form="newsletter"
                         value="Submit"
-                        className="email-button-mobile button-border button-height"
+                        className="email-button-mobile button-border button-height mobile-button-text"
                         onClick={sendEmail}
                       >
                         Send us an email
