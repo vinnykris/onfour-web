@@ -646,6 +646,16 @@ p {
     display: block;
     max-height: 395px;
     overflow-y: overlay;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    &::-webkit-scrollbar {
+      width: 10px;
+      background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(141, 141, 141, 0.596);
+      border-radius: 20px;
+    }
     margin-top: 15px;
 
     & .single-crew-member {
