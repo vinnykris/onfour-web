@@ -814,6 +814,11 @@ p {
 
   &:disabled {
     color: rgba(0, 0, 0, 0.38) !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    cursor: initial;
+    &:hover {
+      background: rgba(255, 255, 255, 0.6) !important;
+    }
   }
 
   &:hover {

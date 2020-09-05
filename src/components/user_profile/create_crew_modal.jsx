@@ -174,9 +174,17 @@ const CreateCrewModal = ({
       visible={showCrewModal}
       onClose={handleCloseMainModal}
       width={511}
-      height={700}
+      height={559}
       measure="px"
       customMaskStyles={{ background: "rgba(0,0,0,0.8)", cursor: "pointer" }}
+      customStyles={{
+        padding: 0,
+        background:
+          "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+        boxShadow:
+          "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+        borderRadius: "10px",
+      }}
       className="user-crews-modal"
     >
       <Row className="user-create-crew">
