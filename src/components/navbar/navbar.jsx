@@ -344,15 +344,15 @@ const NavBar = () => {
           </div>
           <div className="nav-links-container">
             <NavLink
-              exact
-              to="/"
+              to="/home"
               className="nav-page-white header-8"
               onClick={leaveVideoChat}
             >
               Home
             </NavLink>
             <NavLink
-              to="/about"
+              exact
+              to="/"
               className="nav-page-white header-8"
               onClick={leaveVideoChat}
             >

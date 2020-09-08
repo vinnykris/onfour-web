@@ -49,8 +49,8 @@ function App() {
       <Router history={history}>
         <NavBar />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
+          <Route exact path="/" component={About} />
+          <Route exact path="/home" component={Home} />
           <Route exact path="/archive" component={ArchivePage} />
           <Route
             exact
@@ -74,7 +74,7 @@ function App() {
           <Route exact path="/privacy-policy" component={PrivacyPage} />
           <Route exact path="/terms-of-service" component={TermsOfService} />
           <Route exact path="/ticket-agreement" component={PaymentAgreement} />
-          <Route exact path="/artiststream" component={ArtistStreamPage}/>
+          <Route exact path="/artiststream" component={ArtistStreamPage} />
           <Route path="*" component={NotFoundPage} />
         </Switch>
         <Footer />
