@@ -25,7 +25,7 @@ import FeatureCard from "./feature_card";
 
 // AboutPage component that contains all the about page layout
 const LandingPage = () => {
-  const [show_artist, setShowArtist] = useState(true);
+  const [show_artist, setShowArtist] = useState(false);
 
   return (
     <div className="about-page-content">
@@ -136,9 +136,9 @@ const LandingPage = () => {
       </div>
 
       <div className="about-section feature-section">
-        <div className="background-about-container feature-wave-bkgd">
+        {/* <div className="background-about-container feature-wave-bkgd">
           <img src={features_background} className="wave-2" />
-        </div>
+        </div> */}
         {show_artist ? (
           <div className="feature-content-container">
             <div className="header-2">This Isn't Just Another Livestream</div>
@@ -171,6 +171,14 @@ const LandingPage = () => {
                   description="Cross-promote by inviting your friends and other artists to perform with you."
                 />
               </div>
+            </div>
+            <div className="sign-up-container">
+              <button
+                className="primary-button button-text sign-up-button"
+                onClick={() => history.push("/register")}
+              >
+                SIGN UP
+              </button>
             </div>
           </div>
         ) : (
@@ -208,19 +216,27 @@ const LandingPage = () => {
                 />
               </div>
             </div>
+            <div className="sign-up-container">
+              <button
+                className="primary-button button-text sign-up-button"
+                onClick={() => history.push("/register")}
+              >
+                SIGN UP
+              </button>
+            </div>
           </div>
         )}
       </div>
 
       <div className="about-section sign-up-section">
-        <div className="sign-up-container">
+        {/* <div className="sign-up-container">
           <button
             className="primary-button button-text sign-up-button"
             onClick={() => history.push("/register")}
           >
             SIGN UP
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
