@@ -358,6 +358,16 @@ p {
 .crew-modal-user-container {
   height: 270px;
   overflow-y: overlay;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(141, 141, 141, 0.596);
+    border-radius: 20px;
+  }
 }
 
 .crew-modal-discard-modal {
@@ -646,6 +656,16 @@ p {
     display: block;
     max-height: 395px;
     overflow-y: overlay;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    &::-webkit-scrollbar {
+      width: 10px;
+      background-color: rgba(228, 228, 228, 0.253); /* Chrome/Safari/Webkit */
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(141, 141, 141, 0.596);
+      border-radius: 20px;
+    }
     margin-top: 15px;
 
     & .single-crew-member {
@@ -794,6 +814,11 @@ p {
 
   &:disabled {
     color: rgba(0, 0, 0, 0.38) !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    cursor: initial;
+    &:hover {
+      background: rgba(255, 255, 255, 0.6) !important;
+    }
   }
 
   &:hover {
