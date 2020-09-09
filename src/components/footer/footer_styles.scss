@@ -2,68 +2,78 @@
 @import "../../styles";
 
 .footer-container {
-  background:#07070f;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.09)
+    ),
+    #07070f;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12),
+    0px 2px 4px rgba(0, 0, 0, 0.2);
   width: 100%;
-  padding: 60px 10px 10px 10px;
+  max-width: 100%;
   margin-top: -1px;
-  @include respond-to("small") {
-    padding-top: 15px;
-  }
   display: flex;
+  flex-direction: column;
 }
 
-.footer-grid {
+.footer-inner-container {
+  display: flex;
+  flex-direction: row;
+  margin: 0px 154px;
+  &:first-child {
+    margin-top: 62px;
+  }
+  @include respond-to("x-large") {
+    margin: 0px 120px;
+  }
+
+  @include respond-to("large") {
+    margin: 0px 80px;
+  }
+  @include respond-to("medium") {
+    margin: 0px 40px;
+  }
+}
+
+.footer-column-main {
+  display: flex;
+  flex-direction: column;
+  // margin-right: 22%;
+}
+
+.footer-link-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.footer-column-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 70px;
+}
+
+.onfour-logo-container {
+  width: 148px;
+}
+
+.footer-link {
+  margin-top: 16px;
+}
+
+.footer-text-body {
+  color: $on-surface-medium !important;
+}
+
+.footer-bottom {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: row;
   width: 100%;
-}
-
-.footer-container h3 {
-  margin-top: 10px;
-  color: #eaeaea;
-  text-align: right;
-  font-size: 17px;
-  font-weight: $semimedium-weight;
-}
-
-.footer-container p {
-  color: #eaeaea;
-  text-align: left;
-  font-size: 16px;
-}
-
-.footer-container h6 {
-  color: #eaeaea;
-  text-align: left;
-  font-size: 13px;
-  font-weight: $regular-weight;
-}
-
-.footer-container hr {
-  border-color: #eaeaea;
-  width: 82%;
-}
-
-.footer-links {
-  float: right;
-  margin-top: 10px;
-}
-
-.footer-links ul {
-  list-style: none;
-  text-align: right;
-  padding-left: 0;
-  font-size: 16px;
-}
-
-.footer-links li {
-  display: block;
-}
-
-.footer-links li a {
-  color: #eaeaea;
-}
-
-.footer-links li .privacy-link {
-  color: #eaeaea;
 }
 
 .footer-social-media ul {
@@ -75,7 +85,7 @@
   margin: 0px 10px;
   display: inline-block;
   font-size: 26px;
-  color: #07070F;
+  color: #07070f;
   @include respond-to("small") {
     margin-right: 12px;
     margin-left: 0;
@@ -83,30 +93,14 @@
   }
 }
 
+.footer-social-media {
+  margin-right: 0;
+  margin-left: auto;
+}
+
 .footer-social-media li a {
   text-decoration: none;
   color: #eaeaea;
-}
-
-.footer-logo-container {
-  height: 80px;
-  width: 80px;
-  position: relative;
-}
-
-.onfour-logo-footer {
-  // height: 80px;
-  // float: left;
-  @include respond-to("medium") {
-    height: 43px;
-  }
-  @include respond-to("x-small") {
-    height: 30px;
-  }
-  position: absolute;
-  top: 50%;
-  height: 43px;
-  // left: -25%;
 }
 
 .hidden-text {
