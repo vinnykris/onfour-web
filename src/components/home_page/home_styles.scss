@@ -324,6 +324,7 @@
 .home-page-content {
   background: #07070f;
   margin-top: -1px;
+  min-height: calc(100vh - 250px);
 }
 
 .our-mission-text {
@@ -471,5 +472,10 @@
   top: 49px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), linear-gradient(180deg, rgba(7, 7, 15, 0) 0%, #07070F 89.06%);
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.05)
+    ),
+    linear-gradient(180deg, rgba(7, 7, 15, 0) 0%, #07070f 89.06%);
 }

@@ -283,7 +283,47 @@ const NavBar = () => {
             </Grid>
           </div>
 
-          <Grid className="mobile-grid">
+          <div className="mobile-nav-container">
+            <span
+              className="hamburger-menu"
+              onClick={() => openMenu("nav-menu")}
+            >
+              <i className="fa fa-bars fa-2x hamburger-icon"></i>
+            </span>
+            <div className="mobile-logo-container">
+              <NavLink exact to="/">
+                <img
+                  className="onfour-logo-mobile"
+                  src={mobile_logo}
+                  width="auto"
+                  alt="nav-logo"
+                ></img>
+              </NavLink>
+            </div>
+            <div className="mobile-profile-container">
+              {!auth ? (
+                <span className="user-menu" onClick={signInMobile}>
+                  <img
+                    className="user-icon"
+                    src={login_icon}
+                    alt="profile-icon"
+                  ></img>
+                </span>
+              ) : (
+                <span
+                  className="user-menu"
+                  onClick={() => openMenu("nav-signout")}
+                >
+                  <LoggedInUser
+                    className="logged-in-icon"
+                    first={username}
+                    // last={last}
+                  />
+                </span>
+              )}
+            </div>
+          </div>
+          {/* <Grid className="mobile-grid">
             <Row className="mobile-row">
               <Col size={1}>
                 <span
@@ -326,7 +366,7 @@ const NavBar = () => {
                 )}
               </Col>
             </Row>
-          </Grid>
+          </Grid> */}
         </div>
       ) : (
         <div className="main-content desktop-nav-main">

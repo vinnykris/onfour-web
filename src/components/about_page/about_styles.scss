@@ -31,6 +31,10 @@
 
 .fans-main-container-background {
   background: url("../../images/backgrounds/wave_2.svg") center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .about-text-container {
@@ -130,7 +134,14 @@ img.wave-2 {
 }
 
 .feature-wave-bkgd {
-  position: absolute;
+  //position: relative;
+  // background: url("../../images/backgrounds/features_background.png") center
+  //   center;
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
+  // height: calc(100vw * 0.43441);
 }
 
 .feature-card-section {
@@ -138,7 +149,7 @@ img.wave-2 {
   //margin: 0px 144px 0px 144px;
   max-width: 1048px;
   flex-direction: column;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .feature-row {
@@ -156,12 +167,20 @@ img.wave-2 {
   position: relative;
   top: 0;
   margin-top: -56px;
+  background: url("../../images/backgrounds/features_background.png") center
+    center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: calc(100vw * 0.47986111);
 }
 
 .sign-up-container {
   display: flex;
   position: relative;
   width: 100%;
+  margin-top: 114px;
 }
 
 .sign-up-button {
