@@ -133,17 +133,6 @@ img.wave-2 {
   margin-top: 36px;
 }
 
-.feature-wave-bkgd {
-  //position: relative;
-  // background: url("../../images/backgrounds/features_background.png") center
-  //   center;
-  // -webkit-background-size: cover;
-  // -moz-background-size: cover;
-  // -o-background-size: cover;
-  // background-size: cover;
-  // height: calc(100vw * 0.43441);
-}
-
 .feature-card-section {
   display: flex;
   //margin: 0px 144px 0px 144px;
@@ -173,7 +162,7 @@ img.wave-2 {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: calc(100vw * 0.47986111);
+  min-height: calc(100vw * 0.47986111);
 }
 
 .sign-up-container {

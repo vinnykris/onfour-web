@@ -10,7 +10,8 @@ import { useWindowDimensions } from "../custom_hooks";
 import "./footer_styles.scss";
 
 // Images
-import white_logo from "../../images/logos/white-full-logo.png";
+// import white_logo from "../../images/logos/white-full-logo.png";
+import desktop_icon from "../../images/logos/navbar-logo-pink.png";
 
 //AWS
 import { Analytics } from "aws-amplify";
@@ -43,7 +44,125 @@ const Footer = () => {
     <div>
       {show_footer ? (
         <div className="footer-container">
-          <Grid className="footer-grid">
+          <div className="footer-inner-container">
+            <div className="footer-column-main">
+              <img className="onfour-logo-container" src={desktop_icon}></img>
+              <span className="header-8 footer-text-body">
+                Experience music, together.
+              </span>
+            </div>
+            <div className="footer-link-container">
+              <div className="footer-column-content">
+                <span className="header-8 footer-text-title">Explore</span>
+                <NavLink
+                  className="header-8 footer-text-body footer-link"
+                  to="/home"
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  className="header-8 footer-text-body footer-link"
+                  to="/"
+                >
+                  About Us
+                </NavLink>
+                <NavLink
+                  className="header-8 footer-text-body footer-link"
+                  to="/stream"
+                >
+                  Stream
+                </NavLink>
+                <NavLink
+                  className="header-8 footer-text-body footer-link"
+                  to="/upcoming"
+                >
+                  Upcoming
+                </NavLink>
+              </div>
+              <div className="footer-column-content">
+                <span className="header-8 footer-text-title">Legal</span>
+                <NavLink
+                  className="header-8 footer-text-body footer-link"
+                  to="/terms-of-service"
+                >
+                  Terms of Service
+                </NavLink>
+                <NavLink
+                  className="header-8 footer-text-body footer-link"
+                  to="/privacy-policy"
+                >
+                  Privacy Policy
+                </NavLink>
+                <NavLink
+                  className="header-8 footer-text-body footer-link"
+                  to="/ticket-agreement"
+                >
+                  Ticket Agreement
+                </NavLink>
+              </div>
+              <div className="footer-column-content">
+                <span className="header-8 footer-text-title">Collaborate</span>
+                <a
+                  onClick={() => Analytics.record({ name: "contactUsFooter" })}
+                  href="mailto:onfour.box@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="header-8 footer-text-body footer-link"
+                >
+                  onfour.box@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="footer-inner-container">
+            <div className="footer-bottom">
+              <span className="header-8 footer-text-body">
+                Copyright &copy; 2020 All Rights Reserved by onfour
+              </span>
+              <div className="footer-social-media">
+                <ul>
+                  <li>
+                    <a
+                      onClick={() => Analytics.record({ name: "instaFooter" })}
+                      href="https://www.instagram.com/_onfour/"
+                      target="_blank"
+                      className="fa fa-instagram"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="hidden-text">Instagram Link</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      onClick={() =>
+                        Analytics.record({ name: "youtubeFooter" })
+                      }
+                      href="https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ/featured"
+                      target="_blank"
+                      className="fa fa-youtube"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="hidden-text">Youtube Link</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      onClick={() =>
+                        Analytics.record({ name: "twitterFooter" })
+                      }
+                      href="https://twitter.com/_Onfour"
+                      target="_blank"
+                      className="fa fa-twitter"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="hidden-text">Twitter Link</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          {/* <Grid className="footer-grid">
             <Row>
               <Col size={1}></Col>
               <Col size={5}>
@@ -93,7 +212,6 @@ const Footer = () => {
               </Col>
               <Col size={1}></Col>
             </Row>
-            <hr></hr>
             <Row>
               <Col size={1}></Col>
               <Col size={5}>
@@ -147,7 +265,7 @@ const Footer = () => {
               </Col>
               <Col size={1}></Col>
             </Row>
-          </Grid>
+          </Grid> */}
         </div>
       ) : null}
     </div>

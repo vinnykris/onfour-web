@@ -6,11 +6,12 @@
   color: white;
   margin-top: -1px;
   min-height: 70vh;
+  padding: 50px 0px;
 }
 
 .privacy-container {
   // position: absolute;
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   text-align: justify;
 
@@ -40,4 +41,8 @@
   text-align: center;
   margin: 20px;
   padding-bottom: 20px;
+}
+
+.policy-body {
+  text-align: left;
 }
