@@ -626,68 +626,6 @@ const Concert = (props) => {
                     total={total}
                   ></CheckoutBox>
                 )}
-                {/* <div className="invite-friends">
-                          <Row>
-                            <Col size={1}>
-                              <span className="invite-prompt">
-                                <span className="fa-stack">
-                                  <i className="fa fa-circle fa-stack-2x icon-background"></i>
-                                  <i
-                                    className="fa fa-stack-1x fa-user-plus add-user-icon"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-
-                                <p className="invite-text">
-                                  Invite Your Friends
-                                </p>
-                              </span>
-                            </Col>
-                          </Row>
-                          <Row>
-                            <Col size={1}>
-                              <div className="email-input-field">
-                                {" "}
-                                <ReactMultiEmail
-                                  placeholder="Please separate emails with commas"
-                                  style={{ background: "#EEEEEE" }}
-                                  emails={emails}
-                                  onChange={(_emails) => {
-                                    setEmails(_emails);
-                                  }}
-                                  validateEmail={(email) => {
-                                    return isEmail(email) && emails.length < 10; // return boolean
-                                  }}
-                                  getLabel={(email, index, removeEmail) => {
-                                    return (
-                                      <div data-tag key={index}>
-                                        {email}
-                                        <span
-                                          data-tag-handle
-                                          onClick={() => removeEmail(index)}
-                                        >
-                                          ×
-                                        </span>
-                                      </div>
-                                    );
-                                  }}
-                                />
-                              </div>
-                              <div>
-                                {emails.length >= 10 ? (
-                                  <p className="emails-warning">
-                                    You have reached the maximum number of
-                                    invites!
-                                  </p>
-                                ) : (
-                                  <p className="emails-warning backstage-hidden-text">
-                                    Input validated
-                                  </p>
-                                )}
-                              </div>
-                            </Col>
-                          </Row>
-                        </div> */}
               </Rodal>
               <Row className="concert-row-mobile">
                 <Col size={1} className="no-stretch-column">
@@ -972,7 +910,7 @@ const Concert = (props) => {
                 </div>
               </div>
               <div className="concert-info">
-                <div className="tag-calendar">
+                {/* <div className="tag-calendar">
                   <div className="tag-container concert-tag">
                     <Tag content={"In " + concert_info.days_left + " days"} />
                   </div>
@@ -1008,68 +946,7 @@ const Concert = (props) => {
                       + Add to calendar
                     </span>
                   )}
-                  {/* <div className="share-concert-container">
-                      <Col size={1}>
-                        <div>
-                          <h5 className="share-concert-text">
-                            Share With Friends
-                          </h5>
-                        </div>
-                        <div className="share-list-container">
-                          <ul className="social-list">
-                            <li>
-                              <a
-                                onClick={() =>
-                                  Analytics.record({
-                                    name: "facebookShareClicked",
-                                  })
-                                }
-                                href={facebook_link}
-                                className="fa fa-facebook-official fb-xfbml-parse-ignore"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <span>Facebook Link</span>
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                onClick={() =>
-                                  Analytics.record({
-                                    name: "twitterShareClicked",
-                                  })
-                                }
-                                className="fa fa-twitter twitter-share-button"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href={twitter_link}
-                                data-text="Come watch a concert with me!"
-                                data-url={window.location.href}
-                                data-lang="en"
-                                data-show-count="false"
-                              >
-                                <span>Twitter Link</span>
-                              </a>
-                              <script
-                                async
-                                src="https://platform.twitter.com/widgets.js"
-                                charSet="utf-8"
-                              ></script>
-                            </li>
-                            <li>
-                              <Tooltip title={tooltip_text}>
-                                <span onClick={copyToClipboard}>
-                                  <i className="fa fa-clone">
-                                    <span>Copy Link</span>
-                                  </i>
-                                </span>
-                              </Tooltip>
-                            </li>
-                          </ul>
-                        </div>
-                      </Col>
-                    </div> */}
-                </div>
+                </div> */}
                 <div className="concert-info-inner">
                   <div className="concert-main-info">
                     <div>
@@ -1087,7 +964,7 @@ const Concert = (props) => {
                   <div className="concert-logistics">
                     <Row>
                       {/* <div className="buy-ticket"> */}
-                      {has_ticket ? (
+                      {/* {has_ticket ? (
                         <div className="button-container">
                           {enter_venue_status ? (
                             <NavLink to="/stream">
@@ -1111,25 +988,27 @@ const Concert = (props) => {
                             </Tooltip>
                           )}
                         </div>
-                      ) : (
-                        <button
-                          className="primary-button concert-ticket-button"
-                          onClick={getTicket}
-                        >
-                          {total > 0 ? (
-                            <span className="button-text concert-button-text">
-                              Buy Tickets
-                            </span>
-                          ) : (
-                            <span className="button-text concert-button-text">
-                              RSVP
-                            </span>
-                          )}
-                        </button>
-                      )}
+                      ) : ( */}
+                      <button
+                        className="primary-button concert-ticket-button"
+                        onClick={getTicket}
+                        disabled={has_ticket}
+                      >
+                        {total > 0 ? (
+                          <span className="button-text concert-button-text">
+                            Buy Tickets
+                          </span>
+                        ) : (
+                          <span className="button-text concert-button-text">
+                            RSVP
+                          </span>
+                        )}
+                      </button>
+                      {/* )} */}
                       {/* </div> */}
                     </Row>
-                    {has_ticket && (
+
+                    {/* {has_ticket && (
                       <Row>
                         <div className="button-container">
                           {userCrews.length > 0 ? (
@@ -1153,7 +1032,7 @@ const Concert = (props) => {
                           )}
                         </div>
                       </Row>
-                    )}
+                    )} */}
                     <Row className="logistics-top">
                       <span className="header-6">
                         {concert_info.week_day}, {concert_info.formatted_date}
@@ -1162,7 +1041,7 @@ const Concert = (props) => {
                     <hr className="solid" />
                     <Row>
                       <span className="header-6">
-                        {concert_info.formatted_time} EST
+                        {concert_info.formatted_time}
                       </span>
                     </Row>
                     <hr className="solid" />

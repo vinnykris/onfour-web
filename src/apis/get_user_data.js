@@ -15,7 +15,11 @@ import ArchiveVideo from "../components/archive_page/archive_video";
 
 // API Imports
 import { getArtistInfo } from "./get_concert_data";
-import { formatUpcomingShow, formatMemory } from "../components/util";
+import {
+  formatUpcomingShow,
+  formatMemory,
+  formatProfileShow,
+} from "../components/util";
 
 Amplify.configure(awsmobile);
 
@@ -149,8 +153,11 @@ export const getUpcomingPurchasedShows = async (width, username) => {
   if (user_concerts !== []) {
     for await (const data of user_concerts) {
       if (data.data.getConcert.is_future) {
+        // upcoming_concerts.push(
+        //   formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
+        // );
         upcoming_concerts.push(
-          formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
+          formatProfileShow(await getUpcomingFull(data.data.getConcert))
         );
         all_ticketstubs.push(
           <ProfileStub
