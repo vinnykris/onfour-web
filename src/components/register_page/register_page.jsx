@@ -484,6 +484,17 @@ const Register = (props) => {
                           </a>
                           .
                         </div>
+                        <div>
+                          <button
+                            onClick={() =>
+                              Auth.federatedSignIn({
+                                provider: "Google",
+                              }).then((data) => console.log(data))
+                            }
+                          >
+                            Open Google
+                          </button>
+                        </div>
                       </form>
                     </div>
                   )}

@@ -117,6 +117,13 @@ const Login = (props) => {
                 >
                   LOG IN
                 </button>
+                <div>
+                  <button
+                    onClick={() => Auth.federatedSignIn({ provider: "Google" })}
+                  >
+                    Open Google
+                  </button>
+                </div>
                 <p className="forgot-footer">
                   <a href="/forgot" className="header-7 signin-link">
                     Forgot Password?

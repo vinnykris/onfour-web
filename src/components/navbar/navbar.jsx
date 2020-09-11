@@ -61,7 +61,9 @@ const NavBar = () => {
   // If the user is not logged in/invalid, reset their auth value to false
   Auth.currentAuthenticatedUser({})
     .then((user) => {
-      setUserEmail(user.attributes.email);
+      if (user?.signInUserSession?.idToken?.payload?.email)
+        setUserEmail(user.signInUserSession.idToken.payload.email);
+      if (user?.attributes?.email) setUserEmail(user.attributes.email);
       setAuth(true);
       setUsername(user.username);
       setProfileURL("");
@@ -75,7 +77,8 @@ const NavBar = () => {
         input: username,
       })
     );
-    setFirst(user_data.data.getCreateOnfourRegistration.first);
+    if (user_data?.data?.getCreateOnfourRegistration?.first)
+      setFirst(user_data.data.getCreateOnfourRegistration.first);
   };
 
   if (username) {
