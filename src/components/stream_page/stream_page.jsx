@@ -986,6 +986,15 @@ const StreamPage = ({ is_soundcheck }) => {
                     )}
                   </div>
                 </div>
+                <div className="chat-main-mobile">
+                  <div className="chat-wrapper-mobile">
+                    <Chat
+                      chat_name={username ? username : "GUEST"}
+                      chatStatus={chatStatus}
+                      setViewers={getViewers}
+                    />
+                  </div>
+                </div>
                 <div className="payment-row-mobile">
                   <button
                     className="stripe-button-border mobile-payment-button button-text"
@@ -997,15 +1006,6 @@ const StreamPage = ({ is_soundcheck }) => {
                     DONATE
                   </button>
                   {/* <Modal isOpen={false}></Modal> */}
-                </div>
-                <div className="chat-main-mobile">
-                  <div className="chat-wrapper-mobile">
-                    <Chat
-                      chat_name={username ? username : "GUEST"}
-                      chatStatus={chatStatus}
-                      setViewers={getViewers}
-                    />
-                  </div>
                 </div>
               </div>
             </div>

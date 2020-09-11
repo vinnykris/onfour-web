@@ -10,8 +10,6 @@
     display: flex;
     flex: 1 1 auto;
     flex-flow: column;
-    height: calc(100vh - 131px);
-    max-height: calc(100vh - 131px);
   }
 }
 
@@ -111,8 +109,8 @@
 }
 
 .chat-main-mobile {
-  height: calc(100vh - 191px - (100vw * 0.5625));
-  max-height: calc(100vh - 191px - (100vw * 0.5625));
+  height: calc(100vh - 123px - (100vw * 0.5625));
+  max-height: calc(100vh - 123px - (100vw * 0.5625));
   // height: 400px;
   display: flex;
   flex-flow: column;
@@ -875,10 +873,6 @@
   //   #497be0;
   // background: linear-gradient(252.83deg, #E465A2 2.45%, #7BB3D3 96.72%), #C4C4C4;
   background: linear-gradient(252.83deg, #EA91BD 2.45%, #A6AAFB 96.72%), #C4C4C4;
-
-  @include respond-to("small") {
-    height: 220px;
-  }
 }
 
 .waiting-for-artist-screen {
@@ -918,7 +912,7 @@
   transform: translate(-50%, -50%);
   background: #e7281e;
   @include respond-to("small") {
-    top: 38%;
+    top: 75%;
   }
 }
 
