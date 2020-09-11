@@ -580,6 +580,17 @@
   //right: 0;
 }
 
+.viewers-mobile {
+  display: flex;
+  width: auto;
+  height: 30px;
+  align-items: center;
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  z-index: 10;
+}
+
 // .viewer-count {
 //   //width: 150px;
 //   font-size: 0.9rem;
