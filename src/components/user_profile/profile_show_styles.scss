@@ -1,0 +1,65 @@
+// PROFILE UPCOMING CARD STYLING
+@import "../../styles";
+
+.profile-show-container {
+  position: relative;
+  height: 0;
+  width: 100%;
+  padding-bottom: 100%;
+}
+
+.profile-show-poster {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.profile-show-overlay {
+  z-index: 10;
+  position: relative;
+  display: flex;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+  height: 100%;
+  width: 100%;
+  padding-bottom: 100%;
+  flex-direction: column;
+}
+
+.profile-show-inner {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  //   padding-bottom: 100%;
+}
+
+.show-info {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.profile-show-logistics {
+  margin-top: 18px;
+}
+
+.show-action-buttons {
+  position: absolute;
+  //   margin-top: auto;
+  //   margin-bottom: 15px;
+  bottom: 0;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.attend-button {
+  margin-right: 8.5px;
+}
+
+.invite-button {
+  margin-left: 8.5px;
+}
