@@ -19,7 +19,7 @@
 
 .one-row-grid {
   width: 100%;
-  height: 233px;
+  height: auto;
   overflow: hidden;
   position: relative;
 }
@@ -47,7 +47,7 @@
   position: absolute;
   right: 0px;
   top: 0px;
-  height: 233px;
+  bottom: 0px;
   background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
@@ -70,9 +70,10 @@
   opacity: 1;
   cursor: pointer;
   position: absolute;
-  height: 233px;
+  // height: 233px;
   left: 0px !important;
   top: 0px;
+  bottom: 0px;
   background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
@@ -92,7 +93,7 @@
 }
 
 .element-stub-wrapper {
-  width: 233px;
+  width: 257px;
   position: relative;
 
   & .element-stub-title {
