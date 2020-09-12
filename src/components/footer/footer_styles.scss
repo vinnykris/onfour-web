@@ -5,6 +5,7 @@
   background:#07070f;
   width: 100%;
   padding: 60px 10px 10px 10px;
+  
   margin-top: -1px;
   @include respond-to("small") {
     padding-top: 15px;
@@ -19,7 +20,7 @@
 .footer-container h3 {
   margin-top: 10px;
   color: #eaeaea;
-  text-align: right;
+  text-align: left;
   font-size: 17px;
   font-weight: $semimedium-weight;
 }
@@ -49,13 +50,14 @@
 
 .footer-links ul {
   list-style: none;
-  text-align: right;
+  text-align: left;
   padding-left: 0;
   font-size: 16px;
 }
 
 .footer-links li {
   display: block;
+  line-height: 1.8;
 }
 
 .footer-links li a {
@@ -92,6 +94,7 @@
   height: 80px;
   width: 80px;
   position: relative;
+  
 }
 
 .onfour-logo-footer {
@@ -108,7 +111,14 @@
   height: 43px;
   // left: -25%;
 }
-
+.onfour-logo-subheading{
+  margin-top: 10px;
+  color: #eaeaea;
+  text-align: right;
+  font-size: 17px;
+  padding-top: 1px;
+  font-weight: $semimedium-weight; 
+}
 .hidden-text {
   height: 1px;
   width: 1px;

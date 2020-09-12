@@ -10,7 +10,7 @@ import { useWindowDimensions } from "../custom_hooks";
 import "./footer_styles.scss";
 
 // Images
-import white_logo from "../../images/logos/white-full-logo.png";
+import white_logo from "../../images/logos/logo-pink.png";
 
 //AWS
 import { Analytics } from "aws-amplify";
@@ -45,7 +45,80 @@ const Footer = () => {
         <div className="footer-container">
           <Grid className="footer-grid">
             <Row>
-              <Col size={1}></Col>
+              <Col size={2}></Col>
+              <Col size={3}>
+              <div className="footer-logo-container">
+                  <img
+                    className="onfour-logo-footer"
+                    src={white_logo}
+                    width="auto"
+                    alt="nav-logo"
+                  ></img>
+                </div>
+                
+              </Col>
+            </Row>
+            <Row>
+              <Col size={0.5}></Col>
+              <Col size={1}>
+              <div className="onfour-logo-subheading">
+                  <h3>Experience Music Together</h3>
+                </div>
+              </Col>
+            </Row>
+            
+            
+            <Row>
+            
+              <Col size={1.8}>
+                <div className="footer-links">
+                  <h3>Explore</h3>
+                  <ul>
+                    <li>
+                      <a href="/about" >
+                        About Us
+                      </a>
+                    </li>
+                  
+                    <li>
+                      <a href="/artiststream"
+                      >
+                      Stream
+                      </a>
+                      </li>
+                    <li>
+                      <a href="/upcoming">
+                      Upcoming
+                      </a>
+                      </li>
+                  </ul>
+                </div>
+                </Col>
+                <Col size={0}>
+              </Col>
+                <Col size={2}>
+                <div className="footer-links">
+                  <h3>Legal</h3>
+                  <ul>
+                  <li>
+                      <NavLink to="/terms-of-service" className="privacy-link">
+                        Terms of Service
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/privacy-policy" className="privacy-link">
+                        Privacy Policy
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/ticket-agreement" className="privacy-link">
+                        Ticket Agreement
+                      </NavLink>
+                    </li>
+                  </ul>
+                </div>
+              </Col>
+              {/* <Col size={1}></Col>
               <Col size={5}>
                 <div className="footer-logo-container">
                   <img
@@ -55,11 +128,12 @@ const Footer = () => {
                     alt="nav-logo"
                   ></img>
                 </div>
+              </Col> */}
+              <Col size={0}>
               </Col>
-              <Col size={1}></Col>
-              <Col size={3}>
+              <Col size={2}>
                 <div className="footer-links">
-                  <h3>Quick Links</h3>
+                  <h3>Collaborate</h3>
                   <ul>
                     <li>
                       <a
@@ -70,10 +144,18 @@ const Footer = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Contact Us
+                        onfour.box@gmail.com
                       </a>
                     </li>
                     <li>
+                      <a
+                       
+                      href="tel:+496170961709"
+                      >
+                        123.356.2356
+                      </a>
+                    </li>
+                    {/* <li>
                       <NavLink to="/privacy-policy" className="privacy-link">
                         Privacy Policy
                       </NavLink>
@@ -87,7 +169,7 @@ const Footer = () => {
                       <NavLink to="/ticket-agreement" className="privacy-link">
                         Ticket Agreement
                       </NavLink>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </Col>
