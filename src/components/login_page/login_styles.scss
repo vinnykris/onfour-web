@@ -7,6 +7,10 @@
   width: 100%;
   margin-top: -1px;
   height: calc(100vh - 49px);
+  @include respond-to("small") {
+    height: calc(100vh - 61px);
+    max-height: calc(100vh - 61px);
+  }
 }
 
 .signin-form {
@@ -14,6 +18,10 @@
   flex-direction: column;
   width: 360px;
   margin: auto;
+  @include respond-to("small") {
+    width: 100%;
+    margin: auto 30px;
+  }
 }
 
 .form-section {
@@ -52,12 +60,18 @@
   // text-align: center;
   color: $on-surface-medium !important;
   margin-bottom: 16px;
+  @include respond-to("small") {
+    color: $on-surface-disable !important;
+  }
 }
 
 .signin-header-color {
   // display: flex;
   color: $primary-color !important;
   margin-bottom: 16px;
+  @include respond-to("small") {
+    margin-bottom: 10px;
+  }
 }
 
 .processing-message {

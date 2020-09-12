@@ -18,6 +18,9 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  @include respond-to("small") {
+    background: #07070f;
+  }
 }
 
 .register-form-container {

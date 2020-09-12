@@ -130,8 +130,8 @@ const NavBar = () => {
   // Function to sign out the user
   const signOutMobile = () => {
     signOut();
-    setShowMobileLogin(false);
-    closeMenu("nav-signout");
+    toggleMenu("nav-menu");
+    //closeMenu("nav-signout");
   };
 
   // Function to leave video chat for desktop version
@@ -215,13 +215,27 @@ const NavBar = () => {
                     </NavLink>
                   </div>
                 ) : (
-                  <NavLink
-                    to="/profile"
-                    className="header-8 mobile-nav-page"
-                    onClick={() => toggleMenu("nav-menu")}
-                  >
-                    Profile
-                  </NavLink>
+                  <div>
+                    <NavLink
+                      to="/profile"
+                      className="header-8 mobile-nav-page"
+                      onClick={() => toggleMenu("nav-menu")}
+                    >
+                      Profile
+                    </NavLink>
+                    <NavLink
+                      to={{
+                        pathname: "/register",
+                        state: { current: location },
+                      }}
+                      className="mobile-sign-up-container"
+                      onClick={signOutMobile}
+                    >
+                      <div className="primary-button mobile-login-button button-text">
+                        Sign Out
+                      </div>
+                    </NavLink>
+                  </div>
                 )}
               </div>
             </Grid>

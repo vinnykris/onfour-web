@@ -60,6 +60,9 @@ input[type="email"]:not([value=""]):not(:valid) ~ .floating-label {
     -webkit-filter: brightness(0.5);
     filter: brightness(0.5);
   }
+  @include respond-to("small") {
+    top: 16px;
+  }
 }
 
 input:-webkit-autofill,
@@ -92,6 +95,9 @@ select:-webkit-autofill:focus {
   &:focus {
     border: none;
     border-bottom: 1px solid $primary-color;
+  }
+  @include respond-to("small") {
+    min-height: 45px;
   }
 }
 
