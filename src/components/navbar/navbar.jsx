@@ -26,7 +26,7 @@ import history from "../../history";
 import new_logo_white from "../../images/logos/new_logo_white.png";
 import login_icon from "../../images/icons/login.png";
 import desktop_icon from "../../images/logos/navbar-logo-pink.png";
-import mobile_icon from "../../images/logos/logo-pink.png";
+import mobile_icon from "../../images/logos/mobile-logo-pink.png";
 
 // Styles imports
 import "./navbar_styles.scss";
