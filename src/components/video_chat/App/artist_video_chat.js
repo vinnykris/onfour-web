@@ -247,7 +247,7 @@ export default function VideoChatApp({
       } else if (appState === STATE_JOINED) {
         setTimeout(() => {
           startLeavingCall();
-        }, 8000);
+        }, 5000);
       }
     }
   })
