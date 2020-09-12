@@ -6,6 +6,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 import { Row, Col } from "../grid";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
+import OneRowGrid from "../one_row_grid/one_row_grid";
 import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.png";
 
 import CreateCrewModal from "./create_crew_modal";
@@ -155,6 +156,8 @@ const DashboardPage = ({
    * @returns {boolean} true if there's overflow and false if not.
    */
   const checkIfSliderIsOverflowing = () => {
+    console.log(sliderContainerRef.current.clientWidth);
+    console.log(sliderContainerRef.current.scrollWidth);
     if (
       sliderContainerRef.current.clientWidth <
       sliderContainerRef.current.scrollWidth
@@ -231,6 +234,7 @@ const DashboardPage = ({
   }, []);
 
   useEffect(() => {
+    console.log(sliderContainerRef.current);
     if (
       !sliderCalcFirstRun &&
       sliderContainerRef.current &&
@@ -266,11 +270,10 @@ const DashboardPage = ({
                 </Col>
               </Row>
               <Row>
-                <Col size={1}>
+                <Col size={1} className="profile-upcoming-concerts-column">
                   {width <= 600 ? (
-                    <FlexibleGrid
+                    <OneRowGrid
                       content_list={upcoming_concerts}
-                      num_cols={1}
                     />
                   ) : (
                     <div>
@@ -308,9 +311,9 @@ const DashboardPage = ({
                     </Col>
                   </Row>
                   <Row>
-                    <Col size={1}>
+                    <Col size={1} className="memories-column">
                       {width <= 600 ? (
-                        <FlexibleGrid content_list={memories} num_cols={1} />
+                        <OneRowGrid content_list={memories} />
                       ) : (
                         <div>
                           {width < 1280 ? (
@@ -367,7 +370,7 @@ const DashboardPage = ({
                 </Col>
               </Row>
               {memories.length > 0 ? (
-                <div>
+                <div className="memories-container">
                   <Row>
                     <Col size={1}>
                       <h4 className="profile-preview-content-header header-5">
@@ -376,9 +379,9 @@ const DashboardPage = ({
                     </Col>
                   </Row>
                   <Row>
-                    <Col size={1}>
+                    <Col size={1} className="memories-column">
                       {width <= 600 ? (
-                        <FlexibleGrid content_list={memories} num_cols={1} />
+                        <OneRowGrid content_list={memories} />
                       ) : (
                         <div>
                           {width < 1280 ? (
