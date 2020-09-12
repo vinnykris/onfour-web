@@ -281,19 +281,19 @@ const DashboardPage = ({
                         <div>
                           {width <= 768 ? (
                             <FlexibleGrid
-                              content_list={upcoming_concerts}
+                              content_list={upcoming_concerts.slice(0, 3)}
                               num_cols={3}
                             />
                           ) : (
                             <FlexibleGrid
-                              content_list={upcoming_concerts}
+                              content_list={upcoming_concerts.slice(0, 4)}
                               num_cols={4}
                             />
                           )}
                         </div>
                       ) : (
                         <FlexibleGrid
-                          content_list={upcoming_concerts}
+                          content_list={upcoming_concerts.slice(0, 4)}
                           num_cols={4}
                         />
                       )}
@@ -320,19 +320,19 @@ const DashboardPage = ({
                             <div>
                               {width <= 768 ? (
                                 <FlexibleGrid
-                                  content_list={memories}
+                                  content_list={memories.slice(0, 3)}
                                   num_cols={3}
                                 />
                               ) : (
                                 <FlexibleGrid
-                                  content_list={memories}
+                                  content_list={memories.slice(0, 4)}
                                   num_cols={4}
                                 />
                               )}
                             </div>
                           ) : (
                             <FlexibleGrid
-                              content_list={memories}
+                              content_list={memories.slice(0, 4)}
                               num_cols={4}
                             />
                           )}
@@ -388,19 +388,19 @@ const DashboardPage = ({
                             <div>
                               {width <= 768 ? (
                                 <FlexibleGrid
-                                  content_list={memories}
+                                  content_list={memories.slice(0, 3)}
                                   num_cols={3}
                                 />
                               ) : (
                                 <FlexibleGrid
-                                  content_list={memories}
+                                  content_list={memories.slice(0, 4)}
                                   num_cols={4}
                                 />
                               )}
                             </div>
                           ) : (
                             <FlexibleGrid
-                              content_list={memories}
+                              content_list={memories.slice(0, 4)}
                               num_cols={4}
                             />
                           )}

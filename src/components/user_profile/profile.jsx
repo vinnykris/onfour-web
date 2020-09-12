@@ -77,12 +77,12 @@ const Profile = (props) => {
       const upcoming_result = results[0];
       const memories_result = results[1];
       const ticket_stubs = results[2];
-      setUpcomingConcerts(upcoming_result.slice(0, 5));
+      setUpcomingConcerts(upcoming_result);
       // setStubs(getStubs);
       setStubs(ticket_stubs);
       // Archive videos (sorting from most recent -> oldest)
       // const memories_result = await getMemories(variables.username);
-      setMemories(memories_result.slice(0, 4));
+      setMemories(memories_result);
       setIsLoaded(true);
     };
     fetchData();
