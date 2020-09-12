@@ -226,13 +226,23 @@ function VideoPlayer({
     <div className="countdown-wrapper">
       {timer_placeholder.length ? (
         <div className="waiting-screen">
-          <div className="waiting-message-container">
-            <h3 className="header-3">Next Stream Coming Soon</h3>
-            {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
-            <h5 className="header-5">
-              {artist_name} - {concert_name}
-            </h5>
-          </div>
+          {width <= 600 ? (
+            <div className="waiting-message-container">
+              <h3 className="header-4">Next Stream Coming Soon</h3>
+              {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
+              <h5 className="header-7">
+                {artist_name} - {concert_name}
+              </h5>
+            </div>
+          ) : (
+            <div className="waiting-message-container">
+              <h3 className="header-3">Next Stream Coming Soon</h3>
+              {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
+              <h5 className="header-5">
+                {artist_name} - {concert_name}
+              </h5>
+            </div>
+          )}
           <div className="countdown-component-wrapper">
             <Grid>
               <Row>{timer_components}</Row>

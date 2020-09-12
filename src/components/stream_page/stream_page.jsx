@@ -590,7 +590,6 @@ const StreamPage = ({ is_soundcheck }) => {
                                   </div>
                                 </div>
                               </div>
-
                               <div className="feedback-container">
                                 <a
                                   onClick={() =>
@@ -926,6 +925,17 @@ const StreamPage = ({ is_soundcheck }) => {
               <div className="main-column-mobile">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
+                    <div className="viewers-mobile">
+                      <div className="viewers-container">
+                        <img
+                          src={viewers_icon}
+                          className="stream-action-viewers"
+                        />
+                        <div className="segmented-button-text viewer-count">
+                          {viewers}
+                        </div>
+                      </div>
+                    </div>
                     {is_free ||
                     (purchasedTickets &&
                       purchasedTickets.indexOf(concert_id)) >= 0 ? (
@@ -986,6 +996,15 @@ const StreamPage = ({ is_soundcheck }) => {
                     )}
                   </div>
                 </div>
+                <div className="chat-main-mobile">
+                  <div className="chat-wrapper-mobile">
+                    <Chat
+                      chat_name={username ? username : "GUEST"}
+                      chatStatus={chatStatus}
+                      setViewers={getViewers}
+                    />
+                  </div>
+                </div>
                 <div className="payment-row-mobile">
                   <button
                     className="stripe-button-border mobile-payment-button button-text"
@@ -997,15 +1016,6 @@ const StreamPage = ({ is_soundcheck }) => {
                     DONATE
                   </button>
                   {/* <Modal isOpen={false}></Modal> */}
-                </div>
-                <div className="chat-main-mobile">
-                  <div className="chat-wrapper-mobile">
-                    <Chat
-                      chat_name={username ? username : "GUEST"}
-                      chatStatus={chatStatus}
-                      setViewers={getViewers}
-                    />
-                  </div>
                 </div>
               </div>
             </div>

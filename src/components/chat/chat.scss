@@ -241,6 +241,7 @@ button:focus {
 
   @include respond-to("small") {
     min-height: 50px;
+    padding: 13px 13px 0px 13px;
   }
 }
 
