@@ -481,7 +481,7 @@ const DashboardPage = ({
                     <ScaleLoader
                       sizeUnit="px"
                       size={18}
-                      color="#7b6dac"
+                      color="#e465a2"
                       loading={loadingCrews}
                     />
                   </div>
