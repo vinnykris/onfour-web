@@ -21,10 +21,11 @@
   background: #07070F;
   padding-left: 3%;
   padding-right: 3%;
-  padding-top: 40px;
+  padding-top: 25px;
   @include respond-to("small") {
     padding-left: 4%;
     padding-right: 4%;
+    padding-top: 15px;
   }
 }
 
