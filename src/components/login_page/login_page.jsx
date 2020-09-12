@@ -184,18 +184,18 @@ const Login = (props) => {
                     LOG IN
                   </button>
                   <p className="forgot-footer">
-                    <a href="/forgot" className="header-7 signin-link">
+                    <a href="/forgot" className="body-2 signin-link">
                       Forgot Password?
                     </a>
                   </p>
-                  <div className="header-7 signin-text-color">
+                  <div className="body-2 signin-text-color">
                     Don't have an account?{" "}
                     <NavLink
                       to={{
                         pathname: "/register",
                         state: { current: from_path },
                       }}
-                      className="header-7 signin-link"
+                      className="body-2 signin-link"
                     >
                       Sign up
                     </NavLink>

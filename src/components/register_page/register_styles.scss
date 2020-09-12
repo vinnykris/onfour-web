@@ -7,6 +7,10 @@
   width: 100%;
   margin-top: -1px;
   height: calc(100vh - 49px);
+  @include respond-to("small") {
+    height: calc(100vh - 61px);
+    max-height: calc(100vh - 61px);
+  }
 }
 
 .form-section {
@@ -34,11 +38,15 @@
   flex-direction: column;
   width: 360px;
   margin: auto;
+  @include respond-to("small") {
+    width: 100%;
+    margin: auto 30px;
+  }
 }
 
 .register-button-container {
   width: 100%;
-  margin-bottom: 35px;
+  margin-bottom: 13px;
   // display: flex;
   // flex-direction: row;
 }
@@ -89,6 +97,11 @@
   margin: 0;
   padding: 0;
   margin-top: 28px;
+  @include respond-to("small") {
+    height: 45px;
+    width: calc(50% - 5px);
+    margin-top: 20px;
+  }
 }
 
 .fan-submit-button {
@@ -99,6 +112,9 @@
   // font-weight: 420;
   // background-color: #794d94;
   float: right;
+  // @include respond-to("small") {
+  //   margin-left: 5px;
+  // }
 }
 
 .artist-submit-button {
@@ -108,6 +124,9 @@
   // font-weight: 420;
   // background-color: #794d94;
   float: left;
+  // @include respond-to("small") {
+  //   margin-right: 5px;
+  // }
 }
 
 .sign-up-message {

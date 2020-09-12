@@ -9,6 +9,7 @@ import ReactTooltip from "react-tooltip";
 // Components
 import { Grid, Row, Col } from "../grid";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { useWindowDimensions } from "../custom_hooks";
 
 // GraphQL
 import * as mutations from "../../graphql/mutations";
@@ -50,6 +51,8 @@ const Register = (props) => {
   const [is_artist, setIsArtist] = useState(false); // Tracks if user signing up is a musician or a fan
   const [from_path, setFromPath] = useState(null);
   const state = props.location.state;
+
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   useEffect(() => {
     if (state) {
@@ -293,198 +296,401 @@ const Register = (props) => {
                     </div>
                   ) : (
                     <div className="register-form-container">
-                      <form
-                        className="register-form"
-                        action="/"
-                        id="register"
-                        onSubmit={registerSubmit}
-                      >
-                        <div className="login-form-container">
-                          <div className="header-3 signin-header-color">
-                            Sign Up
-                          </div>
-                          <div className="signup-header">
-                            <div className="header-7 register-text-color">
-                              Join the onfour experience below
+                      {width > 600 ? (
+                        <form
+                          className="register-form"
+                          action="/"
+                          id="register"
+                          onSubmit={registerSubmit}
+                        >
+                          <div className="login-form-container">
+                            <div className="header-3 signin-header-color">
+                              Sign Up
                             </div>
-                          </div>
-                          <div className="register-input-container">
-                            <InputOne
-                              id="first_slot"
-                              type="text"
-                              name="full-name"
-                              is_required={true}
-                              placeholder="Full Name"
-                              value={first}
-                              onChange={(event) => setFirst(event.target.value)}
-                            />
-                          </div>
-                          <div className="register-input-container">
-                            <InputOne
-                              id="username_slot"
-                              type="text"
-                              name="username"
-                              is_required={true}
-                              placeholder="Username"
-                              value={username}
-                              onChange={(event) =>
-                                setUsername(event.target.value)
-                              }
-                            />
-                          </div>
-                          <div className="register-input-container">
-                            <InputOne
-                              id="email_slot"
-                              type="email"
-                              name="email"
-                              is_required={true}
-                              placeholder="Email"
-                              value={email}
-                              onChange={(event) => setEmail(event.target.value)}
-                            />
-                          </div>
-                          <div
-                            className="register-input-container"
-                            data-tip
-                            data-for="registerTip"
-                          >
-                            <InputOne
-                              id="password_slot"
-                              type="password"
-                              name="password"
-                              is_required={true}
-                              placeholder="Password"
-                              value={password}
-                              onChange={(event) =>
-                                setPassword(event.target.value)
-                              }
-                              is_password={true}
-                            />
-                          </div>
-                          <ReactTooltip
-                            id="registerTip"
-                            place="left"
-                            effect="solid"
-                          >
-                            <p className="password-tooltip-white">
-                              Your password must contain the following:
-                            </p>
-                            <p className="password-suggestion-bullets">
-                              {password.length > 7 ? (
-                                <i className="fa fa-check green-password-suggestion"></i>
-                              ) : (
-                                <i className="fa fa-times red-password-suggestion"></i>
-                              )}
-                              <text
-                                className={
-                                  password.length > 7
-                                    ? "green-password-suggestion"
-                                    : "red-password-suggestion"
+                            <div className="signup-header">
+                              <div className="header-7 register-text-color">
+                                Join the onfour experience below
+                              </div>
+                            </div>
+                            <div className="register-input-container">
+                              <InputOne
+                                id="first_slot"
+                                type="text"
+                                name="full-name"
+                                is_required={true}
+                                placeholder="Full Name"
+                                value={first}
+                                onChange={(event) =>
+                                  setFirst(event.target.value)
                                 }
-                              >
-                                {" "}
-                                8 or more characters
-                              </text>
-                            </p>
-                            <br></br>
-                            <p className="password-suggestion-bullets">
-                              {containsUppercaseAndLowercase(password) ? (
-                                <i className="fa fa-check green-password-suggestion"></i>
-                              ) : (
-                                <i className="fa fa-times red-password-suggestion"></i>
-                              )}
-                              <text
-                                className={
-                                  containsUppercaseAndLowercase(password)
-                                    ? "green-password-suggestion"
-                                    : "red-password-suggestion"
+                              />
+                            </div>
+                            <div className="register-input-container">
+                              <InputOne
+                                id="username_slot"
+                                type="text"
+                                name="username"
+                                is_required={true}
+                                placeholder="Username"
+                                value={username}
+                                onChange={(event) =>
+                                  setUsername(event.target.value)
                                 }
-                              >
-                                {" "}
-                                Uppercase and lowercase letters
-                              </text>
-                            </p>
-                            <br></br>
-                            <p className="password-suggestion-bullets">
-                              {containsNumber(password) ? (
-                                <i className="fa fa-check green-password-suggestion"></i>
-                              ) : (
-                                <i className="fa fa-times red-password-suggestion"></i>
-                              )}
-                              <text
-                                className={
-                                  containsNumber(password)
-                                    ? "green-password-suggestion"
-                                    : "red-password-suggestion"
+                              />
+                            </div>
+                            <div className="register-input-container">
+                              <InputOne
+                                id="email_slot"
+                                type="email"
+                                name="email"
+                                is_required={true}
+                                placeholder="Email"
+                                value={email}
+                                onChange={(event) =>
+                                  setEmail(event.target.value)
                                 }
-                              >
-                                {" "}
-                                At least 1 number
-                              </text>
-                            </p>
-                            <br></br>
-                            <p className="password-suggestion-bullets">
-                              {containsSpecialCharacter(password) ? (
-                                <i className="fa fa-check green-password-suggestion"></i>
-                              ) : (
-                                <i className="fa fa-times red-password-suggestion"></i>
-                              )}
-                              <text
-                                className={
-                                  containsSpecialCharacter(password)
-                                    ? "green-password-suggestion"
-                                    : "red-password-suggestion"
+                              />
+                            </div>
+                            <div
+                              className="register-input-container"
+                              data-tip
+                              data-for="registerTip"
+                            >
+                              <InputOne
+                                id="password_slot"
+                                type="password"
+                                name="password"
+                                is_required={true}
+                                placeholder="Password"
+                                value={password}
+                                onChange={(event) =>
+                                  setPassword(event.target.value)
                                 }
-                              >
-                                {" "}
-                                At least 1 special character
-                              </text>
-                            </p>
-                          </ReactTooltip>
-                        </div>
-                        <div className="email-subscribe-prompt">
-                          <input
-                            className="email-unsubscribe-checkbox"
-                            name="isGoing"
-                            type="checkbox"
-                            checked={checked}
-                            onChange={(event) => setChecked(!checked)}
-                          />
-                          <label className="header-8 register-text-color">
-                            I want to receive email updates about future onfour
-                            shows.
-                          </label>
-                        </div>
-                        <div style={{ color: "red" }}>{error}</div>
-                        <div className="register-button-container">
-                          <button
-                            className="primary-button button-text register-submit-button fan-submit-button"
-                            type="submit"
-                            form="register"
-                            value="FanSubmit"
-                            onClick={setFanOption}
-                          >
-                            I'M A FAN
-                          </button>
-                          <button
-                            className="primary-button button-text register-submit-button artist-submit-button"
-                            type="submit"
-                            form="register"
-                            value="ArtistSubmit"
-                            onClick={setArtistOption}
-                          >
-                            I'M AN ARTIST
-                          </button>
-                        </div>
+                                is_password={true}
+                              />
+                            </div>
+                            <ReactTooltip
+                              id="registerTip"
+                              place="left"
+                              effect="solid"
+                            >
+                              <p className="password-tooltip-white">
+                                Your password must contain the following:
+                              </p>
+                              <p className="password-suggestion-bullets">
+                                {password.length > 7 ? (
+                                  <i className="fa fa-check green-password-suggestion"></i>
+                                ) : (
+                                  <i className="fa fa-times red-password-suggestion"></i>
+                                )}
+                                <text
+                                  className={
+                                    password.length > 7
+                                      ? "green-password-suggestion"
+                                      : "red-password-suggestion"
+                                  }
+                                >
+                                  {" "}
+                                  8 or more characters
+                                </text>
+                              </p>
+                              <br></br>
+                              <p className="password-suggestion-bullets">
+                                {containsUppercaseAndLowercase(password) ? (
+                                  <i className="fa fa-check green-password-suggestion"></i>
+                                ) : (
+                                  <i className="fa fa-times red-password-suggestion"></i>
+                                )}
+                                <text
+                                  className={
+                                    containsUppercaseAndLowercase(password)
+                                      ? "green-password-suggestion"
+                                      : "red-password-suggestion"
+                                  }
+                                >
+                                  {" "}
+                                  Uppercase and lowercase letters
+                                </text>
+                              </p>
+                              <br></br>
+                              <p className="password-suggestion-bullets">
+                                {containsNumber(password) ? (
+                                  <i className="fa fa-check green-password-suggestion"></i>
+                                ) : (
+                                  <i className="fa fa-times red-password-suggestion"></i>
+                                )}
+                                <text
+                                  className={
+                                    containsNumber(password)
+                                      ? "green-password-suggestion"
+                                      : "red-password-suggestion"
+                                  }
+                                >
+                                  {" "}
+                                  At least 1 number
+                                </text>
+                              </p>
+                              <br></br>
+                              <p className="password-suggestion-bullets">
+                                {containsSpecialCharacter(password) ? (
+                                  <i className="fa fa-check green-password-suggestion"></i>
+                                ) : (
+                                  <i className="fa fa-times red-password-suggestion"></i>
+                                )}
+                                <text
+                                  className={
+                                    containsSpecialCharacter(password)
+                                      ? "green-password-suggestion"
+                                      : "red-password-suggestion"
+                                  }
+                                >
+                                  {" "}
+                                  At least 1 special character
+                                </text>
+                              </p>
+                            </ReactTooltip>
+                          </div>
+                          <div className="email-subscribe-prompt">
+                            <input
+                              className="email-unsubscribe-checkbox"
+                              name="isGoing"
+                              type="checkbox"
+                              checked={checked}
+                              onChange={(event) => setChecked(!checked)}
+                            />
+                            <label className="header-8 register-text-color">
+                              I want to receive email updates about future
+                              onfour shows.
+                            </label>
+                          </div>
+                          <div style={{ color: "red" }}>{error}</div>
+                          <div className="register-button-container">
+                            <button
+                              className="primary-button mobile-button-text register-submit-button fan-submit-button"
+                              type="submit"
+                              form="register"
+                              value="FanSubmit"
+                              onClick={setFanOption}
+                            >
+                              I'M A FAN
+                            </button>
+                            <button
+                              className="primary-button mobile-button-text register-submit-button artist-submit-button"
+                              type="submit"
+                              form="register"
+                              value="ArtistSubmit"
+                              onClick={setArtistOption}
+                            >
+                              I'M AN ARTIST
+                            </button>
+                          </div>
 
-                        <div className="header-7 signup-footer register-text-color">
-                          Already have an account?{" "}
-                          <a href="/login" className="header-7 signin-link">
-                            Log in
-                          </a>
-                          .
-                        </div>
-                      </form>
+                          <div className="header-7 signup-footer register-text-color">
+                            Already have an account?{" "}
+                            <a href="/login" className="header-7 signin-link">
+                              Log in
+                            </a>
+                            .
+                          </div>
+                        </form>
+                      ) : (
+                        <form
+                          className="register-form"
+                          action="/"
+                          id="register"
+                          onSubmit={registerSubmit}
+                        >
+                          <div className="login-form-container">
+                            <div className="header-4 signin-header-color">
+                              Sign Up
+                            </div>
+                            <div className="signup-header">
+                              <div className="subtitle-3 register-text-color">
+                                Join the onfour experience
+                              </div>
+                            </div>
+                            <div className="register-input-container">
+                              <InputOne
+                                id="first_slot"
+                                type="text"
+                                name="full-name"
+                                is_required={true}
+                                placeholder="Full Name"
+                                value={first}
+                                onChange={(event) =>
+                                  setFirst(event.target.value)
+                                }
+                              />
+                            </div>
+                            <div className="register-input-container">
+                              <InputOne
+                                id="username_slot"
+                                type="text"
+                                name="username"
+                                is_required={true}
+                                placeholder="Username"
+                                value={username}
+                                onChange={(event) =>
+                                  setUsername(event.target.value)
+                                }
+                              />
+                            </div>
+                            <div className="register-input-container">
+                              <InputOne
+                                id="email_slot"
+                                type="email"
+                                name="email"
+                                is_required={true}
+                                placeholder="Email"
+                                value={email}
+                                onChange={(event) =>
+                                  setEmail(event.target.value)
+                                }
+                              />
+                            </div>
+                            <div
+                              className="register-input-container"
+                              data-tip
+                              data-for="registerTip"
+                            >
+                              <InputOne
+                                id="password_slot"
+                                type="password"
+                                name="password"
+                                is_required={true}
+                                placeholder="Password"
+                                value={password}
+                                onChange={(event) =>
+                                  setPassword(event.target.value)
+                                }
+                                is_password={true}
+                              />
+                            </div>
+                            <ReactTooltip
+                              id="registerTip"
+                              place="left"
+                              effect="solid"
+                            >
+                              <p className="password-tooltip-white">
+                                Your password must contain the following:
+                              </p>
+                              <p className="password-suggestion-bullets">
+                                {password.length > 7 ? (
+                                  <i className="fa fa-check green-password-suggestion"></i>
+                                ) : (
+                                  <i className="fa fa-times red-password-suggestion"></i>
+                                )}
+                                <text
+                                  className={
+                                    password.length > 7
+                                      ? "green-password-suggestion"
+                                      : "red-password-suggestion"
+                                  }
+                                >
+                                  {" "}
+                                  8 or more characters
+                                </text>
+                              </p>
+                              <br></br>
+                              <p className="password-suggestion-bullets">
+                                {containsUppercaseAndLowercase(password) ? (
+                                  <i className="fa fa-check green-password-suggestion"></i>
+                                ) : (
+                                  <i className="fa fa-times red-password-suggestion"></i>
+                                )}
+                                <text
+                                  className={
+                                    containsUppercaseAndLowercase(password)
+                                      ? "green-password-suggestion"
+                                      : "red-password-suggestion"
+                                  }
+                                >
+                                  {" "}
+                                  Uppercase and lowercase letters
+                                </text>
+                              </p>
+                              <br></br>
+                              <p className="password-suggestion-bullets">
+                                {containsNumber(password) ? (
+                                  <i className="fa fa-check green-password-suggestion"></i>
+                                ) : (
+                                  <i className="fa fa-times red-password-suggestion"></i>
+                                )}
+                                <text
+                                  className={
+                                    containsNumber(password)
+                                      ? "green-password-suggestion"
+                                      : "red-password-suggestion"
+                                  }
+                                >
+                                  {" "}
+                                  At least 1 number
+                                </text>
+                              </p>
+                              <br></br>
+                              <p className="password-suggestion-bullets">
+                                {containsSpecialCharacter(password) ? (
+                                  <i className="fa fa-check green-password-suggestion"></i>
+                                ) : (
+                                  <i className="fa fa-times red-password-suggestion"></i>
+                                )}
+                                <text
+                                  className={
+                                    containsSpecialCharacter(password)
+                                      ? "green-password-suggestion"
+                                      : "red-password-suggestion"
+                                  }
+                                >
+                                  {" "}
+                                  At least 1 special character
+                                </text>
+                              </p>
+                            </ReactTooltip>
+                          </div>
+                          <div className="email-subscribe-prompt">
+                            <input
+                              className="email-unsubscribe-checkbox"
+                              name="isGoing"
+                              type="checkbox"
+                              checked={checked}
+                              onChange={(event) => setChecked(!checked)}
+                            />
+                            <label className="subtitle-3 register-text-color">
+                              I want to receive email updates about future
+                              onfour shows.
+                            </label>
+                          </div>
+                          <div style={{ color: "red" }}>{error}</div>
+                          <div className="register-button-container">
+                            <button
+                              className="primary-button mobile-button-text register-submit-button fan-submit-button"
+                              type="submit"
+                              form="register"
+                              value="FanSubmit"
+                              onClick={setFanOption}
+                            >
+                              I'M A FAN
+                            </button>
+                            <button
+                              className="primary-button mobile-button-text register-submit-button artist-submit-button"
+                              type="submit"
+                              form="register"
+                              value="ArtistSubmit"
+                              onClick={setArtistOption}
+                            >
+                              I'M AN ARTIST
+                            </button>
+                          </div>
+
+                          <div className="body-2 signup-footer register-text-color">
+                            Already have an account?{" "}
+                            <a href="/login" className="body-2 signin-link">
+                              Log in
+                            </a>
+                            .
+                          </div>
+                        </form>
+                      )}
                     </div>
                   )}
                 </div>
