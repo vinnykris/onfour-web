@@ -80,6 +80,10 @@
   margin-top: 16px;
 }
 
+.mobile-footer-link {
+  margin-top: 8px;
+}
+
 .footer-text-body {
   color: $on-surface-medium !important;
 }
@@ -152,6 +156,7 @@
 
 .footer-links li .privacy-link {
   color: #eaeaea;
+  width: 100%;
 }
 
 .onfour-logo-subheading h4{
@@ -162,3 +167,44 @@
   font-weight: $semimedium-weight;
 
 }
+
+.mobile-footer {
+  height: 240px;
+}
+
+.footer-grid {
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-footer-logo-container {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.mobile-onfour-logo-subheading {
+  margin-bottom: 27px;
+  margin-top: 10px;
+}
+
+.mobile-column-title {
+  float: left;
+}
+
+.mobile-footer-link-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+}
+
+.mobile-footer-column-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 43px;
+}
+
+.last-mobile-footer-column-content {
+  margin-left: 20px;
+}
+
