@@ -5,7 +5,12 @@ import React, { useEffect, useState } from "react";
 import "./countdown_timer_styles.scss";
 import { Grid, Row, Col } from "../grid";
 
-function CountdownTimer({ start_date, start_time, time_up_message }) {
+function CountdownTimer({
+  start_date,
+  start_time,
+  time_up_message,
+  className,
+}) {
   //const [difference_copy, setDifferenceCopy] = useState(0);
   // This function calculates the time difference between current time and show start time
   // and represent the difference in days, hours, minuts and seconds
@@ -80,9 +85,9 @@ function CountdownTimer({ start_date, start_time, time_up_message }) {
         <Col size={1} className="countdown-timer-block">
           <Row>
             {interval === "SECONDS" ? (
-              <span className="header-1 countdown-timer-number">00</span>
+              <span className={className}>00</span>
             ) : (
-              <span className="header-1 countdown-timer-number">00:</span>
+              <span className={className}>00:</span>
             )}
           </Row>
         </Col>
@@ -92,15 +97,11 @@ function CountdownTimer({ start_date, start_time, time_up_message }) {
         timer_components.push(
           <Col size={1} className="countdown-timer-block">
             <Row>
-              <span className="header-1 countdown-timer-number">
+              <span className={className}>
                 {interval === "SECONDS" ? (
-                  <span className="header-1 countdown-timer-number">
-                    {time_left[interval]}
-                  </span>
+                  <span className={className}>{time_left[interval]}</span>
                 ) : (
-                  <span className="header-1 countdown-timer-number">
-                    {time_left[interval]}:
-                  </span>
+                  <span className={className}>{time_left[interval]}:</span>
                 )}
               </span>
             </Row>
@@ -110,15 +111,11 @@ function CountdownTimer({ start_date, start_time, time_up_message }) {
         timer_components.push(
           <Col size={1} className="countdown-timer-block">
             <Row>
-              <span className="header-1 countdown-timer-number">
+              <span className={className}>
                 {interval === "SECONDS" ? (
-                  <span className="header-1 countdown-timer-number">
-                    0{time_left[interval]}
-                  </span>
+                  <span className={className}>0{time_left[interval]}</span>
                 ) : (
-                  <span className="header-1 countdown-timer-number">
-                    0{time_left[interval]}:
-                  </span>
+                  <span className={className}>0{time_left[interval]}:</span>
                 )}
               </span>
             </Row>

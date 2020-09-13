@@ -142,7 +142,7 @@
   padding: 0px 10px;
   color: rgba(255, 255, 255, 0.6) !important;
   &:hover {
-    color: #626BF7 !important;
+    color: #626bf7 !important;
     border: none;
   }
 }
@@ -169,7 +169,7 @@
   padding: 0px 10px;
   color: rgba(255, 255, 255, 0.6) !important;
   &:hover {
-    color: #626BF7 !important;
+    color: #626bf7 !important;
     border: none;
   }
 }
@@ -193,14 +193,14 @@
 }
 
 .google-calendar-link-text {
-  color: #626BF7 !important;
-  &:hover{
-    color: #2D2ACE !important;
+  color: #626bf7 !important;
+  &:hover {
+    color: #2d2ace !important;
   }
 }
 
 .left-padding-20 {
-  padding-left: 20px;;
+  padding-left: 20px;
 }
 
 .moonloader-container {
@@ -728,6 +728,7 @@ hr.break-modal {
 
 .mobile-concert-page {
   padding: 5px;
+  position: relative;
 }
 
 .mobile-concert-image-wrapper {
@@ -887,4 +888,83 @@ hr.break-modal {
 .crew-invite-modal-crews {
   overflow: overlay;
   max-height: 260px;
+}
+
+.concert-suggestion-color-mobile {
+  color: $primary-color !important;
+}
+
+.concert-description-color-mobile {
+  color: #e3e3e3 !important;
+}
+
+.concert-header-color-mobile {
+  color: #d2d2d2 !important;
+}
+
+.concert-timing-color-mobile {
+  color: $on-background !important;
+  text-shadow: 1px 0px 1px rgba(136, 136, 136, 0.38),
+    -1px 0px 1px rgba(136, 136, 136, 0.38),
+    0px 1px 1px rgba(136, 136, 136, 0.38),
+    0px -1px 1px rgba(136, 136, 136, 0.38) !important;
+}
+
+.concert-details-section-mobile {
+  margin: auto;
+  text-align: left;
+  width: 90%;
+}
+
+.concert-details-spacing-mobile {
+  margin-bottom: 10px;
+}
+
+.share-section-mobile {
+  margin-bottom: 75px;
+  align-items: center;
+}
+
+.share-text-mobile {
+  color: $on-background !important;
+  text-shadow: 1px 0px 1px rgba(136, 136, 136, 0.38),
+    -1px 0px 1px rgba(136, 136, 136, 0.38),
+    0px 1px 1px rgba(136, 136, 136, 0.38),
+    0px -1px 1px rgba(136, 136, 136, 0.38) !important;
+  margin-right: 20px;
+}
+
+.concert-page-featured-mobile {
+  width: 100%;
+  object-fit: cover;
+  height: calc(100vw * 0.55);
+}
+
+.concert-page-overlay-mobile {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(100vw * 0.6);
+  background: linear-gradient(180deg, rgba(7, 7, 15, 0) 0%, #07070f 94.06%);
+}
+
+.timer-row-mobile {
+  justify-content: center;
+}
+
+.concert-timer-color-mobile {
+  color: #d2d2d2 !important;
+}
+
+.full-width-button {
+  width: 100%;
+}
+
+.disabled-venue-button {
+  width: 100%;
+  background-color: #b4b3b3;
+  color: rgb(133, 133, 133);
+  cursor: default;
 }
