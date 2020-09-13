@@ -1,0 +1,199 @@
+@import "../../styles";
+// ONE ROW GRID STYLING
+
+.black-element {
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+}
+
+.black-element:first-child {
+  padding-left: 0;
+  padding-right: 7.5px;
+}
+
+.black-element:last-child {
+  padding-left: 7.5px;
+  padding-right: 0;
+}
+
+
+.one-row-grid {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.user-elements-column {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+}
+
+.elements-container {
+  position: relative;
+  max-width: 100%;
+}
+
+.fixed-element-navigation-button {
+  visibility: visible;
+  opacity: 1;
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+
+  & > svg {
+    font-size: 50px !important;
+    margin-top: 91.5px;
+
+    & > path {
+      color: white;
+    }
+  }
+}
+
+.fixed-element-navigation-button-left {
+  visibility: visible;
+  opacity: 1;
+  cursor: pointer;
+  position: absolute;
+  // height: 233px;
+  left: 0px !important;
+  top: 0px;
+  bottom: 0px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(2, 0, 36, 0) 100%
+  ) !important;
+  z-index: 1;
+
+  & > svg {
+    font-size: 50px !important;
+    margin-top: 91.5px;
+
+    & > path {
+      color: white;
+    }
+  }
+}
+
+.element-stub-wrapper {
+  width: 257px;
+  position: relative;
+
+  & .element-stub-title {
+    height: 39px;
+    text-align: left;
+    margin-top: 15px;
+
+    & > p {
+      font-family: $exo2;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 23px;
+      line-height: 28px;
+      display: flex;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.87);
+      opacity: 0.6;
+      width: 90%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      margin: 0px auto;
+    }
+  }
+
+  & .element-stub-element-members {
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 200px;
+    align-items: center;
+    justify-content: left;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    align-content: flex-start;
+
+    & .element-stub-member {
+      padding-top: 9px;
+      padding-bottom: 8px;
+      width: 85px;
+      display: block;
+      margin-right: 3px;
+      margin-left: 3px;
+
+      & .element-stub-member-initial {
+        height: 54px !important;
+        width: 54px !important;
+        border-radius: 50%;
+        margin: 0px auto;
+        line-height: 57px;
+        color: white;
+        font-size: 25px;
+      }
+
+      & .element-stub-member-data-username {
+        font-family: $montserrat;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.02em;
+        color: rgba(255, 255, 255, 0.87);
+        width: 90%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin: 0px auto;
+        margin-top: 5px;
+      }
+    }
+
+    & .element-stub-member:nth-child(3) {
+      border-bottom: none !important;
+    }
+  }
+
+  & .element-stub-options {
+    position: absolute;
+    bottom: 0px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    font-family: Helvetica;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 52px;
+    letter-spacing: 0.045em;
+    height: 52px;
+    color: #ffffff;
+    width: 100%;
+    border-top: 1px solid rgba(245, 240, 237, 0.4);
+
+    & > p {
+      text-align: center;
+      color: #ffffff;
+      width: 100%;
+      line-height: 36px;
+    }
+  }
+}
