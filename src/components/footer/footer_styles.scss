@@ -16,7 +16,22 @@
   display: flex;
   flex-direction: column;
 }
+.footer-container h3{
+  margin-top: 10px;
+  color: #eaeaea;
+  text-align: left;
+  font-size: 14px;
+  font-weight: $semimedium-weight;
 
+}
+.footer-container h6{
+  margin-top: 10px;
+  color: #eaeaea;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 400;
+
+}
 .footer-inner-container {
   display: flex;
   flex-direction: row;
@@ -109,4 +124,41 @@
   position: absolute;
   overflow: hidden;
   top: -10px;
+}
+
+
+.footer-links {
+  float: left;
+  margin-top: 10px;
+  text-decoration:none;
+}
+
+.footer-links ul {
+  list-style: none;
+  text-align: left;
+  padding-left: 0;
+  font-size: 13px;
+  list-style-type:none;
+}
+
+.footer-links li {
+  display: block;
+  line-height: 1.8;
+}
+
+.footer-links li a {
+  color: #eaeaea;
+}
+
+.footer-links li .privacy-link {
+  color: #eaeaea;
+}
+
+.onfour-logo-subheading h4{
+  text-align: center;
+  margin-top: 10px;
+  color: #eaeaea;
+  font-size: 14px;
+  font-weight: $semimedium-weight;
+
 }

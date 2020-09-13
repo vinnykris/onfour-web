@@ -12,6 +12,7 @@ import "./footer_styles.scss";
 // Images
 // import white_logo from "../../images/logos/white-full-logo.png";
 import desktop_icon from "../../images/logos/navbar-logo-pink.png";
+import mobile_icon from "../../images/logos/logo-pink.png";
 
 //AWS
 import { Analytics } from "aws-amplify";
@@ -45,7 +46,11 @@ const Footer = () => {
   return (
     <div>
       {show_footer ? (
-        <div className="footer-container">
+        <div>
+        {width > 600 ?
+          (
+            
+            <div className="footer-container">
           <div className="footer-inner-container">
             <div className="footer-column-main">
               <img className="onfour-logo-container" src={desktop_icon}></img>
@@ -164,44 +169,79 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          {/* <Grid className="footer-grid">
+          
+        </div>
+  
+          ):(
+            <div className="footer-container">
+          <Grid className="footer-grid">
             <Row>
-              <Col size={1}></Col>
-              <Col size={5}>
-                <div className="footer-logo-container">
+              
+              <Col size={1}>
+              <div className="footer-logo-container">
                   <img
                     className="onfour-logo-footer"
-                    src={white_logo}
+                    src={mobile_icon}
                     width="auto"
+                    height="50px"
                     alt="nav-logo"
                   ></img>
                 </div>
+                <div className="onfour-logo-subheading">
+                  <h4>Experience Music Together</h4>
+                </div>
+                
               </Col>
-              <Col size={1}></Col>
-              <Col size={3}>
+            </Row>
+            {/* <Row>
+              <Col size={0.5}></Col>
+              <Col size={1}>
+              <div className="onfour-logo-subheading">
+                  <h3>Experience Music Together</h3>
+                </div>
+              </Col>
+            </Row> */}
+            
+            
+            <Row>
+            <Col size={0.5}></Col>
+              <Col size={1.5}>
                 <div className="footer-links">
-                  <h3>Quick Links</h3>
+                  <h3>Explore</h3>
                   <ul>
                     <li>
-                      <a
-                        onClick={() =>
-                          Analytics.record({ name: "contactUsFooter" })
-                        }
-                        href="mailto:onfour.box@gmail.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Contact Us
+                      <a href="/about" >
+                        About Us
                       </a>
+                    </li>
+                  
+                    <li>
+                      <a href="/artiststream"
+                      >
+                      Stream
+                      </a>
+                      </li>
+                    <li>
+                      <a href="/upcoming">
+                      Upcoming
+                      </a>
+                      </li>
+                  </ul>
+                </div>
+                </Col>
+                <Col size={0.5}></Col>
+                <Col size={2}>
+                <div className="footer-links">
+                  <h3>Legal</h3>
+                  <ul>
+                  <li>
+                      <NavLink to="/terms-of-service" className="privacy-link">
+                        Terms of Service
+                      </NavLink>
                     </li>
                     <li>
                       <NavLink to="/privacy-policy" className="privacy-link">
                         Privacy Policy
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink to="/terms-of-service" className="privacy-link">
-                        Terms of Service
                       </NavLink>
                     </li>
                     <li>
@@ -212,14 +252,46 @@ const Footer = () => {
                   </ul>
                 </div>
               </Col>
-              <Col size={1}></Col>
+              
+              <Col size={0.5}>
+              </Col>
+              <Col size={2}>
+                <div className="footer-links">
+                  <h3>Collaborate</h3>
+                  <ul>
+                    <li>
+                      <a
+                        onClick={() =>
+                          Analytics.record({ name: "contactUsFooter" })
+                        }
+                        href="mailto:onfour.box@gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        onfour.box@gmail.com
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                       
+                      href="tel:+496170961709"
+                      >
+                        123.356.2356
+                      </a>
+                    </li>
+                    
+                  </ul>
+                </div>
+              </Col>
+              <Col size={0.5}></Col>
             </Row>
+            <hr></hr>
             <Row>
-              <Col size={1}></Col>
+              <Col size={0.2}></Col>
               <Col size={5}>
                 <h6>Copyright &copy; 2020 All Rights Reserved by onfour</h6>
               </Col>
-              <Col size={1}></Col>
+              <Col size={0.2}></Col>
               <Col size={3}>
                 <div className="footer-social-media">
                   <ul>
@@ -265,9 +337,12 @@ const Footer = () => {
                   </ul>
                 </div>
               </Col>
-              <Col size={1}></Col>
+              <Col size={0.2}></Col>
             </Row>
-          </Grid> */}
+          </Grid>
+        </div>
+
+          )}
         </div>
       ) : null}
     </div>
