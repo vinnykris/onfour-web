@@ -122,6 +122,37 @@
   color: #eaeaea;
 }
 
+.mobile-footer-social-media {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.mobile-footer-social-media ul {
+  float: left;
+  padding-left: 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.mobile-footer-social-media li {
+  list-style: none;
+  margin: 0px 10px;
+  display: inline-block;
+  font-size: 26px;
+  color: #07070f;
+  @include respond-to("small") {
+    margin-right: 12px;
+    margin-left: 0;
+    font-size: 15px;
+  }
+}
+
+.mobile-footer-social-media li a {
+  text-decoration: none;
+  color: #eaeaea;
+}
+
+
 .hidden-text {
   height: 1px;
   width: 1px;
@@ -183,7 +214,7 @@
 }
 
 .mobile-onfour-logo-subheading {
-  margin-bottom: 27px;
+  margin-bottom: 17px;
   margin-top: 10px;
 }
 
@@ -208,3 +239,12 @@
   margin-left: 20px;
 }
 
+.mobile-copyright-row {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.mobile-copyright-text {
+  float: left;
+  margin-left: 43px;
+}

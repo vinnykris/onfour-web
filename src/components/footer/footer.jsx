@@ -248,6 +248,49 @@ const Footer = () => {
                   >
                     onfour.box@gmail.com
                   </a>
+                  <div className="mobile-footer-social-media">
+                    <ul>
+                      <li>
+                        <a
+                          onClick={() =>
+                            Analytics.record({ name: "instaFooter" })
+                          }
+                          href="https://www.instagram.com/_onfour/"
+                          target="_blank"
+                          className="fa fa-instagram"
+                          rel="noopener noreferrer"
+                        >
+                          <span className="hidden-text">Instagram Link</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() =>
+                            Analytics.record({ name: "youtubeFooter" })
+                          }
+                          href="https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ/featured"
+                          target="_blank"
+                          className="fa fa-youtube"
+                          rel="noopener noreferrer"
+                        >
+                          <span className="hidden-text">Youtube Link</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() =>
+                            Analytics.record({ name: "twitterFooter" })
+                          }
+                          href="https://twitter.com/_Onfour"
+                          target="_blank"
+                          className="fa fa-twitter"
+                          rel="noopener noreferrer"
+                        >
+                          <span className="hidden-text">Twitter Link</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
               {/* <Col size={1}>
@@ -315,60 +358,11 @@ const Footer = () => {
                 </div>
               </Col> */}
             </Row>
-            {/* <hr></hr>
-            <Row>
-              <Col size={0.2}></Col>
-              <Col size={5}>
-                <h6 className="header-10">Copyright &copy; 2020 All Rights Reserved by onfour</h6>
+            <Row className="mobile-copyright-row">
+              <Col size={1}>
+                <div className="header-10 mobile-copyright-text">Copyright &copy; 2020 All Rights Reserved by onfour</div>
               </Col>
-              <Col size={0.2}></Col>
-              <Col size={3}>
-                <div className="footer-social-media">
-                  <ul>
-                    <li>
-                      <a
-                        onClick={() =>
-                          Analytics.record({ name: "instaFooter" })
-                        }
-                        href="https://www.instagram.com/_onfour/"
-                        target="_blank"
-                        className="fa fa-instagram"
-                        rel="noopener noreferrer"
-                      >
-                        <span className="hidden-text">Instagram Link</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        onClick={() =>
-                          Analytics.record({ name: "youtubeFooter" })
-                        }
-                        href="https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ/featured"
-                        target="_blank"
-                        className="fa fa-youtube"
-                        rel="noopener noreferrer"
-                      >
-                        <span className="hidden-text">Youtube Link</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        onClick={() =>
-                          Analytics.record({ name: "twitterFooter" })
-                        }
-                        href="https://twitter.com/_Onfour"
-                        target="_blank"
-                        className="fa fa-twitter"
-                        rel="noopener noreferrer"
-                      >
-                        <span className="hidden-text">Twitter Link</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </Col>
-              <Col size={0.2}></Col>
-            </Row> */}
+            </Row>
           </Grid>
         </div>
       )}
