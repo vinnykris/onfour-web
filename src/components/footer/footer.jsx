@@ -122,7 +122,7 @@ const Footer = () => {
             <div className="footer-inner-container">
               <div className="footer-bottom">
                 <span className="header-8 footer-text-body">
-                  Copyright &copy; 2020 All Rights Reserved by onfour.inc
+                  Copyright &copy; 2020 All Rights Reserved by onfour Inc.
                 </span>
                 <div className="footer-social-media">
                   <ul>
@@ -360,7 +360,7 @@ const Footer = () => {
             </Row>
             <Row className="mobile-copyright-row">
               <Col size={1}>
-                <div className="header-10 mobile-copyright-text">Copyright &copy; 2020 All Rights Reserved by onfour.inc</div>
+                <div className="header-10 mobile-copyright-text">Copyright &copy; 2020 All Rights Reserved by onfour Inc.</div>
               </Col>
             </Row>
           </Grid>
