@@ -689,59 +689,88 @@ const Concert = (props) => {
                           </Row>
                         </div> */}
               </Rodal>
-              <Row className="concert-row-mobile">
-                <Col size={1} className="no-stretch-column">
-                  <div className="mobile-concert-image-wrapper">
-                    <img
-                      className="mobile-concert-image"
-                      src={concert_info.img}
-                      alt="concert-poster"
-                    ></img>
-                  </div>
-                </Col>
-              </Row>
-              <Row className="concert-row-mobile">
-                <Col size={1}>
-                  <div className="concert-genre-box">
-                    {concert_info.genre.toUpperCase()}
-                  </div>
-                </Col>
-                <Col size={4}>
+              <div className="mobile-concert-image-wrapper">
+                <img
+                  src={concert_info.img}
+                  className="concert-page-featured-mobile"
+                  alt="concert-poster"
+                />
+                <div className="concert-page-overlay-mobile" />
+              </div>
+              <div className="concert-details-section-mobile">
+                <Row className="timer-row-mobile">
                   <div className="countdown-timer">
                     <CountdownTimer
                       start_date={concert_info.date}
                       start_time={concert_info.time}
+                      className="header-3 countdown-timer-number concert-timer-color-mobile "
                     />
                   </div>
-                </Col>
-              </Row>
-              <Row className="concert-row-mobile">
-                <Col size={1} className="no-stretch-column">
-                  <span className="logistics-text">
-                    {concert_info.week_day} | {concert_info.formatted_date} |{" "}
-                    {concert_info.formatted_time}
-                  </span>
-                </Col>
-              </Row>
-              <Row className="concert-row-mobile">
-                <Col size={1} className="no-stretch-column">
-                  <div>
-                    <h3 className="titles">
+                </Row>
+                <Row style={{ marginBottom: "21px" }}>
+                  <Col size={1}>
+                    {has_ticket ? (
+                      <div>
+                        {enter_venue_status ? (
+                          <NavLink to="/stream">
+                            {" "}
+                            <button
+                              className="primary-button button-text full-width-button"
+                              // onClick={goToVenue}
+                            >
+                              Enter Venue
+                            </button>
+                          </NavLink>
+                        ) : (
+                          <Tooltip title="Please try again 30 minutes before the show!">
+                            <button className="button-text disabled-venue-button">
+                              Enter Venue
+                            </button>
+                          </Tooltip>
+                        )}
+                      </div>
+                    ) : (
+                      <button
+                        className="primary-button button-text full-width-button"
+                        onClick={getTicket}
+                      >
+                        {total > 0 ? "BUY TICKETS" : "RSVP"}
+                      </button>
+                    )}
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="no-stretch-column">
+                    <text className="header-4 concert-header-color-mobile">
                       {concert_info.artist_name.toUpperCase()} –{" "}
                       {concert_info.concert_name.toUpperCase()}
-                    </h3>
-                  </div>
-                  <div>
-                    <p className="artist-description-text">
+                    </text>
+                  </Col>
+                </Row>
+                <Row className="concert-details-spacing-mobile">
+                  <Col className="no-stretch-column">
+                    <span className="header-10 concert-timing-color-mobile">
+                      {concert_info.week_day} | {concert_info.formatted_date} |{" "}
+                      {concert_info.formatted_time}
+                    </span>
+                  </Col>
+                </Row>
+                <Row className="concert-details-spacing-mobile">
+                  <text className="header-10 concert-suggestion-color-mobile">
+                    * Tune in to the concert on your desktop to enjoy video chat
+                    experience
+                  </text>
+                </Row>
+                <Row className="concert-details-spacing-mobile">
+                  <Col className="no-stretch-column">
+                    <p className="body-3 concert-description-color-mobile">
                       {concert_info.description}
                     </p>
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col size={1} className="share-column-mobile">
-                  <h5 className="share-concert-text">Share With Friends</h5>
-                  <div className="share-list-container">
+                  </Col>
+                </Row>
+                <Row className="share-section-mobile">
+                  <text className="header-9 share-text-mobile">Share:</text>
+                  <div>
                     <ul className="social-list">
                       <li>
                         <a
@@ -751,7 +780,7 @@ const Concert = (props) => {
                             })
                           }
                           href={facebook_link}
-                          className="fa fa-facebook-official fb-xfbml-parse-ignore"
+                          className="fab fa-facebook fb-xfbml-parse-ignore"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -793,37 +822,8 @@ const Concert = (props) => {
                       </li>
                     </ul>
                   </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col size={1}>
-                  {has_ticket ? (
-                    <div>
-                      {enter_venue_status ? (
-                        <NavLink to="/stream">
-                          {" "}
-                          <button
-                            className="buy-ticket-button"
-                            // onClick={goToVenue}
-                          >
-                            Enter Venue
-                          </button>
-                        </NavLink>
-                      ) : (
-                        <Tooltip title="Please try again 30 minutes before the show!">
-                          <button className="buy-ticket-button-disabled">
-                            Enter Venue
-                          </button>
-                        </Tooltip>
-                      )}
-                    </div>
-                  ) : (
-                    <button className="buy-ticket-button" onClick={getTicket}>
-                      {total > 0 ? "BUY TICKETS" : "RSVP"}
-                    </button>
-                  )}
-                </Col>
-              </Row>
+                </Row>
+              </div>
             </Grid>
           )}
         </div>
@@ -968,6 +968,7 @@ const Concert = (props) => {
                   <CountdownTimer
                     start_date={concert_info.date}
                     start_time={concert_info.time}
+                    className="header-1 countdown-timer-number"
                   />
                 </div>
               </div>
