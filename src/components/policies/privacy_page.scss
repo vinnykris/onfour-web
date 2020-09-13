@@ -1,5 +1,5 @@
 // PRIVACY PAGE STYLING
-
+@import "../../styles.scss";
 .privacy-page {
   width: 100%;
   background-color: black;
@@ -14,6 +14,10 @@
   width: 60%;
   margin: 0 auto;
   text-align: justify;
+
+  @include respond-to("small") {
+    width: 85%;
+  }
 
   li {
     color: white;
