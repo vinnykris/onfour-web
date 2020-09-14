@@ -90,9 +90,25 @@ img.wave-2 {
   margin-top: -56px;
   @include respond-to("small") {
     position: absolute;
-    margin-top: -420px;
+    margin-top: -570px;
     z-index: 1;
   }
+  @include respond-to("x-small") {
+    position: absolute;
+    margin-top: -420px;
+  }
+  @include respond-to("xx-small") {
+    position: absolute;
+    margin-top: -370px;
+  }
+
+  @include respond-to("xxx-small") {
+    position: absolute;
+    margin-top: -320px;
+  }
+  // @media only screen and (max-width: 340px) {
+
+  // }
 }
 
 .feature-section {

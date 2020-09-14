@@ -19,6 +19,12 @@
     margin: auto;
     margin-bottom: 17px;
   }
+  @include respond-to("xx-small") {
+    width: 278px;
+    height: 166px;
+    margin: auto;
+    margin-bottom: 17px;
+  }
 }
 
 .step-card-container:first-child {

@@ -21,6 +21,12 @@
     margin: auto;
     margin-bottom: 17px;
   }
+  @include respond-to("xx-small") {
+    width: 280px;
+    height: 100px;
+    margin: auto;
+    margin-bottom: 17px;
+  }
 }
 
 .feature-card-container:first-child {
