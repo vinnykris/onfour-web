@@ -44,10 +44,22 @@
   width: 100%;
   align-items: center;
   justify-content: center;
+  // @include respond-to("small") {
+  //   margin: auto 30px;
+  // }
+}
+
+.about-main-header {
+  @include respond-to("small") {
+    margin: 46px 30px 0px 30px;
+  }
 }
 
 .about-main-subheading {
   margin-top: 16px;
+  @include respond-to("small") {
+    margin: 16px 30px 0px 30px;
+  }
 }
 
 img.wave {
@@ -62,6 +74,9 @@ img.info-card {
   max-width: 100%;
   width: 100%;
   height: auto;
+  @include respond-to("small") {
+    z-index: 0;
+  }
 }
 
 img.wave-2 {
@@ -73,11 +88,20 @@ img.wave-2 {
 
 .how-it-works-section {
   margin-top: -56px;
+  @include respond-to("small") {
+    position: absolute;
+    margin-top: -420px;
+    z-index: 1;
+  }
 }
 
 .feature-section {
   margin-top: 178px;
   position: relative;
+  @include respond-to("small") {
+    position: relative;
+    margin-top: 323px;
+  }
 }
 
 .background-about-inner {
@@ -89,14 +113,17 @@ img.wave-2 {
   position: absolute;
   top: 42px;
   cursor: pointer;
+  @include respond-to("small") {
+    top: 16.41px;
+  }
 }
 
 .artist-tab {
-  right: calc(100vw * 0.2194444);
+  right: calc(100vw * 0.12);
 }
 
 .fan-tab {
-  left: calc(100vw * 0.2194444);
+  left: calc(100vw * 0.18);
 }
 
 .not-selected {
@@ -113,6 +140,9 @@ img.wave-2 {
   top: calc(100vw * 0.10277778);
   width: 100%;
   padding-top: 56.25%;
+  @include respond-to("small") {
+    top: calc(100vw * 0.2);
+  }
 }
 
 .experience-video {
@@ -131,6 +161,10 @@ img.wave-2 {
   max-width: 1139px;
   margin: auto;
   margin-top: 36px;
+  @include respond-to("small") {
+    flex-direction: column;
+    margin-top: 17px;
+  }
 }
 
 .feature-card-section {
@@ -139,6 +173,9 @@ img.wave-2 {
   max-width: 1048px;
   flex-direction: column;
   margin: 0 auto;
+  @include respond-to("small") {
+    margin-top: 17px;
+  }
 }
 
 .feature-row {
@@ -163,6 +200,9 @@ img.wave-2 {
   -o-background-size: cover;
   background-size: cover;
   min-height: calc(100vw * 0.47986111);
+  @include respond-to("small") {
+    background: #07070f;
+  }
 }
 
 .sign-up-container {
@@ -170,6 +210,10 @@ img.wave-2 {
   position: relative;
   width: 100%;
   margin-top: 114px;
+  @include respond-to("small") {
+    margin-top: 33px;
+    margin-bottom: 55px;
+  }
 }
 
 .sign-up-button {

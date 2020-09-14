@@ -15,9 +15,12 @@
     ),
     #07070f;
   border-radius: 10px;
-  //   margin-left: 36.5px;
-  //   margin-right: 36.5px;
-  //padding: 0px 20px;
+  @include respond-to("small") {
+    width: 330px;
+    height: 89px;
+    margin: auto;
+    margin-bottom: 17px;
+  }
 }
 
 .feature-card-container:first-child {
@@ -33,7 +36,9 @@
   //top: 43px;
   text-align: center;
   margin-top: 33px;
-  // padding: 0px 20px;
+  @include respond-to("small") {
+    margin-top: 18px;
+  }
 }
 
 .feature-card-description-container {
@@ -42,6 +47,9 @@
   padding: 0px 20px;
   // text-align: center;
   margin-top: 24px;
+  @include respond-to("small") {
+    margin-top: 13px;
+  }
 }
 
 .feature-card-description {
