@@ -16,7 +16,22 @@
   display: flex;
   flex-direction: column;
 }
+.footer-container h3{
+  margin-top: 10px;
+  color: #eaeaea;
+  text-align: left;
+  font-size: 14px;
+  font-weight: $semimedium-weight;
 
+}
+.footer-container h6{
+  margin-top: 10px;
+  color: #eaeaea;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 400;
+
+}
 .footer-inner-container {
   display: flex;
   flex-direction: row;
@@ -65,6 +80,10 @@
   margin-top: 16px;
 }
 
+.mobile-footer-link {
+  margin-top: 8px;
+}
+
 .footer-text-body {
   color: $on-surface-medium !important;
 }
@@ -103,10 +122,129 @@
   color: #eaeaea;
 }
 
+.mobile-footer-social-media {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.mobile-footer-social-media ul {
+  float: left;
+  padding-left: 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.mobile-footer-social-media li {
+  list-style: none;
+  margin: 0px 10px;
+  display: inline-block;
+  font-size: 26px;
+  color: #07070f;
+  @include respond-to("small") {
+    margin-right: 12px;
+    margin-left: 0;
+    font-size: 15px;
+  }
+}
+
+.mobile-footer-social-media li a {
+  text-decoration: none;
+  color: #eaeaea;
+}
+
+
 .hidden-text {
   height: 1px;
   width: 1px;
   position: absolute;
   overflow: hidden;
   top: -10px;
+}
+
+
+.footer-links {
+  float: left;
+  margin-top: 10px;
+  text-decoration:none;
+}
+
+.footer-links ul {
+  list-style: none;
+  text-align: left;
+  padding-left: 0;
+  font-size: 13px;
+  list-style-type:none;
+}
+
+.footer-links li {
+  display: block;
+  line-height: 1.8;
+}
+
+.footer-links li a {
+  color: #eaeaea;
+}
+
+.footer-links li .privacy-link {
+  color: #eaeaea;
+  width: 100%;
+}
+
+.onfour-logo-subheading h4{
+  text-align: center;
+  margin-top: 10px;
+  color: #eaeaea;
+  font-size: 14px;
+  font-weight: $semimedium-weight;
+
+}
+
+.mobile-footer {
+  height: 240px;
+}
+
+.footer-grid {
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-footer-logo-container {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.mobile-onfour-logo-subheading {
+  margin-bottom: 17px;
+  margin-top: 10px;
+}
+
+.mobile-column-title {
+  float: left;
+}
+
+.mobile-footer-link-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+}
+
+.mobile-footer-column-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 43px;
+}
+
+.last-mobile-footer-column-content {
+  margin-left: 20px;
+}
+
+.mobile-copyright-row {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.mobile-copyright-text {
+  float: left;
+  margin-left: 43px;
 }
