@@ -129,40 +129,40 @@ const Forgot = () => {
                     {/* </Row> */}
                   </form>
                 ) : (
-                  <form
-                    onSubmit={sendCode}
-                    className="forgot-form-mobile"
-                    id="forgot"
-                  >
-                    <Row className="forgot-header">
-                      <div className="forgot-header-text-mobile">
+                  <div className="forgot-stage-mobile">
+                    <form
+                      onSubmit={sendCode}
+                      className="forgot-form-mobile"
+                      id="forgot"
+                    >
+                      <div className="header-4 forgot-header-color-mobile">
+                        Forgot Password?
+                      </div>
+                      <div className="subtitle-3 forgot-text-color-mobile">
                         Enter your email or username below and we'll help you
                         reset your password.
                       </div>
-                    </Row>
-                    <Row className="forgot-input-row">
-                      <input
-                        className="forgot-input"
-                        name="email"
-                        id="email_slot"
-                        value={email}
-                        placeholder="Email Address or Username"
-                        onChange={(event) => setEmail(event.target.value)}
-                        required
-                      />
-                    </Row>
-                    <br></br>
-                    <Row className="forgot-verification-footer-mobile">
+                      <div className="register-input-container">
+                        <InputOne
+                          name="email"
+                          type="text"
+                          id="email_slot"
+                          is_required={true}
+                          value={email}
+                          placeholder="Email Address or Username"
+                          onChange={(event) => setEmail(event.target.value)}
+                        />
+                      </div>
                       <button
-                        className="forgot-submit-button"
+                        className="primary-button button-text forgot-submit-button"
                         type="submit"
                         form="forgot"
                         value="Submit"
                       >
                         SEND VERIFICATION CODE
                       </button>
-                    </Row>
-                  </form>
+                    </form>
+                  </div>
                 )}
               </div>
             )}
@@ -286,77 +286,61 @@ const Forgot = () => {
                     </button>
                   </form>
                 ) : (
-                  <form
-                    onSubmit={resetPassword}
-                    className="forgot-form-mobile"
-                    id="forgot"
-                  >
-                    <Row className="forgot-header">
-                      <h6 className="forgot-header-text-mobile">
+                  <div className="forgot-stage-mobile">
+                    <form
+                      onSubmit={resetPassword}
+                      className="forgot-form-mobile"
+                      id="forgot"
+                    >
+                      <div className="header-7 forgot-text-color-mobile">
                         Please enter your verification and new password below!
-                      </h6>
-                    </Row>
-                    <Row className="forgot-input-row">
-                      <input
-                        className="forgot-input"
-                        name="email"
-                        id="email_slot"
-                        disabled="true"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        required
-                      />
-                    </Row>
-                    <Row className="forgot-input-row">
-                      <input
-                        className="forgot-input"
-                        name="code"
-                        id="verification_code"
-                        value={code}
-                        placeholder="Verification Code"
-                        onChange={(event) => setCode(event.target.value)}
-                        required
-                      />
-                    </Row>
-                    <Row className="forgot-input-row">
-                      <input
-                        className="forgot-input"
-                        type="password"
-                        name="password"
-                        id="password_slot"
-                        value={password}
-                        placeholder="New Password"
-                        onChange={(event) => setPassword(event.target.value)}
-                        required
-                      />
-                    </Row>
-                    <Row className="forgot-input-row">
-                      <input
-                        className="forgot-input"
-                        type="password"
-                        name="new_password"
-                        id="new_password_slot"
-                        value={confirm_password}
-                        placeholder="Repeat New Password"
-                        onChange={(event) =>
-                          setConfirmPassword(event.target.value)
-                        }
-                        required
-                      />
-                    </Row>
-                    <div style={{ color: "red" }}>{error}</div>
-                    <br></br>
-                    <Row className="forgot-verification-footer-mobile">
+                      </div>
+                      <div className="register-input-container">
+                        <InputOne
+                          id="email_slot"
+                          type="text"
+                          name="email"
+                          is_required={true}
+                          placeholder=""
+                          value={email}
+                          onChange={(event) => setEmail(event.target.value)}
+                          is_disabled={true}
+                        />
+                      </div>
+                      <div className="register-input-container">
+                        <InputOne
+                          id="verification_code"
+                          type="text"
+                          name="code"
+                          is_required={true}
+                          placeholder="Verification Code"
+                          value={code}
+                          onChange={(event) => setCode(event.target.value)}
+                        />
+                      </div>
+                      <div className="register-input-container">
+                        <InputOne
+                          id="password_slot"
+                          type="password"
+                          name="password"
+                          is_required={true}
+                          placeholder="New Password"
+                          value={password}
+                          onChange={(event) => setPassword(event.target.value)}
+                          is_password={true}
+                        />
+                      </div>
+                      <div style={{ color: "red" }}>{error}</div>
                       <button
-                        className="forgot-submit-button"
+                        className="primary-button button-text forgot-submit-button"
                         type="submit"
                         form="forgot"
                         value="Submit"
                       >
                         CHANGE PASSWORD
                       </button>
-                    </Row>
-                  </form>
+                    </form>
+                  </div>
                 )}
               </div>
             )}
@@ -379,12 +363,12 @@ const Forgot = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="success-container">
-                    <p className="success-message-forgot">
+                  <div className="success-container-mobile">
+                    <div className="header-7 forgot-text-color-mobile success-message-width ">
                       {
                         "Password successfully changed!\n Please log in using your new password."
                       }
-                    </p>
+                    </div>
                   </div>
                 )}
               </div>
