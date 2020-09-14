@@ -30,14 +30,14 @@ const FeaturedConcertBox = ({ artist_info, concert_info, width }) => {
         parseInt(concert_time.slice(0, 2) - 12) +
           ":" +
           concert_time.slice(3, 5) +
-          " PM EST"
+          " PM"
       );
     } else {
       setTime(
         parseInt(concert_time.slice(0, 2)) +
           ":" +
           concert_time.slice(3, 5) +
-          " AM EST"
+          " AM"
       );
     }
   };
@@ -116,7 +116,7 @@ const FeaturedConcertBox = ({ artist_info, concert_info, width }) => {
                   onClick={() => history.push("/upcoming/" + concert_id)}
                 >
                   PEEK INSIDE
-              </button>
+                </button>
               </Col>
             </Row>
           </div>
