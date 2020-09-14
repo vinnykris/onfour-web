@@ -1,5 +1,7 @@
 // LOGIN PAGE COMPONENT STYLING
 
+@import "../../styles.scss";
+
 .forgot-page-content {
   background-color: black;
   height: 100%;
@@ -28,10 +30,7 @@
 
 .forgot-submit-button {
   width: 100%;
-  color: white;
-  font-size: 14px;
-  font-weight: 420;
-  background-color: #794d94;
+  margin-top: 3px;
 }
 
 .forgot-input {
@@ -86,17 +85,15 @@
 }
 
 .forgot-form-mobile {
-  margin-top: 2.5%;
-  width: 85%;
-  padding-bottom: 2%;
+  margin: auto 30px;
 }
 
-.forgot-header-text-mobile {
-  color: white;
-  width: 100%;
-  font-size: 88%;
-  padding-top: 5%;
-}
+// .forgot-header-text-mobile {
+//   color: white;
+//   width: 100%;
+//   font-size: 88%;
+//   padding-top: 5%;
+// }
 
 .forgot-footer-mobile {
   color: white;
@@ -105,6 +102,34 @@
   font-size: 15px;
 }
 
-.forgot-verification-footer-mobile {
-  padding-bottom: 60%;
+.forgot-text-color-mobile {
+  color: $on-surface-disable !important;
+  margin-bottom: 16px;
+}
+
+.forgot-header-color-mobile {
+  // display: flex;
+  color: $primary-color !important;
+  margin-bottom: 10px;
+}
+
+.success-container-mobile {
+  height: 100vh;
+  width: 100%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  margin-top: -15%;
+  justify-content: center;
+}
+
+.success-message-width {
+  width: 85%;
+}
+
+.forgot-stage-mobile {
+  display: flex;
+  height: 100vh;
+  margin-top: -10%;
+  align-items: center;
 }
