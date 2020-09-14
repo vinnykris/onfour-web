@@ -19,7 +19,7 @@ const LoggedInUser = ({
         src={logged_in_icon}
         alt="white-outline"
       ></img>
-      <div className="initials">
+      <div className="segmented-button-text initials">
         {first.toUpperCase()[0]}
         {/* {last[0]} */}
       </div>

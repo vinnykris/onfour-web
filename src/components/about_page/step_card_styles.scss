@@ -10,8 +10,9 @@
     ),
     #07070f;
   border-radius: 10px;
-  margin-left: 36.5px;
-  margin-right: 36.5px;
+  // margin-left: 36.5px;
+  // margin-right: 36.5px;
+  // margin: auto;
   padding: 0px 10px;
   @include respond-to("small") {
     width: 323px;
@@ -27,21 +28,21 @@
   }
 }
 
-.step-card-container:first-child {
-  margin-left: 0;
-  @include respond-to("small") {
-    margin: auto;
-    margin-bottom: 17px;
-  }
-}
+// .step-card-container:first-child {
+//   margin-left: 0;
+//   @include respond-to("small") {
+//     margin: auto;
+//     margin-bottom: 17px;
+//   }
+// }
 
-.step-card-container:last-child {
-  margin-right: 0;
-  @include respond-to("small") {
-    margin: auto;
-    margin-bottom: 17px;
-  }
-}
+// .step-card-container:last-child {
+//   margin-right: 0;
+//   @include respond-to("small") {
+//     margin: auto;
+//     margin-bottom: 17px;
+//   }
+// }
 
 .step-card-number {
   margin-top: 37px;

@@ -6,8 +6,8 @@
   position: relative;
   width: 329px;
   height: 146px;
-  margin-left: 19px;
-  margin-right: 19px;
+  // margin-left: 19px;
+  // margin-right: 19px;
   background: linear-gradient(
       0deg,
       rgba(255, 255, 255, 0.09),
@@ -29,13 +29,13 @@
   }
 }
 
-.feature-card-container:first-child {
-  margin-left: 0;
-}
+// .feature-card-container:first-child {
+//   margin-left: 0;
+// }
 
-.feature-card-container:last-child {
-  margin-right: 0;
-}
+// .feature-card-container:last-child {
+//   margin-right: 0;
+// }
 
 .feature-card-title {
   //position: absolute;

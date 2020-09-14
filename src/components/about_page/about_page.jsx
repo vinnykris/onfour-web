@@ -60,15 +60,17 @@ const LandingPage = () => {
               {show_artist ? (
                 <div className="background-about-inner">
                   <img src={artist_background} className="info-card" />
-                  <span className="header-4 tab-title artist-tab">
-                    I'm an artist
-                  </span>
-                  <span
-                    className="header-4 tab-title fan-tab not-selected"
-                    onClick={() => setShowArtist(!show_artist)}
-                  >
-                    I'm a fan
-                  </span>
+                  <div className="tab-titles">
+                    <span
+                      className="header-4 tab-title fan-tab not-selected"
+                      onClick={() => setShowArtist(!show_artist)}
+                    >
+                      I'm a fan
+                    </span>
+                    <span className="header-4 tab-title artist-tab">
+                      I'm an artist
+                    </span>
+                  </div>
                   <div className="experience-video-wrapper">
                     <ReactPlayer
                       className="experience-video"
@@ -81,13 +83,17 @@ const LandingPage = () => {
               ) : (
                 <div className="background-about-inner">
                   <img src={fan_background} className="info-card" />
-                  <span
-                    className="header-4 tab-title artist-tab not-selected"
-                    onClick={() => setShowArtist(!show_artist)}
-                  >
-                    I'm an artist
-                  </span>
-                  <span className="header-4 tab-title fan-tab">I'm a fan</span>
+                  <div className="tab-titles">
+                    <span className="header-4 tab-title fan-tab">
+                      I'm a fan
+                    </span>
+                    <span
+                      className="header-4 tab-title artist-tab not-selected"
+                      onClick={() => setShowArtist(!show_artist)}
+                    >
+                      I'm an artist
+                    </span>
+                  </div>
                   <div className="experience-video-wrapper">
                     <ReactPlayer
                       className="experience-video"
@@ -104,39 +110,43 @@ const LandingPage = () => {
             <div className="header-2">How It Works</div>
             {show_artist ? (
               <div className="step-card-section">
-                <StepCard
-                  title="Schedule"
-                  description="Pick a date, set your ticket price, and promote with an RSVP link."
-                  step_num="1"
-                />
-                <StepCard
-                  title="Soundcheck"
-                  description="Plug in and join our greenroom with tech support the whole way."
-                  step_num="2"
-                />
-                <StepCard
-                  title="Perform"
-                  description="See and interact with your fans as if they were in the room with you."
-                  step_num="3"
-                />
+                <div className="step-card-row">
+                  <StepCard
+                    title="Schedule"
+                    description="Pick a date, set your ticket price, and promote with an RSVP link."
+                    step_num="1"
+                  />
+                  <StepCard
+                    title="Soundcheck"
+                    description="Plug in and join our greenroom with tech support the whole way."
+                    step_num="2"
+                  />
+                  <StepCard
+                    title="Perform"
+                    description="See and interact with your fans as if they were in the room with you."
+                    step_num="3"
+                  />
+                </div>
               </div>
             ) : (
               <div className="step-card-section">
-                <StepCard
-                  title="Create a Crew"
-                  description="Invite your friends to join your crew and attend shows with them."
-                  step_num="1"
-                />
-                <StepCard
-                  title="Pick a Show"
-                  description="RSVP, add it to your calendar, and invite your crew to join you."
-                  step_num="2"
-                />
-                <StepCard
-                  title="Enjoy the Show"
-                  description="Interact with your crew while watching your favorite artist live."
-                  step_num="3"
-                />
+                <div className="step-card-row">
+                  <StepCard
+                    title="Create a Crew"
+                    description="Invite your friends to join your crew and attend shows with them."
+                    step_num="1"
+                  />
+                  <StepCard
+                    title="Pick a Show"
+                    description="RSVP, add it to your calendar, and invite your crew to join you."
+                    step_num="2"
+                  />
+                  <StepCard
+                    title="Enjoy the Show"
+                    description="Interact with your crew while watching your favorite artist live."
+                    step_num="3"
+                  />
+                </div>
               </div>
             )}
           </div>
@@ -164,8 +174,8 @@ const LandingPage = () => {
                       title="Virtual Meet & Greets"
                       description="Connect with your biggest fans after the show, either 1-to-1 or in small groups."
                     />
-                  </div>
-                  <div className="feature-row">
+                    {/* </div>
+                  <div className="feature-row"> */}
                     <FeatureCard
                       title="Your Ticket, Your Price"
                       description="Set your ticket price and get paid for your performance like you deserve."
@@ -208,8 +218,8 @@ const LandingPage = () => {
                       title="A New Kind of Backstage Pass"
                       description="Meet your favorite artists after the show, either with your crew or 1-to-1."
                     />
-                  </div>
-                  <div className="feature-row">
+                    {/* </div>
+                  <div className="feature-row"> */}
                     <FeatureCard
                       title="Quality Worth Plugging In For"
                       description="Put on your headphones or plug in your favorite speakers. Your ears will thank you."
@@ -263,15 +273,17 @@ const LandingPage = () => {
               {show_artist ? (
                 <div className="background-about-inner">
                   <img src={mobile_artist_background} className="info-card" />
-                  <span className="header-8 tab-title artist-tab">
-                    I'm an artist
-                  </span>
-                  <span
-                    className="header-8 tab-title fan-tab not-selected"
-                    onClick={() => setShowArtist(!show_artist)}
-                  >
-                    I'm a fan
-                  </span>
+                  <div className="tab-titles">
+                    <span
+                      className="header-8 tab-title fan-tab not-selected"
+                      onClick={() => setShowArtist(!show_artist)}
+                    >
+                      I'm a fan
+                    </span>
+                    <span className="header-8 tab-title artist-tab">
+                      I'm an artist
+                    </span>
+                  </div>
                   <div className="experience-video-wrapper">
                     <ReactPlayer
                       className="experience-video"
@@ -284,13 +296,17 @@ const LandingPage = () => {
               ) : (
                 <div className="background-about-inner">
                   <img src={mobile_fan_background} className="info-card" />
-                  <span
-                    className="header-8 tab-title artist-tab not-selected"
-                    onClick={() => setShowArtist(!show_artist)}
-                  >
-                    I'm an artist
-                  </span>
-                  <span className="header-8 tab-title fan-tab">I'm a fan</span>
+                  <div className="tab-titles">
+                    <span className="header-8 tab-title fan-tab">
+                      I'm a fan
+                    </span>
+                    <span
+                      className="header-8 tab-title artist-tab not-selected"
+                      onClick={() => setShowArtist(!show_artist)}
+                    >
+                      I'm an artist
+                    </span>
+                  </div>
                   <div className="experience-video-wrapper">
                     <ReactPlayer
                       className="experience-video"
