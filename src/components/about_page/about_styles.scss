@@ -180,6 +180,15 @@ img.wave-2 {
   transform: translateX(-50%);
 }
 
+.experience-gif {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88%;
+}
+
 .step-card-section {
   display: flex;
   flex-direction: row;

@@ -72,11 +72,15 @@ const LandingPage = () => {
                     </span>
                   </div>
                   <div className="experience-video-wrapper">
-                    <ReactPlayer
+                    {/* <ReactPlayer
                       className="experience-video"
                       url="https://youtu.be/82UqPEJyxZQ"
                       width="88.333%"
                       height="88.333%"
+                    /> */}
+                    <img
+                      src="https://onfour-media.s3.amazonaws.com/website+component/launch_artist_experience.gif"
+                      className="experience-gif"
                     />
                   </div>
                 </div>
@@ -95,11 +99,15 @@ const LandingPage = () => {
                     </span>
                   </div>
                   <div className="experience-video-wrapper">
-                    <ReactPlayer
+                    {/* <ReactPlayer
                       className="experience-video"
                       url="https://youtu.be/82UqPEJyxZQ"
                       width="88.333%"
                       height="88.333%"
+                    /> */}
+                    <img
+                      src="https://onfour-media.s3.amazonaws.com/website+component/launch_fan_experience.gif"
+                      className="experience-gif"
                     />
                   </div>
                 </div>
@@ -285,11 +293,15 @@ const LandingPage = () => {
                     </span>
                   </div>
                   <div className="experience-video-wrapper">
-                    <ReactPlayer
+                    {/* <ReactPlayer
                       className="experience-video"
                       url="https://youtu.be/82UqPEJyxZQ"
                       width="88.333%"
                       height="88.333%"
+                    /> */}
+                    <img
+                      src="https://onfour-media.s3.amazonaws.com/website+component/launch_artist_experience.gif"
+                      className="experience-gif"
                     />
                   </div>
                 </div>
@@ -308,11 +320,15 @@ const LandingPage = () => {
                     </span>
                   </div>
                   <div className="experience-video-wrapper">
-                    <ReactPlayer
+                    {/* <ReactPlayer
                       className="experience-video"
                       url="https://youtu.be/82UqPEJyxZQ"
                       width="88.333%"
                       height="88.333%"
+                    /> */}
+                    <img
+                      src="https://onfour-media.s3.amazonaws.com/website+component/launch_fan_experience.gif"
+                      className="experience-gif"
                     />
                   </div>
                 </div>
