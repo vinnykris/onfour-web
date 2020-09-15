@@ -283,14 +283,12 @@ const LandingPage = () => {
                   <img src={mobile_artist_background} className="info-card" />
                   <div className="tab-titles">
                     <span
-                      className="header-8 tab-title fan-tab not-selected"
+                      className="header-8 tab-title not-selected"
                       onClick={() => setShowArtist(!show_artist)}
                     >
                       I'm a fan
                     </span>
-                    <span className="header-8 tab-title artist-tab">
-                      I'm an artist
-                    </span>
+                    <span className="header-8 tab-title">I'm an artist</span>
                   </div>
                   <div className="experience-video-wrapper">
                     {/* <ReactPlayer
@@ -309,11 +307,9 @@ const LandingPage = () => {
                 <div className="background-about-inner">
                   <img src={mobile_fan_background} className="info-card" />
                   <div className="tab-titles">
-                    <span className="header-8 tab-title fan-tab">
-                      I'm a fan
-                    </span>
+                    <span className="header-8 tab-title">I'm a fan</span>
                     <span
-                      className="header-8 tab-title artist-tab not-selected"
+                      className="header-8 tab-title not-selected"
                       onClick={() => setShowArtist(!show_artist)}
                     >
                       I'm an artist
