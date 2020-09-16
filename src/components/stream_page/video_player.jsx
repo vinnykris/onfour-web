@@ -38,7 +38,7 @@ function VideoPlayer({
   concert_id,
   is_live,
   stream_volume,
-  have_upcoming_concert
+  have_upcoming_concert,
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   var player = null;
@@ -188,7 +188,13 @@ function VideoPlayer({
       if (!timer_placeholder.length && is_live) {
         player = videojs(
           player_ref.current,
-          { autoplay: true, muted: false, controls: true, liveui: true },
+          {
+            autoplay: true,
+            muted: false,
+            controls: true,
+            liveui: true,
+            liveTracker: false,
+          },
           () => {
             player.src(url);
           }
