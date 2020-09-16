@@ -15,7 +15,7 @@
 
 .stream-page-content {
   //margin-top: -1px;
-  background-color: #07070F;
+  background-color: #07070f;
   //height: auto;
   height: 100%;
   width: 100%;
@@ -45,13 +45,12 @@
   }
 }
 
-
 .sticky-container {
   height: auto;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  border-left: 3px solid #07070F;
+  border-left: 3px solid #07070f;
 }
 
 .payment-row-mobile {
@@ -98,7 +97,7 @@
   height: 60%;
   width: 100%;
   position: relative;
-  border-bottom: 3px solid #07070F;
+  border-bottom: 3px solid #07070f;
 }
 
 .chat-row {
@@ -160,47 +159,57 @@
 
 .toggle-chat-button {
   border-radius: 5px 0px 0px 5px;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
   padding: 3px;
   font-weight: bolder;
 }
 
 .toggle-description-button {
   border-radius: 0px 5px 0px 0px;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
   padding: 0px 8px;
   font-weight: bolder;
 }
 
 .fa-chevron-right {
   margin-left: 2px;
-  color: #DADADA;
+  color: #dadada;
   &:hover {
-    color: #EA91BD;
+    color: #ea91bd;
   }
 }
 
 .fa-chevron-left {
   margin-left: 2px;
-  color: #DADADA;
+  color: #dadada;
   &:hover {
-    color: #EA91BD;
+    color: #ea91bd;
   }
 }
 
 .fa-chevron-down {
   margin-top: 2px;
-  color: #DADADA;
+  color: #dadada;
   &:hover {
-    color: #A6AAFB;
+    color: #a6aafb;
   }
 }
 
 .fa-chevron-up {
   margin-top: 2px;
-  color: #DADADA;
+  color: #dadada;
   &:hover {
-    color: #A6AAFB;
+    color: #a6aafb;
   }
 }
 
@@ -249,7 +258,7 @@
 }
 
 .payment-modal-tab.selected-tab {
-  border-bottom: 3px solid #E465A2;
+  border-bottom: 3px solid #e465a2;
 }
 
 .payment-modal-tab-text {
@@ -264,7 +273,7 @@
 }
 
 .payment-modal-tab-text.selected-tab {
-  color:rgba(255, 255, 255, 0.87) !important;
+  color: rgba(255, 255, 255, 0.87) !important;
   margin-bottom: 12px;
   @include respond-to("small") {
     margin-bottom: 3px;
@@ -307,8 +316,13 @@
 .stream-info-wrapper {
   width: 100%;
   height: 100px;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
-  border-top: 3px solid #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
+  border-top: 3px solid #07070f;
 }
 
 .stream-wrapper-mobile {
@@ -324,7 +338,12 @@
     width: 100%;
     position: relative;
     padding-bottom: 55%;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.08)
+      ),
+      #07070f;
   }
 }
 
@@ -520,8 +539,12 @@
 .stream-info-row {
   // padding-left: 10px;
   height: 100%;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
-
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
 }
 
 .buttons-row {
@@ -609,7 +632,7 @@
   width: auto;
   border-radius: 4px;
   background-color: white;
-  color: #07070F;
+  color: #07070f;
   // margin-right: 50%;
   //margin-top: 5px;
   cursor: pointer;
@@ -724,7 +747,7 @@
   display: flex;
   border-radius: 4px;
   background-color: white;
-  color: #07070F;
+  color: #07070f;
   width: 104px;
   height: 33px;
   align-items: center;
@@ -758,7 +781,7 @@
 }
 
 .stream-action-button-icon {
-  color: #07070F;
+  color: #07070f;
   padding-right: 10%;
 }
 
@@ -883,7 +906,7 @@
   //   ),
   //   #497be0;
   // background: linear-gradient(252.83deg, #E465A2 2.45%, #7BB3D3 96.72%), #C4C4C4;
-  background: linear-gradient(252.83deg, #EA91BD 2.45%, #A6AAFB 96.72%), #C4C4C4;
+  background: linear-gradient(252.83deg, #ea91bd 2.45%, #a6aafb 96.72%), #c4c4c4;
 }
 
 .waiting-for-artist-screen {
@@ -953,7 +976,7 @@
 }
 
 .parentDisable {
-  background: #07070F;
+  background: #07070f;
   z-index: 998;
   padding-top: 20vh;
   height: calc(-53px + 100vh);
@@ -961,7 +984,7 @@
 }
 
 .overlay-box {
-  background: #07070F;
+  background: #07070f;
   padding-top: 40vh;
   height: calc(-49px + 100vh);
   width: 100%;
@@ -969,7 +992,6 @@
     height: 100vh;
   }
 }
-
 
 .waiting-message-container {
   margin: 0;
@@ -983,7 +1005,6 @@
     transform: translate(-50%, -30%);
   }
 }
-
 
 .waiting-message1 {
   color: white;
@@ -1098,12 +1119,12 @@
 
 .mobile-payment-button {
   margin: 11px 8px;
-  background: #E465A2;
+  background: #e465a2;
   border-radius: 4px !important;
   padding: 0px !important;
   color: #000000 !important;
   &:hover {
-    background: #EA91BD !important;
+    background: #ea91bd !important;
   }
   &:disabled {
     background: rgba(255, 255, 255, 0.6) !important;
@@ -1179,8 +1200,13 @@
 }
 
 .controll-toolbar-row {
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
-  border-top: 1px solid #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
+  border-top: 1px solid #07070f;
   height: 70px;
   position: absolute;
   width: 100%;
@@ -1216,4 +1242,9 @@
 .mobile-no-show-waiting-msg {
   white-space: pre-wrap;
   line-height: 18px !important;
+}
+
+.ivs-video {
+  width: 100%;
+  height: 100%;
 }
