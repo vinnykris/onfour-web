@@ -38,7 +38,7 @@ function VideoPlayer({
   concert_id,
   is_live,
   stream_volume,
-  have_upcoming_concert
+  have_upcoming_concert,
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   var player = null;
@@ -183,44 +183,44 @@ function VideoPlayer({
   const player_ref = useRef();
   const [global_player, setGlobalPlayer] = useState();
 
-  useEffect(() => {
-    if (have_upcoming_concert) {
-      if (!timer_placeholder.length && is_live) {
-        player = videojs(
-          player_ref.current,
-          { autoplay: true, muted: false, controls: true, liveui: true },
-          () => {
-            player.src(url);
-          }
-        );
-        // configure plugins
-        player.landscapeFullscreen({
-          fullscreen: {
-            enterOnRotate: true,
-            alwaysInLandscapeMode: true,
-            iOS: true,
-          },
-        });
-        setGlobalPlayer(player);
-      }
-    }
-  }, [timer_placeholder.length, is_live]);
+  // useEffect(() => {
+  //   if (have_upcoming_concert) {
+  //     if (!timer_placeholder.length && is_live) {
+  //       player = videojs(
+  //         player_ref.current,
+  //         { autoplay: true, muted: false, controls: true, liveui: true },
+  //         () => {
+  //           player.src(url);
+  //         }
+  //       );
+  //       // configure plugins
+  //       player.landscapeFullscreen({
+  //         fullscreen: {
+  //           enterOnRotate: true,
+  //           alwaysInLandscapeMode: true,
+  //           iOS: true,
+  //         },
+  //       });
+  //       setGlobalPlayer(player);
+  //     }
+  //   }
+  // }, [timer_placeholder.length, is_live]);
 
   useEffect(() => {
-    return () => {
-      if (player) player.dispose();
-      if (global_player) global_player.dispose();
-      setGlobalPlayer();
-    };
+    // return () => {
+    //   if (player) player.dispose();
+    //   if (global_player) global_player.dispose();
+    //   setGlobalPlayer();
+    // };
   }, []);
 
-  useEffect(() => {
-    if (stream_volume) {
-      if (global_player) {
-        global_player.volume(stream_volume);
-      }
-    }
-  }, [stream_volume]);
+  // useEffect(() => {
+  //   if (stream_volume) {
+  //     if (global_player) {
+  //       global_player.volume(stream_volume);
+  //     }
+  //   }
+  // }, [stream_volume]);
 
   return (
     <div className="countdown-wrapper">
@@ -252,14 +252,22 @@ function VideoPlayer({
       ) : have_upcoming_concert ? (
         <div className="player-wrapper">
           {is_live ? (
-            <div data-vjs-player>
-              <div className="vjs-control-bar control-bar-top">
-                <div className="live-indicator">
-                  <span className="live-indicator-text">LIVE</span>
-                </div>
-              </div>
-              <video ref={player_ref} className="video-js" />
-            </div>
+            // <div data-vjs-player>
+            //   <div className="vjs-control-bar control-bar-top">
+            //     <div className="live-indicator">
+            //       <span className="live-indicator-text">LIVE</span>
+            //     </div>
+            //   </div>
+            //   <video ref={player_ref} className="video-js" />
+            // </div>
+            <ReactPlayer
+              className="video-player"
+              url={url}
+              width="100%"
+              height="100%"
+              playing
+              controls
+            />
           ) : (
             <div className="waiting-for-artist-screen">
               <div className="waiting-message-container">
