@@ -249,6 +249,7 @@ function VideoPlayer({
   //   };
   // }, []);
   useEffect(() => {
+    // IVS WORKAROUND SOURCE: https://github.com/cm-wada-yusuke/amazon-ivs-react-js-sample/blob/master/src/AmazonIVSWorkaround.js
     const script = document.createElement("script");
 
     script.src = "https://player.live-video.net/1.0.0/amazon-ivs-player.min.js";
