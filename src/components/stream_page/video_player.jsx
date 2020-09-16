@@ -206,7 +206,6 @@ function VideoPlayer({
   //           );
   //         }
   //       );
-
   //       // configure plugins
   //       player.landscapeFullscreen({
   //         fullscreen: {
@@ -276,6 +275,7 @@ function VideoPlayer({
     return () => {
       document.body.removeChild(script);
     };
+
   }, []);
 
   // useEffect(() => {
