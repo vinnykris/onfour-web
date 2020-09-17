@@ -22,8 +22,8 @@ export default function Call(props) {
   const callObject = useContext(CallObjectContext);
   if (callObject) {
     callObject.setBandwidth({
-      kbs: 40,
-      trackConstraints: { width: 640, height: 360, frameRate: 8 },
+      kbs: 30,
+      trackConstraints: { width: 320, height: 180, frameRate: 6 },
     });
   }
 
@@ -149,7 +149,7 @@ export default function Call(props) {
           isArtist={props.artist_name === callItem.username}
           mute_all={props.mute_all}
           username={callItem.username}
-          volume = {props.volume}
+          volume={props.volume}
         />
       );
       if (isLarge) {
