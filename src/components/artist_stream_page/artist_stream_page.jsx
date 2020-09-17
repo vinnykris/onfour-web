@@ -107,7 +107,7 @@ const StreamPage = () => {
       setGoLiveMsg(data.data.getConcert.is_live ? "DISCONNECT" : "GO LIVE");
     });
   };
-  
+
   // TOGGLE CHAT SECTION
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-left");
   const toggleChat = () => {
@@ -207,25 +207,25 @@ const StreamPage = () => {
                 </Col>
                 <Col size={1} id="chat_container">
                   <Row className="full-width-video">
-                      <div className="artist-stream-wrapper" id="video_player">
-                        <VideoPlayer
-                          url={
-                            "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
-                          }
-                          is_live={is_live}
-                        />
-                        <div className="viewer-number-overlay">
-                          <div className="viewers-container">
-                            <img
-                              src={viewers_icon}
-                              className="stream-action-viewers"
-                            />
-                            <div className="segmented-button-text viewer-count">
-                              {viewers}
-                            </div>
+                    <div className="artist-stream-wrapper" id="video_player">
+                      <VideoPlayer
+                        url={
+                          "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
+                        }
+                        is_live={is_live}
+                      />
+                      <div className="viewer-number-overlay">
+                        <div className="viewers-container">
+                          <img
+                            src={viewers_icon}
+                            className="stream-action-viewers"
+                          />
+                          <div className="segmented-button-text viewer-count">
+                            {viewers}
                           </div>
                         </div>
-                        {/* <div className="artist-timer-wrapper">
+                      </div>
+                      {/* <div className="artist-timer-wrapper">
                         <CountdownTimer
                           // start_date={start_date}
                           // start_time={start_time}
@@ -234,7 +234,7 @@ const StreamPage = () => {
                           time_up_message={"You Reached Your Scheduled Time!"}
                         />
                       </div> */}
-                      </div>
+                    </div>
                   </Row>
                   <Row className="full-width-chat">
                     <div className="artist-chat-main" id="chat_main">
