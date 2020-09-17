@@ -22,8 +22,8 @@ export default function Call(props) {
   const callObject = useContext(CallObjectContext);
   if (callObject) {
     callObject.setBandwidth({
-      kbs: 30,
-      trackConstraints: { width: 320, height: 180, frameRate: 6 },
+      kbs: 50,
+      trackConstraints: { width: 320, height: 180, frameRate: 8 },
     });
   }
 
