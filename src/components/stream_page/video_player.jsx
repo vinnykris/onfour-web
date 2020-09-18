@@ -231,7 +231,8 @@ function VideoPlayer({
               <h3 className="header-4">Next Stream Coming Soon</h3>
               {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
               <h5 className="header-7">
-                {artist_name} - {concert_name}
+                {artist_name}
+                {/* - {concert_name} */}
               </h5>
             </div>
           ) : (
@@ -239,7 +240,8 @@ function VideoPlayer({
               <h3 className="header-3">Next Stream Coming Soon</h3>
               {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
               <h5 className="header-5">
-                {artist_name} - {concert_name}
+                {artist_name}
+                {/* - {concert_name} */}
               </h5>
             </div>
           )}

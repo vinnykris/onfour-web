@@ -31,7 +31,7 @@ export const getMemories = async (username) => {
     archive_videos.push(
       <ArchiveVideo
         artist_name={data.artist_name}
-        concert_name={data.concert_name}
+        // concert_name={data.concert_name}
         concert_date={data.concert_date}
         url={data.video_url}
         length={data.video_length}

@@ -501,7 +501,7 @@ const StreamPage = ({ is_soundcheck }) => {
                               : show_start_time
                           }
                           artist_name={artist_name}
-                          concert_name={concert_name}
+                          // concert_name={concert_name}
                           auth={auth}
                           username={username}
                           concert_id={concert_id}
@@ -949,7 +949,7 @@ const StreamPage = ({ is_soundcheck }) => {
                             : show_start_time
                         }
                         artist_name={artist_name}
-                        concert_name={concert_name}
+                        // concert_name={concert_name}
                         auth={auth}
                         username={username}
                         concert_id={concert_id}

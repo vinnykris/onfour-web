@@ -10,7 +10,7 @@ import "./archive_styles.scss";
 // Container for each past performance object
 const ArchivePerformanceText = ({
   artist_name,
-  concert_name,
+  // concert_name,
   date,
   video_length,
 }) => {
@@ -40,7 +40,7 @@ const ArchivePerformanceText = ({
       <Row>
         <Col size={1}>
           <h4 className="archive-video-header">
-            {artist_name} - {concert_name} | {formatted_date}
+            {artist_name} | {formatted_date}
           </h4>
         </Col>
       </Row>
