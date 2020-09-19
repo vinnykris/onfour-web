@@ -92,13 +92,12 @@ const StreamPage = ({ is_soundcheck }) => {
   const [stream_volume, setStreamVolume] = useState(1.0);
   const [have_upcoming_concert, setHaveUpcomingConcert] = useState(true);
 
-  const history = useHistory();
+  const history = useHistory(0);
 
   // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
   };
-
   // Function passed as prop to chat to get viewer numbers
   const getViewers = (num_viewers) => {
     setViewers(num_viewers);
@@ -773,9 +772,10 @@ const StreamPage = ({ is_soundcheck }) => {
                       </Row>
                       <Row className="chat-row">
                         <Chat
-                          chat_name={username ? username : "GUEST"}
+                          chat_name={username ? username : "GUEST"+ (Math.floor(Math.random() * 99) + 9999) }
                           chatStatus={chatStatus}
                           setViewers={getViewers}
+                          // setguestid={getguestid}
                         />
                       </Row>
                       {/* <Row className="controll-toolbar-row">
@@ -1000,7 +1000,7 @@ const StreamPage = ({ is_soundcheck }) => {
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
                     <Chat
-                      chat_name={username ? username : "GUEST"}
+                      chat_name={username ? username : "GUEST"+(Math.floor(Math.random() * 10000) + 10000).toString().substring(1)}
                       chatStatus={chatStatus}
                       setViewers={getViewers}
                     />

@@ -76,9 +76,28 @@ const Chat = ({ chat_name, chatStatus, setViewers, artistView }) => {
   const sendMessage = (event) => {
     event.preventDefault();
     if (name === "GUEST") {
-      alert(
-        "You cannot send messages as a guest. Please log in to send messages!"
-      );
+      // alert(
+      //   "You cannot send messages as a guest. Please log in to send messages!"
+      // );
+      if (message) {
+        if (message.length > 250) {
+          alert("Message cannot be longer than 250 characters.");
+        } else {
+          Analytics.record({ name: "chatButtonPressed" }); // this record the chat button press
+          socket.emit("sendMessage", message, (error) => {
+            // Error checking if connection is lost
+            setMessage("");
+            if (error) {
+              Analytics.record({ name: "chatError" }); // this record the chat button press
+              setError("Lost connection to chat. Press 'OK' to reconnect.");
+              closeChat();
+            } else {
+              setError("");
+              setMessage("");
+            }
+          });
+        }
+      }
     } else {
       // console.log(name);
       if (message) {
