@@ -59,7 +59,7 @@ const checkoutBox = (props) => {
               <p className="subtitle-2 text-color">
                 {props.general_price
                   ? "$" + props.general_price.toString()
-                  : "free"}
+                  : "pay what you want"}
               </p>
             </p>
           </div>
@@ -85,21 +85,27 @@ const checkoutBox = (props) => {
           </div>
         </div>
         {props.username ? (
-          props.general_price ? (
-            <button
-              className="checkout-modal-checkout-button button-text"
-              onClick={props.goToCheckout}
-            >
-              CHECK OUT
-            </button>
-          ) : (
-            <button
-              className="checkout-modal-checkout-button button-text"
-              onClick={props.addTicket}
-            >
-              GET TICKET
-            </button>
-          )
+          //   props.general_price ? (
+          //     <button
+          //       className="checkout-modal-checkout-button button-text"
+          //       onClick={props.goToCheckout}
+          //     >
+          //       CHECK OUT
+          //     </button>
+          //   ) : (
+          //     <button
+          //       className="checkout-modal-checkout-button button-text"
+          //       onClick={props.addTicket}
+          //     >
+          //       GET TICKET
+          //     </button>
+          //   )
+          <button
+            className="checkout-modal-checkout-button button-text"
+            onClick={props.goToCheckout}
+          >
+            CHECK OUT
+          </button>
         ) : props.general_price ? (
           <NavLink
             to={{
@@ -119,7 +125,7 @@ const checkoutBox = (props) => {
             }}
           >
             <button className="checkout-modal-checkout-button button-text">
-              GET TICKET
+              CHECK OUT
             </button>
           </NavLink>
         )}
