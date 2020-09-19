@@ -85,7 +85,7 @@ const CheckoutForm = (props) => {
   // It's sending the Stripe token to the AWS lambda function for executing the payment
   const submitPayment = async (event) => {
     event.preventDefault();
-    if (props.amount_value) {
+    if (props.amount_value > 0) {
       setWaiting(true);
 
       if (!stripe || !elements) {
@@ -134,90 +134,102 @@ const CheckoutForm = (props) => {
 
   return (
     <div className="donate-box-container">
-      <form id="ticket" className="ticket-form" onSubmit={submitPayment}>
-        {(() => {
-          if (!payed) {
-            return (
-              <div>
-                {display_err ? (
-                  <p className="error-msg">{payment_message}</p>
-                ) : (
-                  <br></br>
-                )}
-                <input
-                  name="name"
-                  label="Name"
-                  type="name"
-                  placeholder="Your Name"
-                  className="donate-form-input body-1 short-width-input"
-                  required
-                  {...name}
-                />
-                <input
-                  name="email"
-                  label="Email"
-                  type="email"
-                  placeholder="Your Email"
-                  className="donate-form-input body-1 short-width-input"
-                  required
-                  {...email}
-                />
-                {props.amount_value > 0 ? (
-                  <div className="donate-form-input body-1">
-                    <CardElement options={cardElementOpts} />
-                  </div>
-                ) : null}
-
-                {need_confirm ? (
-                  <div>
+      {props.amount_value > 0 ? (
+        <form id="ticket" className="ticket-form" onSubmit={submitPayment}>
+          {(() => {
+            if (!payed) {
+              return (
+                <div>
+                  {display_err ? (
+                    <p className="error-msg">{payment_message}</p>
+                  ) : (
                     <br></br>
-                    <button
-                      className="donate-button button-text"
-                      type="toConfirm"
-                      disabled={!stripe}
-                      onClick={needConfirmation}
-                    >
-                      PAY NOW
-                    </button>
-                    <p className="venmo-text segmented-button-text secure-msg">
-                      *Your payment is secured via Stripe.
-                    </p>
-                  </div>
-                ) : (
+                  )}
                   <div>
-                    {waiting ? (
+                    <input
+                      name="name"
+                      label="Name"
+                      type="name"
+                      placeholder="Your Name"
+                      className="donate-form-input body-1 short-width-input"
+                      required
+                      {...name}
+                    />
+                    <input
+                      name="email"
+                      label="Email"
+                      type="email"
+                      placeholder="Your Email"
+                      className="donate-form-input body-1 short-width-input"
+                      required
+                      {...email}
+                    />
+                    <div className="donate-form-input body-1">
+                      <CardElement options={cardElementOpts} />
+                    </div>
+                    {need_confirm ? (
                       <div>
-                        <p className="donate-process-text body-1">Processing</p>
+                        <br></br>
+                        <button
+                          className="donate-button button-text"
+                          type="toConfirm"
+                          disabled={!stripe}
+                          onClick={needConfirmation}
+                        >
+                          PAY NOW
+                        </button>
+                        <p className="venmo-text segmented-button-text secure-msg">
+                          *Your payment is secured via Stripe.
+                        </p>
                       </div>
                     ) : (
                       <div>
-                        <p className="donate-process-text body-1">
-                          Please confirm you are paying ${props.amount_value}
-                        </p>
-                        <button
-                          form="ticket"
-                          className="donate-button button-text"
-                          type="submit"
-                          disabled={!stripe}
-                        >
-                          Confirm
-                        </button>
+                        {waiting ? (
+                          <div>
+                            <p className="donate-process-text body-1">
+                              Processing
+                            </p>
+                          </div>
+                        ) : (
+                          <div>
+                            <p className="donate-process-text body-1">
+                              Please confirm you are paying $
+                              {props.amount_value}
+                            </p>
+                            <button
+                              form="ticket"
+                              className="donate-button button-text"
+                              type="submit"
+                              disabled={!stripe}
+                            >
+                              Confirm
+                            </button>
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
-                )}
-              </div>
-            );
-          } else {
-            return (
-              <div>
-                <br></br>
-                <div className="pay_sucess_msg body-1">Payment Successful!</div>
-              </div>
-            );
-          }
-        })()}
-      </form>
+                </div>
+              );
+            } else {
+              return (
+                <div>
+                  <br></br>
+                  <div className="pay_sucess_msg body-1">Payment Successful!</div>
+                </div>
+              );
+            }
+          })()}
+        </form>
+      ) : (
+        <button
+          form="pay-as-you-want-price-form"
+          className="donate-button button-text"
+          type="submit"
+        >
+          GET TICKET
+        </button>
+      )}
     </div>
   );
 };

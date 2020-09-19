@@ -401,6 +401,7 @@ const Concert = (props) => {
         input: payload,
       })
     );
+    console.log("finish updating user");
     hideModal();
     setShowStub(true);
     setHasTicket(true);
