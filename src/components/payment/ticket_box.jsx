@@ -28,21 +28,10 @@ const CheckoutForm = (props) => {
   const [payment_message, setMessage] = useState(""); // Variable to store the payment error message
   const [display_err, setDisplayErr] = useState(false); // Variable to display error message
   const [waiting, setWaiting] = useState(false); // Variable to display processing message
-  const [block_submit, setBlockSubmit] = useState(false);
 
   // Input form values
   const name = useInputValue("");
   const email = useInputValue("");
-
-  useEffect(() => {
-    if (props.should_disable) {
-      setBlockSubmit(true);
-      console.log("submit should not be allowed");
-    } else {
-      setBlockSubmit(false);
-      console.log("submit should be allowed");
-    }
-  }, [props.should_disable]);
 
   // Style defination for card information input section
   const iframeStyles = {
@@ -185,7 +174,7 @@ const CheckoutForm = (props) => {
                     <button
                       className="donate-button button-text"
                       type="toConfirm"
-                      disabled={!stripe || block_submit}
+                      disabled={!stripe}
                       onClick={needConfirmation}
                     >
                       PAY NOW

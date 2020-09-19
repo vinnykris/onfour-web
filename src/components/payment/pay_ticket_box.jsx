@@ -7,6 +7,7 @@ import { Grid, Row, Col } from "../grid";
 import "./checkout_styles.scss";
 
 import TicketBox from "./ticket_box";
+import { useWindowDimensions } from "../custom_hooks";
 
 const PayTicketBox = (props) => {
   const checked_backstage_pass =
@@ -17,6 +18,7 @@ const PayTicketBox = (props) => {
   // const [entered_value, setEnteredValue] = useState(null);
   const [total_price, setTotalPrice] = useState(props.total);
   const [allow_custom_price, setAllowCustomPrice] = useState(false);
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   useEffect(() => {
     if (props.total == 0) {
@@ -53,29 +55,16 @@ const PayTicketBox = (props) => {
           {checked_backstage_pass ? (
             <div className="ticket-summery-form">
               {allow_custom_price ? (
-                <div className="ticket-summery-field align-left subtitle-1">
-                  Name your price:
-                </div>
-              ) : (
-                <div className="ticket-summery-field lh-33 align-left subtitle-1">
-                  1x General Admission ticket
-                </div>
-              )}
-
-              <div className="ticket-summery-field lh-33 align-left subtitle-1">
-                1x Backstage Pass
-              </div>
-              <div className="ticket-summery-field lh-33 align-right subtitle-1 top-border total-text">
-                {`Total: $${total_price}`}
-              </div>
-            </div>
-          ) : (
-            <div className="ticket-summery-form">
-              {allow_custom_price ? (
                 <div className="name-your-price-container">
-                  <div className="custom-ticket-summery-field align-left subtitle-1">
-                    Name your price:
-                  </div>
+                  {width > 600 ? (
+                    <div className="ticket-summery-field align-left subtitle-1">
+                      Name your price:
+                    </div>
+                  ) : (
+                    <div className="ticket-summery-field align-left subtitle-2">
+                      Name your price:
+                    </div>
+                  )}
                   <NumberFormat
                     className="custom-ticket-form-input body-1 short-width-input"
                     name="amount"
@@ -91,7 +80,47 @@ const PayTicketBox = (props) => {
                   />
                 </div>
               ) : (
-                <div className="ticket-summery-field lh-33 align-left subtitle-1">
+                <div className="ticket-summery-field align-left subtitle-1">
+                  1x General Admission ticket
+                </div>
+              )}
+
+              <div className="ticket-summery-field align-left subtitle-1">
+                1x Backstage Pass
+              </div>
+              <div className="ticket-summery-field align-right subtitle-1 top-border total-text">
+                {`Total: $${total_price}`}
+              </div>
+            </div>
+          ) : (
+            <div className="ticket-summery-form">
+              {allow_custom_price ? (
+                <div className="name-your-price-container">
+                  {width > 600 ? (
+                    <div className="ticket-summery-field align-left subtitle-1">
+                      Name your price:
+                    </div>
+                  ) : (
+                    <div className="ticket-summery-field align-left subtitle-2">
+                      Name your price:
+                    </div>
+                  )}
+                  <NumberFormat
+                    className="custom-ticket-form-input body-1 short-width-input"
+                    name="amount"
+                    placeholder="USD"
+                    // value={entered_value}
+                    onChange={(event) =>
+                      setUserPrice(event.target.value.substring(1))
+                    }
+                    prefix="$"
+                    decimalScale={2}
+                    required
+                    allowNegative={false}
+                  />
+                </div>
+              ) : (
+                <div className="ticket-summery-field align-left subtitle-1">
                   1x General Admission ticket
                 </div>
               )}
