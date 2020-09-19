@@ -48,7 +48,7 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
 
   return (
     <div className="input-container">
-      {auth ? (
+      
         <form className="text-chat-form">
           <input
             className="body-2 text-chat-input"
@@ -94,32 +94,7 @@ const Input = ({ message, setMessage, sendMessage, name }) => {
           </button>
           {/* </ChatTooltip> */}
         </form>
-      ) : (
-        <form className="text-chat-form">
-          <input
-            className="body-2 text-chat-input"
-            type="text"
-            placeholder="Please sign in to send messages!"
-            disabled
-          />
-          {/* visibility toggler */}
-          <div
-            className="emoji-button"
-            onClick={(event) =>
-              setEmojiPickerVisibility(!emojiPickerVisibility)
-            }
-          >
-            <i class="fa fa-smile-o" aria-hidden="true"></i>
-          </div>
-          <button
-            className="send-button"
-            disabled={!message}
-            onClick={(event) => sendMessage(event)}
-          >
-            <i className="fa fa-send"></i>
-          </button>
-        </form>
-      )}
+      
     </div>
   );
 };

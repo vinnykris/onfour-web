@@ -30,8 +30,20 @@ const Message = ({ message: { user, text }, name }) => {
     "onfour-spencer",
   ];
 
-  const color_id = (user.length + user.charCodeAt(0)) % 5;
-
+  var color_id = (user.length + user.charCodeAt(0)) % 5;
+  // var res = user.substr(5, );
+  var res = user.substr(0,5);
+  console.log(color_id);
+if (res=="guest"){
+  var num=parseInt(user.substr(5,));
+  // console.log(num);
+  color_id=(num)%5;
+  console.log(color_id+"color");
+}
+// else{
+//   color_id = (user.length + user.charCodeAt(0)) % 5;
+// }
+  
   // Setting booleans based on user
   if (user === trimmed_name) {
     is_sent_by_current_user = true;
@@ -54,6 +66,7 @@ const Message = ({ message: { user, text }, name }) => {
   //       }
 
   //     };
+  
 
   return is_sent_by_current_user ? (
     <div className="message-container justify-start">
