@@ -87,7 +87,7 @@ const CheckoutForm = (props) => {
   // It's sending the Stripe token to the AWS lambda function for executing the payment
   const submitPayment = async (event) => {
     event.preventDefault();
-    if (props.amount_value) {
+    if (props.amount_value > 0) {
       setWaiting(true);
 
       if (!stripe || !elements) {
@@ -166,7 +166,6 @@ const CheckoutForm = (props) => {
                       required
                       {...email}
                     />
-
                     <div className="donate-form-input body-1">
                       <CardElement options={cardElementOpts} />
                     </div>

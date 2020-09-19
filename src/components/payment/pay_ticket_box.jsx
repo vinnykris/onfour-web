@@ -39,6 +39,9 @@ const PayTicketBox = (props) => {
   //     setUserPrice(parseInt(entered_value, 10));
   //   }
   // }, [entered_value]);
+  const addFreeTicket = () => {
+    props.addTicket();
+  };
 
   return (
     <Grid className="checkout-modal-grid">
@@ -56,7 +59,11 @@ const PayTicketBox = (props) => {
           {checked_backstage_pass ? (
             <div className="ticket-summery-form">
               {allow_custom_price ? (
-                <div className="name-your-price-container">
+                <form
+                  className="name-your-price-container"
+                  id="pay-as-you-want-price-form"
+                  onSubmit={addFreeTicket}
+                >
                   {width > 600 ? (
                     <div className="ticket-summery-field align-left subtitle-1">
                       Name your price:
@@ -80,7 +87,7 @@ const PayTicketBox = (props) => {
                     required
                     allowNegative={false}
                   />
-                </div>
+                </form>
               ) : (
                 <div className="ticket-summery-field align-left subtitle-1">
                   1x General Admission ticket
@@ -97,7 +104,11 @@ const PayTicketBox = (props) => {
           ) : (
             <div className="ticket-summery-form">
               {allow_custom_price ? (
-                <div className="name-your-price-container">
+                <form
+                  className="name-your-price-container"
+                  id="pay-as-you-want-price-form"
+                  onSubmit={addFreeTicket}
+                >
                   {width > 600 ? (
                     <div className="ticket-summery-field align-left subtitle-1">
                       Name your price:
@@ -121,7 +132,7 @@ const PayTicketBox = (props) => {
                     required
                     allowNegative={false}
                   />
-                </div>
+                </form>
               ) : (
                 <div className="ticket-summery-field align-left subtitle-1">
                   1x General Admission ticket
