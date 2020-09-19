@@ -38,6 +38,7 @@ export default function VideoChatApp({
   artistView,
   colNum,
   stream_vol_adjust,
+  stream_volume_value,
 }) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
@@ -51,7 +52,7 @@ export default function VideoChatApp({
   // const self_create_room_name = useInputValue(roomUrl ? roomUrl : "");
   const [already_created_room_name, setCreatedRoomName] = useState("");
   const [isRoomCreated, setIsRoomCreated] = useState(false);
-  const [error_msg, setErrorMsg] = useState('');
+  const [error_msg, setErrorMsg] = useState("");
 
   /**
    * Creates a new call room.
@@ -61,7 +62,7 @@ export default function VideoChatApp({
     // console.log(is_created);
     let response = await api.createRoom(room_name, is_created);
     if (response.url) {
-      return response.url
+      return response.url;
     } else if (response.error) {
       setErrorMsg(response.info);
       setRoomUrl(null);
@@ -142,8 +143,8 @@ export default function VideoChatApp({
   }, []);
 
   /**
-  * Starts leaving the current call.
-  */
+   * Starts leaving the current call.
+   */
   const startLeavingCall = useCallback(() => {
     if (!callObject) return;
     setAppState(STATE_LEAVING);
@@ -215,38 +216,38 @@ export default function VideoChatApp({
   //   }
   // }, [startJoiningPrivateCall]);
 
-    /**
-    * Update the page's URL to reflect the active call when roomUrl changes.
-    *
-    * This demo uses replaceState rather than pushState in order to avoid a bit
-    * of state-management complexity. See the comments around enableCallButtons
-    * and enableStartButton for more information.
-    */
-    useEffect(() => {
-      const pageUrl = pageUrlFromRoomUrl(roomUrl);
-      if (pageUrl === window.location.href) return;
-      window.history.replaceState(null, null, pageUrl);
-    }, [roomUrl]);
+  /**
+   * Update the page's URL to reflect the active call when roomUrl changes.
+   *
+   * This demo uses replaceState rather than pushState in order to avoid a bit
+   * of state-management complexity. See the comments around enableCallButtons
+   * and enableStartButton for more information.
+   */
+  useEffect(() => {
+    const pageUrl = pageUrlFromRoomUrl(roomUrl);
+    if (pageUrl === window.location.href) return;
+    window.history.replaceState(null, null, pageUrl);
+  }, [roomUrl]);
 
-    /**
-    * Uncomment to attach call object to window for debugging purposes.
-    */
-    // useEffect(() => {
-    //   window.callObject = callObject;
-    // }, [callObject]);
+  /**
+   * Uncomment to attach call object to window for debugging purposes.
+   */
+  // useEffect(() => {
+  //   window.callObject = callObject;
+  // }, [callObject]);
 
-    /**
-    * Update app state based on reported meeting state changes.
-    *
-    * NOTE: Here we're showing how to completely clean up a call with destroy().
-    * This isn't strictly necessary between join()s, but is good practice when
-    * you know you'll be done with the call object for a while and you're no
-    * longer listening to its events.
-    */
-    useEffect(() => {
-      if (!callObject) return;
+  /**
+   * Update app state based on reported meeting state changes.
+   *
+   * NOTE: Here we're showing how to completely clean up a call with destroy().
+   * This isn't strictly necessary between join()s, but is good practice when
+   * you know you'll be done with the call object for a while and you're no
+   * longer listening to its events.
+   */
+  useEffect(() => {
+    if (!callObject) return;
 
-      const events = ["joined-meeting", "left-meeting", "error"];
+    const events = ["joined-meeting", "left-meeting", "error"];
 
     function handleNewMeetingState(event) {
       event && logDailyEvent(event);
@@ -319,16 +320,16 @@ export default function VideoChatApp({
   // const enableCallButtons = [STATE_JOINED, STATE_ERROR].includes(appState);
 
   /**
-  * Only enable the start button if we're in an idle state (i.e. not creating,
-  * joining, etc.).
-  *
-  * !!!
-  * IMPORTANT: only one call object is meant to be used at a time. Creating a
-  * new call object with DailyIframe.createCallObject() *before* your previous
-  * callObject.destroy() completely finishes can result in unexpected behavior.
-  * Disabling the start button until then avoids that scenario.
-  * !!!
-  */
+   * Only enable the start button if we're in an idle state (i.e. not creating,
+   * joining, etc.).
+   *
+   * !!!
+   * IMPORTANT: only one call object is meant to be used at a time. Creating a
+   * new call object with DailyIframe.createCallObject() *before* your previous
+   * callObject.destroy() completely finishes can result in unexpected behavior.
+   * Disabling the start button until then avoids that scenario.
+   * !!!
+   */
   const enableStartButton = appState === STATE_IDLE;
 
   const room_ids = [
@@ -336,7 +337,7 @@ export default function VideoChatApp({
     "public-room-2",
     "public-room-3",
     // isRoomCreated? already_created_room_name : "create-room",
-    "create-room"
+    "create-room",
   ];
 
   const switchRoom = (room_number) => {
@@ -374,10 +375,8 @@ export default function VideoChatApp({
 
   const switchToPrivateVideoChat = () => {
     if (document.getElementById("public-room")) {
-      document.getElementById("public-room").style.color =
-        "rgb(173, 173, 173)";
-      document.getElementById("private-room").style.color =
-        "white";
+      document.getElementById("public-room").style.color = "rgb(173, 173, 173)";
+      document.getElementById("private-room").style.color = "white";
       setIsPublic(false);
       startLeavingCall();
     }
@@ -394,11 +393,11 @@ export default function VideoChatApp({
   };
 
   const room_max_map = {
-    "room1": 4,
-    "room2": 6,
-    "room3": 10
+    room1: 4,
+    room2: 6,
+    room3: 10,
   };
-  
+
   return (
     <div className={(artistView ? "artist-" : "") + "app"} id="video-chat-main">
       {artistView ? null : (
@@ -492,6 +491,7 @@ export default function VideoChatApp({
             volume={volume}
             adjust_volume={setVolume}
             stream_vol_adjust={stream_vol_adjust}
+            stream_volume_value={stream_volume_value}
           />
         </CallObjectContext.Provider>
       ) : (
@@ -500,7 +500,9 @@ export default function VideoChatApp({
             <div className="enter-video-chat-prompt">
               {!artistView ? (
                 <div className="public-video-notice message-text">
-                  {"Please use headphones to avoid audio feedback issues. \nThis is a public room, so get ready to make some new friends!"}
+                  {
+                    "Please use headphones to avoid audio feedback issues. \nThis is a public room, so get ready to make some new friends!"
+                  }
                 </div>
               ) : null}
               <StartButton
@@ -523,7 +525,9 @@ export default function VideoChatApp({
           isRoomCreated ? (
             <div className="enter-video-chat-prompt">
               <div className="public-video-notice message-text">
-                {"Rejoin the private room I was in! \nTo create a new room, refresh on this page"}
+                {
+                  "Rejoin the private room I was in! \nTo create a new room, refresh on this page"
+                }
               </div>
               <StartButton
                 create_room={false}

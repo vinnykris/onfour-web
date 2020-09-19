@@ -768,6 +768,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           user_name={username ? username : "GUEST"}
                           artist_name="vinnykris"
                           stream_vol_adjust={setStreamVolume}
+                          stream_volume_value={stream_volume}
                         ></VideoChat>
                       </Row>
                       <Row className="chat-row">

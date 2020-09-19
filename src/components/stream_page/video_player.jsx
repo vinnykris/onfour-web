@@ -20,6 +20,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
+import { registerIVSTech } from "amazon-ivs-player";
 
 // Styling Imports
 import "./stream_styles.scss";
@@ -42,6 +43,8 @@ function VideoPlayer({
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   var player = null;
+  const div_el = useRef(null);
+  const video_el = useRef(null);
 
   // This function calculates the time difference between current time and show start time
   // and represent the difference in days, hours, minuts and seconds
@@ -180,50 +183,108 @@ function VideoPlayer({
 
   // if (auth) {
 
-  const player_ref = useRef();
+  // const player_ref = useRef();
+  // registerIVSTech(videojs);
   const [global_player, setGlobalPlayer] = useState();
 
+  // useEffect(() => {
+  //   if (have_upcoming_concert) {
+  //     if (!timer_placeholder.length && is_live) {
+  //       player = videojs(
+  //         player_ref.current,
+  //         {
+  //           techOrder: ["AmazonIVS"],
+  //           autoplay: true,
+  //           muted: false,
+  //           controls: true,
+  //           liveui: true,
+  //         },
+  //         () => {
+  //           console.log("player is ready");
+  //           player.src(
+  //             "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
+  //           );
+  //         }
+  //       );
+  //       // configure plugins
+  //       player.landscapeFullscreen({
+  //         fullscreen: {
+  //           enterOnRotate: true,
+  //           alwaysInLandscapeMode: true,
+  //           iOS: true,
+  //         },
+  //       });
+  //       setGlobalPlayer(player);
+  //     }
+  //     // if (IVSPlayer.isPlayerSupported) {
+  //     //   const player = IVSPlayer.create();
+  //     //   player.attachHTMLVideoElement(
+  //     //     document.getElementById("video-player")
+  //     //   );
+  //     //   player.load(PLAYBACK_URL);
+  //     //   player.play();
+  //     // }
+  //     //}
+  //   }
+  // }, [timer_placeholder.length, is_live]);
+
+  // useEffect(() => {
+  //   let script = document.createElement('script');
+  //   script.onload = function(){
+  //     if (IVSPlayer.isPlayerSupported) {
+  //       const player = IVSPlayer.create();
+  //       player.attachHTMLVideoElement(document.getElementById('video-player'));
+  //       player.load("https://fcc3ddae59ed.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527354.channel.DmumNckWFTqz.m3u8");
+  //       player.play();
+  //     }
+  //   }
+  //   script.src = "https://player.live-video.net/1.0.0/amazon-ivs-player.min.js";
+  //   const node = player_ref.current;
+  //   node.appendChild(script);
+  //   return () => {
+  //     if (player) player.dispose();
+  //     if (global_player) global_player.dispose();
+  //     setGlobalPlayer();
+  //   };
+  // }, []);
   useEffect(() => {
-    if (have_upcoming_concert) {
-      if (!timer_placeholder.length && is_live) {
-        player = videojs(
-          player_ref.current,
-          {
-            autoplay: true,
-            muted: false,
-            controls: true,
-            liveui: true,
-            liveTracker: false,
-          },
-          () => {
-            player.src(url);
-          }
+    // IVS WORKAROUND SOURCE: https://github.com/cm-wada-yusuke/amazon-ivs-react-js-sample/blob/master/src/AmazonIVSWorkaround.js
+    const script = document.createElement("script");
+
+    script.src = "https://player.live-video.net/1.0.0/amazon-ivs-player.min.js";
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      // eslint-disable-next-line no-undef
+      if (IVSPlayer.isPlayerSupported) {
+        // eslint-disable-next-line no-undef
+        const player = IVSPlayer.create();
+        player.attachHTMLVideoElement(document.getElementById("video-player"));
+
+        // player.load(
+        //   "https://fcc3ddae59ed.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527354.channel.DmumNckWFTqz.m3u8"
+        // );
+        player.load(
+          "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
         );
-        // configure plugins
-        player.landscapeFullscreen({
-          fullscreen: {
-            enterOnRotate: true,
-            alwaysInLandscapeMode: true,
-            iOS: true,
-          },
-        });
+        player.play();
         setGlobalPlayer(player);
       }
-    }
-  }, [timer_placeholder.length, is_live]);
+    };
 
-  useEffect(() => {
     return () => {
-      if (player) player.dispose();
-      if (global_player) global_player.dispose();
-      setGlobalPlayer();
+      document.body.removeChild(script);
     };
   }, []);
 
   useEffect(() => {
     if (stream_volume) {
       if (global_player) {
-        global_player.volume(stream_volume);
+        global_player.setVolume(stream_volume);
+        console.log(stream_volume);
+        console.log(global_player.getVolume());
       }
     }
   }, [stream_volume]);
@@ -258,17 +319,30 @@ function VideoPlayer({
           </div>
         </div>
       ) : have_upcoming_concert ? (
-        <div className="player-wrapper">
+        <div className="player-wrapper" ref={div_el}>
           {is_live ? (
-            <div data-vjs-player>
-              <div className="vjs-control-bar control-bar-top">
-                <div className="live-indicator">
-                  <span className="live-indicator-text">LIVE</span>
-                </div>
-              </div>
-              <video ref={player_ref} className="video-js" />
-            </div>
+            // <div data-vjs-player>
+            //   <div className="vjs-control-bar control-bar-top">
+            //     <div className="live-indicator">
+            //       <span className="live-indicator-text">LIVE</span>
+            //     </div>
+            //   </div>
+            //   <video ref={player_ref} className="video-js" />
+            // </div>
+            // <video id="video-player" playsInline controls></video>
+            <video
+              id="video-player"
+              ref={video_el}
+              playsInline
+              autoPlay
+              controls
+              className="ivs-video"
+            />
           ) : (
+            // <video id="video-player" playsinline controls autoplay></video>
+            // <div class="video-container">
+            // <video id="amazon-ivs-videojs" class="video-js vjs-4-3 vjs-big-play-centered" controls autoplay playsinline></video>
+            // </div>
             <div className="waiting-for-artist-screen">
               <div className="waiting-message-container">
                 <div className="not-live-loader">
