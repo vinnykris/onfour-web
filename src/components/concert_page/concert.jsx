@@ -454,12 +454,13 @@ const Concert = (props) => {
   // };
   const addEvent = async () => {
     const eventLoad = {
-      summary:
-        concert_info.artist_name +
-        " - " +
-        concert_info.concert_name +
-        "(concert)",
-      description: "onfour concert!",
+      // summary:
+      //   concert_info.artist_name +
+      //   " - " +
+      //   concert_info.concert_name +
+      //   "(concert)",
+      summary: concert_info.artist_name + "Concert",
+      description: "Concert hosted on https://onfour.live",
       start: {
         dateTime: new Date(
           concert_info.date + "T" + concert_info.time + ".000-04:00"
@@ -502,7 +503,7 @@ const Concert = (props) => {
     <div className="concert-page">
       {width <= 600 ? (
         <div className="mobile-concert-page">
-          {show_stub && concert_info ? (
+          {/* {show_stub && concert_info ? (
             <span className="stub-background">
               <ClickAwayListener onClickAway={animationEnd}>
                 <div className="centered-stub-container">
@@ -562,7 +563,7 @@ const Concert = (props) => {
                 </div>
               </ClickAwayListener>
             </span>
-          ) : null}
+          ) : null} */}
           {!concert_info ? (
             <div className="overlay-box">
               <ScaleLoader
@@ -608,7 +609,7 @@ const Concert = (props) => {
                     username={username}
                     location={location}
                     artist_name={concert_info.artist_name}
-                    concert_name={concert_info.concert_name}
+                    // concert_name={concert_info.concert_name}
                     concert_full_time={
                       concert_info.week_day +
                       ", " +
@@ -734,7 +735,8 @@ const Concert = (props) => {
                         className="primary-button button-text full-width-button"
                         onClick={getTicket}
                       >
-                        {total > 0 ? "BUY TICKETS" : "RSVP"}
+                        {"GET TICKET"}
+                        {/* {total > 0 ? "GET TICKET" : "GET TICKET"} */}
                       </button>
                     )}
                   </Col>
@@ -742,8 +744,9 @@ const Concert = (props) => {
                 <Row>
                   <Col className="no-stretch-column">
                     <text className="header-4 concert-header-color-mobile">
-                      {concert_info.artist_name.toUpperCase()} –{" "}
-                      {concert_info.concert_name.toUpperCase()}
+                      {concert_info.artist_name.toUpperCase()}
+                      {/* –{" "}
+                      {concert_info.concert_name.toUpperCase()} */}
                     </text>
                   </Col>
                 </Row>
@@ -829,7 +832,7 @@ const Concert = (props) => {
         </div>
       ) : (
         <div className="desktop-concert-page">
-          {show_stub && concert_info ? (
+          {/* {show_stub && concert_info ? (
             <span className="stub-background">
               <ClickAwayListener onClickAway={animationEnd}>
                 <div className="centered-stub-container">
@@ -889,7 +892,7 @@ const Concert = (props) => {
                 </div>
               </ClickAwayListener>
             </span>
-          ) : null}
+          ) : null} */}
           {!concert_info ? (
             <div className="overlay-box">
               <ScaleLoader
@@ -935,7 +938,7 @@ const Concert = (props) => {
                     username={username}
                     location={location}
                     artist_name={concert_info.artist_name}
-                    concert_name={concert_info.concert_name}
+                    // concert_name={concert_info.concert_name}
                     concert_full_time={
                       concert_info.week_day +
                       ", " +
@@ -1075,8 +1078,9 @@ const Concert = (props) => {
                   <div className="concert-main-info">
                     <div>
                       <h3 className="header-3 titles">
-                        {concert_info.artist_name.toUpperCase()} –{" "}
-                        {concert_info.concert_name.toUpperCase()}
+                        {concert_info.artist_name.toUpperCase()}
+                        {/* –{" "}
+                        {concert_info.concert_name.toUpperCase()} */}
                       </h3>
                     </div>
                     <div>
@@ -1117,15 +1121,18 @@ const Concert = (props) => {
                           className="primary-button concert-ticket-button"
                           onClick={getTicket}
                         >
-                          {total > 0 ? (
+                          {/* {total > 0 ? (
                             <span className="button-text concert-button-text">
                               Buy Tickets
                             </span>
                           ) : (
                             <span className="button-text concert-button-text">
-                              RSVP
+                              Get Ticket
                             </span>
-                          )}
+                          )} */}
+                          <span className="button-text concert-button-text">
+                            Get Ticket
+                          </span>
                         </button>
                       )}
                       {/* </div> */}
