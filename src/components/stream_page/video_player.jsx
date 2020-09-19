@@ -185,7 +185,7 @@ function VideoPlayer({
 
   // const player_ref = useRef();
   // registerIVSTech(videojs);
-  // const [global_player, setGlobalPlayer] = useState();
+  const [global_player, setGlobalPlayer] = useState();
 
   // useEffect(() => {
   //   if (have_upcoming_concert) {
@@ -262,6 +262,7 @@ function VideoPlayer({
         // eslint-disable-next-line no-undef
         const player = IVSPlayer.create();
         player.attachHTMLVideoElement(document.getElementById("video-player"));
+
         // player.load(
         //   "https://fcc3ddae59ed.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527354.channel.DmumNckWFTqz.m3u8"
         // );
@@ -269,22 +270,24 @@ function VideoPlayer({
           "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
         );
         player.play();
+        setGlobalPlayer(player);
       }
     };
 
     return () => {
       document.body.removeChild(script);
     };
-
   }, []);
 
-  // useEffect(() => {
-  //   if (stream_volume) {
-  //     if (global_player) {
-  //       global_player.volume(stream_volume);
-  //     }
-  //   }
-  // }, [stream_volume]);
+  useEffect(() => {
+    if (stream_volume) {
+      if (global_player) {
+        global_player.setVolume(stream_volume);
+        console.log(stream_volume);
+        console.log(global_player.getVolume());
+      }
+    }
+  }, [stream_volume]);
 
   return (
     <div className="countdown-wrapper">
