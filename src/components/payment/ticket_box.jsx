@@ -8,6 +8,7 @@ import stripeTokenHandler from "./stripe";
 
 // Component Imports
 import { useInputValue } from "../custom_hooks";
+import MoonLoader from "react-spinners/MoonLoader";
 
 // AWS Imports
 import { Analytics } from "aws-amplify";
@@ -28,6 +29,7 @@ const CheckoutForm = (props) => {
   const [payment_message, setMessage] = useState(""); // Variable to store the payment error message
   const [display_err, setDisplayErr] = useState(false); // Variable to display error message
   const [waiting, setWaiting] = useState(false); // Variable to display processing message
+  const [loading, setLoading] = useState(false);
 
   // Input form values
   const name = useInputValue("");
@@ -144,66 +146,92 @@ const CheckoutForm = (props) => {
                 ) : (
                   <br></br>
                 )}
-                <input
-                  name="name"
-                  label="Name"
-                  type="name"
-                  placeholder="Your Name"
-                  className="donate-form-input body-1 short-width-input"
-                  required
-                  {...name}
-                />
-                <input
-                  name="email"
-                  label="Email"
-                  type="email"
-                  placeholder="Your Email"
-                  className="donate-form-input body-1 short-width-input"
-                  required
-                  {...email}
-                />
                 {props.amount_value > 0 ? (
-                  <div className="donate-form-input body-1">
-                    <CardElement options={cardElementOpts} />
-                  </div>
-                ) : null}
+                  <div>
+                    <input
+                      name="name"
+                      label="Name"
+                      type="name"
+                      placeholder="Your Name"
+                      className="donate-form-input body-1 short-width-input"
+                      required
+                      {...name}
+                    />
+                    <input
+                      name="email"
+                      label="Email"
+                      type="email"
+                      placeholder="Your Email"
+                      className="donate-form-input body-1 short-width-input"
+                      required
+                      {...email}
+                    />
 
-                {need_confirm ? (
-                  <div>
-                    <br></br>
-                    <button
-                      className="donate-button button-text"
-                      type="toConfirm"
-                      disabled={!stripe}
-                      onClick={needConfirmation}
-                    >
-                      PAY NOW
-                    </button>
-                    <p className="venmo-text segmented-button-text secure-msg">
-                      *Your payment is secured via Stripe.
-                    </p>
-                  </div>
-                ) : (
-                  <div>
-                    {waiting ? (
+                    <div className="donate-form-input body-1">
+                      <CardElement options={cardElementOpts} />
+                    </div>
+                    {need_confirm ? (
                       <div>
-                        <p className="donate-process-text body-1">Processing</p>
+                        <br></br>
+                        <button
+                          className="donate-button button-text"
+                          type="toConfirm"
+                          disabled={!stripe}
+                          onClick={needConfirmation}
+                        >
+                          PAY NOW
+                        </button>
+                        <p className="venmo-text segmented-button-text secure-msg">
+                          *Your payment is secured via Stripe.
+                        </p>
                       </div>
                     ) : (
                       <div>
-                        <p className="donate-process-text body-1">
-                          Please confirm you are paying ${props.amount_value}
-                        </p>
-                        <button
-                          form="ticket"
-                          className="donate-button button-text"
-                          type="submit"
-                          disabled={!stripe}
-                        >
-                          Confirm
-                        </button>
+                        {waiting ? (
+                          <div>
+                            <p className="donate-process-text body-1">
+                              Processing
+                            </p>
+                          </div>
+                        ) : (
+                          <div>
+                            <p className="donate-process-text body-1">
+                              Please confirm you are paying $
+                              {props.amount_value}
+                            </p>
+                            <button
+                              form="ticket"
+                              className="donate-button button-text"
+                              type="submit"
+                              disabled={!stripe}
+                            >
+                              Confirm
+                            </button>
+                          </div>
+                        )}
                       </div>
                     )}
+                  </div>
+                ) : (!loading) ? (
+                  <button
+                    className="donate-button button-text"
+                    type="submit"
+                    disabled={!props.is_user_price_inputed}
+                    onClick={() => {
+                      props.addTicket();
+                      setLoading(true);
+                    }}
+                  >
+                    GET TICKET
+                  </button>
+                ) : (
+                  <div className="centered-loader">
+                    <MoonLoader
+                      sizeUnit={"px"}
+                      size={18}
+                      color={"white"}
+                      loading={loading}
+                    />
                   </div>
                 )}
               </div>
@@ -229,6 +257,7 @@ const TicketBox = (props) => {
     <CheckoutForm
       amount_value={props.amount_value}
       addTicket={props.addTicket}
+      is_user_price_inputed={props.is_user_price_inputed}
     />
   );
 };
