@@ -5,7 +5,6 @@ import { Analytics } from "aws-amplify";
 
 var React = require("react");
 
-
 const NotFoundPage = () => {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
@@ -17,14 +16,28 @@ const NotFoundPage = () => {
       />
       <div className="not-found-page-container">
         <div className="not-found-page-text">
-          <h1 className={"not-found-page-oops-heading " + (width > 600 ? "header-2" : "header-4")}>Don't Panic!</h1>
-          <h3 className={"not-found-page-oops-error-text " + (width > 600 ? "header-8" : "subtitle-3")}>
-            {"You found a rare 404 page in a different dimension \nShare your discovery with friends!"}
+          <h1
+            className={
+              "not-found-page-oops-heading " +
+              (width > 600 ? "header-2" : "header-4")
+            }
+          >
+            Don't Panic!
+          </h1>
+          <h3
+            className={
+              "not-found-page-oops-error-text " +
+              (width > 600 ? "header-8" : "subtitle-3")
+            }
+          >
+            {
+              "You found a rare 404 page in a different dimension. \nShare your discovery with friends!"
+            }
           </h3>
           <div className="not-found-page-button-wrapper">
             <div className="mobile-footer-social-media">
               <ul className="social-list">
-                <li>
+                {/* <li>
                   <a
                     onClick={() =>
                       Analytics.record({
@@ -38,7 +51,7 @@ const NotFoundPage = () => {
                   >
                     <span>Instagram Link</span>
                   </a>
-                </li>
+                </li> */}
                 {/* <li>
                   <a
                     onClick={() =>
@@ -56,17 +69,15 @@ const NotFoundPage = () => {
                 </li> */}
                 <li>
                   <a
-                    onClick={() =>
-                      Analytics.record({
-                        name: "404Youtube",
-                      })
-                    }
-                    href="https://www.youtube.com/channel/UCwbWryexV1632eZ_pILnmTQ/featured"
-                    className="fa fa-youtube"
+                    onClick={Analytics.record({ name: "facebookShareClicked" })}
+                    href={`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fonfour.live%2F${window.location.href.substring(
+                      window.location.href.lastIndexOf("/") + 1
+                    )}&amp;src=sdkpreparse`}
+                    className="fa fa-facebook-official fb-xfbml-parse-ignore"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <span>Youtube Link</span>
+                    <span>Facebook Link</span>
                   </a>
                 </li>
                 {/* <li>
@@ -86,18 +97,26 @@ const NotFoundPage = () => {
                 </li> */}
                 <li>
                   <a
-                    onClick={() =>
-                      Analytics.record({
-                        name: "socialBarTwitter",
-                      })
-                    }
-                    href="https://twitter.com/_Onfour"
-                    className="fa fa-twitter"
+                    onClick={Analytics.record({ name: "twitterShareClicked" })}
+                    className="fa fa-twitter twitter-share-button"
                     target="_blank"
                     rel="noopener noreferrer"
+                    href={`https://twitter.com/intent/tweet?text=You%20wont%20believe%20what%20I%20found...&url=https%3A%2F%2Fonfour.live%2F${window.location.href.substring(
+                      window.location.href.lastIndexOf("/") + 1
+                    )}`}
+                    data-text="You won't believe what I just found..."
+                    // data-url="https://www.onfour.live/stream"
+                    data-url={window.location.href}
+                    data-lang="en"
+                    data-show-count="false"
                   >
                     <span>Twitter Link</span>
                   </a>
+                  <script
+                    async
+                    src="https://platform.twitter.com/widgets.js"
+                    charset="utf-8"
+                  ></script>
                 </li>
               </ul>
             </div>
