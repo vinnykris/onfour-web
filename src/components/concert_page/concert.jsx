@@ -735,7 +735,8 @@ const Concert = (props) => {
                         className="primary-button button-text full-width-button"
                         onClick={getTicket}
                       >
-                        {total > 0 ? "BUY TICKETS" : "RSVP"}
+                        {"GET TICKET"}
+                        {/* {total > 0 ? "GET TICKET" : "GET TICKET"} */}
                       </button>
                     )}
                   </Col>
@@ -1120,15 +1121,18 @@ const Concert = (props) => {
                           className="primary-button concert-ticket-button"
                           onClick={getTicket}
                         >
-                          {total > 0 ? (
+                          {/* {total > 0 ? (
                             <span className="button-text concert-button-text">
                               Buy Tickets
                             </span>
                           ) : (
                             <span className="button-text concert-button-text">
-                              RSVP
+                              Get Ticket
                             </span>
-                          )}
+                          )} */}
+                          <span className="button-text concert-button-text">
+                            Get Ticket
+                          </span>
                         </button>
                       )}
                       {/* </div> */}

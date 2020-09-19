@@ -1,5 +1,6 @@
 // React Imports
-import React from "react";
+import React, { useState, useEffect } from "react";
+import NumberFormat from "react-number-format";
 import { Grid, Row, Col } from "../grid";
 
 // Styling Imports
@@ -11,6 +12,30 @@ const PayTicketBox = (props) => {
   const checked_backstage_pass =
     props.total === props.general_price + props.backstage_price &&
     props.backstage_price > 0;
+
+  const [user_price, setUserPrice] = useState(0.0);
+  // const [entered_value, setEnteredValue] = useState(null);
+  const [total_price, setTotalPrice] = useState(props.total);
+  const [allow_custom_price, setAllowCustomPrice] = useState(false);
+
+  useEffect(() => {
+    if (props.total == 0) {
+      setAllowCustomPrice(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    setTotalPrice(parseFloat(props.total + user_price, 10).toFixed(2));
+  }, [user_price]);
+
+  // useEffect(() => {
+  //   console.log(entered_value);
+  //   if (entered_value == null) {
+  //     setUserPrice(0);
+  //   } else {
+  //     setUserPrice(parseInt(entered_value, 10));
+  //   }
+  // }, [entered_value]);
 
   return (
     <Grid className="checkout-modal-grid">
@@ -27,28 +52,56 @@ const PayTicketBox = (props) => {
         <div className="ticket-modal-container">
           {checked_backstage_pass ? (
             <div className="ticket-summery-form">
-              <div className="ticket-summery-field lh-33 align-left subtitle-1">
-                1x General Admission ticket
-              </div>
+              {allow_custom_price ? (
+                <div className="ticket-summery-field align-left subtitle-1">
+                  Name your price:
+                </div>
+              ) : (
+                <div className="ticket-summery-field lh-33 align-left subtitle-1">
+                  1x General Admission ticket
+                </div>
+              )}
+
               <div className="ticket-summery-field lh-33 align-left subtitle-1">
                 1x Backstage Pass
               </div>
-              <div className="ticket-summery-field lh-33 align-right subtitle-1 top-border">
-                {"Total: $" + props.total.toString() + ".00"}
+              <div className="ticket-summery-field lh-33 align-right subtitle-1 top-border total-text">
+                {`Total: $${total_price}`}
               </div>
             </div>
           ) : (
             <div className="ticket-summery-form">
-              <div className="ticket-summery-field align-left subtitle-1">
-                1x General Admission ticket
-              </div>
-              <div className="ticket-summery-field align-right subtitle-1 top-border">
-                {"Total: $" + props.total.toString() + ".00"}
+              {allow_custom_price ? (
+                <div className="name-your-price-container">
+                  <div className="custom-ticket-summery-field align-left subtitle-1">
+                    Name your price:
+                  </div>
+                  <NumberFormat
+                    className="custom-ticket-form-input body-1 short-width-input"
+                    name="amount"
+                    placeholder="USD"
+                    // value={entered_value}
+                    onChange={(event) =>
+                      setUserPrice(event.target.value.substring(1))
+                    }
+                    prefix="$"
+                    decimalScale={2}
+                    required
+                    allowNegative={false}
+                  />
+                </div>
+              ) : (
+                <div className="ticket-summery-field lh-33 align-left subtitle-1">
+                  1x General Admission ticket
+                </div>
+              )}
+              <div className="ticket-summery-field align-right subtitle-1 top-border total-text">
+                {`Total: $${total_price}`}
               </div>
             </div>
           )}
           <TicketBox
-            amount_value={props.total}
+            amount_value={total_price}
             addTicket={props.addTicket}
           ></TicketBox>
         </div>
