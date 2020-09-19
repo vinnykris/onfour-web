@@ -8,6 +8,7 @@ import stripeTokenHandler from "./stripe";
 
 // Component Imports
 import { useInputValue } from "../custom_hooks";
+import MoonLoader from "react-spinners/MoonLoader";
 
 // AWS Imports
 import { Analytics } from "aws-amplify";
@@ -28,6 +29,7 @@ const CheckoutForm = (props) => {
   const [payment_message, setMessage] = useState(""); // Variable to store the payment error message
   const [display_err, setDisplayErr] = useState(false); // Variable to display error message
   const [waiting, setWaiting] = useState(false); // Variable to display processing message
+  const [loading, setLoading] = useState(false);
 
   // Input form values
   const name = useInputValue("");
@@ -134,17 +136,17 @@ const CheckoutForm = (props) => {
 
   return (
     <div className="donate-box-container">
-      {props.amount_value > 0 ? (
-        <form id="ticket" className="ticket-form" onSubmit={submitPayment}>
-          {(() => {
-            if (!payed) {
-              return (
-                <div>
-                  {display_err ? (
-                    <p className="error-msg">{payment_message}</p>
-                  ) : (
-                    <br></br>
-                  )}
+      <form id="ticket" className="ticket-form" onSubmit={submitPayment}>
+        {(() => {
+          if (!payed) {
+            return (
+              <div>
+                {display_err ? (
+                  <p className="error-msg">{payment_message}</p>
+                ) : (
+                  <br></br>
+                )}
+                {props.amount_value > 0 ? (
                   <div>
                     <input
                       name="name"
@@ -209,27 +211,40 @@ const CheckoutForm = (props) => {
                       </div>
                     )}
                   </div>
-                </div>
-              );
-            } else {
-              return (
-                <div>
-                  <br></br>
-                  <div className="pay_sucess_msg body-1">Payment Successful!</div>
-                </div>
-              );
-            }
-          })()}
-        </form>
-      ) : (
-        <button
-          form="pay-as-you-want-price-form"
-          className="donate-button button-text"
-          type="submit"
-        >
-          GET TICKET
-        </button>
-      )}
+                ) : (!loading) ? (
+                  <button
+                    className="donate-button button-text"
+                    type="submit"
+                    disabled={!props.is_user_price_inputed}
+                    onClick={() => {
+                      props.addTicket();
+                      setLoading(true);
+                    }}
+                  >
+                    GET TICKET
+                  </button>
+                ) : (
+                  <div className="centered-loader">
+                    <MoonLoader
+                      sizeUnit={"px"}
+                      size={18}
+                      color={"white"}
+                      loading={loading}
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          } else {
+            return (
+              <div>
+                <br></br>
+                <div className="pay_sucess_msg body-1">Payment Successful!</div>
+              </div>
+            );
+          }
+        })()}
+      </form>
     </div>
   );
 };
@@ -241,6 +256,7 @@ const TicketBox = (props) => {
     <CheckoutForm
       amount_value={props.amount_value}
       addTicket={props.addTicket}
+      is_user_price_inputed={props.is_user_price_inputed}
     />
   );
 };

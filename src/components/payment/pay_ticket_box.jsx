@@ -15,6 +15,7 @@ const PayTicketBox = (props) => {
     props.backstage_price > 0;
 
   const [user_price, setUserPrice] = useState(0.0);
+  const [is_user_price_inputed, setIsUserPriceInput] = useState(false);
   // const [entered_value, setEnteredValue] = useState(null);
   const [total_price, setTotalPrice] = useState(props.total);
   const [allow_custom_price, setAllowCustomPrice] = useState(false);
@@ -77,9 +78,10 @@ const PayTicketBox = (props) => {
                     name="amount"
                     placeholder="USD"
                     // value={entered_value}
-                    onChange={(event) =>
-                      setUserPrice(event.target.value.substring(1))
-                    }
+                    onChange={(event) => {
+                      setUserPrice(event.target.value.substring(1));
+                      setIsUserPriceInput(true);
+                    }}
                     prefix="$"
                     decimalScale={2}
                     required
@@ -121,9 +123,10 @@ const PayTicketBox = (props) => {
                     name="amount"
                     placeholder="USD"
                     // value={entered_value}
-                    onChange={(event) =>
-                      setUserPrice(event.target.value.substring(1))
-                    }
+                    onChange={(event) => {
+                      setUserPrice(event.target.value.substring(1));
+                      setIsUserPriceInput(true);
+                    }}
                     prefix="$"
                     decimalScale={2}
                     required
@@ -143,6 +146,7 @@ const PayTicketBox = (props) => {
           <TicketBox
             amount_value={total_price}
             addTicket={props.addTicket}
+            is_user_price_inputed={is_user_price_inputed}
           ></TicketBox>
         </div>
       </Row>
