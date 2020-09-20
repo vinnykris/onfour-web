@@ -1163,7 +1163,7 @@ const Concert = (props) => {
                     <hr className="solid" />
                     <Row>
                       <span className="header-6">
-                        {concert_info.formatted_time} EST
+                        {concert_info.formatted_time}
                       </span>
                     </Row>
                     <hr className="solid" />

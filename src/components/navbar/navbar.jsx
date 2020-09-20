@@ -59,16 +59,16 @@ const NavBar = () => {
 
   const toggle = () => setDropdownOpen((prevState) => !prevState); // Toggle for dropdown menu
 
-  useEffect(() => {
-    Auth.currentAuthenticatedUser({})
-      .then((user) => {
-        setUserEmail(user.attributes.email);
-        setAuth(true);
-        setUsername(user.username);
-        setProfileURL("");
-      })
-      .catch((err) => setAuth(false));
-  }, []);
+  // useEffect(() => {
+  Auth.currentAuthenticatedUser({})
+    .then((user) => {
+      setUserEmail(user.attributes.email);
+      setAuth(true);
+      setUsername(user.username);
+      setProfileURL("");
+    })
+    .catch((err) => setAuth(false));
+  // }, []);
   // If the user is logged in/valid, set their auth value to true and track their email
   // If the user is not logged in/invalid, reset their auth value to false
 

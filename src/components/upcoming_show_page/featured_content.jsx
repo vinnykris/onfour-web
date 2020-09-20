@@ -42,7 +42,6 @@ const FeaturedContent = (props) => {
                       {props.artist_name}
                       <br></br>
                       {props.week_day} | {props.date} | {props.formatted_time}{" "}
-                      EST
                     </div>
                   </Col>
                 </Row>
