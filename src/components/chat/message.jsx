@@ -33,13 +33,13 @@ const Message = ({ message: { user, text }, name }) => {
   var color_id = (user.length + user.charCodeAt(0)) % 5;
   // var res = user.substr(5, );
   var res = user.substr(0,5);
-  console.log(color_id);
-if (res=="guest"){
-  var num=parseInt(user.substr(5,));
-  // console.log(num);
-  color_id=(num)%5;
-  console.log(color_id+"color");
-}
+  // console.log(color_id);
+  if (res=="guest"){
+    var num=parseInt(user.substr(5,));
+    // console.log(num);
+    color_id=(num)%5;
+    // console.log(color_id+"color");
+  }
 // else{
 //   color_id = (user.length + user.charCodeAt(0)) % 5;
 // }

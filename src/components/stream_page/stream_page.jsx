@@ -63,6 +63,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
   const [show_start_time, setStartTime] = useState(""); // Stores the upcoming show's start time
   const [show_time, setShowTime] = useState(""); // Store the upcoming show's start time to display
+  const [artist_id, setArtistID] = useState("");
   const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
   const [artist_bio, setArtistBio] = useState("");
   const [artist_ig, setArtistIG] = useState("");
@@ -189,6 +190,7 @@ const StreamPage = ({ is_soundcheck }) => {
             : info_list[0].time.slice(0, 5) + "PM")
       );
       setConcertName(info_list[0].concert_name);
+      setArtistID(info_list[0].artist_id);
       getArtistInfo(info_list[0].artist_id);
       setConcertID(info_list[0].id);
       // setIsLive(info_list[0].is_live);
@@ -500,7 +502,7 @@ const StreamPage = ({ is_soundcheck }) => {
                               : show_start_time
                           }
                           artist_name={artist_name}
-                          concert_name={concert_name}
+                          // concert_name={concert_name}
                           auth={auth}
                           username={username}
                           concert_id={concert_id}
@@ -765,8 +767,9 @@ const StreamPage = ({ is_soundcheck }) => {
                       <Row className="video-chat-row">
                         <VideoChat
                           user_name={username ? username : "GUEST"}
-                          artist_name="vinnykris"
+                          artist_name={artist_id}
                           stream_vol_adjust={setStreamVolume}
+                          stream_volume_value={stream_volume}
                         ></VideoChat>
                       </Row>
                       <Row className="chat-row">
@@ -949,7 +952,7 @@ const StreamPage = ({ is_soundcheck }) => {
                             : show_start_time
                         }
                         artist_name={artist_name}
-                        concert_name={concert_name}
+                        // concert_name={concert_name}
                         auth={auth}
                         username={username}
                         concert_id={concert_id}

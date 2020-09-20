@@ -41,7 +41,7 @@ const ArchiveVideo = ({
         <Col size={1}>
           <ArchivePerformanceText
             artist_name={artist_name}
-            concert_name={concert_name}
+            // concert_name={concert_name}
             date={concert_date}
             video_length={length}
           />
