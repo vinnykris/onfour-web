@@ -11,12 +11,19 @@ const checkout = axios.create({
 });
 
 // This function send the Stripe token and payment information to AWS lambda with post request
-const stripeTokenHandler = async (token, amount_value, name, email) => {
+const stripeTokenHandler = async (
+  token,
+  amount_value,
+  name,
+  email,
+  concert_id
+) => {
   const paymentData = {
     token: token.id,
     amount: amount_value,
     name: name,
     email: email,
+    concert_id: concert_id,
   };
 
   try {

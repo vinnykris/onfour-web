@@ -147,6 +147,7 @@ const PayTicketBox = (props) => {
             amount_value={total_price}
             addTicket={props.addTicket}
             is_user_price_inputed={is_user_price_inputed}
+            concert_id={props.concert_id}
           ></TicketBox>
         </div>
       </Row>

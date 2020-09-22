@@ -25,8 +25,6 @@ import Chat from "../chat/stream_chat";
 // import Join from "../chat/join_chat";
 // import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
-import SocialBar from "../social_bar/social_bar";
-import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/video_chat_App";
 
@@ -34,13 +32,11 @@ import { getTickets } from "../../apis/get_user_data";
 import DonateCardBox from "../payment/donate_box";
 import VenmoBox from "../payment/venmo_box";
 import PaypalBox from "../payment/paypal_box";
-import PrimaryButton from "../primary_button";
 // Styles Imports
 import "./stream_styles.scss";
 import "rodal/lib/rodal.css";
 
 // Image imports
-import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
 import ticket1 from "../../images/icons/ticket1.png";
 import feedback_icon from "../../images/icons/stream_icons/feedback_icon.png";
 import share_icon from "../../images/icons/stream_icons/share_icon.png";
@@ -474,7 +470,12 @@ const StreamPage = ({ is_soundcheck }) => {
                 </Grid>
                 {(() => {
                   if (credit_selected) {
-                    return <DonateCardBox is_mobile={false} />;
+                    return (
+                      <DonateCardBox
+                        is_mobile={false}
+                        concert_id={concert_id}
+                      />
+                    );
                   } else if (venmo_selected) {
                     return <VenmoBox is_mobile={false} />;
                   } else {
