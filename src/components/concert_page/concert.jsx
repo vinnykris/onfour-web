@@ -599,6 +599,8 @@ const Concert = (props) => {
                   <PayTicketBox
                     general_price={general_price}
                     backstage_price={backstage_price}
+                    suggested_price={concert_info.suggested_price}
+                    minimum_price={concert_info.minimum_price}
                     // backstage_price = {10}
                     // general_price = {1}
                     total={total}
@@ -929,6 +931,8 @@ const Concert = (props) => {
                   <PayTicketBox
                     general_price={general_price}
                     backstage_price={backstage_price}
+                    suggested_price={concert_info.suggested_price}
+                    minimum_price={concert_info.minimum_price}
                     // backstage_price = {10}
                     // general_price = {1}
                     total={total}

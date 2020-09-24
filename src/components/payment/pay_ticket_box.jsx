@@ -19,17 +19,27 @@ const PayTicketBox = (props) => {
   // const [entered_value, setEnteredValue] = useState(null);
   const [total_price, setTotalPrice] = useState(props.total);
   const [allow_custom_price, setAllowCustomPrice] = useState(false);
+  const [suggested_price, setSuggestedPrice] = useState(props.suggested_price);
+  const [minimum_price, setMinimumPrice] = useState(props.minimum_price);
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   useEffect(() => {
     if (props.total == 0) {
       setAllowCustomPrice(true);
     }
+    console.log(props.suggested_price);
   }, []);
 
   useEffect(() => {
     setTotalPrice(parseFloat(props.total + user_price, 10).toFixed(2));
   }, [user_price]);
+
+  useEffect(() => {
+    if (suggested_price > 0) {
+      console.log(suggested_price);
+      setUserPrice(suggested_price);
+    }
+  }, [suggested_price]);
 
   // useEffect(() => {
   //   console.log(entered_value);
@@ -73,20 +83,37 @@ const PayTicketBox = (props) => {
                       Name your price:
                     </div>
                   )}
-                  <NumberFormat
-                    className="custom-ticket-form-input body-1 short-width-input"
-                    name="amount"
-                    placeholder="USD"
-                    // value={entered_value}
-                    onChange={(event) => {
-                      setUserPrice(event.target.value.substring(1));
-                      setIsUserPriceInput(true);
-                    }}
-                    prefix="$"
-                    decimalScale={2}
-                    required
-                    allowNegative={false}
-                  />
+                  {suggested_price ? (
+                    <NumberFormat
+                      className="custom-ticket-form-input body-1 short-width-input"
+                      name="amount"
+                      placeholder="USD"
+                      value={user_price}
+                      onChange={(event) => {
+                        setUserPrice(event.target.value.substring(1));
+                        setIsUserPriceInput(true);
+                      }}
+                      prefix="$"
+                      decimalScale={2}
+                      required
+                      allowNegative={false}
+                    />
+                  ) : (
+                    <NumberFormat
+                      className="custom-ticket-form-input body-1 short-width-input"
+                      name="amount"
+                      placeholder="USD"
+                      // value={entered_value}
+                      onChange={(event) => {
+                        setUserPrice(event.target.value.substring(1));
+                        setIsUserPriceInput(true);
+                      }}
+                      prefix="$"
+                      decimalScale={2}
+                      required
+                      allowNegative={false}
+                    />
+                  )}
                 </form>
               ) : (
                 <div className="ticket-summery-field align-left subtitle-1">
@@ -118,20 +145,37 @@ const PayTicketBox = (props) => {
                       Name your price:
                     </div>
                   )}
-                  <NumberFormat
-                    className="custom-ticket-form-input body-1 short-width-input"
-                    name="amount"
-                    placeholder="USD"
-                    // value={entered_value}
-                    onChange={(event) => {
-                      setUserPrice(event.target.value.substring(1));
-                      setIsUserPriceInput(true);
-                    }}
-                    prefix="$"
-                    decimalScale={2}
-                    required
-                    allowNegative={false}
-                  />
+                  {suggested_price ? (
+                    <NumberFormat
+                      className="custom-ticket-form-input body-1 short-width-input"
+                      name="amount"
+                      placeholder="USD"
+                      value={user_price}
+                      onChange={(event) => {
+                        setUserPrice(event.target.value.substring(1));
+                        setIsUserPriceInput(true);
+                      }}
+                      prefix="$"
+                      decimalScale={2}
+                      required
+                      allowNegative={false}
+                    />
+                  ) : (
+                    <NumberFormat
+                      className="custom-ticket-form-input body-1 short-width-input"
+                      name="amount"
+                      placeholder="USD"
+                      // value={entered_value}
+                      onChange={(event) => {
+                        setUserPrice(event.target.value.substring(1));
+                        setIsUserPriceInput(true);
+                      }}
+                      prefix="$"
+                      decimalScale={2}
+                      required
+                      allowNegative={false}
+                    />
+                  )}
                 </form>
               ) : (
                 <div className="ticket-summery-field align-left subtitle-1">
