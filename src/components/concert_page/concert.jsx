@@ -604,6 +604,7 @@ const Concert = (props) => {
                     total={total}
                     goBackToModal={goBackToModal}
                     addTicket={addTicket}
+                    concert_id={concert_id}
                   ></PayTicketBox>
                 ) : (
                   <CheckoutBox
@@ -933,6 +934,7 @@ const Concert = (props) => {
                     total={total}
                     goBackToModal={goBackToModal}
                     addTicket={addTicket}
+                    concert_id={concert_id}
                   ></PayTicketBox>
                 ) : (
                   <CheckoutBox
