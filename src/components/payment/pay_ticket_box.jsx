@@ -27,7 +27,6 @@ const PayTicketBox = (props) => {
     if (props.total == 0) {
       setAllowCustomPrice(true);
     }
-    console.log(props.suggested_price);
   }, []);
 
   useEffect(() => {
@@ -36,7 +35,6 @@ const PayTicketBox = (props) => {
 
   useEffect(() => {
     if (suggested_price > 0) {
-      console.log(suggested_price);
       setUserPrice(suggested_price);
     }
   }, [suggested_price]);
