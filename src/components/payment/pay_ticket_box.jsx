@@ -89,7 +89,11 @@ const PayTicketBox = (props) => {
                       value={user_price}
                       onChange={(event) => {
                         setUserPrice(event.target.value.substring(1));
-                        setIsUserPriceInput(true);
+                        if (event.target.value == "") {
+                          setIsUserPriceInput(false);
+                        } else {
+                          setIsUserPriceInput(true);
+                        }
                       }}
                       prefix="$"
                       decimalScale={2}
@@ -104,7 +108,12 @@ const PayTicketBox = (props) => {
                       // value={entered_value}
                       onChange={(event) => {
                         setUserPrice(event.target.value.substring(1));
-                        setIsUserPriceInput(true);
+                        if (event.target.value == "") {
+                          setIsUserPriceInput(false);
+                        }
+                        else {
+                          setIsUserPriceInput(true);
+                        }
                       }}
                       prefix="$"
                       decimalScale={2}
@@ -151,7 +160,11 @@ const PayTicketBox = (props) => {
                       value={user_price}
                       onChange={(event) => {
                         setUserPrice(event.target.value.substring(1));
-                        setIsUserPriceInput(true);
+                        if (event.target.value == "") {
+                          setIsUserPriceInput(false);
+                        } else {
+                          setIsUserPriceInput(true);
+                        }
                       }}
                       prefix="$"
                       decimalScale={2}
@@ -166,7 +179,11 @@ const PayTicketBox = (props) => {
                       // value={entered_value}
                       onChange={(event) => {
                         setUserPrice(event.target.value.substring(1));
-                        setIsUserPriceInput(true);
+                        if (event.target.value == "") {
+                          setIsUserPriceInput(false);
+                        } else {
+                          setIsUserPriceInput(true);
+                        }
                       }}
                       prefix="$"
                       decimalScale={2}
