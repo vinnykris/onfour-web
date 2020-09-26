@@ -119,7 +119,12 @@ export default function VideoChatApp({
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
     newCallObject.join({ url });
-    if (url != "room1" && url != "room2" && url != "room3") {
+    if (
+      url.substring(url.lastIndexOf("/") + 1) != "room1" &&
+      url.substring(url.lastIndexOf("/") + 1) != "room2" &&
+      url.substring(url.lastIndexOf("/") + 1) != "room3"
+    ) {
+      console.log(url);
       setShowInviteModal(true);
     }
   }, []);
