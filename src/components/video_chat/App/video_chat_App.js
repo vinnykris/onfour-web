@@ -55,6 +55,8 @@ export default function VideoChatApp({
   const [isRoomCreated, setIsRoomCreated] = useState(false);
   const [error_msg, setErrorMsg] = useState("");
   const [show_invite_modal, setShowInviteModal] = useState(false);
+  const [copy_button_text, setCopyButtonText] = useState("COPY");
+  const [disable_copy_button, setDisableCopyButton] = useState(false);
 
   /**
    * Creates a new call room.
@@ -395,8 +397,16 @@ export default function VideoChatApp({
     }
   };
 
-  const openInviteModal = () => {
-    setShowInviteModal(true);
+  const copyInviteURL = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopyButtonText("COPIED!");
+    setDisableCopyButton(true);
+  };
+
+  const closeInviteModal = () => {
+    setShowInviteModal(false);
+    setCopyButtonText("COPY");
+    setDisableCopyButton(false);
   };
 
   const room_max_map = {
@@ -407,6 +417,59 @@ export default function VideoChatApp({
 
   return (
     <div className={(artistView ? "artist-" : "") + "app"} id="video-chat-main">
+      {show_invite_modal ? (
+        <Rodal
+          visible={show_invite_modal}
+          onClose={closeInviteModal}
+          width={100}
+          height={100}
+          measure="%"
+          customStyles={{
+            padding: 0,
+            overflow: "scroll",
+            maxHeight: "263px",
+            maxWidth: "555px",
+            background:
+              "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+            boxShadow:
+              "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+            borderRadius: "10px",
+          }}
+          className="rodal-custom"
+        >
+          <div className="invite-rodal-title-container">
+            <span className="invite-rodal-title header-8">Invite Friends</span>
+          </div>
+          <div className="invite-rodal-main-content">
+            <span className="invite-instructions subtitle-2">
+              Copy the URL to your clipboard and send the invite to your friends
+              for them to join this video chat.
+            </span>
+            <div className="invite-url-box">
+              <span className="invite-url-text body-1">
+                {window.location.href}
+              </span>
+            </div>
+            <div className="invite-action-buttons-container">
+              <button
+                className="invite-cancel-button"
+                onClick={closeInviteModal}
+              >
+                <span className="invite-cancel-text button-text">Cancel</span>
+              </button>
+              <button
+                className="invite-copy-button primary-button"
+                onClick={copyInviteURL}
+                disabled={disable_copy_button}
+              >
+                <span className="invite-copy-text segmented-button-text">
+                  {copy_button_text}
+                </span>
+              </button>
+            </div>
+          </div>
+        </Rodal>
+      ) : null}
       {artistView ? null : (
         <div>
           {/* {!isInCrew ? (
