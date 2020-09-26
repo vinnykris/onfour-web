@@ -172,11 +172,15 @@
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-sizing: border-box;
   border-radius: 5px;
+  overflow-x: scroll;
+  white-space: nowrap;
 }
 
 .invite-url-text {
   margin: auto;
   color: $on-surface-disable !important;
+  padding-left: 18px;
+  padding-right: 18px;
 }
 
 .invite-action-buttons-container {

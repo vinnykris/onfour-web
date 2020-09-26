@@ -119,6 +119,9 @@ export default function VideoChatApp({
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
     newCallObject.join({ url });
+    if (url != "room1" && url != "room2" && url != "room3") {
+      setShowInviteModal(true);
+    }
   }, []);
 
   const startJoiningPrivateCall = useCallback(async (url) => {
