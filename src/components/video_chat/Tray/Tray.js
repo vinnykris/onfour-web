@@ -336,6 +336,16 @@ export default function Tray(props) {
           Press and hold to talk
         </button>
       )}
+      {props.artistView ? null : (
+        <button
+          id="invite-friends"
+          type="invite-button"
+          className="tray-button"
+          disabled={props.disabled}
+        >
+          <i className="fas fa-user-plus unmuted"></i>
+        </button>
+      )}
       <button
         type={TYPE_LEAVE}
         className={

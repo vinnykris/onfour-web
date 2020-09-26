@@ -410,18 +410,21 @@ export default function VideoChatApp({
               </div>
             </div>
           ) : ( */}
+          <div className="video-chat-info-bar">
+            <p className="header-7">VIDEO CHAT</p>
+          </div>
           <div className="room-name-row">
             <div
-              className="body-2 public-room click-active"
+              className="public-room click-active"
               onClick={() => switchRoom(3)}
             >
               <div
                 // id={isRoomCreated ? already_created_room_name : "create-room"}
                 id="create-room"
-                className="body-2 room-tab-text room1"
+                className="header-8 room-tab-text room1"
               >
                 {/* {isRoomCreated ? already_created_room_name : "Create Room"} */}
-                My Room
+                Private
               </div>
             </div>
             <div
@@ -430,7 +433,7 @@ export default function VideoChatApp({
             >
               <div
                 id="public-room-1"
-                className="body-2 room-tab-text room-others"
+                className="header-8 room-tab-text room-others"
               >
                 Room 1
               </div>
@@ -441,7 +444,7 @@ export default function VideoChatApp({
             >
               <div
                 id="public-room-2"
-                className="body-2 room-tab-text room-others"
+                className="header-8 room-tab-text room-others"
               >
                 Room 2
               </div>
@@ -452,7 +455,7 @@ export default function VideoChatApp({
             >
               <div
                 id="public-room-3"
-                className="body-2 room-tab-text room-others"
+                className="header-8 room-tab-text room-others"
               >
                 Room 3
               </div>
@@ -506,16 +509,18 @@ export default function VideoChatApp({
                   }
                 </div>
               ) : null}
-              <StartButton
-                create_room={false}
-                disabled={!enableStartButton}
-                onClick={() => {
-                  createPublicCall(current_room, isRoomCreated).then((url) =>
-                    startJoiningPublicCall(url)
-                  );
-                }}
-                artistView={artistView}
-              />
+              <div className="start-button-container">
+                <StartButton
+                  create_room={false}
+                  disabled={!enableStartButton}
+                  onClick={() => {
+                    createPublicCall(current_room, isRoomCreated).then((url) =>
+                      startJoiningPublicCall(url)
+                    );
+                  }}
+                  artistView={artistView}
+                />
+              </div>
             </div>
           ) : // <StartButton
           //   disabled={!enableStartButton}
@@ -530,16 +535,18 @@ export default function VideoChatApp({
                   "Rejoin the private room I was in! \nTo create a new room, refresh on this page"
                 }
               </div>
-              <StartButton
-                create_room={false}
-                disabled={!enableStartButton}
-                onClick={() => {
-                  createPublicCall(current_room, isRoomCreated).then((url) =>
-                    startJoiningPublicCall(url)
-                  );
-                }}
-                artistView={artistView}
-              />
+              <div className="start-button-container">
+                <StartButton
+                  create_room={false}
+                  disabled={!enableStartButton}
+                  onClick={() => {
+                    createPublicCall(current_room, isRoomCreated).then((url) =>
+                      startJoiningPublicCall(url)
+                    );
+                  }}
+                  artistView={artistView}
+                />
+              </div>
             </div>
           ) : (
             <div className="enter-video-chat-prompt">
@@ -549,29 +556,33 @@ export default function VideoChatApp({
                 {...self_create_room_name}
               /> */}
               <div className="public-video-notice message-text">
-                Create my own private room and invite my friends!
+                {
+                  "Create my own private room and invite my friends!\nPlease use headphones to avoid audio feedback issues."
+                }
               </div>
-              <StartButton
-                create_room={true}
-                disabled={!enableStartButton}
-                onClick={() => {
-                  createPublicCall("my room", isRoomCreated)
-                    .then((url) => {
-                      startJoiningPublicCall(url);
-                      setIsRoomCreated(true);
-                      setCreatedRoomName(url.split("/").pop());
-                      // setCreatedRoomName(self_create_room_name.value);
-                      setCurrentRoom(url.split("/").pop());
-                    })
-                    .catch((err) => console.log(err));
-                }}
-                artistView={artistView}
-              />
-              {error_msg ? (
-                <p className="create-room-error message-text">{error_msg}</p>
-              ) : (
-                <p className="room-max-msg message-text">{error_msg}</p>
-              )}
+              <div className="start-button-container">
+                {error_msg ? (
+                  <p className="create-room-error message-text">{error_msg}</p>
+                ) : (
+                  <p className="room-max-msg message-text">{error_msg}</p>
+                )}
+                <StartButton
+                  create_room={true}
+                  disabled={!enableStartButton}
+                  onClick={() => {
+                    createPublicCall("my room", isRoomCreated)
+                      .then((url) => {
+                        startJoiningPublicCall(url);
+                        setIsRoomCreated(true);
+                        setCreatedRoomName(url.split("/").pop());
+                        // setCreatedRoomName(self_create_room_name.value);
+                        setCurrentRoom(url.split("/").pop());
+                      })
+                      .catch((err) => console.log(err));
+                  }}
+                  artistView={artistView}
+                />
+              </div>
             </div>
           )}
         </div>
