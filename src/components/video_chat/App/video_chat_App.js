@@ -12,6 +12,7 @@ import { roomUrlFromPageUrl, pageUrlFromRoomUrl } from "../urlUtils";
 import DailyIframe from "@daily-co/daily-js";
 import { logDailyEvent } from "../logUtils";
 import getToken from "../getToken";
+import Rodal from "rodal";
 
 const STATE_IDLE = "STATE_IDLE";
 const STATE_CREATING = "STATE_CREATING";
@@ -53,6 +54,7 @@ export default function VideoChatApp({
   const [already_created_room_name, setCreatedRoomName] = useState("");
   const [isRoomCreated, setIsRoomCreated] = useState(false);
   const [error_msg, setErrorMsg] = useState("");
+  const [show_invite_modal, setShowInviteModal] = useState(false);
 
   /**
    * Creates a new call room.
@@ -393,6 +395,10 @@ export default function VideoChatApp({
     }
   };
 
+  const openInviteModal = () => {
+    setShowInviteModal(true);
+  };
+
   const room_max_map = {
     room1: 4,
     room2: 6,
@@ -496,6 +502,7 @@ export default function VideoChatApp({
             adjust_volume={setVolume}
             stream_vol_adjust={stream_vol_adjust}
             stream_volume_value={stream_volume_value}
+            openInviteModal={() => setShowInviteModal(true)}
           />
         </CallObjectContext.Provider>
       ) : (
@@ -505,7 +512,7 @@ export default function VideoChatApp({
               {!artistView ? (
                 <div className="public-video-notice message-text">
                   {
-                    "Please use headphones to avoid audio feedback issues. \nThis is a public room, so get ready to make some new friends!"
+                    "This is a public room, so get ready to make some new friends!\nPlease use headphones to avoid audio feedback issues."
                   }
                 </div>
               ) : null}
