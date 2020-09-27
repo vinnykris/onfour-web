@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./Tile.css";
-import RangeSlider from 'react-bootstrap-range-slider';
+import "./Tile.scss";
+import RangeSlider from "react-bootstrap-range-slider";
 import "./range_slider.css";
 
 /**
@@ -41,7 +41,7 @@ export default function Tile(props) {
     if (document.getElementById(audio_component_id)) {
       document.getElementById(audio_component_id).volume = props.volume;
     }
-  },[props.volume])
+  }, [props.volume]);
 
   function getLoadingComponent() {
     return props.isLoading && <p className="loading">Loading...</p>;
@@ -56,10 +56,18 @@ export default function Tile(props) {
   function getAudioComponent() {
     return (
       !props.isLocalPerson &&
-      props.audioTrack && <audio className="audio-all" id={audio_component_id} autoPlay muted={audioMute} playsInline ref={audioEl} />
+      props.audioTrack && (
+        <audio
+          className="audio-all"
+          id={audio_component_id}
+          autoPlay
+          muted={audioMute}
+          playsInline
+          ref={audioEl}
+        />
+      )
     );
   }
-
 
   function getClassNames() {
     let classNames = "tile";
@@ -69,8 +77,7 @@ export default function Tile(props) {
     return classNames;
   }
 
-
-  // const [volume_value, setVolumeValue] = useState(100); 
+  // const [volume_value, setVolumeValue] = useState(100);
 
   // function changeVolume() {
   //   if (document.getElementById(audio_component_id)) {
@@ -95,12 +102,11 @@ export default function Tile(props) {
     if (props.artistView) {
       toggle_audio_mute(props.mute_all);
     }
-  }, [props.mute_all])
-
+  }, [props.mute_all]);
 
   useEffect(() => {
     reflect_audio_change(props.audioTrack);
-  }, [props.audioTrack])
+  }, [props.audioTrack]);
 
   function reflect_audio_change(audioTrack) {
     if (document.getElementById(fans_microphone_id)) {
@@ -140,18 +146,20 @@ export default function Tile(props) {
       <div className="background" />
       {/* {!props.isLocalPerson ? (
           <div> */}
-      {props.artistView ? (
-        <i
-          className="fa fa-microphone-slash mute-others-icon"
-          id={random_id}
-        ></i>
-      ) : (
-        <i
-          className="fa fa-microphone-slash mute-others-icon"
-          id={fans_microphone_id}
-        ></i>
-      )}
-      {/* <div className="range-slider-container">
+      <div className="name-card">
+        {" "}
+        {props.artistView ? (
+          <i
+            className="fa fa-microphone-slash mute-others-icon"
+            id={random_id}
+          ></i>
+        ) : (
+          <i
+            className="fa fa-microphone-slash mute-others-icon"
+            id={fans_microphone_id}
+          ></i>
+        )}
+        {/* <div className="range-slider-container">
               <RangeSlider
                 value={volume_value}
                 onChange={changeEvent => {
@@ -160,9 +168,13 @@ export default function Tile(props) {
                 }}
               />
             </div> */}
-      {/* </div>
+        {/* </div>
         ):null} */}
-      <div className="video-call-participant-name">{props.username}</div>
+        <div className="video-call-participant-name tag-text">
+          {props.username}
+        </div>
+      </div>
+
       {getLoadingComponent()}
       {getVideoComponent()}
       {getAudioComponent()}
