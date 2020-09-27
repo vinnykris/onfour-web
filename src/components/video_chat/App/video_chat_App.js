@@ -434,7 +434,7 @@ export default function VideoChatApp({
           measure="%"
           customStyles={{
             padding: 0,
-            overflow: "scroll",
+            // overflow: "scroll",
             maxHeight: "263px",
             maxWidth: "555px",
             background:
