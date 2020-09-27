@@ -610,7 +610,7 @@ export default function VideoChatApp({
             <div className="enter-video-chat-prompt">
               <div className="public-video-notice message-text">
                 {
-                  "Rejoin the private room I was in! \nTo create a new room, refresh on this page"
+                  "Rejoin the private room I was in! \nTo create a new room, refresh this page."
                 }
               </div>
               <div className="start-button-container">
