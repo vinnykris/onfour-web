@@ -10,21 +10,45 @@
     ),
     #07070f;
   border-radius: 10px;
-  margin-left: 36.5px;
-  margin-right: 36.5px;
+  // margin-left: 36.5px;
+  // margin-right: 36.5px;
+  // margin: auto;
   padding: 0px 10px;
+  @include respond-to("small") {
+    width: 323px;
+    height: 189px;
+    margin: auto;
+    margin-bottom: 17px;
+  }
+  @include respond-to("xx-small") {
+    width: 278px;
+    height: 166px;
+    margin: auto;
+    margin-bottom: 17px;
+  }
 }
 
-.step-card-container:first-child {
-  margin-left: 0;
-}
+// .step-card-container:first-child {
+//   margin-left: 0;
+//   @include respond-to("small") {
+//     margin: auto;
+//     margin-bottom: 17px;
+//   }
+// }
 
-.step-card-container:last-child {
-  margin-right: 0;
-}
+// .step-card-container:last-child {
+//   margin-right: 0;
+//   @include respond-to("small") {
+//     margin: auto;
+//     margin-bottom: 17px;
+//   }
+// }
 
 .step-card-number {
   margin-top: 37px;
+  @include respond-to("small") {
+    margin-top: 31px;
+  }
 }
 
 .step-num-text {
@@ -32,6 +56,9 @@
   color: #07070f !important;
   margin: auto;
   text-align: center;
+  @include respond-to("small") {
+    line-height: 40px !important;
+  }
 }
 
 .ellipse {
@@ -40,6 +67,11 @@
   border-radius: 43px;
   margin: auto;
   background-color: $on-background;
+  @include respond-to("small") {
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+  }
 }
 
 .step-card-text {
@@ -48,4 +80,7 @@
 
 .step-card-description {
   margin-top: 9px;
+  @include respond-to("small") {
+    padding: 0px 20px;
+  }
 }

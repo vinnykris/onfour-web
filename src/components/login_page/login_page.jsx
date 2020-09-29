@@ -9,6 +9,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, Row, Col } from "../grid";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import InputOne from "../inputs/input_one";
+import { useWindowDimensions } from "../custom_hooks";
 
 // APIs/Amplify
 import awsmobile from "../../apis/AppSync";
@@ -27,6 +28,8 @@ const Login = (props) => {
   const [error, setError] = useState(""); // Tracks error messages when trying to log in
   const [from_path, setFromPath] = useState(null);
   const state = props.location.state;
+
+  const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   // Function for when the user clicks the submit button to log in
   // Reloads the window to stream page if successful, otherwise provides error message to user
@@ -75,74 +78,149 @@ const Login = (props) => {
             </div>
           ) : (
             <div className="form-section">
-              <form
-                className="signin-form"
-                action="/"
-                id="login"
-                onSubmit={loginSubmit}
-              >
-                <div className="header-3 signin-header-color">Log In</div>
-                <div className="header-7 signin-text-color">
-                  Log in with your email or username
-                </div>
-                <div className="register-input-container">
-                  <InputOne
-                    id="email_slot"
-                    type="text"
-                    name="email"
-                    is_required={true}
-                    placeholder="Email Address or Username"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                </div>
-                <div className="register-input-container">
-                  <InputOne
-                    id="password_slot"
-                    type="password"
-                    name="password"
-                    is_required={true}
-                    placeholder="Password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    is_password={true}
-                  />
-                </div>
-                <div style={{ color: "red" }}>{error}</div>
-                <button
-                  className="primary-button button-text signin-submit-button"
-                  type="submit"
-                  form="login"
-                  value="Submit"
+              {width > 600 ? (
+                <form
+                  className="signin-form"
+                  action="/"
+                  id="login"
+                  onSubmit={loginSubmit}
                 >
-                  LOG IN
-                </button>
-                <div>
+                  <div className="header-3 signin-header-color">Log In</div>
+                  <div className="header-7 signin-text-color">
+                    Log in with your email or username
+                  </div>
+                  <div className="register-input-container">
+                    <InputOne
+                      id="email_slot"
+                      type="text"
+                      name="email"
+                      is_required={true}
+                      placeholder="Email Address or Username"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                    />
+                  </div>
+                  <div className="register-input-container">
+                    <InputOne
+                      id="password_slot"
+                      type="password"
+                      name="password"
+                      is_required={true}
+                      placeholder="Password"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      is_password={true}
+                    />
+                  </div>
+                  <div style={{ color: "red" }}>{error}</div>
                   <button
-                    onClick={() => Auth.federatedSignIn({ provider: "Google" })}
+                    className="primary-button button-text signin-submit-button"
+                    type="submit"
+                    form="login"
+                    value="Submit"
                   >
-                    Open Google
+                    LOG IN
                   </button>
-                </div>
-                <p className="forgot-footer">
-                  <a href="/forgot" className="header-7 signin-link">
-                    Forgot Password?
-                  </a>
-                </p>
-                <div className="header-7 signin-text-color">
-                  Don't have an account?{" "}
-                  <NavLink
-                    to={{
-                      pathname: "/register",
-                      state: { current: from_path },
-                    }}
-                    className="header-7 signin-link"
+                  <button
+                    onClick={() =>
+                      Auth.federatedSignIn({
+                        provider: "Google",
+                      })
+                    }
                   >
-                    Sign up
-                  </NavLink>
-                  .
-                </div>
-              </form>
+                    Sign In With Google
+                  </button>
+                  <button
+                    onClick={() =>
+                      Auth.federatedSignIn({
+                        provider: "Facebook",
+                      })
+                    }
+                  >
+                    Sign In With Facebook
+                  </button>
+                  <p className="forgot-footer">
+                    <a href="/forgot" className="header-7 signin-link">
+                      Forgot Password?
+                    </a>
+                  </p>
+                  <div className="header-7 signin-text-color">
+                    Don't have an account?{" "}
+                    <NavLink
+                      to={{
+                        pathname: "/register",
+                        state: { current: from_path },
+                      }}
+                      className="header-7 signin-link"
+                    >
+                      Sign up
+                    </NavLink>
+                    .
+                  </div>
+                </form>
+              ) : (
+                <form
+                  className="signin-form"
+                  action="/"
+                  id="login"
+                  onSubmit={loginSubmit}
+                >
+                  <div className="header-4 signin-header-color">Log In</div>
+                  <div className="subtitle-3 signin-text-color">
+                    Log in with your email or username
+                  </div>
+                  <div className="register-input-container">
+                    <InputOne
+                      id="email_slot"
+                      type="text"
+                      name="email"
+                      is_required={true}
+                      placeholder="Email Address or Username"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                    />
+                  </div>
+                  <div className="register-input-container">
+                    <InputOne
+                      id="password_slot"
+                      type="password"
+                      name="password"
+                      is_required={true}
+                      placeholder="Password"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      is_password={true}
+                    />
+                  </div>
+                  <div style={{ color: "red" }}>{error}</div>
+                  <button
+                    className="primary-button button-text signin-submit-button"
+                    type="submit"
+                    form="login"
+                    value="Submit"
+                  >
+                    LOG IN
+                  </button>
+                  <p className="forgot-footer">
+                    <a href="/forgot" className="body-2 signin-link">
+                      Forgot Password?
+                    </a>
+                  </p>
+                  <div className="body-2 signin-text-color">
+                    Don't have an account?{" "}
+                    <NavLink
+                      to={{
+                        pathname: "/register",
+                        state: { current: from_path },
+                      }}
+                      className="body-2 signin-link"
+                    >
+                      Sign up
+                    </NavLink>
+                    .
+                  </div>
+                </form>
+              )}
             </div>
           )}
         </Row>

@@ -11,6 +11,12 @@
   width: 100%;
 }
 
+.about-mobile {
+  max-width: 100%;
+  width: 100%;
+  // overflow-x: hidden;
+}
+
 .background-about-container {
   // position: absolute;
   max-width: 100%;
@@ -31,6 +37,10 @@
 
 .fans-main-container-background {
   background: url("../../images/backgrounds/wave_2.svg") center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .about-text-container {
@@ -40,10 +50,22 @@
   width: 100%;
   align-items: center;
   justify-content: center;
+  // @include respond-to("small") {
+  //   margin: auto 30px;
+  // }
+}
+
+.about-main-header {
+  @include respond-to("small") {
+    margin: 46px 30px 0px 30px;
+  }
 }
 
 .about-main-subheading {
   margin-top: 16px;
+  @include respond-to("small") {
+    margin: 16px 30px 0px 30px;
+  }
 }
 
 img.wave {
@@ -58,6 +80,9 @@ img.info-card {
   max-width: 100%;
   width: 100%;
   height: auto;
+  @include respond-to("small") {
+    height: 700px;
+  }
 }
 
 img.wave-2 {
@@ -69,11 +94,32 @@ img.wave-2 {
 
 .how-it-works-section {
   margin-top: -56px;
+  position: relative;
+  @include respond-to("small") {
+    margin-top: -270px;
+    z-index: 1;
+  }
+  @include respond-to("x-small") {
+    margin-top: -380px;
+  }
+  @include respond-to("xx-small") {
+    margin-top: -420px;
+  }
+
+  @include respond-to("xxx-small") {
+    margin-top: -480px;
+  }
+  // @media only screen and (max-width: 340px) {
+
+  // }
 }
 
 .feature-section {
   margin-top: 178px;
   position: relative;
+  @include respond-to("small") {
+    margin-top: 100px;
+  }
 }
 
 .background-about-inner {
@@ -81,18 +127,26 @@ img.wave-2 {
   display: flex;
 }
 
-.tab-title {
+.tab-titles {
   position: absolute;
+  width: 100%;
   top: 42px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // cursor: pointer;
+  @include respond-to("large") {
+    top: 24px;
+  }
+  @include respond-to("medium") {
+    top: 15px;
+  }
+  @include respond-to("small") {
+    top: 12px;
+  }
+}
+
+.tab-title {
   cursor: pointer;
-}
-
-.artist-tab {
-  right: calc(100vw * 0.2194444);
-}
-
-.fan-tab {
-  left: calc(100vw * 0.2194444);
 }
 
 .not-selected {
@@ -109,6 +163,9 @@ img.wave-2 {
   top: calc(100vw * 0.10277778);
   width: 100%;
   padding-top: 56.25%;
+  @include respond-to("small") {
+    top: calc(100vw * 0.2);
+  }
 }
 
 .experience-video {
@@ -119,18 +176,50 @@ img.wave-2 {
   transform: translateX(-50%);
 }
 
+.experience-gif {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88%;
+}
+
 .step-card-section {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  column-gap: 38px;
   // margin: 36px 150px 0px 150px;
   max-width: 1139px;
   margin: auto;
   margin-top: 36px;
+  @include respond-to("small") {
+    flex-direction: column;
+    margin-top: 17px;
+  }
 }
 
-.feature-wave-bkgd {
-  position: absolute;
+.step-card-row {
+  display: grid;
+  // flex-direction: row;
+  // justify-content: space-between;
+  // margin-top: 68px;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 38px;
+  // margin: 36px 150px 0px 150px;
+  // max-width: 1139px;
+  margin: auto;
+  margin-top: 36px;
+  @media only screen and (max-width: 1100px) {
+    column-gap: 25px;
+  }
+  @include respond-to("large") {
+    grid-template: 1fr 1fr 1fr / none;
+    row-gap: 28px;
+  }
+  // @include respond-to("small") {
+  //   margin-top: 17px;
+  // }
 }
 
 .feature-card-section {
@@ -138,14 +227,33 @@ img.wave-2 {
   //margin: 0px 144px 0px 144px;
   max-width: 1048px;
   flex-direction: column;
-  margin: auto;
+  margin: 0 auto;
+  @include respond-to("small") {
+    margin-top: 17px;
+  }
 }
 
 .feature-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  // flex-direction: row;
+  // justify-content: space-between;
   margin-top: 68px;
+  grid-template: 1fr 1fr / 1fr 1fr 1fr;
+  column-gap: 38px;
+  row-gap: 36px;
+  @media only screen and (max-width: 1100px) {
+    column-gap: 25px;
+    row-gap: 28px;
+  }
+  @include respond-to("large") {
+    grid-template: 1fr 1fr 1fr / 1fr 1fr;
+  }
+  // @include respond-to("medium") {
+  //   grid-template: 1fr 1fr 1fr / 1fr 1fr;
+  // }
+  // @include respond-to("small") {
+  //   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  // }
 }
 
 .feature-content-container {
@@ -156,12 +264,28 @@ img.wave-2 {
   position: relative;
   top: 0;
   margin-top: -56px;
+  background: url("../../images/backgrounds/features_background.png") center
+    center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: calc(100vw * 0.47986111);
+  @include respond-to("small") {
+    background: #07070f;
+  }
 }
 
 .sign-up-container {
   display: flex;
   position: relative;
   width: 100%;
+  margin-top: 114px;
+  margin-bottom: 60px;
+  @include respond-to("small") {
+    margin-top: 33px;
+    margin-bottom: 55px;
+  }
 }
 
 .sign-up-button {

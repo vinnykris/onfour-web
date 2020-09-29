@@ -13,6 +13,7 @@ import Auth from "../../apis/UserPool";
 
 // Component Imports
 import FlexibleGrid from "../flexible_grid/flexible_grid";
+import OneRowGrid from "../one_row_grid/one_row_grid";
 import { useWindowDimensions } from "../custom_hooks";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
@@ -115,7 +116,7 @@ const HomePage = () => {
       // Upcoming shows
       var full_concerts = [];
       const upcoming_result = await getConcertInfo();
-      for await (const data of upcoming_result.slice(0, 4)) {
+      for await (const data of upcoming_result) {
         full_concerts.push(formatUpcomingShow(await getUpcomingFull(data)));
       }
       setConcerts(full_concerts);
@@ -191,6 +192,7 @@ const HomePage = () => {
                     <FeaturedConcertBox
                       artist_info={most_recent_concert_artist}
                       concert_info={most_recent_concert}
+                      width={width}
                     />
                   </Row>
                 </div>
@@ -215,7 +217,7 @@ const HomePage = () => {
                   <Row>
                     <FlexibleGrid
                       className="preview-flex-row"
-                      content_list={concerts}
+                      content_list={concerts.slice(0, 4)}
                       num_cols={4}
                     />
                   </Row>
@@ -254,131 +256,81 @@ const HomePage = () => {
         )
       ) : (
         // {/* MOBILE LAYOUT */}
-        <Grid className="mobile-grid-home">
-          <div className="main-content-mobile">
-            {/* MISSION ROW */}
-            <div className="mobile-section">
-              <Row>
-                <Col size={1}>
-                  <h3 className="header-mobile"> Our Mission </h3>
-                </Col>
-              </Row>
-              <Row>
-                <Col size={1}>
-                  <p className="description-text-mobile">
-                    Onfour is the premier live-streaming concert platform. We
-                    are redefining what it means to experience live music
-                    digitally and are dedicated to empowering artists to connect
-                    with fans in new, meaningful ways.
-                  </p>
-                </Col>
-              </Row>
-            </div>
+        most_recent_concert_artist ? (
+          <Grid className="mobile-grid-home">
+            {/* BANNER ROW */}
+            <Row className="mobile-banner-row">
+              <div className="mobile-banner-container">
+                <img
+                  src={most_recent_concert.poster_url}
+                  className="mobile-home-page-featured"
+                />
+                <div className="mobile-home-page-overlay" />
+                <Row className="mobile-upcoming-row">
+                  <FeaturedConcertBox
+                    artist_info={most_recent_concert_artist}
+                    concert_info={most_recent_concert}
+                    width={width}
+                  />
+                </Row>
+              </div>
+            </Row>
 
-            {/* SUBSCRIBE ROW */}
-            <div className="mobile-section">
-              <Row>
-                <Col size={1}>
-                  <h3 className="header-mobile">Subscribe</h3>
-                </Col>
-              </Row>
-              <Row>
-                <Col size={1}>
-                  <p className="description-text-mobile">
-                    To stay informed about upcoming events,<br></br> subscribe
-                    to our mailing list:
-                  </p>
-                </Col>
-              </Row>
-              <Row>
-                <Col size={1}>
-                  {(() => {
-                    if (clicked) {
-                      return (
-                        <p className="subscribe-success home-success">
-                          Thank you and stay tuned!
-                        </p>
-                      );
-                    } else {
-                      return (
-                        <form
-                          className="inline-form-2"
-                          action="/"
-                          id="newsletter"
-                          onSubmit={emailSubmit}
-                        >
-                          <Row>
-                            <Col size={4}>
-                              <input
-                                type="email"
-                                placeholder="Enter email here..."
-                                name="email"
-                                required
-                                value={email}
-                                className="email-input"
-                                onChange={(event) =>
-                                  setEmail(event.target.value)
-                                }
-                              />
-                            </Col>
-                            <Col size={1}>
-                              <button
-                                type="submit"
-                                form="newsletter"
-                                value="Submit"
-                                className="submit-button button-border button-height mobile-button-text"
-                              >
-                                Submit
-                              </button>
-                            </Col>
-                          </Row>
-                        </form>
-                      );
-                    }
-                  })()}
-                </Col>
-              </Row>
+            <Row>
+              <Col size={1}>
+                <div className="home-preview-content">
+                  <Row className="header-row">
+                    <Col size={1}>
+                      <span className="preview-content-header header-6">
+                        Upcoming Shows
+                    </span>
+                    </Col>
+                    {/* <Col size={1}>
+                      <NavLink to="/upcoming">
+                        <span className="view-all header-7">View All</span>
+                      </NavLink>
+                    </Col> */}
+                  </Row>
+                  <Row className="full-width-row">
+                    <OneRowGrid
+                      className="preview-flex-row"
+                      content_list={concerts}
+                    />
+                  </Row>
+                </div>
+              </Col>
+            </Row>
+          </Grid>
+        ) : (
+            <div>
+              {no_concert ? (
+                <Grid className="desktop-grid-home">
+                  {/* BANNER ROW */}
+                  <Row className="banner-row">
+                    <div className="banner-container">
+                      <img src={no_concert_img} className="home-page-featured" />
+                      <div className="empty-upcoming-container">
+                        <span className="preview-content-header header-5 empty-upcoming">
+                          We don't have any scheduled shows at the moment, but
+                          stay tuned!
+                    </span>
+                      </div>
+                    </div>
+                  </Row>
+                </Grid>
+              ) : (
+                  <div className="overlay-box">
+                    <ScaleLoader
+                      sizeUnit={"px"}
+                      size={18}
+                      color={"#E465A2"}
+                      loading={!most_recent_concert_artist}
+                    />
+                  </div>
+                )}
             </div>
-
-            {/* PERFORM ROW */}
-            <div className="mobile-section">
-              <Row>
-                <Col size={1}>
-                  <Row>
-                    <Col size={1}>
-                      <h3 className="header-mobile">Perform</h3>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col size={1}>
-                      <p className="description-text-mobile">
-                        Want to perform a livestream concert with Onfour?{" "}
-                        <br></br>
-                        Send us an email and we will get back to you soon!
-                      </p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col size={1}>
-                      <button
-                        type="submit"
-                        form="newsletter"
-                        value="Submit"
-                        className="email-button-mobile button-border button-height mobile-button-text"
-                        onClick={sendEmail}
-                      >
-                        Send us an email
-                      </button>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-            </div>
-          </div>
-        </Grid>
+          )
       )}
-      {/* //   </div>
-    // )} */}
     </div>
   );
 };

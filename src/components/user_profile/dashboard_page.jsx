@@ -6,6 +6,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 import { Row, Col } from "../grid";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
+import OneRowGrid from "../one_row_grid/one_row_grid";
 import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.png";
 
 import CreateCrewModal from "./create_crew_modal";
@@ -155,6 +156,8 @@ const DashboardPage = ({
    * @returns {boolean} true if there's overflow and false if not.
    */
   const checkIfSliderIsOverflowing = () => {
+    console.log(sliderContainerRef.current.clientWidth);
+    console.log(sliderContainerRef.current.scrollWidth);
     if (
       sliderContainerRef.current.clientWidth <
       sliderContainerRef.current.scrollWidth
@@ -231,6 +234,7 @@ const DashboardPage = ({
   }, []);
 
   useEffect(() => {
+    console.log(sliderContainerRef.current);
     if (
       !sliderCalcFirstRun &&
       sliderContainerRef.current &&
@@ -246,7 +250,7 @@ const DashboardPage = ({
     <Col size={7} style={{ width: "90%" }}>
       <Row className="header-section">
         <img src={dashboardIcon} className="profile-header-icon"></img>
-        <h4 className="profile-preview-content-header username-header">
+        <h4 className="profile-preview-content-header username-header header-5">
           Dashboard
         </h4>
         {/* <h4 className="profile-preview-content-header dashboard-header">
@@ -260,17 +264,16 @@ const DashboardPage = ({
             <div>
               <Row>
                 <Col size={1}>
-                  <h4 className="profile-preview-content-header">
+                  <h4 className="profile-preview-content-header header-5">
                     MY UPCOMING SHOWS
                   </h4>
                 </Col>
               </Row>
               <Row>
-                <Col size={1}>
+                <Col size={1} className="profile-upcoming-concerts-column">
                   {width <= 600 ? (
-                    <FlexibleGrid
+                    <OneRowGrid
                       content_list={upcoming_concerts}
-                      num_cols={1}
                     />
                   ) : (
                     <div>
@@ -278,19 +281,19 @@ const DashboardPage = ({
                         <div>
                           {width <= 768 ? (
                             <FlexibleGrid
-                              content_list={upcoming_concerts}
+                              content_list={upcoming_concerts.slice(0, 3)}
                               num_cols={3}
                             />
                           ) : (
                             <FlexibleGrid
-                              content_list={upcoming_concerts}
+                              content_list={upcoming_concerts.slice(0, 4)}
                               num_cols={4}
                             />
                           )}
                         </div>
                       ) : (
                         <FlexibleGrid
-                          content_list={upcoming_concerts}
+                          content_list={upcoming_concerts.slice(0, 4)}
                           num_cols={4}
                         />
                       )}
@@ -302,34 +305,34 @@ const DashboardPage = ({
                 <div className="memories-container">
                   <Row>
                     <Col size={1}>
-                      <h4 className="profile-preview-content-header">
+                      <h4 className="profile-preview-content-header header-5">
                         MY MEMORIES
                       </h4>
                     </Col>
                   </Row>
                   <Row>
-                    <Col size={1}>
+                    <Col size={1} className="memories-column">
                       {width <= 600 ? (
-                        <FlexibleGrid content_list={memories} num_cols={1} />
+                        <OneRowGrid content_list={memories} />
                       ) : (
                         <div>
                           {width < 1280 ? (
                             <div>
                               {width <= 768 ? (
                                 <FlexibleGrid
-                                  content_list={memories}
+                                  content_list={memories.slice(0, 3)}
                                   num_cols={3}
                                 />
                               ) : (
                                 <FlexibleGrid
-                                  content_list={memories}
+                                  content_list={memories.slice(0, 4)}
                                   num_cols={4}
                                 />
                               )}
                             </div>
                           ) : (
                             <FlexibleGrid
-                              content_list={memories}
+                              content_list={memories.slice(0, 4)}
                               num_cols={4}
                             />
                           )}
@@ -344,22 +347,22 @@ const DashboardPage = ({
             <div className="profile-empty-state">
               <Row>
                 <Col size={1}>
-                  <h4 className="profile-preview-content-header">
+                  <h4 className="profile-preview-content-header header-5">
                     MY UPCOMING SHOWS
                   </h4>
                 </Col>
               </Row>
               <Row>
                 <Col size={1} className="empty-upcoming-concert-container">
-                  <h4 className="empty-state-message">
+                  <h4 className="empty-state-message body-1">
                     Oops... it looks like you aren't going to any upcoming
                     shows.
                   </h4>
-                  <h5 className="empty-state-message">
+                  <h5 className="empty-state-message body-1">
                     Get your ticket to a show below!
                   </h5>
                   <button
-                    className="upcoming-prompt-button"
+                    className="upcoming-prompt-button primary-button button-text"
                     onClick={() => history.push("/upcoming")}
                   >
                     View Upcoming Shows
@@ -367,37 +370,37 @@ const DashboardPage = ({
                 </Col>
               </Row>
               {memories.length > 0 ? (
-                <div>
+                <div className="memories-container">
                   <Row>
                     <Col size={1}>
-                      <h4 className="profile-preview-content-header">
+                      <h4 className="profile-preview-content-header header-5">
                         MY MEMORIES
                       </h4>
                     </Col>
                   </Row>
                   <Row>
-                    <Col size={1}>
+                    <Col size={1} className="memories-column">
                       {width <= 600 ? (
-                        <FlexibleGrid content_list={memories} num_cols={1} />
+                        <OneRowGrid content_list={memories} />
                       ) : (
                         <div>
                           {width < 1280 ? (
                             <div>
                               {width <= 768 ? (
                                 <FlexibleGrid
-                                  content_list={memories}
+                                  content_list={memories.slice(0, 3)}
                                   num_cols={3}
                                 />
                               ) : (
                                 <FlexibleGrid
-                                  content_list={memories}
+                                  content_list={memories.slice(0, 4)}
                                   num_cols={4}
                                 />
                               )}
                             </div>
                           ) : (
                             <FlexibleGrid
-                              content_list={memories}
+                              content_list={memories.slice(0, 4)}
                               num_cols={4}
                             />
                           )}
@@ -413,7 +416,7 @@ const DashboardPage = ({
           <div className="user-crews-container profile-empty-state">
             <Row className="user-crews-title">
               <Col size={1}>
-                <h4 className="profile-preview-content-header">
+                <h4 className="profile-preview-content-header header-5">
                   My Crews{" "}
                   {userCrews.length > 0 && (
                     <span
@@ -478,7 +481,7 @@ const DashboardPage = ({
                     <ScaleLoader
                       sizeUnit="px"
                       size={18}
-                      color="#7b6dac"
+                      color="#e465a2"
                       loading={loadingCrews}
                     />
                   </div>

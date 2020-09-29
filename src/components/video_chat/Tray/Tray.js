@@ -50,6 +50,7 @@ export default function Tray(props) {
   const [mic_icon, setMicIcon] = useState("fas fa-microphone unmuted");
   const [volume_icon, setVolumeIcon] = useState("fas fa-volume-up unmuted");
   const [current_volume, setCurrentVol] = useState(100);
+  const [stream_volume, setStreamVolume] = useState(props.stream_volume_value);
   //const [leave_icon, setLeaveIcon] = useState("")
   // var camera_icon = "fa fa-microphone-slash";
   // var mic_icon = "fa fa-microphone-slash";
@@ -155,8 +156,9 @@ export default function Tray(props) {
 
   function doSomething(e) {
     // console.log("setting volume");
+    // setStreamVolume(props.stream_volume_value);
     callObject.setLocalAudio(true);
-    props.stream_vol_adjust(0.25);
+    props.stream_vol_adjust(0.15);
   }
 
   /**
@@ -336,7 +338,9 @@ export default function Tray(props) {
       )}
       <button
         type={TYPE_LEAVE}
-        className={"tray-button" + (props.artistView? " artist-leave-button" : "")}
+        className={
+          "tray-button" + (props.artistView ? " artist-leave-button" : "")
+        }
         onClick={leaveCall}
         disabled={props.disabled}
         id="leave-video-chat-button"

@@ -26,6 +26,9 @@ import {
 import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.png";
 import ticketIcon from "../../images/icons/local_activity_24px_outlined.png";
 
+// Utils
+import { determineUsername, determineEmail } from "../../utils/register";
+
 import "./profile_styles.scss";
 import "react-multi-carousel/lib/styles.css";
 
@@ -42,12 +45,14 @@ const Profile = (props) => {
   const history = useHistory();
   const [userEmail, setUserEmail] = useState("");
 
+  console.log(username, userEmail);
+
   useEffect(() => {
     Auth.currentAuthenticatedUser({})
       .then((user) => {
         setAuth(true);
-        setUsername(user.username);
-        setUserEmail(user.attributes.email);
+        determineUsername(user).then((username) => setUsername(username));
+        determineEmail(user).then((email) => setUserEmail(email));
       })
       .catch((err) => {
         setAuth(false);
@@ -77,12 +82,12 @@ const Profile = (props) => {
       const upcoming_result = results[0];
       const memories_result = results[1];
       const ticket_stubs = results[2];
-      setUpcomingConcerts(upcoming_result.slice(0, 5));
+      setUpcomingConcerts(upcoming_result);
       // setStubs(getStubs);
       setStubs(ticket_stubs);
       // Archive videos (sorting from most recent -> oldest)
       // const memories_result = await getMemories(variables.username);
-      setMemories(memories_result.slice(0, 4));
+      setMemories(memories_result);
       setIsLoaded(true);
     };
     fetchData();

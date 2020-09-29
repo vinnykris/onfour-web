@@ -17,6 +17,9 @@ import ArchiveVideo from "../components/archive_page/archive_video";
 import { getArtistInfo } from "./get_concert_data";
 import { formatUpcomingShow, formatMemory } from "../components/util";
 
+// Utils
+import { determineUsername } from "../utils/register";
+
 Amplify.configure(awsmobile);
 
 // Asynchronous function to get list of videos from database
@@ -31,7 +34,7 @@ export const getMemories = async (username) => {
     archive_videos.push(
       <ArchiveVideo
         artist_name={data.artist_name}
-        concert_name={data.concert_name}
+        // concert_name={data.concert_name}
         concert_date={data.concert_date}
         url={data.video_url}
         length={data.video_length}
@@ -99,9 +102,10 @@ export const fetchUserConcerts = async () => {
   var users_shows = [];
   const authenticated_user = await Auth.currentAuthenticatedUser();
   if (authenticated_user) {
+    const username = await determineUsername(authenticated_user);
     const user_data = await API.graphql(
       graphqlOperation(queries.get_user_data, {
-        input: authenticated_user.username,
+        input: username,
       })
     );
     const concert_data = user_data.data.getCreateOnfourRegistration.concert;
@@ -146,7 +150,7 @@ export const getUpcomingPurchasedShows = async (width, username) => {
     return merged;
   };
 
-  if (user_concerts !== []) {
+  if (user_concerts !== [] && !user_concerts.length) {
     for await (const data of user_concerts) {
       if (data.data.getConcert.is_future) {
         upcoming_concerts.push(

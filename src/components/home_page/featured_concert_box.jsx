@@ -6,7 +6,7 @@ import Tag from "../tag";
 import PrimaryButton from "../primary_button";
 import history from "../../history";
 
-const FeaturedConcertBox = ({ artist_info, concert_info }) => {
+const FeaturedConcertBox = ({ artist_info, concert_info, width }) => {
   const [days_left, setDaysLeft] = useState();
   const [artist_name, setArtistName] = useState("");
   const [day, setDay] = useState("");
@@ -30,14 +30,14 @@ const FeaturedConcertBox = ({ artist_info, concert_info }) => {
         parseInt(concert_time.slice(0, 2) - 12) +
           ":" +
           concert_time.slice(3, 5) +
-          " PM EST"
+          " PM"
       );
     } else {
       setTime(
         parseInt(concert_time.slice(0, 2)) +
           ":" +
           concert_time.slice(3, 5) +
-          " AM EST"
+          " AM"
       );
     }
   };
@@ -56,39 +56,71 @@ const FeaturedConcertBox = ({ artist_info, concert_info }) => {
   return (
     <Grid>
       {loaded ? (
-        <div>
-          <Row>
-            <Col className="tag-container">
-              <Tag content={"In " + days_left + " days"} />
-            </Col>
-          </Row>
-          <Row className="featured-concert-box-row">
-            <Col>
-              <div className="header-3">{artist_name}</div>
-            </Col>
-          </Row>
-          <Row className="featured-concert-box-row">
-            <Col>
-              <div className="subtitle-1">
-                {day} | {date} | {time}
-              </div>
-            </Col>
-          </Row>
-          <Row className="featured-concert-box-row">
-            <Col>
-              {/* <PrimaryButton
-            content="PEEK INSIDE"
-            action={() => history.push("/upcoming/" + concert_id)}
-          /> */}
-              <button
-                className="primary-button button-text featured-concert-action-button"
-                onClick={() => history.push("/upcoming/" + concert_id)}
-              >
-                PEEK INSIDE
-              </button>
-            </Col>
-          </Row>
-        </div>
+        width > 600 ? (
+          <div>
+            <Row>
+              <Col className="tag-container">
+                <Tag content={"In " + days_left + " days"} />
+              </Col>
+            </Row>
+            <Row className="featured-concert-box-row">
+              <Col>
+                <div className="header-3">{artist_name}</div>
+              </Col>
+            </Row>
+            <Row className="featured-concert-box-row">
+              <Col>
+                <div className="subtitle-1">
+                  {day} | {date} | {time}
+                </div>
+              </Col>
+            </Row>
+            <Row className="featured-concert-box-row">
+              <Col>
+                {/* <PrimaryButton
+              content="PEEK INSIDE"
+              action={() => history.push("/upcoming/" + concert_id)}
+            /> */}
+                <button
+                  className="primary-button button-text featured-concert-action-button"
+                  onClick={() => history.push("/upcoming/" + concert_id)}
+                >
+                  PEEK INSIDE
+                </button>
+              </Col>
+            </Row>
+          </div>
+        ) : (
+          <div>
+            <Row>
+              <Col className="mobile-tag-container">
+                <Tag content={"In " + days_left + " days"} is_mobile={true} />
+              </Col>
+            </Row>
+            <Row className="mobile-featured-concert-box-row">
+              <Col>
+                <div className="header-6">{artist_name}</div>
+              </Col>
+            </Row>
+            <Row className="mobile-featured-concert-box-row">
+              <Col>
+                <div className="subtitle-3">
+                  {day} | {date} | {time}
+                </div>
+              </Col>
+            </Row>
+            <Row className="featured-concert-box-row">
+              <Col>
+                <button
+                  className="primary-button mobile-button-text mobile-featured-concert-action-button"
+                  onClick={() => history.push("/upcoming/" + concert_id)}
+                >
+                  PEEK INSIDE
+                </button>
+              </Col>
+            </Row>
+          </div>
+        )
       ) : (
         <Row className="featured-concert-box-row">
           <Col>

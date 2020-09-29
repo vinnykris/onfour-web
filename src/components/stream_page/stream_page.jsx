@@ -48,6 +48,7 @@ import viewers_icon from "../../images/icons/stream_icons/viewers_icon.png";
 
 // Utils
 import { getCrewsByUsername } from "../../utils/crew";
+import { determineUsername } from "../../utils/register";
 
 Amplify.configure(awsmobile);
 
@@ -147,7 +148,7 @@ const StreamPage = ({ is_soundcheck }) => {
   useEffect(() => {
     Auth.currentAuthenticatedUser({})
       .then(async (user) => {
-        setUsername(user.username);
+        determineUsername(user).then((username) => setUsername(username));
         setShowChat(true);
         setAuth(true);
         setTickets(await getTickets(user.username));
@@ -501,7 +502,7 @@ const StreamPage = ({ is_soundcheck }) => {
                               : show_start_time
                           }
                           artist_name={artist_name}
-                          concert_name={concert_name}
+                          // concert_name={concert_name}
                           auth={auth}
                           username={username}
                           concert_id={concert_id}
@@ -590,7 +591,6 @@ const StreamPage = ({ is_soundcheck }) => {
                                   </div>
                                 </div>
                               </div>
-
                               <div className="feedback-container">
                                 <a
                                   onClick={() =>
@@ -769,6 +769,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           user_name={username ? username : "GUEST"}
                           artist_name="vinnykris"
                           stream_vol_adjust={setStreamVolume}
+                          stream_volume_value={stream_volume}
                         ></VideoChat>
                       </Row>
                       <Row className="chat-row">
@@ -926,6 +927,17 @@ const StreamPage = ({ is_soundcheck }) => {
               <div className="main-column-mobile">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
+                    <div className="viewers-mobile">
+                      <div className="viewers-container">
+                        <img
+                          src={viewers_icon}
+                          className="stream-action-viewers"
+                        />
+                        <div className="segmented-button-text viewer-count">
+                          {viewers}
+                        </div>
+                      </div>
+                    </div>
                     {is_free ||
                     (purchasedTickets &&
                       purchasedTickets.indexOf(concert_id)) >= 0 ? (
@@ -939,7 +951,7 @@ const StreamPage = ({ is_soundcheck }) => {
                             : show_start_time
                         }
                         artist_name={artist_name}
-                        concert_name={concert_name}
+                        // concert_name={concert_name}
                         auth={auth}
                         username={username}
                         concert_id={concert_id}
@@ -986,6 +998,15 @@ const StreamPage = ({ is_soundcheck }) => {
                     )}
                   </div>
                 </div>
+                <div className="chat-main-mobile">
+                  <div className="chat-wrapper-mobile">
+                    <Chat
+                      chat_name={username ? username : "GUEST"}
+                      chatStatus={chatStatus}
+                      setViewers={getViewers}
+                    />
+                  </div>
+                </div>
                 <div className="payment-row-mobile">
                   <button
                     className="stripe-button-border mobile-payment-button button-text"
@@ -997,15 +1018,6 @@ const StreamPage = ({ is_soundcheck }) => {
                     DONATE
                   </button>
                   {/* <Modal isOpen={false}></Modal> */}
-                </div>
-                <div className="chat-main-mobile">
-                  <div className="chat-wrapper-mobile">
-                    <Chat
-                      chat_name={username ? username : "GUEST"}
-                      chatStatus={chatStatus}
-                      setViewers={getViewers}
-                    />
-                  </div>
                 </div>
               </div>
             </div>

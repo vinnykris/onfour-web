@@ -9,7 +9,7 @@ const ticketPage = ({ width, stubs, history }) => {
     <Col size={7}>
       <Row className="header-section">
         <img src={ticketIcon} className="profile-header-icon"></img>
-        <h4 className="profile-preview-content-header username-header">
+        <h4 className="profile-preview-content-header username-header header-5">
           My Wallet
         </h4>
       </Row>
@@ -39,15 +39,15 @@ const ticketPage = ({ width, stubs, history }) => {
             </Row>
           ) : (
             <div className="profile-empty-state">
-              <h4 className="empty-state-message">
+              <h4 className="empty-state-message body-1">
                 Your wallet is empty! Don't worry, we're not talking about your
                 real wallet.
               </h4>
-              <h5 className="empty-state-message">
+              <h5 className="empty-state-message body-1">
                 Get your first ticket stub below!
               </h5>
               <button
-                className="upcoming-prompt-button"
+                className="upcoming-prompt-button primary-button button-text"
                 onClick={() => history.push("/upcoming")}
               >
                 View Upcoming Shows

@@ -10,14 +10,12 @@
     display: flex;
     flex: 1 1 auto;
     flex-flow: column;
-    height: calc(100vh - 131px);
-    max-height: calc(100vh - 131px);
   }
 }
 
 .stream-page-content {
   //margin-top: -1px;
-  background-color: #07070F;
+  background-color: #07070f;
   //height: auto;
   height: 100%;
   width: 100%;
@@ -47,13 +45,12 @@
   }
 }
 
-
 .sticky-container {
   height: auto;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  border-left: 3px solid #07070F;
+  border-left: 3px solid #07070f;
 }
 
 .payment-row-mobile {
@@ -100,7 +97,7 @@
   height: 60%;
   width: 100%;
   position: relative;
-  border-bottom: 3px solid #07070F;
+  border-bottom: 3px solid #07070f;
 }
 
 .chat-row {
@@ -111,8 +108,8 @@
 }
 
 .chat-main-mobile {
-  height: calc(100vh - 191px - (100vw * 0.5625));
-  max-height: calc(100vh - 191px - (100vw * 0.5625));
+  height: calc(100vh - 123px - (100vw * 0.5625));
+  max-height: calc(100vh - 123px - (100vw * 0.5625));
   // height: 400px;
   display: flex;
   flex-flow: column;
@@ -162,47 +159,57 @@
 
 .toggle-chat-button {
   border-radius: 5px 0px 0px 5px;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
   padding: 3px;
   font-weight: bolder;
 }
 
 .toggle-description-button {
   border-radius: 0px 5px 0px 0px;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
   padding: 0px 8px;
   font-weight: bolder;
 }
 
 .fa-chevron-right {
   margin-left: 2px;
-  color: #f3f3f3;
+  color: #dadada;
   &:hover {
-    color: #497be0;
+    color: #ea91bd;
   }
 }
 
 .fa-chevron-left {
   margin-left: 2px;
-  color: #f3f3f3;
+  color: #dadada;
   &:hover {
-    color: #497be0;
+    color: #ea91bd;
   }
 }
 
 .fa-chevron-down {
   margin-top: 2px;
-  color: #f3f3f3;
+  color: #dadada;
   &:hover {
-    color: #497be0;
+    color: #a6aafb;
   }
 }
 
 .fa-chevron-up {
   margin-top: 2px;
-  color: #f3f3f3;
+  color: #dadada;
   &:hover {
-    color: #497be0;
+    color: #a6aafb;
   }
 }
 
@@ -251,7 +258,7 @@
 }
 
 .payment-modal-tab.selected-tab {
-  border-bottom: 3px solid #E465A2;
+  border-bottom: 3px solid #e465a2;
 }
 
 .payment-modal-tab-text {
@@ -266,7 +273,7 @@
 }
 
 .payment-modal-tab-text.selected-tab {
-  color:rgba(255, 255, 255, 0.87) !important;
+  color: rgba(255, 255, 255, 0.87) !important;
   margin-bottom: 12px;
   @include respond-to("small") {
     margin-bottom: 3px;
@@ -309,8 +316,13 @@
 .stream-info-wrapper {
   width: 100%;
   height: 100px;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
-  border-top: 3px solid #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
+  border-top: 3px solid #07070f;
 }
 
 .stream-wrapper-mobile {
@@ -326,7 +338,12 @@
     width: 100%;
     position: relative;
     padding-bottom: 55%;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
+    background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.08)
+      ),
+      #07070f;
   }
 }
 
@@ -522,8 +539,12 @@
 .stream-info-row {
   // padding-left: 10px;
   height: 100%;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
-
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
 }
 
 .buttons-row {
@@ -582,6 +603,17 @@
   //right: 0;
 }
 
+.viewers-mobile {
+  display: flex;
+  width: auto;
+  height: 30px;
+  align-items: center;
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  z-index: 10;
+}
+
 // .viewer-count {
 //   //width: 150px;
 //   font-size: 0.9rem;
@@ -600,7 +632,7 @@
   width: auto;
   border-radius: 4px;
   background-color: white;
-  color: #07070F;
+  color: #07070f;
   // margin-right: 50%;
   //margin-top: 5px;
   cursor: pointer;
@@ -715,7 +747,7 @@
   display: flex;
   border-radius: 4px;
   background-color: white;
-  color: #07070F;
+  color: #07070f;
   width: 104px;
   height: 33px;
   align-items: center;
@@ -749,7 +781,7 @@
 }
 
 .stream-action-button-icon {
-  color: #07070F;
+  color: #07070f;
   padding-right: 10%;
 }
 
@@ -874,11 +906,7 @@
   //   ),
   //   #497be0;
   // background: linear-gradient(252.83deg, #E465A2 2.45%, #7BB3D3 96.72%), #C4C4C4;
-  background: linear-gradient(252.83deg, #EA91BD 2.45%, #A6AAFB 96.72%), #C4C4C4;
-
-  @include respond-to("small") {
-    height: 220px;
-  }
+  background: linear-gradient(252.83deg, #ea91bd 2.45%, #a6aafb 96.72%), #c4c4c4;
 }
 
 .waiting-for-artist-screen {
@@ -918,7 +946,7 @@
   transform: translate(-50%, -50%);
   background: #e7281e;
   @include respond-to("small") {
-    top: 38%;
+    top: 75%;
   }
 }
 
@@ -948,7 +976,7 @@
 }
 
 .parentDisable {
-  background: #07070F;
+  background: #07070f;
   z-index: 998;
   padding-top: 20vh;
   height: calc(-53px + 100vh);
@@ -956,7 +984,7 @@
 }
 
 .overlay-box {
-  background: #07070F;
+  background: #07070f;
   padding-top: 40vh;
   height: calc(-49px + 100vh);
   width: 100%;
@@ -964,7 +992,6 @@
     height: 100vh;
   }
 }
-
 
 .waiting-message-container {
   margin: 0;
@@ -978,7 +1005,6 @@
     transform: translate(-50%, -30%);
   }
 }
-
 
 .waiting-message1 {
   color: white;
@@ -1093,12 +1119,12 @@
 
 .mobile-payment-button {
   margin: 11px 8px;
-  background: #E465A2;
+  background: #e465a2;
   border-radius: 4px !important;
   padding: 0px !important;
   color: #000000 !important;
   &:hover {
-    background: #EA91BD !important;
+    background: #ea91bd !important;
   }
   &:disabled {
     background: rgba(255, 255, 255, 0.6) !important;
@@ -1174,8 +1200,13 @@
 }
 
 .controll-toolbar-row {
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
-  border-top: 1px solid #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
+  border-top: 1px solid #07070f;
   height: 70px;
   position: absolute;
   width: 100%;
@@ -1211,4 +1242,9 @@
 .mobile-no-show-waiting-msg {
   white-space: pre-wrap;
   line-height: 18px !important;
+}
+
+.ivs-video {
+  width: 100%;
+  height: 100%;
 }

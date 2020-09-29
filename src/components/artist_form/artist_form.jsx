@@ -19,6 +19,9 @@ import Auth from "../../apis/UserPool";
 import Amplify from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
 
+// Utils
+import { determineUsername } from "../../utils/register";
+
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 const ArtistForm = () => {
@@ -48,7 +51,7 @@ const ArtistForm = () => {
   useEffect(() => {
     Auth.currentAuthenticatedUser({})
       .then((user) => {
-        setUsername(user.username);
+        determineUsername(user).then((username) => setUsername(username));
         setAuth(true);
       })
       .catch((err) =>

@@ -26,11 +26,15 @@ import history from "../../history";
 import new_logo_white from "../../images/logos/new_logo_white.png";
 import login_icon from "../../images/icons/login.png";
 import desktop_icon from "../../images/logos/navbar-logo-pink.png";
-import mobile_icon from "../../images/logos/logo-pink.png";
+import mobile_icon from "../../images/logos/mobile-logo-pink.png";
 
 // Styles imports
 import "./navbar_styles.scss";
 import "../login_page/login_styles.scss";
+import { useEffect } from "react";
+
+// Utils
+import { determineEmail, determineUsername } from "../../utils/register";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -50,6 +54,7 @@ const NavBar = () => {
   const [profile_url, setProfileURL] = useState(""); // Tracks user's username after signing in
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
   const [last, setLast] = useState(""); // Tracks first name of signed in user
+  const [menu_open, setMenuOpen] = useState(false);
 
   const [show_mobile_login, setShowMobileLogin] = useState(false); // Tracks whether user clicked sign-in or not on mobile
 
@@ -57,18 +62,18 @@ const NavBar = () => {
 
   const toggle = () => setDropdownOpen((prevState) => !prevState); // Toggle for dropdown menu
 
-  // If the user is logged in/valid, set their auth value to true and track their email
-  // If the user is not logged in/invalid, reset their auth value to false
+  // useEffect(() => {
   Auth.currentAuthenticatedUser({})
     .then((user) => {
-      if (user?.signInUserSession?.idToken?.payload?.email)
-        setUserEmail(user.signInUserSession.idToken.payload.email);
-      if (user?.attributes?.email) setUserEmail(user.attributes.email);
+      determineUsername(user).then((username) => setUsername(username));
+      determineEmail(user).then((email) => setUserEmail(email));
       setAuth(true);
-      setUsername(user.username);
       setProfileURL("");
     })
     .catch((err) => setAuth(false));
+  // }, []);
+  // If the user is logged in/valid, set their auth value to true and track their email
+  // If the user is not logged in/invalid, reset their auth value to false
 
   // Fetching the first name of a signed in user
   const getUserData = async () => {
@@ -93,6 +98,7 @@ const NavBar = () => {
   // Open menu function for mobile
   const openMenu = (id) => {
     document.getElementById(id).style.height = "100%";
+    setMenuOpen(true);
   };
 
   // Close menu function for mobile
@@ -101,6 +107,17 @@ const NavBar = () => {
   const closeMenu = (id) => {
     document.getElementById(id).style.height = "0%";
     setShowMobileLogin(false);
+    setMenuOpen(false);
+  };
+
+  const toggleMenu = (id) => {
+    if (menu_open) {
+      document.getElementById(id).style.height = "0%";
+      setMenuOpen(false);
+    } else {
+      document.getElementById(id).style.height = "calc(100vh - 62px)";
+      setMenuOpen(true);
+    }
   };
 
   // Function to sign out the user -- the window reloads after signing out
@@ -117,8 +134,8 @@ const NavBar = () => {
   // Function to sign out the user
   const signOutMobile = () => {
     signOut();
-    setShowMobileLogin(false);
-    closeMenu("nav-signout");
+    toggleMenu("nav-menu");
+    //closeMenu("nav-signout");
   };
 
   // Function to leave video chat for desktop version
@@ -145,148 +162,137 @@ const NavBar = () => {
           {/* MOBILE CODE */}
           <div id="nav-menu" className="overlay">
             <Grid>
-              <Row>
-                <Col size={1}>
-                  <span
-                    className="navbar-close"
-                    onClick={() => closeMenu("nav-menu")}
-                  >
-                    <i className="fa fa-times fa-2x close-icon"></i>
-                  </span>
-                </Col>
-              </Row>
               <div id="nav-links" className="overlay-content">
-                <div className="mobile-nav-link">
-                  <Row>
-                    <Col size={1}>
-                      <NavLink
-                        exact
-                        to="/"
-                        className="nav-page-white mobile-link-text"
-                        onClick={() => closeMenu("nav-menu")}
-                      >
-                        ABOUT
-                      </NavLink>
-                    </Col>
-                  </Row>
-                </div>
-                <div className="mobile-nav-link">
-                  <Row>
-                    <Col size={1}>
-                      <NavLink
-                        to="/artists"
-                        className="nav-page-white mobile-link-text"
-                        onClick={() => closeMenu("nav-menu")}
-                      >
-                        FOR ARTISTS
-                      </NavLink>
-                    </Col>
-                  </Row>
-                </div>
-                <div className="mobile-nav-link">
-                  <Row>
-                    <Col size={1}>
-                      <NavLink
-                        to="/stream"
-                        className="nav-page-white mobile-link-text"
-                        onClick={() => closeMenu("nav-menu")}
-                      >
-                        STREAM
-                      </NavLink>
-                    </Col>
-                  </Row>
-                </div>
-                <div className="mobile-nav-link">
-                  <Row>
-                    <Col size={1}>
-                      <NavLink
-                        to="/upcoming"
-                        className="nav-page-white mobile-link-text"
-                        onClick={() => closeMenu("nav-menu")}
-                      >
-                        UPCOMING
-                      </NavLink>
-                    </Col>
-                  </Row>
-                </div>
-                <div className="mobile-nav-link">
-                  <Row>
-                    <Col size={1}>
-                      <NavLink
-                        to="/archive"
-                        className="nav-page-white mobile-link-text"
-                        onClick={() => closeMenu("nav-menu")}
-                      >
-                        PAST SHOWS
-                      </NavLink>
-                    </Col>
-                  </Row>
-                </div>
-              </div>
-            </Grid>
-          </div>
+                <NavLink
+                  to="/home"
+                  className="header-8 mobile-nav-page"
+                  onClick={() => toggleMenu("nav-menu")}
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  exact
+                  to="/"
+                  className="header-8 mobile-nav-page"
+                  onClick={() => toggleMenu("nav-menu")}
+                >
+                  About
+                </NavLink>
 
-          <div id="nav-signin" className="overlay">
-            <Grid>
-              <Row>
-                <Col size={1}>
-                  <span
-                    className="navbar-close"
-                    onClick={() => closeMenu("nav-signin")}
-                  >
-                    <i className="fa fa-times fa-2x close-icon"></i>
-                  </span>
-                </Col>
-              </Row>
-              <div className="signin-content">
-                {show_mobile_login ? (
-                  <LoginSwitcher closeMenu={() => closeMenu("nav-signin")} />
-                ) : null}
-              </div>
-            </Grid>
-          </div>
-
-          <div id="nav-signout" className="overlay">
-            <Grid>
-              <Row>
-                <Col size={1}>
-                  <span
-                    className="navbar-close"
-                    onClick={() => closeMenu("nav-signout")}
-                  >
-                    <i className="fa fa-times fa-2x close-icon"></i>
-                  </span>
-                </Col>
-              </Row>
-              <div className="signin-content">
-                <Row>
-                  <div className="sign-out-container">
-                    <div className="greeting-mobile">
-                      <p className="greeting-mobile-text">Hi, {first}! </p>
-                    </div>
+                <NavLink
+                  to="/stream"
+                  className="header-8 mobile-nav-page"
+                  onClick={() => toggleMenu("nav-menu")}
+                >
+                  Stream
+                </NavLink>
+                <NavLink
+                  to="/upcoming"
+                  className="header-8 mobile-nav-page"
+                  onClick={() => toggleMenu("nav-menu")}
+                >
+                  Upcoming
+                </NavLink>
+                {!auth ? (
+                  <div>
+                    <NavLink
+                      to={{
+                        pathname: "/login",
+                        state: { current: location },
+                      }}
+                      className="header-8 mobile-nav-page login-text"
+                      onClick={() => toggleMenu("nav-menu")}
+                    >
+                      Log In
+                    </NavLink>
+                    <NavLink
+                      to={{
+                        pathname: "/register",
+                        state: { current: location },
+                      }}
+                      className="mobile-sign-up-container"
+                      onClick={() => toggleMenu("nav-menu")}
+                    >
+                      <div className="primary-button mobile-login-button button-text">
+                        Sign Up
+                      </div>
+                    </NavLink>
                   </div>
-                </Row>
-                <Row className="mobile-dropdown-row">
-                  <button
-                    className="sign-out-button-mobile"
-                    onClick={openProfile}
-                  >
-                    MY PROFILE
-                  </button>
-                </Row>
-                <Row className="mobile-dropdown-row">
-                  <button
-                    className="sign-out-button-mobile"
-                    onClick={signOutMobile}
-                  >
-                    SIGN OUT
-                  </button>
-                </Row>
+                ) : (
+                  <div>
+                    <NavLink
+                      to="/profile"
+                      className="header-8 mobile-nav-page"
+                      onClick={() => toggleMenu("nav-menu")}
+                    >
+                      Profile
+                    </NavLink>
+                    <NavLink
+                      to={{
+                        pathname: "/register",
+                        state: { current: location },
+                      }}
+                      className="mobile-sign-up-container"
+                      onClick={signOutMobile}
+                    >
+                      <div className="primary-button mobile-login-button button-text">
+                        Sign Out
+                      </div>
+                    </NavLink>
+                  </div>
+                )}
               </div>
             </Grid>
           </div>
 
-          <Grid className="mobile-grid">
+          <div className="mobile-nav-container">
+            <span
+              className="hamburger-menu"
+              onClick={() => toggleMenu("nav-menu")}
+            >
+              {menu_open ? (
+                <i className="fa fa-times fa-2x hamburger-icon"></i>
+              ) : (
+                <i className="fa fa-bars fa-2x hamburger-icon"></i>
+              )}
+            </span>
+            <div className="mobile-logo-container">
+              <NavLink exact to="/">
+                <img
+                  className="onfour-logo-mobile"
+                  src={mobile_logo}
+                  width="auto"
+                  alt="nav-logo"
+                ></img>
+              </NavLink>
+            </div>
+            <div className="mobile-profile-container">
+              {!auth ? (
+                <span
+                  className="user-menu"
+                  onClick={() => history.push("/login")}
+                >
+                  <img
+                    className="user-icon"
+                    src={login_icon}
+                    alt="profile-icon"
+                  ></img>
+                </span>
+              ) : (
+                <span
+                  className="user-menu"
+                  onClick={() => history.push("/profile")}
+                >
+                  <LoggedInUser
+                    className="logged-in-icon"
+                    first={username}
+                    // last={last}
+                  />
+                </span>
+              )}
+            </div>
+          </div>
+          {/* <Grid className="mobile-grid">
             <Row className="mobile-row">
               <Col size={1}>
                 <span
@@ -329,7 +335,7 @@ const NavBar = () => {
                 )}
               </Col>
             </Row>
-          </Grid>
+          </Grid> */}
         </div>
       ) : (
         <div className="main-content desktop-nav-main">
@@ -347,30 +353,30 @@ const NavBar = () => {
           </div>
           <div className="nav-links-container">
             <NavLink
-              exact
-              to="/"
-              className="nav-page-white header-8"
+              to="/home"
+              className="nav-page-white-desktop header-8"
               onClick={leaveVideoChat}
             >
               Home
             </NavLink>
             <NavLink
-              to="/about"
-              className="nav-page-white header-8"
+              exact
+              to="/"
+              className="nav-page-white-desktop header-8"
               onClick={leaveVideoChat}
             >
               About
             </NavLink>
             <NavLink
               to="/stream"
-              className="nav-page-white header-8"
+              className="nav-page-white-desktop header-8"
               onClick={leaveVideoChat}
             >
               Stream
             </NavLink>
             <NavLink
               to="/upcoming"
-              className="nav-page-white header-8"
+              className="nav-page-white-desktop header-8"
               onClick={leaveVideoChat}
             >
               Upcoming
@@ -378,8 +384,11 @@ const NavBar = () => {
             {!auth ? (
               <div className="login-signup-container">
                 <NavLink
-                  to="/login"
-                  className="nav-page-white header-8 login-text"
+                  to={{
+                    pathname: "/login",
+                    state: { current: location },
+                  }}
+                  className="nav-page-white-desktop header-8 login-text"
                   onClick={leaveVideoChat}
                 >
                   Log In
@@ -408,7 +417,7 @@ const NavBar = () => {
                     <DropdownToggle
                       tag="a"
                       caret
-                      className="nav-page-white header-7"
+                      className="nav-page-white-desktop header-7"
                     >
                       <img
                         className="user-icon-desktop"

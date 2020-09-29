@@ -19,7 +19,7 @@ const getRoomUrl = async (room_name) => {
           start_video_off: false,
           start_audio_off: true,
           owner_only_broadcast: true,
-          sfu_switchover: 2,
+          sfu_switchover: 1,
         },
         name: room_name,
         privacy: "public",

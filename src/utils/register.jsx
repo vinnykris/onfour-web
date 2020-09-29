@@ -19,3 +19,23 @@ export function containsSpecialCharacter(str) {
   if (special_character_regex.test(str) == true) return true;
   return false;
 }
+
+export const determineUsername = async (user) => {
+  if (
+    user?.signInUserSession?.idToken?.payload?.identities?.[0]?.providerType ===
+    "Google"
+  ) {
+    return user.signInUserSession.idToken.payload.email;
+  }
+  return user.username;
+};
+
+export const determineEmail = async (user) => {
+  if (
+    user?.signInUserSession?.idToken?.payload?.identities?.[0]?.providerType ===
+    "Google"
+  ) {
+    return user.signInUserSession.idToken.payload.email;
+  }
+  return user.attributes.email;
+};
