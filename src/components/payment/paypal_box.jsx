@@ -1,18 +1,7 @@
 // React Imports
-import React, { useState } from "react";
-import NumberFormat from "react-number-format";
-
-// Stripe Imports
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import stripeTokenHandler from "./stripe";
-
-// Component Imports
-import { useInputValue } from "../custom_hooks";
+import React from "react";
 
 import { Analytics } from "aws-amplify";
-
-// Image imports
-import venmo_code from "../../images/venmo_codes/onfour_venmo.jpeg";
 
 // Styles Imports
 import "./donate_styles.scss";
@@ -28,7 +17,10 @@ const PaypalBox = (props) => {
     <div className="donate-box-container">
       {props.is_mobile ? (
         <div className="venmo-container">
-          <button className="paypal-button mobile-button-text" onClick={donatePaypal}>
+          <button
+            className="paypal-button mobile-button-text"
+            onClick={donatePaypal}
+          >
             Donate with Paypal
           </button>
           <div className="venmo-text-container">

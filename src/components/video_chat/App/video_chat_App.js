@@ -60,6 +60,7 @@ export default function VideoChatApp({
   const createPublicCall = useCallback(async (room_name, is_created) => {
     setAppState(STATE_CREATING);
     // console.log(is_created);
+    console.log(artist_name);
     let response = await api.createRoom(room_name, is_created);
     if (response.url) {
       return response.url;

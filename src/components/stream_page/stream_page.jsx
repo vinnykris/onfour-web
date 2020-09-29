@@ -25,8 +25,6 @@ import Chat from "../chat/stream_chat";
 // import Join from "../chat/join_chat";
 // import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
-import SocialBar from "../social_bar/social_bar";
-import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/video_chat_App";
 
@@ -34,13 +32,11 @@ import { getTickets } from "../../apis/get_user_data";
 import DonateCardBox from "../payment/donate_box";
 import VenmoBox from "../payment/venmo_box";
 import PaypalBox from "../payment/paypal_box";
-import PrimaryButton from "../primary_button";
 // Styles Imports
 import "./stream_styles.scss";
 import "rodal/lib/rodal.css";
 
 // Image imports
-import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
 import ticket1 from "../../images/icons/ticket1.png";
 import feedback_icon from "../../images/icons/stream_icons/feedback_icon.png";
 import share_icon from "../../images/icons/stream_icons/share_icon.png";
@@ -64,6 +60,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [email_submitted, setEmailSubmitted] = useState(false); // If user submitted email
   const [show_start_time, setStartTime] = useState(""); // Stores the upcoming show's start time
   const [show_time, setShowTime] = useState(""); // Store the upcoming show's start time to display
+  const [artist_id, setArtistID] = useState("");
   const [artist_name, setArtistName] = useState(""); // Stores the upcoming show's artist name
   const [artist_bio, setArtistBio] = useState("");
   const [artist_ig, setArtistIG] = useState("");
@@ -93,13 +90,12 @@ const StreamPage = ({ is_soundcheck }) => {
   const [stream_volume, setStreamVolume] = useState(1.0);
   const [have_upcoming_concert, setHaveUpcomingConcert] = useState(true);
 
-  const history = useHistory();
+  const history = useHistory(0);
 
   // Function passed as prop to chat
   const chatStatus = (mode) => {
     setShowChat(mode);
   };
-
   // Function passed as prop to chat to get viewer numbers
   const getViewers = (num_viewers) => {
     setViewers(num_viewers);
@@ -191,6 +187,7 @@ const StreamPage = ({ is_soundcheck }) => {
             : info_list[0].time.slice(0, 5) + "PM")
       );
       setConcertName(info_list[0].concert_name);
+      setArtistID(info_list[0].artist_id);
       getArtistInfo(info_list[0].artist_id);
       setConcertID(info_list[0].id);
       // setIsLive(info_list[0].is_live);
@@ -474,7 +471,12 @@ const StreamPage = ({ is_soundcheck }) => {
                 </Grid>
                 {(() => {
                   if (credit_selected) {
-                    return <DonateCardBox is_mobile={false} />;
+                    return (
+                      <DonateCardBox
+                        is_mobile={false}
+                        concert_id={concert_id}
+                      />
+                    );
                   } else if (venmo_selected) {
                     return <VenmoBox is_mobile={false} />;
                   } else {
@@ -767,16 +769,17 @@ const StreamPage = ({ is_soundcheck }) => {
                       <Row className="video-chat-row">
                         <VideoChat
                           user_name={username ? username : "GUEST"}
-                          artist_name="vinnykris"
+                          artist_name={artist_id}
                           stream_vol_adjust={setStreamVolume}
                           stream_volume_value={stream_volume}
                         ></VideoChat>
                       </Row>
                       <Row className="chat-row">
                         <Chat
-                          chat_name={username ? username : "GUEST"}
+                          chat_name={username ? username : "GUEST"+ (Math.floor(Math.random() * 99) + 9999) }
                           chatStatus={chatStatus}
                           setViewers={getViewers}
+                          // setguestid={getguestid}
                         />
                       </Row>
                       {/* <Row className="controll-toolbar-row">
@@ -1001,7 +1004,7 @@ const StreamPage = ({ is_soundcheck }) => {
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
                     <Chat
-                      chat_name={username ? username : "GUEST"}
+                      chat_name={username ? username : "GUEST"+(Math.floor(Math.random() * 10000) + 10000).toString().substring(1)}
                       chatStatus={chatStatus}
                       setViewers={getViewers}
                     />

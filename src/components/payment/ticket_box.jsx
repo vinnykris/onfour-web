@@ -113,7 +113,8 @@ const CheckoutForm = (props) => {
           result.token,
           Math.round(props.amount_value * 100),
           name.value,
-          email.value
+          email.value,
+          props.concert_id
         );
         setMessage(payment_result);
         if (payment_result === "Charge processed successfully!") {
@@ -211,7 +212,7 @@ const CheckoutForm = (props) => {
                       </div>
                     )}
                   </div>
-                ) : (!loading) ? (
+                ) : !loading ? (
                   <button
                     className="donate-button button-text"
                     type="submit"
@@ -257,6 +258,7 @@ const TicketBox = (props) => {
       amount_value={props.amount_value}
       addTicket={props.addTicket}
       is_user_price_inputed={props.is_user_price_inputed}
+      concert_id={props.concert_id}
     />
   );
 };
