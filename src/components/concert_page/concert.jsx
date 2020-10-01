@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import MoonLoader from "react-spinners/MoonLoader";
+import history from "../../history";
 // Main Imports
 //import history from "../../history";
 
@@ -325,7 +326,11 @@ const Concert = (props) => {
 
   // Opens payment modal when user tries to get ticket from concert page
   const getTicket = () => {
-    setOpenModal(true);
+    if (auth) {
+      setOpenModal(true);
+    } else {
+      history.push("/login");
+    }
   };
 
   // Hides payment modal
