@@ -142,11 +142,6 @@ const CheckoutForm = (props) => {
           if (!payed) {
             return (
               <div>
-                {display_err ? (
-                  <p className="error-msg">{payment_message}</p>
-                ) : (
-                  <br></br>
-                )}
                 {props.amount_value > 0 ? (
                   <div>
                     {/* <input
@@ -172,7 +167,7 @@ const CheckoutForm = (props) => {
                     </div>
                     {need_confirm ? (
                       <div>
-                        <br></br>
+                        {/* <br></br> */}
                         <button
                           className="donate-button button-text"
                           type="toConfirm"
@@ -195,10 +190,14 @@ const CheckoutForm = (props) => {
                           </div>
                         ) : (
                           <div>
-                            <p className="donate-process-text body-1">
-                              Please confirm you are paying $
-                              {props.amount_value}
-                            </p>
+                            {display_err ? (
+                              <p className="error-msg">{payment_message}</p>
+                            ) : (
+                              <p className="donate-process-text body-1">
+                                Please confirm you are paying $
+                                {props.amount_value}
+                              </p>
+                            )}
                             <button
                               form="ticket"
                               className="donate-button button-text"
