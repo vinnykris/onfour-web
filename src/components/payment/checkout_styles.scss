@@ -69,14 +69,30 @@
   width: calc(100% - 16px);
   height: calc(100% - 80px);
   margin: 0 auto;
+  margin-top: 34px;
   display: flex;
   flex-direction: column;
 }
 
-.ticket-summery-form {
+.custom-ticket-summary-form {
   width: 100%;
-  height: 132px;
+  height: 234px;
+  padding: 0px 33px;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.14)
+    ),
+    #07070f;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+}
 
+.ticket-summary-form {
+  width: 100%;
+  height: 181px;
+  padding: 0px 33px;
   background: linear-gradient(
       0deg,
       rgba(255, 255, 255, 0.14),
@@ -92,19 +108,63 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 66px;
+  min-height: 48px;
+  margin-top: 28px;
+}
+
+.name-your-price-text-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ticket-disclaimer {
+  color: $primary-color !important;
+  text-align: left;
+}
+
+.ticket-item-container {
+  display: flex;
+  flex-direction: row;
 }
 
 .ticket-summery-field {
   flex: 1;
-  padding: 0px 30px;
+  // padding: 0px 30px;
   color: rgba(255, 255, 255, 0.87) !important;
-  line-height: 66px !important;
+  //line-height: 48px !important;
+}
+
+.fee-receipt {
+  height: 115px;
+  padding: 24px 0px;
+}
+
+.fee-receipt-small {
+  // height: 115px;
+  padding: 18px 0px;
+  @include respond-to("small") {
+    padding: 12px 0px;
+  }
+}
+
+.ticket-summary-field-2 {
+  flex: 1;
+  // padding: 0px 30px;
+  color: rgba(255, 255, 255, 0.87) !important;
+  line-height: 31px !important;
+}
+
+.ticket-summary-field-3 {
+  flex: 1;
+  // padding: 0px 30px;
+  color: rgba(255, 255, 255, 0.87) !important;
+  line-height: 35px !important;
 }
 
 .custom-ticket-summery-field {
   // flex: 1;
-  padding: 0px 30px;
+  // padding: 0px 30px;
   color: rgba(255, 255, 255, 0.87) !important;
   line-height: 66px !important;
 }
@@ -125,9 +185,9 @@
   height: 48px;
   text-align: left;
   margin-left: auto;
-  margin-top: 2%;
-  margin-bottom: 2%;
-  margin-right: 3%;
+  margin-top: auto;
+  margin-bottom: auto;
+  // margin-right: 3%;
   border: none;
   caret-color: #e465a2;
   font-size: 1rem;
@@ -147,8 +207,15 @@
   }
 }
 
+.ticket-total-container {
+  display: flex;
+  flex: 1;
+}
+
 .total-text {
   font-weight: bold !important;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .lh-33 {

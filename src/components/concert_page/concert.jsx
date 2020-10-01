@@ -585,7 +585,7 @@ const Concert = (props) => {
                 customStyles={{
                   padding: 0,
                   overflow: scroll,
-                  maxHeight: "620px",
+                  maxHeight: "632px",
                   maxWidth: "482px",
                   background:
                     "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
@@ -595,8 +595,38 @@ const Concert = (props) => {
                 }}
                 className="rodal-custom"
               >
-                {showPaymentBox ? (
+                <PayTicketBox
+                  auth={auth}
+                  artist_name={concert_info.artist_name}
+                  concert_full_time={
+                    concert_info.week_day +
+                    ", " +
+                    concert_info.formatted_date +
+                    ", " +
+                    concert_info.formatted_time
+                  }
+                  general_price={general_price}
+                  backstage_price={backstage_price}
+                  suggested_price={concert_info.suggested_price}
+                  minimum_price={concert_info.minimum_price}
+                  // backstage_price = {10}
+                  // general_price = {1}
+                  total={total}
+                  // goBackToModal={goBackToModal}
+                  addTicket={addTicket}
+                  concert_id={concert_id}
+                ></PayTicketBox>
+                {/* {showPaymentBox ? (
                   <PayTicketBox
+                    auth={auth}
+                    artist_name={concert_info.artist_name}
+                    concert_full_time={
+                      concert_info.week_day +
+                      ", " +
+                      concert_info.formatted_date +
+                      ", " +
+                      concert_info.formatted_time
+                    }
                     general_price={general_price}
                     backstage_price={backstage_price}
                     suggested_price={concert_info.suggested_price}
@@ -604,7 +634,7 @@ const Concert = (props) => {
                     // backstage_price = {10}
                     // general_price = {1}
                     total={total}
-                    goBackToModal={goBackToModal}
+                    // goBackToModal={goBackToModal}
                     addTicket={addTicket}
                     concert_id={concert_id}
                   ></PayTicketBox>
@@ -630,7 +660,8 @@ const Concert = (props) => {
                     setTotal={setTotal}
                     total={total}
                   ></CheckoutBox>
-                )}
+                )} */}
+
                 {/* <div className="invite-friends">
                           <Row>
                             <Col size={1}>
@@ -917,7 +948,7 @@ const Concert = (props) => {
                 customStyles={{
                   padding: 0,
                   overflow: scroll,
-                  maxHeight: "620px",
+                  maxHeight: "632px",
                   maxWidth: "482px",
                   background:
                     "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
@@ -927,7 +958,28 @@ const Concert = (props) => {
                 }}
                 className="rodal-custom"
               >
-                {showPaymentBox ? (
+                <PayTicketBox
+                  auth={auth}
+                  artist_name={concert_info.artist_name}
+                  concert_full_time={
+                    concert_info.week_day +
+                    ", " +
+                    concert_info.formatted_date +
+                    ", " +
+                    concert_info.formatted_time
+                  }
+                  general_price={general_price}
+                  backstage_price={backstage_price}
+                  suggested_price={concert_info.suggested_price}
+                  minimum_price={concert_info.minimum_price}
+                  // backstage_price = {10}
+                  // general_price = {1}
+                  total={total}
+                  // goBackToModal={goBackToModal}
+                  addTicket={addTicket}
+                  concert_id={concert_id}
+                ></PayTicketBox>
+                {/* {showPaymentBox ? (
                   <PayTicketBox
                     general_price={general_price}
                     backstage_price={backstage_price}
@@ -962,7 +1014,7 @@ const Concert = (props) => {
                     setTotal={setTotal}
                     total={total}
                   ></CheckoutBox>
-                )}
+                )} */}
               </Rodal>
               <div className="banner-container">
                 <img

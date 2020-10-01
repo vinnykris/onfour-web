@@ -112,7 +112,7 @@ const CheckoutForm = (props) => {
         const payment_result = await stripeTokenHandler(
           result.token,
           Math.round(props.amount_value * 100),
-          name.value,
+          //name.value,
           email.value,
           props.concert_id
         );
@@ -149,7 +149,7 @@ const CheckoutForm = (props) => {
                 )}
                 {props.amount_value > 0 ? (
                   <div>
-                    <input
+                    {/* <input
                       name="name"
                       label="Name"
                       type="name"
@@ -157,7 +157,7 @@ const CheckoutForm = (props) => {
                       className="donate-form-input body-1 short-width-input"
                       required
                       {...name}
-                    />
+                    /> */}
                     <input
                       name="email"
                       label="Email"
