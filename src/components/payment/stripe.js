@@ -14,14 +14,14 @@ const checkout = axios.create({
 const stripeTokenHandler = async (
   token,
   amount_value,
-  name,
+  // name,
   email,
   concert_id
 ) => {
   const paymentData = {
     token: token.id,
     amount: amount_value,
-    name: name,
+    // name: name,
     email: email,
     concert_id: concert_id,
   };

@@ -112,7 +112,7 @@ const CheckoutForm = (props) => {
         const payment_result = await stripeTokenHandler(
           result.token,
           Math.round(props.amount_value * 100),
-          name.value,
+          //name.value,
           email.value,
           props.concert_id
         );
@@ -142,14 +142,9 @@ const CheckoutForm = (props) => {
           if (!payed) {
             return (
               <div>
-                {display_err ? (
-                  <p className="error-msg">{payment_message}</p>
-                ) : (
-                  <br></br>
-                )}
                 {props.amount_value > 0 ? (
                   <div>
-                    <input
+                    {/* <input
                       name="name"
                       label="Name"
                       type="name"
@@ -157,7 +152,7 @@ const CheckoutForm = (props) => {
                       className="donate-form-input body-1 short-width-input"
                       required
                       {...name}
-                    />
+                    /> */}
                     <input
                       name="email"
                       label="Email"
@@ -172,7 +167,7 @@ const CheckoutForm = (props) => {
                     </div>
                     {need_confirm ? (
                       <div>
-                        <br></br>
+                        {/* <br></br> */}
                         <button
                           className="donate-button button-text"
                           type="toConfirm"
@@ -195,10 +190,14 @@ const CheckoutForm = (props) => {
                           </div>
                         ) : (
                           <div>
-                            <p className="donate-process-text body-1">
-                              Please confirm you are paying $
-                              {props.amount_value}
-                            </p>
+                            {display_err ? (
+                              <p className="error-msg">{payment_message}</p>
+                            ) : (
+                              <p className="donate-process-text body-1">
+                                Please confirm you are paying $
+                                {props.amount_value}
+                              </p>
+                            )}
                             <button
                               form="ticket"
                               className="donate-button button-text"

@@ -24,6 +24,10 @@
 .donate-box-container {
   width: 100%;
   height: calc(100% - 132px);
+  padding-top: 5px;
+  @include respond-to ('small') {
+    padding-top: 15px;
+  }
 }
 
 .donate-form {
@@ -110,6 +114,7 @@
   // padding: 1.6vh 0.7vw;
   border: none;
   cursor: pointer;
+  margin-top: 7px;
   margin-left: 10px;
   margin-right: 10px;
   &:hover {
