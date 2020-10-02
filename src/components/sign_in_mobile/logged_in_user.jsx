@@ -9,7 +9,7 @@ import "./sign_in_mobile_styles.scss";
 
 // Creates the appropriate icon for a logged in user
 const LoggedInUser = ({
-  first,
+  username,
   // last
 }) => {
   return (
@@ -20,7 +20,7 @@ const LoggedInUser = ({
         alt="white-outline"
       ></img>
       <div className="segmented-button-text initials">
-        {first.toUpperCase()[0]}
+        {username.toUpperCase()[0]}
         {/* {last[0]} */}
       </div>
     </span>
