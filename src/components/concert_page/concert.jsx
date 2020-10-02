@@ -380,35 +380,31 @@ const Concert = (props) => {
   // Then hides the modal and shows the ticket stub
   // Calls function that sends emails to invited users
   const addTicket = async (email) => {
-    const user_data = await API.graphql(
-      graphqlOperation(queries.get_user_data, {
-        input: username,
-      })
-    );
-
-    const current_concert_data =
-      user_data.data.getCreateOnfourRegistration.concert;
-
-    const user_name = user_data.data.getCreateOnfourRegistration.first;
-
-    if (!current_concert_data || !isNaN(parseInt(current_concert_data))) {
-      var concert_data = {};
-    } else {
-      var concert_data = JSON.parse(current_concert_data);
+    if (auth) {
+      // const user_data = await API.graphql(
+      //   graphqlOperation(queries.get_user_data, {
+      //     input: username,
+      //   })
+      // );
+      // const current_concert_data =
+      //   user_data.data.getCreateOnfourRegistration.concert;
+      // const user_name = user_data.data.getCreateOnfourRegistration.first;
+      // if (!current_concert_data || !isNaN(parseInt(current_concert_data))) {
+      //   var concert_data = {};
+      // } else {
+      //   var concert_data = JSON.parse(current_concert_data);
+      // }
+      // concert_data[concert_id] = true;
+      // const user_payload = {
+      //   username,
+      //   concert: JSON.stringify(concert_data),
+      // };
+      // API.graphql(
+      //   graphqlOperation(mutations.update_user, {
+      //     input: user_payload,
+      //   })
+      // );
     }
-
-    concert_data[concert_id] = true;
-
-    const user_payload = {
-      username,
-      concert: JSON.stringify(concert_data),
-    };
-
-    // API.graphql(
-    //   graphqlOperation(mutations.update_user, {
-    //     input: user_payload,
-    //   })
-    // );
 
     const concert_rsvp_info = await getOneConcert(concert_id);
     const rsvp_list = [...concert_rsvp_info.rsvp_list, email];
@@ -427,7 +423,7 @@ const Concert = (props) => {
     );
     hideModal();
     setShowStub(true);
-    setHasTicket(true);
+    //setHasTicket(true);
     //sendEmailInvites(user_name);
   };
 
@@ -592,14 +588,29 @@ const Concert = (props) => {
                   </div>
                 </Row>
                 <Row style={{ marginBottom: "21px" }}>
-                  <Col size={1}>
+                  {/* <Col size={1}> */}
+                  <div className="get-ticket-action">
                     <button
                       className="primary-button button-text full-width-button"
                       onClick={getTicket}
                     >
                       {"GET TICKET"}
                     </button>
-                  </Col>
+                    {num_tickets > 0 ? (
+                      <div className="tickets-indicator">
+                        <span className="segmented-button-text num-tickets-text">
+                          You have {num_tickets} ticket(s) already.
+                        </span>
+                      </div>
+                    ) : null}
+                  </div>
+                  {/* <button
+                    className="primary-button button-text full-width-button"
+                    onClick={getTicket}
+                  >
+                    {"GET TICKET"}
+                  </button> */}
+                  {/* </Col> */}
                 </Row>
                 <Row>
                   <Col className="no-stretch-column">
@@ -827,8 +838,10 @@ const Concert = (props) => {
                         </span>
                       </button>
                       {num_tickets > 0 ? (
-                        <div>
-                          <span>You have {num_tickets} tickets already.</span>
+                        <div className="tickets-indicator">
+                          <span className="segmented-button-text num-tickets-text">
+                            You have {num_tickets} ticket(s) already.
+                          </span>
                         </div>
                       ) : null}
                     </div>
@@ -858,19 +871,19 @@ const Concert = (props) => {
                       </Row>
                     )}
                     <Row className="logistics-top">
-                      <span className="header-6">
+                      <span className="header-9">
                         {concert_info.week_day}, {concert_info.formatted_date}
                       </span>
                     </Row>
                     <hr className="solid" />
                     <Row>
-                      <span className="header-6">
+                      <span className="header-9">
                         {concert_info.formatted_time}
                       </span>
                     </Row>
                     <hr className="solid" />
                     <Row>
-                      <span className="header-6">
+                      <span className="header-9 location-text">
                         Streamed from {concert_info.location}
                       </span>
                     </Row>

@@ -28,7 +28,6 @@ const PayTicketBox = (props) => {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   useEffect(() => {
-    console.log(props.user_email);
     if (props.total == 0) {
       setAllowCustomPrice(true);
     }

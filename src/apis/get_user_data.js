@@ -94,14 +94,11 @@ export const fetchUserConcertIDs = async (username) => {
 export const fetchUserTickets = async (email, concert_id) => {
   if (email && concert_id) {
     const concert_data = await getOneConcert(concert_id);
-    console.log(concert_data);
     const rsvp_list = concert_data.rsvp_list;
-    console.log("rsvp list for concert is: " + rsvp_list);
 
     const num_tickets = rsvp_list.filter(function (x) {
       return x === email;
     }).length;
-    console.log(email + " has " + num_tickets);
     return num_tickets;
   } else {
     console.log("missing email or concert id.");

@@ -123,11 +123,19 @@
   text-align: left;
 }
 
+.not-logged-in-field {
+  display: flex;
+  flex-direction: column;
+}
+
 .sign-up-prompt {
   display: flex;
-  margin-left: 3%;
+  //margin-left: 3%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
   margin-top: -2px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .ticket-item-container {

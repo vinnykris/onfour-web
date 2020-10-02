@@ -150,9 +150,7 @@ const CheckoutForm = (props) => {
   };
 
   const addTicket = () => {
-    console.log("add ticket");
     props.addTicket(email.value);
-    console.log("add ticket 2");
     setLoading(true);
   };
 
@@ -188,7 +186,7 @@ const CheckoutForm = (props) => {
                       {...email}
                     />
                   ) : (
-                    <div>
+                    <div className="not-logged-in-field">
                       <input
                         name="email"
                         label="Email"
