@@ -8,12 +8,14 @@ Amplify.configure({
   Auth: {
     region: "us-east-1",
 
-    userPoolId: "us-east-1_zHyCq5Y6W",
+    userPoolId: "us-east-1_Zk9B73Bkt",
 
-    userPoolWebClientId: "11os48ai0lk5uo63gc0gnfdtl0",
+    userPoolWebClientId: "1eolu4qrfnuv4207u32p53uudm",
+
+    authenticationFlowType: "USER_PASSWORD_AUTH",
   },
   oauth: {
-    domain: "onfourpool.auth.us-east-1.amazoncognito.com",
+    domain: "onfournewpool.auth.us-east-1.amazoncognito.com",
     redirectSignIn: "http://localhost:3000",
     redirectSignOut: "http://localhost:3000",
     responseType: "code",
