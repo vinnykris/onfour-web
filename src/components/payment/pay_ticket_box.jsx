@@ -449,6 +449,8 @@ const PayTicketBox = (props) => {
           )}
 
           <TicketBox
+            auth={props.auth}
+            user_email={props.user_email}
             amount_value={total_price}
             addTicket={props.addTicket}
             is_user_price_inputed={is_user_price_inputed}

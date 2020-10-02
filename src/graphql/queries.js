@@ -149,6 +149,7 @@ listConcerts(filter: $filter, limit: 1000) {
     suggested_price
     minimum_price
     crew_list
+    rsvp_list
   }
 }
 }`;
@@ -170,6 +171,7 @@ getConcert(id: $id) {
   general_price
   suggested_price
   minimum_price
+  rsvp_list
 }
 }`;
 
