@@ -149,9 +149,15 @@ const CheckoutForm = (props) => {
     }
   };
 
-  const addTicket = () => {
-    props.addTicket(email.value);
+  const addTicket = async () => {
     setLoading(true);
+    await props.addTicket(email.value);
+    clearFields();
+  };
+
+  const clearFields = () => {
+    setLoading(false);
+    email.setValue("");
   };
 
   return (

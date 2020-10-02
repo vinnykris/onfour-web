@@ -101,7 +101,7 @@ export const fetchUserTickets = async (email, concert_id) => {
     }).length;
     return num_tickets;
   } else {
-    console.log("missing email or concert id.");
+    return 0;
   }
 };
 

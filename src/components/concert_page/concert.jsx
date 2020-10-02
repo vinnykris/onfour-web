@@ -414,8 +414,6 @@ const Concert = (props) => {
       rsvp_list: rsvp_list,
     };
 
-    console.log(concert_payload);
-
     API.graphql(
       graphqlOperation(mutations.add_rsvp, {
         input: concert_payload,
@@ -423,7 +421,8 @@ const Concert = (props) => {
     );
     hideModal();
     setShowStub(true);
-    //setHasTicket(true);
+    setHasTicket(true);
+    setNumTickets(num_tickets + 1);
     //sendEmailInvites(user_name);
   };
 
@@ -599,7 +598,15 @@ const Concert = (props) => {
                     {num_tickets > 0 ? (
                       <div className="tickets-indicator">
                         <span className="segmented-button-text num-tickets-text">
-                          You have {num_tickets} ticket(s) already.
+                          You have {num_tickets} ticket(s).
+                        </span>
+                      </div>
+                    ) : null}
+                    {has_ticket ? (
+                      <div className="tickets-indicator">
+                        <span className="segmented-button-text num-tickets-text">
+                          Enter your email on the stream page during the show to
+                          enter.
                         </span>
                       </div>
                     ) : null}
@@ -840,12 +847,20 @@ const Concert = (props) => {
                       {num_tickets > 0 ? (
                         <div className="tickets-indicator">
                           <span className="segmented-button-text num-tickets-text">
-                            You have {num_tickets} ticket(s) already.
+                            You have {num_tickets} ticket(s).
+                          </span>
+                        </div>
+                      ) : null}
+                      {has_ticket ? (
+                        <div className="tickets-indicator">
+                          <span className="segmented-button-text num-tickets-text">
+                            Enter your email on the stream page during the show
+                            to enter.
                           </span>
                         </div>
                       ) : null}
                     </div>
-                    {has_ticket && (
+                    {/* {has_ticket && (
                       <Row>
                         <div className="button-container">
                           {userCrews.length > 0 ? (
@@ -869,7 +884,7 @@ const Concert = (props) => {
                           )}
                         </div>
                       </Row>
-                    )}
+                    )} */}
                     <Row className="logistics-top">
                       <span className="header-9">
                         {concert_info.week_day}, {concert_info.formatted_date}
