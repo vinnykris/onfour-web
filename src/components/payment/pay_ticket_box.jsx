@@ -147,7 +147,7 @@ const PayTicketBox = (props) => {
                         allowNegative={false}
                       />
                     ) : (
-                      <div>
+                      <div className="name-your-price-input">
                         {minimum_price ? (
                           <NumberFormat
                             className="custom-ticket-form-input body-1 short-width-input"
