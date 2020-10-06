@@ -381,29 +381,29 @@ const Concert = (props) => {
   // Calls function that sends emails to invited users
   const addTicket = async (email) => {
     if (auth) {
-      // const user_data = await API.graphql(
-      //   graphqlOperation(queries.get_user_data, {
-      //     input: username,
-      //   })
-      // );
-      // const current_concert_data =
-      //   user_data.data.getCreateOnfourRegistration.concert;
-      // const user_name = user_data.data.getCreateOnfourRegistration.first;
-      // if (!current_concert_data || !isNaN(parseInt(current_concert_data))) {
-      //   var concert_data = {};
-      // } else {
-      //   var concert_data = JSON.parse(current_concert_data);
-      // }
-      // concert_data[concert_id] = true;
-      // const user_payload = {
-      //   username,
-      //   concert: JSON.stringify(concert_data),
-      // };
-      // API.graphql(
-      //   graphqlOperation(mutations.update_user, {
-      //     input: user_payload,
-      //   })
-      // );
+      const user_data = await API.graphql(
+        graphqlOperation(queries.get_user_data, {
+          input: username,
+        })
+      );
+      const current_concert_data =
+        user_data.data.getCreateOnfourRegistration.concert;
+      const user_name = user_data.data.getCreateOnfourRegistration.first;
+      if (!current_concert_data || !isNaN(parseInt(current_concert_data))) {
+        var concert_data = {};
+      } else {
+        var concert_data = JSON.parse(current_concert_data);
+      }
+      concert_data[concert_id] = true;
+      const user_payload = {
+        username,
+        concert: JSON.stringify(concert_data),
+      };
+      API.graphql(
+        graphqlOperation(mutations.update_user, {
+          input: user_payload,
+        })
+      );
     }
 
     const concert_rsvp_info = await getOneConcert(concert_id);
@@ -909,6 +909,7 @@ const Concert = (props) => {
                       youtube={concert_info.youtube}
                       facebook={concert_info.facebook}
                       twitter={concert_info.twitter}
+                      merch={concert_info.merch}
                     />
                   </div>
                 </div>

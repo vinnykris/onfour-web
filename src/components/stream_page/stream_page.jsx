@@ -67,6 +67,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [artist_spotify, setArtistSpotify] = useState("");
   const [artist_twitter, setArtistTwitter] = useState("");
   const [artist_youtube, setArtistYoutube] = useState("");
+  const [artist_merch, setArtistMerch] = useState("");
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
   const [concert_crews, setConcertCrews] = useState("");
@@ -211,6 +212,7 @@ const StreamPage = ({ is_soundcheck }) => {
     setArtistSpotify(artist_info_list.spotify);
     setArtistTwitter(artist_info_list.twitter);
     setArtistYoutube(artist_info_list.youtube);
+    setArtistMerch(artist_info_list.merch);
   };
 
   // DONATION SECTION
@@ -742,6 +744,24 @@ const StreamPage = ({ is_soundcheck }) => {
                                     </a>
                                   </li>
                                 ) : null}
+
+                                {artist_merch ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarMerch",
+                                        })
+                                      }
+                                      href={artist_merch}
+                                      className="fas fa-shopping-cart"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Merch Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
                               </ul>
                             </div>
                           </Col>
@@ -775,7 +795,12 @@ const StreamPage = ({ is_soundcheck }) => {
                       </Row>
                       <Row className="chat-row">
                         <Chat
-                          chat_name={username ? username : "GUEST"+ (Math.floor(Math.random() * 99) + 9999) }
+                          chat_name={
+                            username
+                              ? username
+                              : "GUEST" +
+                                (Math.floor(Math.random() * 99) + 9999)
+                          }
                           chatStatus={chatStatus}
                           setViewers={getViewers}
                           // setguestid={getguestid}
@@ -1003,7 +1028,14 @@ const StreamPage = ({ is_soundcheck }) => {
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
                     <Chat
-                      chat_name={username ? username : "GUEST"+(Math.floor(Math.random() * 10000) + 10000).toString().substring(1)}
+                      chat_name={
+                        username
+                          ? username
+                          : "GUEST" +
+                            (Math.floor(Math.random() * 10000) + 10000)
+                              .toString()
+                              .substring(1)
+                      }
                       chatStatus={chatStatus}
                       setViewers={getViewers}
                     />

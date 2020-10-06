@@ -812,6 +812,23 @@
   }
 }
 
+.social-list [class*="fas fa-"] {
+  background: rgba(255, 255, 255, 0.87);
+  border-radius: 27px;
+  color: #07070f;
+  display: inline-block;
+  height: 27px;
+  line-height: 27px;
+  margin: auto;
+  width: 27px;
+  font-size: 16px;
+  text-align: center;
+  &:hover {
+    background: $secondary-color;
+    color: #07070f;
+  }
+}
+
 .social-list li {
   color: white;
   margin: auto 11.5px;

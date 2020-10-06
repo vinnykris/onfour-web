@@ -72,6 +72,7 @@ export const get_artist_info = `query getCreateOnfourRegistration(
       twitter
       facebook
       soundcloud
+      merch
   }
 }`;
 
