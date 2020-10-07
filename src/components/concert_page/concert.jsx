@@ -638,15 +638,23 @@ const Concert = (props) => {
                 </Row>
                 <Row className="concert-details-spacing-mobile">
                   <text className="header-10 concert-suggestion-color-mobile">
-                    * Tune in to the concert on your desktop to enjoy video chat
-                    experience
+                    * Tune in to the concert on your desktop to enjoy the watch
+                    together experience. Click{" "}
+                    <a
+                      href="https://www.onfour.live/"
+                      target="_blank"
+                      className="header-10 about-page-link"
+                    >
+                      here
+                    </a>{" "}
+                    to learn more about the experience.
                   </text>
                 </Row>
                 <Row className="concert-details-spacing-mobile">
                   <Col className="no-stretch-column">
-                    <p className="body-3 concert-description-color-mobile">
+                    <pre className="body-3 concert-description-color-mobile">
                       {concert_info.description}
-                    </p>
+                    </pre>
                   </Col>
                 </Row>
                 <Row className="share-section-mobile">
@@ -827,6 +835,20 @@ const Concert = (props) => {
                         {/* –{" "}
                         {concert_info.concert_name.toUpperCase()} */}
                       </h3>
+                    </div>
+                    <div className="experience-blurb">
+                      <span className="subtitle-2 experience-blurb-text concert-suggestion-color-mobile">
+                        *Invite your friends to watch the show together, or
+                        watch with other fans! Click{" "}
+                        <a
+                          href="https://www.onfour.live/"
+                          target="_blank"
+                          className="subtitle-2 about-page-link"
+                        >
+                          here
+                        </a>{" "}
+                        to learn more about the experience.
+                      </span>
                     </div>
                     <div>
                       <p className="body-1 artist-description-text">
