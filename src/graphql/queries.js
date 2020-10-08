@@ -53,6 +53,8 @@ listConcerts(filter: $filter, limit: 1000) {
     poster_url
     concert_name
     general_price
+    suggested_price
+    minimum_price
     is_live
   }
 }
@@ -144,7 +146,10 @@ listConcerts(filter: $filter, limit: 1000) {
     artist_id
     concert_name
     general_price
+    suggested_price
+    minimum_price
     crew_list
+    rsvp_list
   }
 }
 }`;
@@ -164,6 +169,9 @@ getConcert(id: $id) {
   artist_id
   concert_name
   general_price
+  suggested_price
+  minimum_price
+  rsvp_list
 }
 }`;
 

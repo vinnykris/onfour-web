@@ -11,17 +11,19 @@ export default function StartButton(props) {
     <button
       className={
         "start-button" +
-        (props.create_room ? " create-room-start-button" : "") + 
+        (props.create_room ? " create-room-start-button" : "") +
         (props.artistView ? " artist-start-button" : "")
       }
       disabled={props.disabled}
       onClick={props.onClick}
     >
-      {props.artistView
-        ? "Join One Random Fan Room"
-        : props.create_room
-        ? "Create Room"
-        : "Join Video Call"}
+      <p className="button-text start-button-text">
+        {props.artistView
+          ? "Join One Random Fan Room"
+          : props.create_room
+          ? "Create Room"
+          : "Join Video Call"}
+      </p>
     </button>
   );
 }

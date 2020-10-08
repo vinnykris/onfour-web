@@ -285,7 +285,7 @@ const NavBar = () => {
                 >
                   <LoggedInUser
                     className="logged-in-icon"
-                    first={username}
+                    username={username}
                     // last={last}
                   />
                 </span>
@@ -424,7 +424,7 @@ const NavBar = () => {
                         src={login_icon}
                         alt="profile-icon"
                       ></img>
-                      {first} {""}
+                      {username} {""}
                     </DropdownToggle>
                   </div>
                   <DropdownMenu

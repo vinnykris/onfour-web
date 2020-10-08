@@ -234,6 +234,8 @@ export default function Tray(props) {
     }
   }
 
+  function openInviteModal() {}
+
   return (
     <div className="tray">
       {!props.artistView ? (
@@ -334,6 +336,17 @@ export default function Tray(props) {
           disabled={props.disabled}
         >
           Press and hold to talk
+        </button>
+      )}
+      {props.artistView ? null : (
+        <button
+          id="invite-friends"
+          type="invite-button"
+          className="tray-button"
+          disabled={props.disabled}
+          onClick={props.openInviteModal}
+        >
+          <i className="fas fa-user-plus unmuted"></i>
         </button>
       )}
       <button
