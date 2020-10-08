@@ -121,24 +121,6 @@ const Login = (props) => {
                   >
                     LOG IN
                   </button>
-                  <button
-                    onClick={() =>
-                      Auth.federatedSignIn({
-                        provider: "Google",
-                      })
-                    }
-                  >
-                    Sign In With Google
-                  </button>
-                  <button
-                    onClick={() =>
-                      Auth.federatedSignIn({
-                        provider: "Facebook",
-                      })
-                    }
-                  >
-                    Sign In With Facebook
-                  </button>
                   <p className="forgot-footer">
                     <a href="/forgot" className="header-7 signin-link">
                       Forgot Password?
@@ -157,6 +139,39 @@ const Login = (props) => {
                     </NavLink>
                     .
                   </div>
+                  <Row>
+                    <div className="sign-in-divider"></div>
+                    <text className="header-7 sign-in-divider-text">or</text>
+                    <div className="sign-in-divider"></div>
+                  </Row>
+                  <Row className="social-sign-in-container">
+                    <button
+                      onClick={() =>
+                        Auth.federatedSignIn({
+                          provider: "Google",
+                        })
+                      }
+                      className="social-sign-in-button"
+                    >
+                      <text className="segmented-button-text social-sign-in-text">
+                        Sign In With Google
+                      </text>
+                    </button>
+                  </Row>
+                  <Row className="social-sign-in-container">
+                    <button
+                      onClick={() =>
+                        Auth.federatedSignIn({
+                          provider: "Facebook",
+                        })
+                      }
+                      className="social-sign-in-button"
+                    >
+                      <text className="segmented-button-text social-sign-in-text">
+                        Sign In With Facebook
+                      </text>
+                    </button>
+                  </Row>
                 </form>
               ) : (
                 <form
@@ -219,6 +234,41 @@ const Login = (props) => {
                     </NavLink>
                     .
                   </div>
+                  <Row>
+                    <div className="sign-in-divider-mobile"></div>
+                    <text className="header-8 sign-in-divider-text-mobile">
+                      or
+                    </text>
+                    <div className="sign-in-divider-mobile"></div>
+                  </Row>
+                  <Row className="social-sign-in-container">
+                    <button
+                      onClick={() =>
+                        Auth.federatedSignIn({
+                          provider: "Google",
+                        })
+                      }
+                      className="social-sign-in-button"
+                    >
+                      <text className="segmented-button-text social-sign-in-text">
+                        Sign In With Google
+                      </text>
+                    </button>
+                  </Row>
+                  <Row className="social-sign-in-container">
+                    <button
+                      onClick={() =>
+                        Auth.federatedSignIn({
+                          provider: "Facebook",
+                        })
+                      }
+                      className="social-sign-in-button"
+                    >
+                      <text className="segmented-button-text social-sign-in-text">
+                        Sign In With Facebook
+                      </text>
+                    </button>
+                  </Row>
                 </form>
               )}
             </div>

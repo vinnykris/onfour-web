@@ -450,19 +450,6 @@ const Register = (props) => {
                               </p>
                             </ReactTooltip>
                           </div>
-                          <div className="email-subscribe-prompt">
-                            <input
-                              className="email-unsubscribe-checkbox"
-                              name="isGoing"
-                              type="checkbox"
-                              checked={checked}
-                              onChange={(event) => setChecked(!checked)}
-                            />
-                            <label className="header-8 register-text-color">
-                              I want to receive email updates about future
-                              onfour shows.
-                            </label>
-                          </div>
                           <div style={{ color: "red" }}>{error}</div>
                           <div className="register-button-container">
                             <button
@@ -484,26 +471,6 @@ const Register = (props) => {
                               I'M AN ARTIST
                             </button>
                           </div>
-
-                          <button
-                            onClick={() =>
-                              Auth.federatedSignIn({
-                                provider: "Google",
-                              })
-                            }
-                          >
-                            Sign Up With Google
-                          </button>
-                          <button
-                            onClick={() =>
-                              Auth.federatedSignIn({
-                                provider: "Facebook",
-                              })
-                            }
-                          >
-                            Sign Up With Facebook
-                          </button>
-
                           <div className="header-7 signup-footer register-text-color">
                             Already have an account?{" "}
                             <a href="/login" className="header-7 signin-link">
@@ -511,6 +478,41 @@ const Register = (props) => {
                             </a>
                             .
                           </div>
+                          <Row>
+                            <div className="sign-up-divider"></div>
+                            <text className="header-7 sign-up-divider-text">
+                              or
+                            </text>
+                            <div className="sign-up-divider"></div>
+                          </Row>
+                          <Row className="social-sign-up-container">
+                            <button
+                              onClick={() =>
+                                Auth.federatedSignIn({
+                                  provider: "Google",
+                                })
+                              }
+                              className="social-sign-up-button"
+                            >
+                              <text className="segmented-button-text social-sign-up-text">
+                                Sign Up With Google
+                              </text>
+                            </button>
+                          </Row>
+                          <Row className="social-sign-up-container">
+                            <button
+                              onClick={() =>
+                                Auth.federatedSignIn({
+                                  provider: "Facebook",
+                                })
+                              }
+                              className="social-sign-up-button"
+                            >
+                              <text className="segmented-button-text social-sign-up-text">
+                                Sign Up With Facebook
+                              </text>
+                            </button>
+                          </Row>
                         </form>
                       ) : (
                         <form
@@ -666,19 +668,6 @@ const Register = (props) => {
                               </p>
                             </ReactTooltip>
                           </div>
-                          <div className="email-subscribe-prompt">
-                            <input
-                              className="email-unsubscribe-checkbox"
-                              name="isGoing"
-                              type="checkbox"
-                              checked={checked}
-                              onChange={(event) => setChecked(!checked)}
-                            />
-                            <label className="subtitle-3 register-text-color">
-                              I want to receive email updates about future
-                              onfour shows.
-                            </label>
-                          </div>
                           <div style={{ color: "red" }}>{error}</div>
                           <div className="register-button-container">
                             <button
@@ -707,6 +696,41 @@ const Register = (props) => {
                             </a>
                             .
                           </div>
+                          <Row>
+                            <div className="sign-up-divider"></div>
+                            <text className="header-7 sign-up-divider-text">
+                              or
+                            </text>
+                            <div className="sign-up-divider"></div>
+                          </Row>
+                          <Row className="social-sign-up-container">
+                            <button
+                              onClick={() =>
+                                Auth.federatedSignIn({
+                                  provider: "Google",
+                                })
+                              }
+                              className="social-sign-up-button"
+                            >
+                              <text className="segmented-button-text social-sign-up-text">
+                                Sign Up With Google
+                              </text>
+                            </button>
+                          </Row>
+                          <Row className="social-sign-up-container">
+                            <button
+                              onClick={() =>
+                                Auth.federatedSignIn({
+                                  provider: "Facebook",
+                                })
+                              }
+                              className="social-sign-up-button"
+                            >
+                              <text className="segmented-button-text social-sign-up-text">
+                                Sign Up With Facebook
+                              </text>
+                            </button>
+                          </Row>
                         </form>
                       )}
                     </div>

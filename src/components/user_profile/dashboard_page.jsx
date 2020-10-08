@@ -220,12 +220,12 @@ const DashboardPage = ({
    */
   const handleWindowResize = () => {
     if (sliderContainerRef.current && userCrews.length > 0)
-      // console.log("checking if overflowing!");
-    if (checkIfSliderIsOverflowing()) {
-      setShowForwardSliderButton(true);
-    } else {
-      setShowForwardSliderButton(false);
-    }
+      if (checkIfSliderIsOverflowing()) {
+        // console.log("checking if overflowing!");
+        setShowForwardSliderButton(true);
+      } else {
+        setShowForwardSliderButton(false);
+      }
   };
 
   useEffect(() => {
@@ -272,9 +272,7 @@ const DashboardPage = ({
               <Row>
                 <Col size={1} className="profile-upcoming-concerts-column">
                   {width <= 600 ? (
-                    <OneRowGrid
-                      content_list={upcoming_concerts}
-                    />
+                    <OneRowGrid content_list={upcoming_concerts} />
                   ) : (
                     <div>
                       {width < 1280 ? (
