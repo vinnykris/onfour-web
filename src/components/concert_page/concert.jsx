@@ -58,7 +58,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // EmailJS Import
 import emailjs from "emailjs-com";
-import { service_id, template_id, user_id } from "../../apis/email_js";
+import {
+  service_id,
+  template_id,
+  rsvp_template_id,
+  user_id,
+} from "../../apis/email_js";
 
 // Google Calendar Import
 import ApiCalendar from "../google_calender/google_calendar_api";
@@ -375,6 +380,29 @@ const Concert = (props) => {
     }
   };
 
+  // Sends email confirmation to users after they get their ticket to a show
+  const sendEmailConfirmation = (
+    username,
+    artist_name,
+    concert_id,
+    email_recipient,
+    date,
+    time
+  ) => {
+    const template_params = {
+      email_recipient: email_recipient,
+      reply_to: "onfour.box@gmail.com",
+      username: username,
+      artist_name: artist_name,
+      time: time,
+      date: date,
+      concert_id: concert_id,
+    };
+    setTimeout(() => {
+      emailjs.send(service_id, rsvp_template_id, template_params, user_id);
+    }, 1000);
+  };
+
   // Function called when user purchases/obtains ticket from modal
   // First adds ticket to user's profile in database
   // Then hides the modal and shows the ticket stub
@@ -423,6 +451,28 @@ const Concert = (props) => {
     setShowStub(true);
     setHasTicket(true);
     setNumTickets(num_tickets + 1);
+
+    if (auth) {
+      sendEmailConfirmation(
+        username,
+        concert_info.artist_name,
+        concert_id,
+        email,
+        concert_info.formatted_date,
+        concert_info.formatted_time
+      );
+    } else {
+      console.log(email);
+      sendEmailConfirmation(
+        email,
+        concert_info.artist_name,
+        concert_id,
+        email,
+        concert_info.formatted_date,
+        concert_info.formatted_time
+      );
+    }
+
     //sendEmailInvites(user_name);
   };
 
