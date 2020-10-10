@@ -1,0 +1,76 @@
+@import "../../styles.scss";
+
+.access-modal-main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.access-modal-header {
+  display: flex;
+  height: 83px;
+  width: 100%;
+}
+
+.access-modal-title {
+  display: flex;
+  margin: auto;
+}
+
+.access-modal-body {
+  flex-direction: column;
+  display: flex;
+  height: 256px;
+  width: 470px;
+  margin: auto;
+  padding: 12px;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.14)
+    ),
+    #07070f;
+  border-radius: 2px;
+}
+
+.enter-email-prompt {
+  margin-bottom: 25px;
+}
+
+.prompt-text {
+  display: flex;
+  text-align: left;
+}
+
+.enter-email-input {
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.submit-email-button-container {
+  width: 100%;
+}
+
+.enter-venue-button {
+  width: 100%;
+  span {
+    color: #000000;
+  }
+}
+
+.buy-ticket-prompt-container {
+  display: flex;
+  height: 85px;
+  width: 100%;
+}
+
+.buy-ticket-prompt {
+  display: flex;
+  margin: auto;
+}
+
+.open-ticket-modal-link {
+  color: $primary-color !important;
+  text-decoration: underline;
+}

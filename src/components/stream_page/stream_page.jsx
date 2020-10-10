@@ -32,6 +32,8 @@ import { getTickets } from "../../apis/get_user_data";
 import DonateCardBox from "../payment/donate_box";
 import VenmoBox from "../payment/venmo_box";
 import PaypalBox from "../payment/paypal_box";
+
+import AccessModal from "./access_modal";
 // Styles Imports
 import "./stream_styles.scss";
 import "rodal/lib/rodal.css";
@@ -75,6 +77,8 @@ const StreamPage = ({ is_soundcheck }) => {
   const [is_live, setIsLive] = useState(true);
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
+  const [user_email, setUserEmail] = useState("");
+  const [rsvp_list, setRSVPList] = useState([]);
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
   const [show_popup, setShowPopup] = useState(false); // If popup should be shown
   const [description_button_icon, setDescriptionButtonIcon] = useState(
@@ -145,6 +149,7 @@ const StreamPage = ({ is_soundcheck }) => {
     Auth.currentAuthenticatedUser({})
       .then(async (user) => {
         setUsername(user.username);
+        setUserEmail(user.attributes.email);
         setShowChat(true);
         setAuth(true);
         setTickets(await getTickets(user.username));
@@ -186,10 +191,12 @@ const StreamPage = ({ is_soundcheck }) => {
             ? info_list[0].time.slice(0, 5) + "AM"
             : info_list[0].time.slice(0, 5) + "PM")
       );
+      // console.log(info_list[0]);
       setConcertName(info_list[0].concert_name);
       setArtistID(info_list[0].artist_id);
       getArtistInfo(info_list[0].artist_id);
       setConcertID(info_list[0].id);
+      setRSVPList(info_list[0].rsvp_list);
       // setIsLive(info_list[0].is_live);
       setIsFree(info_list[0].general_price === 0);
       setConcertCrews(JSON.parse(info_list[0].crew_list));
@@ -394,6 +401,10 @@ const StreamPage = ({ is_soundcheck }) => {
     }
   };
 
+  const openTicketModal = () => {
+    console.log("open ticket modal");
+  };
+
   // RENDERING SECTION
   return (
     <div className="stream-container">
@@ -401,6 +412,11 @@ const StreamPage = ({ is_soundcheck }) => {
         <div className="stream-page-content">
           {width > 600 ? (
             <Grid className="desktop-stream-grid">
+              <AccessModal
+                access_list={rsvp_list}
+                user_email={user_email}
+                openTicketModal={openTicketModal}
+              />
               <Rodal
                 visible={open_modal}
                 onClose={closeModal}
