@@ -89,6 +89,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [paypal_selected, setPaypalSelected] = useState(false);
   const [stream_volume, setStreamVolume] = useState(1.0);
   const [have_upcoming_concert, setHaveUpcomingConcert] = useState(true);
+  const [video_chat_variables, setVideoChatVariables] = useState();
 
   const history = useHistory(0);
 
@@ -157,7 +158,9 @@ const StreamPage = ({ is_soundcheck }) => {
   // Call stream page analtics
   useEffect(() => {
     getStartTime();
+    getTestingVariables();
   }, []);
+
   // Query upcoming show database
   const getStartTime = async () => {
     // Calling the API, using async and await is necessary
@@ -215,6 +218,16 @@ const StreamPage = ({ is_soundcheck }) => {
     setArtistMerch(artist_info_list.merch);
   };
 
+  const getTestingVariables = async () => {
+    const info = await API.graphql(
+      graphqlOperation(queries.get_video_chat_variables, {
+        id: "ea08d153-09ce-48e7-b8c6-97473a6065aa",
+      })
+    );
+    const item = info.data.getVideochat_Testing;
+    setVideoChatVariables(item);
+  };
+  
   // DONATION SECTION
   // Opens link to paypal account for musician
   const donatePaypal = () => {
@@ -791,6 +804,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           artist_name={artist_id}
                           stream_vol_adjust={setStreamVolume}
                           stream_volume_value={stream_volume}
+                          video_chat_variables={video_chat_variables}
                         ></VideoChat>
                       </Row>
                       <Row className="chat-row">

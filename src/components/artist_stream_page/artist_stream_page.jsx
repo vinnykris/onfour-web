@@ -79,10 +79,12 @@ const StreamPage = () => {
   const [go_live_message, setGoLiveMsg] = useState("GO LIVE");
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
+  const [video_chat_variables, setVideoChatVariables] = useState();
 
   // Get the start time for countdown_timer
   useEffect(() => {
     getStartTimeAndIsLive();
+    getTestingVariables();
     Auth.currentAuthenticatedUser({})
       .then((user) => {
         setUsername(user.username);
@@ -106,6 +108,16 @@ const StreamPage = () => {
       setIsLive(data.data.getConcert.is_live);
       setGoLiveMsg(data.data.getConcert.is_live ? "DISCONNECT" : "GO LIVE");
     });
+  };
+
+  const getTestingVariables = async () => {
+    const info = await API.graphql(
+      graphqlOperation(queries.get_video_chat_variables, {
+        id: "ea08d153-09ce-48e7-b8c6-97473a6065aa",
+      })
+    );
+    const item = info.data.getVideochat_Testing;
+    setVideoChatVariables(item);
   };
 
   // TOGGLE CHAT SECTION
@@ -193,6 +205,7 @@ const StreamPage = () => {
                         artistView={true}
                         colNum={video_col_num}
                         isReady={show_start_time}
+                        video_chat_variables={video_chat_variables}
                       ></VideoChat>
                       {/* <div className="artist-toggle-chat">
                         <button
