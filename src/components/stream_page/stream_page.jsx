@@ -44,7 +44,10 @@ import viewers_icon from "../../images/icons/stream_icons/viewers_icon.png";
 
 // Utils
 import { getCrewsByUsername } from "../../utils/crew";
-import { determineUsername } from "../../utils/register";
+import {
+  determineUsername,
+  determinePreferredUsername,
+} from "../../utils/register";
 
 Amplify.configure(awsmobile);
 
@@ -89,6 +92,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [paypal_selected, setPaypalSelected] = useState(false);
   const [stream_volume, setStreamVolume] = useState(1.0);
   const [have_upcoming_concert, setHaveUpcomingConcert] = useState(true);
+  const [preferred_username, setPreferredUsername] = useState("");
 
   const history = useHistory(0);
 
@@ -145,6 +149,9 @@ const StreamPage = ({ is_soundcheck }) => {
     Auth.currentAuthenticatedUser({})
       .then(async (user) => {
         determineUsername(user).then((username) => setUsername(username));
+        determinePreferredUsername(user).then((preferred_username) =>
+          setPreferredUsername(preferred_username)
+        );
         setShowChat(true);
         setAuth(true);
         setTickets(await getTickets(user.username));
@@ -768,7 +775,13 @@ const StreamPage = ({ is_soundcheck }) => {
                     <div className="chat-wrapper">
                       <Row className="video-chat-row">
                         <VideoChat
-                          user_name={username ? username : "GUEST"}
+                          user_name={
+                            username
+                              ? preferred_username
+                                ? preferred_username
+                                : username
+                              : "GUEST"
+                          }
                           artist_name={artist_id}
                           stream_vol_adjust={setStreamVolume}
                           stream_volume_value={stream_volume}
@@ -776,7 +789,14 @@ const StreamPage = ({ is_soundcheck }) => {
                       </Row>
                       <Row className="chat-row">
                         <Chat
-                          chat_name={username ? username : "GUEST"+ (Math.floor(Math.random() * 99) + 9999) }
+                          chat_name={
+                            username
+                              ? preferred_username
+                                ? preferred_username
+                                : username
+                              : "GUEST" +
+                                (Math.floor(Math.random() * 99) + 9999)
+                          }
                           chatStatus={chatStatus}
                           setViewers={getViewers}
                           // setguestid={getguestid}
@@ -1004,7 +1024,16 @@ const StreamPage = ({ is_soundcheck }) => {
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
                     <Chat
-                      chat_name={username ? username : "GUEST"+(Math.floor(Math.random() * 10000) + 10000).toString().substring(1)}
+                      chat_name={
+                        username
+                          ? preferred_username
+                            ? preferred_username
+                            : username
+                          : "GUEST" +
+                            (Math.floor(Math.random() * 10000) + 10000)
+                              .toString()
+                              .substring(1)
+                      }
                       chatStatus={chatStatus}
                       setViewers={getViewers}
                     />

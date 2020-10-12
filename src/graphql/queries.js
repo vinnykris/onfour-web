@@ -117,6 +117,7 @@ listFutureConcerts(filter: $filter, limit: 1000) {
 export const get_user_data = `query getCreateOnfourRegistration ($input: String!){
 getCreateOnfourRegistration(username: $input) {
   username
+  preferred_username
   first
   concert
   crew

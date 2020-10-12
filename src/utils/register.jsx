@@ -1,3 +1,6 @@
+import { API, graphqlOperation } from "aws-amplify";
+import * as queries from "../graphql/queries";
+
 export function containsUppercaseAndLowercase(str) {
   const uppercase_regex = new RegExp("[A-Z]+");
   const lowercase_regex = new RegExp("[a-z]+");
@@ -21,13 +24,7 @@ export function containsSpecialCharacter(str) {
 }
 
 export const determineUsername = async (user) => {
-  if (
-    user?.signInUserSession?.idToken?.payload?.identities?.[0]?.providerType ===
-    "Google"
-  ) {
-    return user.signInUserSession.idToken.payload.email;
-  }
-  return user.username;
+  return user.signInUserSession.idToken.payload["cognito:username"];
 };
 
 export const determineEmail = async (user) => {
@@ -38,4 +35,24 @@ export const determineEmail = async (user) => {
     return user.signInUserSession.idToken.payload.email;
   }
   return user.attributes.email;
+};
+
+export const determinePreferredUsername = async (user) => {
+  if (
+    user?.signInUserSession?.idToken?.payload?.identities?.[0]?.providerType ===
+    "Google"
+  ) {
+    console.log("A REACHED", user.username);
+    const user_data = await API.graphql(
+      graphqlOperation(queries.get_user_data, {
+        input: user.username,
+      })
+    );
+    console.log("USER DATA IS", user_data);
+    if (user_data?.data?.getCreateOnfourRegistration?.preferred_username)
+      return user_data.data.getCreateOnfourRegistration.preferred_username;
+    else return "";
+  }
+  console.log("B REACHED");
+  return user.signInUserSession.idToken.payload.preferred_username;
 };
