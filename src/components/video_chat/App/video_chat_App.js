@@ -40,6 +40,7 @@ export default function VideoChatApp({
   colNum,
   stream_vol_adjust,
   stream_volume_value,
+  video_chat_variables,
 }) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
@@ -562,6 +563,7 @@ export default function VideoChatApp({
             colNum={colNum}
             mute_all={mute_all}
             volume={volume}
+            video_chat_variables={video_chat_variables}
           />
           <Tray
             disabled={!enableCallButtons}
