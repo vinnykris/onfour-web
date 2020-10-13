@@ -10,7 +10,12 @@
   // padding-top: 35vh;
   z-index: 10;
   margin: auto;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.09)
+    ),
+    #07070f;
 }
 
 .payment-bar {
@@ -23,11 +28,20 @@
 
 .donate-box-container {
   width: 100%;
-  height: 80%;
+  height: calc(100% - 132px);
+  padding-top: 5px;
+  @include respond-to("small") {
+    padding-top: 15px;
+  }
 }
 
 .donate-form {
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.09)
+    ),
+    #07070f;
   width: 100%;
   height: 100%;
   //max-width: 500px;
@@ -39,7 +53,12 @@
 }
 
 .ticket-form {
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.09)
+    ),
+    #07070f;
   width: 100%;
   height: 100%;
   //max-width: 500px;
@@ -54,7 +73,12 @@
 }
 
 .donate-form-input {
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.07)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.07)
+    ),
+    #07070f;
   border-radius: 3px;
   height: 15%;
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
@@ -67,7 +91,7 @@
   margin-bottom: 2%;
   margin-right: 3%;
   border: none;
-  caret-color: #E465A2;
+  caret-color: #e465a2;
   font-size: 1rem;
   padding: 12px 24px;
   color: rgba(255, 255, 255, 0.87);
@@ -75,7 +99,10 @@
     color: rgba(255, 255, 255, 0.28);
   }
   &:focus {
-    border: 2px solid #E465A2 !important;
+    border: 2px solid #e465a2 !important;
+  }
+  &:disabled {
+    color: $on-surface-disable;
   }
   @include respond-to("small") {
     padding: 8px 12px;
@@ -98,7 +125,7 @@
 .donate-button {
   width: 94%;
   // height: 20%;
-  background: #E465A2;
+  background: #e465a2;
   border-radius: 4px;
   color: #000000;
   align-items: center;
@@ -110,10 +137,15 @@
   // padding: 1.6vh 0.7vw;
   border: none;
   cursor: pointer;
+  margin-top: 7px;
   margin-left: 10px;
   margin-right: 10px;
   &:hover {
-    background: #EA91BD;
+    background: #ea91bd;
+  }
+  &:disabled {
+    background: rgba(255, 255, 255, 0.6);
+    cursor: default;
   }
 }
 
@@ -122,7 +154,7 @@
 }
 
 .error-msg {
-  color: #BE7884 !important;
+  color: #be7884 !important;
   margin: 0px !important;
 }
 
@@ -146,7 +178,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.07)), #07070F;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.07),
+      rgba(255, 255, 255, 0.07)
+    ),
+    #07070f;
   //bottom: 10%;
 }
 
@@ -174,7 +211,7 @@
 .paypal-button {
   width: 78%;
   // height: 20%;
-  background: #E465A2;
+  background: #e465a2;
   border-radius: 4px;
   color: #000000;
   align-items: center;
@@ -192,11 +229,16 @@
 }
 
 .wc-stripe-elements-field {
-  caret-color: #E465A2 !important;
+  caret-color: #e465a2 !important;
 }
 .InputElement {
-  caret-color: #E465A2 !important;
+  caret-color: #e465a2 !important;
   &:focus {
-    border: 2px solid #E465A2 !important;
+    border: 2px solid #e465a2 !important;
   }
+}
+
+.centered-loader {
+  width: 20px;
+  margin: auto;
 }

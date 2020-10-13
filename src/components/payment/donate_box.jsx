@@ -112,7 +112,8 @@ const CheckoutForm = (props) => {
         result.token,
         Math.round(amount_value * 100),
         name.value,
-        email.value
+        email.value,
+        props.concert_id
       );
       setMessage(payment_result);
       if (payment_result === "Charge processed successfully!") {
@@ -330,7 +331,9 @@ const CheckoutForm = (props) => {
 // donateBox is a wrapper component for CheckoutForm
 // It is used for cleaner layout
 const DonateBox = (props) => {
-  return <CheckoutForm is_mobile={props.is_mobile} />;
+  return (
+    <CheckoutForm is_mobile={props.is_mobile} concert_id={props.concert_id} />
+  );
 };
 
 export default DonateBox;

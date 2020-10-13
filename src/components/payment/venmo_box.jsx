@@ -1,13 +1,5 @@
 // React Imports
-import React, { useState } from "react";
-import NumberFormat from "react-number-format";
-
-// Stripe Imports
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import stripeTokenHandler from "./stripe";
-
-// Component Imports
-import { useInputValue } from "../custom_hooks";
+import React from "react";
 
 // Image imports
 import venmo_code from "../../images/venmo_codes/onfour_venmo.jpeg";

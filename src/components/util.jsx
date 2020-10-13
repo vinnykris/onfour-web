@@ -75,7 +75,10 @@ export const createUpcomingObject = (data, artist_data) => {
     twitter: artist_data.twitter,
     spotify: artist_data.spotify,
     soundcloud: artist_data.soundcloud,
+    merch: artist_data.soundcloud,
     location: data.location,
+    suggested_price: data.suggested_price,
+    minimum_price: data.minimum_price,
   };
 };
 
@@ -115,6 +118,8 @@ export const formatUpcomingShow = (data, width) => {
       month={month_map[data.date.slice(5, 7)]}
       day={data.date.slice(8, 10)}
       price={data.general_price}
+      suggested_price={data.suggested_price}
+      minimum_price={data.minimum_price}
       description={data.artist_bio.toString()}
       days_left={days_left}
       width={width}
@@ -124,6 +129,7 @@ export const formatUpcomingShow = (data, width) => {
       twitter={data.twitter}
       spotify={data.spotify}
       soundcloud={data.soundcloud}
+      merch={data.merch}
       location={data.location}
       upcoming={true}
     />
@@ -163,6 +169,7 @@ export const formatMemory = (data, width) => {
       twitter={data.twitter}
       spotify={data.spotify}
       soundcloud={data.soundcloud}
+      merch={data.merch}
       location={data.location}
       upcoming={false}
     />

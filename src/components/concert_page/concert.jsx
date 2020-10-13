@@ -3,13 +3,17 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import MoonLoader from "react-spinners/MoonLoader";
+import history from "../../history";
 // Main Imports
 //import history from "../../history";
 
 // Function import
 import { createUpcomingObject } from "../util";
 import { getOneConcert, getArtistInfo } from "../../apis/get_concert_data";
-import { fetchUserConcertIDs } from "../../apis/get_user_data";
+import {
+  fetchUserConcertIDs,
+  fetchUserTickets,
+} from "../../apis/get_user_data";
 import { useWindowDimensions } from "../custom_hooks";
 
 // Graphql Imports
@@ -54,7 +58,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // EmailJS Import
 import emailjs from "emailjs-com";
-import { service_id, template_id, user_id } from "../../apis/email_js";
+import {
+  service_id,
+  template_id,
+  rsvp_template_id,
+  user_id,
+} from "../../apis/email_js";
 
 // Google Calendar Import
 import ApiCalendar from "../google_calender/google_calendar_api";
@@ -89,6 +98,7 @@ const Concert = (props) => {
   const [general_checked, setGeneralChecked] = useState(true);
   // const [backstage_checked, setBackstageChecked] = useState(false);
   const [has_ticket, setHasTicket] = useState(false);
+  const [num_tickets, setNumTickets] = useState(0);
   const [loading, setLoading] = useState(true);
   const [enter_venue_status, setEnterVenueStatus] = useState(false);
   const [showPaymentBox, setShowPaymentBox] = useState(false);
@@ -222,15 +232,17 @@ const Concert = (props) => {
     setShowCreateCrewModal(false);
   };
 
-  const fetchUserData = async (name) => {
+  const fetchUserData = async (name, email) => {
     // console.log(name);
-    const user_concerts = await fetchUserConcertIDs(name);
-    // console.log("fetching user data");
-    // console.log(user_concerts);
-    if (user_concerts && user_concerts.includes(concert_id)) {
-      setHasTicket(true);
-    }
-    await getUserCrews(name);
+    // const user_concerts = await fetchUserConcertIDs(name);
+    // // console.log("fetching user data");
+    // // console.log(user_concerts);
+    // if (user_concerts && user_concerts.includes(concert_id)) {
+    //   setHasTicket(true);
+    // }
+    // await getUserCrews(name);
+    const user_tickets = await fetchUserTickets(email, concert_id);
+    setNumTickets(user_tickets);
   };
 
   // Runs on mount
@@ -242,9 +254,10 @@ const Concert = (props) => {
       .then(async (user) => {
         setAuth(true);
         setUsername(user.username);
-        setUserEmail(user.email);
+        setUserEmail(user.attributes.email);
+        // console.log(user.email);
         // console.log(user.username);
-        await fetchData(user.username);
+        await fetchData(user.username, user.attributes.email);
         setLoading(false);
         // console.log(concert_info);
         // console.log(has_ticket);
@@ -256,8 +269,8 @@ const Concert = (props) => {
       });
     // })();
 
-    const fetchData = async (name) => {
-      await fetchUserData(name);
+    const fetchData = async (name, email) => {
+      await fetchUserData(name, email);
       if (state) {
         // If data is coming from upcoming show page
         setConcertInfo(state.info);
@@ -367,44 +380,100 @@ const Concert = (props) => {
     }
   };
 
+  // Sends email confirmation to users after they get their ticket to a show
+  const sendEmailConfirmation = (
+    username,
+    artist_name,
+    concert_id,
+    email_recipient,
+    date,
+    time
+  ) => {
+    const template_params = {
+      email_recipient: email_recipient,
+      reply_to: "onfour.box@gmail.com",
+      username: username,
+      artist_name: artist_name,
+      time: time,
+      date: date,
+      concert_id: concert_id,
+    };
+    setTimeout(() => {
+      emailjs.send(service_id, rsvp_template_id, template_params, user_id);
+    }, 1000);
+  };
+
   // Function called when user purchases/obtains ticket from modal
   // First adds ticket to user's profile in database
   // Then hides the modal and shows the ticket stub
   // Calls function that sends emails to invited users
-  const addTicket = async () => {
-    const user_data = await API.graphql(
-      graphqlOperation(queries.get_user_data, {
-        input: username,
-      })
-    );
-
-    const current_concert_data =
-      user_data.data.getCreateOnfourRegistration.concert;
-
-    const user_name = user_data.data.getCreateOnfourRegistration.first;
-
-    if (!current_concert_data || !isNaN(parseInt(current_concert_data))) {
-      var concert_data = {};
-    } else {
-      var concert_data = JSON.parse(current_concert_data);
+  const addTicket = async (email) => {
+    if (auth) {
+      const user_data = await API.graphql(
+        graphqlOperation(queries.get_user_data, {
+          input: username,
+        })
+      );
+      const current_concert_data =
+        user_data.data.getCreateOnfourRegistration.concert;
+      const user_name = user_data.data.getCreateOnfourRegistration.first;
+      if (!current_concert_data || !isNaN(parseInt(current_concert_data))) {
+        var concert_data = {};
+      } else {
+        var concert_data = JSON.parse(current_concert_data);
+      }
+      concert_data[concert_id] = true;
+      const user_payload = {
+        username,
+        concert: JSON.stringify(concert_data),
+      };
+      API.graphql(
+        graphqlOperation(mutations.update_user, {
+          input: user_payload,
+        })
+      );
     }
 
-    concert_data[concert_id] = true;
+    const concert_rsvp_info = await getOneConcert(concert_id);
+    const rsvp_list = [...concert_rsvp_info.rsvp_list, email];
 
-    const payload = {
-      username,
-      concert: JSON.stringify(concert_data),
+    const concert_payload = {
+      id: concert_id,
+      rsvp_list: rsvp_list,
     };
 
     API.graphql(
-      graphqlOperation(mutations.update_user, {
-        input: payload,
+      graphqlOperation(mutations.add_rsvp, {
+        input: concert_payload,
       })
     );
     hideModal();
     setShowStub(true);
     setHasTicket(true);
-    sendEmailInvites(user_name);
+    setNumTickets(num_tickets + 1);
+
+    if (auth) {
+      sendEmailConfirmation(
+        username,
+        concert_info.artist_name,
+        concert_id,
+        email,
+        concert_info.formatted_date,
+        concert_info.formatted_time
+      );
+    } else {
+      console.log(email);
+      sendEmailConfirmation(
+        email,
+        concert_info.artist_name,
+        concert_id,
+        email,
+        concert_info.formatted_date,
+        concert_info.formatted_time
+      );
+    }
+
+    //sendEmailInvites(user_name);
   };
 
   // Shows the calendar button
@@ -454,12 +523,13 @@ const Concert = (props) => {
   // };
   const addEvent = async () => {
     const eventLoad = {
-      summary:
-        concert_info.artist_name +
-        " - " +
-        concert_info.concert_name +
-        "(concert)",
-      description: "onfour concert!",
+      // summary:
+      //   concert_info.artist_name +
+      //   " - " +
+      //   concert_info.concert_name +
+      //   "(concert)",
+      summary: concert_info.artist_name + "Concert",
+      description: "Concert hosted on https://onfour.live",
       start: {
         dateTime: new Date(
           concert_info.date + "T" + concert_info.time + ".000-04:00"
@@ -494,75 +564,10 @@ const Concert = (props) => {
       });
   };
 
-  const goToVenue = () => {
-    console.log("take me to the venue pls");
-  };
-
   return (
     <div className="concert-page">
       {width <= 600 ? (
         <div className="mobile-concert-page">
-          {show_stub && concert_info ? (
-            <span className="stub-background">
-              <ClickAwayListener onClickAway={animationEnd}>
-                <div className="centered-stub-container">
-                  <AnimatePresence>
-                    {!stub_animation_done ? (
-                      <div>
-                        <motion.img
-                          src={concert_info.stub_url}
-                          initial={{ y: 600 }}
-                          animate={{ y: 0 }}
-                          exit={{ y: 600 }}
-                          onAnimationComplete={showCalendarButton}
-                          className="ticket-stub-img"
-                        />
-                        <div className="calendar-button">
-                          {calender_added ? (
-                            <p
-                              className="calendar-redirect-msg"
-                              id="calendar-redirect-msg"
-                            >
-                              We've got you covered! Check your{" "}
-                              <a
-                                className="google-calendar-link-text calendar-redirect-msg"
-                                href={
-                                  "https://calendar.google.com/calendar/b/0/r/week/" +
-                                  concert_info.date.replace(/-/gi, "/")
-                                }
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                Google Calendar
-                              </a>{" "}
-                              for a surprise.
-                            </p>
-                          ) : calendar_button_clicked ? (
-                            <div className="moonloader-container">
-                              <MoonLoader
-                                sizeUnit={"px"}
-                                size={30}
-                                color={"white"}
-                                loading={!calender_added}
-                              />
-                            </div>
-                          ) : (
-                            <button
-                              id="add-to-calendar"
-                              className="add-calendar-button segmented-button-text add-to-calendar"
-                              onClick={addToCalendar}
-                            >
-                              + Add to Calendar
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    ) : null}
-                  </AnimatePresence>
-                </div>
-              </ClickAwayListener>
-            </span>
-          ) : null}
           {!concert_info ? (
             <div className="overlay-box">
               <ScaleLoader
@@ -583,7 +588,7 @@ const Concert = (props) => {
                 customStyles={{
                   padding: 0,
                   overflow: scroll,
-                  maxHeight: "620px",
+                  maxHeight: "632px",
                   maxWidth: "482px",
                   background:
                     "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
@@ -593,101 +598,25 @@ const Concert = (props) => {
                 }}
                 className="rodal-custom"
               >
-                {showPaymentBox ? (
-                  <PayTicketBox
-                    general_price={general_price}
-                    backstage_price={backstage_price}
-                    // backstage_price = {10}
-                    // general_price = {1}
-                    total={total}
-                    goBackToModal={goBackToModal}
-                    addTicket={addTicket}
-                  ></PayTicketBox>
-                ) : (
-                  <CheckoutBox
-                    username={username}
-                    location={location}
-                    artist_name={concert_info.artist_name}
-                    concert_name={concert_info.concert_name}
-                    concert_full_time={
-                      concert_info.week_day +
-                      ", " +
-                      concert_info.formatted_date +
-                      ", " +
-                      concert_info.formatted_time
-                    }
-                    general_price={general_price}
-                    backstage_price={backstage_price}
-                    goToCheckout={goToCheckout}
-                    // backstage_price = {10}
-                    // general_price = {1}
-                    addTicket={addTicket}
-                    setTotal={setTotal}
-                    total={total}
-                  ></CheckoutBox>
-                )}
-                {/* <div className="invite-friends">
-                          <Row>
-                            <Col size={1}>
-                              <span className="invite-prompt">
-                                <span className="fa-stack">
-                                  <i className="fa fa-circle fa-stack-2x icon-background"></i>
-                                  <i
-                                    className="fa fa-stack-1x fa-user-plus add-user-icon"
-                                    aria-hidden="true"
-                                  ></i>
-                                </span>
-
-                                <p className="invite-text">
-                                  Invite Your Friends
-                                </p>
-                              </span>
-                            </Col>
-                          </Row>
-                          <Row>
-                            <Col size={1}>
-                              <div className="email-input-field">
-                                {" "}
-                                <ReactMultiEmail
-                                  placeholder="Please separate emails with commas"
-                                  style={{ background: "#EEEEEE" }}
-                                  emails={emails}
-                                  onChange={(_emails) => {
-                                    setEmails(_emails);
-                                  }}
-                                  validateEmail={(email) => {
-                                    return isEmail(email) && emails.length < 10; // return boolean
-                                  }}
-                                  getLabel={(email, index, removeEmail) => {
-                                    return (
-                                      <div data-tag key={index}>
-                                        {email}
-                                        <span
-                                          data-tag-handle
-                                          onClick={() => removeEmail(index)}
-                                        >
-                                          ×
-                                        </span>
-                                      </div>
-                                    );
-                                  }}
-                                />
-                              </div>
-                              <div>
-                                {emails.length >= 10 ? (
-                                  <p className="emails-warning">
-                                    You have reached the maximum number of
-                                    invites!
-                                  </p>
-                                ) : (
-                                  <p className="emails-warning backstage-hidden-text">
-                                    Input validated
-                                  </p>
-                                )}
-                              </div>
-                            </Col>
-                          </Row>
-                        </div> */}
+                <PayTicketBox
+                  auth={auth}
+                  user_email={userEmail}
+                  artist_name={concert_info.artist_name}
+                  concert_full_time={
+                    concert_info.week_day +
+                    ", " +
+                    concert_info.formatted_date +
+                    ", " +
+                    concert_info.formatted_time
+                  }
+                  general_price={general_price}
+                  backstage_price={backstage_price}
+                  suggested_price={concert_info.suggested_price}
+                  minimum_price={concert_info.minimum_price}
+                  total={total}
+                  addTicket={addTicket}
+                  concert_id={concert_id}
+                ></PayTicketBox>
               </Rodal>
               <div className="mobile-concert-image-wrapper">
                 <img
@@ -708,42 +637,44 @@ const Concert = (props) => {
                   </div>
                 </Row>
                 <Row style={{ marginBottom: "21px" }}>
-                  <Col size={1}>
-                    {has_ticket ? (
-                      <div>
-                        {enter_venue_status ? (
-                          <NavLink to="/stream">
-                            {" "}
-                            <button
-                              className="primary-button button-text full-width-button"
-                              // onClick={goToVenue}
-                            >
-                              Enter Venue
-                            </button>
-                          </NavLink>
-                        ) : (
-                          <Tooltip title="Please try again 30 minutes before the show!">
-                            <button className="button-text disabled-venue-button">
-                              Enter Venue
-                            </button>
-                          </Tooltip>
-                        )}
+                  {/* <Col size={1}> */}
+                  <div className="get-ticket-action">
+                    <button
+                      className="primary-button button-text full-width-button"
+                      onClick={getTicket}
+                    >
+                      {"GET TICKET"}
+                    </button>
+                    {num_tickets > 0 ? (
+                      <div className="tickets-indicator">
+                        <span className="segmented-button-text num-tickets-text">
+                          You have {num_tickets} ticket(s).
+                        </span>
                       </div>
-                    ) : (
-                      <button
-                        className="primary-button button-text full-width-button"
-                        onClick={getTicket}
-                      >
-                        {total > 0 ? "BUY TICKETS" : "RSVP"}
-                      </button>
-                    )}
-                  </Col>
+                    ) : null}
+                    {has_ticket ? (
+                      <div className="tickets-indicator">
+                        <span className="segmented-button-text num-tickets-text">
+                          Enter your email on the stream page during the show to
+                          enter.
+                        </span>
+                      </div>
+                    ) : null}
+                  </div>
+                  {/* <button
+                    className="primary-button button-text full-width-button"
+                    onClick={getTicket}
+                  >
+                    {"GET TICKET"}
+                  </button> */}
+                  {/* </Col> */}
                 </Row>
                 <Row>
                   <Col className="no-stretch-column">
                     <text className="header-4 concert-header-color-mobile">
-                      {concert_info.artist_name.toUpperCase()} –{" "}
-                      {concert_info.concert_name.toUpperCase()}
+                      {concert_info.artist_name.toUpperCase()}
+                      {/* –{" "}
+                      {concert_info.concert_name.toUpperCase()} */}
                     </text>
                   </Col>
                 </Row>
@@ -757,15 +688,23 @@ const Concert = (props) => {
                 </Row>
                 <Row className="concert-details-spacing-mobile">
                   <text className="header-10 concert-suggestion-color-mobile">
-                    * Tune in to the concert on your desktop to enjoy video chat
-                    experience
+                    * Tune in to the concert on your desktop to enjoy the watch
+                    together experience. Click{" "}
+                    <a
+                      href="https://www.onfour.live/"
+                      target="_blank"
+                      className="header-10 about-page-link"
+                    >
+                      here
+                    </a>{" "}
+                    to learn more about the experience.
                   </text>
                 </Row>
                 <Row className="concert-details-spacing-mobile">
                   <Col className="no-stretch-column">
-                    <p className="body-3 concert-description-color-mobile">
+                    <pre className="body-3 concert-description-color-mobile">
                       {concert_info.description}
-                    </p>
+                    </pre>
                   </Col>
                 </Row>
                 <Row className="share-section-mobile">
@@ -829,67 +768,6 @@ const Concert = (props) => {
         </div>
       ) : (
         <div className="desktop-concert-page">
-          {show_stub && concert_info ? (
-            <span className="stub-background">
-              <ClickAwayListener onClickAway={animationEnd}>
-                <div className="centered-stub-container">
-                  <AnimatePresence>
-                    {!stub_animation_done ? (
-                      <div>
-                        <motion.img
-                          src={concert_info.stub_url}
-                          initial={{ y: 1000 }}
-                          animate={{ y: 0 }}
-                          exit={{ y: 1000 }}
-                          onAnimationComplete={showCalendarButton}
-                          className="ticket-stub-img"
-                        />
-                        <div className="calendar-button">
-                          {calender_added ? (
-                            <p
-                              className="calendar-redirect-msg"
-                              id="calendar-redirect-msg"
-                            >
-                              We've got you covered! Check your{" "}
-                              <a
-                                className="google-calendar-link-text calendar-redirect-msg"
-                                href={
-                                  "https://calendar.google.com/calendar/b/0/r/week/" +
-                                  concert_info.date.replace(/-/gi, "/")
-                                }
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                Google Calendar
-                              </a>{" "}
-                              for a surprise.
-                            </p>
-                          ) : calendar_button_clicked ? (
-                            <div className="moonloader-container">
-                              <MoonLoader
-                                sizeUnit={"px"}
-                                size={30}
-                                color={"white"}
-                                loading={!calender_added}
-                              />
-                            </div>
-                          ) : (
-                            <button
-                              id="add-to-calendar"
-                              className="add-calendar-button segmented-button-text add-to-calendar"
-                              onClick={addToCalendar}
-                            >
-                              + Add to Calendar
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    ) : null}
-                  </AnimatePresence>
-                </div>
-              </ClickAwayListener>
-            </span>
-          ) : null}
           {!concert_info ? (
             <div className="overlay-box">
               <ScaleLoader
@@ -910,7 +788,7 @@ const Concert = (props) => {
                 customStyles={{
                   padding: 0,
                   overflow: scroll,
-                  maxHeight: "620px",
+                  maxHeight: "632px",
                   maxWidth: "482px",
                   background:
                     "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
@@ -920,39 +798,28 @@ const Concert = (props) => {
                 }}
                 className="rodal-custom"
               >
-                {showPaymentBox ? (
-                  <PayTicketBox
-                    general_price={general_price}
-                    backstage_price={backstage_price}
-                    // backstage_price = {10}
-                    // general_price = {1}
-                    total={total}
-                    goBackToModal={goBackToModal}
-                    addTicket={addTicket}
-                  ></PayTicketBox>
-                ) : (
-                  <CheckoutBox
-                    username={username}
-                    location={location}
-                    artist_name={concert_info.artist_name}
-                    concert_name={concert_info.concert_name}
-                    concert_full_time={
-                      concert_info.week_day +
-                      ", " +
-                      concert_info.formatted_date +
-                      ", " +
-                      concert_info.formatted_time
-                    }
-                    general_price={general_price}
-                    backstage_price={backstage_price}
-                    goToCheckout={goToCheckout}
-                    // backstage_price = {10}
-                    // general_price = {1}
-                    addTicket={addTicket}
-                    setTotal={setTotal}
-                    total={total}
-                  ></CheckoutBox>
-                )}
+                <PayTicketBox
+                  auth={auth}
+                  user_email={userEmail}
+                  artist_name={concert_info.artist_name}
+                  concert_full_time={
+                    concert_info.week_day +
+                    ", " +
+                    concert_info.formatted_date +
+                    ", " +
+                    concert_info.formatted_time
+                  }
+                  general_price={general_price}
+                  backstage_price={backstage_price}
+                  suggested_price={concert_info.suggested_price}
+                  minimum_price={concert_info.minimum_price}
+                  // backstage_price = {10}
+                  // general_price = {1}
+                  total={total}
+                  // goBackToModal={goBackToModal}
+                  addTicket={addTicket}
+                  concert_id={concert_id}
+                ></PayTicketBox>
               </Rodal>
               <div className="banner-container">
                 <img
@@ -1009,75 +876,29 @@ const Concert = (props) => {
                       + Add to calendar
                     </span>
                   )}
-                  {/* <div className="share-concert-container">
-                      <Col size={1}>
-                        <div>
-                          <h5 className="share-concert-text">
-                            Share With Friends
-                          </h5>
-                        </div>
-                        <div className="share-list-container">
-                          <ul className="social-list">
-                            <li>
-                              <a
-                                onClick={() =>
-                                  Analytics.record({
-                                    name: "facebookShareClicked",
-                                  })
-                                }
-                                href={facebook_link}
-                                className="fa fa-facebook-official fb-xfbml-parse-ignore"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <span>Facebook Link</span>
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                onClick={() =>
-                                  Analytics.record({
-                                    name: "twitterShareClicked",
-                                  })
-                                }
-                                className="fa fa-twitter twitter-share-button"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                href={twitter_link}
-                                data-text="Come watch a concert with me!"
-                                data-url={window.location.href}
-                                data-lang="en"
-                                data-show-count="false"
-                              >
-                                <span>Twitter Link</span>
-                              </a>
-                              <script
-                                async
-                                src="https://platform.twitter.com/widgets.js"
-                                charSet="utf-8"
-                              ></script>
-                            </li>
-                            <li>
-                              <Tooltip title={tooltip_text}>
-                                <span onClick={copyToClipboard}>
-                                  <i className="fa fa-clone">
-                                    <span>Copy Link</span>
-                                  </i>
-                                </span>
-                              </Tooltip>
-                            </li>
-                          </ul>
-                        </div>
-                      </Col>
-                    </div> */}
                 </div>
                 <div className="concert-info-inner">
                   <div className="concert-main-info">
                     <div>
                       <h3 className="header-3 titles">
-                        {concert_info.artist_name.toUpperCase()} –{" "}
-                        {concert_info.concert_name.toUpperCase()}
+                        {concert_info.artist_name.toUpperCase()}
+                        {/* –{" "}
+                        {concert_info.concert_name.toUpperCase()} */}
                       </h3>
+                    </div>
+                    <div className="experience-blurb">
+                      <span className="subtitle-2 experience-blurb-text concert-suggestion-color-mobile">
+                        *Invite your friends to watch the show together, or
+                        watch with other fans! Click{" "}
+                        <a
+                          href="https://www.onfour.live/"
+                          target="_blank"
+                          className="subtitle-2 about-page-link"
+                        >
+                          here
+                        </a>{" "}
+                        to learn more about the experience.
+                      </span>
                     </div>
                     <div>
                       <p className="body-1 artist-description-text">
@@ -1086,51 +907,32 @@ const Concert = (props) => {
                     </div>
                   </div>
                   <div className="concert-logistics">
-                    <Row>
-                      {/* <div className="buy-ticket"> */}
-                      {has_ticket ? (
-                        <div className="button-container">
-                          {enter_venue_status ? (
-                            <NavLink to="/stream">
-                              {" "}
-                              <button className="primary-button concert-ticket-button">
-                                <span className="button-text concert-button-text">
-                                  Enter Venue
-                                </span>
-                              </button>
-                            </NavLink>
-                          ) : (
-                            <Tooltip title="Please try again 30 minutes before the show!">
-                              <button
-                                className="primary-button concert-ticket-button"
-                                disabled
-                              >
-                                <span className="button-text concert-button-text">
-                                  Enter Venue
-                                </span>
-                              </button>
-                            </Tooltip>
-                          )}
+                    <div className="get-ticket-action">
+                      <button
+                        className="primary-button concert-ticket-button"
+                        onClick={getTicket}
+                      >
+                        <span className="button-text concert-button-text">
+                          Get Ticket
+                        </span>
+                      </button>
+                      {num_tickets > 0 ? (
+                        <div className="tickets-indicator">
+                          <span className="segmented-button-text num-tickets-text">
+                            You have {num_tickets} ticket(s).
+                          </span>
                         </div>
-                      ) : (
-                        <button
-                          className="primary-button concert-ticket-button"
-                          onClick={getTicket}
-                        >
-                          {total > 0 ? (
-                            <span className="button-text concert-button-text">
-                              Buy Tickets
-                            </span>
-                          ) : (
-                            <span className="button-text concert-button-text">
-                              RSVP
-                            </span>
-                          )}
-                        </button>
-                      )}
-                      {/* </div> */}
-                    </Row>
-                    {has_ticket && (
+                      ) : null}
+                      {has_ticket ? (
+                        <div className="tickets-indicator">
+                          <span className="segmented-button-text num-tickets-text">
+                            Enter your email on the stream page during the show
+                            to enter.
+                          </span>
+                        </div>
+                      ) : null}
+                    </div>
+                    {/* {has_ticket && (
                       <Row>
                         <div className="button-container">
                           {userCrews.length > 0 ? (
@@ -1154,21 +956,21 @@ const Concert = (props) => {
                           )}
                         </div>
                       </Row>
-                    )}
+                    )} */}
                     <Row className="logistics-top">
-                      <span className="header-6">
+                      <span className="header-9">
                         {concert_info.week_day}, {concert_info.formatted_date}
                       </span>
                     </Row>
                     <hr className="solid" />
                     <Row>
-                      <span className="header-6">
+                      <span className="header-9">
                         {concert_info.formatted_time}
                       </span>
                     </Row>
                     <hr className="solid" />
                     <Row>
-                      <span className="header-6">
+                      <span className="header-9 location-text">
                         Streamed from {concert_info.location}
                       </span>
                     </Row>
@@ -1179,6 +981,7 @@ const Concert = (props) => {
                       youtube={concert_info.youtube}
                       facebook={concert_info.facebook}
                       twitter={concert_info.twitter}
+                      merch={concert_info.merch}
                     />
                   </div>
                 </div>

@@ -14,7 +14,7 @@ import ProfileStub from "../components/user_profile/profile_stub";
 import ArchiveVideo from "../components/archive_page/archive_video";
 
 // API Imports
-import { getArtistInfo } from "./get_concert_data";
+import { getArtistInfo, getOneConcert } from "./get_concert_data";
 import { formatUpcomingShow, formatMemory } from "../components/util";
 
 Amplify.configure(awsmobile);
@@ -31,7 +31,7 @@ export const getMemories = async (username) => {
     archive_videos.push(
       <ArchiveVideo
         artist_name={data.artist_name}
-        concert_name={data.concert_name}
+        // concert_name={data.concert_name}
         concert_date={data.concert_date}
         url={data.video_url}
         length={data.video_length}
@@ -88,6 +88,20 @@ export const fetchUserConcertIDs = async (username) => {
       const concerts_ids = Object.keys(parsed_concerts);
       return concerts_ids;
     }
+  }
+};
+
+export const fetchUserTickets = async (email, concert_id) => {
+  if (email && concert_id) {
+    const concert_data = await getOneConcert(concert_id);
+    const rsvp_list = concert_data.rsvp_list;
+
+    const num_tickets = rsvp_list.filter(function (x) {
+      return x === email;
+    }).length;
+    return num_tickets;
+  } else {
+    return 0;
   }
 };
 

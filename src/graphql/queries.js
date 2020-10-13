@@ -53,6 +53,8 @@ listConcerts(filter: $filter, limit: 1000) {
     poster_url
     concert_name
     general_price
+    suggested_price
+    minimum_price
     is_live
   }
 }
@@ -70,6 +72,7 @@ export const get_artist_info = `query getCreateOnfourRegistration(
       twitter
       facebook
       soundcloud
+      merch
   }
 }`;
 
@@ -144,7 +147,10 @@ listConcerts(filter: $filter, limit: 1000) {
     artist_id
     concert_name
     general_price
+    suggested_price
+    minimum_price
     crew_list
+    rsvp_list
   }
 }
 }`;
@@ -164,6 +170,9 @@ getConcert(id: $id) {
   artist_id
   concert_name
   general_price
+  suggested_price
+  minimum_price
+  rsvp_list
 }
 }`;
 
@@ -185,3 +194,14 @@ export const get_crew_by_id = `query getCrew ($input: ID!) {
   }
 }
 `;
+
+export const get_video_chat_variables = `query getVideochat_Testing(
+  $id: ID!
+) {
+  getVideochat_Testing(id: $id) {
+    kbs
+    width
+    height
+    frameRate
+  }
+}`;
