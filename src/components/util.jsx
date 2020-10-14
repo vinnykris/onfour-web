@@ -79,6 +79,7 @@ export const createUpcomingObject = (data, artist_data) => {
     location: data.location,
     suggested_price: data.suggested_price,
     minimum_price: data.minimum_price,
+    general_price: data.general_price,
   };
 };
 

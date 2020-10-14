@@ -32,8 +32,11 @@ import { getTickets } from "../../apis/get_user_data";
 import DonateCardBox from "../payment/donate_box";
 import VenmoBox from "../payment/venmo_box";
 import PaypalBox from "../payment/paypal_box";
+import PayTicketBox from "../payment/pay_ticket_box";
+import { createUpcomingObject } from "../util";
 
 import AccessModal from "./access_modal";
+import PaymentModal from "./payment_modal";
 // Styles Imports
 import "./stream_styles.scss";
 import "rodal/lib/rodal.css";
@@ -46,6 +49,7 @@ import viewers_icon from "../../images/icons/stream_icons/viewers_icon.png";
 
 // Utils
 import { getCrewsByUsername } from "../../utils/crew";
+import { getArtistInfo } from "../../apis/get_concert_data";
 
 Amplify.configure(awsmobile);
 
@@ -70,6 +74,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [artist_twitter, setArtistTwitter] = useState("");
   const [artist_youtube, setArtistYoutube] = useState("");
   const [artist_merch, setArtistMerch] = useState("");
+  const [concert_info, setConcertInfo] = useState("");
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
   const [concert_crews, setConcertCrews] = useState("");
@@ -93,6 +98,8 @@ const StreamPage = ({ is_soundcheck }) => {
   const [paypal_selected, setPaypalSelected] = useState(false);
   const [stream_volume, setStreamVolume] = useState(1.0);
   const [have_upcoming_concert, setHaveUpcomingConcert] = useState(true);
+  const [show_payment_modal, setShowPaymentModal] = useState(false);
+  const [show_access_modal, setShowAccessModal] = useState(true);
 
   const history = useHistory(0);
 
@@ -161,10 +168,10 @@ const StreamPage = ({ is_soundcheck }) => {
   // Get the start time for countdown_timer
   // Call stream page analtics
   useEffect(() => {
-    getStartTime();
+    fetchData();
   }, []);
   // Query upcoming show database
-  const getStartTime = async () => {
+  const fetchData = async () => {
     // Calling the API, using async and await is necessary
     const info = await API.graphql(
       graphqlOperation(queries.list_concerts, {
@@ -181,6 +188,13 @@ const StreamPage = ({ is_soundcheck }) => {
       const hour = parseInt(info_list[0].time.slice(0, 2));
       const minutes = info_list[0].time.slice(2, 5);
 
+      console.log(info_list[0]);
+      // setConcertInfo(info_list[0]);
+      const concert_data = info_list[0];
+      const artist_data = await getArtistInfo(info_list[0].artist_id);
+      setConcertInfo(createUpcomingObject(concert_data, artist_data));
+      console.log(createUpcomingObject(concert_data, artist_data));
+
       setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
       setShowTime(
         info_list[0].date +
@@ -194,7 +208,6 @@ const StreamPage = ({ is_soundcheck }) => {
       // console.log(info_list[0]);
       setConcertName(info_list[0].concert_name);
       setArtistID(info_list[0].artist_id);
-      getArtistInfo(info_list[0].artist_id);
       setConcertID(info_list[0].id);
       setRSVPList(info_list[0].rsvp_list);
       // setIsLive(info_list[0].is_live);
@@ -205,22 +218,22 @@ const StreamPage = ({ is_soundcheck }) => {
     }
   };
 
-  const getArtistInfo = async (artist_id) => {
-    const artist_info = await API.graphql(
-      graphqlOperation(queries.get_artist_info, {
-        username: artist_id,
-      })
-    );
-    const artist_info_list = artist_info.data.getCreateOnfourRegistration;
-    setArtistName(artist_info_list.artist_name);
-    setArtistBio(artist_info_list.artist_bio);
-    setArtistFB(artist_info_list.facebook);
-    setArtistIG(artist_info_list.instagram);
-    setArtistSpotify(artist_info_list.spotify);
-    setArtistTwitter(artist_info_list.twitter);
-    setArtistYoutube(artist_info_list.youtube);
-    setArtistMerch(artist_info_list.merch);
-  };
+  // const getArtistInfo = async (artist_id) => {
+  //   const artist_info = await API.graphql(
+  //     graphqlOperation(queries.get_artist_info, {
+  //       username: artist_id,
+  //     })
+  //   );
+  //   const artist_info_list = artist_info.data.getCreateOnfourRegistration;
+  //   setArtistName(artist_info_list.artist_name);
+  //   setArtistBio(artist_info_list.artist_bio);
+  //   setArtistFB(artist_info_list.facebook);
+  //   setArtistIG(artist_info_list.instagram);
+  //   setArtistSpotify(artist_info_list.spotify);
+  //   setArtistTwitter(artist_info_list.twitter);
+  //   setArtistYoutube(artist_info_list.youtube);
+  //   setArtistMerch(artist_info_list.merch);
+  // };
 
   // DONATION SECTION
   // Opens link to paypal account for musician
@@ -403,19 +416,35 @@ const StreamPage = ({ is_soundcheck }) => {
 
   const openTicketModal = () => {
     console.log("open ticket modal");
+    setShowPaymentModal(true);
   };
+
+  const closeAccessModal = () => {
+    setShowAccessModal(false);
+  }
 
   // RENDERING SECTION
   return (
     <div className="stream-container">
-      {artist_name || !have_upcoming_concert ? (
+      {concert_info || !have_upcoming_concert ? (
         <div className="stream-page-content">
           {width > 600 ? (
             <Grid className="desktop-stream-grid">
               <AccessModal
-                access_list={rsvp_list}
+                access_list={concert_info.rsvp_list}
                 user_email={user_email}
                 openTicketModal={openTicketModal}
+                visible={show_access_modal}
+                onClose={closeAccessModal}
+                rsvp_list={concert_info.rsvp_list}
+              />
+              <PaymentModal 
+                visible={show_payment_modal} 
+                onClose={() => setShowPaymentModal(false)} 
+                concert_info={concert_info} 
+                auth={auth} 
+                user_email={user_email} 
+                artist_name={artist_name}
               />
               <Rodal
                 visible={open_modal}
@@ -671,7 +700,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           <Col size={1}>
                             <div className="social-media-container">
                               <ul className="social-list">
-                                {artist_ig ? (
+                                {concert_info.instagram ? (
                                   <li>
                                     <a
                                       onClick={() =>
@@ -679,7 +708,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                           name: "socialBarInsta",
                                         })
                                       }
-                                      href={artist_ig}
+                                      href={concert_info.instagram}
                                       className="fa fa-instagram"
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -689,7 +718,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                   </li>
                                 ) : null}
 
-                                {artist_spotify ? (
+                                {concert_info.spotify ? (
                                   <li>
                                     <a
                                       onClick={() =>
@@ -697,7 +726,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                           name: "socialBarSpotify",
                                         })
                                       }
-                                      href={artist_spotify}
+                                      href={concert_info.spotify}
                                       className="fab fa-spotify"
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -707,7 +736,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                   </li>
                                 ) : null}
 
-                                {artist_youtube ? (
+                                {concert_info.youtube ? (
                                   <li>
                                     <a
                                       onClick={() =>
@@ -715,7 +744,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                           name: "socialBarYoutube",
                                         })
                                       }
-                                      href={artist_youtube}
+                                      href={concert_info.youtube}
                                       className="fa fa-youtube"
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -725,7 +754,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                   </li>
                                 ) : null}
 
-                                {artist_fb ? (
+                                {concert_info.facebook ? (
                                   <li>
                                     <a
                                       onClick={() =>
@@ -733,7 +762,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                           name: "socialBarFacebook",
                                         })
                                       }
-                                      href={artist_fb}
+                                      href={concert_info.facebook}
                                       className="fab fa-facebook"
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -743,7 +772,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                   </li>
                                 ) : null}
 
-                                {artist_twitter ? (
+                                {concert_info.twitter ? (
                                   <li>
                                     <a
                                       onClick={() =>
@@ -751,7 +780,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                           name: "socialBarTwitter",
                                         })
                                       }
-                                      href={artist_twitter}
+                                      href={concert_info.twitter}
                                       className="fa fa-twitter"
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -761,7 +790,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                   </li>
                                 ) : null}
 
-                                {artist_merch ? (
+                                {concert_info.merch ? (
                                   <li>
                                     <a
                                       onClick={() =>
@@ -769,7 +798,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                           name: "socialBarMerch",
                                         })
                                       }
-                                      href={artist_merch}
+                                      href={concert_info.merch}
                                       className="fas fa-shopping-cart"
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -1080,7 +1109,7 @@ const StreamPage = ({ is_soundcheck }) => {
             sizeUnit={"px"}
             size={18}
             color={"#E465A2"}
-            loading={!artist_name}
+            loading={!concert_info}
           />
         </div>
         // </div>

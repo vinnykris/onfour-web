@@ -21,11 +21,11 @@ const AccessModal = (props) => {
   return (
     <div>
       <Rodal
-        visible={show_modal}
+        visible={props.visible}
         width={482}
         height={424}
         measure="px"
-        onClose={closeModal}
+        onClose={props.onClose}
         customStyles={{
           padding: 0,
           //overflow: scroll,
@@ -37,6 +37,8 @@ const AccessModal = (props) => {
             "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
           borderRadius: "10px",
         }}
+        closeMaskOnClick={false}
+        showCloseButton={false}
       >
         <div className="access-modal-main">
           <div className="access-modal-header">
@@ -70,14 +72,14 @@ const AccessModal = (props) => {
           </form>
           <div className="buy-ticket-prompt-container">
             <span className="buy-ticket-prompt header-7">
-              {"Don't have a ticket? Click "}
+              Don't have a ticket? Click&nbsp;
               <span
                 onClick={props.openTicketModal}
                 className="open-ticket-modal-link header-7"
               >
                 here
               </span>
-              {" to get your ticket!"}
+              &nbsp;to get your ticket!
             </span>
           </div>
         </div>
