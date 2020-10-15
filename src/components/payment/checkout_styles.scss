@@ -157,7 +157,7 @@
 }
 
 .fee-receipt {
-  height: 115px;
+  min-height: 115px;
   padding: 24px 0px;
 }
 
@@ -237,6 +237,7 @@
   font-weight: bold !important;
   margin-top: auto;
   margin-bottom: auto;
+  line-height: 36px !important;
 }
 
 .lh-33 {
