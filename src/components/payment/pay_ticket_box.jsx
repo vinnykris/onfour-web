@@ -355,7 +355,7 @@ const PayTicketBox = (props) => {
                         allowNegative={false}
                       />
                     ) : (
-                      <div>
+                      <div className="mobile-custom-price-input">
                         {minimum_price ? (
                           <NumberFormat
                             className="custom-ticket-form-input body-1 short-width-input"
@@ -422,6 +422,16 @@ const PayTicketBox = (props) => {
                         </div>
                       </div>
                     ) : null}
+                    {service_fee > 0 ? (<div className="ticket-item-container">
+                        <div className="ticket-summary-field-2 align-left subtitle-2">
+                          Service Fee
+                        </div>
+                        <div className="item-price-container">
+                          <span className="item-price subtitle-2">
+                            ${service_fee}
+                          </span>
+                        </div>
+                      </div>) : (null)}
                     <div className="ticket-item-container">
                       <div className="ticket-summary-field-2 align-left subtitle-2">
                         Processing Fee
@@ -465,6 +475,16 @@ const PayTicketBox = (props) => {
                         </div>
                       </div>
                     ) : null}
+                    {service_fee > 0 ? (<div className="ticket-item-container">
+                        <div className="ticket-summary-field-2 align-left subtitle-2">
+                          Service Fee
+                        </div>
+                        <div className="item-price-container">
+                          <span className="item-price subtitle-2">
+                            ${service_fee}
+                          </span>
+                        </div>
+                      </div>) : (null)}
                     <div className="ticket-item-container">
                       <div className="ticket-summary-field-2 align-left subtitle-2">
                         Processing Fee
