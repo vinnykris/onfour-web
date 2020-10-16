@@ -4,6 +4,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import history from "./history";
 
 // Component imports
+import EditProfilePage from "./components/user_profile/edit_profile_page";
 import Home from "./components/home_page/home_page";
 import About from "./components/about_page/about_page";
 import ArtistStream from "./components/artist_stream_page/artist_stream_page";
@@ -75,7 +76,9 @@ function App() {
           <Route exact path="/terms-of-service" component={TermsOfService} />
           <Route exact path="/ticket-agreement" component={PaymentAgreement} />
           <Route exact path="/artiststream" component={ArtistStreamPage} />
+          <Route exact path="/editprofilepage" component={EditProfilePage} />
           <Route path="*" component={NotFoundPage} />
+          
         </Switch>
         <Footer />
       </Router>
