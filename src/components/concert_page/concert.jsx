@@ -565,6 +565,10 @@ const Concert = (props) => {
       });
   };
 
+  const goToVenue = () => {
+    history.push("/stream");
+  }
+
   return (
     <div className="concert-page">
       {width <= 600 ? (
@@ -653,14 +657,20 @@ const Concert = (props) => {
                         </span>
                       </div>
                     ) : null}
-                    {has_ticket ? (
+                    {/* {has_ticket ? (
                       <div className="tickets-indicator">
                         <span className="segmented-button-text num-tickets-text">
                           Enter your email on the stream page during the show to
                           enter.
                         </span>
                       </div>
-                    ) : null}
+                    ) : null} */}
+                      <button
+                      className="primary-button button-text full-width-button concert-enter-button"
+                      onClick={goToVenue}
+                    >
+                      {"VIEW STREAM"}
+                    </button>
                   </div>
                   {/* <button
                     className="primary-button button-text full-width-button"
@@ -924,14 +934,22 @@ const Concert = (props) => {
                           </span>
                         </div>
                       ) : null}
-                      {has_ticket ? (
+                      {/* {has_ticket ? (
                         <div className="tickets-indicator">
                           <span className="segmented-button-text num-tickets-text">
                             Enter your email on the stream page during the show
                             to enter.
                           </span>
                         </div>
-                      ) : null}
+                      ) : null} */}
+                                            <button
+                      className="primary-button concert-enter-button"
+                      onClick={goToVenue}
+                    >
+                      <span className="button-text concert-button-text">
+                          View Stream
+                        </span>
+                    </button>
                     </div>
                     {/* {has_ticket && (
                       <Row>

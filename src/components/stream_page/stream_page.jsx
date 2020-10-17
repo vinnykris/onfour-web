@@ -407,6 +407,10 @@ const StreamPage = ({ is_soundcheck }) => {
     }
   };
 
+  // const openLyrics = () => {
+
+  // }
+
   // RENDERING SECTION
   return (
     <div className="stream-container">
@@ -778,7 +782,21 @@ const StreamPage = ({ is_soundcheck }) => {
                               </ul>
                             </div>
                           </Col>
-                          <Col size={1} className="donate-button-column">
+                          {concert_id === "925d2552-7e18-4507-b293-89e4322be5fa" ? ( <div className="donate-button-column">
+                            <div className="stream-action-donate-container">
+                              
+                                <a href="https://onfour-media.s3.amazonaws.com/Hand+in+Hand+Texts+and+Translations.pdf" target="_blank"><span
+                                //content="DONATE"
+                                //onClick={openLyrics}
+                                disabled={!have_upcoming_concert}
+                                className="primary-button stream-lyrics-button segmented-button-text"
+                              >LYRICS</span></a>
+                              
+                            </div>
+                            </div>) : (null)}
+                         
+                          {/* <Col size={1} className="donate-button-column"> */}
+                            <div className="donate-button-column">
                             <div className="stream-action-donate-container">
                               <button
                                 //content="DONATE"
@@ -789,7 +807,18 @@ const StreamPage = ({ is_soundcheck }) => {
                                 DONATE
                               </button>
                             </div>
-                          </Col>
+                            </div>
+                            {/* <div className="stream-action-donate-container">
+                              <button
+                                //content="DONATE"
+                                onClick={donateModal}
+                                disabled={!have_upcoming_concert}
+                                className="primary-button stream-donate-button segmented-button-text"
+                              >
+                                DONATE
+                              </button>
+                            </div>
+                          </Col> */}
                         </Row>
                       </Col>
                     </Row>
