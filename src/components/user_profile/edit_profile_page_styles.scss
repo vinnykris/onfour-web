@@ -2,14 +2,8 @@
 
 .edit-profile-page-content {
   background-color: black;
-  min-height: 65vh;
   width: 100%;
   margin-top: -1px;
-  height: 100%;
-  @include respond-to("small") {
-    height: calc(100vh - 61px);
-    max-height: calc(100vh - 61px);
-  }
 }
 
 
@@ -54,9 +48,6 @@ width: 50%;
     padding-bottom: 20px;
   text-align: left;
   }
-  .Profile-edit-profile{
-    width: 100%;
-  }
   .edit-profile-username-text{
     color: white;
   width: 100%;
@@ -64,13 +55,13 @@ width: 50%;
   }
  
   .Profile-edit-profile{
-float: left;
-margin-left: 23px;
-margin-top: 43px;
-margin-bottom: 30px;
-width: 10%;
-display: flex;
-flex-direction: row;
+    float: left;
+    margin-left: 23px;
+    margin-top: 43px;
+    margin-bottom: 30px;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
   }
   
   .username-edit-profile{
@@ -116,13 +107,13 @@ flex-direction: row;
     cursor: pointer;
     color: #E465A2;
     font-family: Montserrat;
-font-style: normal;
-font-weight: 500;
-font-size: 17px;
-line-height: 25px;
-margin-top: 5px;
-align-items: center;
-letter-spacing: 0.035em;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 25px;
+    margin-top: 5px;
+    align-items: center;
+    letter-spacing: 0.035em;
   }
   .edit-profile-overview-container{
     display:flex;

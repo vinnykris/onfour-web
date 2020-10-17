@@ -25,8 +25,6 @@ import Editicon from "../../images/icons/edit_icon.png";
 import Edit from "../../images/icons/Edit.png";
 // Utils
   import InputOne from "../inputs/input_one";
-import { EditLocation } from "@material-ui/icons";
-import { left } from "@popperjs/core";
 
   Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -82,111 +80,91 @@ const EditProfile = ({username,userEmail})=>{
         console.log(Submit)}
      }
     return(
-        
         <div className = "edit-profile-page-content">
-                            
-               
-                <div className="header-5 Profile-edit-profile" style={{ width: '100%' }}>Profile</div>
-                
-                <br/>
-                
-                <div classname="user-initials-edit-profile">
-                    <div className="edit-profile-page-contianer">
-                         <p className="header-4 username-edit-profile" data-letters={(Firstchar)}   > </p>
-                         <div className="header-4 username">{(username)}</div>    
-                     </div>
-                     
+            <div className="header-5 Profile-edit-profile">Profile</div>
+            <div classname="user-initials-edit-profile">
+                <div className="edit-profile-page-contianer">
+                    <p className="header-4 username-edit-profile" data-letters={(Firstchar)}></p>
+                    <div className="header-4 username">{(username)}</div>    
                 </div>
-
+            </div>
             <form className="edit-profile-section"
             action="/"
             id="register"
             onSubmit={usernameSubmit}
             >
-        <div className="edit-profile-container">
-        
-            <div className="edit-profile-sub-container">
-                       
-        <div className= "edit-profile-overview-container header-5">Overview
-        {Submit ?( <p className="header-5 edit-profile-overview" style={{ float: 'left' ,width:'415'}}>    
-                  <span
-                  
-                    className="Save-changes-edit-profile"
-                    type="submit"
-                    value="Submit"
-                    onClick={saveChanges}
-                  >Save changes</span>
-                  </p>):(     <p className="header-5 edit-profile-overview" style={{ float: 'left' ,width:'415'}}>
-                  <img
-                    src={Editicon}
-                    className="edit-pointer-edit-profile"
-                    onClick={saveChanges}
-                  ></img> <img className="edit-pointertext-edit-profile" src={Edit} onClick={saveChanges}></img>
-                  </p>)}
-                  
-            
-        </div>
-
-        <br/><br/>
-
-
-        <div className=" edit-profile-input-container" >
-            
-        <div className="header-8 username-box" >Username</div>
-                <div className="username-box-container">
-                {Submit?(
-                <InputOne
-                id='third_slot'
-                type='text'
-                
-                placeholder='Username'
-                is_required={true}
-                >
-                </InputOne>    
-                ):(<InputOne
-                    id='third_slot'
-                    type='text'
-                    
-                    placeholder='Username'
-                    is_required={true}
-                    is_disabled={true}
-                    ></InputOne>)}
+                <div className="edit-profile-container">
+                    <div className="edit-profile-sub-container">         
+                        <div className= "edit-profile-overview-container header-5">Overview
+                            {Submit ?( 
+                                <p className="header-5 edit-profile-overview" style={{ float: 'left' ,width:'415'}}>    
+                                    <span
+                                    className="Save-changes-edit-profile"
+                                    type="submit"
+                                    value="Submit"
+                                    onClick={saveChanges}
+                                    >
+                                        Save changes
+                                    </span>
+                                </p>
+                            ):(     
+                                <p className="header-5 edit-profile-overview" style={{ float: 'left' ,width:'415'}}>
+                                    <img
+                                    src={Editicon}
+                                    className="edit-pointer-edit-profile"
+                                    onClick={saveChanges}
+                                    ></img>
+                                    <img className="edit-pointertext-edit-profile" src={Edit} onClick={saveChanges}></img>
+                                </p>
+                            )}  
+                        </div>
+                        <br/><br/>
+                        <div className=" edit-profile-input-container" >
+                            <div className="header-8 username-box" >Username</div>
+                            <div className="username-box-container">
+                                {Submit?(
+                                    <InputOne
+                                        id='third_slot'
+                                        type='text'
+                                        placeholder='Username'
+                                        is_required={true}
+                                    >
+                                    </InputOne>    
+                                ) : (
+                                    <InputOne
+                                        id='third_slot'
+                                        type='text'
+                                        placeholder='Username'
+                                        is_required={true}
+                                        is_disabled={true}
+                                    ></InputOne>
+                                )}
+                            </div>
+                        </div>
+                        <div className="edit-profile-input-container" >
+                            <div className="header-8 input-email-edit-profile" style={{ float: 'left',marginBottom:"6px" }}>Email</div>
+                            <div className="email-box-edit-profile" >
+                                <div className="email-container-box">
+                                    <InputOne
+                                    id='second_slot'
+                                    type='text'
+                                    placeholder={userEmail}
+                                    is_disabled = {true}
+                                    ></InputOne> 
+                                </div>
+                                {Submit ?(<div className="email-warning">Sorry, You cannot change the Email Rhythm</div>):(<div></div>)}
+                            </div>
+                        </div>
+                        <div className="reset-passwor">
+                            <p className="forgot-footer">
+                                <a href="/forgot" className="body-2 signin-link">
+                                Reset Password?
+                                </a>
+                            </p>
+                        </div>
+                    </div>          
                 </div>
-            </div>
-            
-            <div className="edit-profile-input-container" >
-            <div className="header-8 input-email-edit-profile" style={{ float: 'left',marginBottom:"6px" }}>Email</div>
-            
-            <div className="email-box-edit-profile" >
-            
-            <div className="email-container-box">
-            <InputOne
-                id='second_slot'
-                type='text'
-                placeholder={userEmail}
-                is_disabled = {true}
-                ></InputOne> 
-                </div>
-
-                {Submit ?(<div className="email-warning">Sorry, You cannot change the Email Rhythm</div>):(<div></div>)}
-
-                 </div>
-                 {/* {Submit?(<span className="email-edit-warning">You cannot change your email address</span>):(<p></p>)} */}
-           
-            </div>
-            
-            <div className="reset-passwor">
-                <p className="forgot-footer">
-                    <a href="/forgot" className="body-2 signin-link">
-                      Reset Password?
-                    </a>
-                </p>
-                </div>
-            </div>          
-        </div>
-        </form>
-      
-        
+            </form>
         </div>
     );
 };
