@@ -32,6 +32,9 @@ import {
 } from "../../utils/register";
 import InputOne from "../inputs/input_one";
 
+// Query Params
+import queryString from "query-string";
+
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 const Register = (props) => {
@@ -53,6 +56,15 @@ const Register = (props) => {
   const state = props.location.state;
 
   const { height, width } = useWindowDimensions(); // Dimensions of screen
+
+  const pre_signup_failure = queryString.parse(window.location.search)
+    .error_code;
+
+  useEffect(() => {
+    if (pre_signup_failure && pre_signup_failure.includes("duplicate_email")) {
+      setError("A user with this email already exists");
+    }
+  }, []);
 
   useEffect(() => {
     if (state) {

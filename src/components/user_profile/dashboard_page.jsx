@@ -260,29 +260,47 @@ const DashboardPage = ({
 
   useEffect(() => {
     Auth.currentAuthenticatedUser({ bypassCache: true }).then((user) => {
-      console.log(user);
       determinePreferredUsername(user).then((preferred_username) => {
-        console.log("preferred username IS", preferred_username);
         setPreferredUsername(preferred_username);
         if (preferred_username) setHideOriginalUsername(true);
       });
     });
   }, []);
 
-  const changePreferredUsername = async () => {
+  const changePreferredUsername = async (event) => {
+    event.preventDefault();
     let user = await Auth.currentAuthenticatedUser();
-    await Auth.updateUserAttributes(user, {
-      preferred_username: preferred_username,
-    });
-    const payload = {
-      username,
-      preferred_username,
-    };
-    API.graphql(
-      graphqlOperation(mutations.update_user, {
-        input: payload,
-      })
-    );
+    if (
+      user?.signInUserSession?.idToken?.payload?.identities?.[0]
+        ?.providerType === "Google" ||
+      user?.signInUserSession?.idToken?.payload?.identities?.[0]
+        ?.providerType === "Facebook"
+    ) {
+      const payload = {
+        username,
+        preferred_username,
+      };
+      await API.graphql(
+        graphqlOperation(mutations.update_user, {
+          input: payload,
+        })
+      );
+      window.location.reload();
+    } else {
+      await Auth.updateUserAttributes(user, {
+        preferred_username: preferred_username,
+      });
+      const payload = {
+        username,
+        preferred_username,
+      };
+      await API.graphql(
+        graphqlOperation(mutations.update_user, {
+          input: payload,
+        })
+      );
+      window.location.reload();
+    }
   };
 
   return (

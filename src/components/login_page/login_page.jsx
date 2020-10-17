@@ -112,7 +112,9 @@ const Login = (props) => {
                       is_password={true}
                     />
                   </div>
-                  <div style={{ color: "red" }}>{error}</div>
+                  <div style={{ color: "red" }}>
+                    {error.replace("UserMigration failed with error ", "")}
+                  </div>
                   <button
                     className="primary-button button-text signin-submit-button"
                     type="submit"

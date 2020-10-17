@@ -30,7 +30,9 @@ export const determineUsername = async (user) => {
 export const determineEmail = async (user) => {
   if (
     user?.signInUserSession?.idToken?.payload?.identities?.[0]?.providerType ===
-    "Google"
+      "Google" ||
+    user?.signInUserSession?.idToken?.payload?.identities?.[0]?.providerType ===
+      "Facebook"
   ) {
     return user.signInUserSession.idToken.payload.email;
   }
@@ -40,19 +42,18 @@ export const determineEmail = async (user) => {
 export const determinePreferredUsername = async (user) => {
   if (
     user?.signInUserSession?.idToken?.payload?.identities?.[0]?.providerType ===
-    "Google"
+      "Google" ||
+    user?.signInUserSession?.idToken?.payload?.identities?.[0]?.providerType ===
+      "Facebook"
   ) {
-    console.log("A REACHED", user.username);
     const user_data = await API.graphql(
       graphqlOperation(queries.get_user_data, {
         input: user.username,
       })
     );
-    console.log("USER DATA IS", user_data);
     if (user_data?.data?.getCreateOnfourRegistration?.preferred_username)
       return user_data.data.getCreateOnfourRegistration.preferred_username;
     else return "";
   }
-  console.log("B REACHED");
   return user.signInUserSession.idToken.payload.preferred_username;
 };

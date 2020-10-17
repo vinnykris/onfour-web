@@ -45,8 +45,6 @@ const Profile = (props) => {
   const history = useHistory();
   const [userEmail, setUserEmail] = useState("");
 
-  console.log(username, userEmail);
-
   useEffect(() => {
     Auth.currentAuthenticatedUser({})
       .then((user) => {

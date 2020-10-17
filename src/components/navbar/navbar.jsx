@@ -68,7 +68,6 @@ const NavBar = () => {
 
   const toggle = () => setDropdownOpen((prevState) => !prevState); // Toggle for dropdown menu
 
-  console.log(isSocialUser);
   // useEffect(() => {
   Auth.currentAuthenticatedUser({ bypassCache: true })
     .then((user) => {

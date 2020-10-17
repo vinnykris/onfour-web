@@ -254,82 +254,80 @@ const HomePage = () => {
             )}
           </div>
         )
-      ) : (
-        // {/* MOBILE LAYOUT */}
-        most_recent_concert_artist ? (
-          <Grid className="mobile-grid-home">
-            {/* BANNER ROW */}
-            <Row className="mobile-banner-row">
-              <div className="mobile-banner-container">
-                <img
-                  src={most_recent_concert.poster_url}
-                  className="mobile-home-page-featured"
+      ) : // {/* MOBILE LAYOUT */}
+      most_recent_concert_artist ? (
+        <Grid className="mobile-grid-home">
+          {/* BANNER ROW */}
+          <Row className="mobile-banner-row">
+            <div className="mobile-banner-container">
+              <img
+                src={most_recent_concert.poster_url}
+                className="mobile-home-page-featured"
+              />
+              <div className="mobile-home-page-overlay" />
+              <Row className="mobile-upcoming-row">
+                <FeaturedConcertBox
+                  artist_info={most_recent_concert_artist}
+                  concert_info={most_recent_concert}
+                  width={width}
                 />
-                <div className="mobile-home-page-overlay" />
-                <Row className="mobile-upcoming-row">
-                  <FeaturedConcertBox
-                    artist_info={most_recent_concert_artist}
-                    concert_info={most_recent_concert}
-                    width={width}
-                  />
-                </Row>
-              </div>
-            </Row>
+              </Row>
+            </div>
+          </Row>
 
-            <Row>
-              <Col size={1}>
-                <div className="home-preview-content">
-                  <Row className="header-row">
-                    <Col size={1}>
-                      <span className="preview-content-header header-6">
-                        Upcoming Shows
+          <Row>
+            <Col size={1}>
+              <div className="home-preview-content">
+                <Row className="header-row">
+                  <Col size={1}>
+                    <span className="preview-content-header header-6">
+                      Upcoming Shows
                     </span>
-                    </Col>
-                    {/* <Col size={1}>
+                  </Col>
+                  {/* <Col size={1}>
                       <NavLink to="/upcoming">
                         <span className="view-all header-7">View All</span>
                       </NavLink>
                     </Col> */}
-                  </Row>
-                  <Row className="full-width-row">
-                    <OneRowGrid
-                      className="preview-flex-row"
-                      content_list={concerts}
-                    />
-                  </Row>
-                </div>
-              </Col>
-            </Row>
-          </Grid>
-        ) : (
-            <div>
-              {no_concert ? (
-                <Grid className="desktop-grid-home">
-                  {/* BANNER ROW */}
-                  <Row className="banner-row">
-                    <div className="banner-container">
-                      <img src={no_concert_img} className="home-page-featured" />
-                      <div className="empty-upcoming-container">
-                        <span className="preview-content-header header-5 empty-upcoming">
-                          We don't have any scheduled shows at the moment, but
-                          stay tuned!
+                </Row>
+                <Row className="full-width-row">
+                  <OneRowGrid
+                    className="preview-flex-row"
+                    content_list={concerts}
+                  />
+                </Row>
+              </div>
+            </Col>
+          </Row>
+        </Grid>
+      ) : (
+        <div>
+          {no_concert ? (
+            <Grid className="desktop-grid-home">
+              {/* BANNER ROW */}
+              <Row className="banner-row">
+                <div className="banner-container">
+                  <img src={no_concert_img} className="home-page-featured" />
+                  <div className="empty-upcoming-container">
+                    <span className="preview-content-header header-5 empty-upcoming">
+                      We don't have any scheduled shows at the moment, but stay
+                      tuned!
                     </span>
-                      </div>
-                    </div>
-                  </Row>
-                </Grid>
-              ) : (
-                  <div className="overlay-box">
-                    <ScaleLoader
-                      sizeUnit={"px"}
-                      size={18}
-                      color={"#E465A2"}
-                      loading={!most_recent_concert_artist}
-                    />
                   </div>
-                )}
+                </div>
+              </Row>
+            </Grid>
+          ) : (
+            <div className="overlay-box">
+              <ScaleLoader
+                sizeUnit={"px"}
+                size={18}
+                color={"#E465A2"}
+                loading={!most_recent_concert_artist}
+              />
             </div>
-          )
+          )}
+        </div>
       )}
     </div>
   );
