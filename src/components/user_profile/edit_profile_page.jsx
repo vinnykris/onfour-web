@@ -17,6 +17,9 @@ import Auth from "../../apis/UserPool";
 import Amplify from "aws-amplify";
 import { API, graphqlOperation } from "aws-amplify";
 
+// graphql
+import * as mutations from "../../graphql/mutations";
+
 //Styles
 import "./edit_profile_page_styles.scss";
 //Images
@@ -27,7 +30,14 @@ import InputOne from "../inputs/input_one";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
-const EditProfile = ({ username, userEmail }) => {
+const EditProfile = ({
+  username,
+  userEmail,
+  preferred_username,
+  hide_original_username,
+  setPreferredUsername,
+  setHideOriginalUsername,
+}) => {
   const [email, setemail] = useState(userEmail);
   const [Username, setUsername] = useState(username);
 
@@ -36,7 +46,7 @@ const EditProfile = ({ username, userEmail }) => {
   const [Submit, setSubmit] = useState(false);
   const [Emailbutton, setEmailbutton] = useState(false);
   var Firstchar = username.toUpperCase().charAt(0);
-  console.log(Firstchar);
+  //console.log(Firstchar);
   // Auth.currentAuthenticatedUser({})
   // .then((user) => {
   //   setUserEmail(user.attributes.email);
@@ -59,8 +69,42 @@ const EditProfile = ({ username, userEmail }) => {
   //     COPYAuth.verifyCurrentUserAttributeSubmit("email", fields.code);
   //     };
   // console.log(Username);
-  const usernameSubmit = (event) => {
+  const usernameSubmit = async (event) => {
     event.preventDefault();
+    saveChanges();
+    console.log("HOORAY HOORAY");
+    let user = await Auth.currentAuthenticatedUser();
+    if (
+      user?.signInUserSession?.idToken?.payload?.identities?.[0]
+        ?.providerType === "Google" ||
+      user?.signInUserSession?.idToken?.payload?.identities?.[0]
+        ?.providerType === "Facebook"
+    ) {
+      const payload = {
+        username,
+        preferred_username,
+      };
+      await API.graphql(
+        graphqlOperation(mutations.update_user, {
+          input: payload,
+        })
+      );
+      window.location.reload();
+    } else {
+      await Auth.updateUserAttributes(user, {
+        preferred_username: preferred_username,
+      });
+      const payload = {
+        username,
+        preferred_username,
+      };
+      await API.graphql(
+        graphqlOperation(mutations.update_user, {
+          input: payload,
+        })
+      );
+      window.location.reload();
+    }
   };
   const emailCLick = () => {
     setEmailbutton(true);
@@ -73,7 +117,7 @@ const EditProfile = ({ username, userEmail }) => {
       // console.log(Submit);
     } else {
       setSubmit(true);
-      console.log(Submit);
+      //console.log(Submit);
     }
   };
   return (
@@ -91,7 +135,7 @@ const EditProfile = ({ username, userEmail }) => {
       <form
         className="edit-profile-section"
         action="/"
-        id="register"
+        id="update-profile-info"
         onSubmit={usernameSubmit}
       >
         <div className="edit-profile-container">
@@ -99,19 +143,19 @@ const EditProfile = ({ username, userEmail }) => {
             <div className="edit-profile-overview-container header-5">
               Overview
               {Submit ? (
-                <p
-                  className="header-5 edit-profile-overview"
-                  style={{ float: "left", width: "415" }}
+                <button
+                  type="submit"
+                  value="Submit"
+                  form="update-profile-info"
+                  className="Save-changes-edit-profile"
                 >
-                  <span
-                    className="Save-changes-edit-profile"
-                    type="submit"
-                    value="Submit"
-                    onClick={saveChanges}
+                  <p
+                    className="header-5 edit-profile-overview"
+                    style={{ float: "left", width: "415" }}
                   >
                     Save changes
-                  </span>
-                </p>
+                  </p>
+                </button>
               ) : (
                 <p
                   className="header-5 edit-profile-overview"
@@ -135,22 +179,20 @@ const EditProfile = ({ username, userEmail }) => {
             <div className=" edit-profile-input-container">
               <div className="header-8 username-box">Username</div>
               <div className="username-box-container">
-                {Submit ? (
-                  <InputOne
-                    id="third_slot"
-                    type="text"
-                    placeholder="Username"
-                    is_required={true}
-                  ></InputOne>
-                ) : (
-                  <InputOne
-                    id="third_slot"
-                    type="text"
-                    placeholder="Username"
-                    is_required={true}
-                    is_disabled={true}
-                  ></InputOne>
-                )}
+                <InputOne
+                  id="third_slot"
+                  type="text"
+                  value={
+                    preferred_username ||
+                    (hide_original_username ? "" : username)
+                  }
+                  onChange={(event) => {
+                    setPreferredUsername(event.target.value);
+                    setHideOriginalUsername(true);
+                  }}
+                  is_required={true}
+                  is_disabled={Submit ? false : true}
+                ></InputOne>
               </div>
             </div>
             <div className="edit-profile-input-container">

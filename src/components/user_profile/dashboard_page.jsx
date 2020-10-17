@@ -14,16 +14,7 @@ import UserCrews from "./user_crews";
 
 import { getCrewsByUsername, getCrewObject } from "../../utils/crew";
 
-import Auth from "../../apis/UserPool";
-import { determinePreferredUsername } from "../../utils/register";
-import * as mutations from "../../graphql/mutations";
-import { API, graphqlOperation } from "aws-amplify";
-import awsmobile from "../../apis/AppSync";
-import Amplify from "aws-amplify";
-
 import "./profile_styles.scss";
-
-Amplify.configure(awsmobile); // Configuring AppSync API
 
 const DashboardPage = ({
   width,
@@ -49,9 +40,6 @@ const DashboardPage = ({
   const [sliderCalcFirstRun, setSliderCalcFirstRun] = useState(false);
 
   const sliderContainerRef = useRef(null);
-
-  const [preferred_username, setPreferredUsername] = useState("");
-  const [hide_original_username, setHideOriginalUsername] = useState(false);
 
   /**
    * Closes the Create Crew Modal and updates the user data if needed.
@@ -258,51 +246,6 @@ const DashboardPage = ({
       }
   });
 
-  useEffect(() => {
-    Auth.currentAuthenticatedUser({ bypassCache: true }).then((user) => {
-      determinePreferredUsername(user).then((preferred_username) => {
-        setPreferredUsername(preferred_username);
-        if (preferred_username) setHideOriginalUsername(true);
-      });
-    });
-  }, []);
-
-  const changePreferredUsername = async (event) => {
-    event.preventDefault();
-    let user = await Auth.currentAuthenticatedUser();
-    if (
-      user?.signInUserSession?.idToken?.payload?.identities?.[0]
-        ?.providerType === "Google" ||
-      user?.signInUserSession?.idToken?.payload?.identities?.[0]
-        ?.providerType === "Facebook"
-    ) {
-      const payload = {
-        username,
-        preferred_username,
-      };
-      await API.graphql(
-        graphqlOperation(mutations.update_user, {
-          input: payload,
-        })
-      );
-      window.location.reload();
-    } else {
-      await Auth.updateUserAttributes(user, {
-        preferred_username: preferred_username,
-      });
-      const payload = {
-        username,
-        preferred_username,
-      };
-      await API.graphql(
-        graphqlOperation(mutations.update_user, {
-          input: payload,
-        })
-      );
-      window.location.reload();
-    }
-  };
-
   return (
     <Col size={7} style={{ width: "90%" }}>
       <Row className="header-section">
@@ -317,25 +260,6 @@ const DashboardPage = ({
       </Row>
       <Row className="profile-section">
         <Col className="profile-column" size={1}>
-          <form onSubmit={changePreferredUsername} id="preferred-username">
-            <div>
-              <input
-                type="text"
-                value={
-                  preferred_username || (hide_original_username ? "" : username)
-                }
-                onChange={(event) => {
-                  setPreferredUsername(event.target.value);
-                  setHideOriginalUsername(true);
-                }}
-              />
-            </div>
-            <div>
-              <button type="submit" form="preferred-username" value="Submit">
-                Change Username
-              </button>
-            </div>
-          </form>
           {upcoming_concerts.length > 0 ? (
             <div>
               <Row>
