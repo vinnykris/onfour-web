@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 
 import { Grid, Row, Col } from "../grid";
 import { useWindowDimensions } from "../custom_hooks";
-import FlexibleGrid from "../flexible_grid/flexible_grid";
 
 import EditProfile from "./edit_profile_page";
 import DashboardPage from "./dashboard_page";

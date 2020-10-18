@@ -1,14 +1,7 @@
-// Main Imports
-import history from "../../history";
-
 // React
-import React, { useState, useEffect } from "react";
-import PasswordStrengthBar from "react-password-strength-bar";
-import ReactTooltip from "react-tooltip";
+import React, { useState } from "react";
 
 // Components
-import { Grid, Row, Col } from "../grid";
-import ScaleLoader from "react-spinners/ScaleLoader";
 import { useWindowDimensions } from "../custom_hooks";
 
 // APIs/Amplify
@@ -19,6 +12,7 @@ import { API, graphqlOperation } from "aws-amplify";
 
 // graphql
 import * as mutations from "../../graphql/mutations";
+import * as queries from "../../graphql/queries";
 
 //Styles
 import "./edit_profile_page_styles.scss";
@@ -38,72 +32,70 @@ const EditProfile = ({
   setPreferredUsername,
   setHideOriginalUsername,
 }) => {
-  const [email, setemail] = useState(userEmail);
-  const [Username, setUsername] = useState(username);
-
-  const { height, width } = useWindowDimensions(); // Dimensions of screen
-  const [Error, setError] = useState("");
+  const [error, setError] = useState("");
   const [Submit, setSubmit] = useState(false);
   const [Emailbutton, setEmailbutton] = useState(false);
+  const [fixedUsername, setFixedUsername] = useState(
+    preferred_username || (hide_original_username ? "" : username)
+  );
   var Firstchar = username.toUpperCase().charAt(0);
-  //console.log(Firstchar);
-  // Auth.currentAuthenticatedUser({})
-  // .then((user) => {
-  //   setUserEmail(user.attributes.email);
-  //   setAuth(true);
-  //   setUsername(user.username);
-  // //   setProfileURL("");
-  // })
-  // .catch((err) => setAuth(false));
-  // Function that takes the user's entered information and passes it into
-  // the AppSync API to be stored in our registered users database table
 
-  //on submit:
-  // COPYAuth.verifyCurrentUserAttributeSubmit("email", fields.code);
-
-  // const user = await Auth.currentAuthenticatedUser();
-  // Auth.updateUserAttributes(user,{email:attributes.email});
-  // const registerSubmit = (event) => {
-  //     event.preventDefault();
-  //     setProcessing(true);
-  //     COPYAuth.verifyCurrentUserAttributeSubmit("email", fields.code);
-  //     };
-  // console.log(Username);
   const usernameSubmit = async (event) => {
     event.preventDefault();
-    saveChanges();
-    console.log("HOORAY HOORAY");
-    let user = await Auth.currentAuthenticatedUser();
+
+    const user_by_username = await API.graphql(
+      graphqlOperation(queries.get_user_data, {
+        input: preferred_username,
+      })
+    );
+
+    const user_by_preferred_username = await API.graphql(
+      graphqlOperation(queries.get_user_by_preferred_username, {
+        input: preferred_username,
+      })
+    );
+
     if (
-      user?.signInUserSession?.idToken?.payload?.identities?.[0]
-        ?.providerType === "Google" ||
-      user?.signInUserSession?.idToken?.payload?.identities?.[0]
-        ?.providerType === "Facebook"
+      user_by_username.data.getCreateOnfourRegistration ||
+      user_by_preferred_username.data.listUsersByPreferredUsername.items
+        .length > 0
     ) {
-      const payload = {
-        username,
-        preferred_username,
-      };
-      await API.graphql(
-        graphqlOperation(mutations.update_user, {
-          input: payload,
-        })
-      );
-      window.location.reload();
+      setError("This username is already taken.");
     } else {
-      await Auth.updateUserAttributes(user, {
-        preferred_username: preferred_username,
-      });
-      const payload = {
-        username,
-        preferred_username,
-      };
-      await API.graphql(
-        graphqlOperation(mutations.update_user, {
-          input: payload,
-        })
-      );
-      window.location.reload();
+      saveChanges();
+      setError("");
+      let user = await Auth.currentAuthenticatedUser();
+      if (
+        user?.signInUserSession?.idToken?.payload?.identities?.[0]
+          ?.providerType === "Google" ||
+        user?.signInUserSession?.idToken?.payload?.identities?.[0]
+          ?.providerType === "Facebook"
+      ) {
+        const payload = {
+          username,
+          preferred_username,
+        };
+        await API.graphql(
+          graphqlOperation(mutations.update_user, {
+            input: payload,
+          })
+        );
+        window.location.reload();
+      } else {
+        await Auth.updateUserAttributes(user, {
+          preferred_username: preferred_username,
+        });
+        const payload = {
+          username,
+          preferred_username,
+        };
+        await API.graphql(
+          graphqlOperation(mutations.update_user, {
+            input: payload,
+          })
+        );
+        window.location.reload();
+      }
     }
   };
   const emailCLick = () => {
@@ -129,7 +121,7 @@ const EditProfile = ({
             className="header-4 username-edit-profile"
             data-letters={Firstchar}
           ></p>
-          <div className="header-4 username">{username}</div>
+          <div className="header-4 username">{fixedUsername}</div>
         </div>
       </div>
       <form
@@ -149,12 +141,7 @@ const EditProfile = ({
                   form="update-profile-info"
                   className="Save-changes-edit-profile"
                 >
-                  <p
-                    className="header-5 edit-profile-overview"
-                    style={{ float: "left", width: "415" }}
-                  >
-                    Save changes
-                  </p>
+                  Save changes
                 </button>
               ) : (
                 <p
@@ -176,7 +163,7 @@ const EditProfile = ({
             </div>
             <br />
             <br />
-            <div className=" edit-profile-input-container">
+            <div className="edit-profile-input-container">
               <div className="header-8 username-box">Username</div>
               <div className="username-box-container">
                 <InputOne
@@ -192,9 +179,12 @@ const EditProfile = ({
                   }}
                   is_required={true}
                   is_disabled={Submit ? false : true}
+                  text_color={Submit ? "white" : "rgba(255, 255, 255, 0.28)"}
                 ></InputOne>
+                <div className="email-warning">{error}</div>
               </div>
             </div>
+
             <div className="edit-profile-input-container">
               <div
                 className="header-8 input-email-edit-profile"
@@ -213,7 +203,7 @@ const EditProfile = ({
                 </div>
                 {Submit ? (
                   <div className="email-warning">
-                    Sorry, You cannot change the Email Rhythm
+                    You cannot change your email address.
                   </div>
                 ) : (
                   <div></div>
