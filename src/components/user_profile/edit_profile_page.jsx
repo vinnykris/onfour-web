@@ -102,14 +102,11 @@ const EditProfile = ({
     setEmailbutton(true);
   };
   const saveChanges = () => {
-    //  setSubmit(!submit)
     if (Submit == true) {
       setSubmit(false);
       setEmailbutton(false);
-      // console.log(Submit);
     } else {
       setSubmit(true);
-      //console.log(Submit);
     }
   };
   return (

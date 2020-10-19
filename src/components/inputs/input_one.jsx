@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import "./input_one_styles.scss";
 import eye from "../../images/icons/eye.png";
 import { useWindowDimensions } from "../custom_hooks";
-import { text } from "body-parser";
 
 const InputOne = ({
   id,
