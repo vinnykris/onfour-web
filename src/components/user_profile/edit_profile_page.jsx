@@ -31,6 +31,7 @@ const EditProfile = ({
   hide_original_username,
   setPreferredUsername,
   setHideOriginalUsername,
+  width,
 }) => {
   const [error, setError] = useState("");
   const [Submit, setSubmit] = useState(false);
@@ -39,6 +40,8 @@ const EditProfile = ({
     preferred_username || (hide_original_username ? "" : username)
   );
   var Firstchar = username.toUpperCase().charAt(0);
+
+  const isMobile = width < 600;
 
   const usernameSubmit = async (event) => {
     event.preventDefault();
@@ -112,15 +115,17 @@ const EditProfile = ({
   return (
     <div className="edit-profile-page-content">
       <div className="header-5 Profile-edit-profile">Profile</div>
-      <div classname="user-initials-edit-profile">
-        <div className="edit-profile-page-contianer">
-          <p
-            className="header-4 username-edit-profile"
-            data-letters={Firstchar}
-          ></p>
-          <div className="header-4 username">{fixedUsername}</div>
+      {!isMobile && (
+        <div classname="user-initials-edit-profile">
+          <div className="edit-profile-page-contianer">
+            <p
+              className="header-4 username-edit-profile"
+              data-letters={Firstchar}
+            ></p>
+            <div className="header-4 username">{fixedUsername}</div>
+          </div>
         </div>
-      </div>
+      )}
       <form
         className="edit-profile-section"
         action="/"
@@ -178,7 +183,15 @@ const EditProfile = ({
                   is_disabled={Submit ? false : true}
                   text_color={Submit ? "white" : "rgba(255, 255, 255, 0.28)"}
                 ></InputOne>
-                <div className="email-warning">{error}</div>
+                <div
+                  className={
+                    isMobile
+                      ? "email-username-warning-mobile"
+                      : "username-warning"
+                  }
+                >
+                  {error}
+                </div>
               </div>
             </div>
 
@@ -198,14 +211,18 @@ const EditProfile = ({
                     is_disabled={true}
                   ></InputOne>
                 </div>
-                {Submit ? (
-                  <div className="email-warning">
-                    You cannot change your email address.
-                  </div>
-                ) : (
-                  <div></div>
-                )}
               </div>
+              {Submit ? (
+                <div
+                  className={
+                    isMobile ? "email-username-warning-mobile" : "email-warning"
+                  }
+                >
+                  You cannot change your email address.
+                </div>
+              ) : (
+                <div></div>
+              )}
             </div>
             <div className="reset-passwor">
               <p className="forgot-footer">

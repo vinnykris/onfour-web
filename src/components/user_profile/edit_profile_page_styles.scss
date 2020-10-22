@@ -33,7 +33,8 @@
   margin-left: 200px;
   @include respond-to("small") {
     width: 100%;
-    margin: auto 30px;
+    margin: 20px 23px;
+    // margin: auto 30px;
   }
 }
 .edit-profile-sub-container {
@@ -112,6 +113,10 @@ p.username-edit-profile {
   border: none !important;
   outline: none !important;
   padding-top: 4px;
+  @include respond-to("small") {
+    font-size: 14px;
+    margin-left: 0px;
+  }
 }
 .edit-profile-overview-container {
   display: flex;
@@ -147,17 +152,34 @@ p.username-edit-profile {
   margin-bottom: 6px;
 }
 .email-container-box {
-  width: 40%;
+  width: 100%;
   min-width: 170px;
+  max-width: 500px;
 }
 .username-box-container {
-  width: 40%;
+  width: 100%;
   min-width: 170px;
+  max-width: 500px;
 }
 .email-warning {
   font-weight: inherit;
   color: #db0000;
-  margin-left: 20px;
-  align-items: center;
+  text-align: left;
   display: flex;
+}
+
+.username-warning {
+  font-weight: inherit;
+  color: #db0000;
+  text-align: left;
+  display: flex;
+}
+
+.email-username-warning-mobile {
+  font-weight: inherit;
+  color: #db0000;
+  text-align: left;
+  display: flex;
+  font-size: small;
+  margin-top: 5px;
 }

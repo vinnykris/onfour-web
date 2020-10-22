@@ -41,7 +41,7 @@ const Profile = (props) => {
   const [is_loaded, setIsLoaded] = useState(false);
   const [auth, setAuth] = useState(false);
   const [username, setUsername] = useState("");
-  const [currentPage, setCurrentPage] = useState("EditProfile");
+  const [currentPage, setCurrentPage] = useState("dashboard");
   const history = useHistory();
   const [userEmail, setUserEmail] = useState("");
   const [preferred_username, setPreferredUsername] = useState("");
@@ -168,7 +168,6 @@ const Profile = (props) => {
                     className="profile-dashboard-icon initial-highlight"
                     id="dashboard-icon"
                     onClick={goToDashboard}
-                    style={{ opacity: 0.5 }}
                   ></img>
                 </Row>
                 <Row>
@@ -177,7 +176,6 @@ const Profile = (props) => {
                     className="profile-dashboard-icon initial-highlight"
                     id="ticket-icon"
                     onClick={goToTicket}
-                    style={{ opacity: 0.5 }}
                   ></img>
                 </Row>
                 <Row>
@@ -186,7 +184,6 @@ const Profile = (props) => {
                     className="profile-dashboard-icon initial-highlight"
                     id="profile-icon"
                     onClick={editprofilepage}
-                    style={{ opacity: 1 }}
                   ></img>
                 </Row>
               </div>
@@ -213,6 +210,7 @@ const Profile = (props) => {
                     hide_original_username={hide_original_username}
                     setPreferredUsername={setPreferredUsername}
                     setHideOriginalUsername={setHideOriginalUsername}
+                    width={width}
                   ></EditProfile>
                 );
               } else {

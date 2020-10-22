@@ -16,7 +16,7 @@ Amplify.configure({
   },
   oauth: {
     domain: "onfournewpool.auth.us-east-1.amazoncognito.com",
-    redirectSignIn: "http://localhost:3000",
+    redirectSignIn: "http://localhost:3000/profile",
     redirectSignOut: "http://localhost:3000",
     responseType: "code",
     scope: ["email", "profile", "openid"],
