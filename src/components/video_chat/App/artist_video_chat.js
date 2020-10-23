@@ -25,6 +25,7 @@ export default function VideoChatApp({
   artistView,
   colNum,
   stream_vol_adjust,
+  video_chat_variables,
 }) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
@@ -64,7 +65,7 @@ export default function VideoChatApp({
   const startJoiningPublicCall = useCallback(async (url) => {
     // const newToken = await getToken(user_name, url.split("/").pop());
     const newCallObject = DailyIframe.createCallObject({
-      userName: user_name
+      userName: user_name,
     });
     setRoomUrl(url.split("/").pop());
     setCallObject(newCallObject);
@@ -225,17 +226,15 @@ export default function VideoChatApp({
   };
 
   const activateVideoRoulette = () => {
-    
-      if (start_auto_roulette) {
-        setStartAutoRoulette(false);
-        // document.getElementById("roulette-button").style.background = "transparent";
-        // document.getElementById("roulette-button").style.color = "#E465A2";
-      } else {
-        setStartAutoRoulette(true);
-        // document.getElementById("roulette-button").style.background = "#E465A2";
-        // document.getElementById("roulette-button").style.color = "rgba(255, 255, 255, 0.87)";
-      }
-    
+    if (start_auto_roulette) {
+      setStartAutoRoulette(false);
+      // document.getElementById("roulette-button").style.background = "transparent";
+      // document.getElementById("roulette-button").style.color = "#E465A2";
+    } else {
+      setStartAutoRoulette(true);
+      // document.getElementById("roulette-button").style.background = "#E465A2";
+      // document.getElementById("roulette-button").style.color = "rgba(255, 255, 255, 0.87)";
+    }
   };
 
   useEffect(() => {
@@ -250,8 +249,7 @@ export default function VideoChatApp({
         }, 8000);
       }
     }
-  })
-
+  });
 
   return (
     <div className={(artistView ? "artist-" : "") + "app"} id="video-chat-main">
@@ -260,12 +258,10 @@ export default function VideoChatApp({
           Video Chat
         </div>
         <label class="auto-roulette-switch">
-          <input type="checkbox" onChange={activateVideoRoulette}/>
+          <input type="checkbox" onChange={activateVideoRoulette} />
           <span class="auto-roulette-slider round"></span>
         </label>
-        <div className="auto-roulette-text header-8">
-          auto-rotate rooms
-        </div>
+        <div className="auto-roulette-text header-8">auto-rotate rooms</div>
         {/* <button
           className="auto-roulette-button"
           id="roulette-button"
@@ -295,6 +291,7 @@ export default function VideoChatApp({
             colNum={colNum}
             mute_all={mute_all}
             volume={volume}
+            video_chat_variables={video_chat_variables}
           />
           <Tray
             disabled={!enableCallButtons}
@@ -309,13 +306,13 @@ export default function VideoChatApp({
         </CallObjectContext.Provider>
       ) : (
         <div className="video-chat-prompt-container">
-          {start_auto_roulette? (
+          {start_auto_roulette ? (
             <div className="enter-video-chat-prompt">
               <div className="public-video-notice message-text">
                 auto-rotating rooms....
               </div>
             </div>
-          ): (
+          ) : (
             <div className="enter-video-chat-prompt">
               <StartButton
                 create_room={false}
@@ -326,9 +323,8 @@ export default function VideoChatApp({
                 artistView={artistView}
               />
               <p className="create-room-error">{error_msg}</p>
-          </div>
+            </div>
           )}
-          
         </div>
       )}
     </div>
