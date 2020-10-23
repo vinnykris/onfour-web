@@ -36,7 +36,7 @@ import PayTicketBox from "../payment/pay_ticket_box";
 import { createUpcomingObject } from "../util";
 
 import AccessModal from "./access_modal";
-import PaymentModal from "./payment_modal";
+import TicketModal from "./ticket_modal";
 // Styles Imports
 import "./stream_styles.scss";
 import "rodal/lib/rodal.css";
@@ -438,14 +438,16 @@ const StreamPage = ({ is_soundcheck }) => {
                 onClose={closeAccessModal}
                 rsvp_list={concert_info.rsvp_list}
               />
-              <PaymentModal 
+              {show_payment_modal ? (<TicketModal 
                 visible={show_payment_modal} 
                 onClose={() => setShowPaymentModal(false)} 
                 concert_info={concert_info} 
                 auth={auth} 
+                username={username}
                 user_email={user_email} 
                 artist_name={artist_name}
-              />
+              />) : (null)}
+              
               <Rodal
                 visible={open_modal}
                 onClose={closeModal}
