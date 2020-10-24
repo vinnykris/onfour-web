@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import "./input_one_styles.scss";
+import "./input_three_styles.scss";
 import eye from "../../images/icons/eye.png";
 import { useWindowDimensions } from "../custom_hooks";
 
@@ -20,9 +20,10 @@ const InputOne = ({
   return (
     <div>
       {is_password ? (
-        <div className="input-one-container">
+        <div className="input-three-container">
           {width > 600 ? (
             <div>
+              <span className="fixed-label segmented-button-text">{placeholder}</span>
               <input
                 type={hidden ? "password" : "text"}
                 name={name}
@@ -30,18 +31,18 @@ const InputOne = ({
                 required={is_required}
                 value={value}
                 onChange={onChange}
-                className="input-one body-1"
+                className="input-three body-1"
                 disabled={is_disabled}
               />
               <img
                 src={eye}
-                className="view-password"
+                className="view-password-three"
                 onClick={() => setHidden(!hidden)}
               />
-              <span className="floating-label-one body-1">{placeholder}</span>
             </div>
           ) : (
             <div>
+              <span className="fixed-label mobile-button-text">{placeholder}</span>
               <input
                 type={hidden ? "password" : "text"}
                 name={name}
@@ -49,22 +50,22 @@ const InputOne = ({
                 required={is_required}
                 value={value}
                 onChange={onChange}
-                className="input-one body-3"
+                className="input-three body-3"
                 disabled={is_disabled}
               />
               <img
                 src={eye}
-                className="view-password"
+                className="view-password-three"
                 onClick={() => setHidden(!hidden)}
               />
-              <span className="floating-label-one body-3">{placeholder}</span>
             </div>
           )}
         </div>
       ) : (
-        <div className="input-one-container">
+        <div className="input-three-container">
           {width > 600 ? (
             <div>
+              <span className="fixed-label segmented-button-text">{placeholder}</span>
               <input
                 type={type}
                 name={name}
@@ -73,12 +74,12 @@ const InputOne = ({
                 value={value}
                 onChange={onChange}
                 disabled={is_disabled}
-                className="input-one body-1"
+                className="input-three body-1"
               />
-              <span className="floating-label-one body-1">{placeholder}</span>
             </div>
           ) : (
             <div>
+              <span className="fixed-label mobile-button-text">{placeholder}</span>
               <input
                 type={type}
                 name={name}
@@ -87,9 +88,8 @@ const InputOne = ({
                 value={value}
                 onChange={onChange}
                 disabled={is_disabled}
-                className="input-one body-3"
+                className="input-three body-3"
               />
-              <span className="floating-label-one body-3">{placeholder}</span>
             </div>
           )}
         </div>

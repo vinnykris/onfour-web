@@ -1,0 +1,77 @@
+@import "../../styles.scss";
+
+.register-input-container {
+  margin-bottom: 19px;
+  @include respond-to("small") {
+    margin-bottom: 17px;
+  }
+}
+
+.input-three-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.password-input-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.view-password-three {
+  position: absolute;
+  right: 14px;
+  height: 15px;
+  width: 22px;
+  top: 43px;
+  cursor: pointer;
+  &:hover {
+    -webkit-filter: brightness(0.5);
+    filter: brightness(0.5);
+  }
+  @include respond-to("small") {
+    top: 38px;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px black inset !important; /* Change the color to your own background color */
+  -webkit-text-fill-color: white;
+}
+
+.input-three {
+  width: 100%;
+  min-height: 56px;
+  background:#07070F;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  caret-color: $primary-color;
+  &:focus {
+    border: 2px solid $primary-color;
+  }
+  @include respond-to("small") {
+    min-height: 45px;
+    padding-left: 18px;
+  }
+}
+
+.input-three[type="email"]:not([value=""]):not(:valid) {
+  border: 2px solid $error-color;
+  caret-color: $error-color;
+}
+
+.fixed-label {
+  float: left;
+  color: $on-surface-high;
+  padding-bottom: 5px;
+  padding-left: 2px;
+}
