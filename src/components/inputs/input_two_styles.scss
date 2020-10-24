@@ -1,41 +1,42 @@
 @import "../../styles.scss";
 
-.input-one:focus ~ .floating-label-one,
-.input-one:not(:focus):valid ~ .floating-label-one,
-.input-one[type="email"]:not([value=""]) ~ .floating-label-one {
-  top: 10px;
-  bottom: 10px;
-  left: 20px;
+.input-two:focus ~ .floating-label-two,
+.input-two:not(:focus):valid ~ .floating-label-two,
+.input-two[type="email"]:not([value=""]) ~ .floating-label-two {
+  top: -4.5px;
+  left: 15px;
   opacity: 1;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
   font-size: 9px;
-  line-height: 11px;
+  line-height: 11px !important;
   letter-spacing: 0.045em;
+  background: #07070F;
+  padding: 0px 4px;
   color: $primary-color !important;
   @include respond-to("small") {
-    top: 8px;
+    top: -4px;
     font-size: 8px;
-    line-height: 10px;
-    left: 18px;
+    line-height: 10px !important;
+    left: 13px;
   }
 }
 
-.input-one:focus:valid ~ .floating-label-one {
+.input-two:focus:valid ~ .floating-label-two {
   color: $primary-color;
 }
 
-.input-one:not(:valid) ~ .floating-label-one {
+.input-two:not(:valid) ~ .floating-label-two {
   color: $on-surface-disable;
 }
 
-.input-one[type="email"]:not([value=""]):not(:valid) {
-  border-bottom: 1px solid $error-color;
+.input-two[type="email"]:not([value=""]):not(:valid) {
+  border: 2px solid $error-color;
   caret-color: $error-color;
 }
 
-.input-one[type="email"]:not([value=""]):not(:valid) ~ .floating-label-one {
+.input-two[type="email"]:not([value=""]):not(:valid) ~ .floating-label-two {
   color: $error-color !important;
 }
 
@@ -46,7 +47,7 @@
   }
 }
 
-.input-one-container {
+.input-two-container {
   position: relative;
   width: 100%;
   height: 100%;
@@ -87,23 +88,18 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: white;
 }
 
-.input-one {
+.input-two {
   width: 100%;
   min-height: 56px;
-  padding-top: 20px;
-  background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.14),
-      rgba(255, 255, 255, 0.14)
-    ),
-    #07070f !important;
-  // background-color: #07070f !important;
-  border-radius: 0px;
-  border: none;
+  background:#07070F;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   caret-color: $primary-color;
   &:focus {
-    border: none;
-    border-bottom: 1px solid $primary-color;
+    border: 2px solid $primary-color;
+  }
+  &:focus::placeholder {
+    color: transparent;
   }
   @include respond-to("small") {
     min-height: 45px;
@@ -111,11 +107,12 @@ select:-webkit-autofill:focus {
   }
 }
 
-.floating-label-one {
+.floating-label-two {
   position: absolute;
   pointer-events: none;
   left: 20px;
   top: 18px;
+  opacity: 0;
   transition: 0.2s ease all;
   color: $on-surface-disable;
   @include respond-to("small") {
