@@ -3,10 +3,10 @@
 
 .register-page-content {
   background-color: black;
-  min-height: 65vh;
+  // min-height: 65vh;
   width: 100%;
   margin-top: -1px;
-  height: calc(100vh - 48px);
+  min-height: calc(100vh - 48px);
   @include respond-to("small") {
     height: calc(100vh - 61px);
     max-height: calc(100vh - 61px);
