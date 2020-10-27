@@ -5,6 +5,9 @@ import React, { useEffect, useState, useRef } from "react";
 import ReactPlayer from "react-player";
 import MoonLoader from "react-spinners/MoonLoader";
 
+// Icon Imports
+import cheer_icon from "../../images/icons/stream_icons/cheer_icon.png"
+
 // VideoJS Imports
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
@@ -40,6 +43,7 @@ function VideoPlayer({
   is_live,
   stream_volume,
   have_upcoming_concert,
+  is_artist_in_the_house,
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   var player = null;
@@ -340,15 +344,27 @@ function VideoPlayer({
             //   <video ref={player_ref} className="video-js" />
             // </div>
             // <video id="video-player" playsInline controls></video>
-            <video
-              id="video-player"
-              ref={video_el}
-              playsInline
-              autoPlay
-              controls
-              muted={false}
-              className="ivs-video"
-            />
+            <div className="video-player-inner-wrapper">
+              <video
+                id="video-player"
+                ref={video_el}
+                playsInline
+                autoPlay
+                controls
+                muted={false}
+                className="ivs-video"
+              >
+              </video>
+              {is_artist_in_the_house? (
+                <div className="artist-in-the-house-container">
+                  <div className="artist-in-the-house-inner-container">
+                    <img src={cheer_icon} className="artist-in-the-house-icon"></img>
+                    <div className="segmented-button-text artist-in-the-house-text">The artist is viewing your room!</div>
+                  </div>
+                </div>
+              ) : null
+              }
+            </div>
           ) : (
             // <video id="video-player" playsinline controls autoplay></video>
             // <div class="video-container">

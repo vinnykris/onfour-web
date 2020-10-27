@@ -41,6 +41,7 @@ export default function VideoChatApp({
   stream_vol_adjust,
   stream_volume_value,
   video_chat_variables,
+  setArtistInTheHouse,
 }) {
   const [appState, setAppState] = useState(STATE_IDLE);
   const [roomUrl, setRoomUrl] = useState(null);
@@ -564,6 +565,7 @@ export default function VideoChatApp({
             mute_all={mute_all}
             volume={volume}
             video_chat_variables={video_chat_variables}
+            setArtistInTheHouse={setArtistInTheHouse}
           />
           <Tray
             disabled={!enableCallButtons}
