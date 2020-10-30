@@ -23,7 +23,6 @@ import features_background from "../../images/backgrounds/features_background.pn
 import ReactPlayer from "react-player";
 import StepCard from "./step_card";
 import FeatureCard from "./feature_card";
-import { didUserRSVP } from "../../utils/concert";
 
 //Amplify.configure(awsmobile);
 
