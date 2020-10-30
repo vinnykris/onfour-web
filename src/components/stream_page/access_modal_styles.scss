@@ -1,4 +1,4 @@
-@import "../../styles.scss";
+@import '../../styles.scss';
 
 .access-modal-main {
   display: flex;
@@ -73,4 +73,12 @@
 .open-ticket-modal-link {
   color: $primary-color !important;
   text-decoration: underline;
+}
+
+.failed-access-message-container {
+  margin-top: 5px;
+}
+
+.failed-access-message {
+  color: #be7884 !important;
 }
