@@ -30,7 +30,7 @@ import {
   containsNumber,
   containsSpecialCharacter,
 } from "../../utils/register";
-import InputOne from "../inputs/input_one";
+import InputOne from "../inputs/input_two";
 
 // Query Params
 import queryString from "query-string";

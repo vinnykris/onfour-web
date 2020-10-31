@@ -75,6 +75,7 @@ export const createUpcomingObject = (data, artist_data) => {
     twitter: artist_data.twitter,
     spotify: artist_data.spotify,
     soundcloud: artist_data.soundcloud,
+    merch: artist_data.soundcloud,
     location: data.location,
     suggested_price: data.suggested_price,
     minimum_price: data.minimum_price,
@@ -128,6 +129,7 @@ export const formatUpcomingShow = (data, width) => {
       twitter={data.twitter}
       spotify={data.spotify}
       soundcloud={data.soundcloud}
+      merch={data.merch}
       location={data.location}
       upcoming={true}
     />
@@ -167,6 +169,7 @@ export const formatMemory = (data, width) => {
       twitter={data.twitter}
       spotify={data.spotify}
       soundcloud={data.soundcloud}
+      merch={data.merch}
       location={data.location}
       upcoming={false}
     />

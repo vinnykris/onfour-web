@@ -58,7 +58,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // EmailJS Import
 import emailjs from "emailjs-com";
-import { service_id, template_id, user_id } from "../../apis/email_js";
+import {
+  service_id,
+  template_id,
+  rsvp_template_id,
+  user_id,
+} from "../../apis/email_js";
 
 // Google Calendar Import
 import ApiCalendar from "../google_calender/google_calendar_api";
@@ -306,6 +311,7 @@ const Concert = (props) => {
       setTotal(concert_info.price);
       concert_date = concert_info.date;
       concert_time = concert_info.time;
+      console.log(concert_info)
     }
   }, [concert_info]);
 
@@ -377,35 +383,58 @@ const Concert = (props) => {
     }
   };
 
+  // Sends email confirmation to users after they get their ticket to a show
+  const sendEmailConfirmation = (
+    username,
+    artist_name,
+    concert_id,
+    email_recipient,
+    date,
+    time
+  ) => {
+    const template_params = {
+      email_recipient: email_recipient,
+      reply_to: "onfour.box@gmail.com",
+      username: username,
+      artist_name: artist_name,
+      time: time,
+      date: date,
+      concert_id: concert_id,
+    };
+    setTimeout(() => {
+      emailjs.send(service_id, rsvp_template_id, template_params, user_id);
+    }, 1000);
+  };
+
   // Function called when user purchases/obtains ticket from modal
   // First adds ticket to user's profile in database
   // Then hides the modal and shows the ticket stub
   // Calls function that sends emails to invited users
   const addTicket = async (email) => {
     if (auth) {
-      // const user_data = await API.graphql(
-      //   graphqlOperation(queries.get_user_data, {
-      //     input: username,
-      //   })
-      // );
-      // const current_concert_data =
-      //   user_data.data.getCreateOnfourRegistration.concert;
-      // const user_name = user_data.data.getCreateOnfourRegistration.first;
-      // if (!current_concert_data || !isNaN(parseInt(current_concert_data))) {
-      //   var concert_data = {};
-      // } else {
-      //   var concert_data = JSON.parse(current_concert_data);
-      // }
-      // concert_data[concert_id] = true;
-      // const user_payload = {
-      //   username,
-      //   concert: JSON.stringify(concert_data),
-      // };
-      // API.graphql(
-      //   graphqlOperation(mutations.update_user, {
-      //     input: user_payload,
-      //   })
-      // );
+      const user_data = await API.graphql(
+        graphqlOperation(queries.get_user_data, {
+          input: username,
+        })
+      );
+      const current_concert_data =
+        user_data.data.getCreateOnfourRegistration.concert;
+      const user_name = user_data.data.getCreateOnfourRegistration.first;
+      if (!current_concert_data || !isNaN(parseInt(current_concert_data))) {
+        var concert_data = {};
+      } else {
+        var concert_data = JSON.parse(current_concert_data);
+      }
+      concert_data[concert_id] = true;
+      const user_payload = {
+        username,
+        concert: JSON.stringify(concert_data),
+      };
+      API.graphql(
+        graphqlOperation(mutations.update_user, {
+          input: user_payload,
+        })
+      );
     }
 
     const concert_rsvp_info = await getOneConcert(concert_id);
@@ -425,6 +454,28 @@ const Concert = (props) => {
     setShowStub(true);
     setHasTicket(true);
     setNumTickets(num_tickets + 1);
+
+    if (auth) {
+      sendEmailConfirmation(
+        username,
+        concert_info.artist_name,
+        concert_id,
+        email,
+        concert_info.formatted_date,
+        concert_info.formatted_time
+      );
+    } else {
+      console.log(email);
+      sendEmailConfirmation(
+        email,
+        concert_info.artist_name,
+        concert_id,
+        email,
+        concert_info.formatted_date,
+        concert_info.formatted_time
+      );
+    }
+
     //sendEmailInvites(user_name);
   };
 
@@ -516,6 +567,10 @@ const Concert = (props) => {
       });
   };
 
+  const goToVenue = () => {
+    history.push("/stream");
+  }
+
   return (
     <div className="concert-page">
       {width <= 600 ? (
@@ -604,14 +659,20 @@ const Concert = (props) => {
                         </span>
                       </div>
                     ) : null}
-                    {has_ticket ? (
+                    {/* {has_ticket ? (
                       <div className="tickets-indicator">
                         <span className="segmented-button-text num-tickets-text">
                           Enter your email on the stream page during the show to
                           enter.
                         </span>
                       </div>
-                    ) : null}
+                    ) : null} */}
+                      <button
+                      className="primary-button button-text full-width-button concert-enter-button"
+                      onClick={goToVenue}
+                    >
+                      {"VIEW STREAM"}
+                    </button>
                   </div>
                   {/* <button
                     className="primary-button button-text full-width-button"
@@ -640,15 +701,23 @@ const Concert = (props) => {
                 </Row>
                 <Row className="concert-details-spacing-mobile">
                   <text className="header-10 concert-suggestion-color-mobile">
-                    * Tune in to the concert on your desktop to enjoy video chat
-                    experience
+                    * Tune in to the concert on your desktop to enjoy the watch
+                    together experience. Click{" "}
+                    <a
+                      href="https://www.onfour.live/"
+                      target="_blank"
+                      className="header-10 about-page-link"
+                    >
+                      here
+                    </a>{" "}
+                    to learn more about the experience.
                   </text>
                 </Row>
                 <Row className="concert-details-spacing-mobile">
                   <Col className="no-stretch-column">
-                    <p className="body-3 concert-description-color-mobile">
+                    <pre className="body-3 concert-description-color-mobile">
                       {concert_info.description}
-                    </p>
+                    </pre>
                   </Col>
                 </Row>
                 <Row className="share-section-mobile">
@@ -830,6 +899,20 @@ const Concert = (props) => {
                         {concert_info.concert_name.toUpperCase()} */}
                       </h3>
                     </div>
+                    <div className="experience-blurb">
+                      <span className="subtitle-2 experience-blurb-text concert-suggestion-color-mobile">
+                        *Invite your friends to watch the show together, or
+                        watch with other fans! Click{" "}
+                        <a
+                          href="https://www.onfour.live/"
+                          target="_blank"
+                          className="subtitle-2 about-page-link"
+                        >
+                          here
+                        </a>{" "}
+                        to learn more about the experience.
+                      </span>
+                    </div>
                     <div>
                       <p className="body-1 artist-description-text">
                         {concert_info.description}
@@ -853,14 +936,22 @@ const Concert = (props) => {
                           </span>
                         </div>
                       ) : null}
-                      {has_ticket ? (
+                      {/* {has_ticket ? (
                         <div className="tickets-indicator">
                           <span className="segmented-button-text num-tickets-text">
                             Enter your email on the stream page during the show
                             to enter.
                           </span>
                         </div>
-                      ) : null}
+                      ) : null} */}
+                                            <button
+                      className="primary-button concert-enter-button"
+                      onClick={goToVenue}
+                    >
+                      <span className="button-text concert-button-text">
+                          View Stream
+                        </span>
+                    </button>
                     </div>
                     {/* {has_ticket && (
                       <Row>
@@ -911,6 +1002,7 @@ const Concert = (props) => {
                       youtube={concert_info.youtube}
                       facebook={concert_info.facebook}
                       twitter={concert_info.twitter}
+                      merch={concert_info.merch}
                     />
                   </div>
                 </div>

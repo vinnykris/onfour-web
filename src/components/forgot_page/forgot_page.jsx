@@ -9,7 +9,7 @@ import Auth from "../../apis/UserPool";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import InputOne from ".././inputs/input_one";
+import InputOne from ".././inputs/input_two";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useWindowDimensions } from "../custom_hooks";
 

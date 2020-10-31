@@ -71,6 +71,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [artist_spotify, setArtistSpotify] = useState("");
   const [artist_twitter, setArtistTwitter] = useState("");
   const [artist_youtube, setArtistYoutube] = useState("");
+  const [artist_merch, setArtistMerch] = useState("");
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
   const [concert_crews, setConcertCrews] = useState("");
@@ -93,6 +94,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [stream_volume, setStreamVolume] = useState(1.0);
   const [have_upcoming_concert, setHaveUpcomingConcert] = useState(true);
   const [preferred_username, setPreferredUsername] = useState("");
+  const [video_chat_variables, setVideoChatVariables] = useState();
 
   const history = useHistory(0);
 
@@ -164,7 +166,9 @@ const StreamPage = ({ is_soundcheck }) => {
   // Call stream page analtics
   useEffect(() => {
     getStartTime();
+    getTestingVariables();
   }, []);
+
   // Query upcoming show database
   const getStartTime = async () => {
     // Calling the API, using async and await is necessary
@@ -219,8 +223,19 @@ const StreamPage = ({ is_soundcheck }) => {
     setArtistSpotify(artist_info_list.spotify);
     setArtistTwitter(artist_info_list.twitter);
     setArtistYoutube(artist_info_list.youtube);
+    setArtistMerch(artist_info_list.merch);
   };
 
+  const getTestingVariables = async () => {
+    const info = await API.graphql(
+      graphqlOperation(queries.get_video_chat_variables, {
+        id: "ea08d153-09ce-48e7-b8c6-97473a6065aa",
+      })
+    );
+    const item = info.data.getVideochat_Testing;
+    setVideoChatVariables(item);
+  };
+  
   // DONATION SECTION
   // Opens link to paypal account for musician
   const donatePaypal = () => {
@@ -399,6 +414,10 @@ const StreamPage = ({ is_soundcheck }) => {
         .classList.remove("selected-tab");
     }
   };
+
+  // const openLyrics = () => {
+
+  // }
 
   // RENDERING SECTION
   return (
@@ -750,10 +769,42 @@ const StreamPage = ({ is_soundcheck }) => {
                                     </a>
                                   </li>
                                 ) : null}
+
+                                {artist_merch ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarMerch",
+                                        })
+                                      }
+                                      href={artist_merch}
+                                      className="fas fa-shopping-cart"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Merch Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
                               </ul>
                             </div>
                           </Col>
-                          <Col size={1} className="donate-button-column">
+                          {concert_id === "925d2552-7e18-4507-b293-89e4322be5fa" ? ( <div className="donate-button-column">
+                            <div className="stream-action-donate-container">
+                              
+                                <a href="https://onfour-media.s3.amazonaws.com/Hand+in+Hand+Texts+and+Translations.pdf" target="_blank"><span
+                                //content="DONATE"
+                                //onClick={openLyrics}
+                                disabled={!have_upcoming_concert}
+                                className="primary-button stream-lyrics-button segmented-button-text"
+                              >LYRICS</span></a>
+                              
+                            </div>
+                            </div>) : (null)}
+                         
+                          {/* <Col size={1} className="donate-button-column"> */}
+                            <div className="donate-button-column">
                             <div className="stream-action-donate-container">
                               <button
                                 //content="DONATE"
@@ -764,7 +815,18 @@ const StreamPage = ({ is_soundcheck }) => {
                                 DONATE
                               </button>
                             </div>
-                          </Col>
+                            </div>
+                            {/* <div className="stream-action-donate-container">
+                              <button
+                                //content="DONATE"
+                                onClick={donateModal}
+                                disabled={!have_upcoming_concert}
+                                className="primary-button stream-donate-button segmented-button-text"
+                              >
+                                DONATE
+                              </button>
+                            </div>
+                          </Col> */}
                         </Row>
                       </Col>
                     </Row>
@@ -785,6 +847,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           artist_name={artist_id}
                           stream_vol_adjust={setStreamVolume}
                           stream_volume_value={stream_volume}
+                          video_chat_variables={video_chat_variables}
                         ></VideoChat>
                       </Row>
                       <Row className="chat-row">

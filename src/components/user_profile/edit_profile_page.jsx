@@ -20,7 +20,7 @@ import "./edit_profile_page_styles.scss";
 import Editicon from "../../images/icons/edit_icon.png";
 import Edit from "../../images/icons/Edit.png";
 // Utils
-import InputOne from "../inputs/input_one";
+import InputOne from "../inputs/input_two";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 

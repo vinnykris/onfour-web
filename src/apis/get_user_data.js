@@ -117,12 +117,14 @@ export const fetchUserConcerts = async () => {
   const authenticated_user = await Auth.currentAuthenticatedUser();
   if (authenticated_user) {
     const username = await determineUsername(authenticated_user);
+    console.log(username);
     const user_data = await API.graphql(
       graphqlOperation(queries.get_user_data, {
         input: username,
       })
     );
     const concert_data = user_data.data.getCreateOnfourRegistration.concert;
+    // console.log(concert_data);
     if (concert_data && isNaN(parseInt(concert_data))) {
       const parsed_concerts = JSON.parse(concert_data);
       const concerts_ids = Object.keys(parsed_concerts);
@@ -163,8 +165,7 @@ export const getUpcomingPurchasedShows = async (width, username) => {
     let merged = { ...data, ...artist_info };
     return merged;
   };
-
-  if (user_concerts !== [] && !user_concerts.length) {
+  if (user_concerts !== [] && user_concerts[0].data.getConcert !== null) {
     for await (const data of user_concerts) {
       if (data.data.getConcert.is_future) {
         upcoming_concerts.push(
