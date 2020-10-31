@@ -129,6 +129,7 @@ const TicketModal = (props) => {
       );
     }
 
+    props.onTicketingComplete();
     //sendEmailInvites(user_name);
   };
 

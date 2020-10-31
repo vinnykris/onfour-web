@@ -49,6 +49,7 @@ import viewers_icon from '../../images/icons/stream_icons/viewers_icon.png'
 
 // Utils
 import { getCrewsByUsername } from '../../utils/crew'
+import { didUserRSVP } from "../../utils/concert"
 import { getArtistInfo } from '../../apis/get_concert_data'
 import { rsvp_template_id } from '../../apis/email_js'
 
@@ -218,6 +219,7 @@ const StreamPage = ({ is_soundcheck }) => {
       setRSVPList(info_list[0].rsvp_list)
       // setIsLive(info_list[0].is_live);
       setIsFree(info_list[0].general_price === 0)
+      setShowAccessModal(info_list[0].general_price > 0)
       setConcertCrews(JSON.parse(info_list[0].crew_list))
     } else {
       setHaveUpcomingConcert(false)
@@ -433,9 +435,12 @@ const StreamPage = ({ is_soundcheck }) => {
     setShowAccessModal(false)
   }
 
-  const checkForAccess = email => {
-    if (rsvp_list.includes(email)) {
+  // Checks if email parameter is in the RSVP list for the concert
+  const checkForAccess = async email => {
+    const user_has_ticket = await didUserRSVP(concert_id, email);
+    if (user_has_ticket) {
       setShowAccessModal(false)
+      setAccessError(0)
     } else {
       setAccessError(1)
       console.log('this email does not have access!')
@@ -470,6 +475,7 @@ const StreamPage = ({ is_soundcheck }) => {
                   username={username}
                   user_email={user_email}
                   artist_name={concert_info.artist_name}
+                  onTicketingComplete={() => setShowPaymentModal(false)}
                 />
               ) : null}
               {open_modal ? (
@@ -566,7 +572,7 @@ const StreamPage = ({ is_soundcheck }) => {
                 <Col size={6} id='stream_col' className='stream-col'>
                   <div className='stream-main' id='stream_main_section'>
                     <div className='stream-wrapper' id='video_player'>
-                      {is_free ||
+                      {/* {is_free ||
                       (purchasedTickets &&
                         purchasedTickets.indexOf(concert_id)) >= 0 ? (
                         <VideoPlayer
@@ -622,7 +628,25 @@ const StreamPage = ({ is_soundcheck }) => {
                             Get Ticket
                           </button>
                         </div>
-                      )}
+                      )} */}
+                       <VideoPlayer
+                          url={
+                            'https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8'
+                          }
+                          start_time={
+                            is_soundcheck
+                              ? '2020-06-03T19:00:00.000-04: 00'
+                              : show_start_time
+                          }
+                          artist_name={concert_info.artist_name}
+                          // concert_name={concert_name}
+                          auth={auth}
+                          username={username}
+                          concert_id={concert_id}
+                          is_live={is_live}
+                          stream_volume={stream_volume}
+                          have_upcoming_concert={have_upcoming_concert}
+                        />
                       <div className='toggle-chat' id='chat_toggle_button'>
                         <button
                           className='toggle-chat-button'
