@@ -53,11 +53,15 @@ const PayTicketBox = (props) => {
       const subtotal = parseFloat(props.total, 10).toFixed(2);
       console.log(subtotal);
       if (subtotal > 0) {
-        const concert_charge = parseFloat(subtotal, 10)
+        const concert_charge = parseFloat(subtotal, 10);
         //const service_charge = parseFloat(concert_charge * 0.15, 10);
         const service_charge = concert_charge * 0.15;
-        const processing_charge = ((concert_charge + service_charge + 0.3) / 0.97) - concert_charge - service_charge;
-        const total_charge = concert_charge + service_charge + processing_charge;
+        const processing_charge =
+          (concert_charge + service_charge + 0.3) / 0.97 -
+          concert_charge -
+          service_charge;
+        const total_charge =
+          concert_charge + service_charge + processing_charge;
         // setConcertFee(parseFloat(subtotal, 10).toFixed(2));
         // setServiceFee(parseFloat(subtotal, 10).toFixed(2) * 0.15);
         // setProcessingFee((subtotal * 0.03 + 0.3).toFixed(2));
@@ -230,7 +234,8 @@ const PayTicketBox = (props) => {
                         </div>
                       </div>
                     ) : null}
-                    {service_fee > 0 ? (<div className="ticket-item-container">
+                    {service_fee > 0 ? (
+                      <div className="ticket-item-container">
                         <div className="ticket-summary-field-2 align-left subtitle-1">
                           Service Fee
                         </div>
@@ -239,7 +244,8 @@ const PayTicketBox = (props) => {
                             ${service_fee}
                           </span>
                         </div>
-                      </div>) : (null)}
+                      </div>
+                    ) : null}
                     <div className="ticket-item-container">
                       <div className="ticket-summary-field-2 align-left subtitle-1">
                         Processing Fee
@@ -283,7 +289,8 @@ const PayTicketBox = (props) => {
                         </div>
                       </div>
                     ) : null}
-                    {service_fee > 0 ? (<div className="ticket-item-container">
+                    {service_fee > 0 ? (
+                      <div className="ticket-item-container">
                         <div className="ticket-summary-field-2 align-left subtitle-1">
                           Service Fee
                         </div>
@@ -292,7 +299,8 @@ const PayTicketBox = (props) => {
                             ${service_fee}
                           </span>
                         </div>
-                      </div>) : (null)}
+                      </div>
+                    ) : null}
                     <div className="ticket-item-container">
                       <div className="ticket-summary-field-2 align-left subtitle-1">
                         Processing Fee
@@ -421,7 +429,8 @@ const PayTicketBox = (props) => {
                         </div>
                       </div>
                     ) : null}
-                    {service_fee > 0 ? (<div className="ticket-item-container">
+                    {service_fee > 0 ? (
+                      <div className="ticket-item-container">
                         <div className="ticket-summary-field-2 align-left subtitle-2">
                           Service Fee
                         </div>
@@ -430,7 +439,8 @@ const PayTicketBox = (props) => {
                             ${service_fee}
                           </span>
                         </div>
-                      </div>) : (null)}
+                      </div>
+                    ) : null}
                     <div className="ticket-item-container">
                       <div className="ticket-summary-field-2 align-left subtitle-2">
                         Processing Fee
@@ -474,7 +484,8 @@ const PayTicketBox = (props) => {
                         </div>
                       </div>
                     ) : null}
-                    {service_fee > 0 ? (<div className="ticket-item-container">
+                    {service_fee > 0 ? (
+                      <div className="ticket-item-container">
                         <div className="ticket-summary-field-2 align-left subtitle-2">
                           Service Fee
                         </div>
@@ -483,7 +494,8 @@ const PayTicketBox = (props) => {
                             ${service_fee}
                           </span>
                         </div>
-                      </div>) : (null)}
+                      </div>
+                    ) : null}
                     <div className="ticket-item-container">
                       <div className="ticket-summary-field-2 align-left subtitle-2">
                         Processing Fee
