@@ -14,6 +14,7 @@ const InputOne = ({
   onChange,
   is_password,
   is_disabled,
+  text_color,
 }) => {
   const [hidden, setHidden] = useState("true");
   const { height, width } = useWindowDimensions(); // Dimensions of screen
@@ -32,6 +33,7 @@ const InputOne = ({
                 onChange={onChange}
                 className="input-one body-1"
                 disabled={is_disabled}
+                style={{ color: text_color ? text_color : "white" }}
               />
               <img
                 src={eye}
@@ -51,6 +53,7 @@ const InputOne = ({
                 onChange={onChange}
                 className="input-one body-3"
                 disabled={is_disabled}
+                style={{ color: text_color ? text_color : "white" }}
               />
               <img
                 src={eye}
@@ -74,6 +77,7 @@ const InputOne = ({
                 onChange={onChange}
                 disabled={is_disabled}
                 className="input-one body-1"
+                style={{ color: text_color ? text_color : "white" }}
               />
               <span className="floating-label-one body-1">{placeholder}</span>
             </div>
@@ -88,6 +92,7 @@ const InputOne = ({
                 onChange={onChange}
                 disabled={is_disabled}
                 className="input-one body-3"
+                style={{ color: text_color ? text_color : "white" }}
               />
               <span className="floating-label-one body-3">{placeholder}</span>
             </div>
