@@ -164,7 +164,7 @@ export const getUpcomingPurchasedShows = async (width, username) => {
     return merged;
   };
 
-  if (user_concerts !== [] && !user_concerts.length) {
+  if (user_concerts !== [] && user_concerts[0].data.getConcert !== null) {
     for await (const data of user_concerts) {
       if (data.data.getConcert.is_future) {
         upcoming_concerts.push(
