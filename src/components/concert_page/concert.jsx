@@ -309,7 +309,7 @@ const Concert = (props) => {
       setTotal(concert_info.price);
       concert_date = concert_info.date;
       concert_time = concert_info.time;
-      console.log(concert_info)
+      console.log(concert_info);
     }
   }, [concert_info]);
 
@@ -567,7 +567,7 @@ const Concert = (props) => {
 
   const goToVenue = () => {
     history.push("/stream");
-  }
+  };
 
   return (
     <div className="concert-page">
@@ -665,7 +665,7 @@ const Concert = (props) => {
                         </span>
                       </div>
                     ) : null} */}
-                      <button
+                    <button
                       className="primary-button button-text full-width-button concert-enter-button"
                       onClick={goToVenue}
                     >
@@ -942,14 +942,14 @@ const Concert = (props) => {
                           </span>
                         </div>
                       ) : null} */}
-                                            <button
-                      className="primary-button concert-enter-button"
-                      onClick={goToVenue}
-                    >
-                      <span className="button-text concert-button-text">
+                      <button
+                        className="primary-button concert-enter-button"
+                        onClick={goToVenue}
+                      >
+                        <span className="button-text concert-button-text">
                           View Stream
                         </span>
-                    </button>
+                      </button>
                     </div>
                     {/* {has_ticket && (
                       <Row>
