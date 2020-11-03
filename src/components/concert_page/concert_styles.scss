@@ -59,13 +59,20 @@
   height: 48px;
 }
 
+.concert-enter-button {
+  width: 100%;
+  height: 48px;
+  background: $secondary-color !important;
+  margin-top: 20px;
+}
+
 .tickets-indicator {
   margin-top: 13px;
   display: flex;
 }
 
 .num-tickets-text {
-  color: $primary-color;
+  color: $primary-color !important;
   margin: auto;
 }
 
@@ -237,7 +244,7 @@
 
 .titles {
   text-align: left;
-  padding-bottom: 25px;
+  //padding-bottom: 25px;
 }
 
 .artist-description-text {
@@ -324,6 +331,19 @@ hr.solid {
 .concert-main-info {
   max-width: 602px;
   margin-right: 60px;
+}
+
+.experience-blurb {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.experience-blurb-text {
+  text-align: left;
+}
+
+.about-page-link {
+  text-decoration: underline;
 }
 
 .concert-info-modal-header {
@@ -915,6 +935,7 @@ hr.break-modal {
 
 .concert-description-color-mobile {
   color: #e3e3e3 !important;
+  white-space: pre-line;
 }
 
 .concert-header-color-mobile {

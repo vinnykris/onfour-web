@@ -16,6 +16,7 @@ const SocialBar = ({
   youtube,
   facebook,
   twitter,
+  merch,
 }) => {
   return (
     <div className="social-media">
@@ -92,6 +93,20 @@ const SocialBar = ({
               rel="noopener noreferrer"
             >
               <span>Twitter Link</span>
+            </a>
+          </li>
+        ) : null}
+
+        {merch ? (
+          <li>
+            <a
+              onClick={() => Analytics.record({ name: "socialBarMerch" })}
+              href={merch}
+              className="fas fa-shopping-cart"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Merch Link</span>
             </a>
           </li>
         ) : null}
