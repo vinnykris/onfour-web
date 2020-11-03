@@ -22,20 +22,25 @@ const PayTicketBox = (props) => {
   const [suggested_price, setSuggestedPrice] = useState(props.suggested_price);
   const [minimum_price, setMinimumPrice] = useState(props.minimum_price);
   const [concert_fee, setConcertFee] = useState(0.0);
+  const [service_fee, setServiceFee] = useState(0.0);
   const [processing_fee, setProcessingFee] = useState(0.0);
   const [disclaimer_text, setDisclaimerText] = useState("");
 
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   useEffect(() => {
-    if (props.total == 0) {
+    if (props.total === 0 || !props.total) {
       setAllowCustomPrice(true);
+    } else {
+      setAllowCustomPrice(false);
+      setUserPrice(props.total);
     }
-  }, []);
+  }, [props]);
 
   useEffect(() => {
+    console.log(allow_custom_price);
     if (allow_custom_price) {
-      const subtotal = parseFloat(props.total + user_price, 10).toFixed(2);
+      const subtotal = parseFloat(props.total + user_price, 10);
       setTotalPrice(subtotal);
       if (subtotal > 0) {
         setConcertFee((subtotal * 0.97 - 0.3).toFixed(2));
@@ -46,10 +51,25 @@ const PayTicketBox = (props) => {
       }
     } else {
       const subtotal = parseFloat(props.total, 10).toFixed(2);
+      console.log(subtotal);
       if (subtotal > 0) {
-        setConcertFee(subtotal.toFixed(2));
-        setProcessingFee((subtotal * 0.03 + 0.3).toFixed(2));
-        setTotalPrice(0.0);
+        const concert_charge = parseFloat(subtotal, 10);
+        //const service_charge = parseFloat(concert_charge * 0.15, 10);
+        const service_charge = concert_charge * 0.15;
+        const processing_charge =
+          (concert_charge + service_charge + 0.3) / 0.97 -
+          concert_charge -
+          service_charge;
+        const total_charge =
+          concert_charge + service_charge + processing_charge;
+        // setConcertFee(parseFloat(subtotal, 10).toFixed(2));
+        // setServiceFee(parseFloat(subtotal, 10).toFixed(2) * 0.15);
+        // setProcessingFee((subtotal * 0.03 + 0.3).toFixed(2));
+        // setTotalPrice((subtotal * 1.18 + 0.03).toFixed(2));
+        setConcertFee(concert_charge.toFixed(2));
+        setServiceFee(service_charge.toFixed(2));
+        setProcessingFee(processing_charge.toFixed(2));
+        setTotalPrice(total_charge.toFixed(2));
       } else {
         setConcertFee(0.0);
         setProcessingFee(0.0);
@@ -147,7 +167,7 @@ const PayTicketBox = (props) => {
                         allowNegative={false}
                       />
                     ) : (
-                      <div>
+                      <div className="name-your-price-input">
                         {minimum_price ? (
                           <NumberFormat
                             className="custom-ticket-form-input body-1 short-width-input"
@@ -214,6 +234,18 @@ const PayTicketBox = (props) => {
                         </div>
                       </div>
                     ) : null}
+                    {service_fee > 0 ? (
+                      <div className="ticket-item-container">
+                        <div className="ticket-summary-field-2 align-left subtitle-1">
+                          Service Fee
+                        </div>
+                        <div className="item-price-container">
+                          <span className="item-price subtitle-1">
+                            ${service_fee}
+                          </span>
+                        </div>
+                      </div>
+                    ) : null}
                     <div className="ticket-item-container">
                       <div className="ticket-summary-field-2 align-left subtitle-1">
                         Processing Fee
@@ -240,7 +272,7 @@ const PayTicketBox = (props) => {
                       </div>
                       <div className="item-price-container">
                         <span className="item-price subtitle-1">
-                          ${props.general_price}
+                          ${concert_fee}
                         </span>
                       </div>
                     </div>
@@ -253,6 +285,18 @@ const PayTicketBox = (props) => {
                         <div className="item-price-container">
                           <span className="item-price subtitle-1">
                             ${props.backstage_price}
+                          </span>
+                        </div>
+                      </div>
+                    ) : null}
+                    {service_fee > 0 ? (
+                      <div className="ticket-item-container">
+                        <div className="ticket-summary-field-2 align-left subtitle-1">
+                          Service Fee
+                        </div>
+                        <div className="item-price-container">
+                          <span className="item-price subtitle-1">
+                            ${service_fee}
                           </span>
                         </div>
                       </div>
@@ -318,7 +362,7 @@ const PayTicketBox = (props) => {
                         allowNegative={false}
                       />
                     ) : (
-                      <div>
+                      <div className="mobile-custom-price-input">
                         {minimum_price ? (
                           <NumberFormat
                             className="custom-ticket-form-input body-1 short-width-input"
@@ -385,6 +429,18 @@ const PayTicketBox = (props) => {
                         </div>
                       </div>
                     ) : null}
+                    {service_fee > 0 ? (
+                      <div className="ticket-item-container">
+                        <div className="ticket-summary-field-2 align-left subtitle-2">
+                          Service Fee
+                        </div>
+                        <div className="item-price-container">
+                          <span className="item-price subtitle-2">
+                            ${service_fee}
+                          </span>
+                        </div>
+                      </div>
+                    ) : null}
                     <div className="ticket-item-container">
                       <div className="ticket-summary-field-2 align-left subtitle-2">
                         Processing Fee
@@ -424,6 +480,18 @@ const PayTicketBox = (props) => {
                         <div className="item-price-container">
                           <span className="item-price subtitle-2">
                             ${props.backstage_price}
+                          </span>
+                        </div>
+                      </div>
+                    ) : null}
+                    {service_fee > 0 ? (
+                      <div className="ticket-item-container">
+                        <div className="ticket-summary-field-2 align-left subtitle-2">
+                          Service Fee
+                        </div>
+                        <div className="item-price-container">
+                          <span className="item-price subtitle-2">
+                            ${service_fee}
                           </span>
                         </div>
                       </div>

@@ -72,6 +72,7 @@ export const get_artist_info = `query getCreateOnfourRegistration(
       twitter
       facebook
       soundcloud
+      merch
   }
 }`;
 
@@ -193,3 +194,14 @@ export const get_crew_by_id = `query getCrew ($input: ID!) {
   }
 }
 `;
+
+export const get_video_chat_variables = `query getVideochat_Testing(
+  $id: ID!
+) {
+  getVideochat_Testing(id: $id) {
+    kbs
+    width
+    height
+    frameRate
+  }
+}`;
