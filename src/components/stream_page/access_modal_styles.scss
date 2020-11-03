@@ -73,6 +73,9 @@
 .open-ticket-modal-link {
   color: $primary-color !important;
   text-decoration: underline;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .failed-access-message-container {

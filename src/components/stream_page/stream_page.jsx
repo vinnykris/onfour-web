@@ -177,6 +177,15 @@ const StreamPage = ({ is_soundcheck }) => {
     getTestingVariables()
   }, [])
 
+  useEffect(() => {
+    console.log(rsvp_list, user_email);
+    if (rsvp_list.includes(user_email)) {
+      setShowAccessModal(false);
+    } else {
+      setShowAccessModal(true);
+    }
+  }, [user_email, rsvp_list])
+
   // Query upcoming show database
   const fetchData = async () => {
     // Calling the API, using async and await is necessary
@@ -199,7 +208,6 @@ const StreamPage = ({ is_soundcheck }) => {
       // setConcertInfo(info_list[0]);
       const concert_data = info_list[0]
       const artist_data = await getArtistInfo(info_list[0].artist_id)
-      setConcertInfo(createUpcomingObject(concert_data, artist_data))
       console.log(createUpcomingObject(concert_data, artist_data))
 
       setStartTime(info_list[0].date + 'T' + info_list[0].time + '.000-04:00')
@@ -216,11 +224,12 @@ const StreamPage = ({ is_soundcheck }) => {
       setConcertName(info_list[0].concert_name)
       setArtistID(info_list[0].artist_id)
       setConcertID(info_list[0].id)
-      setRSVPList(info_list[0].rsvp_list)
       // setIsLive(info_list[0].is_live);
       setIsFree(info_list[0].general_price === 0)
       setShowAccessModal(info_list[0].general_price > 0)
       setConcertCrews(JSON.parse(info_list[0].crew_list))
+      setRSVPList(info_list[0].rsvp_list)
+      setConcertInfo(createUpcomingObject(concert_data, artist_data))
     } else {
       setHaveUpcomingConcert(false)
     }
