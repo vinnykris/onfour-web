@@ -30,7 +30,7 @@ import {
   containsNumber,
   containsSpecialCharacter,
 } from "../../utils/register";
-import InputOne from "../inputs/input_one";
+import InputTwo from "../inputs/input_one";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -313,7 +313,7 @@ const Register = (props) => {
                               </div>
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="first_slot"
                                 type="text"
                                 name="full-name"
@@ -326,7 +326,7 @@ const Register = (props) => {
                               />
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="username_slot"
                                 type="text"
                                 name="username"
@@ -339,7 +339,7 @@ const Register = (props) => {
                               />
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="email_slot"
                                 type="email"
                                 name="email"
@@ -356,7 +356,7 @@ const Register = (props) => {
                               data-tip
                               data-for="registerTip"
                             >
-                              <InputOne
+                              <InputTwo
                                 id="password_slot"
                                 type="password"
                                 name="password"
@@ -510,7 +510,7 @@ const Register = (props) => {
                               </div>
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="first_slot"
                                 type="text"
                                 name="full-name"
@@ -523,7 +523,7 @@ const Register = (props) => {
                               />
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="username_slot"
                                 type="text"
                                 name="username"
@@ -536,7 +536,7 @@ const Register = (props) => {
                               />
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="email_slot"
                                 type="email"
                                 name="email"
@@ -553,7 +553,7 @@ const Register = (props) => {
                               data-tip
                               data-for="registerTip"
                             >
-                              <InputOne
+                              <InputTwo
                                 id="password_slot"
                                 type="password"
                                 name="password"

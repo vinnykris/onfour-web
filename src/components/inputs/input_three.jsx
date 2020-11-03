@@ -4,7 +4,7 @@ import "./input_three_styles.scss";
 import eye from "../../images/icons/eye.png";
 import { useWindowDimensions } from "../custom_hooks";
 
-const InputOne = ({
+const InputThree = ({
   id,
   type,
   name,
@@ -98,4 +98,4 @@ const InputOne = ({
   );
 };
 
-export default InputOne;
+export default InputThree;
