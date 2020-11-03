@@ -111,7 +111,7 @@ const CheckoutForm = (props) => {
       const payment_result = await stripeTokenHandler(
         result.token,
         Math.round(amount_value * 100),
-        name.value,
+        // name.value,
         email.value,
         props.concert_id
       );

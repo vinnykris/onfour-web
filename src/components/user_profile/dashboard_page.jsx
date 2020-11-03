@@ -234,7 +234,7 @@ const DashboardPage = ({
   }, []);
 
   useEffect(() => {
-    console.log(sliderContainerRef.current);
+    //console.log(sliderContainerRef.current);
     if (
       !sliderCalcFirstRun &&
       sliderContainerRef.current &&
