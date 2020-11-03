@@ -29,6 +29,9 @@ import viewers_icon from "../../images/icons/stream_icons/viewers_icon.png";
 // Styles Imports
 import "./artist_stream_styles.scss";
 
+// Utils
+import { determineUsername } from "../../utils/register";
+
 Amplify.configure(awsmobile);
 
 // Main stream page component. Holds stream video, chat, and payment functionality
@@ -87,7 +90,7 @@ const StreamPage = () => {
     getTestingVariables();
     Auth.currentAuthenticatedUser({})
       .then((user) => {
-        setUsername(user.username);
+        determineUsername(user).then((username) => setUsername(username));
         setShowChat(true);
         setAuth(true);
       })

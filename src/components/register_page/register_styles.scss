@@ -10,6 +10,7 @@
   @include respond-to("small") {
     height: calc(100vh - 61px);
     max-height: calc(100vh - 61px);
+    overflow-y: scroll;
   }
 }
 
@@ -137,23 +138,6 @@
   color: white;
 }
 
-.email-subscribe-prompt {
-  display: flex;
-  flex-direction: row;
-}
-
-.email-unsubscribe-text {
-  color: white;
-  width: 100%;
-  padding-left: 3%;
-  text-align: left;
-}
-
-.email-unsubscribe-checkbox {
-  width: 16px;
-  height: 16px;
-}
-
 .register-verification-submit-button {
   width: 100%;
   color: white;
@@ -205,4 +189,40 @@
 
 .password-suggestion-bullets {
   float: left;
+}
+
+.sign-up-divider {
+  width: 44%;
+  margin-top: 20px;
+  margin-bottom: 35px;
+  height: 0px;
+  border: 1px solid rgba(136, 136, 136, 0.45);
+}
+
+.sign-up-divider-text {
+  width: 12%;
+  color: rgba(136, 136, 136, 0.55) !important;
+  margin-top: 7px;
+}
+
+.social-sign-up-container {
+  justify-content: center;
+  margin: 2px 0 13px 0;
+}
+
+.social-sign-up-button {
+  border: 1px solid $on-background;
+  box-sizing: border-box;
+  border-radius: 40px;
+  width: 65%;
+  background-color: transparent;
+  height: 35px;
+  min-width: 200px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.social-sign-up-text {
+  color: $on-background;
 }
