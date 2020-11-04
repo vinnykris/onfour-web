@@ -1014,6 +1014,31 @@ const StreamPage = ({ is_soundcheck }) => {
             </Grid>
           ) : (
             <div className="mobile-grid-stream">
+              {show_access_modal ? (
+                <AccessModal
+                  access_list={concert_info.rsvp_list}
+                  user_email={user_email}
+                  openTicketModal={openTicketModal}
+                  visible={show_access_modal}
+                  onClose={closeAccessModal}
+                  rsvp_list={concert_info.rsvp_list}
+                  checkAccess={checkForAccess}
+                  access_error={access_error}
+                  is_mobile={width <= 600}
+                />
+              ) : null}
+              {show_payment_modal ? (
+                <TicketModal
+                  visible={show_payment_modal}
+                  onClose={() => setShowPaymentModal(false)}
+                  concert_info={concert_info}
+                  auth={auth}
+                  username={username}
+                  user_email={user_email}
+                  artist_name={concert_info.artist_name}
+                  onTicketingComplete={() => setShowPaymentModal(false)}
+                />
+              ) : null}
               <Rodal
                 visible={open_modal}
                 onClose={closeModal}
@@ -1107,7 +1132,7 @@ const StreamPage = ({ is_soundcheck }) => {
                         </div>
                       </div>
                     </div>
-                    {is_free ||
+                    {/* {is_free ||
                     (purchasedTickets &&
                       purchasedTickets.indexOf(concert_id)) >= 0 ? (
                       <VideoPlayer
@@ -1164,7 +1189,24 @@ const StreamPage = ({ is_soundcheck }) => {
                           </button>
                         </div>
                       </div>
-                    )}
+                    )} */}
+                    <VideoPlayer
+                      url={
+                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                      }
+                      start_time={
+                        is_soundcheck
+                          ? "2020-06-03T19:00:00.000-04: 00"
+                          : show_start_time
+                      }
+                      artist_name={concert_info.artist_name}
+                      // concert_name={concert_name}
+                      auth={auth}
+                      username={username}
+                      concert_id={concert_id}
+                      is_live={is_live}
+                      have_upcoming_concert={have_upcoming_concert}
+                    />
                   </div>
                 </div>
                 <div className="chat-main-mobile">
