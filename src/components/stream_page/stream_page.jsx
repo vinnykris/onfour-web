@@ -658,6 +658,7 @@ const StreamPage = ({ is_soundcheck }) => {
                         is_live={is_live}
                         stream_volume={stream_volume}
                         have_upcoming_concert={have_upcoming_concert}
+                        is_artist_in_the_house={is_artist_in_the_house}
                       />
                       <div className="toggle-chat" id="chat_toggle_button">
                         <button
