@@ -932,8 +932,8 @@ const StreamPage = ({ is_soundcheck }) => {
                       <Row className="video-chat-row">
                         <VideoChat
                           user_name={username ? username : "GUEST"}
-                          // artist_name={artist_id}
-                          artist_name={'takoyuxin'}
+                          artist_name={artist_id}
+                          // artist_name={'takoyuxin'}
                           stream_vol_adjust={setStreamVolume}
                           stream_volume_value={stream_volume}
                           video_chat_variables={video_chat_variables}
