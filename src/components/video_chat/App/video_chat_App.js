@@ -490,7 +490,7 @@ export default function VideoChatApp({
             </div>
           ) : ( */}
           <div className="video-chat-info-bar">
-            <p className="header-7">VIDEO CHAT</p>
+            <p className="header-7">WATCH WITH FRIENDS</p>
           </div>
           <div className="room-name-row">
             <div
