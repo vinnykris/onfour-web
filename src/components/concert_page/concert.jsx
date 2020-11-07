@@ -76,6 +76,9 @@ import "react-multi-email/style.css";
 // Image imports
 import Tag from "../tag";
 
+// Utils
+import { determineEmail, determineUsername } from "../../utils/register";
+
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 // Concert is the unique concert page
@@ -253,9 +256,8 @@ const Concert = (props) => {
     Auth.currentAuthenticatedUser({})
       .then(async (user) => {
         setAuth(true);
-        setUsername(user.username);
-        setUserEmail(user.attributes.email);
-        // console.log(user.email);
+        determineUsername(user).then((username) => setUsername(username));
+        determineEmail(user).then((email) => setUserEmail(email));
         // console.log(user.username);
         await fetchData(user.username, user.attributes.email);
         setLoading(false);

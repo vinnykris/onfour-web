@@ -33,6 +33,13 @@ import "./navbar_styles.scss";
 import "../login_page/login_styles.scss";
 import { useEffect } from "react";
 
+// Utils
+import {
+  determineEmail,
+  determineUsername,
+  determinePreferredUsername,
+} from "../../utils/register";
+
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 // Navbar component
@@ -52,6 +59,8 @@ const NavBar = () => {
   const [first, setFirst] = useState(""); // Tracks first name of signed in user
   const [last, setLast] = useState(""); // Tracks first name of signed in user
   const [menu_open, setMenuOpen] = useState(false);
+  const [preferred_username, setPreferredUsername] = useState("");
+  const [isSocialUser, setIsSocialUser] = useState(false);
 
   const [show_mobile_login, setShowMobileLogin] = useState(false); // Tracks whether user clicked sign-in or not on mobile
 
@@ -60,11 +69,23 @@ const NavBar = () => {
   const toggle = () => setDropdownOpen((prevState) => !prevState); // Toggle for dropdown menu
 
   // useEffect(() => {
-  Auth.currentAuthenticatedUser({})
+  Auth.currentAuthenticatedUser({ bypassCache: true })
     .then((user) => {
-      setUserEmail(user.attributes.email);
+      determineUsername(user).then((username) => setUsername(username));
+      determinePreferredUsername(user).then((preferred_username) =>
+        setPreferredUsername(preferred_username)
+      );
+      if (
+        (user?.signInUserSession?.idToken?.payload?.identities?.[0]
+          ?.providerType ===
+          "Google") |
+        (user?.signInUserSession?.idToken?.payload?.identities?.[0]
+          ?.providerType ===
+          "Facebook")
+      )
+        setIsSocialUser(true);
+      determineEmail(user).then((email) => setUserEmail(email));
       setAuth(true);
-      setUsername(user.username);
       setProfileURL("");
     })
     .catch((err) => setAuth(false));
@@ -79,7 +100,8 @@ const NavBar = () => {
         input: username,
       })
     );
-    setFirst(user_data.data.getCreateOnfourRegistration.first);
+    if (user_data?.data?.getCreateOnfourRegistration?.first)
+      setFirst(user_data.data.getCreateOnfourRegistration.first);
   };
 
   if (username) {
@@ -281,7 +303,9 @@ const NavBar = () => {
                 >
                   <LoggedInUser
                     className="logged-in-icon"
-                    username={username}
+                    username={
+                      preferred_username ? preferred_username : username
+                    }
                     // last={last}
                   />
                 </span>
@@ -420,7 +444,12 @@ const NavBar = () => {
                         src={login_icon}
                         alt="profile-icon"
                       ></img>
-                      {username} {""}
+                      {preferred_username
+                        ? preferred_username
+                        : isSocialUser
+                        ? ""
+                        : username}{" "}
+                      {""}
                     </DropdownToggle>
                   </div>
                   <DropdownMenu

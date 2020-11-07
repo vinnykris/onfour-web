@@ -49,6 +49,10 @@ import viewers_icon from "../../images/icons/stream_icons/viewers_icon.png";
 
 // Utils
 import { getCrewsByUsername } from "../../utils/crew";
+import {
+  determineUsername,
+  determinePreferredUsername,
+} from "../../utils/register";
 import { didUserRSVP } from "../../utils/concert";
 import { getArtistInfo } from "../../apis/get_concert_data";
 import { rsvp_template_id } from "../../apis/email_js";
@@ -100,6 +104,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [paypal_selected, setPaypalSelected] = useState(false);
   const [stream_volume, setStreamVolume] = useState(1.0);
   const [have_upcoming_concert, setHaveUpcomingConcert] = useState(true);
+  const [preferred_username, setPreferredUsername] = useState("");
   const [show_payment_modal, setShowPaymentModal] = useState(false);
   const [show_access_modal, setShowAccessModal] = useState(true);
   const [access_error, setAccessError] = useState(0); // 0 is no error, 1 if user isn't in rsvp list
@@ -159,8 +164,10 @@ const StreamPage = ({ is_soundcheck }) => {
   useEffect(() => {
     Auth.currentAuthenticatedUser({})
       .then(async (user) => {
-        setUsername(user.username);
-        setUserEmail(user.attributes.email);
+        determineUsername(user).then((username) => setUsername(username));
+        determinePreferredUsername(user).then((preferred_username) =>
+          setPreferredUsername(preferred_username)
+        );
         setShowChat(true);
         setAuth(true);
         setTickets(await getTickets(user.username));
@@ -930,7 +937,13 @@ const StreamPage = ({ is_soundcheck }) => {
                     <div className="chat-wrapper">
                       <Row className="video-chat-row">
                         <VideoChat
-                          user_name={username ? username : "GUEST"}
+                          user_name={
+                            username
+                              ? preferred_username
+                                ? preferred_username
+                                : username
+                              : "GUEST"
+                          }
                           artist_name={artist_id}
                           stream_vol_adjust={setStreamVolume}
                           stream_volume_value={stream_volume}
@@ -941,7 +954,9 @@ const StreamPage = ({ is_soundcheck }) => {
                         <Chat
                           chat_name={
                             username
-                              ? username
+                              ? preferred_username
+                                ? preferred_username
+                                : username
                               : "GUEST" +
                                 (Math.floor(Math.random() * 99) + 9999)
                           }
@@ -1220,7 +1235,9 @@ const StreamPage = ({ is_soundcheck }) => {
                     <Chat
                       chat_name={
                         username
-                          ? username
+                          ? preferred_username
+                            ? preferred_username
+                            : username
                           : "GUEST" +
                             (Math.floor(Math.random() * 10000) + 10000)
                               .toString()
