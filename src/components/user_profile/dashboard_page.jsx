@@ -249,7 +249,7 @@ const DashboardPage = ({
   return (
     <Col size={7} style={{ width: "90%" }}>
       <Row className="header-section">
-        <img src={dashboardIcon} className="profile-header-icon"></img>
+        {/* <img src={dashboardIcon} className="profile-header-icon"></img> */}
         <h4 className="profile-preview-content-header username-header header-5">
           Dashboard
         </h4>

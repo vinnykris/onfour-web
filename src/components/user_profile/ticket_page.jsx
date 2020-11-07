@@ -8,7 +8,7 @@ const ticketPage = ({ width, stubs, history }) => {
   return (
     <Col size={7}>
       <Row className="header-section">
-        <img src={ticketIcon} className="profile-header-icon"></img>
+        {/* <img src={ticketIcon} className="profile-header-icon"></img> */}
         <h4 className="profile-preview-content-header username-header header-5">
           My Wallet
         </h4>
