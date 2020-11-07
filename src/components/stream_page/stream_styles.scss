@@ -315,7 +315,7 @@
 
 .stream-info-wrapper {
   width: 100%;
-  height: 100px;
+  height: 103px;
   background: linear-gradient(
       0deg,
       rgba(255, 255, 255, 0.08),
@@ -736,10 +736,21 @@
   }
 }
 
+.stream-lyrics-button {
+  height: 33px !important;
+  width: 104px !important;
+  background: rgba(255, 255, 255, 0.87) !important;
+  &:disabled {
+    background: rgba(255, 255, 255, 0.6) !important;
+    cursor: initial;
+  }
+}
+
 .donate-button-column {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 20px;
 }
 
 .stream-action-button {
@@ -805,6 +816,23 @@
   margin: auto;
   width: 27px;
   font-size: 18px;
+  text-align: center;
+  &:hover {
+    background: $secondary-color;
+    color: #07070f;
+  }
+}
+
+.social-list [class*="fas fa-"] {
+  background: rgba(255, 255, 255, 0.87);
+  border-radius: 27px;
+  color: #07070f;
+  display: inline-block;
+  height: 27px;
+  line-height: 27px;
+  margin: auto;
+  width: 27px;
+  font-size: 16px;
   text-align: center;
   &:hover {
     background: $secondary-color;

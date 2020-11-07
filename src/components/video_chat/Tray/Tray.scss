@@ -2,14 +2,20 @@
 
 .tray {
   flex: none;
-  height: 35px;
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)), #07070F;
-  padding: 0 10px;
+  height: 60px;
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.08)
+    ),
+    #07070f;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: absolute;
   width: 100%;
   bottom: 5px;
+  z-index: 2;
 }
 
 .artist-mute-all-button {
@@ -18,12 +24,12 @@
   border-radius: 2px;
   height: 25px;
   padding: 0px 10px;
-  background-color:#E465A2;
+  background-color: #e465a2;
   color: $on-background;
 }
 
 .artist-mute-all-button:hover {
-  background: #EA91BD;
+  background: #ea91bd;
 }
 
 .artist-mute-all-button:disabled {
@@ -85,10 +91,11 @@
 
 .press-to-talk-btn {
   background-color: transparent !important;
+  // width: 236px !important;
   width: 100% !important;
-  height: 35px;
-  color: #E465A2 !important;
-  border: 1px solid #E465A2 !important;
+  height: 44px;
+  color: #e465a2 !important;
+  border: 1px solid #e465a2 !important;
   box-sizing: border-box !important;
   border-radius: 10px !important;
   /* font-size: 0.8rem !important; */
@@ -100,7 +107,7 @@
 }
 
 .press-to-talk-btn:active {
-  background-color: #E465A2 !important;
+  background-color: #e465a2 !important;
   color: rgba(255, 255, 255, 0.87) !important;
 }
 /* .new-tray-button {

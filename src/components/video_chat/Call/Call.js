@@ -16,14 +16,26 @@ import {
   getMessage,
 } from "./callState";
 import { logDailyEvent } from "../logUtils";
+
 // import { propTypes } from "react-bootstrap-range-slider";
 
 export default function Call(props) {
   const callObject = useContext(CallObjectContext);
+
   if (callObject) {
+    console.log(
+      props.video_chat_variables.kbs,
+      props.video_chat_variables.width,
+      props.video_chat_variables.height,
+      props.video_chat_variables.frameRate
+    );
     callObject.setBandwidth({
-      kbs: 80,
-      trackConstraints: { width: 320, height: 180, frameRate: 8 },
+      kbs: props.video_chat_variables.kbs,
+      trackConstraints: {
+        width: props.video_chat_variables.width,
+        height: props.video_chat_variables.height,
+        frameRate: props.video_chat_variables.frameRate,
+      },
     });
   }
 

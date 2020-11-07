@@ -25,8 +25,6 @@ import Chat from "../chat/stream_chat";
 // import Join from "../chat/join_chat";
 // import WaitingChat from "../chat/chat_waiting";
 import { Grid, Row, Col } from "../grid";
-import SocialBar from "../social_bar/social_bar";
-import Modal from "../payment/payment_modal";
 import { useWindowDimensions } from "../custom_hooks";
 import VideoChat from "../video_chat/App/video_chat_App";
 
@@ -34,13 +32,16 @@ import { getTickets } from "../../apis/get_user_data";
 import DonateCardBox from "../payment/donate_box";
 import VenmoBox from "../payment/venmo_box";
 import PaypalBox from "../payment/paypal_box";
-import PrimaryButton from "../primary_button";
+import PayTicketBox from "../payment/pay_ticket_box";
+import { createUpcomingObject } from "../util";
+
+import AccessModal from "./access_modal";
+import TicketModal from "./ticket_modal";
 // Styles Imports
 import "./stream_styles.scss";
 import "rodal/lib/rodal.css";
 
 // Image imports
-import VenmoCode from "../../images/venmo_codes/onfour_venmo.jpeg";
 import ticket1 from "../../images/icons/ticket1.png";
 import feedback_icon from "../../images/icons/stream_icons/feedback_icon.png";
 import share_icon from "../../images/icons/stream_icons/share_icon.png";
@@ -48,6 +49,9 @@ import viewers_icon from "../../images/icons/stream_icons/viewers_icon.png";
 
 // Utils
 import { getCrewsByUsername } from "../../utils/crew";
+import { didUserRSVP } from "../../utils/concert";
+import { getArtistInfo } from "../../apis/get_concert_data";
+import { rsvp_template_id } from "../../apis/email_js";
 
 Amplify.configure(awsmobile);
 
@@ -71,6 +75,8 @@ const StreamPage = ({ is_soundcheck }) => {
   const [artist_spotify, setArtistSpotify] = useState("");
   const [artist_twitter, setArtistTwitter] = useState("");
   const [artist_youtube, setArtistYoutube] = useState("");
+  const [artist_merch, setArtistMerch] = useState("");
+  const [concert_info, setConcertInfo] = useState("");
   const [concert_name, setConcertName] = useState(""); // Stores the upcoming show's concert name
   const [concert_id, setConcertID] = useState("");
   const [concert_crews, setConcertCrews] = useState("");
@@ -78,6 +84,8 @@ const StreamPage = ({ is_soundcheck }) => {
   const [is_live, setIsLive] = useState(true);
   const [auth, setAuth] = useState(false); // Tracks if user is logged in/valid session
   const [username, setUsername] = useState(""); // Username from login
+  const [user_email, setUserEmail] = useState("");
+  const [rsvp_list, setRSVPList] = useState([]);
   const [button_icon, setButtonIcon] = useState("fa fa-chevron-right");
   const [show_popup, setShowPopup] = useState(false); // If popup should be shown
   const [description_button_icon, setDescriptionButtonIcon] = useState(
@@ -92,6 +100,10 @@ const StreamPage = ({ is_soundcheck }) => {
   const [paypal_selected, setPaypalSelected] = useState(false);
   const [stream_volume, setStreamVolume] = useState(1.0);
   const [have_upcoming_concert, setHaveUpcomingConcert] = useState(true);
+  const [show_payment_modal, setShowPaymentModal] = useState(false);
+  const [show_access_modal, setShowAccessModal] = useState(true);
+  const [access_error, setAccessError] = useState(0); // 0 is no error, 1 if user isn't in rsvp list
+  const [video_chat_variables, setVideoChatVariables] = useState();
 
   const history = useHistory(0);
 
@@ -148,6 +160,7 @@ const StreamPage = ({ is_soundcheck }) => {
     Auth.currentAuthenticatedUser({})
       .then(async (user) => {
         setUsername(user.username);
+        setUserEmail(user.attributes.email);
         setShowChat(true);
         setAuth(true);
         setTickets(await getTickets(user.username));
@@ -159,10 +172,21 @@ const StreamPage = ({ is_soundcheck }) => {
   // Get the start time for countdown_timer
   // Call stream page analtics
   useEffect(() => {
-    getStartTime();
+    fetchData();
+    // getStartTime();
+    getTestingVariables();
   }, []);
+
+  useEffect(() => {
+    if (rsvp_list.includes(user_email)) {
+      setShowAccessModal(false);
+    } else {
+      setShowAccessModal(true);
+    }
+  }, [user_email, rsvp_list]);
+
   // Query upcoming show database
-  const getStartTime = async () => {
+  const fetchData = async () => {
     // Calling the API, using async and await is necessary
     const info = await API.graphql(
       graphqlOperation(queries.list_concerts, {
@@ -179,6 +203,10 @@ const StreamPage = ({ is_soundcheck }) => {
       const hour = parseInt(info_list[0].time.slice(0, 2));
       const minutes = info_list[0].time.slice(2, 5);
 
+      // setConcertInfo(info_list[0]);
+      const concert_data = info_list[0];
+      const artist_data = await getArtistInfo(info_list[0].artist_id);
+
       setStartTime(info_list[0].date + "T" + info_list[0].time + ".000-04:00");
       setShowTime(
         info_list[0].date +
@@ -189,32 +217,48 @@ const StreamPage = ({ is_soundcheck }) => {
             ? info_list[0].time.slice(0, 5) + "AM"
             : info_list[0].time.slice(0, 5) + "PM")
       );
+      // console.log(info_list[0]);
       setConcertName(info_list[0].concert_name);
       setArtistID(info_list[0].artist_id);
-      getArtistInfo(info_list[0].artist_id);
       setConcertID(info_list[0].id);
       // setIsLive(info_list[0].is_live);
       setIsFree(info_list[0].general_price === 0);
+      setShowAccessModal(info_list[0].general_price > 0);
       setConcertCrews(JSON.parse(info_list[0].crew_list));
+      setRSVPList(info_list[0].rsvp_list);
+      setConcertInfo(createUpcomingObject(concert_data, artist_data));
+      console.log(artist_data);
+      console.log(createUpcomingObject(concert_data, artist_data));
     } else {
       setHaveUpcomingConcert(false);
     }
   };
 
-  const getArtistInfo = async (artist_id) => {
-    const artist_info = await API.graphql(
-      graphqlOperation(queries.get_artist_info, {
-        username: artist_id,
+  // const getArtistInfo = async (artist_id) => {
+  //   const artist_info = await API.graphql(
+  //     graphqlOperation(queries.get_artist_info, {
+  //       username: artist_id,
+  //     })
+  //   );
+  //   const artist_info_list = artist_info.data.getCreateOnfourRegistration;
+  //   setArtistName(artist_info_list.artist_name);
+  //   setArtistBio(artist_info_list.artist_bio);
+  //   setArtistFB(artist_info_list.facebook);
+  //   setArtistIG(artist_info_list.instagram);
+  //   setArtistSpotify(artist_info_list.spotify);
+  //   setArtistTwitter(artist_info_list.twitter);
+  //   setArtistYoutube(artist_info_list.youtube);
+  //   setArtistMerch(artist_info_list.merch);
+  // };
+
+  const getTestingVariables = async () => {
+    const info = await API.graphql(
+      graphqlOperation(queries.get_video_chat_variables, {
+        id: "ea08d153-09ce-48e7-b8c6-97473a6065aa",
       })
     );
-    const artist_info_list = artist_info.data.getCreateOnfourRegistration;
-    setArtistName(artist_info_list.artist_name);
-    setArtistBio(artist_info_list.artist_bio);
-    setArtistFB(artist_info_list.facebook);
-    setArtistIG(artist_info_list.instagram);
-    setArtistSpotify(artist_info_list.spotify);
-    setArtistTwitter(artist_info_list.twitter);
-    setArtistYoutube(artist_info_list.youtube);
+    const item = info.data.getVideochat_Testing;
+    setVideoChatVariables(item);
   };
 
   // DONATION SECTION
@@ -396,112 +440,163 @@ const StreamPage = ({ is_soundcheck }) => {
     }
   };
 
+  const openTicketModal = () => {
+    setShowPaymentModal(true);
+  };
+
+  const closeAccessModal = () => {
+    setShowAccessModal(false);
+  };
+
+  // Checks if email parameter is in the RSVP list for the concert
+  const checkForAccess = async (email) => {
+    const user_has_ticket = await didUserRSVP(concert_id, email);
+    if (user_has_ticket) {
+      setShowAccessModal(false);
+      setAccessError(0);
+    } else {
+      setAccessError(1);
+    }
+  };
+
   // RENDERING SECTION
   return (
     <div className="stream-container">
-      {artist_name || !have_upcoming_concert ? (
+      {concert_info || !have_upcoming_concert ? (
         <div className="stream-page-content">
           {width > 600 ? (
             <Grid className="desktop-stream-grid">
-              <Rodal
-                visible={open_modal}
-                onClose={closeModal}
-                width={100}
-                height={100}
-                measure="%"
-                customStyles={{
-                  padding: 0,
-                  overflow: scroll,
-                  maxHeight: "545px",
-                  maxWidth: "482px",
-                  background:
-                    "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
-                  boxShadow:
-                    "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
-                  borderRadius: "10px",
-                }}
-                className="rodal-custom"
-              >
-                <Grid className="payment-modal-grid">
-                  <Row className="payment-modal-header">
-                    <Col size={1}>
-                      <h4 className="payment-modal-header-text header-5">
-                        Donate to {artist_name}
-                      </h4>
-                    </Col>
-                  </Row>
-                  <Row className="payment-modal-header">
-                    <Col
-                      size={1}
-                      className="payment-modal-tab selected-tab"
-                      id="credit-tab"
-                      onClick={() => paymentTabSelected(0)}
-                    >
-                      <span
-                        className="payment-modal-tab-text subtitle-1 selected-tab"
-                        id="credit-tab-text"
+              {show_access_modal ? (
+                <AccessModal
+                  access_list={concert_info.rsvp_list}
+                  user_email={user_email}
+                  openTicketModal={openTicketModal}
+                  visible={show_access_modal}
+                  onClose={closeAccessModal}
+                  rsvp_list={concert_info.rsvp_list}
+                  checkAccess={checkForAccess}
+                  access_error={access_error}
+                />
+              ) : null}
+              {show_payment_modal ? (
+                <TicketModal
+                  visible={show_payment_modal}
+                  onClose={() => setShowPaymentModal(false)}
+                  concert_info={concert_info}
+                  auth={auth}
+                  username={username}
+                  user_email={user_email}
+                  artist_name={concert_info.artist_name}
+                  onTicketingComplete={() => setShowPaymentModal(false)}
+                />
+              ) : null}
+              {open_modal ? (
+                <Rodal
+                  visible={open_modal}
+                  onClose={closeModal}
+                  width={100}
+                  height={100}
+                  measure="%"
+                  customStyles={{
+                    padding: 0,
+                    overflow: scroll,
+                    maxHeight: "545px",
+                    maxWidth: "482px",
+                    background:
+                      "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                    boxShadow:
+                      "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                    borderRadius: "10px",
+                  }}
+                  className="rodal-custom"
+                >
+                  <Grid className="payment-modal-grid">
+                    <Row className="payment-modal-header">
+                      <Col size={1}>
+                        <h4 className="payment-modal-header-text header-5">
+                          Donate to {concert_info.artist_name}
+                        </h4>
+                      </Col>
+                    </Row>
+                    <Row className="payment-modal-header">
+                      <Col
+                        size={1}
+                        className="payment-modal-tab selected-tab"
+                        id="credit-tab"
+                        onClick={() => paymentTabSelected(0)}
                       >
-                        Credit Card
-                      </span>
-                    </Col>
-                    <Col
-                      size={1}
-                      className="payment-modal-tab"
-                      id="venmo-tab"
-                      onClick={() => paymentTabSelected(1)}
-                    >
-                      <span
-                        className="payment-modal-tab-text subtitle-1"
-                        id="venmo-tab-text"
+                        <span
+                          className="payment-modal-tab-text subtitle-1 selected-tab"
+                          id="credit-tab-text"
+                        >
+                          Credit Card
+                        </span>
+                      </Col>
+                      <Col
+                        size={1}
+                        className="payment-modal-tab"
+                        id="venmo-tab"
+                        onClick={() => paymentTabSelected(1)}
                       >
-                        Venmo
-                      </span>
-                    </Col>
-                    <Col
-                      size={1}
-                      className="payment-modal-tab"
-                      id="paypal-tab"
-                      onClick={() => paymentTabSelected(2)}
-                    >
-                      <span
-                        className="payment-modal-tab-text subtitle-1"
-                        id="paypal-tab-text"
+                        <span
+                          className="payment-modal-tab-text subtitle-1"
+                          id="venmo-tab-text"
+                        >
+                          Venmo
+                        </span>
+                      </Col>
+                      <Col
+                        size={1}
+                        className="payment-modal-tab"
+                        id="paypal-tab"
+                        onClick={() => paymentTabSelected(2)}
                       >
-                        Paypal
-                      </span>
-                    </Col>
-                  </Row>
-                </Grid>
-                {(() => {
-                  if (credit_selected) {
-                    return <DonateCardBox is_mobile={false} />;
-                  } else if (venmo_selected) {
-                    return <VenmoBox is_mobile={false} />;
-                  } else {
-                    return <PaypalBox is_mobile={false} />;
-                  }
-                })()}
-                {/* <DonateCardBox /> */}
-              </Rodal>
+                        <span
+                          className="payment-modal-tab-text subtitle-1"
+                          id="paypal-tab-text"
+                        >
+                          Paypal
+                        </span>
+                      </Col>
+                    </Row>
+                  </Grid>
+                  {(() => {
+                    if (credit_selected) {
+                      return (
+                        <DonateCardBox
+                          is_mobile={false}
+                          concert_id={concert_id}
+                        />
+                      );
+                    } else if (venmo_selected) {
+                      return <VenmoBox is_mobile={false} />;
+                    } else {
+                      return <PaypalBox is_mobile={false} />;
+                    }
+                  })()}
+                  {/* <DonateCardBox /> */}
+                </Rodal>
+              ) : null}
+
               {/* <Modal is_open={open_modal}></Modal> */}
               <Row className="desktop-stream-row">
                 {/* <Col size={0.5}></Col> */}
                 <Col size={6} id="stream_col" className="stream-col">
                   <div className="stream-main" id="stream_main_section">
                     <div className="stream-wrapper" id="video_player">
-                      {is_free ||
+                      {/* {is_free ||
                       (purchasedTickets &&
                         purchasedTickets.indexOf(concert_id)) >= 0 ? (
                         <VideoPlayer
                           url={
-                            "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                            'https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8'
                           }
                           start_time={
                             is_soundcheck
-                              ? "2020-06-03T19:00:00.000-04: 00"
+                              ? '2020-06-03T19:00:00.000-04: 00'
                               : show_start_time
                           }
-                          artist_name={artist_name}
+                          artist_name={concert_info.artist_name}
                           // concert_name={concert_name}
                           auth={auth}
                           username={username}
@@ -511,24 +606,24 @@ const StreamPage = ({ is_soundcheck }) => {
                           have_upcoming_concert={have_upcoming_concert}
                         />
                       ) : (
-                        <div className="buy-ticket-message-container">
-                          <div className="buy-ticket-message-inner-top">
-                            <Row className="buy-ticket-message-row">
+                        <div className='buy-ticket-message-container'>
+                          <div className='buy-ticket-message-inner-top'>
+                            <Row className='buy-ticket-message-row'>
                               <Col size={2}>
                                 <img
                                   src={ticket1}
-                                  className="buy-ticket-img"
+                                  className='buy-ticket-img'
                                 ></img>
                               </Col>
-                              <Col size={4} className="buy-ticket-text-col">
-                                <div className="buy-ticket-text-container">
+                              <Col size={4} className='buy-ticket-text-col'>
+                                <div className='buy-ticket-text-container'>
                                   <Row>
-                                    <h4 className="buy-ticket-text">
+                                    <h4 className='buy-ticket-text'>
                                       It looks like your ticket is missing.
                                     </h4>
                                   </Row>
                                   <Row>
-                                    <h5 className="buy-ticket-text">
+                                    <h5 className='buy-ticket-text'>
                                       Go get your ticket below!
                                     </h5>
                                   </Row>
@@ -537,15 +632,33 @@ const StreamPage = ({ is_soundcheck }) => {
                             </Row>
                           </div>
                           <button
-                            className="buy-ticket-redirect-button"
+                            className='buy-ticket-redirect-button'
                             onClick={() =>
-                              history.push("/upcoming/" + concert_id)
+                              history.push('/upcoming/' + concert_id)
                             }
                           >
                             Get Ticket
                           </button>
                         </div>
-                      )}
+                      )} */}
+                      <VideoPlayer
+                        url={
+                          "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                        }
+                        start_time={
+                          is_soundcheck
+                            ? "2020-06-03T19:00:00.000-04: 00"
+                            : show_start_time
+                        }
+                        artist_name={concert_info.artist_name}
+                        // concert_name={concert_name}
+                        auth={auth}
+                        username={username}
+                        concert_id={concert_id}
+                        is_live={is_live}
+                        stream_volume={stream_volume}
+                        have_upcoming_concert={have_upcoming_concert}
+                      />
                       <div className="toggle-chat" id="chat_toggle_button">
                         <button
                           className="toggle-chat-button"
@@ -574,7 +687,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           <Col size={2}>
                             <div className="artist-name-container">
                               <span className="header-5 artist-name-stream">
-                                {artist_name}
+                                {concert_info.artist_name}
                               </span>
                             </div>
                           </Col>
@@ -640,7 +753,7 @@ const StreamPage = ({ is_soundcheck }) => {
                             </h5> */}
                             <div className="stream-artist-bio-container">
                               <p className="body-2 stream-artist-bio">
-                                {artist_bio}
+                                {concert_info.description}
                               </p>
                             </div>
                           </Col>
@@ -652,7 +765,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           <Col size={1}>
                             <div className="social-media-container">
                               <ul className="social-list">
-                                {artist_ig ? (
+                                {concert_info.instagram ? (
                                   <li>
                                     <a
                                       onClick={() =>
@@ -660,7 +773,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                           name: "socialBarInsta",
                                         })
                                       }
-                                      href={artist_ig}
+                                      href={concert_info.instagram}
                                       className="fa fa-instagram"
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -670,7 +783,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                   </li>
                                 ) : null}
 
-                                {artist_spotify ? (
+                                {concert_info.spotify ? (
                                   <li>
                                     <a
                                       onClick={() =>
@@ -678,7 +791,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                           name: "socialBarSpotify",
                                         })
                                       }
-                                      href={artist_spotify}
+                                      href={concert_info.spotify}
                                       className="fab fa-spotify"
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -688,7 +801,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                   </li>
                                 ) : null}
 
-                                {artist_youtube ? (
+                                {concert_info.youtube ? (
                                   <li>
                                     <a
                                       onClick={() =>
@@ -696,7 +809,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                           name: "socialBarYoutube",
                                         })
                                       }
-                                      href={artist_youtube}
+                                      href={concert_info.youtube}
                                       className="fa fa-youtube"
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -706,7 +819,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                   </li>
                                 ) : null}
 
-                                {artist_fb ? (
+                                {concert_info.facebook ? (
                                   <li>
                                     <a
                                       onClick={() =>
@@ -714,7 +827,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                           name: "socialBarFacebook",
                                         })
                                       }
-                                      href={artist_fb}
+                                      href={concert_info.facebook}
                                       className="fab fa-facebook"
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -724,7 +837,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                   </li>
                                 ) : null}
 
-                                {artist_twitter ? (
+                                {concert_info.twitter ? (
                                   <li>
                                     <a
                                       onClick={() =>
@@ -732,7 +845,7 @@ const StreamPage = ({ is_soundcheck }) => {
                                           name: "socialBarTwitter",
                                         })
                                       }
-                                      href={artist_twitter}
+                                      href={concert_info.twitter}
                                       className="fa fa-twitter"
                                       target="_blank"
                                       rel="noopener noreferrer"
@@ -741,10 +854,50 @@ const StreamPage = ({ is_soundcheck }) => {
                                     </a>
                                   </li>
                                 ) : null}
+
+                                {concert_info.merch ? (
+                                  <li>
+                                    <a
+                                      onClick={() =>
+                                        Analytics.record({
+                                          name: "socialBarMerch",
+                                        })
+                                      }
+                                      href={concert_info.merch}
+                                      className="fas fa-shopping-cart"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      <span>Merch Link</span>
+                                    </a>
+                                  </li>
+                                ) : null}
                               </ul>
                             </div>
                           </Col>
-                          <Col size={1} className="donate-button-column">
+                          {concert_id ===
+                          "925d2552-7e18-4507-b293-89e4322be5fa" ? (
+                            <div className="donate-button-column">
+                              <div className="stream-action-donate-container">
+                                <a
+                                  href="https://onfour-media.s3.amazonaws.com/Hand+in+Hand+Texts+and+Translations.pdf"
+                                  target="_blank"
+                                >
+                                  <span
+                                    //content="DONATE"
+                                    //onClick={openLyrics}
+                                    disabled={!have_upcoming_concert}
+                                    className="primary-button stream-lyrics-button segmented-button-text"
+                                  >
+                                    LYRICS
+                                  </span>
+                                </a>
+                              </div>
+                            </div>
+                          ) : null}
+
+                          {/* <Col size={1} className="donate-button-column"> */}
+                          <div className="donate-button-column">
                             <div className="stream-action-donate-container">
                               <button
                                 //content="DONATE"
@@ -755,7 +908,18 @@ const StreamPage = ({ is_soundcheck }) => {
                                 DONATE
                               </button>
                             </div>
-                          </Col>
+                          </div>
+                          {/* <div className="stream-action-donate-container">
+                              <button
+                                //content="DONATE"
+                                onClick={donateModal}
+                                disabled={!have_upcoming_concert}
+                                className="primary-button stream-donate-button segmented-button-text"
+                              >
+                                DONATE
+                              </button>
+                            </div>
+                          </Col> */}
                         </Row>
                       </Col>
                     </Row>
@@ -770,11 +934,17 @@ const StreamPage = ({ is_soundcheck }) => {
                           artist_name={artist_id}
                           stream_vol_adjust={setStreamVolume}
                           stream_volume_value={stream_volume}
+                          video_chat_variables={video_chat_variables}
                         ></VideoChat>
                       </Row>
                       <Row className="chat-row">
                         <Chat
-                          chat_name={username ? username : "GUEST"+ (Math.floor(Math.random() * 99) + 9999) }
+                          chat_name={
+                            username
+                              ? username
+                              : "GUEST" +
+                                (Math.floor(Math.random() * 99) + 9999)
+                          }
                           chatStatus={chatStatus}
                           setViewers={getViewers}
                           // setguestid={getguestid}
@@ -846,85 +1016,114 @@ const StreamPage = ({ is_soundcheck }) => {
             </Grid>
           ) : (
             <div className="mobile-grid-stream">
-              <Rodal
-                visible={open_modal}
-                onClose={closeModal}
-                width={96}
-                height={100}
-                measure="%"
-                customStyles={{
-                  padding: 0,
-                  overflow: scroll,
-                  maxHeight: "400px",
-                  maxWidth: "350px",
-                  background:
-                    "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
-                  boxShadow:
-                    "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
-                  borderRadius: "10px",
-                }}
-                className="rodal-custom"
-              >
-                <Grid className="payment-modal-grid">
-                  <Row className="payment-modal-header">
-                    <Col size={1}>
-                      <h4 className="payment-modal-header-text header-8">
-                        Donate to {artist_name}
-                      </h4>
-                    </Col>
-                  </Row>
-                  <Row className="payment-modal-header">
-                    <Col
-                      size={1}
-                      className="payment-modal-tab selected-tab"
-                      id="credit-tab"
-                      onClick={() => paymentTabSelected(0)}
-                    >
-                      <span
-                        className="payment-modal-tab-text subtitle-3 selected-tab"
-                        id="credit-tab-text"
+              {show_access_modal ? (
+                <AccessModal
+                  access_list={concert_info.rsvp_list}
+                  user_email={user_email}
+                  openTicketModal={openTicketModal}
+                  visible={show_access_modal}
+                  onClose={closeAccessModal}
+                  rsvp_list={concert_info.rsvp_list}
+                  checkAccess={checkForAccess}
+                  access_error={access_error}
+                  is_mobile={width <= 600}
+                />
+              ) : null}
+              {show_payment_modal ? (
+                <TicketModal
+                  visible={show_payment_modal}
+                  onClose={() => setShowPaymentModal(false)}
+                  concert_info={concert_info}
+                  auth={auth}
+                  username={username}
+                  user_email={user_email}
+                  artist_name={concert_info.artist_name}
+                  onTicketingComplete={() => setShowPaymentModal(false)}
+                  is_mobile={width <= 600}
+                />
+              ) : null}
+              {open_modal ? (
+                <Rodal
+                  visible={open_modal}
+                  onClose={closeModal}
+                  width={96}
+                  height={100}
+                  measure="%"
+                  customStyles={{
+                    padding: 0,
+                    overflow: scroll,
+                    maxHeight: "400px",
+                    maxWidth: "350px",
+                    background:
+                      "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                    boxShadow:
+                      "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                    borderRadius: "10px",
+                  }}
+                  className="rodal-custom"
+                >
+                  <Grid className="payment-modal-grid">
+                    <Row className="payment-modal-header">
+                      <Col size={1}>
+                        <h4 className="payment-modal-header-text header-8">
+                          Donate to {concert_info.artist_name}
+                        </h4>
+                      </Col>
+                    </Row>
+                    <Row className="payment-modal-header">
+                      <Col
+                        size={1}
+                        className="payment-modal-tab selected-tab"
+                        id="credit-tab"
+                        onClick={() => paymentTabSelected(0)}
                       >
-                        Credit Card
-                      </span>
-                    </Col>
-                    <Col
-                      size={1}
-                      className="payment-modal-tab"
-                      id="venmo-tab"
-                      onClick={() => paymentTabSelected(1)}
-                    >
-                      <span
-                        className="payment-modal-tab-text subtitle-3"
-                        id="venmo-tab-text"
+                        <span
+                          className="payment-modal-tab-text subtitle-3 selected-tab"
+                          id="credit-tab-text"
+                        >
+                          Credit Card
+                        </span>
+                      </Col>
+                      <Col
+                        size={1}
+                        className="payment-modal-tab"
+                        id="venmo-tab"
+                        onClick={() => paymentTabSelected(1)}
                       >
-                        Venmo
-                      </span>
-                    </Col>
-                    <Col
-                      size={1}
-                      className="payment-modal-tab"
-                      id="paypal-tab"
-                      onClick={() => paymentTabSelected(2)}
-                    >
-                      <span
-                        className="payment-modal-tab-text subtitle-3"
-                        id="paypal-tab-text"
+                        <span
+                          className="payment-modal-tab-text subtitle-3"
+                          id="venmo-tab-text"
+                        >
+                          Venmo
+                        </span>
+                      </Col>
+                      <Col
+                        size={1}
+                        className="payment-modal-tab"
+                        id="paypal-tab"
+                        onClick={() => paymentTabSelected(2)}
                       >
-                        Paypal
-                      </span>
-                    </Col>
-                  </Row>
-                </Grid>
-                {(() => {
-                  if (credit_selected) {
-                    return <DonateCardBox is_mobile={true} />;
-                  } else if (venmo_selected) {
-                    return <VenmoBox is_mobile={true} />;
-                  } else {
-                    return <PaypalBox is_mobile={true} />;
-                  }
-                })()}
-              </Rodal>
+                        <span
+                          className="payment-modal-tab-text subtitle-3"
+                          id="paypal-tab-text"
+                        >
+                          Paypal
+                        </span>
+                      </Col>
+                    </Row>
+                  </Grid>
+                  {(() => {
+                    if (credit_selected) {
+                      return <DonateCardBox is_mobile={true} />;
+                    } else if (venmo_selected) {
+                      return <VenmoBox is_mobile={true} />;
+                    } else {
+                      return <PaypalBox is_mobile={true} />;
+                    }
+                  })()}
+                </Rodal>
+              ) : null}
+
               <div className="main-column-mobile">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
@@ -939,7 +1138,7 @@ const StreamPage = ({ is_soundcheck }) => {
                         </div>
                       </div>
                     </div>
-                    {is_free ||
+                    {/* {is_free ||
                     (purchasedTickets &&
                       purchasedTickets.indexOf(concert_id)) >= 0 ? (
                       <VideoPlayer
@@ -951,7 +1150,7 @@ const StreamPage = ({ is_soundcheck }) => {
                             ? "2020-06-03T19:00:00.000-04: 00"
                             : show_start_time
                         }
-                        artist_name={artist_name}
+                        artist_name={concert_info.artist_name}
                         // concert_name={concert_name}
                         auth={auth}
                         username={username}
@@ -996,13 +1195,37 @@ const StreamPage = ({ is_soundcheck }) => {
                           </button>
                         </div>
                       </div>
-                    )}
+                    )} */}
+                    <VideoPlayer
+                      url={
+                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                      }
+                      start_time={
+                        is_soundcheck
+                          ? "2020-06-03T19:00:00.000-04: 00"
+                          : show_start_time
+                      }
+                      artist_name={concert_info.artist_name}
+                      // concert_name={concert_name}
+                      auth={auth}
+                      username={username}
+                      concert_id={concert_id}
+                      is_live={is_live}
+                      have_upcoming_concert={have_upcoming_concert}
+                    />
                   </div>
                 </div>
                 <div className="chat-main-mobile">
                   <div className="chat-wrapper-mobile">
                     <Chat
-                      chat_name={username ? username : "GUEST"+(Math.floor(Math.random() * 10000) + 10000).toString().substring(1)}
+                      chat_name={
+                        username
+                          ? username
+                          : "GUEST" +
+                            (Math.floor(Math.random() * 10000) + 10000)
+                              .toString()
+                              .substring(1)
+                      }
                       chatStatus={chatStatus}
                       setViewers={getViewers}
                     />
@@ -1031,7 +1254,7 @@ const StreamPage = ({ is_soundcheck }) => {
             sizeUnit={"px"}
             size={18}
             color={"#E465A2"}
-            loading={!artist_name}
+            loading={!concert_info}
           />
         </div>
         // </div>

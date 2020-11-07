@@ -1,21 +1,18 @@
 .start-button {
-  /* padding: 20px 30px; */
-  margin: 0 auto;
-  position: absolute;
-  bottom: -15px;
+  /* margin: 0 auto; */
+  display: flex;
   width: 93%;
-  color: #000000;
-  font-family: "Montserrat", sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 13px;
-  line-height: 16px;
-  letter-spacing: 0.065em;
-  /* top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
-  background: #E465A2;
+  /* height: 48.6px;
+  margin-top: auto;
+  margin-bottom: 24px; */
+  margin: auto;
+  background: #e465a2;
   border-radius: 4px;
+}
+
+.start-button-text {
+  color: #000000;
+  margin: auto;
 }
 
 .artist-start-button {
@@ -26,17 +23,17 @@
 }
 
 .start-button:hover {
-  background: #EA91BD;
+  background: #ea91bd;
 }
 
 .start-button:active {
-  background: #E465A2;
+  background: #e465a2;
 }
 
 .start-button::after {
-  background: #E465A2;
+  background: #e465a2;
 }
 
-.create-room-start-button {
+/* .create-room-start-button {
   width: 93%;
-}
+} */

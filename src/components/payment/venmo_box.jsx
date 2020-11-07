@@ -1,16 +1,8 @@
 // React Imports
-import React, { useState } from "react";
-import NumberFormat from "react-number-format";
-
-// Stripe Imports
-import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
-import stripeTokenHandler from "./stripe";
-
-// Component Imports
-import { useInputValue } from "../custom_hooks";
+import React from "react";
 
 // Image imports
-import venmo_code from "../../images/venmo_codes/onfour_venmo.jpeg";
+// import venmo_code from "../../images/venmo_codes/onfour_venmo.jpeg";
 
 // Styles Imports
 import "./donate_styles.scss";
@@ -22,7 +14,7 @@ const VenmoBox = (props) => {
     <div className="donate-box-container">
       {props.is_mobile ? (
         <div className="venmo-container">
-          <img className="venmo-code" src={venmo_code} alt="venmo-qr"></img>
+          <img className="venmo-code" src={"https://onfour-media.s3.amazonaws.com/website+component/spencer-venmo-flowcode.png"} alt="venmo-qr"></img>
           <div className="venmo-text-container">
             <p className="venmo-text mobile-button-text">
               Scan the bar code to donate. <br></br>onfour will ensure your
@@ -32,7 +24,7 @@ const VenmoBox = (props) => {
         </div>
       ) : (
         <div className="venmo-container">
-          <img className="venmo-code" src={venmo_code} alt="venmo-qr"></img>
+          <img className="venmo-code" src={"https://onfour-media.s3.amazonaws.com/website+component/spencer-venmo-flowcode.png"} alt="venmo-qr"></img>
           <div className="venmo-text-container">
             <p className="venmo-text segmented-button-text">
               Scan the bar code to donate. <br></br>onfour will ensure your

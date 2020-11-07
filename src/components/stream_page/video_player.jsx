@@ -20,7 +20,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
-import { registerIVSTech } from "amazon-ivs-player";
+import { PlayerEventType, registerIVSTech } from "amazon-ivs-player";
 
 // Styling Imports
 import "./stream_styles.scss";
@@ -262,6 +262,9 @@ function VideoPlayer({
         // eslint-disable-next-line no-undef
         const player = IVSPlayer.create();
         player.attachHTMLVideoElement(document.getElementById("video-player"));
+        // player.addEventListener(PlayerEventType.SEEK_COMPLETED, () =>
+        //   player.setMuted(false)
+        // );
 
         // player.load(
         //   "https://fcc3ddae59ed.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527354.channel.DmumNckWFTqz.m3u8"
@@ -269,7 +272,10 @@ function VideoPlayer({
         player.load(
           "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
         );
+        player.setMuted(false);
         player.play();
+
+        // console.log(player.isMuted());
         setGlobalPlayer(player);
       }
     };
@@ -296,18 +302,22 @@ function VideoPlayer({
           {width <= 600 ? (
             <div className="waiting-message-container">
               <h3 className="header-4">Next Stream Coming Soon</h3>
-              {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
+              <h5 className="waiting-message2 header-7">
+                Invite your friends to join you while waiting!
+              </h5>
               <h5 className="header-7">
-                {artist_name}
+                UP NEXT: {artist_name}
                 {/* - {concert_name} */}
               </h5>
             </div>
           ) : (
             <div className="waiting-message-container">
               <h3 className="header-3">Next Stream Coming Soon</h3>
-              {/* <h5 className="waiting-message2">For updates, follow us on Instagram @_onfour</h5> */}
+              <h5 className="waiting-message2 header-5">
+                Invite your friends to join you while waiting!
+              </h5>
               <h5 className="header-5">
-                {artist_name}
+                UP NEXT: {artist_name}
                 {/* - {concert_name} */}
               </h5>
             </div>
@@ -336,6 +346,7 @@ function VideoPlayer({
               playsInline
               autoPlay
               controls
+              muted={false}
               className="ivs-video"
             />
           ) : (
