@@ -48,7 +48,7 @@ const TicketModal = (props) => {
   ) => {
     const template_params = {
       email_recipient: email_recipient,
-      reply_to: "onfour.box@gmail.com",
+      reply_to: "info@onfour.live",
       username: username,
       artist_name: artist_name,
       time: time,

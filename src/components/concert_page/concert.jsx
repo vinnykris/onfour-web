@@ -371,7 +371,7 @@ const Concert = (props) => {
     for (let i = 0; i < emails.length; i++) {
       const template_params = {
         email_receipient: emails[i],
-        reply_to: "onfour.box@gmail.com",
+        reply_to: "info@onfour.live",
         friend_name: user_name,
         musician: concert_info.artist_name,
         date: concert_info.week_day.concat(
@@ -400,7 +400,7 @@ const Concert = (props) => {
   ) => {
     const template_params = {
       email_recipient: email_recipient,
-      reply_to: "onfour.box@gmail.com",
+      reply_to: "info@onfour.live",
       username: username,
       artist_name: artist_name,
       time: time,
