@@ -118,6 +118,7 @@ listFutureConcerts(filter: $filter, limit: 1000) {
 export const get_user_data = `query getCreateOnfourRegistration ($input: String!){
 getCreateOnfourRegistration(username: $input) {
   username
+  preferred_username
   first
   concert
   crew
@@ -183,6 +184,15 @@ export const get_user_by_email = `query listUsersByEmail ($input: String!) {
     }
   }
 }
+`;
+
+export const get_user_by_preferred_username = `query listUsersByPreferredUsername($input: String!) {
+  listUsersByPreferredUsername(preferred_username: $input) {
+    items {
+      username
+    }
+  }
+} 
 `;
 
 export const get_crew_by_id = `query getCrew ($input: ID!) {

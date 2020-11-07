@@ -76,6 +76,9 @@ import "react-multi-email/style.css";
 // Image imports
 import Tag from "../tag";
 
+// Utils
+import { determineEmail, determineUsername } from "../../utils/register";
+
 Amplify.configure(awsmobile); // Configuring AppSync API
 
 // Concert is the unique concert page
@@ -253,9 +256,8 @@ const Concert = (props) => {
     Auth.currentAuthenticatedUser({})
       .then(async (user) => {
         setAuth(true);
-        setUsername(user.username);
-        setUserEmail(user.attributes.email);
-        // console.log(user.email);
+        determineUsername(user).then((username) => setUsername(username));
+        determineEmail(user).then((email) => setUserEmail(email));
         // console.log(user.username);
         await fetchData(user.username, user.attributes.email);
         setLoading(false);
@@ -309,6 +311,7 @@ const Concert = (props) => {
       setTotal(concert_info.price);
       concert_date = concert_info.date;
       concert_time = concert_info.time;
+      console.log(concert_info);
     }
   }, [concert_info]);
 
@@ -564,6 +567,10 @@ const Concert = (props) => {
       });
   };
 
+  const goToVenue = () => {
+    history.push("/stream");
+  };
+
   return (
     <div className="concert-page">
       {width <= 600 ? (
@@ -652,14 +659,20 @@ const Concert = (props) => {
                         </span>
                       </div>
                     ) : null}
-                    {has_ticket ? (
+                    {/* {has_ticket ? (
                       <div className="tickets-indicator">
                         <span className="segmented-button-text num-tickets-text">
                           Enter your email on the stream page during the show to
                           enter.
                         </span>
                       </div>
-                    ) : null}
+                    ) : null} */}
+                    <button
+                      className="primary-button button-text full-width-button concert-enter-button"
+                      onClick={goToVenue}
+                    >
+                      {"VIEW STREAM"}
+                    </button>
                   </div>
                   {/* <button
                     className="primary-button button-text full-width-button"
@@ -923,14 +936,22 @@ const Concert = (props) => {
                           </span>
                         </div>
                       ) : null}
-                      {has_ticket ? (
+                      {/* {has_ticket ? (
                         <div className="tickets-indicator">
                           <span className="segmented-button-text num-tickets-text">
                             Enter your email on the stream page during the show
                             to enter.
                           </span>
                         </div>
-                      ) : null}
+                      ) : null} */}
+                      <button
+                        className="primary-button concert-enter-button"
+                        onClick={goToVenue}
+                      >
+                        <span className="button-text concert-button-text">
+                          View Stream
+                        </span>
+                      </button>
                     </div>
                     {/* {has_ticket && (
                       <Row>

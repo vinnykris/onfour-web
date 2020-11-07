@@ -410,7 +410,6 @@ const DashboardPage = ({
               ) : null}
             </div>
           )}
-
           <div className="user-crews-container profile-empty-state">
             <Row className="user-crews-title">
               <Col size={1}>
@@ -487,7 +486,6 @@ const DashboardPage = ({
               )}
             </Row>
           </div>
-
           <CreateCrewModal
             showCrewModal={showCrewModal}
             closeModal={closeModal}

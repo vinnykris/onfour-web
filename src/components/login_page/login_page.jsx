@@ -112,7 +112,9 @@ const Login = (props) => {
                       is_password={true}
                     />
                   </div>
-                  <div style={{ color: "red" }}>{error}</div>
+                  <div style={{ color: "red" }}>
+                    {error.replace("UserMigration failed with error ", "")}
+                  </div>
                   <button
                     className="primary-button button-text signin-submit-button"
                     type="submit"
@@ -139,6 +141,39 @@ const Login = (props) => {
                     </NavLink>
                     .
                   </div>
+                  <Row>
+                    <div className="sign-in-divider"></div>
+                    <text className="header-7 sign-in-divider-text">or</text>
+                    <div className="sign-in-divider"></div>
+                  </Row>
+                  <Row className="social-sign-in-container">
+                    <button
+                      onClick={() =>
+                        Auth.federatedSignIn({
+                          provider: "Google",
+                        })
+                      }
+                      className="social-sign-in-button"
+                    >
+                      <text className="segmented-button-text social-sign-in-text">
+                        Sign In With Google
+                      </text>
+                    </button>
+                  </Row>
+                  <Row className="social-sign-in-container">
+                    <button
+                      onClick={() =>
+                        Auth.federatedSignIn({
+                          provider: "Facebook",
+                        })
+                      }
+                      className="social-sign-in-button"
+                    >
+                      <text className="segmented-button-text social-sign-in-text">
+                        Sign In With Facebook
+                      </text>
+                    </button>
+                  </Row>
                 </form>
               ) : (
                 <form
@@ -201,6 +236,41 @@ const Login = (props) => {
                     </NavLink>
                     .
                   </div>
+                  <Row>
+                    <div className="sign-in-divider-mobile"></div>
+                    <text className="header-8 sign-in-divider-text-mobile">
+                      or
+                    </text>
+                    <div className="sign-in-divider-mobile"></div>
+                  </Row>
+                  <Row className="social-sign-in-container">
+                    <button
+                      onClick={() =>
+                        Auth.federatedSignIn({
+                          provider: "Google",
+                        })
+                      }
+                      className="social-sign-in-button"
+                    >
+                      <text className="segmented-button-text social-sign-in-text">
+                        Sign In With Google
+                      </text>
+                    </button>
+                  </Row>
+                  <Row className="social-sign-in-container">
+                    <button
+                      onClick={() =>
+                        Auth.federatedSignIn({
+                          provider: "Facebook",
+                        })
+                      }
+                      className="social-sign-in-button"
+                    >
+                      <text className="segmented-button-text social-sign-in-text">
+                        Sign In With Facebook
+                      </text>
+                    </button>
+                  </Row>
                 </form>
               )}
             </div>
