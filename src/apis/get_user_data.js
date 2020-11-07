@@ -141,10 +141,17 @@ export const fetchUserConcerts = async () => {
 // RSVP'd shows on a user's profile
 export const getUpcomingPurchasedShows = async (width, username) => {
   const user_concerts = await fetchUserConcerts();
-  user_concerts.sort((a, b) =>
-    moment(a.data.getConcert.date + "T" + a.data.getConcert.time).diff(
+  console.log(user_concerts);
+  user_concerts.sort((a, b) => {
+    if (!a.data.getConcert) return;
+    if (!b.data.getConcert) return;
+    // console.log(a);
+    // console.log(b)
+    return moment(a.data.getConcert.date + "T" + a.data.getConcert.time).diff(
       moment(b.data.getConcert.date + "T" + b.data.getConcert.time)
     )
+  }
+    
   );
   var upcoming_concerts = [];
   // The past_concerts is not returned for this function
@@ -162,6 +169,7 @@ export const getUpcomingPurchasedShows = async (width, username) => {
 
   if (user_concerts !== []) {
     for await (const data of user_concerts) {
+      if (!data.data.getConcert) continue;
       if (data.data.getConcert.is_future) {
         upcoming_concerts.push(
           formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
@@ -178,7 +186,7 @@ export const getUpcomingPurchasedShows = async (width, username) => {
         );
         all_ticketstubs.push(
           <ProfileStub
-            img={await data.data.getConcert.stub_url}
+            img={data.data.getConcert.stub_url}
             className="profile-stub-component"
           />
         );
