@@ -411,7 +411,7 @@ const DashboardPage = ({
             </div>
           )}
 
-          <div className="user-crews-container profile-empty-state">
+          {/* <div className="user-crews-container profile-empty-state">
             <Row className="user-crews-title">
               <Col size={1}>
                 <h4 className="profile-preview-content-header header-5">
@@ -486,14 +486,14 @@ const DashboardPage = ({
                 </Col>
               )}
             </Row>
-          </div>
+          </div> */}
 
-          <CreateCrewModal
+          {/* <CreateCrewModal
             showCrewModal={showCrewModal}
             closeModal={closeModal}
             currentUsername={username}
             currentUserEmail={userEmail}
-          />
+          /> */}
         </Col>
       </Row>
     </Col>

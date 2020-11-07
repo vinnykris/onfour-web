@@ -110,12 +110,11 @@ const Profile = (props) => {
     setCurrentPage("ticketstub");
     if (
       document.getElementById("dashboard-icon") &&
-      document.getElementById("ticket-icon")&& 
-      document.getElementById("profile-icon")
+      document.getElementById("ticket-icon")
     ) {
       document.getElementById("dashboard-icon").style.opacity = 0.5;
       document.getElementById("ticket-icon").style.opacity = 1;
-      document.getElementById("profile-icon").style.opacity=0.5;
+      // document.getElementById("profile-icon").style.opacity=0.5;
     }
   };
 
@@ -123,28 +122,27 @@ const Profile = (props) => {
     setCurrentPage("dashboard");
     if (
       document.getElementById("dashboard-icon") &&
-      document.getElementById("ticket-icon") &&
-      document.getElementById("profile-icon")
+      document.getElementById("ticket-icon")
     ) {
       document.getElementById("dashboard-icon").style.opacity = 1;
       document.getElementById("ticket-icon").style.opacity = 0.5;
-      document.getElementById("profile-icon").style.opacity=0.5;
+      // document.getElementById("profile-icon").style.opacity=0.5;
     }
   };
-  const editprofilepage=()=>{
+  // const editprofilepage=()=>{
     
-    setCurrentPage("EditProfile");
-    if (
-      document.getElementById("dashboard-icon") &&
-      document.getElementById("ticket-icon")&& 
-      document.getElementById("profile-icon")
-    ) {
-      document.getElementById("dashboard-icon").style.opacity = 0.5;
-      document.getElementById("ticket-icon").style.opacity = 0.5;
-      document.getElementById("profile-icon").style.opacity=1;
-    }
+  //   setCurrentPage("EditProfile");
+  //   if (
+  //     document.getElementById("dashboard-icon") &&
+  //     document.getElementById("ticket-icon")&& 
+  //     document.getElementById("profile-icon")
+  //   ) {
+  //     document.getElementById("dashboard-icon").style.opacity = 0.5;
+  //     document.getElementById("ticket-icon").style.opacity = 0.5;
+  //     document.getElementById("profile-icon").style.opacity=1;
+  //   }
     
-  };
+  // };
 
   return (
     <div className="profile-page">
@@ -165,20 +163,20 @@ const Profile = (props) => {
                 <Row>
                   <img
                     src={ticketIcon}
-                    className="profile-dashboard-icon initial-highlight"
+                    className="profile-dashboard-icon"
                     id="ticket-icon"
                     onClick={goToTicket}
                   ></img>
                 </Row>
-                <Row>
+                {/* <Row>
                   <img
                   src={profileIcon}
-                  className="profile-dashboard-icon initial-highlight"
+                  className="profile-dashboard-icon"
                   id="profile-icon"
                   onClick={editprofilepage}
                 >
                   </img>
-                </Row>
+                </Row> */}
               </div>
               
             </Col>
