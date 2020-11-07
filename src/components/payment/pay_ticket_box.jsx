@@ -38,7 +38,6 @@ const PayTicketBox = (props) => {
   }, [props]);
 
   useEffect(() => {
-    console.log(allow_custom_price);
     if (allow_custom_price) {
       const subtotal = parseFloat(props.total + user_price, 10);
       setTotalPrice(subtotal);
@@ -51,7 +50,6 @@ const PayTicketBox = (props) => {
       }
     } else {
       const subtotal = parseFloat(props.total, 10).toFixed(2);
-      console.log(subtotal);
       if (subtotal > 0) {
         const concert_charge = parseFloat(subtotal, 10);
         //const service_charge = parseFloat(concert_charge * 0.15, 10);
