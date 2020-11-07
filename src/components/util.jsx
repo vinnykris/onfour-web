@@ -75,7 +75,7 @@ export const createUpcomingObject = (data, artist_data) => {
     twitter: artist_data.twitter,
     spotify: artist_data.spotify,
     soundcloud: artist_data.soundcloud,
-    merch: artist_data.soundcloud,
+    merch: artist_data.merch,
     location: data.location,
     suggested_price: data.suggested_price,
     minimum_price: data.minimum_price,

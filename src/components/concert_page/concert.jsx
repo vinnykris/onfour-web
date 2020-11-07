@@ -347,6 +347,14 @@ const Concert = (props) => {
     setOpenModal(false);
   };
 
+  useEffect(() => {
+    if (open_modal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [open_modal]);
+
   // Go to checkout page for paid concert
   const goToCheckout = () => {
     // console.log("go to checkout");

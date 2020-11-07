@@ -227,6 +227,8 @@ const StreamPage = ({ is_soundcheck }) => {
       setConcertCrews(JSON.parse(info_list[0].crew_list));
       setRSVPList(info_list[0].rsvp_list);
       setConcertInfo(createUpcomingObject(concert_data, artist_data));
+      console.log(artist_data);
+      console.log(createUpcomingObject(concert_data, artist_data));
     } else {
       setHaveUpcomingConcert(false);
     }
@@ -751,7 +753,7 @@ const StreamPage = ({ is_soundcheck }) => {
                             </h5> */}
                             <div className="stream-artist-bio-container">
                               <p className="body-2 stream-artist-bio">
-                                {artist_bio}
+                                {concert_info.description}
                               </p>
                             </div>
                           </Col>
