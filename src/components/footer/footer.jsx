@@ -116,12 +116,12 @@ const Footer = () => {
                       onClick={() =>
                         Analytics.record({ name: "contactUsFooter" })
                       }
-                      href="mailto:onfour.box@gmail.com"
+                      href="mailto:info@onfour.live"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="header-8 footer-text-body footer-link"
                     >
-                      onfour.box@gmail.com
+                      info@onfour.live
                     </a>
                   </div>
                 </div>
@@ -256,7 +256,7 @@ const Footer = () => {
                         onClick={() =>
                           Analytics.record({ name: "contactUsFooter" })
                         }
-                        href="mailto:onfour.box@gmail.com"
+                        href="mailto:info@onfour.live"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="header-10 footer-text-body mobile-footer-link"

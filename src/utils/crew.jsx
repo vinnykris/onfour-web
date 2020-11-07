@@ -305,7 +305,7 @@ export const sendCrewInvites = async (user_name, emails, crew_name) => {
   for (let i = 0; i < emails.length; i++) {
     const template_params = {
       email_receipient: emails[i],
-      reply_to: "onfour.box@gmail.com",
+      reply_to: "info@onfour.live",
       friend_name: user_name,
       crew_name: crew_name,
       concert_link: "https://www.onfour.live/profile/",
