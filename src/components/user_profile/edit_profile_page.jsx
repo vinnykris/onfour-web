@@ -24,7 +24,7 @@ import "./edit_profile_page_styles.scss";
 import Editicon from "../../images/icons/edit_icon.png"; 
 import Edit from "../../images/icons/Edit.png";
 // Utils
-import InputOne from "../inputs/input_three";
+import InputThree from "../inputs/input_three";
 import InputThreeWide from '../inputs/input_three_wide';
 
 Amplify.configure(awsmobile); // Configuring AppSync API
@@ -133,21 +133,21 @@ const EditProfile = ({username,userEmail})=>{
                             <div className="header-8 username-box" >Username</div>
                             <div className="username-box-container">
                                 {Submit?(
-                                    <InputOne
+                                    <InputThree
                                         id='third_slot'
                                         type='text'
                                         is_required={true}
                                         is_disabled={false}
                                     >
-                                    </InputOne>    
+                                    </InputThree>    
                                 ) : (
-                                    <InputOne
+                                    <InputThree
                                         id='third_slot'
                                         type='text'
                                         value={username}
                                         is_required={true}
                                         is_disabled = {true}
-                                    ></InputOne>
+                                    ></InputThree>
                                 )}
                             </div>
                         </div>
@@ -155,12 +155,12 @@ const EditProfile = ({username,userEmail})=>{
                             <div className="header-8 input-email-edit-profile" style={{ float: 'left',marginBottom:"6px" }}>Email</div>
                             <div className="email-box-edit-profile" >
                                 <div className="email-container-box">
-                                    <InputOne
+                                    <InputThree
                                     id='second_slot'
                                     type='text'
                                     value={userEmail}
                                     is_disabled = {true}
-                                    ></InputOne> 
+                                    ></InputThree> 
                                 </div>
                                 {Submit ?(
                                   <div className="email-warning-container">
@@ -206,117 +206,8 @@ const EditProfile = ({username,userEmail})=>{
             
           </Row>
         </Col>
-        {/* <Col className="profile-column" size={1}>
-            <Row>
-              <Col size={1} className="stubs-column">
-                {width <= 600 ? (
-                  <FlexibleGrid content_list={stubs} num_cols={1} />
-                ) : (
-                  <div>
-                    {width <= 1280 ? (
-                      <div>
-                        {width <= 768 ? (
-                          <FlexibleGrid content_list={stubs} num_cols={2} />
-                        ) : (
-                          <FlexibleGrid content_list={stubs} num_cols={3} />
-                        )}
-                      </div>
-                    ) : (
-                      <FlexibleGrid content_list={stubs} num_cols={4} />
-                    )}
-                  </div>
-                )}
-              </Col>
-            </Row>
-        </Col> */}
       </Row>
     </Col>
-        // <div className = "edit-profile-page-content">
-        //     <div className="header-5 Profile-edit-profile">Profile</div>
-        //     <div classname="user-initials-edit-profile">
-        //         <div className="edit-profile-page-contianer">
-        //             <p className="header-4 username-edit-profile" data-letters={(Firstchar)}></p>
-        //             <div className="header-4 username">{(username)}</div>    
-        //         </div>
-        //     </div>
-        //     <form className="edit-profile-section"
-        //     action="/"
-        //     id="register"
-        //     onSubmit={usernameSubmit}
-        //     >
-        //         <div className="edit-profile-container">
-        //             <div className="edit-profile-sub-container">         
-        //                 <div className= "edit-profile-overview-container header-5">Overview
-        //                     {Submit ?( 
-        //                         <p className="header-5 edit-profile-overview" style={{ float: 'left' ,width:'415'}}>    
-        //                             <span
-        //                             className="Save-changes-edit-profile"
-        //                             type="submit"
-        //                             value="Submit"
-        //                             onClick={saveChanges}
-        //                             >
-        //                                 Save changes
-        //                             </span>
-        //                         </p>
-        //                     ):(     
-        //                         <p className="header-5 edit-profile-overview" style={{ float: 'left' ,width:'415'}}>
-        //                             <img
-        //                             src={Editicon}
-        //                             className="edit-pointer-edit-profile"
-        //                             onClick={saveChanges}
-        //                             ></img>
-        //                             <img className="edit-pointertext-edit-profile" src={Edit} onClick={saveChanges}></img>
-        //                         </p>
-        //                     )}  
-        //                 </div>
-        //                 <br/><br/>
-        //                 <div className=" edit-profile-input-container" >
-        //                     <div className="header-8 username-box" >Username</div>
-        //                     <div className="username-box-container">
-        //                         {Submit?(
-        //                             <InputOne
-        //                                 id='third_slot'
-        //                                 type='text'
-        //                                 placeholder='Username'
-        //                                 is_required={true}
-        //                             >
-        //                             </InputOne>    
-        //                         ) : (
-        //                             <InputOne
-        //                                 id='third_slot'
-        //                                 type='text'
-        //                                 placeholder='Username'
-        //                                 is_required={true}
-        //                                 is_disabled={true}
-        //                             ></InputOne>
-        //                         )}
-        //                     </div>
-        //                 </div>
-        //                 <div className="edit-profile-input-container" >
-        //                     <div className="header-8 input-email-edit-profile" style={{ float: 'left',marginBottom:"6px" }}>Email</div>
-        //                     <div className="email-box-edit-profile" >
-        //                         <div className="email-container-box">
-        //                             <InputOne
-        //                             id='second_slot'
-        //                             type='text'
-        //                             placeholder={userEmail}
-        //                             is_disabled = {true}
-        //                             ></InputOne> 
-        //                         </div>
-        //                         {Submit ?(<div className="email-warning">Sorry, You cannot change the Email Rhythm</div>):(<div></div>)}
-        //                     </div>
-        //                 </div>
-        //                 <div className="reset-passwor">
-        //                     <p className="forgot-footer">
-        //                         <a href="/forgot" className="body-2 signin-link">
-        //                         Reset Password?
-        //                         </a>
-        //                     </p>
-        //                 </div>
-        //             </div>          
-        //         </div>
-        //     </form>
-        // </div>
     );
 };
 export default EditProfile;
