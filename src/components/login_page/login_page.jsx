@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 // Components
 import { Grid, Row, Col } from "../grid";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import InputOne from "../inputs/input_one";
+import InputTwo from "../inputs/input_two";
 import { useWindowDimensions } from "../custom_hooks";
 
 // APIs/Amplify
@@ -90,7 +90,7 @@ const Login = (props) => {
                     Log in with your email or username
                   </div>
                   <div className="register-input-container">
-                    <InputOne
+                    <InputTwo
                       id="email_slot"
                       type="text"
                       name="email"
@@ -101,7 +101,7 @@ const Login = (props) => {
                     />
                   </div>
                   <div className="register-input-container">
-                    <InputOne
+                    <InputTwo
                       id="password_slot"
                       type="password"
                       name="password"
@@ -152,7 +152,7 @@ const Login = (props) => {
                     Log in with your email or username
                   </div>
                   <div className="register-input-container">
-                    <InputOne
+                    <InputTwo
                       id="email_slot"
                       type="text"
                       name="email"
@@ -163,7 +163,7 @@ const Login = (props) => {
                     />
                   </div>
                   <div className="register-input-container">
-                    <InputOne
+                    <InputTwo
                       id="password_slot"
                       type="password"
                       name="password"

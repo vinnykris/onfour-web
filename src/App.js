@@ -76,6 +76,7 @@ function App() {
           <Route exact path="/ticket-agreement" component={PaymentAgreement} />
           <Route exact path="/artiststream" component={ArtistStreamPage} />
           <Route path="*" component={NotFoundPage} />
+          
         </Switch>
         <Footer />
       </Router>

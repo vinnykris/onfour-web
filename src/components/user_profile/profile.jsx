@@ -6,13 +6,10 @@ import { Grid, Row, Col } from "../grid";
 import { useWindowDimensions } from "../custom_hooks";
 import FlexibleGrid from "../flexible_grid/flexible_grid";
 
-// import ProfileStub from "./profile_stub";
-// import Carousel from "react-multi-carousel";
-// import StubSlider from "./stub_slider";
 
+import EditProfile from "./edit_profile_page";
 import DashboardPage from "./dashboard_page";
 import TicketPage from "./ticket_page";
-
 import Auth from "../../apis/UserPool";
 
 // API Imports
@@ -25,6 +22,7 @@ import {
 // Images Imports
 import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.png";
 import ticketIcon from "../../images/icons/local_activity_24px_outlined.png";
+import profileIcon from "../../images/icons/wallet_24px.png";
 
 import "./profile_styles.scss";
 import "react-multi-carousel/lib/styles.css";
@@ -116,6 +114,7 @@ const Profile = (props) => {
     ) {
       document.getElementById("dashboard-icon").style.opacity = 0.5;
       document.getElementById("ticket-icon").style.opacity = 1;
+      // document.getElementById("profile-icon").style.opacity=0.5;
     }
   };
 
@@ -127,8 +126,23 @@ const Profile = (props) => {
     ) {
       document.getElementById("dashboard-icon").style.opacity = 1;
       document.getElementById("ticket-icon").style.opacity = 0.5;
+      // document.getElementById("profile-icon").style.opacity=0.5;
     }
   };
+  // const editprofilepage=()=>{
+    
+  //   setCurrentPage("EditProfile");
+  //   if (
+  //     document.getElementById("dashboard-icon") &&
+  //     document.getElementById("ticket-icon")&& 
+  //     document.getElementById("profile-icon")
+  //   ) {
+  //     document.getElementById("dashboard-icon").style.opacity = 0.5;
+  //     document.getElementById("ticket-icon").style.opacity = 0.5;
+  //     document.getElementById("profile-icon").style.opacity=1;
+  //   }
+    
+  // };
 
   return (
     <div className="profile-page">
@@ -144,6 +158,7 @@ const Profile = (props) => {
                     id="dashboard-icon"
                     onClick={goToDashboard}
                   ></img>
+                  
                 </Row>
                 <Row>
                   <img
@@ -153,9 +168,55 @@ const Profile = (props) => {
                     onClick={goToTicket}
                   ></img>
                 </Row>
+                {/* <Row>
+                  <img
+                  src={profileIcon}
+                  className="profile-dashboard-icon"
+                  id="profile-icon"
+                  onClick={editprofilepage}
+                >
+                  </img>
+                </Row> */}
               </div>
+              
             </Col>
-            {currentPage === "dashboard" ? (
+            {(()=>{
+
+
+              if (currentPage == "dashboard"){
+                return(
+                  <DashboardPage
+                  width={width}
+                  upcoming_concerts={upcoming_concerts}
+                  memories={memories}
+                  history={history}
+                  username={username}
+                  userEmail={userEmail}
+                ></DashboardPage>
+                
+                );
+               }
+              if (currentPage =='EditProfile'){
+                return(
+                <EditProfile
+                username={username}
+                userEmail={userEmail}>
+                  
+                </EditProfile>
+              );}
+              else{
+                return(
+                <TicketPage
+                stubs={stubs}
+                width={width}
+                history={history}
+              ></TicketPage>
+              );
+              }
+              
+            }
+            )()}
+            {/* {currentPage === "dashboard" ? (
               <DashboardPage
                 width={width}
                 upcoming_concerts={upcoming_concerts}
@@ -171,7 +232,7 @@ const Profile = (props) => {
                 history={history}
               ></TicketPage>
             )}
-
+             */}
             {/* <Col size={7}>
             <Row className="header-section">
                 <img src={dashboardIcon} className="profile-header-icon"></img>

@@ -1,0 +1,191 @@
+@import "../../styles.scss";
+
+.edit-profile-page-content {
+  background-color: black;
+  width: 100%;
+  margin-top: -1px;
+}
+
+.edit-profile-input-container {
+  margin-top: 30px;
+}
+
+.edit-profile-artist-bio-container {
+  margin-top: 30px;
+  height: 200px;
+}
+
+
+.edit-profile-grid {
+    height: 100%;
+  }
+.edit-profile-fields-section {
+    height: 100%;
+  }
+  .edit-profile-section{
+    float: left;
+    display: flex;
+  width: 100%;
+  height: 100%;
+    @include respond-to("small") {
+    background: #07070f;
+  }
+  }
+  .edit-profile-container{
+   float: left;
+    display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left:200px;
+  @include respond-to("small") {
+    width: 100%;
+    margin: auto 30px;
+  }
+  }
+  .edit-profile-sub-container{
+    // width: 415px;
+    width: 100%;
+    float:left;
+
+  }
+  
+  .edit-profile-username{
+    padding-bottom: 20px;
+  text-align: left;
+  }
+  .edit-profile-username-text{
+    color: white;
+  width: 100%;
+
+  }
+ 
+  .Profile-edit-profile{
+    float: left;
+    margin-left: 23px;
+    margin-top: 43px;
+    margin-bottom: 30px;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .username-edit-profile{
+    margin-top: -2px;
+    width: 200px;
+    float: left;
+  }
+  p.username-edit-profile{
+    font-size: 24px;
+    width: 200px;
+    float: left;
+    
+  }
+  
+  [data-letters]:before {
+    content:attr(data-letters);
+    margin-left: 0px;
+    margin-right: 0px;
+    display:inline-block;
+    font-size:1em;
+    width:138px;
+    height:138px;
+    line-height:138px;
+    text-align:center;
+    border-radius:50%;
+    background:#04ADC0;
+    vertical-align:middle;
+    color:white;
+    font-size: 24px;
+    float: left;
+  }
+  .edit-profile-username{
+    float: left;
+    transform: translateY(50%);
+  }
+  .edit-profile-page-contianer{
+    width: 935px;
+    display: flex;
+    align-items: flex-start;
+  }
+  .Save-changes-edit-profile{
+    margin-left: 38px;
+    cursor: pointer;
+    color: #E465A2;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 25px;
+    margin-top: 5px;
+    align-items: center;
+    letter-spacing: 0.035em;
+  }
+  .edit-profile-overview-container{
+    display:flex;
+    flex-direction: row;
+    align-items: flex-start;;
+    
+    
+  }
+  .edit-pointer-edit-profile{
+    cursor: pointer;
+    margin-top: 7px;
+    margin-left: 50px;
+  }
+  .edit-pointertext-edit-profile{
+    cursor: pointer;
+    margin-left: 6px;
+    margin-top: 10px;
+  }
+
+  .reset-password-link {
+    float: left;
+    color: $primary-color !important;
+  }
+
+  .edit-profile-overview{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .email-box-edit-profile{
+    display: flex;
+    width: 100%;
+    height: 58.12px;
+  }
+  .username-box{
+    margin-top: -15px;
+    float: left;
+    margin-bottom: 6px;
+  }
+   .email-container-box{
+     width: 40%;
+     min-width: 170px;
+   }
+   .username-box-container{
+     width:40%;
+     min-width: 170px;
+     height: 58.12px;
+   }
+
+   .artist-bio-box-container {
+     width:60%;
+     min-width: 200px;
+     height: 180px;
+   }
+  
+   .email-warning-container {
+     height: 100%;
+     width: 60%;
+     position: relative;
+   }
+
+   .email-warning{
+    position: absolute;
+    top: 50%;
+    transform: translateY(50%);
+    font-weight: inherit;
+    color: #DB0000 !important;
+    margin-left: 20px;
+    line-height: 0px !important;
+   }
