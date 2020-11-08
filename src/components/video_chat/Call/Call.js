@@ -176,12 +176,14 @@ export default function Call(props) {
         smallTiles.push(tile);
       }
     });
-
-    if (artist_count > 0) {
-      props.setArtistInTheHouse(true);
-    } else {
-      props.setArtistInTheHouse(false);
+    if (!props.artistView) {
+      if (artist_count > 0) {
+        props.setArtistInTheHouse(true);
+      } else {
+        props.setArtistInTheHouse(false);
+      }
     }
+    
     return [largeTiles, smallTiles];
   }
 
