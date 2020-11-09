@@ -5,7 +5,7 @@ import "./access_modal_styles.scss";
 
 import { useInputValue, useWindowDimensions } from "../custom_hooks";
 
-import InputOne from "../inputs/input_one";
+import InputTwo from "../inputs/input_two";
 
 const AccessModal = (props) => {
   const [show_modal, setShowModal] = useState(true);
@@ -55,7 +55,7 @@ const AccessModal = (props) => {
                 </span>
               </div>
               <div className="enter-email-input">
-                <InputOne
+                <InputTwo
                   id="stream-email-input"
                   type="email"
                   name="access-email"
@@ -127,7 +127,7 @@ const AccessModal = (props) => {
                 </span>
               </div>
               <div className="enter-email-input">
-                <InputOne
+                <InputTwo
                   id="stream-email-input"
                   type="email"
                   name="access-email"
