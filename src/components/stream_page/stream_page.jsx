@@ -234,6 +234,8 @@ const StreamPage = ({ is_soundcheck }) => {
       setConcertCrews(JSON.parse(info_list[0].crew_list));
       setRSVPList(info_list[0].rsvp_list);
       setConcertInfo(createUpcomingObject(concert_data, artist_data));
+      console.log(artist_data);
+      console.log(createUpcomingObject(concert_data, artist_data));
     } else {
       setHaveUpcomingConcert(false);
     }
@@ -758,7 +760,7 @@ const StreamPage = ({ is_soundcheck }) => {
                             </h5> */}
                             <div className="stream-artist-bio-container">
                               <p className="body-2 stream-artist-bio">
-                                {artist_bio}
+                                {concert_info.description}
                               </p>
                             </div>
                           </Col>
@@ -1029,85 +1031,114 @@ const StreamPage = ({ is_soundcheck }) => {
             </Grid>
           ) : (
             <div className="mobile-grid-stream">
-              <Rodal
-                visible={open_modal}
-                onClose={closeModal}
-                width={96}
-                height={100}
-                measure="%"
-                customStyles={{
-                  padding: 0,
-                  overflow: scroll,
-                  maxHeight: "400px",
-                  maxWidth: "350px",
-                  background:
-                    "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
-                  boxShadow:
-                    "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
-                  borderRadius: "10px",
-                }}
-                className="rodal-custom"
-              >
-                <Grid className="payment-modal-grid">
-                  <Row className="payment-modal-header">
-                    <Col size={1}>
-                      <h4 className="payment-modal-header-text header-8">
-                        Donate to {concert_info.artist_name}
-                      </h4>
-                    </Col>
-                  </Row>
-                  <Row className="payment-modal-header">
-                    <Col
-                      size={1}
-                      className="payment-modal-tab selected-tab"
-                      id="credit-tab"
-                      onClick={() => paymentTabSelected(0)}
-                    >
-                      <span
-                        className="payment-modal-tab-text subtitle-3 selected-tab"
-                        id="credit-tab-text"
+              {show_access_modal ? (
+                <AccessModal
+                  access_list={concert_info.rsvp_list}
+                  user_email={user_email}
+                  openTicketModal={openTicketModal}
+                  visible={show_access_modal}
+                  onClose={closeAccessModal}
+                  rsvp_list={concert_info.rsvp_list}
+                  checkAccess={checkForAccess}
+                  access_error={access_error}
+                  is_mobile={width <= 600}
+                />
+              ) : null}
+              {show_payment_modal ? (
+                <TicketModal
+                  visible={show_payment_modal}
+                  onClose={() => setShowPaymentModal(false)}
+                  concert_info={concert_info}
+                  auth={auth}
+                  username={username}
+                  user_email={user_email}
+                  artist_name={concert_info.artist_name}
+                  onTicketingComplete={() => setShowPaymentModal(false)}
+                  is_mobile={width <= 600}
+                />
+              ) : null}
+              {open_modal ? (
+                <Rodal
+                  visible={open_modal}
+                  onClose={closeModal}
+                  width={96}
+                  height={100}
+                  measure="%"
+                  customStyles={{
+                    padding: 0,
+                    overflow: scroll,
+                    maxHeight: "400px",
+                    maxWidth: "350px",
+                    background:
+                      "linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)), #07070F",
+                    boxShadow:
+                      "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
+                    borderRadius: "10px",
+                  }}
+                  className="rodal-custom"
+                >
+                  <Grid className="payment-modal-grid">
+                    <Row className="payment-modal-header">
+                      <Col size={1}>
+                        <h4 className="payment-modal-header-text header-8">
+                          Donate to {concert_info.artist_name}
+                        </h4>
+                      </Col>
+                    </Row>
+                    <Row className="payment-modal-header">
+                      <Col
+                        size={1}
+                        className="payment-modal-tab selected-tab"
+                        id="credit-tab"
+                        onClick={() => paymentTabSelected(0)}
                       >
-                        Credit Card
-                      </span>
-                    </Col>
-                    <Col
-                      size={1}
-                      className="payment-modal-tab"
-                      id="venmo-tab"
-                      onClick={() => paymentTabSelected(1)}
-                    >
-                      <span
-                        className="payment-modal-tab-text subtitle-3"
-                        id="venmo-tab-text"
+                        <span
+                          className="payment-modal-tab-text subtitle-3 selected-tab"
+                          id="credit-tab-text"
+                        >
+                          Credit Card
+                        </span>
+                      </Col>
+                      <Col
+                        size={1}
+                        className="payment-modal-tab"
+                        id="venmo-tab"
+                        onClick={() => paymentTabSelected(1)}
                       >
-                        Venmo
-                      </span>
-                    </Col>
-                    <Col
-                      size={1}
-                      className="payment-modal-tab"
-                      id="paypal-tab"
-                      onClick={() => paymentTabSelected(2)}
-                    >
-                      <span
-                        className="payment-modal-tab-text subtitle-3"
-                        id="paypal-tab-text"
+                        <span
+                          className="payment-modal-tab-text subtitle-3"
+                          id="venmo-tab-text"
+                        >
+                          Venmo
+                        </span>
+                      </Col>
+                      <Col
+                        size={1}
+                        className="payment-modal-tab"
+                        id="paypal-tab"
+                        onClick={() => paymentTabSelected(2)}
                       >
-                        Paypal
-                      </span>
-                    </Col>
-                  </Row>
-                </Grid>
-                {(() => {
-                  if (credit_selected) {
-                    return <DonateCardBox is_mobile={true} />;
-                  } else if (venmo_selected) {
-                    return <VenmoBox is_mobile={true} />;
-                  } else {
-                    return <PaypalBox is_mobile={true} />;
-                  }
-                })()}
-              </Rodal>
+                        <span
+                          className="payment-modal-tab-text subtitle-3"
+                          id="paypal-tab-text"
+                        >
+                          Paypal
+                        </span>
+                      </Col>
+                    </Row>
+                  </Grid>
+                  {(() => {
+                    if (credit_selected) {
+                      return <DonateCardBox is_mobile={true} />;
+                    } else if (venmo_selected) {
+                      return <VenmoBox is_mobile={true} />;
+                    } else {
+                      return <PaypalBox is_mobile={true} />;
+                    }
+                  })()}
+                </Rodal>
+              ) : null}
+
               <div className="main-column-mobile">
                 <div className="mobile-row stream-main-mobile">
                   <div className="stream-wrapper-mobile">
@@ -1122,7 +1153,7 @@ const StreamPage = ({ is_soundcheck }) => {
                         </div>
                       </div>
                     </div>
-                    {is_free ||
+                    {/* {is_free ||
                     (purchasedTickets &&
                       purchasedTickets.indexOf(concert_id)) >= 0 ? (
                       <VideoPlayer
@@ -1179,7 +1210,24 @@ const StreamPage = ({ is_soundcheck }) => {
                           </button>
                         </div>
                       </div>
-                    )}
+                    )} */}
+                    <VideoPlayer
+                      url={
+                        "https://d20g8tdvm6kr0b.cloudfront.net/out/v1/474ceccf630440328476691e9bdeaeee/index.m3u8"
+                      }
+                      start_time={
+                        is_soundcheck
+                          ? "2020-06-03T19:00:00.000-04: 00"
+                          : show_start_time
+                      }
+                      artist_name={concert_info.artist_name}
+                      // concert_name={concert_name}
+                      auth={auth}
+                      username={username}
+                      concert_id={concert_id}
+                      is_live={is_live}
+                      have_upcoming_concert={have_upcoming_concert}
+                    />
                   </div>
                 </div>
                 <div className="chat-main-mobile">

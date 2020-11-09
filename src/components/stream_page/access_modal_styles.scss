@@ -32,6 +32,10 @@
     ),
     #07070f;
   border-radius: 2px;
+  @include respond-to("small") {
+    height: 60%;
+    width: 95%;
+  }
 }
 
 .enter-email-prompt {
@@ -68,6 +72,11 @@
 .buy-ticket-prompt {
   display: flex;
   margin: auto;
+  @include respond-to("small") {
+    display: inline;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
 }
 
 .open-ticket-modal-link {

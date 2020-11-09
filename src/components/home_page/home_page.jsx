@@ -100,7 +100,7 @@ const HomePage = () => {
   // This function gets called when user clicked the "Send us an email"
   // It will open a mailbox with onfour.box@gmail.com as the receiver
   const sendEmail = () => {
-    const url = "mailto:onfour.box@gmail.com";
+    const url = "mailto:info@onfour.live";
     window.open(url, "_blank");
   };
 
