@@ -159,17 +159,6 @@ export default function Tile(props) {
             id={fans_microphone_id}
           ></i>
         )}
-        {/* <div className="range-slider-container">
-              <RangeSlider
-                value={volume_value}
-                onChange={changeEvent => {
-                  setVolumeValue(changeEvent.target.value);
-                  changeVolume(changeEvent.target.value);
-                }}
-              />
-            </div> */}
-        {/* </div>
-        ):null} */}
         <div className="video-call-participant-name tag-text">
           {props.username}
         </div>
