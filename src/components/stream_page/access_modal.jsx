@@ -127,7 +127,7 @@ const AccessModal = (props) => {
                 </span>
               </div>
               <div className="enter-email-input">
-                <InputOne
+                <InputTwo
                   id="stream-email-input"
                   type="email"
                   name="access-email"
