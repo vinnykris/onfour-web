@@ -17,8 +17,7 @@ const AccessModal = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.checkAccess(email_input.value);
-    console.log(email_input);
+    props.checkAccess(email_input.value.toLowerCase());
   };
   return (
     <div>

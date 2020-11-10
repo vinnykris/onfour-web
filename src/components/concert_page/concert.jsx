@@ -436,7 +436,7 @@ const Concert = (props) => {
     }
 
     const concert_rsvp_info = await getOneConcert(concert_id);
-    const rsvp_list = [...concert_rsvp_info.rsvp_list, email];
+    const rsvp_list = [...concert_rsvp_info.rsvp_list, email.toLowerCase()];
 
     const concert_payload = {
       id: concert_id,
