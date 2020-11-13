@@ -5,9 +5,6 @@ import React, { useEffect, useState, useRef } from "react";
 import ReactPlayer from "react-player";
 import MoonLoader from "react-spinners/MoonLoader";
 
-// Icon Imports
-import cheer_icon from "../../images/icons/stream_icons/cheer_icon.png"
-
 // VideoJS Imports
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
@@ -23,7 +20,12 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../../graphql/mutations";
 import Amplify, { Analytics } from "aws-amplify";
 import awsmobile from "../../apis/AppSync";
-import { PlayerEventType, registerIVSTech } from "amazon-ivs-player";
+import {
+  PlayerError,
+  PlayerState,
+  PlayerEventType,
+  registerIVSTech,
+} from "amazon-ivs-player";
 
 // Styling Imports
 import "./stream_styles.scss";
@@ -43,7 +45,6 @@ function VideoPlayer({
   is_live,
   stream_volume,
   have_upcoming_concert,
-  is_artist_in_the_house,
 }) {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   var player = null;
@@ -270,14 +271,16 @@ function VideoPlayer({
         //   player.setMuted(false)
         // );
 
+        getStream(player);
+
         // player.load(
         //   "https://fcc3ddae59ed.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527354.channel.DmumNckWFTqz.m3u8"
         // );
-        player.load(
-          "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
-        );
-        player.setMuted(false);
-        player.play();
+        // player.load(
+        //   "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
+        // );
+        //player.setMuted(false);
+        // player.play();
 
         // console.log(player.isMuted());
         setGlobalPlayer(player);
@@ -288,6 +291,53 @@ function VideoPlayer({
       document.body.removeChild(script);
     };
   }, []);
+
+  const getStream = (player) => {
+    // Try to load stream. This will either successfully load the stream or start an infinite loading cycle.
+    player.load(
+      "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
+    );
+    // var load_interval;
+
+    // For loop that runs through all of the Player States, and adds event listeners for each
+    for (let state of Object.values(PlayerState)) {
+      player.addEventListener(state, () => {
+        // If player receives "Ended" or "Idle" event, attempt to load again. This will restart the loading cycle.
+        if (state === "Ended" || state === "Idle") {
+          console.log(state);
+          console.log("stream ended");
+          //load_interval = setInterval(tryLoadingStream, 1000);
+          player.load(
+            "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
+          );
+          return;
+        }
+
+        // If code reaches this point, that means that the stream was successfully loaded. Play the stream, don't need to load.
+        //clearInterval(load_interval);
+        console.log(state);
+        player.play();
+      });
+    }
+
+    // Listens for any error events. Errors occur when player attempts to load stream and there is no stream.
+    // If player finds error, player attempts to load again, thus creating an infinite load cycle that only
+    // ends once the stream is successfully loaded.
+    player.addEventListener(PlayerEventType.ERROR, (error) => {
+      console.error("ERROR", error);
+      //load_interval = setInterval(tryLoadingStream, 1000);
+      player.load(
+        "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
+      );
+    });
+
+    // const tryLoadingStream = () => {
+    //   player.load(
+    //     "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
+    //   );
+    //   console.log("trying to load");
+    // };
+  };
 
   useEffect(() => {
     if (stream_volume) {
@@ -344,27 +394,15 @@ function VideoPlayer({
             //   <video ref={player_ref} className="video-js" />
             // </div>
             // <video id="video-player" playsInline controls></video>
-            <div className="video-player-inner-wrapper">
-              <video
-                id="video-player"
-                ref={video_el}
-                playsInline
-                autoPlay
-                controls
-                muted={false}
-                className="ivs-video"
-              >
-              </video>
-              {is_artist_in_the_house? (
-                <div className="artist-in-the-house-container">
-                  <div className="artist-in-the-house-inner-container">
-                    <img src={cheer_icon} className="artist-in-the-house-icon"></img>
-                    <div className="segmented-button-text artist-in-the-house-text">The artist is viewing your room!</div>
-                  </div>
-                </div>
-              ) : null
-              }
-            </div>
+            <video
+              id="video-player"
+              ref={video_el}
+              playsInline
+              autoPlay
+              controls
+              muted={false}
+              className="ivs-video"
+            />
           ) : (
             // <video id="video-player" playsinline controls autoplay></video>
             // <div class="video-container">
