@@ -38,6 +38,7 @@ function VideoPlayer({
   url,
   start_time,
   artist_name,
+  artist_img,
   concert_name,
   auth,
   username,
@@ -46,6 +47,8 @@ function VideoPlayer({
   stream_volume,
   have_upcoming_concert,
 }) {
+  const [is_artist_backstage, setIsArtistBackstage] = useState(true);
+
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   var player = null;
   const div_el = useRef(null);
@@ -253,6 +256,7 @@ function VideoPlayer({
   //   };
   // }, []);
   useEffect(() => {
+    console.log(artist_img);
     // IVS WORKAROUND SOURCE: https://github.com/cm-wada-yusuke/amazon-ivs-react-js-sample/blob/master/src/AmazonIVSWorkaround.js
     const script = document.createElement("script");
 
@@ -317,6 +321,7 @@ function VideoPlayer({
         //clearInterval(load_interval);
         console.log(state);
         player.play();
+        setIsArtistBackstage(false);
       });
     }
 
@@ -384,7 +389,7 @@ function VideoPlayer({
         </div>
       ) : have_upcoming_concert ? (
         <div className="player-wrapper" ref={div_el}>
-          {is_live ? (
+          {!is_artist_backstage ? (
             // <div data-vjs-player>
             //   <div className="vjs-control-bar control-bar-top">
             //     <div className="live-indicator">
@@ -409,19 +414,19 @@ function VideoPlayer({
             // <video id="amazon-ivs-videojs" class="video-js vjs-4-3 vjs-big-play-centered" controls autoplay playsinline></video>
             // </div>
             <div className="waiting-for-artist-screen">
+              <img src={artist_img} className="artist-img-background"></img>
               <div className="waiting-message-container">
                 <div className="not-live-loader">
                   <MoonLoader
                     sizeUnit={"px"}
                     size={30}
                     color={"white"}
-                    loading={!is_live}
+                    loading={is_artist_backstage}
                   />
                 </div>
                 <br></br>
                 <h7 className="waiting-message2">
-                  The artist is still backstage, the performance should begin
-                  soon.
+                  {artist_name} is backstage! Hang tight.
                 </h7>
                 <br></br>
                 <h7 className="waiting-message2">
