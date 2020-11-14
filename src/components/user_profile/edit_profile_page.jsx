@@ -20,7 +20,7 @@ import "./edit_profile_page_styles.scss";
 import Editicon from "../../images/icons/edit_icon.png";
 import Edit from "../../images/icons/Edit.png";
 // Utils
-import InputOne from "../inputs/input_one";
+import InputTwo from "../inputs/input_two";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -168,7 +168,7 @@ const EditProfile = ({
             <div className="edit-profile-input-container">
               <div className="header-8 username-box">Username</div>
               <div className="username-box-container">
-                <InputOne
+                <InputTwo
                   id="third_slot"
                   type="text"
                   value={
@@ -182,7 +182,7 @@ const EditProfile = ({
                   is_required={true}
                   is_disabled={Submit ? false : true}
                   text_color={Submit ? "white" : "rgba(255, 255, 255, 0.28)"}
-                ></InputOne>
+                ></InputTwo>
                 <div
                   className={
                     isMobile
@@ -204,12 +204,12 @@ const EditProfile = ({
               </div>
               <div className="email-box-edit-profile">
                 <div className="email-container-box">
-                  <InputOne
+                  <InputTwo
                     id="second_slot"
                     type="text"
                     placeholder={userEmail}
                     is_disabled={true}
-                  ></InputOne>
+                  ></InputTwo>
                 </div>
               </div>
               {Submit ? (

@@ -24,27 +24,12 @@ import ReactPlayer from "react-player";
 import StepCard from "./step_card";
 import FeatureCard from "./feature_card";
 
-// Query Params
-import queryString from "query-string";
-
 //Amplify.configure(awsmobile);
 
 // AboutPage component that contains all the about page layout
 const LandingPage = () => {
   const [show_artist, setShowArtist] = useState(false);
   const { height, width } = useWindowDimensions(); // Dimensions of screen
-
-  const pre_signup_failure = queryString.parse(window.location.search)
-    .error_description;
-
-  if (
-    pre_signup_failure &&
-    pre_signup_failure.includes("A user with the same email address exists")
-  )
-    history.push({
-      pathname: "/register",
-      search: "?error_code=duplicate_email",
-    });
 
   return (
     <div className="about-page-content">

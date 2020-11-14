@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import "./input_one_styles.scss";
+import "./input_two_styles.scss";
 import eye from "../../images/icons/eye.png";
 import { useWindowDimensions } from "../custom_hooks";
 
-const InputOne = ({
+const InputTwo = ({
   id,
   type,
   name,
@@ -14,14 +14,13 @@ const InputOne = ({
   onChange,
   is_password,
   is_disabled,
-  text_color,
 }) => {
   const [hidden, setHidden] = useState("true");
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   return (
     <div>
       {is_password ? (
-        <div className="input-one-container">
+        <div className="input-two-container">
           {width > 600 ? (
             <div>
               <input
@@ -31,16 +30,16 @@ const InputOne = ({
                 required={is_required}
                 value={value}
                 onChange={onChange}
-                className="input-one body-1"
+                className="input-two body-1"
                 disabled={is_disabled}
-                style={{ color: text_color ? text_color : "white" }}
+                placeholder={placeholder}
               />
               <img
                 src={eye}
                 className="view-password"
                 onClick={() => setHidden(!hidden)}
               />
-              <span className="floating-label-one body-1">{placeholder}</span>
+              <span className="floating-label-two tag-text">{placeholder}</span>
             </div>
           ) : (
             <div>
@@ -51,21 +50,21 @@ const InputOne = ({
                 required={is_required}
                 value={value}
                 onChange={onChange}
-                className="input-one body-3"
+                className="input-two body-3"
                 disabled={is_disabled}
-                style={{ color: text_color ? text_color : "white" }}
+                placeholder={placeholder}
               />
               <img
                 src={eye}
                 className="view-password"
                 onClick={() => setHidden(!hidden)}
               />
-              <span className="floating-label-one body-3">{placeholder}</span>
+              <span className="floating-label-two mobile-tag-text">{placeholder}</span>
             </div>
           )}
         </div>
       ) : (
-        <div className="input-one-container">
+        <div className="input-two-container">
           {width > 600 ? (
             <div>
               <input
@@ -76,10 +75,10 @@ const InputOne = ({
                 value={value}
                 onChange={onChange}
                 disabled={is_disabled}
-                className="input-one body-1"
-                style={{ color: text_color ? text_color : "white" }}
+                className="input-two body-1"
+                placeholder={placeholder}
               />
-              <span className="floating-label-one body-1">{placeholder}</span>
+              <span className="floating-label-two tag-text">{placeholder}</span>
             </div>
           ) : (
             <div>
@@ -91,10 +90,10 @@ const InputOne = ({
                 value={value}
                 onChange={onChange}
                 disabled={is_disabled}
-                className="input-one body-3"
-                style={{ color: text_color ? text_color : "white" }}
+                className="input-two body-3"
+                placeholder={placeholder}
               />
-              <span className="floating-label-one body-3">{placeholder}</span>
+              <span className="floating-label-two mobile-tag-text">{placeholder}</span>
             </div>
           )}
         </div>
@@ -103,4 +102,4 @@ const InputOne = ({
   );
 };
 
-export default InputOne;
+export default InputTwo;

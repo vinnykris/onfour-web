@@ -145,11 +145,13 @@ export const fetchUserConcerts = async () => {
 // RSVP'd shows on a user's profile
 export const getUpcomingPurchasedShows = async (width, username) => {
   const user_concerts = await fetchUserConcerts();
-  user_concerts.sort((a, b) =>
+  user_concerts.sort((a, b) => {
+    if (!a.data.getConcert) return;
+    if (!b.data.getConcert) return;
     moment(a.data.getConcert.date + "T" + a.data.getConcert.time).diff(
       moment(b.data.getConcert.date + "T" + b.data.getConcert.time)
-    )
-  );
+    );
+  });
   var upcoming_concerts = [];
   // The past_concerts is not returned for this function
   // but later, both upcoming_concerts and past_concerts
@@ -164,8 +166,9 @@ export const getUpcomingPurchasedShows = async (width, username) => {
     return merged;
   };
 
-  if (user_concerts !== [] && user_concerts[0].data.getConcert !== null) {
+  if (user_concerts !== [] && user_concerts[0]?.data?.getConcert !== null) {
     for await (const data of user_concerts) {
+      if (!data.data.getConcert) continue;
       if (data.data.getConcert.is_future) {
         upcoming_concerts.push(
           formatUpcomingShow(await getUpcomingFull(data.data.getConcert))
