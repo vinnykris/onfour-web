@@ -22,6 +22,9 @@ import dashboardIcon from "../../images/icons/chrome_reader_mode_24px_outlined.p
 import ticketIcon from "../../images/icons/local_activity_24px_outlined.png";
 import profileIcon from "../../images/icons/wallet_24px.png";
 
+// Query Params
+import queryString from "query-string";
+
 // Utils
 import {
   determineUsername,
@@ -60,7 +63,19 @@ const Profile = (props) => {
       })
       .catch((err) => {
         setAuth(false);
-        history.push("/");
+        const pre_signup_failure = queryString.parse(window.location.search)
+          .error_description;
+        if (
+          pre_signup_failure &&
+          pre_signup_failure.includes(
+            "A user with the same email address exists"
+          )
+        )
+          history.push({
+            pathname: "/register",
+            search: "?error_code=duplicate_email",
+          });
+        else history.push("/");
       });
   }, []);
 
