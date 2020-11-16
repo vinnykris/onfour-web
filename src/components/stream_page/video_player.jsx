@@ -47,7 +47,9 @@ function VideoPlayer({
   stream_volume,
   have_upcoming_concert,
 }) {
-  const [is_artist_backstage, setIsArtistBackstage] = useState(true);
+  const [is_artist_backstage, setIsArtistBackstage] = useState(true); // Determines whether to show the indicator that the artist is backstage
+  const [current_stream_state, setCurrentStreamState] = useState(""); // Holds the current state of the stream
+  const is_first_render = useRef(true);
 
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   var player = null;
@@ -186,77 +188,10 @@ function VideoPlayer({
     // console.log("event recorded for Analytics");
   };
 
-  // Showing the user either the logged in waiting page or the
-  // stream depending on the countdown
-
-  // if (auth) {
-
-  // const player_ref = useRef();
-  // registerIVSTech(videojs);
   const [global_player, setGlobalPlayer] = useState();
 
-  // useEffect(() => {
-  //   if (have_upcoming_concert) {
-  //     if (!timer_placeholder.length && is_live) {
-  //       player = videojs(
-  //         player_ref.current,
-  //         {
-  //           techOrder: ["AmazonIVS"],
-  //           autoplay: true,
-  //           muted: false,
-  //           controls: true,
-  //           liveui: true,
-  //         },
-  //         () => {
-  //           console.log("player is ready");
-  //           player.src(
-  //             "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
-  //           );
-  //         }
-  //       );
-  //       // configure plugins
-  //       player.landscapeFullscreen({
-  //         fullscreen: {
-  //           enterOnRotate: true,
-  //           alwaysInLandscapeMode: true,
-  //           iOS: true,
-  //         },
-  //       });
-  //       setGlobalPlayer(player);
-  //     }
-  //     // if (IVSPlayer.isPlayerSupported) {
-  //     //   const player = IVSPlayer.create();
-  //     //   player.attachHTMLVideoElement(
-  //     //     document.getElementById("video-player")
-  //     //   );
-  //     //   player.load(PLAYBACK_URL);
-  //     //   player.play();
-  //     // }
-  //     //}
-  //   }
-  // }, [timer_placeholder.length, is_live]);
-
-  // useEffect(() => {
-  //   let script = document.createElement('script');
-  //   script.onload = function(){
-  //     if (IVSPlayer.isPlayerSupported) {
-  //       const player = IVSPlayer.create();
-  //       player.attachHTMLVideoElement(document.getElementById('video-player'));
-  //       player.load("https://fcc3ddae59ed.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527354.channel.DmumNckWFTqz.m3u8");
-  //       player.play();
-  //     }
-  //   }
-  //   script.src = "https://player.live-video.net/1.0.0/amazon-ivs-player.min.js";
-  //   const node = player_ref.current;
-  //   node.appendChild(script);
-  //   return () => {
-  //     if (player) player.dispose();
-  //     if (global_player) global_player.dispose();
-  //     setGlobalPlayer();
-  //   };
-  // }, []);
+  // On mount, the IVS script is loaded.
   useEffect(() => {
-    console.log(artist_img);
     // IVS WORKAROUND SOURCE: https://github.com/cm-wada-yusuke/amazon-ivs-react-js-sample/blob/master/src/AmazonIVSWorkaround.js
     const script = document.createElement("script");
 
@@ -271,23 +206,8 @@ function VideoPlayer({
         // eslint-disable-next-line no-undef
         const player = IVSPlayer.create();
         player.attachHTMLVideoElement(document.getElementById("video-player"));
-        // player.addEventListener(PlayerEventType.SEEK_COMPLETED, () =>
-        //   player.setMuted(false)
-        // );
-
-        getStream(player);
-
-        // player.load(
-        //   "https://fcc3ddae59ed.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527354.channel.DmumNckWFTqz.m3u8"
-        // );
-        // player.load(
-        //   "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
-        // );
-        //player.setMuted(false);
-        // player.play();
-
-        // console.log(player.isMuted());
         setGlobalPlayer(player);
+        is_first_render.current = false;
       }
     };
 
@@ -296,31 +216,50 @@ function VideoPlayer({
     };
   }, []);
 
-  const getStream = (player) => {
+  // This is called after the IVS player is loaded. If the show has started already, then get the stream.
+  // If the countdown is still going, do not load the stream.
+  // This protects against people inspecting and hiding the stream waiting page.
+  useEffect(() => {
+    if (!is_first_render.current) {
+      if (!timer_placeholder.length) getStream();
+    }
+  }, [global_player]);
+
+  // This function is called every time the timer placeholder length changes.
+  // The length refers to how many non-zero values there are in the countdown timer.
+  // If days, hours, minutes, and seconds are all at 0, that means the countdown is over.
+  // Length of the timer placeholder will be 0 here, and the stream is then loaded.
+  useEffect(() => {
+    if (!timer_placeholder.length && !is_first_render.current) {
+      getStream();
+    }
+  }, [timer_placeholder.length]);
+
+  const getStream = () => {
     // Try to load stream. This will either successfully load the stream or start an infinite loading cycle.
-    player.load(
+    global_player.load(
       "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
     );
-    // var load_interval;
 
     // For loop that runs through all of the Player States, and adds event listeners for each
     for (let state of Object.values(PlayerState)) {
-      player.addEventListener(state, () => {
-        // If player receives "Ended" or "Idle" event, attempt to load again. This will restart the loading cycle.
+      global_player.addEventListener(state, () => {
+        // If player receives "Ended" event, call the endStream function.
+        // If the player receives "Idle" event, attempt to reload the stream; this will restart the loading cycle.
+        setCurrentStreamState(state);
+        // console.log(state); // Uncomment this line out if testing -- will give you info about what state the stream is in.
         if (state === "Ended" || state === "Idle") {
-          console.log(state);
-          console.log("stream ended");
-          //load_interval = setInterval(tryLoadingStream, 1000);
-          player.load(
-            "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
-          );
+          if (state === "Ended") endStream();
+          if (state === "Idle")
+            global_player.load(
+              "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
+            );
+          setIsArtistBackstage(true);
           return;
         }
 
         // If code reaches this point, that means that the stream was successfully loaded. Play the stream, don't need to load.
-        //clearInterval(load_interval);
-        console.log(state);
-        player.play();
+        global_player.play();
         setIsArtistBackstage(false);
       });
     }
@@ -328,20 +267,21 @@ function VideoPlayer({
     // Listens for any error events. Errors occur when player attempts to load stream and there is no stream.
     // If player finds error, player attempts to load again, thus creating an infinite load cycle that only
     // ends once the stream is successfully loaded.
-    player.addEventListener(PlayerEventType.ERROR, (error) => {
-      console.error("ERROR", error);
-      //load_interval = setInterval(tryLoadingStream, 1000);
-      player.load(
+    global_player.addEventListener(PlayerEventType.ERROR, (error) => {
+      setCurrentStreamState("Error");
+      // console.error("ERROR", error); // This outputs the error to the console -- uncomment if testing
+      global_player.load(
         "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
       );
+      setIsArtistBackstage(true);
     });
+  };
 
-    // const tryLoadingStream = () => {
-    //   player.load(
-    //     "https://54db060f9b79.us-east-1.playback.live-video.net/api/video/v1/us-east-1.556351844479.channel.0WDRvKHIFymu.m3u8"
-    //   );
-    //   console.log("trying to load");
-    // };
+  // Called when the stream ends. Tries to load stream again after 8 second pause.
+  // The reason we try to restart the stream again is the start the infinite cycle again.
+  // This way, if someone stops streaming and then starts again, the users don't have to refresh.
+  const endStream = () => {
+    setTimeout(getStream, 8000);
   };
 
   useEffect(() => {
@@ -364,10 +304,7 @@ function VideoPlayer({
               <h5 className="waiting-message2 header-7">
                 Invite your friends to join you while waiting!
               </h5>
-              <h5 className="header-7">
-                UP NEXT: {artist_name}
-                {/* - {concert_name} */}
-              </h5>
+              <h5 className="header-7">UP NEXT: {artist_name}</h5>
             </div>
           ) : (
             <div className="waiting-message-container">
@@ -375,10 +312,7 @@ function VideoPlayer({
               <h5 className="waiting-message2 header-5">
                 Invite your friends to join you while waiting!
               </h5>
-              <h5 className="header-5">
-                UP NEXT: {artist_name}
-                {/* - {concert_name} */}
-              </h5>
+              <h5 className="header-5">UP NEXT: {artist_name}</h5>
             </div>
           )}
           <div className="countdown-component-wrapper">
@@ -387,32 +321,10 @@ function VideoPlayer({
             </Grid>
           </div>
         </div>
-      ) : have_upcoming_concert ? (
+      ) : null}
+      {have_upcoming_concert ? (
         <div className="player-wrapper" ref={div_el}>
-          {!is_artist_backstage ? (
-            // <div data-vjs-player>
-            //   <div className="vjs-control-bar control-bar-top">
-            //     <div className="live-indicator">
-            //       <span className="live-indicator-text">LIVE</span>
-            //     </div>
-            //   </div>
-            //   <video ref={player_ref} className="video-js" />
-            // </div>
-            // <video id="video-player" playsInline controls></video>
-            <video
-              id="video-player"
-              ref={video_el}
-              playsInline
-              autoPlay
-              controls
-              muted={false}
-              className="ivs-video"
-            />
-          ) : (
-            // <video id="video-player" playsinline controls autoplay></video>
-            // <div class="video-container">
-            // <video id="amazon-ivs-videojs" class="video-js vjs-4-3 vjs-big-play-centered" controls autoplay playsinline></video>
-            // </div>
+          {is_artist_backstage ? (
             <div className="waiting-for-artist-screen">
               <img src={artist_img} className="artist-img-background"></img>
               <div className="waiting-message-container">
@@ -425,17 +337,21 @@ function VideoPlayer({
                   />
                 </div>
                 <br></br>
-                <h7 className="waiting-message2">
-                  {artist_name} is backstage! Hang tight.
-                </h7>
-                <br></br>
-                <h7 className="waiting-message2">
-                  If you are unable to see the stream well, please try
-                  refreshing your browser.
-                </h7>
+                <span className="waiting-message2 header-5">
+                  {artist_name} is backstage.
+                </span>
               </div>
             </div>
-          )}
+          ) : null}
+          <video
+            id="video-player"
+            ref={video_el}
+            playsInline
+            autoPlay
+            controls
+            muted={false}
+            className="ivs-video"
+          />
         </div>
       ) : (
         <div className="waiting-screen">
