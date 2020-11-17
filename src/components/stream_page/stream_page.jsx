@@ -653,6 +653,7 @@ const StreamPage = ({ is_soundcheck }) => {
                             : show_start_time
                         }
                         artist_name={concert_info.artist_name}
+                        artist_img={concert_info.img}
                         // concert_name={concert_name}
                         auth={auth}
                         username={username}
