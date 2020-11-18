@@ -16,8 +16,8 @@ Amplify.configure({
   },
   oauth: {
     domain: "onfournewpool.auth.us-east-1.amazoncognito.com",
-    redirectSignIn: "https://staging.d2ttrrfsua432p.amplifyapp.com/profile",
-    redirectSignOut: "https://staging.d2ttrrfsua432p.amplifyapp.com/",
+    redirectSignIn: "https://www.onfour.live/profile",
+    redirectSignOut: "https://www.onfour.live/",
     responseType: "code",
     scope: ["email", "profile", "openid"],
   },
