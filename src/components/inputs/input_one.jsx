@@ -14,6 +14,7 @@ const InputOne = ({
   onChange,
   is_password,
   is_disabled,
+  text_color,
 }) => {
   const [hidden, setHidden] = useState("true");
   const { height, width } = useWindowDimensions(); // Dimensions of screen

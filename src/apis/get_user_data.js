@@ -17,6 +17,9 @@ import ArchiveVideo from "../components/archive_page/archive_video";
 import { getArtistInfo, getOneConcert } from "./get_concert_data";
 import { formatUpcomingShow, formatMemory } from "../components/util";
 
+// Utils
+import { determineUsername } from "../utils/register";
+
 Amplify.configure(awsmobile);
 
 // Asynchronous function to get list of videos from database
@@ -113,9 +116,10 @@ export const fetchUserConcerts = async () => {
   var users_shows = [];
   const authenticated_user = await Auth.currentAuthenticatedUser();
   if (authenticated_user) {
+    const username = await determineUsername(authenticated_user);
     const user_data = await API.graphql(
       graphqlOperation(queries.get_user_data, {
-        input: authenticated_user.username,
+        input: username,
       })
     );
     const concert_data = user_data.data.getCreateOnfourRegistration.concert;
@@ -141,18 +145,13 @@ export const fetchUserConcerts = async () => {
 // RSVP'd shows on a user's profile
 export const getUpcomingPurchasedShows = async (width, username) => {
   const user_concerts = await fetchUserConcerts();
-  console.log(user_concerts);
   user_concerts.sort((a, b) => {
     if (!a.data.getConcert) return;
     if (!b.data.getConcert) return;
-    // console.log(a);
-    // console.log(b)
-    return moment(a.data.getConcert.date + "T" + a.data.getConcert.time).diff(
+    moment(a.data.getConcert.date + "T" + a.data.getConcert.time).diff(
       moment(b.data.getConcert.date + "T" + b.data.getConcert.time)
-    )
-  }
-    
-  );
+    );
+  });
   var upcoming_concerts = [];
   // The past_concerts is not returned for this function
   // but later, both upcoming_concerts and past_concerts
@@ -167,7 +166,7 @@ export const getUpcomingPurchasedShows = async (width, username) => {
     return merged;
   };
 
-  if (user_concerts !== []) {
+  if (user_concerts !== [] && user_concerts[0]?.data?.getConcert !== null) {
     for await (const data of user_concerts) {
       if (!data.data.getConcert) continue;
       if (data.data.getConcert.is_future) {

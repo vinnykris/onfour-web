@@ -9,7 +9,7 @@ import Auth from "../../apis/UserPool";
 
 // Components
 import { Grid, Row, Col } from "../grid";
-import InputOne from ".././inputs/input_one";
+import InputTwo from ".././inputs/input_two";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useWindowDimensions } from "../custom_hooks";
 
@@ -98,7 +98,7 @@ const Forgot = () => {
                       </div>
                     </Row>
                     <div className="register-input-container">
-                      <InputOne
+                      <InputTwo
                         id="email_slot"
                         type="text"
                         name="email"
@@ -143,7 +143,7 @@ const Forgot = () => {
                         reset your password.
                       </div>
                       <div className="register-input-container">
-                        <InputOne
+                        <InputTwo
                           name="email"
                           type="text"
                           id="email_slot"
@@ -192,7 +192,7 @@ const Forgot = () => {
                       />
                     </Row> */}
                     <div className="register-input-container">
-                      <InputOne
+                      <InputTwo
                         id="email_slot"
                         type="text"
                         name="email"
@@ -204,7 +204,7 @@ const Forgot = () => {
                       />
                     </div>
                     <div className="register-input-container">
-                      <InputOne
+                      <InputTwo
                         id="verification_code"
                         type="text"
                         name="code"
@@ -239,7 +239,7 @@ const Forgot = () => {
                       />
                     </Row> */}
                     <div className="register-input-container">
-                      <InputOne
+                      <InputTwo
                         id="password_slot"
                         type="password"
                         name="password"
@@ -296,7 +296,7 @@ const Forgot = () => {
                         Please enter your verification and new password below!
                       </div>
                       <div className="register-input-container">
-                        <InputOne
+                        <InputTwo
                           id="email_slot"
                           type="text"
                           name="email"
@@ -308,7 +308,7 @@ const Forgot = () => {
                         />
                       </div>
                       <div className="register-input-container">
-                        <InputOne
+                        <InputTwo
                           id="verification_code"
                           type="text"
                           name="code"
@@ -319,7 +319,7 @@ const Forgot = () => {
                         />
                       </div>
                       <div className="register-input-container">
-                        <InputOne
+                        <InputTwo
                           id="password_slot"
                           type="password"
                           name="password"

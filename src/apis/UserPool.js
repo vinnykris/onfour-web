@@ -6,14 +6,20 @@ import Amplify, { Auth } from "aws-amplify";
 
 Amplify.configure({
   Auth: {
-    // REQUIRED - Amazon Cognito Region
     region: "us-east-1",
 
-    // OPTIONAL - Amazon Cognito User Pool ID
-    userPoolId: "us-east-1_zHyCq5Y6W",
+    userPoolId: "us-east-1_Zk9B73Bkt",
 
-    // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-    userPoolWebClientId: "11os48ai0lk5uo63gc0gnfdtl0",
+    userPoolWebClientId: "1eolu4qrfnuv4207u32p53uudm",
+
+    authenticationFlowType: "USER_PASSWORD_AUTH",
+  },
+  oauth: {
+    domain: "onfournewpool.auth.us-east-1.amazoncognito.com",
+    redirectSignIn: "https://www.onfour.live/profile",
+    redirectSignOut: "https://www.onfour.live/",
+    responseType: "code",
+    scope: ["email", "profile", "openid"],
   },
 });
 

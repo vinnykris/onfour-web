@@ -30,7 +30,10 @@ import {
   containsNumber,
   containsSpecialCharacter,
 } from "../../utils/register";
-import InputOne from "../inputs/input_two";
+import InputTwo from "../inputs/input_two";
+
+// Query Params
+import queryString from "query-string";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -54,6 +57,15 @@ const Register = (props) => {
 
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
+  const pre_signup_failure = queryString.parse(window.location.search)
+    .error_code;
+
+  useEffect(() => {
+    if (pre_signup_failure && pre_signup_failure.includes("duplicate_email")) {
+      setError("A user with this email already exists");
+    }
+  }, []);
+
   useEffect(() => {
     if (state) {
       setFromPath(state.current);
@@ -61,7 +73,7 @@ const Register = (props) => {
   }, []);
 
   // Function that occurs after the user clicks the submit button to sign up
-  const registerSubmit = (event) => {
+  const registerSubmit = async (event) => {
     event.preventDefault();
     setProcessing(true);
     // Username/Password information passed into cognito API
@@ -74,13 +86,34 @@ const Register = (props) => {
       },
     };
 
+    const concerts = await API.graphql(
+      graphqlOperation(queries.list_concerts, {})
+    );
+    const concert_rsvp_lists = concerts?.data?.listConcerts?.items;
+
+    const getRsvpList = async (concert_rsvp_lists) => {
+      const returnObject = {};
+      for (let i = 0; i < concert_rsvp_lists.length; i++) {
+        const concert_rsvp_list = concert_rsvp_lists[i].rsvp_list;
+        if (concert_rsvp_list) {
+          if (concert_rsvp_list.includes(email))
+            returnObject[concert_rsvp_lists[i].id] = true;
+        }
+      }
+      if (Object.keys(returnObject).length > 0)
+        return JSON.stringify(returnObject);
+      else return "0";
+    };
+
+    const concert_payload = await getRsvpList(concert_rsvp_lists);
+
     // Email/First Name/Last Name/Concerts information passed into AppSync API/Registration Table
     const register_payload = {
       username: username.toLowerCase(),
       email: email,
       first: first,
       last: last,
-      concert: "0", // Currently a placeholder value
+      concert: concert_payload, // Currently a placeholder value
       is_artist: false,
       verified: false,
     };
@@ -313,7 +346,7 @@ const Register = (props) => {
                               </div>
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="first_slot"
                                 type="text"
                                 name="full-name"
@@ -326,7 +359,7 @@ const Register = (props) => {
                               />
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="username_slot"
                                 type="text"
                                 name="username"
@@ -339,7 +372,7 @@ const Register = (props) => {
                               />
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="email_slot"
                                 type="email"
                                 name="email"
@@ -356,7 +389,7 @@ const Register = (props) => {
                               data-tip
                               data-for="registerTip"
                             >
-                              <InputOne
+                              <InputTwo
                                 id="password_slot"
                                 type="password"
                                 name="password"
@@ -450,19 +483,6 @@ const Register = (props) => {
                               </p>
                             </ReactTooltip>
                           </div>
-                          <div className="email-subscribe-prompt">
-                            <input
-                              className="email-unsubscribe-checkbox"
-                              name="isGoing"
-                              type="checkbox"
-                              checked={checked}
-                              onChange={(event) => setChecked(!checked)}
-                            />
-                            <label className="header-8 register-text-color">
-                              I want to receive email updates about future
-                              onfour shows.
-                            </label>
-                          </div>
                           <div style={{ color: "red" }}>{error}</div>
                           <div className="register-button-container">
                             <button
@@ -484,7 +504,6 @@ const Register = (props) => {
                               I'M AN ARTIST
                             </button>
                           </div>
-
                           <div className="header-7 signup-footer register-text-color">
                             Already have an account?{" "}
                             <a href="/login" className="header-7 signin-link">
@@ -492,6 +511,41 @@ const Register = (props) => {
                             </a>
                             .
                           </div>
+                          <Row>
+                            <div className="sign-up-divider"></div>
+                            <text className="header-7 sign-up-divider-text">
+                              or
+                            </text>
+                            <div className="sign-up-divider"></div>
+                          </Row>
+                          <Row className="social-sign-up-container">
+                            <button
+                              onClick={() =>
+                                Auth.federatedSignIn({
+                                  provider: "Google",
+                                })
+                              }
+                              className="social-sign-up-button"
+                            >
+                              <text className="segmented-button-text social-sign-up-text">
+                                Sign Up With Google
+                              </text>
+                            </button>
+                          </Row>
+                          <Row className="social-sign-up-container">
+                            <button
+                              onClick={() =>
+                                Auth.federatedSignIn({
+                                  provider: "Facebook",
+                                })
+                              }
+                              className="social-sign-up-button"
+                            >
+                              <text className="segmented-button-text social-sign-up-text">
+                                Sign Up With Facebook
+                              </text>
+                            </button>
+                          </Row>
                         </form>
                       ) : (
                         <form
@@ -510,7 +564,7 @@ const Register = (props) => {
                               </div>
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="first_slot"
                                 type="text"
                                 name="full-name"
@@ -523,7 +577,7 @@ const Register = (props) => {
                               />
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="username_slot"
                                 type="text"
                                 name="username"
@@ -536,7 +590,7 @@ const Register = (props) => {
                               />
                             </div>
                             <div className="register-input-container">
-                              <InputOne
+                              <InputTwo
                                 id="email_slot"
                                 type="email"
                                 name="email"
@@ -553,7 +607,7 @@ const Register = (props) => {
                               data-tip
                               data-for="registerTip"
                             >
-                              <InputOne
+                              <InputTwo
                                 id="password_slot"
                                 type="password"
                                 name="password"
@@ -647,19 +701,6 @@ const Register = (props) => {
                               </p>
                             </ReactTooltip>
                           </div>
-                          <div className="email-subscribe-prompt">
-                            <input
-                              className="email-unsubscribe-checkbox"
-                              name="isGoing"
-                              type="checkbox"
-                              checked={checked}
-                              onChange={(event) => setChecked(!checked)}
-                            />
-                            <label className="subtitle-3 register-text-color">
-                              I want to receive email updates about future
-                              onfour shows.
-                            </label>
-                          </div>
                           <div style={{ color: "red" }}>{error}</div>
                           <div className="register-button-container">
                             <button
@@ -681,7 +722,6 @@ const Register = (props) => {
                               I'M AN ARTIST
                             </button>
                           </div>
-
                           <div className="body-2 signup-footer register-text-color">
                             Already have an account?{" "}
                             <a href="/login" className="body-2 signin-link">
@@ -689,6 +729,41 @@ const Register = (props) => {
                             </a>
                             .
                           </div>
+                          <Row>
+                            <div className="sign-up-divider"></div>
+                            <text className="header-7 sign-up-divider-text">
+                              or
+                            </text>
+                            <div className="sign-up-divider"></div>
+                          </Row>
+                          <Row className="social-sign-up-container">
+                            <button
+                              onClick={() =>
+                                Auth.federatedSignIn({
+                                  provider: "Google",
+                                })
+                              }
+                              className="social-sign-up-button"
+                            >
+                              <text className="segmented-button-text social-sign-up-text">
+                                Sign Up With Google
+                              </text>
+                            </button>
+                          </Row>
+                          <Row className="social-sign-up-container">
+                            <button
+                              onClick={() =>
+                                Auth.federatedSignIn({
+                                  provider: "Facebook",
+                                })
+                              }
+                              className="social-sign-up-button"
+                            >
+                              <text className="segmented-button-text social-sign-up-text">
+                                Sign Up With Facebook
+                              </text>
+                            </button>
+                          </Row>
                         </form>
                       )}
                     </div>
