@@ -73,7 +73,7 @@ const Register = (props) => {
   }, []);
 
   // Function that occurs after the user clicks the submit button to sign up
-  const registerSubmit = (event) => {
+  const registerSubmit = async (event) => {
     event.preventDefault();
     setProcessing(true);
     // Username/Password information passed into cognito API
@@ -86,13 +86,34 @@ const Register = (props) => {
       },
     };
 
+    const concerts = await API.graphql(
+      graphqlOperation(queries.list_concerts, {})
+    );
+    const concert_rsvp_lists = concerts?.data?.listConcerts?.items;
+
+    const getRsvpList = async (concert_rsvp_lists) => {
+      const returnObject = {};
+      for (let i = 0; i < concert_rsvp_lists.length; i++) {
+        const concert_rsvp_list = concert_rsvp_lists[i].rsvp_list;
+        if (concert_rsvp_list) {
+          if (concert_rsvp_list.includes(email))
+            returnObject[concert_rsvp_lists[i].id] = true;
+        }
+      }
+      if (Object.keys(returnObject).length > 0)
+        return JSON.stringify(returnObject);
+      else return "0";
+    };
+
+    const concert_payload = await getRsvpList(concert_rsvp_lists);
+
     // Email/First Name/Last Name/Concerts information passed into AppSync API/Registration Table
     const register_payload = {
       username: username.toLowerCase(),
       email: email,
       first: first,
       last: last,
-      concert: "0", // Currently a placeholder value
+      concert: concert_payload, // Currently a placeholder value
       is_artist: false,
       verified: false,
     };
