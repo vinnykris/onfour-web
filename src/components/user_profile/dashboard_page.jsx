@@ -249,7 +249,7 @@ const DashboardPage = ({
   return (
     <Col size={7} style={{ width: "90%" }}>
       <Row className="header-section">
-        <img src={dashboardIcon} className="profile-header-icon"></img>
+        {/* <img src={dashboardIcon} className="profile-header-icon"></img> */}
         <h4 className="profile-preview-content-header username-header header-5">
           Dashboard
         </h4>
@@ -410,7 +410,8 @@ const DashboardPage = ({
               ) : null}
             </div>
           )}
-          <div className="user-crews-container profile-empty-state">
+
+          {/* <div className="user-crews-container profile-empty-state">
             <Row className="user-crews-title">
               <Col size={1}>
                 <h4 className="profile-preview-content-header header-5">
@@ -485,13 +486,14 @@ const DashboardPage = ({
                 </Col>
               )}
             </Row>
-          </div>
-          <CreateCrewModal
+          </div> */}
+
+          {/* <CreateCrewModal
             showCrewModal={showCrewModal}
             closeModal={closeModal}
             currentUsername={username}
             currentUserEmail={userEmail}
-          />
+          /> */}
         </Col>
       </Row>
     </Col>

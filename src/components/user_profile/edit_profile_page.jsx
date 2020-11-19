@@ -20,7 +20,7 @@ import "./edit_profile_page_styles.scss";
 import Editicon from "../../images/icons/edit_icon.png";
 import Edit from "../../images/icons/Edit.png";
 // Utils
-import InputTwo from "../inputs/input_two";
+import InputTwo from "../inputs/input_three";
 
 Amplify.configure(awsmobile); // Configuring AppSync API
 
@@ -224,7 +224,7 @@ const EditProfile = ({
                 <div></div>
               )}
             </div>
-            <div className="reset-passwor">
+            <div className="reset-password">
               <p className="forgot-footer">
                 <a href="/forgot" className="body-2 signin-link-edit">
                   Reset Password?

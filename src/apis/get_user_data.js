@@ -185,7 +185,7 @@ export const getUpcomingPurchasedShows = async (width, username) => {
         );
         all_ticketstubs.push(
           <ProfileStub
-            img={await data.data.getConcert.stub_url}
+            img={data.data.getConcert.stub_url}
             className="profile-stub-component"
           />
         );

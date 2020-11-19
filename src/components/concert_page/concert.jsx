@@ -311,7 +311,6 @@ const Concert = (props) => {
       setTotal(concert_info.price);
       concert_date = concert_info.date;
       concert_time = concert_info.time;
-      console.log(concert_info);
     }
   }, [concert_info]);
 
@@ -446,7 +445,7 @@ const Concert = (props) => {
     }
 
     const concert_rsvp_info = await getOneConcert(concert_id);
-    const rsvp_list = [...concert_rsvp_info.rsvp_list, email];
+    const rsvp_list = [...concert_rsvp_info.rsvp_list, email.toLowerCase()];
 
     const concert_payload = {
       id: concert_id,
@@ -473,7 +472,6 @@ const Concert = (props) => {
         concert_info.formatted_time
       );
     } else {
-      console.log(email);
       sendEmailConfirmation(
         email,
         concert_info.artist_name,

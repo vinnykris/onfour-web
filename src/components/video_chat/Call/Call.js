@@ -23,12 +23,12 @@ export default function Call(props) {
   const callObject = useContext(CallObjectContext);
 
   if (callObject) {
-    console.log(
-      props.video_chat_variables.kbs,
-      props.video_chat_variables.width,
-      props.video_chat_variables.height,
-      props.video_chat_variables.frameRate
-    );
+    // console.log(
+    //   props.video_chat_variables.kbs,
+    //   props.video_chat_variables.width,
+    //   props.video_chat_variables.height,
+    //   props.video_chat_variables.frameRate
+    // );
     callObject.setBandwidth({
       kbs: props.video_chat_variables.kbs,
       trackConstraints: {
@@ -143,11 +143,17 @@ export default function Call(props) {
   function getTiles() {
     let largeTiles = [];
     let smallTiles = [];
+    let artist_count = 0;
     Object.entries(callState.callItems).forEach(([id, callItem]) => {
       // const isLarge =
       //   isScreenShare(id) ||
       //   (!isLocal(id) && !containsScreenShare(callState.callItems));
       // console.log(id, callItem);
+
+      if (callItem.username === props.artist_name) {
+        artist_count = artist_count + 1;
+      }
+
       const isLarge = false;
       const tile = (
         <Tile
@@ -170,6 +176,14 @@ export default function Call(props) {
         smallTiles.push(tile);
       }
     });
+    if (!props.artistView) {
+      if (artist_count > 0) {
+        props.setArtistInTheHouse(true);
+      } else {
+        props.setArtistInTheHouse(false);
+      }
+    }
+    
     return [largeTiles, smallTiles];
   }
 

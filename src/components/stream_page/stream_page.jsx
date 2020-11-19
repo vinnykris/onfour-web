@@ -109,6 +109,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [show_access_modal, setShowAccessModal] = useState(true);
   const [access_error, setAccessError] = useState(0); // 0 is no error, 1 if user isn't in rsvp list
   const [video_chat_variables, setVideoChatVariables] = useState();
+  const [is_artist_in_the_house, setArtistInTheHouse] = useState(false);
 
   const history = useHistory(0);
 
@@ -611,6 +612,7 @@ const StreamPage = ({ is_soundcheck }) => {
                           is_live={is_live}
                           stream_volume={stream_volume}
                           have_upcoming_concert={have_upcoming_concert}
+                          is_artist_in_the_house={is_artist_in_the_house}
                         />
                       ) : (
                         <div className='buy-ticket-message-container'>
@@ -658,6 +660,7 @@ const StreamPage = ({ is_soundcheck }) => {
                             : show_start_time
                         }
                         artist_name={concert_info.artist_name}
+                        artist_img={concert_info.img}
                         // concert_name={concert_name}
                         auth={auth}
                         username={username}
@@ -665,6 +668,7 @@ const StreamPage = ({ is_soundcheck }) => {
                         is_live={is_live}
                         stream_volume={stream_volume}
                         have_upcoming_concert={have_upcoming_concert}
+                        is_artist_in_the_house={is_artist_in_the_house}
                       />
                       <div className="toggle-chat" id="chat_toggle_button">
                         <button
@@ -945,9 +949,11 @@ const StreamPage = ({ is_soundcheck }) => {
                               : "GUEST"
                           }
                           artist_name={artist_id}
+                          // artist_name={'takoyuxin'}
                           stream_vol_adjust={setStreamVolume}
                           stream_volume_value={stream_volume}
                           video_chat_variables={video_chat_variables}
+                          setArtistInTheHouse={setArtistInTheHouse}
                         ></VideoChat>
                       </Row>
                       <Row className="chat-row">

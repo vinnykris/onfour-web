@@ -8,6 +8,7 @@ const InputThree = ({
   id,
   type,
   name,
+  label,
   is_required,
   value,
   placeholder,
@@ -18,12 +19,11 @@ const InputThree = ({
   const [hidden, setHidden] = useState("true");
   const { height, width } = useWindowDimensions(); // Dimensions of screen
   return (
-    <div>
-      {is_password ? (
+    is_password ? (
         <div className="input-three-container">
           {width > 600 ? (
-            <div>
-              <span className="fixed-label segmented-button-text">{placeholder}</span>
+            <div className="input-full-size">
+              <span className="fixed-label segmented-button-text">{label}</span>
               <input
                 type={hidden ? "password" : "text"}
                 name={name}
@@ -31,6 +31,7 @@ const InputThree = ({
                 required={is_required}
                 value={value}
                 onChange={onChange}
+                placeholder={placeholder}
                 className="input-three body-1"
                 disabled={is_disabled}
               />
@@ -41,8 +42,8 @@ const InputThree = ({
               />
             </div>
           ) : (
-            <div>
-              <span className="fixed-label mobile-button-text">{placeholder}</span>
+            <div className="input-full-size">
+              <span className="fixed-label mobile-button-text">{label}</span>
               <input
                 type={hidden ? "password" : "text"}
                 name={name}
@@ -50,6 +51,7 @@ const InputThree = ({
                 required={is_required}
                 value={value}
                 onChange={onChange}
+                placeholder={placeholder}
                 className="input-three body-3"
                 disabled={is_disabled}
               />
@@ -64,8 +66,8 @@ const InputThree = ({
       ) : (
         <div className="input-three-container">
           {width > 600 ? (
-            <div>
-              <span className="fixed-label segmented-button-text">{placeholder}</span>
+            <div className="input-full-size">
+              <span className="fixed-label segmented-button-text">{label}</span>
               <input
                 type={type}
                 name={name}
@@ -74,12 +76,13 @@ const InputThree = ({
                 value={value}
                 onChange={onChange}
                 disabled={is_disabled}
+                placeholder={placeholder}
                 className="input-three body-1"
               />
             </div>
           ) : (
-            <div>
-              <span className="fixed-label mobile-button-text">{placeholder}</span>
+            <div className="input-full-size">
+              <span className="fixed-label mobile-button-text">{label}</span>
               <input
                 type={type}
                 name={name}
@@ -88,13 +91,13 @@ const InputThree = ({
                 value={value}
                 onChange={onChange}
                 disabled={is_disabled}
+                placeholder={placeholder}
                 className="input-three body-3"
               />
             </div>
           )}
         </div>
-      )}
-    </div>
+    )
   );
 };
 

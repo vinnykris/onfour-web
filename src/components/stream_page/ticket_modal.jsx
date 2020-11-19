@@ -92,7 +92,7 @@ const TicketModal = (props) => {
     }
 
     const concert_rsvp_info = await getOneConcert(props.concert_info.id);
-    const rsvp_list = [...concert_rsvp_info.rsvp_list, email];
+    const rsvp_list = [...concert_rsvp_info.rsvp_list, email.toLowerCase()];
 
     const concert_payload = {
       id: props.concert_info.id,
