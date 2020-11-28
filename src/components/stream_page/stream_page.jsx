@@ -461,12 +461,12 @@ const StreamPage = ({ is_soundcheck }) => {
   // Checks if email parameter is in the RSVP list for the concert
   const checkForAccess = async (email) => {
     const user_has_ticket = await didUserRSVP(concert_id, email);
-    // if (user_has_ticket) {
-    //   setShowAccessModal(false);
-    //   setAccessError(0);
-    // } else {
-    //   setAccessError(1);
-    // }
+    if (user_has_ticket) {
+      setShowAccessModal(false);
+      setAccessError(0);
+    } else {
+      setAccessError(1);
+    }
   };
 
   // RENDERING SECTION
