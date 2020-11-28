@@ -268,7 +268,7 @@ const CheckoutForm = (props) => {
                     <button
                       className="donate-button button-text"
                       type="submit"
-                      disabled={!props.is_user_price_inputed}
+                      disabled={(!props.is_user_price_inputed) || (email.value === '')}
                       // onClick={() => {
                       //   props.addTicket();
                       //   setLoading(true);
