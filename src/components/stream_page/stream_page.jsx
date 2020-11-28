@@ -51,6 +51,7 @@ import viewers_icon from "../../images/icons/stream_icons/viewers_icon.png";
 import { getCrewsByUsername } from "../../utils/crew";
 import {
   determineUsername,
+  determineEmail,
   determinePreferredUsername,
 } from "../../utils/register";
 import { didUserRSVP } from "../../utils/concert";
@@ -169,6 +170,7 @@ const StreamPage = ({ is_soundcheck }) => {
         determinePreferredUsername(user).then((preferred_username) =>
           setPreferredUsername(preferred_username)
         );
+        determineEmail(user).then((useremail) => setUserEmail(useremail));
         setShowChat(true);
         setAuth(true);
         setTickets(await getTickets(user.username));
@@ -495,7 +497,11 @@ const StreamPage = ({ is_soundcheck }) => {
                   username={username}
                   user_email={user_email}
                   artist_name={concert_info.artist_name}
-                  onTicketingComplete={() => setShowPaymentModal(false)}
+                  onTicketingComplete={() => {
+                    setShowPaymentModal(false);
+                    setShowAccessModal(false);
+                    setAccessError(0);
+                  }}
                 />
               ) : null}
               {open_modal ? (
@@ -1059,7 +1065,11 @@ const StreamPage = ({ is_soundcheck }) => {
                   username={username}
                   user_email={user_email}
                   artist_name={concert_info.artist_name}
-                  onTicketingComplete={() => setShowPaymentModal(false)}
+                  onTicketingComplete={() => {
+                    setShowPaymentModal(false);
+                    setShowAccessModal(false);
+                    setAccessError(0);
+                  }}
                   is_mobile={width <= 600}
                 />
               ) : null}

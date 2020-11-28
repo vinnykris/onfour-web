@@ -29,12 +29,12 @@ const PayTicketBox = (props) => {
   const { height, width } = useWindowDimensions(); // Dimensions of screen
 
   useEffect(() => {
-    if (props.total === 0 || !props.total) {
-      setAllowCustomPrice(true);
-    } else {
-      setAllowCustomPrice(false);
-      setUserPrice(props.total);
-    }
+    // if (props.total === 0 || !props.total) {
+    //   setAllowCustomPrice(true);
+    // } else {
+    //   setAllowCustomPrice(false);
+    //   setUserPrice(props.total);
+    // }
   }, [props]);
 
   useEffect(() => {
@@ -519,7 +519,8 @@ const PayTicketBox = (props) => {
             user_email={props.user_email}
             amount_value={total_price}
             addTicket={props.addTicket}
-            is_user_price_inputed={is_user_price_inputed}
+            // is_user_price_inputed={is_user_price_inputed}
+            is_user_price_inputed={true}
             concert_id={props.concert_id}
           ></TicketBox>
         </div>
