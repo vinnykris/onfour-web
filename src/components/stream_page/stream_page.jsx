@@ -1071,8 +1071,6 @@ const StreamPage = ({ is_soundcheck }) => {
                     setAccessError(0);
                   }}
                   is_mobile={width <= 600}
-                  setShowAccessModal = {setShowAccessModal}
-                  setAccessError = {setAccessError}
                 />
               ) : null}
               {open_modal ? (
