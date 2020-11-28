@@ -497,7 +497,11 @@ const StreamPage = ({ is_soundcheck }) => {
                   username={username}
                   user_email={user_email}
                   artist_name={concert_info.artist_name}
-                  onTicketingComplete={() => setShowPaymentModal(false)}
+                  onTicketingComplete={() => {
+                    setShowPaymentModal(false);
+                    setShowAccessModal(false);
+                    setAccessError(0);
+                  }}
                 />
               ) : null}
               {open_modal ? (
@@ -1061,8 +1065,14 @@ const StreamPage = ({ is_soundcheck }) => {
                   username={username}
                   user_email={user_email}
                   artist_name={concert_info.artist_name}
-                  onTicketingComplete={() => setShowPaymentModal(false)}
+                  onTicketingComplete={() => {
+                    setShowPaymentModal(false);
+                    setShowAccessModal(false);
+                    setAccessError(0);
+                  }}
                   is_mobile={width <= 600}
+                  setShowAccessModal = {setShowAccessModal}
+                  setAccessError = {setAccessError}
                 />
               ) : null}
               {open_modal ? (
