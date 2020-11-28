@@ -59,6 +59,7 @@ export default function VideoChatApp({
   const [show_invite_modal, setShowInviteModal] = useState(false);
   const [copy_button_text, setCopyButtonText] = useState("COPY");
   const [disable_copy_button, setDisableCopyButton] = useState(false);
+  const [loaded_video_set_num, setLoadedVideoSetNum] = useState(0);
 
   /**
    * Creates a new call room.
@@ -114,6 +115,7 @@ export default function VideoChatApp({
     const newCallObject = DailyIframe.createCallObject({
       userName: user_name,
       token: newToken,
+      subscribeToTracksAutomatically: false,
     });
     setRoomUrl(url.split("/").pop());
     // console.log("joining_video_call!");
@@ -189,19 +191,9 @@ export default function VideoChatApp({
       switchRoom(0);
       setCurrentRoom("room1");
       setIsPublic(true);
-    } else if (url === "room2") {
-      url && startJoiningPublicCall("https://onfour.daily.co/room2");
-      switchRoom(1);
-      setCurrentRoom("room2");
-      setIsPublic(true);
-    } else if (url === "room3") {
-      url && startJoiningPublicCall("https://onfour.daily.co/room3");
-      switchRoom(2);
-      setCurrentRoom("room3");
-      setIsPublic(true);
     } else if (url) {
       url && startJoiningPublicCall("https://onfour.daily.co/" + url);
-      switchRoom(3);
+      switchRoom(1);
       setCurrentRoom(url);
       setCreatedRoomName(url);
       setIsRoomCreated(true);
@@ -349,8 +341,8 @@ export default function VideoChatApp({
 
   const room_ids = [
     "public-room-1",
-    "public-room-2",
-    "public-room-3",
+    // "public-room-2",
+    // "public-room-3",
     // isRoomCreated? already_created_room_name : "create-room",
     "create-room",
   ];
@@ -365,7 +357,7 @@ export default function VideoChatApp({
     // }
     startLeavingCall();
     setCurrentRoom("room" + (room_number + 1));
-    if (room_number === 3) {
+    if (room_number === 1) {
       setIsPublic(false);
       setCurrentRoom(already_created_room_name);
     } else {
@@ -417,12 +409,6 @@ export default function VideoChatApp({
     setShowInviteModal(false);
     setCopyButtonText("COPY");
     setDisableCopyButton(false);
-  };
-
-  const room_max_map = {
-    room1: 4,
-    room2: 6,
-    room3: 10,
   };
 
   return (
@@ -495,7 +481,7 @@ export default function VideoChatApp({
           <div className="room-name-row">
             <div
               className="public-room click-active"
-              onClick={() => switchRoom(3)}
+              onClick={() => switchRoom(1)}
             >
               <div
                 // id={isRoomCreated ? already_created_room_name : "create-room"}
@@ -514,10 +500,19 @@ export default function VideoChatApp({
                 id="public-room-1"
                 className="header-8 room-tab-text room-others"
               >
-                Room 1
+                Public
               </div>
             </div>
-            <div
+            <div>
+              <button onClick={() => {
+                                const new_loaded_video_set_num = loaded_video_set_num + 1;
+                                setLoadedVideoSetNum(new_loaded_video_set_num);
+                                }
+                              }>
+                load next videos
+              </button>
+            </div>
+            {/* <div
               className="public-room click-active"
               onClick={() => switchRoom(1)}
             >
@@ -538,7 +533,7 @@ export default function VideoChatApp({
               >
                 Room 3
               </div>
-            </div>
+            </div> */}
           </div>
           {/* )} */}
         </div>
@@ -566,6 +561,7 @@ export default function VideoChatApp({
             volume={volume}
             video_chat_variables={video_chat_variables}
             setArtistInTheHouse={setArtistInTheHouse}
+            loaded_video_set_num = {loaded_video_set_num}
           />
           <Tray
             disabled={!enableCallButtons}

@@ -191,6 +191,9 @@ const StreamPage = ({ is_soundcheck }) => {
     } else {
       setShowAccessModal(true);
     }
+    if (is_soundcheck) {
+      setShowAccessModal(false);
+    }
   }, [user_email, rsvp_list]);
 
   // Query upcoming show database

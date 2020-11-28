@@ -21,7 +21,9 @@ import { logDailyEvent } from "../logUtils";
 
 export default function Call(props) {
   const callObject = useContext(CallObjectContext);
-
+  let shown_video_num = 0;
+  let max_video_num = 2;
+  let subscribed_track_ids = [];
   if (callObject) {
     // console.log(
     //   props.video_chat_variables.kbs,
@@ -59,7 +61,7 @@ export default function Call(props) {
         type: PARTICIPANTS_CHANGE,
         participants: callObject.participants(),
       });
-      // console.log(callObject.participants());
+      console.log(callObject.participants());
     }
 
     // Use initial state
@@ -141,39 +143,60 @@ export default function Call(props) {
   }, []);
 
   function getTiles() {
-    let largeTiles = [];
     let smallTiles = [];
     let artist_count = 0;
     Object.entries(callState.callItems).forEach(([id, callItem]) => {
-      // const isLarge =
-      //   isScreenShare(id) ||
-      //   (!isLocal(id) && !containsScreenShare(callState.callItems));
-      // console.log(id, callItem);
-
       if (callItem.username === props.artist_name) {
-        artist_count = artist_count + 1;
+            artist_count = artist_count + 1; 
+            // counter indicating whether the artist is in the chat or not (old version)
       }
-
-      const isLarge = false;
-      const tile = (
-        <Tile
-          key={id}
-          videoTrack={callItem.videoTrack}
-          audioTrack={callItem.audioTrack}
-          isLocalPerson={isLocal(id)}
-          isLarge={isLarge}
-          isLoading={callItem.isLoading}
-          artistView={props.artistView}
-          isArtist={props.artist_name === callItem.username}
-          mute_all={props.mute_all}
-          username={callItem.username}
-          volume={props.volume}
-        />
-      );
-      if (isLarge) {
-        largeTiles.push(tile);
-      } else {
+      if (isLocal(id)) {
+        const tile = (
+          <Tile
+            key={id}
+            videoTrack={callItem.videoTrack}
+            audioTrack={callItem.audioTrack}
+            isLocalPerson={isLocal(id)}
+            isLarge={false}
+            isLoading={callItem.isLoading}
+            artistView={props.artistView}
+            isArtist={props.artist_name === callItem.username}
+            mute_all={props.mute_all}
+            username={callItem.username}
+            volume={props.volume}
+          />
+        );
         smallTiles.push(tile);
+      } 
+      else {
+        shown_video_num = shown_video_num + 1; 
+        if (shown_video_num <= props.loaded_video_set_num * (max_video_num-1)) {
+          callObject.updateParticipant(
+            id, 
+            { setSubscribedTracks: false }
+          );
+        } else if (shown_video_num <= (props.loaded_video_set_num + 1) * (max_video_num-1)) {
+          callObject.updateParticipant(
+            id, 
+            { setSubscribedTracks: true }
+          );
+          const tile = (
+            <Tile
+              key={id}
+              videoTrack={callItem.videoTrack}
+              audioTrack={callItem.audioTrack}
+              isLocalPerson={isLocal(id)}
+              isLarge={false}
+              isLoading={callItem.isLoading}
+              artistView={props.artistView}
+              isArtist={props.artist_name === callItem.username}
+              mute_all={props.mute_all}
+              username={callItem.username}
+              volume={props.volume}
+            />
+          );
+          smallTiles.push(tile);
+        }
       }
     });
     if (!props.artistView) {
@@ -184,10 +207,10 @@ export default function Call(props) {
       }
     }
     
-    return [largeTiles, smallTiles];
+    return smallTiles;
   }
 
-  const [largeTiles, smallTiles] = getTiles();
+  const smallTiles = getTiles();
   const message = getMessage(callState, props.isPublic);
   return (
     <div className={(props.artistView ? "artist-" : "") + "call"}>

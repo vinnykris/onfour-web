@@ -66,6 +66,7 @@ export default function VideoChatApp({
     // const newToken = await getToken(user_name, url.split("/").pop());
     const newCallObject = DailyIframe.createCallObject({
       userName: user_name,
+      subscribeToTracksAutomatically: false,
     });
     setRoomUrl(url.split("/").pop());
     setCallObject(newCallObject);
