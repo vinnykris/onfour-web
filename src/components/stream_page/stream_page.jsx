@@ -106,7 +106,7 @@ const StreamPage = ({ is_soundcheck }) => {
   const [have_upcoming_concert, setHaveUpcomingConcert] = useState(true);
   const [preferred_username, setPreferredUsername] = useState("");
   const [show_payment_modal, setShowPaymentModal] = useState(false);
-  const [show_access_modal, setShowAccessModal] = useState(false);
+  const [show_access_modal, setShowAccessModal] = useState(true);
   const [access_error, setAccessError] = useState(0); // 0 is no error, 1 if user isn't in rsvp list
   const [video_chat_variables, setVideoChatVariables] = useState();
   const [is_artist_in_the_house, setArtistInTheHouse] = useState(false);
@@ -185,13 +185,13 @@ const StreamPage = ({ is_soundcheck }) => {
     getTestingVariables();
   }, []);
 
-  // useEffect(() => {
-  //   if (rsvp_list.includes(user_email)) {
-  //     setShowAccessModal(false);
-  //   } else {
-  //     setShowAccessModal(true);
-  //   }
-  // }, [user_email, rsvp_list]);
+  useEffect(() => {
+    if (rsvp_list.includes(user_email)) {
+      setShowAccessModal(false);
+    } else {
+      setShowAccessModal(true);
+    }
+  }, [user_email, rsvp_list]);
 
   // Query upcoming show database
   const fetchData = async () => {
@@ -459,12 +459,12 @@ const StreamPage = ({ is_soundcheck }) => {
   // Checks if email parameter is in the RSVP list for the concert
   const checkForAccess = async (email) => {
     const user_has_ticket = await didUserRSVP(concert_id, email);
-    // if (user_has_ticket) {
-    //   setShowAccessModal(false);
-    //   setAccessError(0);
-    // } else {
-    //   setAccessError(1);
-    // }
+    if (user_has_ticket) {
+      setShowAccessModal(false);
+      setAccessError(0);
+    } else {
+      setAccessError(1);
+    }
   };
 
   // RENDERING SECTION
