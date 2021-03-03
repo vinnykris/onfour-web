@@ -1,6 +1,6 @@
 const getToken = async(user_name, room_name) => {
     const DAILY_API_KEY =
-      "cf904922e02ef8957caba380503f4330c21f2fee04c125f5277cd80959e8ffc8";
+      "removed-for-security";
     const fetch = require('isomorphic-fetch');
     // console.log(user_name, room_name)
     let response = await fetch(
